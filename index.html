@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guías de estudio · Álgebra Lineal y Cálculo Multivariado</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 48px}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0 0}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:20ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .stats{display:flex;gap:22px;flex-wrap:wrap;margin:20px 0 0}
+  .stat{display:flex;align-items:baseline;gap:8px}
+  .stat .num{font-size:26px;font-weight:800;letter-spacing:-.03em;color:var(--navy)}
+  .stat .lbl{font-size:15px;font-weight:700;color:var(--muted)}
+
+  main{display:grid;gap:26px;margin-top:26px}
+  @media(min-width:760px){main{grid-template-columns:1fr 1fr;align-items:start}}
+
+  .col{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+  .colhead{padding:20px 22px 16px;border-bottom:2px solid var(--ink)}
+  .colhead.alg{background:var(--cream)}
+  .colhead.calc{background:var(--green-tint)}
+  .colhead .mkick{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin:0}
+  .colhead.alg .mkick{color:var(--deep)}
+  .colhead.calc .mkick{color:var(--green-deep)}
+  .colhead h2{margin:.14em 0 .18em;font-size:clamp(21px,3vw,26px);letter-spacing:-.025em;line-height:1.1}
+  .colhead .msub{margin:0;font-size:15px;color:var(--muted);font-weight:600}
+
+  .units{list-style:none;margin:0;padding:14px;display:grid;gap:11px}
+  .unit{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;
+    border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;background:#fcfbf9;
+    transition:transform .1s,border-color .1s,box-shadow .1s}
+  .unit:hover{transform:translate(-2px,-2px);border-color:var(--ink);box-shadow:4px 4px 0 var(--ink);background:#fff}
+  .unit .badge{flex:0 0 auto;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+    font-size:17px;font-weight:800;border:2px solid var(--ink)}
+  .unit.alg .badge{background:var(--orange);color:#fff}
+  .unit.calc .badge{background:var(--navy);color:#fff}
+  .unit .body{display:grid;gap:1px;min-width:0}
+  .unit .uno{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .unit .uti{font-size:17px;font-weight:700;letter-spacing:-.01em;line-height:1.25}
+  .unit .arrow{margin-left:auto;flex:0 0 auto;font-size:20px;font-weight:800;color:var(--muted);transition:transform .1s,color .1s}
+  .unit:hover .arrow{color:var(--orange);transform:translateX(3px)}
+
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Prep de vacaciones · ITAM</p>
+    <h1>Todas tus <mark>guías</mark> en un solo lugar</h1>
+    <p class="lead">Dos materias, catorce temas. Cada tarjeta te lleva a la guía completa: la idea, los ejemplos paso a paso y la práctica. Toca la que quieras estudiar hoy.</p>
+    <div class="stats">
+      <div class="stat"><span class="num">2</span><span class="lbl">materias</span></div>
+      <div class="stat"><span class="num">14</span><span class="lbl">unidades</span></div>
+      <div class="stat"><span class="num">100%</span><span class="lbl">a mano</span></div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="col">
+      <div class="colhead alg">
+        <p class="mkick">Materia</p>
+        <h2>Álgebra Lineal</h2>
+        <p class="msub">7 unidades · de sistemas a Rⁿ euclídeo</p>
+      </div>
+      <ul class="units">
+        <li><a class="unit alg" href="algebra-lineal/L1_sistemas_gauss-jordan.html">
+          <span class="badge">U1</span>
+          <span class="body"><span class="uno">Unidad 1</span><span class="uti">Sistemas y Gauss-Jordan</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit alg" href="algebra-lineal/L2_vectores-subespacios.html">
+          <span class="badge">U2</span>
+          <span class="body"><span class="uno">Unidad 2</span><span class="uti">Vectores y subespacios</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit alg" href="algebra-lineal/L3_transformaciones-lineales.html">
+          <span class="badge">U3</span>
+          <span class="body"><span class="uno">Unidad 3</span><span class="uti">Transformaciones lineales</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit alg" href="algebra-lineal/L4_algebra-matricial.html">
+          <span class="badge">U4</span>
+          <span class="body"><span class="uno">Unidad 4</span><span class="uti">Álgebra matricial</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit alg" href="algebra-lineal/L5_determinantes.html">
+          <span class="badge">U5</span>
+          <span class="body"><span class="uno">Unidad 5</span><span class="uti">Determinantes</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit alg" href="algebra-lineal/L6_diagonalizacion.html">
+          <span class="badge">U6</span>
+          <span class="body"><span class="uno">Unidad 6</span><span class="uti">Diagonalización</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit alg" href="algebra-lineal/L7_espacio-euclideo.html">
+          <span class="badge">U7</span>
+          <span class="body"><span class="uno">Unidad 7</span><span class="uti">Rⁿ euclídeo</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+      </ul>
+    </section>
+
+    <section class="col">
+      <div class="colhead calc">
+        <p class="mkick">Materia</p>
+        <h2>Cálculo Multivariado</h2>
+        <p class="msub">7 unidades · de sucesiones a integración múltiple</p>
+      </div>
+      <ul class="units">
+        <li><a class="unit calc" href="calculo-multivariado/C1_sucesiones-series.html">
+          <span class="badge">U1</span>
+          <span class="body"><span class="uno">Unidad 1</span><span class="uti">Sucesiones y series</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit calc" href="calculo-multivariado/C2_espacio-Rn.html">
+          <span class="badge">U2</span>
+          <span class="body"><span class="uno">Unidad 2</span><span class="uti">El espacio Rⁿ</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit calc" href="calculo-multivariado/C3_funciones-varias-variables.html">
+          <span class="badge">U3</span>
+          <span class="body"><span class="uno">Unidad 3</span><span class="uti">Funciones de varias variables</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit calc" href="calculo-multivariado/C4_diferenciacion.html">
+          <span class="badge">U4</span>
+          <span class="body"><span class="uno">Unidad 4</span><span class="uti">Diferenciación</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit calc" href="calculo-multivariado/C5_optimizacion.html">
+          <span class="badge">U5</span>
+          <span class="body"><span class="uno">Unidad 5</span><span class="uti">Optimización</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit calc" href="calculo-multivariado/C6_funcion-implicita-inversa.html">
+          <span class="badge">U6</span>
+          <span class="body"><span class="uno">Unidad 6</span><span class="uti">Función implícita e inversa</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+        <li><a class="unit calc" href="calculo-multivariado/C7_integracion.html">
+          <span class="badge">U7</span>
+          <span class="body"><span class="uno">Unidad 7</span><span class="uti">Integración múltiple</span></span>
+          <span class="arrow">→</span>
+        </a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer><p>aprueba<b>.net</b> · Guías de estudio · Álgebra Lineal y Cálculo Multivariado</p></footer>
+
+</div>
+</body>
+</html>

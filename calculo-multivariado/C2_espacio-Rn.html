@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U2 — El espacio Rⁿ</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0 0}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .check{display:grid;gap:11px;padding:16px 18px;border:1.5px solid #cfd6f2;border-radius:12px;background:#eef1fb}
+  .check .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .check .qtag::before{content:"✎ "}
+  .check .q{margin:0;font-weight:700;font-size:17px}
+
+  .opts{display:grid;gap:10px}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .opt:disabled{cursor:default}
+  .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
+  .why.show{display:block}
+  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .why.miss>.lbl{color:var(--deep)}
+  .why p{margin:0}
+
+  .ejemplo{border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9;padding:18px 20px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+
+  .practice{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
+  .practice .phead h3{margin:0;font-size:19px}
+  .practice .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
+  .pitem{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff;transition:border-color .2s,background .2s}
+  .pitem.solved{border-color:var(--green);background:#f3faf5}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.guiado{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.juntos{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .pstatement{margin:0;font-size:17px}
+  .aux summary{cursor:pointer;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;list-style:none;width:max-content;font-size:15px}
+  .aux summary::-webkit-details-marker{display:none}
+  .aux summary:hover{border-color:var(--navy);background:#f7f8fc}
+  .aux details[open] summary{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
+  .aux p{margin:8px 2px 0;font-size:16px;color:var(--slate)}
+
+  .viz{display:grid;gap:12px}
+  .viz-tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .viz-tab{font:inherit;font-weight:700;font-size:15px;padding:9px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .viz-tab:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .viz-tab.active{border-color:var(--ink);background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+  .viz-plane{padding:10px}
+  .viz-plane svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
+  .viz-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--slate)}
+  .viz-legend span{display:inline-flex;align-items:center;gap:7px}
+  .viz-legend i{width:18px;height:4px;border-radius:2px;display:inline-block}
+  .viz-cap{margin:0;font-size:17px;color:var(--slate);min-height:1.6em}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 2</p>
+    <h1>El espacio <mark>Rⁿ</mark>: vectores, distancias y regiones</h1>
+    <p class="lead">El terreno donde vive todo el cálculo de varias variables. Aquí no se adivina: se recuerda la definición y se razona el paso. Todo a mano, sin calculadora.</p>
+    <div class="learn">
+      <h2>Al terminar vas a poder</h2>
+      <ol>
+        <li><span class="n">1</span> Operar con vectores en Rⁿ</li>
+        <li><span class="n">2</span> Calcular la norma y la distancia</li>
+        <li><span class="n">3</span> Usar el producto punto y el ángulo</li>
+        <li><span class="n">4</span> Aplicar la desigualdad de Cauchy-Schwarz</li>
+        <li><span class="n">5</span> Describir una recta y un plano</li>
+        <li><span class="n">6</span> Convertir entre coordenadas polares</li>
+        <li><span class="n">7</span> Distinguir conjuntos abiertos y cerrados</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">La idea</h2>
+
+    <section class="sec">
+      <h3>Un punto de Rⁿ es una lista de números</h3>
+      <p class="idea">Rⁿ es el conjunto de todas las <strong>listas ordenadas de n números reales</strong>. Cada lista es a la vez un <strong>punto</strong> (una ubicación) y un <strong>vector</strong> (una flecha desde el origen). En R² son pares; en R³, tríadas. Este es un vector de R³:</p>
+      <div class="fx"><div class="sys"><span class="eq">v = (3, −1, 2)</span></div></div>
+      <p class="idea">Se <strong>suman</strong> y se <strong>escalan</strong> componente a componente. Sumar dos vectores es coordenada con coordenada; multiplicar por un número real estira o encoge cada coordenada por igual:</p>
+      <div class="fx"><div class="sys"><span class="eq">(3, −1, 2) + (2, 4, 1) = (5, 3, 3)</span><span class="eq">2·(3, −1, 2) = (6, −2, 4)</span></div></div>
+    </section>
+
+    <section class="sec">
+      <h3>Norma: qué tan largo es un vector</h3>
+      <p class="idea">La <strong>norma</strong> |v| mide la longitud del vector, es decir, su distancia al origen. Es Pitágoras extendido: se suman los cuadrados de todas las componentes y se saca raíz. ¿Recuerdas la fórmula antes de mirarla?</p>
+      <div class="check" data-kind="recall" data-fid="F1_norma" data-tema="norma">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Cómo se calcula la norma de un vector v = (a, b, c) en R³?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">a + b + c</button>
+          <button class="opt" data-ok="1">La raíz cuadrada de a² + b² + c²</button>
+          <button class="opt" data-ok="0">a² + b² + c², sin raíz</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Es el teorema de Pitágoras en varias dimensiones. La <strong>raíz</strong> es clave: sin ella tendrías la longitud al cuadrado, no la longitud.</p></div>
+      </div>
+      <p class="idea">La <strong>distancia</strong> entre dos puntos es la norma de su diferencia: |u − v|. Un vector de norma 1 se llama <strong>unitario</strong>; para conseguir uno, se divide un vector entre su propia norma.</p>
+    </section>
+
+    <section class="sec">
+      <h3>Producto punto: un número que mide alineación</h3>
+      <p class="idea">El <strong>producto punto</strong> u·v multiplica las componentes emparejadas y suma todo. El resultado es un <strong>número</strong>, no un vector. Sirve para dos cosas: mide el ángulo entre los vectores y detecta perpendicularidad.</p>
+      <div class="fx"><div class="sys"><span class="eq">(3, −1, 2)·(2, 4, 1) = 6 − 4 + 2 = 4</span></div></div>
+      <p class="idea">La conexión con el ángulo es directa:</p>
+      <div class="fx"><div class="sys"><span class="eq">u·v = |u| |v| cos θ</span></div></div>
+      <p class="idea">De ahí sale la regla de oro: si el producto punto da <strong>cero</strong>, los vectores son <strong>perpendiculares</strong> (ortogonales), porque cos 90° = 0. Míralo con un par concreto:</p>
+      <div class="fx"><div class="sys"><span class="eq">(2, 1)·(1, −2) = 2 − 2 = 0</span></div></div>
+      <p class="fx-note">El resultado es cero, así que esos dos vectores forman un ángulo recto.</p>
+    </section>
+
+    <section class="sec">
+      <h3>Cauchy-Schwarz: un tope universal</h3>
+      <p class="idea">La <strong>desigualdad de Cauchy-Schwarz</strong> dice que el producto punto nunca puede ser más grande, en valor absoluto, que el producto de las normas. Es lo que garantiza que el coseno del ángulo siempre quede entre −1 y 1.</p>
+      <div class="fx"><div class="sys"><span class="eq">| u·v |  ≤  | u | · | v |</span></div></div>
+      <p class="idea">La igualdad ocurre <strong>solo</strong> cuando los vectores son <strong>paralelos</strong> (uno es múltiplo del otro). En cualquier otro caso, el lado izquierdo es estrictamente menor.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago</h2>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Calculemos la <strong>norma</strong> y el <strong>ángulo</strong> entre dos vectores. Voy paso a paso; tú solo sigue el hilo. Tomo u = (1, 0) y v = (1, 1).</p>
+      <div class="estep"><div class="oprow">Paso 1 · normas</div><p>Cada norma es la raíz de la suma de cuadrados. |u| = raíz de 1 = 1. |v| = raíz de 1 + 1.</p><div class="fx"><div class="sys"><span class="eq">| u | = 1</span><span class="eq">| v | = √2</span></div></div></div>
+      <div class="estep"><div class="oprow">Paso 2 · producto punto</div><p>Multiplico componente con componente y sumo.</p><div class="fx"><div class="sys"><span class="eq">u·v = (1)(1) + (0)(1) = 1</span></div></div></div>
+
+      <div class="check" data-kind="item" data-id="EJpred" data-tema="angulo">
+        <div class="qtag">Te toca · predice</div>
+        <p class="q">Ya tengo u·v = 1, |u| = 1 y |v| = √2. Usando u·v = |u||v|cos θ, ¿cuánto vale cos θ?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">1 dividido entre √2</button>
+          <button class="opt" data-ok="0">√2</button>
+          <button class="opt" data-ok="0">1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Despejando, cos θ = (u·v) ÷ (|u||v|) = 1 ÷ (1·√2) = 1/√2. Ese coseno corresponde a un ángulo de 45°.</p></div>
+      </div>
+
+      <div class="estep"><div class="oprow">Paso 3 · ángulo</div><p>El coseno 1/√2 es el de un ángulo conocido de memoria.</p><div class="fx"><div class="sys"><span class="eq">cos θ = 1/√2  →  θ = 45°</span></div></div></div>
+      <p class="idea" style="font-size:17px">El producto punto dio positivo y el ángulo salió agudo: <strong>45°</strong>. Si hubiera dado cero, el ángulo sería recto.</p>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Ahora una <strong>distancia</strong> entre dos puntos, que es solo la norma de su diferencia. Midamos la distancia entre P = (1, 2) y Q = (4, 6).</p>
+      <div class="estep"><div class="oprow">Paso 1 · la diferencia</div><p>Resto componente a componente: Q − P.</p><div class="fx"><div class="sys"><span class="eq">Q − P = (4 − 1, 6 − 2) = (3, 4)</span></div></div></div>
+      <div class="estep"><div class="oprow">Paso 2 · la norma</div><p>La distancia es la norma de ese vector: raíz de la suma de cuadrados.</p><div class="fx"><div class="sys"><span class="eq">d(P, Q) = | (3, 4) | = √(3² + 4²) = √25 = 5</span></div></div></div>
+      <p class="idea" style="font-size:17px">La distancia entre (1, 2) y (4, 6) es <strong>5</strong>. Siempre: distancia = norma de la diferencia.</p>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Ahora <strong>coordenadas polares</strong>, que reaparecen en todo el curso. Un punto del plano se puede dar por (x, y) o por su <strong>radio</strong> r (distancia al origen) y su <strong>ángulo</strong> θ. Convirtamos el punto (−1, 1) a polares.</p>
+      <div class="estep"><div class="oprow">Paso 1 · el radio</div><p>El radio es la norma del punto: raíz de la suma de cuadrados.</p><div class="fx"><div class="sys"><span class="eq">r = √((−1)² + 1²) = √2</span></div></div></div>
+      <div class="estep"><div class="oprow">Paso 2 · el ángulo</div><p>El punto (−1, 1) está en el segundo cuadrante (x negativo, y positivo). Ahí el ángulo es 135°.</p><div class="fx"><div class="sys"><span class="eq">θ = 135°  (o 3π/4)</span></div></div></div>
+      <p class="idea" style="font-size:17px">Listo: (−1, 1) en polares es <strong>r = √2, θ = 135°</strong>. Para volver a cartesianas se usan estas dos fórmulas:</p>
+      <div class="fx"><div class="sys"><span class="eq">x = r·cos θ</span><span class="eq">y = r·sen θ</span></div></div>
+      <p class="idea" style="font-size:17px">El cuadrante decide el ángulo: cuídalo siempre.</p>
+    </section>
+
+    <section class="sec">
+      <h3>Rectas y planos: puntos que cumplen una regla</h3>
+      <p class="idea">Una <strong>recta</strong> se describe con un punto de paso y una <strong>dirección</strong>: caminas desde el punto en múltiplos del vector director. Un <strong>plano</strong> en R³ se describe con un punto y una <strong>normal</strong>: son todos los puntos cuyo desplazamiento es perpendicular a ese vector normal.</p>
+      <div class="fx"><div class="sys"><span class="eq">Recta: (x, y) = (1, 2) + t·(3, −1)</span><span class="eq">Plano: 2(x−1) + (y) − (z) = 0  →  2x + y − z = 2</span></div></div>
+      <p class="fx-note">En el plano, los coeficientes (2, 1, −1) son justo el vector normal: perpendicular a toda la superficie.</p>
+    </section>
+
+    <section class="sec">
+      <h3>Míralo: un punto, su radio y su ángulo</h3>
+      <p class="idea">Todo lo anterior vive en el plano. Un punto tiene una <strong>norma</strong> (la longitud de su flecha) y un <strong>ángulo</strong> con el eje x: eso son sus coordenadas polares. Toca cada punto y observa cómo cambian r y θ:</p>
+      <div class="viz">
+        <div class="viz-tabs" id="vizTabs">
+          <button class="viz-tab" data-case="a">Punto (2, 0)</button>
+          <button class="viz-tab" data-case="b">Punto (1, √3)</button>
+          <button class="viz-tab" data-case="c">Punto (−1, 1)</button>
+        </div>
+        <div class="viz-plane fx" id="vizPlane"></div>
+        <div class="viz-legend"><span><i style="background:#F5821F"></i>Vector al punto (radio r)</span><span><i style="background:#283891"></i>Ángulo θ</span></div>
+        <p class="viz-cap" id="vizCap"></p>
+      </div>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Por último, <strong>conjuntos abiertos y cerrados</strong>, la base para hablar de regiones. Piensa en una <strong>bola</strong>: todos los puntos a distancia menor que r de un centro. Si <strong>no</strong> incluye su orilla, es <strong>abierta</strong>; si <strong>sí</strong> la incluye, es <strong>cerrada</strong>.</p>
+      <div class="estep"><div class="oprow">Bola abierta</div><p>La condición usa &lt; estricto: los puntos de la frontera (distancia exactamente r) quedan fuera.</p><div class="fx"><div class="sys"><span class="eq">{ (x, y) : x² + y² &lt; 1 }</span></div></div></div>
+      <div class="estep"><div class="oprow">Bola cerrada</div><p>La condición usa ≤: se agregan los puntos de la frontera.</p><div class="fx"><div class="sys"><span class="eq">{ (x, y) : x² + y² ≤ 1 }</span></div></div></div>
+      <p class="idea" style="font-size:17px">Regla práctica: un conjunto es <strong>abierto</strong> si todo punto tiene algo de espacio alrededor sin salirse (desigualdad estricta); es <strong>cerrado</strong> si contiene toda su frontera (desigualdad con igualdad). El punto (1, 0) está en la bola cerrada, pero no en la abierta.</p>
+    </section>
+
+    <h2 class="modhead">Tu turno</h2>
+    <section class="practice">
+      <div class="phead"><h3>De guiado a solo</h3><p class="sub">Toca tu respuesta. Si fallas, vuelve a intentar. El apoyo se va retirando. · <span class="cont" id="cont"></span></p></div>
+
+      <div class="pitem" data-kind="item" data-id="P0a" data-tema="operaciones_vectores" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Escala y suma paso a paso. ¿Cuánto vale 2·(3, −1, 2) + (1, 0, 4)?</p>
+        <div class="fx"><div class="sys"><span class="eq">2·(3, −1, 2) + (1, 0, 4) = ?</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">(7, −2, 8)</button>
+          <button class="opt" data-ok="0">(7, −1, 8)</button>
+          <button class="opt" data-ok="0">(8, −2, 12)</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Primero escala: 2·(3, −1, 2) = (6, −2, 4). Luego suma componente a componente con (1, 0, 4).</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>2·(3, −1, 2) = (6, −2, 4); después (6, −2, 4) + (1, 0, 4) = (7, −2, 8). Se escala y se suma coordenada por coordenada.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P0b" data-tema="operaciones_vectores" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Ahora tú sola: suma y escala. ¿Cuánto vale 3·(1, 2) − (2, 1)?</p>
+        <div class="fx"><div class="sys"><span class="eq">3·(1, 2) − (2, 1) = ?</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">(1, 5)</button>
+          <button class="opt" data-ok="0">(5, 5)</button>
+          <button class="opt" data-ok="0">(1, 7)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>3·(1, 2) = (3, 6); luego (3, 6) − (2, 1) = (1, 5). Restar es sumar componente a componente el opuesto.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P1" data-tema="norma" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">¿Cuánto vale la norma del vector (3, 4)?</p>
+        <div class="fx"><div class="sys"><span class="eq">| (3, 4) | = ?</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">5</button>
+          <button class="opt" data-ok="0">7</button>
+          <button class="opt" data-ok="0">12</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Suma los cuadrados: 3² + 4² = 9 + 16 = 25. Ahora saca la raíz de 25.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>√(9 + 16) = √25 = 5. Sumar 3 + 4 = 7 sería el error clásico: falta elevar al cuadrado y sacar raíz.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="producto_punto" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Calcula el producto punto de estos dos vectores.</p>
+        <div class="fx"><div class="sys"><span class="eq">(2, 1, 3)·(1, −2, 0) = ?</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">0</button>
+          <button class="opt" data-ok="0">4</button>
+          <button class="opt" data-ok="0">−4</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>(2)(1) + (1)(−2) + (3)(0) = 2 − 2 + 0 = 0. Como da cero, además son <strong>perpendiculares</strong>.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="norma" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Calcula tú sola la norma de este vector.</p>
+        <div class="fx"><div class="sys"><span class="eq">| (6, 8) | = ?</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">14</button>
+          <button class="opt" data-ok="1">10</button>
+          <button class="opt" data-ok="0">100</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>√(6² + 8²) = √(36 + 64) = √100 = 10. Ni 6 + 8 = 14 (falta el cuadrado) ni 100 (falta la raíz).</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3c" data-tema="distancia" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">La distancia entre dos puntos es la norma de su diferencia. ¿Cuál es la distancia entre (1, 2) y (4, 6)?</p>
+        <div class="fx"><div class="sys"><span class="eq">d = | (4, 6) − (1, 2) |</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">5</button>
+          <button class="opt" data-ok="0">7</button>
+          <button class="opt" data-ok="0">25</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Primero la diferencia: (4, 6) − (1, 2) = (3, 4). Luego su norma: raíz de 3² + 4².</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>(4, 6) − (1, 2) = (3, 4); su norma es √(9 + 16) = √25 = 5. Ni 3 + 4 = 7 ni el 25 sin raíz.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3d" data-tema="distancia" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Calcula tú sola la distancia entre los puntos (2, −1) y (−1, 3).</p>
+        <div class="fx"><div class="sys"><span class="eq">d = | (−1, 3) − (2, −1) |</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">5</button>
+          <button class="opt" data-ok="0">7</button>
+          <button class="opt" data-ok="0">25</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>(−1, 3) − (2, −1) = (−3, 4); su norma es √((−3)² + 4²) = √(9 + 16) = √25 = 5. El 25 es la distancia al cuadrado: falta la raíz.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3b" data-tema="ortogonalidad" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">¿Cuál de estas afirmaciones es cierta cuando el producto punto de dos vectores no nulos vale cero?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Los vectores son perpendiculares entre sí</button>
+          <button class="opt" data-ok="0">Los vectores son paralelos</button>
+          <button class="opt" data-ok="0">Los dos vectores tienen norma cero</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Como u·v = |u||v|cos θ y las normas no son cero, la única forma de que dé cero es cos θ = 0, o sea θ = 90°.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P4a" data-tema="angulo" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Vamos a preparar el ángulo entre estos dos vectores. Primero el producto punto y las dos normas: ¿cuánto vale cada uno?</p>
+        <div class="fx"><div class="sys"><span class="eq">u = (0, 2)</span><span class="eq">v = (2, 2)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">u·v = 4, |u| = 2, |v| = 2√2</button>
+          <button class="opt" data-ok="0">u·v = 0, |u| = 2, |v| = 4</button>
+          <button class="opt" data-ok="0">u·v = 4, |u| = 4, |v| = 8</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Producto punto: (0)(2) + (2)(2). Normas: raíz de la suma de cuadrados de cada vector.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>u·v = (0)(2) + (2)(2) = 4. |u| = √(0² + 2²) = 2. |v| = √(2² + 2²) = √8 = 2√2. Estas tres piezas son lo que entra en la fórmula del ángulo.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P4b" data-tema="angulo" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Con las piezas del paso anterior, termina tú el ángulo: usa u·v = |u||v|cos θ para hallar θ.</p>
+        <div class="fx"><div class="sys"><span class="eq">u·v = 4,  |u| = 2,  |v| = 2√2</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">θ = 45° (porque cos θ = 4 ÷ (2·2√2) = 1/√2)</button>
+          <button class="opt" data-ok="0">θ = 90° (porque el producto punto es cero)</button>
+          <button class="opt" data-ok="0">θ = 60° (porque cos θ = 1/2)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>cos θ = (u·v) ÷ (|u||v|) = 4 ÷ (2·2√2) = 4 ÷ (4√2) = 1/√2. Ese coseno es el de 45°. El producto punto NO es cero, así que no es un ángulo recto.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="polares" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Un punto tiene coordenadas polares r = 2, θ = 60°. Sabiendo que cos 60° = 1/2 y sen 60° = √3/2, ¿cuáles son sus coordenadas cartesianas (x, y)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(1, √3)</button>
+          <button class="opt" data-ok="0">(√3, 1)</button>
+          <button class="opt" data-ok="0">(2, 60)</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Recuerda las fórmulas de conversión: x = r·cos θ, y = r·sen θ. Sustituye r = 2 y los valores del coseno y el seno.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>x = r·cos θ = 2·(1/2) = 1; y = r·sen θ = 2·(√3/2) = √3. Nunca son directamente r y θ.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="polares" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Convierte tú sola: un punto tiene r = 4 y θ = 30°. Sabiendo que cos 30° = √3/2 y sen 30° = 1/2, halla sus coordenadas cartesianas (x, y).</p>
+        <div class="fx"><div class="sys"><span class="eq">r = 4,  θ = 30°</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">(2√3, 2)</button>
+          <button class="opt" data-ok="0">(2, 2√3)</button>
+          <button class="opt" data-ok="0">(4, 30)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>x = r·cos θ = 4·(√3/2) = 2√3; y = r·sen θ = 4·(1/2) = 2. El coseno acompaña a x y el seno a y, nunca al revés.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="recta_plano" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">De esta recta escrita como punto + dirección, ¿cuál es su vector director?</p>
+        <div class="fx"><div class="sys"><span class="eq">(x, y) = (1, 2) + t·(3, −1)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">(3, −1)</button>
+          <button class="opt" data-ok="0">(1, 2)</button>
+          <button class="opt" data-ok="0">(4, 1)</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>El punto de paso es el que va suelto; la dirección es el vector que multiplica al parámetro t.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>La dirección es el vector que acompaña a t: (3, −1). El (1, 2) es solo el punto por donde pasa la recta.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="recta_plano" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">De este plano en R³, lee su vector normal (el vector perpendicular a toda la superficie).</p>
+        <div class="fx"><div class="sys"><span class="eq">2x + y − z = 2</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">(2, 1, −1)</button>
+          <button class="opt" data-ok="0">(2, 2, 2)</button>
+          <button class="opt" data-ok="0">(0, 0, 2)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La normal de un plano ax + by + cz = d son justo sus coeficientes: (a, b, c) = (2, 1, −1). El lado derecho (el 2) no forma parte de la normal.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="conjuntos" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Antes de clasificar, fíjate solo en el signo. En el conjunto { (x, y) : x² + y² &lt; 4 }, ¿la frontera (los puntos con x² + y² = 4) está incluida o no?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Sí está incluida, porque aparece el número 4</button>
+          <button class="opt" data-ok="1">No está incluida, porque el signo es &lt; estricto</button>
+          <button class="opt" data-ok="0">Depende del centro del disco</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>El signo &lt; (menor estricto) deja fuera la igualdad; el signo ≤ la incluye. Pregúntate: ¿un punto con x² + y² = 4 cumple x² + y² &lt; 4?</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con &lt; estricto, los puntos que cumplen x² + y² = 4 quedan fuera: la frontera no está incluida. Ese es justo el criterio de un conjunto <strong>abierto</strong>.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P10" data-tema="conjuntos" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Considera el conjunto de puntos del plano que cumplen x² + y² ≤ 1 (el disco con su orilla). ¿Cómo se clasifica?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Cerrado, porque incluye su frontera (la desigualdad usa ≤)</button>
+          <button class="opt" data-ok="0">Abierto, porque la desigualdad tiene un signo de menor</button>
+          <button class="opt" data-ok="0">Ni abierto ni cerrado, porque tiene borde</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El ≤ agrega los puntos con x² + y² = 1, que son la frontera. Un conjunto que contiene toda su frontera es <strong>cerrado</strong>.</p></div>
+      </div>
+    </section>
+
+    <div class="check" data-kind="recall" data-fid="F2_cauchy_schwarz" data-tema="cauchy_schwarz">
+      <div class="qtag">Te toca · recuerda</div>
+      <p class="q">¿Qué afirma la desigualdad de Cauchy-Schwarz?</p>
+      <div class="opts">
+        <button class="opt" data-ok="1">El valor absoluto del producto punto nunca supera al producto de las normas</button>
+        <button class="opt" data-ok="0">La norma de una suma es igual a la suma de las normas</button>
+        <button class="opt" data-ok="0">El producto punto siempre es positivo</button>
+      </div>
+      <div class="why"><span class="lbl">Por qué</span><p>|u·v| ≤ |u||v|, con igualdad solo si son paralelos. Es lo que hace que el coseno del ángulo quede siempre entre −1 y 1.</p></div>
+    </div>
+
+    <section class="chuleta">
+      <h3>Para memorizar</h3>
+      <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
+      <ul>
+        <li><span class="ck">✓</span> Vectores en Rⁿ: se suman y escalan componente a componente.</li>
+        <li><span class="ck">✓</span> Norma: |v| = raíz de la suma de cuadrados. Distancia = |u − v|.</li>
+        <li><span class="ck">✓</span> Producto punto: u·v = suma de componentes emparejadas. Es un número.</li>
+        <li><span class="ck">✓</span> Ángulo: u·v = |u||v|cos θ. Si u·v = 0 → perpendiculares.</li>
+        <li><span class="ck">✓</span> Cauchy-Schwarz: |u·v| ≤ |u||v|, igualdad solo si son paralelos.</li>
+        <li><span class="ck">✓</span> Polares: x = r·cos θ, y = r·sen θ; r = norma; cuida el cuadrante del ángulo.</li>
+        <li><span class="ck">✓</span> Recta = punto + dirección; plano = punto + normal (los coeficientes son la normal).</li>
+        <li><span class="ck">✓</span> Abierto: desigualdad estricta (&lt;); cerrado: incluye la frontera (≤).</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue?</h3>
+      <p class="nota">Qué tan segura te sientes moviéndote en Rⁿ: normas, producto punto y regiones. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 2</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+function mat(rows){
+  var coeffs = rows[0].length - 1;
+  var gtc = 'repeat('+coeffs+',auto) 16px auto';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
+
+// (Esta lección usa vectores inline en bloques .sys; no hay matrices que inyectar.)
+
+// ===== visual: un punto del plano, su radio r y su ángulo θ =====
+function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
+var VG='', VA='';
+(function(){
+  for(var g=-1; g<=5; g++){
+    var a=PT(g,-1), b=PT(g,5), c=PT(-1,g), d=PT(5,g);
+    VG+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/>'+'<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';
+  }
+  var x0=PT(-1,0), x1=PT(5,0), y0=PT(0,-1), y1=PT(0,5);
+  VA='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/>'+'<line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';
+})();
+function arcSVG(deg){
+  // arco del ángulo θ desde el eje +x, radio fijo de 30px alrededor del origen
+  var O=PT(0,0), R=30, rad=deg*Math.PI/180;
+  var ex=O[0]+R, ey=O[1];                       // punto sobre el eje +x
+  var px=O[0]+R*Math.cos(rad), py=O[1]-R*Math.sin(rad);
+  var large=(deg>180)?1:0;
+  return '<path d="M '+ex+' '+ey+' A '+R+' '+R+' 0 '+large+' 0 '+px+' '+py+'" fill="none" stroke="#283891" stroke-width="2.5"/>';
+}
+function drawPlane(cse){
+  var pts={ a:[2,0,'r = 2, θ = 0°','El punto (2, 0) descansa sobre el eje x: su ángulo es 0° y su radio, la distancia al origen, vale 2.'],
+            b:[1,Math.sqrt(3),'r = 2, θ = 60°','El punto (1, √3) tiene radio 2 (norma) y ángulo 60°. En cartesianas: x = 2·cos60° = 1, y = 2·sen60° = √3.'],
+            c:[-1,1,'r = √2, θ = 135°','El punto (−1, 1) está en el segundo cuadrante: radio √2 y ángulo 135°.'] };
+  var d=pts[cse], x=d[0], y=d[1];
+  var O=PT(0,0), P=PT(x,y);
+  var deg=Math.atan2(y,x)*180/Math.PI; if(deg<0) deg+=360;
+  var L=arcSVG(deg);
+  L+='<line x1="'+O[0]+'" y1="'+O[1]+'" x2="'+P[0]+'" y2="'+P[1]+'" stroke="#F5821F" stroke-width="3.5" stroke-linecap="round"/>';
+  L+='<circle cx="'+P[0]+'" cy="'+P[1]+'" r="6.5" fill="#181B22"/>';
+  L+='<text x="'+(P[0]+9)+'" y="'+(P[1]-8)+'" font-size="15" font-weight="700" fill="#181B22">'+d[2]+'</text>';
+  document.getElementById('vizPlane').innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plano cartesiano con un punto, su radio y su ángulo">'+VG+VA+L+'</svg>';
+  document.getElementById('vizCap').textContent=d[3];
+}
+document.querySelectorAll('.viz-tab').forEach(function(b){
+  b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawPlane(b.getAttribute('data-case')); };
+});
+(function(){ var f=document.querySelector('.viz-tab'); f.classList.add('active'); drawPlane('a'); })();
+
+// ===== instrumentación =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo_multivariado", unidad:"U2_espacio_Rn", leccion:"C2_espacio-Rn",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_EJ = document.querySelectorAll('[data-kind="item"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.items.length+"/"+TOT_EJ+" ejercicios"; }
+
+document.querySelectorAll('[data-kind]').forEach(function(block){
+  var kind = block.getAttribute('data-kind');
+  var start = Date.now(), intentos = 0, done = false;
+  var why = block.querySelector('.why');
+  block.querySelectorAll('.opt').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      intentos++;
+      if(b.getAttribute('data-ok')==="1"){
+        done = true; b.classList.add('right');
+        if(why) why.classList.add('show');
+        var pit = block.closest('.pitem'); if(pit) pit.classList.add('solved');
+        if(kind==="recall"){
+          session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:(intentos===1?"de_memoria":"con_pista") });
+        } else {
+          session.items.push({ id:block.getAttribute('data-id'), tema:block.getAttribute('data-tema'),
+            nivel:(block.getAttribute('data-level')||"-"), intentos:intentos, correcto:true, tiempo_s:Math.round((Date.now()-start)/1000) });
+          updateCont();
+        }
+      } else {
+        b.classList.add('wrong'); b.disabled = true;
+        if(why){ why.classList.add('show','miss'); }
+      }
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var c=session.items.filter(function(x){return x.correcto;}).length;
+  var trabas=session.items.filter(function(x){return x.intentos>1;}).map(function(x){return x.id;});
+  var rec=session.formulas.map(function(f){return f.id+": "+f.recall;});
+  var s="Resolvió "+c+"/"+TOT_EJ+" ejercicios. ";
+  s+= rec.length? ("Recall de fórmulas → "+rec.join(" · ")+". ") : "No hizo el recall de fórmulas. ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_calculo_U2.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){return '<span class="pill">'+f.id+": "+f.recall+'</span>';}).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT_EJ+'</strong> ejercicios · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Fórmulas: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>

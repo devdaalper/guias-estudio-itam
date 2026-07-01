@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U1 — Sistemas de ecuaciones y Gauss-Jordan</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0 0}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .check{display:grid;gap:11px;padding:16px 18px;border:1.5px solid #cfd6f2;border-radius:12px;background:#eef1fb}
+  .check .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .check .qtag::before{content:"✎ "}
+  .check .q{margin:0;font-weight:700;font-size:17px}
+
+  .opts{display:grid;gap:10px}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .opt:disabled{cursor:default}
+  .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
+  .why.show{display:block}
+  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .why.miss>.lbl{color:var(--deep)}
+  .why p{margin:0}
+
+  .ejemplo{border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9;padding:18px 20px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+
+  .practice{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
+  .practice .phead h3{margin:0;font-size:19px}
+  .practice .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
+  .pitem{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff;transition:border-color .2s,background .2s}
+  .pitem.solved{border-color:var(--green);background:#f3faf5}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.guiado{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.juntos{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .pstatement{margin:0;font-size:17px}
+  .aux summary{cursor:pointer;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;list-style:none;width:max-content;font-size:15px}
+  .aux summary::-webkit-details-marker{display:none}
+  .aux summary:hover{border-color:var(--navy);background:#f7f8fc}
+  .aux details[open] summary{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
+  .aux p{margin:8px 2px 0;font-size:16px;color:var(--slate)}
+
+  .viz{display:grid;gap:12px}
+  .viz-tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .viz-tab{font:inherit;font-weight:700;font-size:15px;padding:9px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .viz-tab:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .viz-tab.active{border-color:var(--ink);background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+  .viz-plane{padding:10px}
+  .viz-plane svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
+  .viz-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--slate)}
+  .viz-legend span{display:inline-flex;align-items:center;gap:7px}
+  .viz-legend i{width:18px;height:4px;border-radius:2px;display:inline-block}
+  .viz-cap{margin:0;font-size:17px;color:var(--slate);min-height:1.6em}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 1</p>
+    <h1>Sistemas de ecuaciones y <mark>Gauss-Jordan</mark></h1>
+    <p class="lead">El tema completo, de principio a fin. Aquí no se adivina: se recuerda la regla y se razona el paso. Todo a mano, sin calculadora.</p>
+    <div class="learn">
+      <h2>Al terminar vas a poder</h2>
+      <ol>
+        <li><span class="n">1</span> Escribir un sistema como matriz aumentada</li>
+        <li><span class="n">2</span> Usar las 3 operaciones de renglón</li>
+        <li><span class="n">3</span> Reconocer la forma reducida (RREF)</li>
+        <li><span class="n">4</span> Resolver por Gauss-Jordan (2×2 y 3×3)</li>
+        <li><span class="n">5</span> Clasificar: una, ninguna o infinitas</li>
+        <li><span class="n">6</span> Escribir la solución general con variable libre</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">La idea</h2>
+
+    <section class="sec">
+      <h3>De ecuaciones a una tabla de números</h3>
+      <p class="idea">Un sistema de ecuaciones lo reescribimos como una <strong>matriz aumentada</strong>: los coeficientes a la izquierda, los resultados a la derecha, separados por una barra. Mira el mismo sistema en sus dos formas:</p>
+      <div class="fx"><div class="sys"><span class="eq">x + 2y = 5</span><span class="eq">3x − y = 1</span></div></div>
+      <div class="fx" id="mtxIntro"></div>
+      <p class="idea">Resolver el sistema es <strong>simplificar</strong> esa tabla con operaciones permitidas hasta poder <strong>leer</strong> la respuesta directamente.</p>
+    </section>
+
+    <section class="sec">
+      <h3>Las 3 operaciones permitidas</h3>
+      <p class="idea">Solo hay tres movidas válidas. Ninguna cambia las soluciones porque todas se pueden deshacer. ¿Las recuerdas antes de mirarlas?</p>
+      <div class="check" data-kind="recall" data-fid="F1_operaciones_renglon" data-tema="operaciones_elementales">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Cuál de estas SÍ es el conjunto correcto de operaciones de renglón?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Intercambiar dos renglones · multiplicar un renglón por un número distinto de cero · sumar a un renglón un múltiplo de otro</button>
+          <button class="opt" data-ok="0">Intercambiar dos columnas · multiplicar un renglón por cualquier número · sumar dos renglones</button>
+          <button class="opt" data-ok="0">Multiplicar un renglón por cero · intercambiar renglones · restar una constante a todos</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Esas tres no cambian las soluciones. Multiplicar por <strong>cero</strong> borra información (no se vale) y las <strong>columnas</strong> nunca se tocan.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>La meta: la forma reducida</h3>
+      <p class="idea">El objetivo es dejar la matriz en su <strong>forma escalonada reducida</strong>: cada variable con un <strong>1</strong> solo en su columna (un pivote) y ceros en el resto. Cuando llegas ahí, la solución se lee sola. Así se ve una matriz ya reducida de un sistema 2×2:</p>
+      <div class="fx" id="rrefEx"></div>
+      <p class="fx-note">Se lee directo: la primera variable vale 4, la segunda vale −1.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago</h2>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Reduzcamos la matriz del sistema de arriba hasta su forma más simple. Voy paso a paso; tú solo sigue el hilo.</p>
+      <div class="estep"><div class="oprow">R2 → R2 − 3·R1</div><p>Resto 3 veces el renglón 1 al renglón 2 para que la x del renglón 2 desaparezca.</p><div class="fx" id="e1"></div></div>
+
+      <div class="check" data-kind="item" data-id="EJpred" data-tema="gauss_jordan">
+        <div class="qtag">Te toca · predice</div>
+        <p class="q">El renglón 2 quedó como “−7 por y, igual a −14”. ¿Cuál es el siguiente movimiento natural?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Dividir el renglón 2 entre −7, para que el coeficiente de y sea 1</button>
+          <button class="opt" data-ok="0">Multiplicar el renglón 2 por −7</button>
+          <button class="opt" data-ok="0">Intercambiar el renglón 1 y el renglón 2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Buscamos un 1 limpio en la posición de y. Dividir entre −7 lo logra y deja el renglón listo para leer.</p></div>
+      </div>
+
+      <div class="estep"><div class="oprow">R2 → R2 ÷ (−7)</div><p>Ahora el renglón 2 dice directamente cuánto vale y.</p><div class="fx" id="e2"></div></div>
+      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>Uso ese renglón para limpiar la y del renglón 1.</p><div class="fx" id="e3"></div></div>
+      <p class="idea" style="font-size:17px">Quedó tan simple que se lee sola: <strong>x = 1</strong>, <strong>y = 2</strong>. Esa es la meta de Gauss-Jordan.</p>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Ahora uno <strong>3×3</strong>, que es lo que de verdad cae en examen. Mismo método, más renglones. El sistema es: x + y + z = 6, x − y + z = 2, 2x + y − z = 1.</p>
+      <div class="estep"><div class="oprow">Matriz inicial</div><div class="fx" id="t0"></div></div>
+      <div class="estep"><div class="oprow">R2 → R2 − R1 · R3 → R3 − 2·R1</div><p>Uso el primer renglón para hacer cero la x en los otros dos.</p><div class="fx" id="t1"></div></div>
+      <div class="estep"><div class="oprow">R2 → R2 ÷ (−2) · R3 → R3 + R2</div><p>Hago 1 el pivote de y, y con él limpio la y del tercer renglón.</p><div class="fx" id="t2"></div></div>
+      <div class="estep"><div class="oprow">R3 → R3 ÷ (−3)</div><p>El tercer renglón ya dice cuánto vale z.</p><div class="fx" id="t3"></div></div>
+      <div class="estep"><div class="oprow">R1 → R1 − R2 − R3</div><p>Subo a limpiar la y y la z del primer renglón. Listo.</p><div class="fx" id="t4"></div></div>
+      <p class="idea" style="font-size:17px">Forma reducida: <strong>x = 1</strong>, <strong>y = 2</strong>, <strong>z = 3</strong>. Mismo ritmo que el 2×2, solo que bajas primero (hacer ceros) y luego subes (limpiar).</p>
+    </section>
+
+    <section class="sec">
+      <h3>Míralo: cada ecuación es una recta</h3>
+      <p class="idea">Con dos incógnitas, cada ecuación es una <strong>recta</strong> y resolver es ver <strong>dónde se cruzan</strong>. Eso explica los tres resultados posibles. Toca cada caso:</p>
+      <div class="viz">
+        <div class="viz-tabs" id="vizTabs">
+          <button class="viz-tab" data-case="una">Una solución</button>
+          <button class="viz-tab" data-case="ninguna">Ninguna</button>
+          <button class="viz-tab" data-case="infinitas">Infinitas</button>
+        </div>
+        <div class="viz-plane fx" id="vizPlane"></div>
+        <div class="viz-legend"><span><i style="background:#F5821F"></i>Ecuación 1</span><span><i style="background:#283891"></i>Ecuación 2</span></div>
+        <p class="viz-cap" id="vizCap"></p>
+      </div>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Cuando hay <strong>infinitas</strong> soluciones, no escribes un número: escribes una <strong>fórmula</strong>. Aparece una <strong>variable libre</strong> (una columna sin pivote) que se vuelve un parámetro. Reduzcamos este sistema: x + y + z = 4, 2x + y − z = 5.</p>
+      <div class="estep"><div class="oprow">Matriz inicial</div><div class="fx" id="f0"></div></div>
+      <div class="estep"><div class="oprow">R2 → R2 − 2·R1, luego ajustar signos</div><p>Tras reducir, la columna de z se queda sin pivote: z es libre.</p><div class="fx" id="f1"></div></div>
+      <p class="idea" style="font-size:17px">Llamamos <strong>z = t</strong> (el parámetro). Despejando cada pivote, la solución general es:</p>
+      <div class="fx"><div class="sys"><span class="eq">x = 1 + 2t</span><span class="eq">y = 3 − 3t</span><span class="eq">z = t</span></div></div>
+      <p class="fx-note">Cada valor de t da una solución distinta: por eso son infinitas, pero todas con la misma forma.</p>
+    </section>
+
+    <h2 class="modhead">Tu turno</h2>
+    <section class="practice">
+      <div class="phead"><h3>De guiado a solo</h3><p class="sub">Toca tu respuesta. Si fallas, vuelve a intentar. El apoyo se va retirando. · <span class="cont" id="cont"></span></p></div>
+
+      <div class="pitem" data-kind="item" data-id="P1" data-tema="gauss_jordan" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Quieres que la x del renglón 2 se vuelva cero. ¿Qué operación lo logra?</p>
+        <div class="fx" id="p1"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Restar 3 veces el renglón 1 al renglón 2</button>
+          <button class="opt" data-ok="0">Sumar 3 veces el renglón 1 al renglón 2</button>
+          <button class="opt" data-ok="0">Restar 3 veces el renglón 2 al renglón 1</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Mira el coeficiente de x: arriba hay un 1, abajo un 3. ¿Qué múltiplo del de arriba cancela el de abajo?</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>El renglón 1 tiene un 1 en x; restar 3 veces ese renglón hace 3 − 3 = 0.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="clasificacion" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Esta matriz ya está reducida. ¿Cuántas soluciones tiene el sistema?</p>
+        <div class="fx" id="p2"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Una sola</button>
+          <button class="opt" data-ok="0">Ninguna</button>
+          <button class="opt" data-ok="0">Infinitas</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Cada variable tiene su pivote y no hay renglón imposible: solución única.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="clasificacion" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">¿Qué tipo de sistema es este?</p>
+        <div class="fx" id="p3"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Sin solución</button>
+          <button class="opt" data-ok="0">Solución única</button>
+          <button class="opt" data-ok="0">Infinitas soluciones</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El último renglón dice “cero igual a tres”, imposible: el sistema no tiene solución.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="variable_libre" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Esta matriz reducida tiene 3 columnas de variables. ¿Cuántas variables libres hay?</p>
+        <div class="fx" id="p4"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Una (la tercera columna no tiene pivote)</button>
+          <button class="opt" data-ok="0">Ninguna</button>
+          <button class="opt" data-ok="0">Dos</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Hay pivotes en las dos primeras columnas, pero la tercera no tiene: esa variable queda libre → infinitas soluciones.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="modelado" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Dos cafés y tres jugos cuestan 13. Un café y dos jugos cuestan 8. ¿Cuál matriz aumentada modela el problema? (café = primera columna, jugo = segunda)</p>
+        <div class="opts">
+          <button class="opt" data-ok="1" id="p5a"></button>
+          <button class="opt" data-ok="0" id="p5b"></button>
+          <button class="opt" data-ok="0" id="p5c"></button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>“Dos cafés y tres jugos = 13” es el renglón 2, 3, 13; “un café y dos jugos = 8” es 1, 2, 8.</p></div>
+      </div>
+    </section>
+
+    <div class="check" data-kind="recall" data-fid="F2_inconsistente" data-tema="consistencia">
+      <div class="qtag">Te toca · recuerda</div>
+      <p class="q">¿Cómo se reconoce en la matriz un sistema que NO tiene solución?</p>
+      <div class="opts">
+        <button class="opt" data-ok="1">Aparece un renglón de ceros a la izquierda con un número distinto de cero a la derecha</button>
+        <button class="opt" data-ok="0">Aparece un renglón de puros ceros, incluida la derecha</button>
+        <button class="opt" data-ok="0">Hay más ecuaciones que incógnitas</button>
+      </div>
+      <div class="why"><span class="lbl">Por qué</span><p>Ese renglón dice “cero igual a un número distinto de cero”, imposible. El renglón de <strong>puros</strong> ceros es otra cosa: solo sobra una ecuación.</p></div>
+    </div>
+
+    <section class="chuleta">
+      <h3>Para memorizar</h3>
+      <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
+      <ul>
+        <li><span class="ck">✓</span> Las 3 operaciones de renglón: intercambiar, multiplicar por un número distinto de cero, sumar un múltiplo de otro.</li>
+        <li><span class="ck">✓</span> Meta = forma reducida: un 1 (pivote) solo en su columna por cada variable.</li>
+        <li><span class="ck">✓</span> Método: primero baja haciendo ceros, luego sube limpiando.</li>
+        <li><span class="ck">✓</span> Una solución: cada variable tiene pivote.</li>
+        <li><span class="ck">✓</span> Ninguna: aparece “cero = número distinto de cero”.</li>
+        <li><span class="ck">✓</span> Infinitas: hay variable libre (columna sin pivote) → solución con parámetro t.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue?</h3>
+      <p class="nota">Qué tan segura te sientes resolviendo sistemas por Gauss-Jordan ahora. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 1</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+function mat(rows){
+  var coeffs = rows[0].length - 1;
+  var gtc = 'repeat('+coeffs+',auto) 16px auto';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
+
+set('mtxIntro',[["1","2","5"],["3","−1","1"]]);
+set('rrefEx',[["1","0","4"],["0","1","−1"]]);
+// 2x2
+set('e1',[["1","2","5"],["0","−7","−14"]]);
+set('e2',[["1","2","5"],["0","1","2"]]);
+set('e3',[["1","0","1"],["0","1","2"]]);
+// 3x3
+set('t0',[["1","1","1","6"],["1","−1","1","2"],["2","1","−1","1"]]);
+set('t1',[["1","1","1","6"],["0","−2","0","−4"],["0","−1","−3","−11"]]);
+set('t2',[["1","1","1","6"],["0","1","0","2"],["0","0","−3","−9"]]);
+set('t3',[["1","1","1","6"],["0","1","0","2"],["0","0","1","3"]]);
+set('t4',[["1","0","0","1"],["0","1","0","2"],["0","0","1","3"]]);
+// infinitas
+set('f0',[["1","1","1","4"],["2","1","−1","5"]]);
+set('f1',[["1","0","−2","1"],["0","1","3","3"]]);
+// práctica
+set('p1',[["1","2","5"],["3","−1","1"]]);
+set('p2',[["1","0","3"],["0","1","−1"]]);
+set('p3',[["1","2","4"],["0","0","3"]]);
+set('p4',[["1","0","−2","1"],["0","1","3","3"]]);
+// opciones-matriz del modelado (P5)
+document.getElementById('p5a').innerHTML = mat([["2","3","13"],["1","2","8"]]);
+document.getElementById('p5b').innerHTML = mat([["2","3","8"],["1","2","13"]]);
+document.getElementById('p5c').innerHTML = mat([["3","2","13"],["2","1","8"]]);
+
+// ===== visual: el sistema como dos rectas =====
+function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
+function clip(a,b,c){
+  var pts=[], E=1e-9;
+  if(Math.abs(b)>E){ [-1,5].forEach(function(x){ var y=(c-a*x)/b; if(y>=-1-E&&y<=5+E) pts.push([x,y]); }); }
+  if(Math.abs(a)>E){ [-1,5].forEach(function(y){ var x=(c-b*y)/a; if(x>=-1-E&&x<=5+E) pts.push([x,y]); }); }
+  var u=[]; pts.forEach(function(p){ if(!u.some(function(q){return Math.abs(q[0]-p[0])<1e-6&&Math.abs(q[1]-p[1])<1e-6;})) u.push(p); });
+  return u.slice(0,2);
+}
+function lineSVG(a,b,c,color,dash){
+  var e=clip(a,b,c); if(e.length<2) return '';
+  var p0=PT(e[0][0],e[0][1]), p1=PT(e[1][0],e[1][1]);
+  return '<line x1="'+p0[0]+'" y1="'+p0[1]+'" x2="'+p1[0]+'" y2="'+p1[1]+'" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"'+(dash?' stroke-dasharray="8 7"':'')+'/>';
+}
+var VG='', VA='';
+(function(){
+  for(var g=-1; g<=5; g++){
+    var a=PT(g,-1), b=PT(g,5), c=PT(-1,g), d=PT(5,g);
+    VG+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/>'+'<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';
+  }
+  var x0=PT(-1,0), x1=PT(5,0), y0=PT(0,-1), y1=PT(0,5);
+  VA='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/>'+'<line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';
+})();
+function drawPlane(cse){
+  var L, cap;
+  if(cse==='una'){
+    L=lineSVG(1,2,5,'#F5821F')+lineSVG(3,-1,1,'#283891');
+    var dp=PT(1,2);
+    L+='<circle cx="'+dp[0]+'" cy="'+dp[1]+'" r="11" fill="none" stroke="#F5821F" stroke-width="2.5"/><circle cx="'+dp[0]+'" cy="'+dp[1]+'" r="6.5" fill="#181B22"/>';
+    cap='Las dos rectas se cruzan en un punto. Ese punto —x = 1, y = 2— es la única solución.';
+  } else if(cse==='ninguna'){
+    L=lineSVG(1,2,5,'#F5821F')+lineSVG(1,2,8,'#283891');
+    cap='Las rectas son paralelas: nunca se cruzan. El sistema no tiene solución.';
+  } else {
+    L=lineSVG(1,2,5,'#F5821F')+lineSVG(2,4,10,'#283891',true);
+    cap='Las dos ecuaciones son la misma recta. Coinciden en todos sus puntos: infinitas soluciones.';
+  }
+  document.getElementById('vizPlane').innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plano cartesiano con dos rectas">'+VG+VA+L+'</svg>';
+  document.getElementById('vizCap').textContent=cap;
+}
+document.querySelectorAll('.viz-tab').forEach(function(b){
+  b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawPlane(b.getAttribute('data-case')); };
+});
+(function(){ var f=document.querySelector('.viz-tab'); f.classList.add('active'); drawPlane('una'); })();
+
+// ===== instrumentación =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U1_sistemas", leccion:"L1_sistemas_gauss-jordan",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_EJ = document.querySelectorAll('[data-kind="item"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.items.length+"/"+TOT_EJ+" ejercicios"; }
+
+document.querySelectorAll('[data-kind]').forEach(function(block){
+  var kind = block.getAttribute('data-kind');
+  var start = Date.now(), intentos = 0, done = false;
+  var why = block.querySelector('.why');
+  block.querySelectorAll('.opt').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      intentos++;
+      if(b.getAttribute('data-ok')==="1"){
+        done = true; b.classList.add('right');
+        if(why) why.classList.add('show');
+        var pit = block.closest('.pitem'); if(pit) pit.classList.add('solved');
+        if(kind==="recall"){
+          session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:(intentos===1?"de_memoria":"con_pista") });
+        } else {
+          session.items.push({ id:block.getAttribute('data-id'), tema:block.getAttribute('data-tema'),
+            nivel:(block.getAttribute('data-level')||"-"), intentos:intentos, correcto:true, tiempo_s:Math.round((Date.now()-start)/1000) });
+          updateCont();
+        }
+      } else {
+        b.classList.add('wrong'); b.disabled = true;
+        if(why){ why.classList.add('show','miss'); }
+      }
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var c=session.items.filter(function(x){return x.correcto;}).length;
+  var trabas=session.items.filter(function(x){return x.intentos>1;}).map(function(x){return x.id;});
+  var rec=session.formulas.map(function(f){return f.id+": "+f.recall;});
+  var s="Resolvió "+c+"/"+TOT_EJ+" ejercicios. ";
+  s+= rec.length? ("Recall de fórmulas → "+rec.join(" · ")+". ") : "No hizo el recall de fórmulas. ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U1.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){return '<span class="pill">'+f.id+": "+f.recall+'</span>';}).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT_EJ+'</strong> ejercicios · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Fórmulas: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>

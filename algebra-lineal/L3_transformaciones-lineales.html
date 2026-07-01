@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U3 — Transformaciones lineales</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0 0}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .check{display:grid;gap:11px;padding:16px 18px;border:1.5px solid #cfd6f2;border-radius:12px;background:#eef1fb}
+  .check .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .check .qtag::before{content:"✎ "}
+  .check .q{margin:0;font-weight:700;font-size:17px}
+
+  .opts{display:grid;gap:10px}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .opt:disabled{cursor:default}
+  .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
+  .why.show{display:block}
+  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .why.miss>.lbl{color:var(--deep)}
+  .why p{margin:0}
+
+  .ejemplo{border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9;padding:18px 20px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+
+  .practice{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
+  .practice .phead h3{margin:0;font-size:19px}
+  .practice .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
+  .pitem{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff;transition:border-color .2s,background .2s}
+  .pitem.solved{border-color:var(--green);background:#f3faf5}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.guiado{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.juntos{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .pstatement{margin:0;font-size:17px}
+  .aux summary{cursor:pointer;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;list-style:none;width:max-content;font-size:15px}
+  .aux summary::-webkit-details-marker{display:none}
+  .aux summary:hover{border-color:var(--navy);background:#f7f8fc}
+  .aux details[open] summary{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
+  .aux p{margin:8px 2px 0;font-size:16px;color:var(--slate)}
+
+  .viz{display:grid;gap:12px}
+  .viz-tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .viz-tab{font:inherit;font-weight:700;font-size:15px;padding:9px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .viz-tab:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .viz-tab.active{border-color:var(--ink);background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+  .viz-plane{padding:10px}
+  .viz-plane svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
+  .viz-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--slate)}
+  .viz-legend span{display:inline-flex;align-items:center;gap:7px}
+  .viz-legend i{width:18px;height:4px;border-radius:2px;display:inline-block}
+  .viz-cap{margin:0;font-size:17px;color:var(--slate);min-height:1.6em}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 3</p>
+    <h1>Transformaciones <mark>lineales</mark></h1>
+    <p class="lead">El tema completo, de principio a fin. Aquí no se adivina: se recuerda la definición y se razona el paso. Todo a mano, sin calculadora.</p>
+    <div class="learn">
+      <h2>Al terminar vas a poder</h2>
+      <ol>
+        <li><span class="n">1</span> Verificar si una función es lineal</li>
+        <li><span class="n">2</span> Armar la matriz canónica de la transformación</li>
+        <li><span class="n">3</span> Calcular el núcleo y la imagen</li>
+        <li><span class="n">4</span> Obtener rango y nulidad</li>
+        <li><span class="n">5</span> Usar el teorema de rango-nulidad</li>
+        <li><span class="n">6</span> Clasificar: inyectiva, suprayectiva, biyectiva</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">La idea</h2>
+
+    <section class="sec">
+      <h3>Una función que respeta la suma y el escalado</h3>
+      <p class="idea">Una <strong>transformación lineal</strong> es una función entre espacios vectoriales que respeta las dos operaciones básicas: sumar vectores y multiplicarlos por un número. Formalmente pide que se cumplan estas dos condiciones para todo par de vectores y todo escalar:</p>
+      <div class="fx"><div class="sys"><span class="eq">T(u + v) = T(u) + T(v)</span><span class="eq">T(c·u) = c·T(u)</span></div></div>
+      <p class="idea">La consecuencia inmediata: como <strong>T(0) = 0</strong> siempre, cualquier función que mueva el cero de lugar ya <strong>no</strong> es lineal. Ese es el filtro rápido antes de calcular nada.</p>
+    </section>
+
+    <section class="sec">
+      <h3>¿Qué es lineal y qué no?</h3>
+      <p class="idea">La linealidad es una condición estricta: en cada coordenada solo caben <strong>combinaciones de las variables por constantes</strong>. Nada de cuadrados, sumar un número fijo, valores absolutos ni productos entre variables. ¿Reconoces cuál regla sí es lineal?</p>
+      <div class="check" data-kind="recall" data-fid="F1_definicion_lineal" data-tema="definicion">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Cuál de estas reglas SÍ define una transformación lineal?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">A cada punto le asigna: primera coordenada, la resta de sus dos entradas; segunda coordenada, el doble de la primera</button>
+          <button class="opt" data-ok="0">A cada punto le asigna sus mismas entradas pero sumándole 1 a la primera</button>
+          <button class="opt" data-ok="0">A cada punto le asigna el cuadrado de su primera entrada y su segunda entrada sin cambio</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Solo la primera usa combinaciones de las variables por constantes. Sumar <strong>1</strong> mueve el cero (rompe T(0)=0) y elevar al <strong>cuadrado</strong> no respeta el escalado.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>Toda transformación lineal es una matriz</h3>
+      <p class="idea">El hecho clave: cada transformación lineal de un espacio de flechas a otro se puede escribir como <strong>una matriz</strong>. Se llama <strong>matriz canónica</strong> y se arma con una receta simple: aplica T a cada vector de la base canónica y esos resultados son las <strong>columnas</strong>. Para la transformación que manda a cada punto a "suma de entradas, y el triple de la primera menos la segunda":</p>
+      <div class="fx" id="canonEx"></div>
+      <p class="fx-note">Primera columna = imagen de (1, 0); segunda columna = imagen de (0, 1). Multiplicar por esta matriz reproduce la transformación entera.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago</h2>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Primero comprobemos que una regla es lineal. Tomo la que manda a cada punto a "la suma de sus entradas, y el doble de la primera". Voy verificando las dos condiciones con vectores concretos; tú solo sigue el hilo.</p>
+      <div class="estep"><div class="oprow">La regla en fórmula</div><div class="fx"><div class="sys"><span class="eq">T(x, y) = (x + y, 2x)</span></div></div></div>
+      <div class="estep"><div class="oprow">Prueba la suma</div><p>Con dos vectores concretos, sumo primero y luego aplico T; después aplico T a cada uno y sumo. Deben coincidir.</p><div class="fx"><div class="sys"><span class="eq">u = (1, 2),  v = (3, 1)</span><span class="eq">T(u + v) = T(4, 3) = (7, 8)</span><span class="eq">T(u) + T(v) = (3, 2) + (4, 6) = (7, 8)</span></div></div></div>
+
+      <div class="check" data-kind="item" data-id="EJpred" data-tema="definicion">
+        <div class="qtag">Te toca · predice</div>
+        <p class="q">Ya salió que la suma se respeta. ¿Qué falta para poder afirmar que T es lineal?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Verificar también el escalado: que sacar el factor por fuera dé lo mismo que meterlo antes de aplicar T</button>
+          <button class="opt" data-ok="0">Nada más: con que respete la suma ya es lineal</button>
+          <button class="opt" data-ok="0">Comprobar que T mande el vector cero a un vector distinto de cero</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La definición pide <strong>las dos</strong> condiciones. Y el cero debe ir al cero, nunca a otro punto.</p></div>
+      </div>
+
+      <div class="estep"><div class="oprow">Prueba el escalado</div><p>Escalo el vector por un factor antes de aplicar T y comparo con escalar el resultado.</p><div class="fx"><div class="sys"><span class="eq">c = 5,  u = (1, 2)</span><span class="eq">T(5·u) = T(5, 10) = (15, 10)</span><span class="eq">5·T(u) = 5·(3, 2) = (15, 10)</span></div></div></div>
+      <p class="idea" style="font-size:17px">Las dos condiciones se cumplen, así que <strong>T sí es lineal</strong>. Su matriz canónica sale de aplicar T a cada vector de la base canónica; esas imágenes son las columnas:</p>
+      <div class="fx"><div class="sys"><span class="eq">T(1, 0) = (1, 2)</span><span class="eq">T(0, 1) = (1, 0)</span></div></div>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Ahora lo que de verdad cae en examen: hallar el <strong>núcleo</strong> (qué vectores van a parar al cero) y el <strong>rango</strong>. Parto de una transformación con regla explícita, del dominio de dimensión 3 al de dimensión 2:</p>
+      <div class="fx"><div class="sys"><span class="eq">T(x, y, z) = (x + 2y − z, x + 3y + z)</span></div></div>
+      <div class="estep"><div class="oprow">Matriz de la transformación</div><p>Sus columnas son T aplicado a cada vector de la base canónica: T(1,0,0) = (1, 1), T(0,1,0) = (2, 3), T(0,0,1) = (−1, 1). Esas tres imágenes son las columnas. Reduzco por Gauss-Jordan.</p><div class="fx" id="k0"></div></div>
+      <div class="estep"><div class="oprow">R2 → R2 − R1</div><p>Hago cero la primera entrada del renglón 2.</p><div class="fx" id="k1"></div></div>
+      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>Limpio la segunda columna del renglón 1. Ya está reducida.</p><div class="fx" id="k2"></div></div>
+      <p class="idea" style="font-size:17px">Hay <strong>2 pivotes</strong> (columnas 1 y 2), así que el <strong>rango es 2</strong>. La tercera columna no tiene pivote: esa variable es libre. Al parametrizar con la variable libre, el <strong>núcleo</strong> es la recta generada por un solo vector:</p>
+      <div class="fx"><div class="sys"><span class="eq">z = t</span><span class="eq">(x, y, z) = t·(5, −2, 1)</span></div></div>
+      <p class="fx-note">La nulidad (dimensión del núcleo) es 1: el cero solo sale con múltiplos de ese vector. Comprobación con la matriz original:</p>
+      <div class="fx"><div class="sys"><span class="eq">5 − 4 − 1 = 0   (renglón de arriba)</span><span class="eq">5 + 1 − 6 = 0   (renglón de abajo)</span></div></div>
+      <div class="estep"><div class="oprow">Y la imagen</div><p>Los pivotes cayeron en las columnas 1 y 2. Cuidado con la trampa: la base de la imagen NO son las columnas de la matriz reducida, sino las <strong>columnas 1 y 2 de la matriz ORIGINAL</strong>. Esas dos flechas generan todo lo que T alcanza.</p><div class="fx"><div class="sys"><span class="eq">base de la imagen = { (1, 1),  (2, 3) }</span><span class="eq">dim de la imagen = rango = 2</span></div></div></div>
+      <p class="fx-note">Cierra el objetivo 3: núcleo = recta t·(5, −2, 1) · imagen = plano generado por (1, 1) y (2, 3), que ya llena todo el codominio de dimensión 2.</p>
+    </section>
+
+    <section class="sec">
+      <h3>Míralo: el teorema de rango-nulidad</h3>
+      <p class="idea">Todo cuadra por una razón. Las columnas de la matriz se reparten en <strong>dos grupos</strong>: las que tienen pivote alimentan la <strong>imagen</strong> (su cantidad es el rango) y las que no tienen pivote dan las variables libres del <strong>núcleo</strong> (su cantidad es la nulidad). Como cada columna cae en exactamente un grupo:</p>
+      <div class="fx"><div class="sys"><span class="eq">rango + nulidad = número de columnas</span></div></div>
+      <p class="idea">El "número de columnas" es la dimensión del <strong>dominio</strong> (de dónde salen los vectores). Por eso, si conoces dos de los tres números, el tercero sale solo. En el ejemplo de arriba: 2 + 1 = 3, y la matriz tenía 3 columnas.</p>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Cerremos con la clasificación. La transformación es <strong>inyectiva</strong> cuando lo único que va al cero es el cero (nulidad 0), y <strong>suprayectiva</strong> cuando su imagen llena todo el <strong>codominio</strong> (el rango iguala la dimensión del destino, es decir, el número de renglones). Tomo T de un dominio de dimensión 3 a un codominio de dimensión 2, con esta matriz reducida:</p>
+      <div class="estep"><div class="oprow">Matriz reducida</div><div class="fx" id="c0"></div></div>
+      <p class="idea" style="font-size:17px">Hay 2 pivotes → <strong>rango 2</strong>, que es justo la dimensión del codominio: <strong>suprayectiva</strong>. Pero por rango-nulidad, la nulidad es 3 − 2 = 1 &gt; 0: hay más que el cero en el núcleo, así que <strong>no</strong> es inyectiva. Como falla la inyectividad, tampoco es biyectiva.</p>
+      <p class="fx-note">Regla de bolsillo: si el dominio es "más grande" que el codominio, jamás será inyectiva; si es "más chico", jamás será suprayectiva. Biyectiva exige que ambos espacios tengan la misma dimensión.</p>
+    </section>
+
+    <h2 class="modhead">Tu turno</h2>
+    <section class="practice">
+      <div class="phead"><h3>De guiado a solo</h3><p class="sub">Toca tu respuesta. Si fallas, vuelve a intentar. El apoyo se va retirando. · <span class="cont" id="cont"></span></p></div>
+
+      <div class="pitem" data-kind="item" data-id="P1" data-tema="matriz_canonica" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Una transformación manda a cada punto a "la suma de sus entradas, y el triple de la primera menos la segunda". ¿Cuál es la primera columna de su matriz canónica?</p>
+        <div class="fx"><div class="sys"><span class="eq">T(x, y) = (x + y, 3x − y)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">La imagen de (1, 0), o sea (1, 3)</button>
+          <button class="opt" data-ok="0">La imagen de (0, 1), o sea (1, −1)</button>
+          <button class="opt" data-ok="0">El vector (1, 0) tal cual, sin aplicar T</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>La receta: cada columna es T aplicado a un vector de la base canónica. La primera columna usa (1, 0).</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Aplicas T al primer vector de la base canónica; el resultado es la primera columna:</p><div class="fx"><div class="sys"><span class="eq">T(1, 0) = (1+0, 3·1 − 0) = (1, 3)</span></div></div></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P1b" data-tema="rango_nulidad" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Ahora arma tú la matriz y redúcela. Para esta regla, ¿cuánto valen el rango y la nulidad?</p>
+        <div class="fx"><div class="sys"><span class="eq">T(x, y, z) = (x + y + z, 2x + 2y + 2z)</span></div></div>
+        <div class="estep"><div class="oprow">Sigue el hilo</div><p>Las columnas son T de la base canónica: T(1,0,0)=(1,2), T(0,1,0)=(1,2), T(0,0,1)=(1,2). Al reducir, el renglón 2 se hace R2 − 2·R1 y queda todo cero: solo sobrevive un pivote.</p><div class="fx" id="p1b"></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Rango 1, nulidad 2: solo hay un pivote, sobran dos columnas libres</button>
+          <button class="opt" data-ok="0">Rango 2, nulidad 1: hay dos pivotes</button>
+          <button class="opt" data-ok="0">Rango 3, nulidad 0: cada columna es un pivote</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Cuenta los renglones no nulos de la forma reducida: ese es el rango. La nulidad es columnas − rango = 3 − rango.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Las tres columnas son iguales, así que al reducir solo queda <strong>1 pivote</strong> → rango 1. Por rango-nulidad, nulidad = 3 − 1 = 2.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P1c" data-tema="rango_nulidad" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Sola esta vez: arma la matriz de esta regla, redúcela y di cuánto valen el rango y la nulidad.</p>
+        <div class="fx"><div class="sys"><span class="eq">T(x, y) = (x − y, 2x − 2y)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Rango 1, nulidad 1</button>
+          <button class="opt" data-ok="0">Rango 2, nulidad 0</button>
+          <button class="opt" data-ok="0">Rango 1, nulidad 2</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>La matriz es [[1, −1],[2, −2]]. Haz R2 − 2·R1 y mira cuántos renglones quedan con pivote. La nulidad es 2 − rango.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>El segundo renglón es el doble del primero: al reducir se anula. Queda <strong>1 pivote</strong> → rango 1, y nulidad = 2 − 1 = 1.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="rango_nulidad" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Esta es la matriz reducida de una transformación con 3 columnas. ¿Cuál es su nulidad (la dimensión del núcleo)?</p>
+        <div class="fx" id="p2"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Uno: la tercera columna no tiene pivote</button>
+          <button class="opt" data-ok="0">Cero: solo el vector cero va al núcleo</button>
+          <button class="opt" data-ok="0">Dos: sobran dos columnas</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Hay pivotes en las columnas 1 y 2 (rango 2). La tercera no tiene pivote: una variable libre → nulidad 1. Y checa: 2 + 1 = 3 columnas.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="rango_nulidad" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Una transformación sale de un espacio de dimensión 4 y su núcleo tiene dimensión 2. ¿Cuál es su rango?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Dos</button>
+          <button class="opt" data-ok="0">Cuatro</button>
+          <button class="opt" data-ok="0">Seis</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Por rango-nulidad, rango + nulidad = columnas = 4. Entonces rango = 4 − 2 = 2.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3b" data-tema="clasificacion" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Primera vez clasificando: aquí tienes la matriz reducida de una T de un dominio de dimensión 3 a un codominio de dimensión 3. Hay 3 pivotes → rango 3, nulidad 0. ¿Cómo se clasifica?</p>
+        <div class="fx" id="p3b"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Biyectiva: rango 3 = dimensión del codominio (suprayectiva) y nulidad 0 (inyectiva)</button>
+          <button class="opt" data-ok="0">Solo suprayectiva: llena el codominio pero no es inyectiva</button>
+          <button class="opt" data-ok="0">Ni inyectiva ni suprayectiva</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Compara dos cosas: rango contra la dimensión del codominio (¿supra?) y nulidad contra 0 (¿inyectiva?). Si ambas se cumplen, es biyectiva.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Nulidad 0 → <strong>inyectiva</strong>. Rango 3 = dimensión del codominio → <strong>suprayectiva</strong>. Las dos juntas → <strong>biyectiva</strong>.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="clasificacion" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Una transformación va de un espacio de dimensión 2 a uno de dimensión 3. ¿Qué NUNCA podrá ser?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Suprayectiva: su imagen jamás llena las 3 dimensiones del codominio</button>
+          <button class="opt" data-ok="0">Inyectiva: siempre mandará dos puntos distintos al mismo lugar</button>
+          <button class="opt" data-ok="0">Lineal: cambiar de dimensión rompe la linealidad</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El rango no puede pasar de 2 (solo hay 2 columnas), y la dimensión de destino es 3. Nunca alcanza para ser suprayectiva. Inyectiva sí puede.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="definicion" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">De estas tres reglas, ¿cuál NO es una transformación lineal?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">La que deja igual la segunda entrada y a la primera le suma 1</button>
+          <button class="opt" data-ok="0">La que intercambia las dos entradas de cada punto</button>
+          <button class="opt" data-ok="0">La que duplica la primera entrada y anula la segunda</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Sumar 1 fijo manda el (0, 0) a (1, 0): mueve el cero, así que rompe T(0)=0. Intercambiar y duplicar sí son combinaciones lineales de las variables.</p></div>
+      </div>
+    </section>
+
+    <div class="check" data-kind="recall" data-fid="F2_teorema_rango_nulidad" data-tema="rango_nulidad">
+      <div class="qtag">Te toca · recuerda</div>
+      <p class="q">¿Qué afirma exactamente el teorema de rango-nulidad?</p>
+      <div class="opts">
+        <button class="opt" data-ok="1">Rango más nulidad es igual al número de columnas (la dimensión del dominio)</button>
+        <button class="opt" data-ok="0">Rango más nulidad es igual al número de renglones (la dimensión del codominio)</button>
+        <button class="opt" data-ok="0">Rango por nulidad es igual al número de columnas</button>
+      </div>
+      <div class="why"><span class="lbl">Por qué</span><p>Cada columna del dominio o tiene pivote (aporta al rango) o no (aporta a la nulidad). Se <strong>suman</strong>, y el total es la dimensión del <strong>dominio</strong>, no del destino.</p></div>
+    </div>
+
+    <section class="chuleta">
+      <h3>Para memorizar</h3>
+      <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
+      <ul>
+        <li><span class="ck">✓</span> Lineal = respeta suma y escalado. Filtro rápido: si mueve el cero, no es lineal.</li>
+        <li><span class="ck">✓</span> Matriz canónica: sus columnas son T aplicado a cada vector de la base canónica.</li>
+        <li><span class="ck">✓</span> Núcleo = vectores que van al cero; su dimensión es la nulidad (columnas sin pivote).</li>
+        <li><span class="ck">✓</span> Imagen = lo que sí se alcanza; su dimensión es el rango (columnas con pivote).</li>
+        <li><span class="ck">✓</span> Rango-nulidad: rango + nulidad = número de columnas (dimensión del dominio).</li>
+        <li><span class="ck">✓</span> Inyectiva ⇔ nulidad 0 · Suprayectiva ⇔ rango = dimensión del codominio · Biyectiva = ambas.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue?</h3>
+      <p class="nota">Qué tan segura te sientes con transformaciones lineales, núcleo, imagen y rango-nulidad ahora. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 3</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+function mat(rows){
+  var cols = rows[0].length;
+  var gtc = 'repeat('+cols+',auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<cols;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
+
+// matriz canónica de T(x,y)=(x+y, 3x-y)
+set('canonEx',[["1","1"],["3","−1"]]);
+// núcleo/rango: A = [[1,2,-1],[1,3,1]] -> rref
+set('k0',[["1","2","−1"],["1","3","1"]]);
+set('k1',[["1","2","−1"],["0","1","2"]]);
+set('k2',[["1","0","−5"],["0","1","2"]]);
+// clasificación 3->2: matriz reducida rango 2, nulidad 1
+set('c0',[["1","0","−5"],["0","1","2"]]);
+// práctica
+set('p1b',[["1","1","1"],["0","0","0"]]);
+set('p2',[["1","0","−5"],["0","1","2"]]);
+set('p3b',[["1","0","0"],["0","1","0"],["0","0","1"]]);
+
+// ===== instrumentación =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U3_transformaciones", leccion:"L3_transformaciones-lineales",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_EJ = document.querySelectorAll('[data-kind="item"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.items.length+"/"+TOT_EJ+" ejercicios"; }
+
+document.querySelectorAll('[data-kind]').forEach(function(block){
+  var kind = block.getAttribute('data-kind');
+  var start = Date.now(), intentos = 0, done = false;
+  var why = block.querySelector('.why');
+  block.querySelectorAll('.opt').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      intentos++;
+      if(b.getAttribute('data-ok')==="1"){
+        done = true; b.classList.add('right');
+        if(why) why.classList.add('show');
+        var pit = block.closest('.pitem'); if(pit) pit.classList.add('solved');
+        if(kind==="recall"){
+          session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:(intentos===1?"de_memoria":"con_pista") });
+        } else {
+          session.items.push({ id:block.getAttribute('data-id'), tema:block.getAttribute('data-tema'),
+            nivel:(block.getAttribute('data-level')||"-"), intentos:intentos, correcto:true, tiempo_s:Math.round((Date.now()-start)/1000) });
+          updateCont();
+        }
+      } else {
+        b.classList.add('wrong'); b.disabled = true;
+        if(why){ why.classList.add('show','miss'); }
+      }
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var c=session.items.filter(function(x){return x.correcto;}).length;
+  var trabas=session.items.filter(function(x){return x.intentos>1;}).map(function(x){return x.id;});
+  var rec=session.formulas.map(function(f){return f.id+": "+f.recall;});
+  var s="Resolvió "+c+"/"+TOT_EJ+" ejercicios. ";
+  s+= rec.length? ("Recall de fórmulas → "+rec.join(" · ")+". ") : "No hizo el recall de fórmulas. ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U3.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){return '<span class="pill">'+f.id+": "+f.recall+'</span>';}).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT_EJ+'</strong> ejercicios · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Fórmulas: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>

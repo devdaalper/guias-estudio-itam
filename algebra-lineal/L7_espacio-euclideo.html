@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U7 — Rⁿ euclídeo y ortogonalidad</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0 0}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .check{display:grid;gap:11px;padding:16px 18px;border:1.5px solid #cfd6f2;border-radius:12px;background:#eef1fb}
+  .check .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .check .qtag::before{content:"✎ "}
+  .check .q{margin:0;font-weight:700;font-size:17px}
+
+  .opts{display:grid;gap:10px}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .opt:disabled{cursor:default}
+  .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
+  .why.show{display:block}
+  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .why.miss>.lbl{color:var(--deep)}
+  .why p{margin:0}
+
+  .ejemplo{border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9;padding:18px 20px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+
+  .practice{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
+  .practice .phead h3{margin:0;font-size:19px}
+  .practice .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
+  .pitem{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff;transition:border-color .2s,background .2s}
+  .pitem.solved{border-color:var(--green);background:#f3faf5}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.guiado{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.juntos{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .pstatement{margin:0;font-size:17px}
+  .aux summary{cursor:pointer;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;list-style:none;width:max-content;font-size:15px}
+  .aux summary::-webkit-details-marker{display:none}
+  .aux summary:hover{border-color:var(--navy);background:#f7f8fc}
+  .aux details[open] summary{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
+  .aux p{margin:8px 2px 0;font-size:16px;color:var(--slate)}
+
+  .viz{display:grid;gap:12px}
+  .viz-tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .viz-tab{font:inherit;font-weight:700;font-size:15px;padding:9px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .viz-tab:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .viz-tab.active{border-color:var(--ink);background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+  .viz-plane{padding:10px}
+  .viz-plane svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
+  .viz-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--slate)}
+  .viz-legend span{display:inline-flex;align-items:center;gap:7px}
+  .viz-legend i{width:18px;height:4px;border-radius:2px;display:inline-block}
+  .viz-cap{margin:0;font-size:17px;color:var(--slate);min-height:1.6em}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 7</p>
+    <h1>Rⁿ euclídeo y <mark>ortogonalidad</mark></h1>
+    <p class="lead">El producto punto le da a los vectores longitud, ángulo y perpendicularidad. Con eso podemos proyectar, ortogonalizar y aproximar. Todo a mano, con números limpios, sin calculadora.</p>
+    <div class="learn">
+      <h2>Al terminar vas a poder</h2>
+      <ol>
+        <li><span class="n">1</span> Calcular el producto punto de dos vectores</li>
+        <li><span class="n">2</span> Medir la norma (longitud) de un vector</li>
+        <li><span class="n">3</span> Hallar el ángulo entre dos vectores</li>
+        <li><span class="n">4</span> Reconocer cuándo son ortogonales</li>
+        <li><span class="n">5</span> Proyectar un vector sobre otro</li>
+        <li><span class="n">6</span> Ortogonalizar con Gram-Schmidt e intuir mínimos cuadrados</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">La idea</h2>
+
+    <section class="sec">
+      <h3>El producto punto: una sola operación que lo desata todo</h3>
+      <p class="idea">A dos vectores del mismo tamaño les asignamos un <strong>número</strong>: multiplicas coordenada con coordenada y sumas. Ese número es el <strong>producto punto</strong>. Con este ejemplo:</p>
+      <div class="fx"><div class="sys"><span class="eq">u = (2, 3, −1)</span><span class="eq">v = (1, −2, 4)</span></div></div>
+      <div class="fx"><div class="sys"><span class="eq">u · v = (2)(1) + (3)(−2) + (−1)(4)</span><span class="eq">u · v = 2 − 6 − 4 = −8</span></div></div>
+      <p class="idea">De este solo número salen la <strong>longitud</strong>, el <strong>ángulo</strong> y la <strong>perpendicularidad</strong>. Todo lo demás de la unidad es leerlo bien.</p>
+    </section>
+
+    <section class="sec">
+      <h3>La norma: la longitud de un vector</h3>
+      <p class="idea">La <strong>norma</strong> es qué tan largo es el vector. Sale del producto punto de un vector consigo mismo: sumas los cuadrados de sus coordenadas y sacas raíz. Con un vector limpio:</p>
+      <div class="fx"><div class="sys"><span class="eq">‖w‖ = √(w · w)</span><span class="eq">w = (3, 4)  →  ‖w‖ = √(9 + 16) = √25 = 5</span></div></div>
+      <p class="idea">Un vector de norma <strong>1</strong> se llama <strong>unitario</strong>. Para volver unitario cualquier vector, lo divides entre su norma. ¿Recuerdas la fórmula antes de mirar el resto?</p>
+      <div class="check" data-kind="recall" data-fid="F1_norma" data-tema="norma">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Cuál expresión da la norma de un vector?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">La raíz cuadrada de la suma de los cuadrados de sus coordenadas</button>
+          <button class="opt" data-ok="0">La suma de sus coordenadas</button>
+          <button class="opt" data-ok="0">La suma de los cuadrados de sus coordenadas, sin raíz</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La norma es <strong>√(v · v)</strong>. La suma de cuadrados sin raíz es ‖v‖², útil, pero no es la longitud.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>Ángulo y ortogonalidad</h3>
+      <p class="idea">El coseno del ángulo entre dos vectores sale del producto punto dividido entre las dos normas. Esta es la fórmula clave:</p>
+      <div class="fx"><div class="sys"><span class="eq">cos θ = (u · v) / (‖u‖ · ‖v‖)</span></div></div>
+      <p class="idea">De aquí sale lo más importante de la unidad: si <strong>u · v = 0</strong>, entonces cos θ = 0, o sea θ = 90°. Dos vectores son <strong>ortogonales</strong> (perpendiculares) exactamente cuando su producto punto es cero. Ya no necesitas dibujar nada: <strong>calculas el producto punto y ves si da cero</strong>. Mira el ejemplo:</p>
+      <div class="fx"><div class="sys"><span class="eq">(2, 3) · (3, −2) = 6 − 6 = 0</span><span class="eq">→ son perpendiculares</span></div></div>
+    </section>
+
+    <h2 class="modhead">Yo lo hago</h2>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Calculemos el <strong>ángulo</strong> entre dos vectores. Voy paso a paso; tú solo sigue el hilo. Los vectores son u = (1, 1) y v = (1, 0).</p>
+      <div class="estep"><div class="oprow">Paso 1 · producto punto</div><p>Multiplico coordenada con coordenada y sumo.</p><div class="fx"><div class="sys"><span class="eq">u · v = (1)(1) + (1)(0) = 1</span></div></div></div>
+      <div class="estep"><div class="oprow">Paso 2 · las dos normas</div><p>Longitud de cada vector.</p><div class="fx"><div class="sys"><span class="eq">‖u‖ = √(1 + 1) = √2</span><span class="eq">‖v‖ = √(1 + 0) = 1</span></div></div></div>
+
+      <div class="check" data-kind="item" data-id="EJpred" data-tema="angulo">
+        <div class="qtag">Te toca · predice</div>
+        <p class="q">Ya tengo u · v = 1, ‖u‖ = √2 y ‖v‖ = 1. ¿Cuánto vale cos θ?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">1 dividido entre √2, que es un valor conocido: θ = 45°</button>
+          <button class="opt" data-ok="0">√2 dividido entre 1, o sea √2</button>
+          <button class="opt" data-ok="0">Cero, así que θ = 90°</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>cos θ = (u · v)/(‖u‖‖v‖) = 1/(√2 · 1) = 1/√2. Ese coseno corresponde a <strong>45°</strong>, un ángulo que conviene tener de memoria.</p></div>
+      </div>
+
+      <div class="estep"><div class="oprow">Paso 3 · junta todo</div><p>Divido el producto punto entre las dos normas.</p><div class="fx"><div class="sys"><span class="eq">cos θ = 1 / (√2 · 1) = 1/√2</span><span class="eq">θ = 45°</span></div></div></div>
+      <p class="idea" style="font-size:17px">Listo: el ángulo es <strong>45°</strong>. Nota que nunca dibujé nada; solo apliqué la fórmula con números limpios.</p>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Ahora la operación estrella de la unidad: <strong>proyectar</strong> un vector sobre otro. La proyección de u sobre v es la “sombra” de u en la dirección de v. Su fórmula:</p>
+      <div class="fx"><div class="sys"><span class="eq">proy_v(u) = ( (u · v) / (v · v) ) · v</span></div></div>
+      <p class="idea" style="font-size:17px">Proyectemos u = (2, 4) sobre v = (1, 1), paso a paso.</p>
+      <div class="estep"><div class="oprow">Paso 1 · los dos productos punto</div><p>Arriba u · v, abajo v · v.</p><div class="fx"><div class="sys"><span class="eq">u · v = (2)(1) + (4)(1) = 6</span><span class="eq">v · v = (1)(1) + (1)(1) = 2</span></div></div></div>
+      <div class="estep"><div class="oprow">Paso 2 · el factor</div><p>Divido: ese número escala a v.</p><div class="fx"><div class="sys"><span class="eq">6 / 2 = 3</span></div></div></div>
+      <div class="estep"><div class="oprow">Paso 3 · escala v</div><p>Multiplico v por el factor 3.</p><div class="fx"><div class="sys"><span class="eq">proy_v(u) = 3 · (1, 1) = (3, 3)</span></div></div></div>
+      <p class="idea" style="font-size:17px">Lo que sobra al restarle la proyección a u es <strong>perpendicular</strong> a v. Ese “resto perpendicular” es la clave de todo lo que sigue; compruébalo abajo:</p>
+      <div class="fx"><div class="sys"><span class="eq">u − proy_v(u) = (2, 4) − (3, 3) = (−1, 1)</span><span class="eq">(−1, 1) · (1, 1) = −1 + 1 = 0</span></div></div>
+    </section>
+
+    <section class="sec">
+      <h3>Míralo: la proyección y su sombra</h3>
+      <p class="idea">Aquí sí vale un dibujo, porque la palabra “proyección” <strong>es</strong> geométrica. <span style="color:var(--deep);font-weight:700">u</span> se apoya sobre la recta que marca <span style="color:var(--navy);font-weight:700">v</span>; su sombra es <span style="color:var(--ink);font-weight:700">proy_v(u)</span>, y lo que sobra (la línea punteada) cae en ángulo recto sobre v.</p>
+      <div class="fx" style="padding:10px"><div id="projPlane"></div></div>
+      <div class="viz-legend">
+        <span><i style="background:#C75D08"></i>u = (2, 4)</span>
+        <span><i style="background:#283891"></i>dirección de v</span>
+        <span><i style="background:#181B22"></i>proy_v(u) = (3, 3)</span>
+      </div>
+      <p class="fx-note">La punteada mide (−1, 1): toca la recta de v formando un ángulo recto. Por eso la proyección es el punto de la recta <strong>más cercano</strong> a u.</p>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Cuando quieres una base <strong>ortogonal</strong> a partir de vectores cualesquiera, usas <strong>Gram-Schmidt</strong>: al segundo vector le quitas su proyección sobre el primero, y lo que queda ya es perpendicular. Hagámoslo con v₁ = (3, 0) y v₂ = (2, 2).</p>
+      <div class="estep"><div class="oprow">Paso 1 · el primero se queda</div><p>Tomo u₁ = v₁ como está.</p><div class="fx"><div class="sys"><span class="eq">u₁ = (3, 0)</span></div></div></div>
+      <div class="estep"><div class="oprow">Paso 2 · proyecta v₂ sobre u₁</div><p>Mismo cálculo del ejemplo anterior.</p><div class="fx"><div class="sys"><span class="eq">v₂ · u₁ = (2)(3) + (2)(0) = 6</span><span class="eq">u₁ · u₁ = 9   →   factor = 6/9 = 2/3</span><span class="eq">proy = (2/3)(3, 0) = (2, 0)</span></div></div></div>
+      <div class="estep"><div class="oprow">Paso 3 · quita la proyección</div><p>Lo que sobra es el segundo vector ortogonal.</p><div class="fx"><div class="sys"><span class="eq">u₂ = v₂ − proy = (2, 2) − (2, 0) = (0, 2)</span></div></div></div>
+      <p class="idea" style="font-size:17px">Compruebo que ya son perpendiculares con el producto punto; da cero:</p>
+      <div class="fx"><div class="sys"><span class="eq">u₁ · u₂ = (3)(0) + (0)(2) = 0</span></div></div>
+      <p class="idea" style="font-size:17px">Si además divides cada uno entre su norma, obtienes una base <strong>ortonormal</strong>: (1, 0) y (0, 1).</p>
+      <p class="fx-note">Idea de mínimos cuadrados: cuando un sistema no tiene solución exacta (más ecuaciones que incógnitas), la mejor respuesta posible es <strong>proyectar</strong> el vector de datos sobre lo alcanzable y quedarte con esa sombra. Es la misma proyección de esta unidad, aplicada para aproximar.</p>
+    </section>
+
+    <h2 class="modhead">Tu turno</h2>
+    <section class="practice">
+      <div class="phead"><h3>De guiado a solo</h3><p class="sub">Toca tu respuesta. Si fallas, vuelve a intentar. El apoyo se va retirando. · <span class="cont" id="cont"></span></p></div>
+
+      <div class="pitem" data-kind="item" data-id="P1" data-tema="producto_punto" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Calcula el producto punto de estos dos vectores.</p>
+        <div class="fx"><div class="sys"><span class="eq">a = (5, −2)</span><span class="eq">b = (1, 3)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">−1</button>
+          <button class="opt" data-ok="0">11</button>
+          <button class="opt" data-ok="0">(5, −6)</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Multiplica primera con primera, segunda con segunda, y suma los dos números. El resultado es un solo número, no un vector.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>(5)(1) + (−2)(3) = 5 − 6 = −1. El producto punto siempre da un número, nunca un vector.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="norma" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">¿Cuál es la norma de este vector?</p>
+        <div class="fx"><div class="sys"><span class="eq">w = (6, 8)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">10</button>
+          <button class="opt" data-ok="0">14</button>
+          <button class="opt" data-ok="0">100</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>‖w‖ = √(36 + 64) = √100 = 10. El 100 es ‖w‖² (sin la raíz); el 14 sería sumar las coordenadas.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="ortogonalidad" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">¿Cuál de estos vectores es ortogonal a (2, 1)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(1, −2)</button>
+          <button class="opt" data-ok="0">(2, 1)</button>
+          <button class="opt" data-ok="0">(4, 2)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>(2, 1) · (1, −2) = 2 − 2 = 0, así que son perpendiculares. Los otros dos apuntan en la misma dirección (producto punto 5 y 10, no cero).</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="Pang1" data-tema="angulo" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Empieza calculando el producto punto de estos dos vectores. Con ese número deduce el ángulo que forman.</p>
+        <div class="fx"><div class="sys"><span class="eq">u = (1, 1)</span><span class="eq">v = (2, −2)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">u · v = 0, así que el ángulo es 90°</button>
+          <button class="opt" data-ok="0">u · v = 0, así que el ángulo es 0°</button>
+          <button class="opt" data-ok="0">u · v = 4, así que el ángulo es 45°</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>u · v = (1)(2) + (1)(−2). Si ese número es cero, cos θ = 0, y el único ángulo con coseno cero es 90°.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>(1)(2) + (1)(−2) = 2 − 2 = 0. Producto punto cero significa cos θ = 0, o sea θ = 90°: son perpendiculares.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="Pang2" data-tema="angulo" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Halla el ángulo entre estos dos vectores de principio a fin: producto punto, las dos normas y el coseno.</p>
+        <div class="fx"><div class="sys"><span class="eq">u = (3, 3)</span><span class="eq">v = (3, 0)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">45°</button>
+          <button class="opt" data-ok="0">90°</button>
+          <button class="opt" data-ok="0">0°</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>u · v = (3)(3) + (3)(0) = 9. ‖u‖ = √(9 + 9) = 3√2 y ‖v‖ = √9 = 3. cos θ = 9/(3√2 · 3) = 1/√2, que es <strong>45°</strong>. El 90° saldría si el producto punto fuera cero; el 0° si los vectores fueran paralelos.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="proyeccion" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Vamos a proyectar u = (3, 1) sobre v = (1, 1). Primer paso: calcula los dos productos punto que necesita la fórmula, u · v y v · v.</p>
+        <div class="fx"><div class="sys"><span class="eq">u = (3, 1)</span><span class="eq">v = (1, 1)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">u · v = 4 y v · v = 2</button>
+          <button class="opt" data-ok="0">u · v = 2 y v · v = 4</button>
+          <button class="opt" data-ok="0">u · v = 3 y v · v = 1</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>u · v = (3)(1) + (1)(1). Y v · v es v consigo mismo: (1)(1) + (1)(1).</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>u · v = (3)(1) + (1)(1) = 4. v · v = (1)(1) + (1)(1) = 2. Estos dos números arman el factor de la proyección.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="proyeccion" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Seguimos con los mismos u = (3, 1) y v = (1, 1). Ya sabes que u · v = 4 y v · v = 2. Termina la proyección: forma el factor y escala v.</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(2, 2)</button>
+          <button class="opt" data-ok="0">(4, 4)</button>
+          <button class="opt" data-ok="0">(3, 1)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Factor = (u · v)/(v · v) = 4/2 = 2. Proyección = 2·(1, 1) = (2, 2). El (4, 4) sale de usar u · v sin dividir; el (3, 1) es u sin proyectar.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="proyeccion" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Proyecta u = (7, 4) sobre v = (1, 2). ¿Cuál es la proyección?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(3, 6)</button>
+          <button class="opt" data-ok="0">(7, 4)</button>
+          <button class="opt" data-ok="0">(1, 2)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>u · v = (7)(1) + (4)(2) = 15. v · v = 1 + 4 = 5. Factor = 15/5 = 3. Proyección = 3·(1, 2) = (3, 6). Ni (7, 4) ni (1, 2) usan la fórmula: uno es u, el otro es v.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="gram_schmidt" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Gram-Schmidt con v₁ = (2, 0) y v₂ = (3, 3). Tomamos u₁ = v₁. Primer paso del cómputo: proyecta v₂ sobre u₁. ¿Cuánto vale esa proyección?</p>
+        <div class="fx"><div class="sys"><span class="eq">u₁ = (2, 0)</span><span class="eq">v₂ = (3, 3)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">(3, 0)</button>
+          <button class="opt" data-ok="0">(3, 3)</button>
+          <button class="opt" data-ok="0">(6, 0)</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>v₂ · u₁ = (3)(2) + (3)(0) = 6. u₁ · u₁ = 4. El factor es 6/4, y multiplica a u₁ = (2, 0).</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>v₂ · u₁ = 6 y u₁ · u₁ = 4, así que el factor es 6/4 = 3/2. Proyección = (3/2)·(2, 0) = (3, 0). El (6, 0) olvida dividir entre u₁ · u₁.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="gram_schmidt" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Sigue con v₂ = (3, 3) y la proyección (3, 0) que acabas de obtener. Réstala para hallar u₂, el vector ortogonal a u₁ = (2, 0). ¿Cuál es u₂?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(0, 3)</button>
+          <button class="opt" data-ok="0">(6, 3)</button>
+          <button class="opt" data-ok="0">(0, 6)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>u₂ = v₂ − proyección = (3, 3) − (3, 0) = (0, 3). Comprueba: u₁ · u₂ = (2)(0) + (0)(3) = 0, perpendiculares. Restar es el paso clave; sumar daría (6, 3), que no es ortogonal.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="gram_schmidt" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Aplica Gram-Schmidt completo a estos dos vectores: toma u₁ = v₁, proyecta v₂ sobre u₁, réstala y da el segundo vector ortogonal u₂.</p>
+        <div class="fx"><div class="sys"><span class="eq">v₁ = (1, 0)</span><span class="eq">v₂ = (4, 3)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">(0, 3)</button>
+          <button class="opt" data-ok="0">(4, 0)</button>
+          <button class="opt" data-ok="0">(4, 3)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>u₁ = (1, 0). Factor = (v₂ · u₁)/(u₁ · u₁) = 4/1 = 4, así que la proyección es 4·(1, 0) = (4, 0). u₂ = v₂ − proyección = (4, 3) − (4, 0) = (0, 3). Comprueba: u₁ · u₂ = 0. El (4, 0) es la proyección (falta restar); el (4, 3) es v₂ sin tocar.</p></div>
+      </div>
+    </section>
+
+    <div class="check" data-kind="recall" data-fid="F2_ortogonalidad" data-tema="ortogonalidad">
+      <div class="qtag">Te toca · recuerda</div>
+      <p class="q">¿Cómo reconoces, sin dibujar, que dos vectores son perpendiculares?</p>
+      <div class="opts">
+        <button class="opt" data-ok="1">Su producto punto vale cero</button>
+        <button class="opt" data-ok="0">Sus normas son iguales</button>
+        <button class="opt" data-ok="0">Uno es el doble del otro</button>
+      </div>
+      <div class="why"><span class="lbl">Por qué</span><p>Si u · v = 0, entonces cos θ = 0 y θ = 90°. Que un vector sea múltiplo de otro es justo lo contrario: son <strong>paralelos</strong>.</p></div>
+    </div>
+
+    <section class="chuleta">
+      <h3>Para memorizar</h3>
+      <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
+      <ul>
+        <li><span class="ck">✓</span> Producto punto: multiplica coordenada con coordenada y suma. Da un número.</li>
+        <li><span class="ck">✓</span> Norma: ‖v‖ = √(v · v). Unitario = norma 1 (divide entre su norma).</li>
+        <li><span class="ck">✓</span> Ángulo: cos θ = (u · v)/(‖u‖‖v‖).</li>
+        <li><span class="ck">✓</span> Ortogonales ⇔ u · v = 0 (perpendiculares, 90°).</li>
+        <li><span class="ck">✓</span> Proyección: proy_v(u) = ((u · v)/(v · v))·v. Lo que sobra es perpendicular a v.</li>
+        <li><span class="ck">✓</span> Gram-Schmidt: al siguiente vector réstale su proyección sobre los anteriores.</li>
+        <li><span class="ck">✓</span> Mínimos cuadrados: la mejor aproximación es proyectar los datos sobre lo alcanzable.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue?</h3>
+      <p class="nota">Qué tan segura te sientes con producto punto, ortogonalidad y proyección ahora. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 7</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+function mat(rows){
+  var coeffs = rows[0].length - 1;
+  var gtc = 'repeat('+coeffs+',auto) 16px auto';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
+
+// (Esta lección usa vectores, no matrices aumentadas: el motor mat()/set()
+//  queda intacto y disponible, pero los datos van en el visual de proyección.)
+
+// ===== visual: la proyección de un vector sobre otro =====
+(function(){
+  var host = document.getElementById('projPlane');
+  if(!host) return;
+  // Plano: origen abajo-izquierda, 1 unidad = 44px. u=(2,4), v-dir hasta (5,5), proy=(3,3).
+  var O=[40,270], S=44;
+  function P(x,y){ return [O[0]+x*S, O[1]-y*S]; }
+  var g='';
+  for(var k=0;k<=5;k++){
+    var a=P(k,0), b=P(k,5), c=P(0,k), d=P(5,k);
+    g+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/>';
+    g+='<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';
+  }
+  // ejes
+  var ox0=P(0,0), oxE=P(5,0), oy0=P(0,0), oyE=P(0,5);
+  var axes='<line x1="'+ox0[0]+'" y1="'+ox0[1]+'" x2="'+oxE[0]+'" y2="'+oxE[1]+'" stroke="#181B22" stroke-width="1.5"/>'
+         + '<line x1="'+oy0[0]+'" y1="'+oy0[1]+'" x2="'+oyE[0]+'" y2="'+oyE[1]+'" stroke="#181B22" stroke-width="1.5"/>';
+  var org=P(0,0), Pu=P(2,4), Pv=P(5,5), Pp=P(3,3);
+  // recta que marca la dirección de v (por el origen)
+  var vline='<line x1="'+org[0]+'" y1="'+org[1]+'" x2="'+Pv[0]+'" y2="'+Pv[1]+'" stroke="#283891" stroke-width="2.5"/>';
+  // marcador de ángulo recto en la punta de la proyección
+  var nx=(2-3), ny=(4-3); // residual (-1,1) normalizado a pequeño
+  var m=Math.sqrt(nx*nx+ny*ny), sqr=8;
+  var dvx=1/Math.SQRT2, dvy=1/Math.SQRT2;   // dir de v (1,1) normalizada
+  var drx=nx/m, dry=ny/m;                     // dir del residual
+  var c1=[Pp[0]+dvx*sqr, Pp[1]-dvy*sqr];
+  var c2=[Pp[0]+drx*sqr, Pp[1]+dry*sqr];      // ojo: y hacia arriba invertida
+  var c3=[Pp[0]+(dvx+drx)*sqr, Pp[1]-(dvy-dry)*sqr];
+  var rightangle='<polyline points="'+c1[0]+','+c1[1]+' '+c3[0]+','+c3[1]+' '+c2[0]+','+c2[1]+'" fill="none" stroke="#181B22" stroke-width="1.5"/>';
+  // vector u
+  var uvec='<line x1="'+org[0]+'" y1="'+org[1]+'" x2="'+Pu[0]+'" y2="'+Pu[1]+'" stroke="#C75D08" stroke-width="3.5" stroke-linecap="round"/>';
+  // proyección (sombra sobre la recta)
+  var pvec='<line x1="'+org[0]+'" y1="'+org[1]+'" x2="'+Pp[0]+'" y2="'+Pp[1]+'" stroke="#181B22" stroke-width="5" stroke-linecap="round"/>';
+  // residual punteado, de u a la proyección
+  var res='<line x1="'+Pu[0]+'" y1="'+Pu[1]+'" x2="'+Pp[0]+'" y2="'+Pp[1]+'" stroke="#334155" stroke-width="2.5" stroke-dasharray="7 6" stroke-linecap="round"/>';
+  var dots='<circle cx="'+Pu[0]+'" cy="'+Pu[1]+'" r="4.5" fill="#C75D08"/>'
+         + '<circle cx="'+Pp[0]+'" cy="'+Pp[1]+'" r="4.5" fill="#181B22"/>';
+  var labels='<text x="'+(Pu[0]+7)+'" y="'+(Pu[1]-4)+'" font-size="15" font-weight="700" fill="#C75D08">u</text>'
+           + '<text x="'+(Pp[0]+8)+'" y="'+(Pp[1]+18)+'" font-size="15" font-weight="700" fill="#181B22">proy</text>'
+           + '<text x="'+(Pv[0]-14)+'" y="'+(Pv[1]-6)+'" font-size="15" font-weight="700" fill="#283891">v</text>';
+  host.innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proyección del vector u sobre la dirección de v, con el resto perpendicular" style="display:block;width:100%;height:auto;max-width:340px;margin:0 auto">'
+    + g + axes + vline + pvec + res + uvec + rightangle + dots + labels + '</svg>';
+})();
+
+// ===== motor de plano (intacto; disponible para futuras versiones con rectas) =====
+function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
+function clip(a,b,c){
+  var pts=[], E=1e-9;
+  if(Math.abs(b)>E){ [-1,5].forEach(function(x){ var y=(c-a*x)/b; if(y>=-1-E&&y<=5+E) pts.push([x,y]); }); }
+  if(Math.abs(a)>E){ [-1,5].forEach(function(y){ var x=(c-b*y)/a; if(x>=-1-E&&x<=5+E) pts.push([x,y]); }); }
+  var u=[]; pts.forEach(function(p){ if(!u.some(function(q){return Math.abs(q[0]-p[0])<1e-6&&Math.abs(q[1]-p[1])<1e-6;})) u.push(p); });
+  return u.slice(0,2);
+}
+function lineSVG(a,b,c,color,dash){
+  var e=clip(a,b,c); if(e.length<2) return '';
+  var p0=PT(e[0][0],e[0][1]), p1=PT(e[1][0],e[1][1]);
+  return '<line x1="'+p0[0]+'" y1="'+p0[1]+'" x2="'+p1[0]+'" y2="'+p1[1]+'" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"'+(dash?' stroke-dasharray="8 7"':'')+'/>';
+}
+var VG='', VA='';
+(function(){
+  for(var g=-1; g<=5; g++){
+    var a=PT(g,-1), b=PT(g,5), c=PT(-1,g), d=PT(5,g);
+    VG+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/>'+'<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';
+  }
+  var x0=PT(-1,0), x1=PT(5,0), y0=PT(0,-1), y1=PT(0,5);
+  VA='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/>'+'<line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';
+})();
+function drawPlane(cse){
+  var L, cap;
+  if(cse==='una'){
+    L=lineSVG(1,2,5,'#F5821F')+lineSVG(3,-1,1,'#283891');
+    var dp=PT(1,2);
+    L+='<circle cx="'+dp[0]+'" cy="'+dp[1]+'" r="11" fill="none" stroke="#F5821F" stroke-width="2.5"/><circle cx="'+dp[0]+'" cy="'+dp[1]+'" r="6.5" fill="#181B22"/>';
+    cap='Las dos rectas se cruzan en un punto. Ese punto —x = 1, y = 2— es la única solución.';
+  } else if(cse==='ninguna'){
+    L=lineSVG(1,2,5,'#F5821F')+lineSVG(1,2,8,'#283891');
+    cap='Las rectas son paralelas: nunca se cruzan. El sistema no tiene solución.';
+  } else {
+    L=lineSVG(1,2,5,'#F5821F')+lineSVG(2,4,10,'#283891',true);
+    cap='Las dos ecuaciones son la misma recta. Coinciden en todos sus puntos: infinitas soluciones.';
+  }
+  document.getElementById('vizPlane').innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plano cartesiano con dos rectas">'+VG+VA+L+'</svg>';
+  document.getElementById('vizCap').textContent=cap;
+}
+document.querySelectorAll('.viz-tab').forEach(function(b){
+  b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawPlane(b.getAttribute('data-case')); };
+});
+(function(){ var f=document.querySelector('.viz-tab'); if(f){ f.classList.add('active'); drawPlane('una'); } })();
+
+// ===== instrumentación =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U7_euclideo_opcional", leccion:"L7_espacio-euclideo",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_EJ = document.querySelectorAll('[data-kind="item"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.items.length+"/"+TOT_EJ+" ejercicios"; }
+
+document.querySelectorAll('[data-kind]').forEach(function(block){
+  var kind = block.getAttribute('data-kind');
+  var start = Date.now(), intentos = 0, done = false;
+  var why = block.querySelector('.why');
+  block.querySelectorAll('.opt').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      intentos++;
+      if(b.getAttribute('data-ok')==="1"){
+        done = true; b.classList.add('right');
+        if(why) why.classList.add('show');
+        var pit = block.closest('.pitem'); if(pit) pit.classList.add('solved');
+        if(kind==="recall"){
+          session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:(intentos===1?"de_memoria":"con_pista") });
+        } else {
+          session.items.push({ id:block.getAttribute('data-id'), tema:block.getAttribute('data-tema'),
+            nivel:(block.getAttribute('data-level')||"-"), intentos:intentos, correcto:true, tiempo_s:Math.round((Date.now()-start)/1000) });
+          updateCont();
+        }
+      } else {
+        b.classList.add('wrong'); b.disabled = true;
+        if(why){ why.classList.add('show','miss'); }
+      }
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var c=session.items.filter(function(x){return x.correcto;}).length;
+  var trabas=session.items.filter(function(x){return x.intentos>1;}).map(function(x){return x.id;});
+  var rec=session.formulas.map(function(f){return f.id+": "+f.recall;});
+  var s="Resolvió "+c+"/"+TOT_EJ+" ejercicios. ";
+  s+= rec.length? ("Recall de fórmulas → "+rec.join(" · ")+". ") : "No hizo el recall de fórmulas. ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U7.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){return '<span class="pill">'+f.id+": "+f.recall+'</span>';}).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT_EJ+'</strong> ejercicios · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Fórmulas: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>

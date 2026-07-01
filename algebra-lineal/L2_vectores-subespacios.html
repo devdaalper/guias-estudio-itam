@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U2 — Vectores y subespacios de Rⁿ</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0 0}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .check{display:grid;gap:11px;padding:16px 18px;border:1.5px solid #cfd6f2;border-radius:12px;background:#eef1fb}
+  .check .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .check .qtag::before{content:"✎ "}
+  .check .q{margin:0;font-weight:700;font-size:17px}
+
+  .opts{display:grid;gap:10px}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .opt:disabled{cursor:default}
+  .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
+  .why.show{display:block}
+  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .why.miss>.lbl{color:var(--deep)}
+  .why p{margin:0}
+
+  .ejemplo{border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9;padding:18px 20px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+
+  .practice{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
+  .practice .phead h3{margin:0;font-size:19px}
+  .practice .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
+  .pitem{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff;transition:border-color .2s,background .2s}
+  .pitem.solved{border-color:var(--green);background:#f3faf5}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.guiado{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.juntos{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .pstatement{margin:0;font-size:17px}
+  .aux summary{cursor:pointer;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;list-style:none;width:max-content;font-size:15px}
+  .aux summary::-webkit-details-marker{display:none}
+  .aux summary:hover{border-color:var(--navy);background:#f7f8fc}
+  .aux details[open] summary{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
+  .aux p{margin:8px 2px 0;font-size:16px;color:var(--slate)}
+
+  .viz{display:grid;gap:12px}
+  .viz-tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .viz-tab{font:inherit;font-weight:700;font-size:15px;padding:9px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .viz-tab:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .viz-tab.active{border-color:var(--ink);background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+  .viz-plane{padding:10px}
+  .viz-plane svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
+  .viz-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--slate)}
+  .viz-legend span{display:inline-flex;align-items:center;gap:7px}
+  .viz-legend i{width:18px;height:4px;border-radius:2px;display:inline-block}
+  .viz-cap{margin:0;font-size:17px;color:var(--slate);min-height:1.6em}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 2</p>
+    <h1>Vectores y <mark>subespacios</mark> de Rⁿ</h1>
+    <p class="lead">El tema completo, de principio a fin. Aquí no se adivina: se recuerda la definición y se razona el paso. Todo a mano, sin calculadora.</p>
+    <div class="learn">
+      <h2>Al terminar vas a poder</h2>
+      <ol>
+        <li><span class="n">1</span> Formar combinaciones lineales de vectores</li>
+        <li><span class="n">2</span> Describir el generado (span) de un conjunto</li>
+        <li><span class="n">3</span> Decidir si un conjunto es independiente</li>
+        <li><span class="n">4</span> Verificar si un conjunto es subespacio</li>
+        <li><span class="n">5</span> Reconocer una base de un subespacio</li>
+        <li><span class="n">6</span> Calcular la dimensión contando pivotes</li>
+        <li><span class="n">7</span> Distinguir subespacio de subespacio afín</li>
+        <li><span class="n">8</span> Hallar espacio nulo, columna y nulidad</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">La idea</h2>
+
+    <section class="sec">
+      <h3>Un vector y sus combinaciones</h3>
+      <p class="idea">Un <strong>vector</strong> en Rⁿ es una lista de números (una flecha desde el origen). Con dos vectores puedes formar otros <strong>estirándolos</strong> (multiplicar por un número) y <strong>sumándolos</strong>. Eso es una <strong>combinación lineal</strong>: pesos por vectores, sumados.</p>
+      <div class="fx"><div class="sys"><span class="eq">2·(1, 0) + 3·(0, 1) = (2, 3)</span><span class="eq">a·u + b·v = w</span></div></div>
+      <p class="idea">Preguntar si <strong>w es combinación lineal</strong> de u y v es preguntar si existen pesos a, b que la produzcan. Eso se vuelve un <strong>sistema</strong>: pones los vectores en columnas y resuelves.</p>
+    </section>
+
+    <section class="sec">
+      <h3>El generado: todo lo que alcanzas</h3>
+      <p class="idea">El <strong>generado</strong> (span) de un conjunto es <strong>todo</strong> lo que puedes armar con sus combinaciones lineales. Un solo vector no nulo genera una <strong>recta</strong>; dos vectores que apunten en direcciones distintas generan <strong>todo el plano</strong>. ¿Recuerdas qué genera un solo vector?</p>
+      <div class="check" data-kind="recall" data-fid="F1_generado" data-tema="generado">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Qué es el generado (span) de un solo vector no nulo v en R²?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">La recta por el origen en la dirección de v (todos los múltiplos t·v)</button>
+          <button class="opt" data-ok="0">Todo el plano R², porque un vector alcanza cualquier punto</button>
+          <button class="opt" data-ok="0">Solo el punto v y el origen</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con un solo vector solo puedes <strong>estirarlo</strong>: los múltiplos t·v forman una recta por el origen. Necesitas un segundo vector en otra dirección para llenar el plano.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>Independencia: ¿alguno sobra?</h3>
+      <p class="idea">Un conjunto es <strong>linealmente independiente</strong> si la única combinación que da el vector cero es la trivial (todos los pesos en cero). Si algún vector es combinación de los otros, <strong>sobra</strong>: el conjunto es <strong>dependiente</strong>. La prueba es armar la matriz con los vectores en columnas y reducir: si hay un <strong>pivote en cada columna</strong>, son independientes.</p>
+      <div class="fx" id="indepEx"></div>
+      <p class="fx-note">Dos pivotes para dos columnas: estos dos vectores son independientes.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago</h2>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">¿Es <strong>w = (5, 1)</strong> combinación lineal de <strong>u = (1, 3)</strong> y <strong>v = (2, −1)</strong>? Busco pesos a, b con a·u + b·v = w. Pongo u y v en columnas, w a la derecha, y reduzco. Voy paso a paso; tú solo sigue el hilo.</p>
+      <div class="estep"><div class="oprow">Matriz [u · v | w]</div><p>Cada columna es un vector; la barra es el vector meta.</p><div class="fx" id="e0"></div></div>
+      <div class="estep"><div class="oprow">R2 → R2 − 3·R1</div><p>Resto 3 veces el renglón 1 al renglón 2 para hacer cero abajo a la izquierda.</p><div class="fx" id="e1"></div></div>
+
+      <div class="check" data-kind="item" data-id="EJpred" data-tema="combinacion_lineal">
+        <div class="qtag">Te toca · predice</div>
+        <p class="q">El renglón 2 quedó como “−7 por b, igual a −14”. ¿Cuál es el siguiente movimiento natural?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Dividir el renglón 2 entre −7, para que el coeficiente de b sea 1</button>
+          <button class="opt" data-ok="0">Multiplicar el renglón 2 por −7</button>
+          <button class="opt" data-ok="0">Intercambiar el renglón 1 y el renglón 2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Buscamos un 1 limpio en la posición de b. Dividir entre −7 lo logra y deja el renglón listo para leer el peso.</p></div>
+      </div>
+
+      <div class="estep"><div class="oprow">R2 → R2 ÷ (−7)</div><p>Ahora el renglón 2 dice directamente cuánto vale b.</p><div class="fx" id="e2"></div></div>
+      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>Uso ese renglón para despejar a en el renglón 1.</p><div class="fx" id="e3"></div></div>
+      <p class="idea" style="font-size:17px">Se lee solo: <strong>a = 1</strong>, <strong>b = 2</strong>. Sí es combinación: <strong>w = 1·u + 2·v</strong>. Como el sistema tuvo solución, w vive en el generado de {u, v}.</p>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Ahora una <strong>base y su dimensión</strong>. Tengo tres vectores en R³: v₁ = (1, 1, 2), v₂ = (1, −1, 1), v₃ = (2, 0, 3). ¿Son independientes? ¿Cuál es la dimensión de su generado? Los pongo en columnas y reduzco.</p>
+      <div class="estep"><div class="oprow">Matriz [v₁ · v₂ · v₃]</div><div class="fx" id="t0"></div></div>
+      <div class="estep"><div class="oprow">R2 → R2 − R1 · R3 → R3 − 2·R1</div><p>Uso el primer renglón para hacer ceros bajo el primer pivote.</p><div class="fx" id="t1"></div></div>
+      <div class="estep"><div class="oprow">R2 → R2 ÷ (−2) · R3 → R3 + R2</div><p>Hago 1 el segundo pivote y limpio abajo. Mira el tercer renglón.</p><div class="fx" id="t2"></div></div>
+      <p class="idea" style="font-size:17px">El tercer renglón quedó <strong>todo ceros</strong>: la tercera columna <strong>no</strong> tiene pivote. Eso delata que <strong>v₃ = v₁ + v₂</strong> (sobra). Hay <strong>2 pivotes</strong>, así que solo dos vectores son independientes: la <strong>dimensión del generado es 2</strong> (un plano en R³) y una <strong>base</strong> es {v₁, v₂}.</p>
+    </section>
+
+    <section class="sec">
+      <h3>Míralo: qué genera cada conjunto</h3>
+      <p class="idea">El generado se <strong>ve</strong>. En R², un solo vector genera una <strong>recta</strong>; dos vectores en distinta dirección generan <strong>todo el plano</strong>; dos vectores <strong>alineados</strong> (dependientes) solo generan una recta. Toca cada caso:</p>
+      <div class="viz">
+        <div class="viz-tabs" id="vizTabs">
+          <button class="viz-tab" data-case="una">Un vector</button>
+          <button class="viz-tab" data-case="infinitas">Dos alineados</button>
+          <button class="viz-tab" data-case="ninguna">Dos en cruz</button>
+        </div>
+        <div class="viz-plane fx" id="vizPlane"></div>
+        <div class="viz-legend"><span><i style="background:#F5821F"></i>Vector 1</span><span><i style="background:#283891"></i>Vector 2</span></div>
+        <p class="viz-cap" id="vizCap"></p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>Subespacio: cerrado bajo suma y escalar</h3>
+      <p class="idea">Un <strong>subespacio</strong> de Rⁿ es un conjunto que (1) <strong>contiene al cero</strong>, (2) al sumar dos de sus vectores el resultado <strong>sigue dentro</strong>, y (3) al multiplicar uno por un escalar <strong>sigue dentro</strong>. Los generados <strong>siempre</strong> son subespacios; una recta o plano que <strong>no pasa por el origen</strong>, no.</p>
+      <div class="fx"><div class="sys"><span class="eq">0 ∈ S</span><span class="eq">u, v ∈ S  ⇒  u + v ∈ S</span><span class="eq">u ∈ S, c escalar  ⇒  c·u ∈ S</span></div></div>
+      <p class="fx-note">Si falla cualquiera de las tres, no es subespacio. La más rápida de checar: ¿contiene al vector cero?</p>
+    </section>
+
+    <section class="sec">
+      <h3>Subespacio afín: el mismo plano, corrido</h3>
+      <p class="idea">Cuando resuelves <strong>A·x = b</strong> con <strong>b ≠ 0</strong> (sistema <strong>no homogéneo</strong>), la solución <strong>no</strong> pasa por el origen: es un <strong>subespacio afín</strong>. Se escribe como <strong>una solución particular más el generado de las soluciones del homogéneo</strong>: x = xₚ + (solución de A·x = 0). Es un subespacio <strong>trasladado</strong> (recta o plano corrido), que por eso <strong>no</strong> es subespacio: le falta el cero.</p>
+      <div class="fx"><div class="sys"><span class="eq">A·x = 0  →  homogéneo (pasa por 0): subespacio</span><span class="eq">A·x = b, b ≠ 0  →  no homogéneo: subespacio afín</span><span class="eq">x = x_p + t·v   (particular + homogénea)</span></div></div>
+      <p class="fx-note">La <strong>forma paramétrica</strong> es justo esa: fijas las variables libres como parámetros (t, s…) y expresas toda la solución como xₚ más combinaciones de vectores dirección.</p>
+      <div class="check" data-kind="recall" data-fid="F3_afin" data-tema="subespacio_afin">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">La solución de A·x = b con b ≠ 0, ¿por qué NO es un subespacio?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Porque no contiene al vector cero: es un subespacio afín (trasladado)</button>
+          <button class="opt" data-ok="0">Porque tiene infinitas soluciones y un subespacio debe ser finito</button>
+          <button class="opt" data-ok="0">Porque b ≠ 0 hace que el sistema no tenga solución</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>x = 0 daría A·0 = 0 ≠ b, así que el cero no está en el conjunto solución. Es el subespacio homogéneo <strong>corrido</strong> por xₚ: un subespacio afín, no un subespacio.</p></div>
+      </div>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Escribe en <strong>forma paramétrica</strong> la solución de este sistema no homogéneo. Ya reducido, queda: x₁ + 2·x₃ = 5 y x₂ − x₃ = 1. La variable <strong>x₃ es libre</strong>: la llamo t.</p>
+      <div class="estep"><div class="oprow">Sistema ya reducido</div><p>Dos pivotes (x₁, x₂), una variable libre (x₃ = t).</p><div class="fx" id="pf0"></div></div>
+      <div class="estep"><div class="oprow">Despejo pivotes</div><p>x₁ = 5 − 2t y x₂ = 1 + t; x₃ = t.</p></div>
+      <p class="idea" style="font-size:17px">Junto todo en un vector: <strong>x = (5, 1, 0) + t·(−2, 1, 1)</strong>. El punto <strong>(5, 1, 0)</strong> es la solución particular xₚ; la dirección <strong>(−2, 1, 1)</strong> genera el espacio nulo. Es una <strong>recta afín</strong>: el generado de (−2, 1, 1) corrido hasta (5, 1, 0), sin pasar por el origen.</p>
+    </section>
+
+    <section class="sec">
+      <h3>Espacio nulo, espacio columna y nulidad</h3>
+      <p class="idea">Toda matriz A trae dos subespacios. El <strong>espacio nulo</strong> (kernel) es el conjunto de soluciones de <strong>A·x = 0</strong>: los vectores que A manda al cero. El <strong>espacio columna</strong> es el <strong>generado de las columnas</strong> de A: todo lo que A puede producir. La <strong>nulidad</strong> es la dimensión del espacio nulo; el <strong>rango</strong>, la del espacio columna.</p>
+      <div class="fx"><div class="sys"><span class="eq">Nul(A) = { x : A·x = 0 }   (subespacio)</span><span class="eq">Col(A) = generado de las columnas</span><span class="eq">nulidad = variables libres · rango = pivotes</span></div></div>
+      <p class="fx-note">Al reducir A: cada <strong>columna con pivote</strong> aporta al rango (y su columna original entra en una base de Col); cada <strong>columna libre</strong> aporta a la nulidad. Por eso rango + nulidad = número de columnas.</p>
+      <div class="check" data-kind="recall" data-fid="F4_nulidad" data-tema="nulidad">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">Reduces una matriz A de 5 columnas y encuentras 3 pivotes. ¿Cuánto valen el rango y la nulidad?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Rango 3 (pivotes) y nulidad 2 (columnas libres): 3 + 2 = 5</button>
+          <button class="opt" data-ok="0">Rango 5 y nulidad 0, porque hay 5 columnas</button>
+          <button class="opt" data-ok="0">Rango 2 y nulidad 3, porque sobran 3 columnas</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Rango = número de pivotes = 3. Nulidad = variables libres = columnas − pivotes = 5 − 3 = 2. Siempre rango + nulidad = número de columnas.</p></div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Tu turno</h2>
+    <section class="practice">
+      <div class="phead"><h3>De guiado a solo</h3><p class="sub">Toca tu respuesta. Si fallas, vuelve a intentar. El apoyo se va retirando. · <span class="cont" id="cont"></span></p></div>
+
+      <div class="pitem" data-kind="item" data-id="P1" data-tema="combinacion_lineal" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Para saber si w es combinación lineal de u y v, ¿cómo armas la matriz que vas a reducir?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">u y v como columnas, w como columna de la derecha (después de la barra)</button>
+          <button class="opt" data-ok="0">u, v y w los tres como renglones, sin barra</button>
+          <button class="opt" data-ok="0">Solo w como columna; u y v no entran</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Los pesos a, b son las incógnitas. ¿De qué son coeficientes? De los vectores que combinas.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>a·u + b·v = w es un sistema con incógnitas a, b: los coeficientes son u y v (columnas) y el término independiente es w.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="independencia" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Al poner tres vectores en columnas y reducir, obtienes esta matriz. ¿Son independientes?</p>
+        <div class="fx" id="p2"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Sí: hay un pivote en cada una de las 3 columnas</button>
+          <button class="opt" data-ok="0">No: falta un pivote en la última columna</button>
+          <button class="opt" data-ok="0">No se puede saber sin la columna de resultados</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Un pivote por columna significa que la única combinación que da cero es la trivial: independientes.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="dimension" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Reduces cuatro vectores de R⁴ y quedan 3 pivotes. ¿Cuál es la dimensión de su generado?</p>
+        <div class="fx" id="p3"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">3 (una base tiene 3 vectores; uno era dependiente)</button>
+          <button class="opt" data-ok="0">4, porque partiste de 4 vectores</button>
+          <button class="opt" data-ok="0">1, porque solo queda un renglón de ceros</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La dimensión del generado = número de pivotes = 3. El vector sin pivote es combinación de los otros y no suma dimensión.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="subespacio" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">¿Cuál de estos conjuntos NO es un subespacio de R²?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">La recta y = x + 1 (no pasa por el origen)</button>
+          <button class="opt" data-ok="0">La recta y = 2x (pasa por el origen)</button>
+          <button class="opt" data-ok="0">Todo R²</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Un subespacio debe contener al vector cero. y = x + 1 no pasa por (0, 0), así que falla la primera condición.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="combinacion_lineal" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Para probar si w = (5, 1) es combinación de u = (1, 3) y v = (2, −1), ¿cuál matriz [u · v | w] planteas? (u = primera columna, v = segunda)</p>
+        <div class="opts">
+          <button class="opt" data-ok="1" id="p5a"></button>
+          <button class="opt" data-ok="0" id="p5b"></button>
+          <button class="opt" data-ok="0" id="p5c"></button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>u = (1, 3) va en la primera columna, v = (2, −1) en la segunda, y w = (5, 1) a la derecha de la barra: renglones (1, 2 | 5) y (3, −1 | 1).</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="nulidad" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Una matriz A tiene 4 columnas. Al reducirla salen 2 pivotes. ¿Cuál es la nulidad (dimensión del espacio nulo)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">2, porque nulidad = columnas − pivotes = 4 − 2</button>
+          <button class="opt" data-ok="0">4, porque el espacio nulo tiene tantas dimensiones como columnas</button>
+          <button class="opt" data-ok="0">0, porque toda matriz tiene espacio nulo trivial</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Las columnas sin pivote son las variables libres. Cada variable libre suma una dimensión al espacio nulo.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Nulidad = variables libres = columnas − pivotes = 4 − 2 = 2. Y rango + nulidad = 2 + 2 = 4 = número de columnas.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="subespacio_afin" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">La solución de A·x = b se escribe x = (3, 0, 2) + t·(1, 1, 0). ¿Qué es este conjunto?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Una recta afín: el generado de (1, 1, 0) corrido hasta (3, 0, 2), no pasa por el origen</button>
+          <button class="opt" data-ok="0">Un subespacio, porque es una recta y toda recta es subespacio</button>
+          <button class="opt" data-ok="0">Un solo punto, el (3, 0, 2)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Es una solución particular (3, 0, 2) más el espacio nulo generado por (1, 1, 0): un subespacio afín. En t = 0 da (3, 0, 2) ≠ 0, así que no contiene al cero y no es subespacio.</p></div>
+      </div>
+    </section>
+
+    <div class="check" data-kind="recall" data-fid="F2_subespacio" data-tema="subespacio">
+      <div class="qtag">Te toca · recuerda</div>
+      <p class="q">¿Cuáles son las condiciones para que un conjunto S sea subespacio de Rⁿ?</p>
+      <div class="opts">
+        <button class="opt" data-ok="1">Contiene al cero, es cerrado bajo suma y cerrado bajo multiplicación por escalar</button>
+        <button class="opt" data-ok="0">Tiene exactamente n vectores y ninguno es el cero</button>
+        <button class="opt" data-ok="0">Es finito y todos sus vectores son independientes</button>
+      </div>
+      <div class="why"><span class="lbl">Por qué</span><p>Son tres cerraduras: el cero adentro, la suma se queda adentro y el escalado se queda adentro. Nada de contar vectores.</p></div>
+    </div>
+
+    <section class="chuleta">
+      <h3>Para memorizar</h3>
+      <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
+      <ul>
+        <li><span class="ck">✓</span> Combinación lineal: pesos por vectores, sumados (a·u + b·v).</li>
+        <li><span class="ck">✓</span> Generado (span): todo lo que alcanzas combinando; siempre es subespacio.</li>
+        <li><span class="ck">✓</span> Independientes ⇔ un pivote en cada columna (vectores en columnas, reducir).</li>
+        <li><span class="ck">✓</span> Subespacio: contiene al cero + cerrado bajo suma + cerrado bajo escalar.</li>
+        <li><span class="ck">✓</span> Base = conjunto independiente que genera; su tamaño es la dimensión.</li>
+        <li><span class="ck">✓</span> Dimensión del generado = número de pivotes.</li>
+        <li><span class="ck">✓</span> Subespacio afín = subespacio corrido (A·x = b, b ≠ 0); no contiene al cero.</li>
+        <li><span class="ck">✓</span> Forma paramétrica: x = xₚ + parámetros por vectores dirección (particular + homogénea).</li>
+        <li><span class="ck">✓</span> Espacio nulo = soluciones de A·x = 0; espacio columna = generado de las columnas.</li>
+        <li><span class="ck">✓</span> Rango = pivotes · nulidad = columnas libres; rango + nulidad = nº de columnas.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue?</h3>
+      <p class="nota">Qué tan segura te sientes con combinaciones, generado, independencia, subespacios, subespacio afín y espacio nulo/columna ahora. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 2</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+function mat(rows){
+  var coeffs = rows[0].length - 1;
+  var gtc = 'repeat('+coeffs+',auto) 16px auto';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
+
+set('indepEx',[["1","0","0"],["0","1","0"]]);
+// combinación lineal: [u · v | w]
+set('e0',[["1","2","5"],["3","−1","1"]]);
+set('e1',[["1","2","5"],["0","−7","−14"]]);
+set('e2',[["1","2","5"],["0","1","2"]]);
+set('e3',[["1","0","1"],["0","1","2"]]);
+// base y dimensión: [v1 · v2 · v3]
+set('t0',[["1","1","2"],["1","−1","0"],["2","1","3"]]);
+set('t1',[["1","1","2"],["0","−2","−2"],["0","−1","−1"]]);
+set('t2',[["1","1","2"],["0","1","1"],["0","0","0"]]);
+// forma paramétrica: sistema reducido [I libre | b]
+set('pf0',[["1","0","2","5"],["0","1","−1","1"]]);
+// práctica
+set('p2',[["1","0","0"],["0","1","0"],["0","0","1"]]);
+set('p3',[["1","0","0","0"],["0","1","0","0"],["0","0","1","0"],["0","0","0","0"]]);
+// opciones-matriz de combinación lineal (P5): [u · v | w]
+document.getElementById('p5a').innerHTML = mat([["1","2","5"],["3","−1","1"]]);
+document.getElementById('p5b').innerHTML = mat([["1","3","5"],["2","−1","1"]]);
+document.getElementById('p5c').innerHTML = mat([["5","1","2"],["1","3","−1"]]);
+
+// ===== visual: vectores y su generado =====
+function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
+// recta por el origen en dirección (dx,dy), recortada a la ventana [-1,5]
+function spanLine(dx,dy,color,dash){
+  var E=1e-9, pts=[];
+  // intersección con x=-1, x=5 (usando y = (dy/dx)*x cuando dx≠0)
+  if(Math.abs(dx)>E){ [-1,5].forEach(function(x){ var y=dy*x/dx; if(y>=-1-E&&y<=5+E) pts.push([x,y]); }); }
+  if(Math.abs(dy)>E){ [-1,5].forEach(function(y){ var x=dx*y/dy; if(x>=-1-E&&x<=5+E) pts.push([x,y]); }); }
+  var u=[]; pts.forEach(function(p){ if(!u.some(function(q){return Math.abs(q[0]-p[0])<1e-6&&Math.abs(q[1]-p[1])<1e-6;})) u.push(p); });
+  if(u.length<2) return '';
+  var p0=PT(u[0][0],u[0][1]), p1=PT(u[1][0],u[1][1]);
+  return '<line x1="'+p0[0]+'" y1="'+p0[1]+'" x2="'+p1[0]+'" y2="'+p1[1]+'" stroke="'+color+'" stroke-width="2.5" stroke-linecap="round"'+(dash?' stroke-dasharray="7 6"':'')+'/>';
+}
+// flecha desde el origen hasta (x,y)
+function vecSVG(x,y,color){
+  var o=PT(0,0), p=PT(x,y);
+  var ang=Math.atan2(p[1]-o[1], p[0]-o[0]), s=9;
+  var a1=[p[0]-s*Math.cos(ang-0.4), p[1]-s*Math.sin(ang-0.4)];
+  var a2=[p[0]-s*Math.cos(ang+0.4), p[1]-s*Math.sin(ang+0.4)];
+  return '<line x1="'+o[0]+'" y1="'+o[1]+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"/>'+
+    '<polygon points="'+p[0]+','+p[1]+' '+a1[0]+','+a1[1]+' '+a2[0]+','+a2[1]+'" fill="'+color+'"/>';
+}
+var VG='', VA='';
+(function(){
+  for(var g=-1; g<=5; g++){
+    var a=PT(g,-1), b=PT(g,5), c=PT(-1,g), d=PT(5,g);
+    VG+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/>'+'<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';
+  }
+  var x0=PT(-1,0), x1=PT(5,0), y0=PT(0,-1), y1=PT(0,5);
+  VA='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/>'+'<line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';
+})();
+function drawPlane(cse){
+  var L, cap;
+  if(cse==='una'){
+    // un vector: genera una recta
+    L=spanLine(2,3,'#F5821F')+vecSVG(2,3,'#F5821F');
+    cap='Un solo vector genera una recta: todos sus múltiplos t·v. La dimensión del generado es 1.';
+  } else if(cse==='infinitas'){
+    // dos alineados (dependientes): siguen generando una recta
+    L=spanLine(2,3,'#F5821F')+vecSVG(2,3,'#F5821F')+vecSVG(3,4.5,'#283891');
+    cap='Los dos vectores apuntan en la misma dirección (uno es múltiplo del otro): son dependientes y solo generan una recta. Dimensión 1.';
+  } else {
+    // dos en cruz (independientes): generan todo el plano
+    L='<rect x="'+PT(-1,5)[0]+'" y="'+PT(-1,5)[1]+'" width="240" height="240" fill="#F5821F" fill-opacity="0.07"/>'+
+      vecSVG(2,1,'#F5821F')+vecSVG(1,3,'#283891');
+    cap='Dos vectores en direcciones distintas son independientes: sus combinaciones llenan todo el plano. Dimensión 2, y {v₁, v₂} es una base.';
+  }
+  document.getElementById('vizPlane').innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plano cartesiano con vectores y su generado">'+VG+VA+L+'</svg>';
+  document.getElementById('vizCap').textContent=cap;
+}
+document.querySelectorAll('.viz-tab').forEach(function(b){
+  b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawPlane(b.getAttribute('data-case')); };
+});
+(function(){ var f=document.querySelector('.viz-tab'); f.classList.add('active'); drawPlane('una'); })();
+
+// ===== instrumentación =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U2_vectores_subespacios", leccion:"L2_vectores-subespacios",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_EJ = document.querySelectorAll('[data-kind="item"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.items.length+"/"+TOT_EJ+" ejercicios"; }
+
+document.querySelectorAll('[data-kind]').forEach(function(block){
+  var kind = block.getAttribute('data-kind');
+  var start = Date.now(), intentos = 0, done = false;
+  var why = block.querySelector('.why');
+  block.querySelectorAll('.opt').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      intentos++;
+      if(b.getAttribute('data-ok')==="1"){
+        done = true; b.classList.add('right');
+        if(why) why.classList.add('show');
+        var pit = block.closest('.pitem'); if(pit) pit.classList.add('solved');
+        if(kind==="recall"){
+          session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:(intentos===1?"de_memoria":"con_pista") });
+        } else {
+          session.items.push({ id:block.getAttribute('data-id'), tema:block.getAttribute('data-tema'),
+            nivel:(block.getAttribute('data-level')||"-"), intentos:intentos, correcto:true, tiempo_s:Math.round((Date.now()-start)/1000) });
+          updateCont();
+        }
+      } else {
+        b.classList.add('wrong'); b.disabled = true;
+        if(why){ why.classList.add('show','miss'); }
+      }
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var c=session.items.filter(function(x){return x.correcto;}).length;
+  var trabas=session.items.filter(function(x){return x.intentos>1;}).map(function(x){return x.id;});
+  var rec=session.formulas.map(function(f){return f.id+": "+f.recall;});
+  var s="Resolvió "+c+"/"+TOT_EJ+" ejercicios. ";
+  s+= rec.length? ("Recall de fórmulas → "+rec.join(" · ")+". ") : "No hizo el recall de fórmulas. ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U2.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){return '<span class="pill">'+f.id+": "+f.recall+'</span>';}).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT_EJ+'</strong> ejercicios · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Fórmulas: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>
