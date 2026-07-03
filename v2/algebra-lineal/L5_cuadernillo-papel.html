@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U5 — Cuadernillo de papel (Determinantes)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+  /* barras verticales para determinantes escritos como |A| */
+  .dtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .dbar{width:0;border-left:2.5px solid var(--ink);align-self:stretch}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+
+  /* ===== cuadernillo de papel ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.dtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx,.dtx{font-size:18px}}
+</style>
+</head>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora · en papel</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 5 · Cuadernillo</p>
+    <h1>Determinantes, <mark>resueltos en una hoja</mark></h1>
+    <p class="lead">Aquí no se elige opción: se calcula completo, a mano, como en el parcial. Cada problema trae su enunciado, su matriz, tu espacio para trabajarlo en papel y la solución celda por celda para cotejar. Toma lápiz y hoja antes de abrir cada respuesta.</p>
+    <div class="learn">
+      <h2>Lo que vas a entrenar</h2>
+      <ol>
+        <li><span class="n">1</span> La cruz de la 2×2 y el signo negativo</li>
+        <li><span class="n">2</span> Expansión por cofactores en 3×3</li>
+        <li><span class="n">3</span> Propiedades como atajo (sin calcular todo)</li>
+        <li><span class="n">4</span> Decidir invertibilidad con el determinante</li>
+        <li><span class="n">5</span> Regla de Cramer para sistemas</li>
+        <li><span class="n">6</span> Inversa 2×2 por la adjunta y el área</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este cuadernillo</h2>
+    <section class="sec">
+      <h3>La regla de oro: papel primero</h3>
+      <p class="idea">Los tres primeros son <strong>resueltos-guía</strong>: léelos completos para fijar cada método (cofactores, Cramer, adjunta). El resto es <strong>producción</strong>: resuélvelos tú de principio a fin en una hoja <strong>antes</strong> de abrir la solución. Al terminar cada uno, dime cómo te fue con los tres botones. Eso arma tu reporte para el tutor sin escaneos ni fotos.</p>
+      <p class="idea">Recuerda las tres claves del tema: el determinante <strong>solo existe para matrices cuadradas</strong>; una 2×2 es <strong>diagonal principal menos antidiagonal</strong> (a·d − b·c); un 3×3 se rompe en 2×2 con el tablero de signos <strong>+ − + / − + − / + − +</strong>, y conviene desarrollar por donde haya <strong>más ceros</strong>. Y el gran veredicto: la matriz se invierte <strong>si y solo si</strong> su determinante no es cero.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago — resueltos-guía</h2>
+
+    <!-- ============ RESUELTO-GUÍA 1 : 3x3 por cofactores, columna con ceros ============ -->
+    <section class="prob" data-kind="prob" data-id="RG1" data-tema="cofactores_3x3" data-level="resuelto">
+      <div class="phead"><span class="pnum">1</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Determinante 3×3 por cofactores</p>
+      <p class="pstatement">Calcula el determinante de esta 3×3. <strong>Antes de multiplicar nada, elige el renglón o columna con más ceros</strong> para gastar menos cuentas. Luego desarrolla por ahí.</p>
+      <div class="fx" id="rg1m"></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Miro dónde hay ceros. La <strong>columna del medio</strong> es 0, 5, 0: dos ceros. Desarrollar por ahí mata dos de los tres términos, así que solo calculo <strong>un</strong> menor.</p></div>
+          <div class="estep"><div class="oprow">Entradas cero → se anulan</div><p>Cada término es entrada × cofactor. Las dos entradas cero anulan su término sin calcular el menor:</p><p class="calc"><span class="rw">arriba</span> 0·(menor)=<b>0</b> <span class="sep">•</span> <span class="rw">abajo</span> 0·(menor)=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Menor del 5 en (2,2)</div><p>El 5 está en el renglón 2, columna 2. Tapo ese renglón y esa columna; sobran las cuatro esquinas: (4, 2) arriba y (2, 3) abajo. Calculo su cruz:</p><div class="fx" id="rg1a"></div><p class="calc"><span class="rw">menor</span> 4·3−2·2=12−4=<b>8</b></p></div>
+          <div class="estep"><div class="oprow">Signo del tablero en (2,2)</div><p>La casilla (2,2) es un <strong>+</strong> en el tablero + − + / − + − / + − +. El término entra sumando tal cual.</p></div>
+          <div class="estep"><div class="oprow">Junto el único término vivo</div><p>Entrada 5 × su menor 8 × signo +, más los dos ceros:</p><p class="calc"><span class="rw">det</span> 0 + 5·(+8) + 0 = <b>40</b></p></div>
+          <p class="verdict"><strong>Determinante = 40.</strong> Desarrollar por la columna con dos ceros convirtió el 3×3 en un solo 2×2. Como no dio cero, la matriz <strong>sí</strong> se puede invertir.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (aunque sea de muestra, márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 2 : Cramer 2x2, x e y ============ -->
+    <section class="prob" data-kind="prob" data-id="RG2" data-tema="regla_de_cramer" data-level="resuelto">
+      <div class="phead"><span class="pnum">2</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Resolver un sistema por la regla de Cramer</p>
+      <p class="pstatement">Resuelve este sistema por Cramer: cada incógnita es un cociente de determinantes. Primero el determinante del sistema; luego, para cada incógnita, reemplaza <strong>su</strong> columna por los resultados y divide.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">3x + 2y = 8</span>
+        <span class="eq">x + 4y = 6</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Determinante del sistema</div><p>Es el de la matriz de coeficientes. Con la cruz:</p><div class="fx" id="rg2d"></div><p class="calc"><span class="rw">det</span> 3·4−2·1=<b>10</b></p></div>
+          <div class="estep"><div class="oprow">Determinante para x</div><p>Reemplazo la <strong>columna de x</strong> (el 3 y el 1) por los resultados (8 y 6). Saco la cruz y divido entre 10:</p><div class="fx" id="rg2x"></div><p class="calc"><span class="rw">det<sub>x</sub></span> 8·4−2·6=<b>20</b> <span class="sep">•</span> <span class="rw">x</span> 20÷10=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Determinante para y</div><p>Ahora reemplazo la <strong>columna de y</strong> (el 2 y el 4) por los resultados (8 y 6). Cruz y divido entre 10:</p><div class="fx" id="rg2y"></div><p class="calc"><span class="rw">det<sub>y</sub></span> 3·6−8·1=<b>10</b> <span class="sep">•</span> <span class="rw">y</span> 10÷10=<b>1</b></p></div>
+          <p class="verdict"><strong>x = 2, y = 1.</strong> Como el determinante del sistema fue 10 ≠ 0, había solución única y Cramer la entrega directa. Compruebo en la primera ecuación: 3·2 + 2·1 = 8 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 3 : inversa 2x2 por adjunta ============ -->
+    <section class="prob" data-kind="prob" data-id="RG3" data-tema="adjunta_inversa" data-level="resuelto">
+      <div class="phead"><span class="pnum">3</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Invertir una 2×2 por la adjunta</p>
+      <p class="pstatement">Encuentra la inversa de esta 2×2. La fórmula: la inversa es <strong>uno sobre el determinante</strong> por la adjunta. En 2×2 la adjunta <strong>intercambia la diagonal principal y cambia el signo de la otra</strong>.</p>
+      <div class="fx" id="rg3m"></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Determinante (¿se invierte?)</div><p>Primero la cruz; si diera cero, no habría inversa:</p><p class="calc"><span class="rw">det</span> 3·3−4·2=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Adjunta</div><p>Intercambio la diagonal principal (el 3 de arriba con el 3 de abajo, aquí quedan igual) y cambio el signo de la otra diagonal (el 4 y el 2 se vuelven −4 y −2):</p><div class="fx" id="rg3a"></div></div>
+          <div class="estep"><div class="oprow">Divido la adjunta entre el determinante</div><p>Como el determinante es 1, dividir entre 1 no cambia nada. Entrada por entrada:</p><p class="calc"><span class="rw">1/det</span> 3÷1=<b>3</b> <span class="sep">•</span> −4÷1=<b>−4</b> <span class="sep">•</span> −2÷1=<b>−2</b> <span class="sep">•</span> 3÷1=<b>3</b></p><div class="fx" id="rg3i"></div></div>
+          <p class="verdict"><strong>Esa es la inversa.</strong> Cuando el determinante es 1, la inversa es la adjunta tal cual. Compruebo una entrada del producto A·A⁻¹: primer renglón por primera columna, 3·3 + 4·(−2) = 9 − 8 = 1 ✓ (el 1 de la diagonal de la identidad).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Tu turno — producción</h2>
+
+    <!-- ============ P4 GUIADO : 2x2 con negativos ============ -->
+    <section class="prob" data-kind="prob" data-id="P4" data-tema="determinante_2x2" data-level="guiado">
+      <div class="phead"><span class="pnum">4</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">La cruz con números negativos</p>
+      <p class="pstatement">Calcula el determinante de esta 2×2. <em>Pista: la matriz tiene un negativo; lleva su signo por toda la cuenta y cuida el doble menos.</em></p>
+      <div class="fx" id="p4m"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Diagonal principal ↘</div><p>Multiplico las esquinas 2 y 4:</p><p class="calc"><span class="rw">↘</span> 2·4=<b>8</b></p></div>
+          <div class="estep"><div class="oprow">Antidiagonal ↗</div><p>Multiplico las esquinas −3 y 1. Este producto se restará después:</p><p class="calc"><span class="rw">↗</span> (−3)·1=<b>−3</b></p></div>
+          <div class="estep"><div class="oprow">Junto la cruz</div><p>Diagonal principal menos antidiagonal. Restar −3 es sumar 3 (doble menos):</p><p class="calc"><span class="rw">det</span> 8−(−3)=8+3=<b>11</b></p></div>
+          <p class="verdict"><strong>Determinante = 11.</strong> El error clásico aquí es escribir 8 − 3 = 5 por olvidar que la antidiagonal ya era negativa. Restar un negativo suma.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P5 GUIADO : propiedad renglones proporcionales ============ -->
+    <section class="prob" data-kind="prob" data-id="P5" data-tema="propiedades" data-level="guiado">
+      <div class="phead"><span class="pnum">5</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Sin hacer la cruz: usa una propiedad</p>
+      <p class="pstatement">Di cuánto vale este determinante <strong>sin</strong> hacer la cruz completa. Mira los dos renglones y decide qué propiedad aplica. Luego compruébalo con la cruz.</p>
+      <div class="fx" id="p5m"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Comparo los renglones: <strong>(2, 5)</strong> arriba y <strong>(6, 15)</strong> abajo. Cada entrada de abajo es <strong>3 veces</strong> la de arriba:</p><p class="calc"><span class="rw">col 1</span> 6÷2=<b>3</b> <span class="sep">•</span> <span class="rw">col 2</span> 15÷5=<b>3</b></p></div>
+          <div class="estep"><p>Los renglones son <strong>proporcionales</strong> (uno es múltiplo del otro). Por propiedad, eso obliga a determinante <strong>0</strong> sin más cuenta.</p></div>
+          <div class="estep"><div class="oprow">Compruebo con la cruz</div><p>Por si dudo, hago la cruz igual:</p><p class="calc"><span class="rw">det</span> 2·15−5·6=30−30=<b>0</b></p></div>
+          <p class="verdict"><strong>Determinante = 0.</strong> Renglones proporcionales → siempre 0. Geométricamente, las dos flechas apuntan en la misma dirección: no encierran área. Y det 0 significa que la matriz <strong>no</strong> se invierte.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P6 GUIADO : triangular 3x3 (atajo) ============ -->
+    <section class="prob" data-kind="prob" data-id="P6" data-tema="propiedades" data-level="guiado">
+      <div class="phead"><span class="pnum">6</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">El atajo de la triangular</p>
+      <p class="pstatement">Esta 3×3 tiene puros ceros de un lado de la diagonal. <strong>No uses cofactores:</strong> aplica el atajo de la matriz triangular. Nombra qué números entran y cuáles ignoras.</p>
+      <div class="fx" id="p6m"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Debajo de la diagonal hay puros ceros: es <strong>triangular superior</strong>. El atajo dice: el determinante es el <strong>producto de la diagonal</strong>; los números de arriba (el 6, el 7, el 4) no cuentan.</p></div>
+          <div class="estep"><div class="oprow">Producto de la diagonal</div><p>La diagonal es 2, 3, 5. Multiplico en orden:</p><p class="calc"><span class="rw">paso</span> 2·3=<b>6</b> <span class="sep">•</span> <span class="rw">luego</span> 6·5=<b>30</b></p></div>
+          <p class="verdict"><strong>Determinante = 30.</strong> En una triangular, al desarrollar por cofactores todo se cancela salvo la diagonal. Ojo: en la 2×2 la cruz <em>resta</em>; en la triangular la diagonal se <em>multiplica</em>, no se suma.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P7 SOLO : 3x3 por renglon con un cero ============ -->
+    <section class="prob" data-kind="prob" data-id="P7" data-tema="cofactores_3x3" data-level="solo">
+      <div class="phead"><span class="pnum">7</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Elige el mejor renglón y desarrolla</p>
+      <p class="pstatement">Calcula el determinante de esta 3×3. <strong>Decide primero por dónde desarrollar</strong> (busca el renglón o columna con un cero) y justifica tu elección antes de calcular.</p>
+      <div class="fx" id="p7m"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>El <strong>tercer renglón</strong> es (0, 2, 3): tiene un cero, así que ahí me ahorro un menor. Desarrollo por ese renglón con signos del tablero <strong>+ − +</strong> (renglón 3: + − +).</p></div>
+          <div class="estep"><div class="oprow">Primera entrada: 0</div><p>El 0 en (3,1) anula su término sin calcular su menor:</p><p class="calc"><span class="rw">(3,1)</span> 0·(menor)=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Segunda entrada: 2 en (3,2), signo −</div><p>Tapo renglón 3 y columna 2; sobran las columnas 1 y 3: (1, 2) arriba y (2, 4) abajo. Su cruz, luego por 2, luego el signo menos del tablero:</p><p class="calc"><span class="rw">menor</span> 1·4−2·2=4−4=<b>0</b> <span class="sep">•</span> <span class="rw">término</span> −(2·0)=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Tercera entrada: 3 en (3,3), signo +</div><p>Tapo renglón 3 y columna 3; sobran las columnas 1 y 2: (1, 1) arriba y (2, 1) abajo. Cruz, por 3, signo +:</p><p class="calc"><span class="rw">menor</span> 1·1−1·2=1−2=<b>−1</b> <span class="sep">•</span> <span class="rw">término</span> +(3·(−1))=<b>−3</b></p></div>
+          <div class="estep"><div class="oprow">Sumo los términos vivos</div><p>El primero fue 0, el segundo también 0, y el tercero −3:</p><p class="calc"><span class="rw">det</span> 0 + 0 + (−3) = <b>−3</b></p></div>
+          <p class="verdict"><strong>Determinante = −3.</strong> El cero del tercer renglón ahorró un menor, y el tablero + − + del renglón 3 fija los signos. Un determinante negativo es válido: la matriz igual se invierte (det ≠ 0).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P8 SOLO : 3x3 expansion completa por primer renglon ============ -->
+    <section class="prob" data-kind="prob" data-id="P8" data-tema="cofactores_3x3" data-level="solo">
+      <div class="phead"><span class="pnum">8</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Expansión completa (sin ceros que te salven)</p>
+      <p class="pstatement">Esta 3×3 no tiene ceros: toca la expansión completa. Desarrolla por el <strong>primer renglón</strong> respetando el tablero <strong>+ − +</strong>. Cuidado con el término del medio, que va restando.</p>
+      <div class="fx" id="p8m"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Primer término: 2 en (1,1), signo +</div><p>Tapo renglón 1 y columna 1; queda [[1, 0],[2, 2]]. Cruz, por 2, signo +:</p><p class="calc"><span class="rw">menor</span> 1·2−0·2=<b>2</b> <span class="sep">•</span> <span class="rw">término</span> +(2·2)=<b>4</b></p></div>
+          <div class="estep"><div class="oprow">Segundo término: 1 en (1,2), signo −</div><p>Tapo renglón 1 y columna 2; queda [[1, 0],[3, 2]]. Cruz, por 1, signo menos:</p><p class="calc"><span class="rw">menor</span> 1·2−0·3=<b>2</b> <span class="sep">•</span> <span class="rw">término</span> −(1·2)=<b>−2</b></p></div>
+          <div class="estep"><div class="oprow">Tercer término: 1 en (1,3), signo +</div><p>Tapo renglón 1 y columna 3; queda [[1, 1],[3, 2]]. Cruz, por 1, signo +:</p><p class="calc"><span class="rw">menor</span> 1·2−1·3=<b>−1</b> <span class="sep">•</span> <span class="rw">término</span> +(1·(−1))=<b>−1</b></p></div>
+          <div class="estep"><div class="oprow">Sumo los tres términos</div><p>Con sus signos ya incorporados:</p><p class="calc"><span class="rw">det</span> 4 + (−2) + (−1) = <b>1</b></p></div>
+          <p class="verdict"><strong>Determinante = 1.</strong> El − del tablero en el término del medio es donde más gente pierde puntos: si lo sumas, te sale 5 en vez de 1. Cada menor lleva su signo antes de sumar.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P9 SOLO : Cramer 2x2 completo x e y ============ -->
+    <section class="prob" data-kind="prob" data-id="P9" data-tema="regla_de_cramer" data-level="solo">
+      <div class="phead"><span class="pnum">9</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Cramer de principio a fin: x e y</p>
+      <p class="pstatement">Resuelve este sistema por Cramer y da <strong>ambas</strong> incógnitas. Escribe primero el determinante del sistema; si sale distinto de cero, sabes que hay solución única antes de terminar.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">2x + 3y = 4</span>
+        <span class="eq">x + 5y = 9</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Determinante del sistema</div><p>Matriz de coeficientes, con la cruz:</p><div class="fx" id="p9d"></div><p class="calc"><span class="rw">det</span> 2·5−3·1=<b>7</b></p><p>Como 7 ≠ 0, hay solución única.</p></div>
+          <div class="estep"><div class="oprow">Para x: reemplazo la columna de x por (4, 9)</div><p>La columna de x era (2, 1); la cambio por los resultados. Cruz y divido entre 7:</p><div class="fx" id="p9x"></div><p class="calc"><span class="rw">det<sub>x</sub></span> 4·5−3·9=20−27=<b>−7</b> <span class="sep">•</span> <span class="rw">x</span> −7÷7=<b>−1</b></p></div>
+          <div class="estep"><div class="oprow">Para y: reemplazo la columna de y por (4, 9)</div><p>La columna de y era (3, 5); la cambio por los resultados. Cruz y divido entre 7:</p><div class="fx" id="p9y"></div><p class="calc"><span class="rw">det<sub>y</sub></span> 2·9−4·1=18−4=<b>14</b> <span class="sep">•</span> <span class="rw">y</span> 14÷7=<b>2</b></p></div>
+          <p class="verdict"><strong>x = −1, y = 2.</strong> Compruebo en la segunda ecuación: −1 + 5·2 = −1 + 10 = 9 ✓. Nota que x salió negativo sin problema: el signo viene del determinante de arriba.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P10 SOLO : Cramer con det=0 -> decision ============ -->
+    <section class="prob" data-kind="prob" data-id="P10" data-tema="cramer_det_cero" data-level="solo">
+      <div class="phead"><span class="pnum">10</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">¿Se puede usar Cramer aquí?</p>
+      <p class="pstatement">Antes de resolver, <strong>saca el determinante del sistema y decide</strong>: ¿la regla de Cramer sirve para este sistema? Justifica qué pasa y qué significa geométricamente. <em>No se pide x ni y: se pide analizar.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">2x + 4y = 6</span>
+        <span class="eq">x + 2y = 5</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Determinante del sistema</div><p>Con la cruz sobre los coeficientes:</p><div class="fx" id="p10d"></div><p class="calc"><span class="rw">det</span> 2·2−4·1=4−4=<b>0</b></p></div>
+          <div class="estep"><p>El determinante es <strong>0</strong>. Cramer divide entre ese determinante, y <strong>no se puede dividir entre cero</strong>: la regla <strong>no aplica</strong>. El sistema no tiene solución única.</p></div>
+          <div class="estep"><p>Miro los coeficientes: el primer renglón (2, 4) es el <strong>doble</strong> del segundo (1, 2). Rectas <strong>paralelas</strong> o la misma recta. Reviso los lados derechos: 2·(x+2y)=2·5=10 ≠ 6, así que las rectas son paralelas distintas → <strong>ninguna solución</strong>.</p></div>
+          <p class="verdict warn"><strong>Cramer no sirve cuando el determinante del sistema es 0.</strong> Aquí las dos rectas son paralelas y el sistema no tiene solución. Si los lados derechos hubieran sido proporcionales también, serían la misma recta (infinitas). En ambos casos, con det = 0 hay que ir a Gauss-Jordan, no a Cramer.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P11 SOLO : invertibilidad con parametro k ============ -->
+    <section class="prob" data-kind="prob" data-id="P11" data-tema="invertibilidad_parametro" data-level="solo">
+      <div class="phead"><span class="pnum">11</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">¿Para qué valores de k se invierte?</p>
+      <p class="pstatement">Esta 2×2 depende de un número <strong>k</strong>. <strong>Decide para qué valores de k la matriz tiene inversa y para cuál no.</strong> La clave es dónde el determinante se hace cero. <em>Se pide analizar todos los casos, no un número.</em></p>
+      <div class="fx" id="p11m"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Determinante en función de k</div><p>Cruz con la k dentro. Diagonal principal k·k menos antidiagonal 4·1:</p><p class="calc"><span class="rw">det</span> k·k−4·1=<b>k²−4</b></p></div>
+          <div class="estep"><p>La matriz se invierte cuando <strong>det ≠ 0</strong>, o sea <strong>k² − 4 ≠ 0</strong>. Busco dónde se anula:</p><p class="calc"><span class="rw">cero</span> k²−4=0 → k²=4 → <b>k=2 o k=−2</b></p></div>
+          <p class="verdict"><strong>Se invierte para todo k salvo k = 2 y k = −2.</strong> En esos dos valores el determinante vale 0 (la matriz colapsa: sus renglones se vuelven proporcionales) y no hay inversa. Ejemplo: con k = 3, det = 9 − 4 = 5 ≠ 0 → invertible.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P12 SOLO : efecto de operaciones de renglon en el det ============ -->
+    <section class="prob" data-kind="prob" data-id="P12" data-tema="propiedades_operaciones" data-level="solo">
+      <div class="phead"><span class="pnum">12</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Qué le pasa al determinante si tocas los renglones</p>
+      <p class="pstatement">El determinante de cierta matriz A es <strong>det(A) = 6</strong>. <strong>Sin calcular nada nuevo</strong>, di cuánto vale el determinante después de cada cambio y explica la propiedad que usaste. (a) Intercambias dos renglones de A. (b) Multiplicas un renglón entero por 5. (c) Formas la matriz B con det(B) = 3 y calculas det(A·B).</p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">(a) Intercambiar dos renglones</div><p>Intercambiar dos renglones <strong>cambia el signo</strong> del determinante. Nada más:</p><p class="calc"><span class="rw">nuevo</span> −(6)=<b>−6</b></p></div>
+          <div class="estep"><div class="oprow">(b) Multiplicar un renglón por 5</div><p>Multiplicar <strong>un</strong> renglón por un número multiplica el determinante por ese mismo número (el factor sale del renglón):</p><p class="calc"><span class="rw">nuevo</span> 5·6=<b>30</b></p></div>
+          <div class="estep"><div class="oprow">(c) Determinante de un producto</div><p>Propiedad del producto: det(A·B) = det(A)·det(B). Con 6 y 3:</p><p class="calc"><span class="rw">det(AB)</span> 6·3=<b>18</b></p></div>
+          <p class="verdict"><strong>(a) −6 · (b) 30 · (c) 18.</strong> Tres propiedades sin volver a expandir nada: intercambio → signo; escalar un renglón → multiplica el det por ese escalar; producto → producto de determinantes. Ojo: si multiplicaras la <em>matriz completa</em> 2×2 por 5, el det se multiplicaría por 5² = 25, porque son dos renglones escalados.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P13 SOLO : area del paralelogramo (cierra el terreno) ============ -->
+    <section class="prob" data-kind="prob" data-id="P13" data-tema="area_determinante" data-level="solo">
+      <div class="phead"><span class="pnum">13</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">El terreno del inicio: cierra el área</p>
+      <p class="pstatement">Vuelve al terreno del inicio de la guía. Sale de la esquina y lo cierran dos lados: uno avanza <strong>3 al este y 1 al norte</strong>, el otro <strong>1 al este y 2 al norte</strong>. Arma la 2×2 con esos dos lados como renglones y da el <strong>área</strong> que encierra. Explica por qué el determinante es el área.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">lado A → (3, 1)</span>
+        <span class="eq">lado B → (1, 2)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Armo la matriz</div><p>Cada lado es un renglón: (3, 1) arriba y (1, 2) abajo.</p><div class="fx" id="p13m"></div></div>
+          <div class="estep"><div class="oprow">Determinante (= área)</div><p>Con la cruz, diagonal principal menos antidiagonal:</p><p class="calc"><span class="rw">det</span> 3·2−1·1=6−1=<b>5</b></p></div>
+          <p class="verdict"><strong>Área = 5 metros cuadrados.</strong> El determinante de una 2×2 es el área (con signo) del paralelogramo que forman sus dos renglones-flecha. Como salió distinto de cero, los dos lados sí encierran terreno; si hubiera dado 0, los lados apuntarían igual y el "terreno" sería una recta sin área.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P14 SOLO : det con fila de ceros / decision rapida ============ -->
+    <section class="prob" data-kind="prob" data-id="P14" data-tema="propiedades" data-level="solo">
+      <div class="phead"><span class="pnum">14</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Lectura rápida: ¿se invierte o no?</p>
+      <p class="pstatement">Para cada matriz, <strong>decide de un vistazo</strong> (usando una propiedad, sin expansión completa) si su determinante es 0 y por tanto si se invierte. Da el determinante y el veredicto de invertibilidad de las tres.</p>
+      <div class="fx" id="p14a"></div>
+      <div class="fx" id="p14b"></div>
+      <div class="fx" id="p14c"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz A: renglón de ceros</div><p>El segundo renglón es todo ceros. Propiedad: renglón (o columna) de ceros → determinante 0.</p><p class="calc"><span class="rw">det A</span> renglón de ceros → <b>0</b></p><p>det = 0 → <strong>no</strong> se invierte.</p></div>
+          <div class="estep"><div class="oprow">Matriz B: columnas iguales</div><p>La primera y la tercera columna son idénticas (3, 1, 4). Propiedad: dos renglones o columnas iguales → determinante 0.</p><p class="calc"><span class="rw">det B</span> columnas iguales → <b>0</b></p><p>det = 0 → <strong>no</strong> se invierte.</p></div>
+          <div class="estep"><div class="oprow">Matriz C: triangular</div><p>Ceros bajo la diagonal: triangular. Producto de la diagonal:</p><p class="calc"><span class="rw">det C</span> 1·2·3=<b>6</b></p><p>det = 6 ≠ 0 → <strong>sí</strong> se invierte.</p></div>
+          <p class="verdict"><strong>A: 0 (no se invierte) · B: 0 (no se invierte) · C: 6 (sí se invierte).</strong> Dos de las tres se resuelven sin una sola multiplicación: la propiedad correcta te ahorra toda la expansión. La C es triangular, así que basta multiplicar la diagonal.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P15 SOLO : adjunta + inversa 2x2 con det != 1 ============ -->
+    <section class="prob" data-kind="prob" data-id="P15" data-tema="adjunta_inversa" data-level="solo">
+      <div class="phead"><span class="pnum">15</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Inversa 2×2 completa (determinante ≠ 1)</p>
+      <p class="pstatement">Encuentra la inversa de esta 2×2 por la adjunta. Aquí el determinante <strong>no</strong> vale 1, así que sí tendrás que dividir cada entrada de la adjunta. Da la inversa en fracciones.</p>
+      <div class="fx" id="p15m"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Determinante</div><p>Cruz; compruebo que no sea cero:</p><p class="calc"><span class="rw">det</span> 4·2−1·3=8−3=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Adjunta</div><p>Intercambio la diagonal principal (el 4 y el 2 se cambian a 2 y 4) y cambio el signo de la otra (el 1 y el 3 se vuelven −1 y −3):</p><div class="fx" id="p15a"></div></div>
+          <div class="estep"><div class="oprow">Divido la adjunta entre el determinante</div><p>Cada entrada entre 5:</p><p class="calc"><span class="rw">1/det</span> 2÷5=<b>2/5</b> <span class="sep">•</span> −1÷5=<b>−1/5</b> <span class="sep">•</span> −3÷5=<b>−3/5</b> <span class="sep">•</span> 4÷5=<b>4/5</b></p><div class="fx" id="p15i"></div></div>
+          <p class="verdict"><strong>Esa es la inversa.</strong> Con determinante 5, cada entrada de la adjunta se divide entre 5; por eso salen fracciones. Compruebo una entrada de A·A⁻¹: primer renglón de A (4, 1) por la primera columna de A⁻¹ (2/5, −3/5) = 4·(2/5) + 1·(−3/5) = 8/5 − 3/5 = 5/5 = 1 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Errores típicos que cuestan puntos</h3>
+      <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Sumar en vez de restar la antidiagonal.</strong> La 2×2 es a·d <em>menos</em> b·c. El signo del medio es un menos, siempre.</li>
+        <li><span class="ck">✗</span> <strong>Ignorar el tablero de signos.</strong> En el 3×3, el término del medio de cada renglón/columna va restando (+ − +). Sumar los tres cofactores sin signo es el error número uno.</li>
+        <li><span class="ck">✗</span> <strong>Desarrollar por donde no hay ceros.</strong> Cada 0 mata un menor completo: elige el renglón o columna con más ceros y ahórrate cuentas.</li>
+        <li><span class="ck">✗</span> <strong>Sumar la diagonal de una triangular.</strong> El atajo es <em>multiplicar</em> la diagonal, no sumarla.</li>
+        <li><span class="ck">✗</span> <strong>Usar Cramer con determinante del sistema = 0.</strong> Si det = 0 no se puede dividir: Cramer no aplica, hay que ir a Gauss-Jordan.</li>
+        <li><span class="ck">✗</span> <strong>Confundir invertible con det positivo.</strong> Invertible ⇔ det ≠ 0. Un determinante negativo se invierte perfecto.</li>
+        <li><span class="ck">✗</span> <strong>Olvidar dividir entre el determinante en la inversa.</strong> La inversa es (1 ÷ det) · adjunta: la adjunta sola no es la inversa (salvo que det = 1).</li>
+        <li><span class="ck">✗</span> <strong>Escalar la matriz completa y multiplicar el det solo por el factor.</strong> Si multiplicas una 2×2 entera por c, el det se multiplica por c², no por c (cada renglón aporta un factor).</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre de sesión</h3>
+      <p class="nota">Qué tan segura te sientes resolviendo Unidad 5 completa en papel. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="L5_teoria-formal.html"><span class="sp">← Teoría</span><span class="ti">Repasar fórmulas</span></a><a class="next" href="L5_evaluacion.html"><span class="sp">Siguiente →</span><span class="ti">Evaluación · demuéstralo</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Álgebra Lineal · Unidad 5 — Determinantes</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- render de matriz cuadrada (corchetes, sin barra aumentada) ---------- */
+function sq(rows){
+  var n = rows[0].length;
+  var gtc = 'repeat('+n+',auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<n;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setsq(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=sq(rows); }
+
+/* ---------- render de un determinante escrito con barras verticales |A| ---------- */
+function det(rows){
+  var n = rows[0].length;
+  var gtc = 'repeat('+n+',auto)';
+  var h='<div class="dtx"><span class="dbar"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<n;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="dbar"></span></div>';
+}
+function setdet(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=det(rows); }
+
+/* ===== RG1 : 3x3 por cofactores, columna del medio 0,5,0 -> det 40 ===== */
+/* [[4,0,2],[1,5,3],[2,0,3]]  menor de (2,2)=[[4,2],[2,3]]=4*3-2*2=8, det=5*8=40 */
+setdet('rg1m',[["4","0","2"],["1","5","3"],["2","0","3"]]);
+setsq('rg1a',[["4","2"],["2","3"]]);   /* menor de (2,2): 4*3 - 2*2 = 8 */
+
+/* ===== RG2 : Cramer 3x+2y=8 ; x+4y=6 -> det=10, dx=20, dy=10 -> x=2,y=1 ===== */
+setdet('rg2d',[["3","2"],["1","4"]]);
+setdet('rg2x',[["8","2"],["6","4"]]);
+setdet('rg2y',[["3","8"],["1","6"]]);
+
+/* ===== RG3 : inversa 2x2 [[3,4],[2,3]], det=1, adj=[[3,-4],[-2,3]] ===== */
+setsq('rg3m',[["3","4"],["2","3"]]);
+setsq('rg3a',[["3","−4"],["−2","3"]]);
+setsq('rg3i',[["3","−4"],["−2","3"]]);
+
+/* ===== P4 : 2x2 con negativo [[2,-3],[1,4]] -> 2*4 - (-3)*1 = 8+3 = 11 ===== */
+setdet('p4m',[["2","−3"],["1","4"]]);
+
+/* ===== P5 : renglones proporcionales [[2,5],[6,15]] -> 0 ===== */
+setdet('p5m',[["2","5"],["6","15"]]);
+
+/* ===== P6 : triangular 3x3 [[2,6,7],[0,3,4],[0,0,5]] -> 2*3*5 = 30 ===== */
+setdet('p6m',[["2","6","7"],["0","3","4"],["0","0","5"]]);
+
+/* ===== P7 : 3x3 con cero en 3er renglon [[1,1,2],[2,1,4],[0,2,3]] -> -7 ===== */
+setdet('p7m',[["1","1","2"],["2","1","4"],["0","2","3"]]);
+
+/* ===== P8 : 3x3 sin ceros [[2,1,1],[1,1,0],[3,2,2]] -> por 1er renglon = 1 ===== */
+setdet('p8m',[["2","1","1"],["1","1","0"],["3","2","2"]]);
+
+/* ===== P9 : Cramer 2x+3y=4 ; x+5y=9 -> det=7, dx=-7, dy=14 -> x=-1,y=2 ===== */
+setdet('p9d',[["2","3"],["1","5"]]);
+setdet('p9x',[["4","3"],["9","5"]]);
+setdet('p9y',[["2","4"],["1","9"]]);
+
+/* ===== P10 : Cramer det=0. 2x+4y=6 ; x+2y=5 -> det = 0 ===== */
+setdet('p10d',[["2","4"],["1","2"]]);
+
+/* ===== P11 : invertibilidad con k [[k,4],[1,k]] -> det = k^2 - 4 ===== */
+setsq('p11m',[["k","4"],["1","k"]]);
+
+/* ===== P13 : area terreno [[3,1],[1,2]] -> det 5 ===== */
+setsq('p13m',[["3","1"],["1","2"]]);
+
+/* ===== P14 : tres matrices para lectura rapida ===== */
+setdet('p14a',[["3","1","5"],["0","0","0"],["2","4","1"]]);   /* renglon de ceros -> 0 */
+setdet('p14b',[["3","2","3"],["1","5","1"],["4","0","4"]]);   /* col 1 = col 3 -> 0 */
+setdet('p14c',[["1","7","2"],["0","2","6"],["0","0","3"]]);   /* triangular -> 6 */
+
+/* ===== P15 : inversa 2x2 [[4,1],[3,2]], det=5, adj=[[2,-1],[-3,4]] ===== */
+setsq('p15m',[["4","1"],["3","2"]]);
+setsq('p15a',[["2","−1"],["−3","4"]]);
+setsq('p15i',[["2/5","−1/5"],["−3/5","4/5"]]);
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U5_determinantes", leccion:"L5_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U5_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

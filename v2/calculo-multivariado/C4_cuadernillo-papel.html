@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U4 — Cuadernillo de papel (Diferenciación: parciales, gradiente y regla de la cadena)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+
+  /* ===== cuadernillo de papel ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora · en papel</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 4 · Cuadernillo</p>
+    <h1>Parciales, gradiente y regla de la cadena, <mark>resueltos en una hoja</mark></h1>
+    <p class="lead">Aquí no se elige opción: se deriva completo, a mano, como en el parcial. Cada problema trae su enunciado, tu espacio para trabajarlo en papel y la solución paso a paso para cotejar. Toma lápiz y hoja antes de abrir cada respuesta.</p>
+    <div class="learn">
+      <h2>Lo que vas a entrenar</h2>
+      <ol>
+        <li><span class="n">1</span> Derivadas parciales tratando la otra variable como constante</li>
+        <li><span class="n">2</span> Armar y evaluar el gradiente en un punto</li>
+        <li><span class="n">3</span> Escribir el plano tangente a una superficie</li>
+        <li><span class="n">4</span> Regla de la cadena en términos de t</li>
+        <li><span class="n">5</span> Derivada direccional y dirección de máximo ascenso</li>
+        <li><span class="n">6</span> Parciales de orden superior y cruzadas</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este cuadernillo</h2>
+    <section class="sec">
+      <h3>La regla de oro: papel primero</h3>
+      <p class="idea">Los dos primeros son <strong>resueltos-guía</strong>: léelos completos para fijar el método. El resto es <strong>producción</strong>: resuélvelos tú de principio a fin en una hoja <strong>antes</strong> de abrir la solución. Al terminar cada uno, dime cómo te fue con los tres botones. Eso arma tu reporte para el tutor sin escaneos ni fotos.</p>
+      <p class="idea">Método del curso: para una <strong>parcial</strong> derivo por una variable y trato la otra como <strong>número fijo</strong>. El <strong>gradiente</strong> es ∇f = (∂f/∂x, ∂f/∂y): apunta al máximo crecimiento. El <strong>plano tangente</strong> es z = altura + (∂f/∂x)(x − x<sub>0</sub>) + (∂f/∂y)(y − y<sub>0</sub>). La <strong>cadena</strong>: df/dt = (∂f/∂x)(dx/dt) + (∂f/∂y)(dy/dt). La <strong>direccional</strong>: D<sub>u</sub>f = ∇f · u, con u unitario.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago — resueltos-guía</h2>
+
+    <!-- ============ RESUELTO-GUÍA 1 : gradiente evaluado ============ -->
+    <section class="prob" data-kind="prob" data-id="RG1" data-tema="gradiente" data-level="resuelto">
+      <div class="phead"><span class="pnum">1</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Armar y evaluar un gradiente</p>
+      <p class="pstatement">Para la función de abajo, arma el <strong>gradiente</strong> ∇f (fórmula general) y luego evalúalo en el punto <strong>(2, 1)</strong>. Recuerda: cada parcial deriva por su variable y congela la otra.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x<sup>3</sup> + 2x y<sup>2</sup></span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · parcial en x</div><p>Derivo respecto a x y congelo la y (el factor y<sup>2</sup> es constante), término por término:</p><p class="calc"><span class="rw">∂f/∂x</span> deriva x<sup>3</sup>=<b>3x<sup>2</sup></b> <span class="sep">•</span> deriva 2xy<sup>2</sup>=<b>2y<sup>2</sup></b> <span class="sep">•</span> total=<b>3x<sup>2</sup> + 2y<sup>2</sup></b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · parcial en y</div><p>Ahora al revés: congelo la x. El término x<sup>3</sup> es constante (su derivada es 0):</p><p class="calc"><span class="rw">∂f/∂y</span> deriva x<sup>3</sup>=<b>0</b> <span class="sep">•</span> deriva 2xy<sup>2</sup>=<b>4xy</b> <span class="sep">•</span> total=<b>4xy</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · gradiente general</div><p>Guardo las dos parciales en un vector:</p>
+            <div class="fx"><div class="sys"><span class="eq">∇f = ( 3x<sup>2</sup> + 2y<sup>2</sup> , 4xy )</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 4 · evaluar en (2, 1)</div><p>Meto x = 2, y = 1 en cada componente, cuenta por cuenta:</p><p class="calc"><span class="rw">1ª comp</span> 3·2<sup>2</sup>=<b>12</b> <span class="sep">•</span> 2·1<sup>2</sup>=<b>2</b> <span class="sep">•</span> 12+2=<b>14</b></p><p class="calc"><span class="rw">2ª comp</span> 4·2·1=<b>8</b></p></div>
+          <p class="verdict">∇f(2, 1) = <strong>(14, 8)</strong>. Parada en (2, 1), f sube más rápido en esa dirección, y la tasa máxima es su longitud √(14<sup>2</sup> + 8<sup>2</sup>) = √260. Primero la fórmula, luego los números.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (aunque sea de muestra, márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 2 : regla de la cadena ============ -->
+    <section class="prob" data-kind="prob" data-id="RG2" data-tema="regla_cadena" data-level="resuelto">
+      <div class="phead"><span class="pnum">2</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Regla de la cadena en términos de t</p>
+      <p class="pstatement">La función depende de x e y, pero x e y dependen del tiempo <strong>t</strong>. Calcula <strong>df/dt</strong> con la regla de la cadena y déjalo en términos de t. Al final verifica sustituyendo primero.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x y<sup>2</sup>,   x = t<sup>2</sup>,   y = t</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Fase 1 · parciales de f</div><p>Las dos parciales de siempre: por x congelo y, por y congelo x.</p><p class="calc"><span class="rw">∂f/∂x</span> deriva xy<sup>2</sup>=<b>y<sup>2</sup></b> <span class="sep">•</span> <span class="rw">∂f/∂y</span> deriva xy<sup>2</sup>=<b>2xy</b></p></div>
+          <div class="estep"><div class="oprow">Fase 1 · derivadas en t</div><p>Cómo cambia cada variable con el tiempo: derivo x = t<sup>2</sup> y y = t respecto a t.</p><p class="calc"><span class="rw">dx/dt</span> deriva t<sup>2</sup>=<b>2t</b> <span class="sep">•</span> <span class="rw">dy/dt</span> deriva t=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Fase 2 · armar la suma</div><p>Cada camino es su parcial por su derivada en t; se suman:</p><p class="calc"><span class="rw">camino x</span> (y<sup>2</sup>)(2t)=<b>2t y<sup>2</sup></b> <span class="sep">•</span> <span class="rw">camino y</span> (2xy)(1)=<b>2xy</b></p>
+            <div class="fx"><div class="sys"><span class="eq">df/dt = 2t y<sup>2</sup> + 2xy</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Fase 2 · dejar todo en t</div><p>Sustituyo x = t<sup>2</sup> y y = t, término por término:</p><p class="calc"><span class="rw">2t y<sup>2</sup></span> y=t: 2t·t<sup>2</sup>=<b>2t<sup>3</sup></b> <span class="sep">•</span> <span class="rw">2xy</span> x=t<sup>2</sup>, y=t: 2·t<sup>2</sup>·t=<b>2t<sup>3</sup></b> <span class="sep">•</span> suma=<b>4t<sup>3</sup></b></p>
+            <div class="fx"><div class="sys"><span class="eq">df/dt = 4t<sup>3</sup></span></div></div>
+          </div>
+          <p class="verdict">Verificación (sustituir primero): f = x y<sup>2</sup> = t<sup>2</sup>·t<sup>2</sup> = t<sup>4</sup>, y su derivada es <strong>4t<sup>3</sup></strong>. Coincide. En t = 1 ambas dan <strong>4</strong>. La cadena te ahorra la sustitución cuando f es complicada.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Tu turno — producción</h2>
+
+    <!-- ============ P3 GUIADO : parcial en y ============ -->
+    <section class="prob" data-kind="prob" data-id="P3" data-tema="derivadas_parciales" data-level="guiado">
+      <div class="phead"><span class="pnum">3</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Parcial respecto a y</p>
+      <p class="pstatement">Calcula <strong>∂f/∂y</strong> de la función de abajo. <em>Pista: congela la x; todo término sin y es constante y deriva a 0.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = 5x<sup>2</sup> + x y<sup>3</sup> − 7y</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · marcar constantes</div><p>Con la x congelada, 5x<sup>2</sup> es un número fijo. En x y<sup>3</sup>, el factor x es constante; y −7y es lineal en y.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · derivar término a término</div><p>Derivo cada pedazo respecto a y:</p><p class="calc"><span class="rw">5x<sup>2</sup></span> constante=<b>0</b> <span class="sep">•</span> <span class="rw">x y<sup>3</sup></span> x·3y<sup>2</sup>=<b>3x y<sup>2</sup></b> <span class="sep">•</span> <span class="rw">−7y</span> deriva=<b>−7</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · juntar</div><p>Sumo los tres:</p>
+            <div class="fx"><div class="sys"><span class="eq">∂f/∂y = 3x y<sup>2</sup> − 7</span></div></div>
+          </div>
+          <p class="verdict"><strong>∂f/∂y = 3x y<sup>2</sup> − 7.</strong> El 5x<sup>2</sup> desapareció por ser constante; el error típico es dejarlo o derivarlo. La x del término x y<sup>3</sup> se queda como factor.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P4 GUIADO : cazar el error ============ -->
+    <section class="prob" data-kind="prob" data-id="P4" data-tema="derivadas_parciales" data-level="guiado">
+      <div class="phead"><span class="pnum">4</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Caza el error en una parcial</p>
+      <p class="pstatement">Un compañero escribió <strong>∂f/∂x = 3x<sup>2</sup> + 8xy</strong> para la función de abajo. <strong>Decide si está bien</strong>; si no, corrígela y di exactamente qué término salió mal y por qué.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x<sup>3</sup> + 4x<sup>2</sup> y<sup>2</sup></span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · derivar bien en x</div><p>Congelo la y (el factor y<sup>2</sup> es constante) y derivo cada término respecto a x:</p><p class="calc"><span class="rw">x<sup>3</sup></span> deriva=<b>3x<sup>2</sup></b> <span class="sep">•</span> <span class="rw">4x<sup>2</sup> y<sup>2</sup></span> 4y<sup>2</sup>·2x=<b>8x y<sup>2</sup></b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · comparar</div><p>Lo correcto es 3x<sup>2</sup> + 8x y<sup>2</sup>. El compañero puso 8xy, es decir se comió un factor de y (dejó y en vez de y<sup>2</sup>).</p></div>
+          <p class="verdict warn"><strong>Está mal.</strong> Lo correcto es <strong>∂f/∂x = 3x<sup>2</sup> + 8x y<sup>2</sup></strong>. El error: en 4x<sup>2</sup> y<sup>2</sup>, la y<sup>2</sup> es constante y se queda entera (y<sup>2</sup>, no y). Solo la x<sup>2</sup> se deriva (a 2x).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P5 SOLO : gradiente evaluado ============ -->
+    <section class="prob" data-kind="prob" data-id="P5" data-tema="gradiente" data-level="solo">
+      <div class="phead"><span class="pnum">5</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Gradiente evaluado en un punto</p>
+      <p class="pstatement">Arma el gradiente de la función de abajo y evalúalo en el punto <strong>(1, 2)</strong>. Da la fórmula general y el vector numérico.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x<sup>2</sup> y + y<sup>3</sup></span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · parcial en x</div><p>Congelo la y (el término y<sup>3</sup> es constante):</p><p class="calc"><span class="rw">∂f/∂x</span> deriva x<sup>2</sup>y=<b>2xy</b> <span class="sep">•</span> deriva y<sup>3</sup>=<b>0</b> <span class="sep">•</span> total=<b>2xy</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · parcial en y</div><p>Congelo la x (el factor x<sup>2</sup> es constante):</p><p class="calc"><span class="rw">∂f/∂y</span> deriva x<sup>2</sup>y=<b>x<sup>2</sup></b> <span class="sep">•</span> deriva y<sup>3</sup>=<b>3y<sup>2</sup></b> <span class="sep">•</span> total=<b>x<sup>2</sup> + 3y<sup>2</sup></b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · evaluar en (1, 2)</div><p>Meto x = 1, y = 2 en cada componente:</p><p class="calc"><span class="rw">1ª comp</span> 2·1·2=<b>4</b></p><p class="calc"><span class="rw">2ª comp</span> 1<sup>2</sup>=<b>1</b> <span class="sep">•</span> 3·2<sup>2</sup>=<b>12</b> <span class="sep">•</span> 1+12=<b>13</b></p></div>
+          <p class="verdict"><strong>∇f = (2xy, x<sup>2</sup> + 3y<sup>2</sup>)</strong>, y <strong>∇f(1, 2) = (4, 13)</strong>. Cuidado con la parcial en y: son dos términos, no solo x<sup>2</sup>.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P6 SOLO : plano tangente ============ -->
+    <section class="prob" data-kind="prob" data-id="P6" data-tema="plano_tangente" data-level="solo">
+      <div class="phead"><span class="pnum">6</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Plano tangente a una superficie</p>
+      <p class="pstatement">Escribe el <strong>plano tangente</strong> a la superficie de abajo en el punto donde <strong>x = 2, y = 1</strong>. Calcula altura y las dos pendientes, y ensambla la fórmula.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x<sup>2</sup> + x y,   punto (2, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · altura</div><p>Meto x = 2, y = 1 en f, término por término:</p><p class="calc"><span class="rw">f(2,1)</span> 2<sup>2</sup>=<b>4</b> <span class="sep">•</span> 2·1=<b>2</b> <span class="sep">•</span> 4+2=<b>6</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · pendiente en x</div><p>∂f/∂x congelando y (en xy la y es constante), y evalúo:</p><p class="calc"><span class="rw">∂f/∂x</span>=2x + y <span class="sep">•</span> en (2,1): 2·2+1=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · pendiente en y</div><p>∂f/∂y congelando x (x<sup>2</sup> es constante, en xy queda x), y evalúo:</p><p class="calc"><span class="rw">∂f/∂y</span>=x <span class="sep">•</span> en (2,1): <b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · armar el plano</div><p>Altura 6, pendiente 5 con (x − 2), pendiente 2 con (y − 1):</p><p class="calc"><span class="rw">z</span> altura=<b>6</b> <span class="sep">•</span> +5(x−2) <span class="sep">•</span> +2(y−1)</p>
+            <div class="fx"><div class="sys"><span class="eq">z = 6 + 5(x − 2) + 2(y − 1)</span></div></div>
+          </div>
+          <p class="verdict"><strong>z = 6 + 5(x − 2) + 2(y − 1).</strong> Toca la superficie en (2, 1, 6). El desplazamiento de cada variable se mide desde su coordenada del punto: (x − 2) y (y − 1), no cruzados.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P7 SOLO : plano tangente con constante ============ -->
+    <section class="prob" data-kind="prob" data-id="P7" data-tema="plano_tangente" data-level="solo">
+      <div class="phead"><span class="pnum">7</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Plano tangente, superficie con término lineal</p>
+      <p class="pstatement">Escribe el plano tangente a la superficie de abajo en <strong>(1, 3)</strong>. <em>Anticipa: ¿qué parcial no depende de las variables?</em> Luego confírmalo con la cuenta.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = y<sup>2</sup> + 4x,   punto (1, 3)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · altura</div><p>Meto x = 1, y = 3 en f:</p><p class="calc"><span class="rw">f(1,3)</span> 3<sup>2</sup>=<b>9</b> <span class="sep">•</span> 4·1=<b>4</b> <span class="sep">•</span> 9+4=<b>13</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · pendiente en x</div><p>∂f/∂x: y<sup>2</sup> es constante, 4x deriva a 4. No depende del punto:</p><p class="calc"><span class="rw">∂f/∂x</span>=<b>4</b> <span class="sep">•</span> en (1,3): <b>4</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · pendiente en y</div><p>∂f/∂y: 4x es constante, y<sup>2</sup> deriva a 2y, y evalúo:</p><p class="calc"><span class="rw">∂f/∂y</span>=2y <span class="sep">•</span> en (1,3): 2·3=<b>6</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · armar el plano</div><p>Altura 13, pendiente 4 con (x − 1), pendiente 6 con (y − 3):</p><p class="calc"><span class="rw">z</span> altura=<b>13</b> <span class="sep">•</span> +4(x−1) <span class="sep">•</span> +6(y−3)</p>
+            <div class="fx"><div class="sys"><span class="eq">z = 13 + 4(x − 1) + 6(y − 3)</span></div></div>
+          </div>
+          <p class="verdict"><strong>z = 13 + 4(x − 1) + 6(y − 3).</strong> Se cumple lo anticipado: la parcial en x salió constante (4), porque x entra lineal. La pendiente en x es la misma en todo punto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P8 SOLO : regla de la cadena ============ -->
+    <section class="prob" data-kind="prob" data-id="P8" data-tema="regla_cadena" data-level="solo">
+      <div class="phead"><span class="pnum">8</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Regla de la cadena, ejecutándola</p>
+      <p class="pstatement">Con las variables dependiendo de t, calcula <strong>df/dt</strong> en términos de t para la función de abajo. Al final verifica sustituyendo primero.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x<sup>2</sup> + y<sup>2</sup>,   x = 3t,   y = t<sup>2</sup></span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Fase 1 · parciales de f</div><p>Por x congelo y, por y congelo x:</p><p class="calc"><span class="rw">∂f/∂x</span>=<b>2x</b> <span class="sep">•</span> <span class="rw">∂f/∂y</span>=<b>2y</b></p></div>
+          <div class="estep"><div class="oprow">Fase 1 · derivadas en t</div><p>Derivo x = 3t y y = t<sup>2</sup> respecto a t:</p><p class="calc"><span class="rw">dx/dt</span> deriva 3t=<b>3</b> <span class="sep">•</span> <span class="rw">dy/dt</span> deriva t<sup>2</sup>=<b>2t</b></p></div>
+          <div class="estep"><div class="oprow">Fase 2 · armar la suma</div><p>Cada parcial por su derivada en t; se suman:</p><p class="calc"><span class="rw">camino x</span> (2x)(3)=<b>6x</b> <span class="sep">•</span> <span class="rw">camino y</span> (2y)(2t)=<b>4yt</b></p>
+            <div class="fx"><div class="sys"><span class="eq">df/dt = 6x + 4yt</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Fase 2 · dejar todo en t</div><p>Sustituyo x = 3t y y = t<sup>2</sup>:</p><p class="calc"><span class="rw">6x</span> x=3t: 6·3t=<b>18t</b> <span class="sep">•</span> <span class="rw">4yt</span> y=t<sup>2</sup>: 4·t<sup>2</sup>·t=<b>4t<sup>3</sup></b></p>
+            <div class="fx"><div class="sys"><span class="eq">df/dt = 18t + 4t<sup>3</sup></span></div></div>
+          </div>
+          <p class="verdict">Verificación: f = (3t)<sup>2</sup> + (t<sup>2</sup>)<sup>2</sup> = 9t<sup>2</sup> + t<sup>4</sup>, cuya derivada es <strong>18t + 4t<sup>3</sup></strong>. Coincide. En t = 1 da <strong>22</strong>.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P9 SOLO : derivada direccional ============ -->
+    <section class="prob" data-kind="prob" data-id="P9" data-tema="derivada_direccional" data-level="solo">
+      <div class="phead"><span class="pnum">9</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Derivada direccional</p>
+      <p class="pstatement">Calcula la <strong>derivada direccional</strong> de la función de abajo en el punto <strong>(1, 2)</strong>, en la dirección que apunta hacia <strong>(4, 3)</strong>. Sigue el orden: gradiente, normalizar, producto punto.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x<sup>2</sup> + y,   punto (1, 2),   dir (4, 3)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · gradiente en el punto</div><p>∇f = (2x, 1). Lo evalúo en (1, 2):</p><p class="calc"><span class="rw">∇f</span>=(2x, 1) <span class="sep">•</span> en (1,2): (2·1, 1)=<b>(2, 1)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · dirección unitaria</div><p>La dirección (4, 3) mide √(4<sup>2</sup> + 3<sup>2</sup>). Divido entre esa longitud:</p><p class="calc"><span class="rw">|(4,3)|</span> √(16+9)=√25=<b>5</b> <span class="sep">•</span> <span class="rw">u</span>=(4/5, 3/5)</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · producto punto</div><p>D<sub>u</sub>f = ∇f · u: componente a componente y sumo:</p><p class="calc"><span class="rw">D<sub>u</sub>f</span> 2·(4/5)=8/5 <span class="sep">•</span> 1·(3/5)=3/5 <span class="sep">•</span> 8/5+3/5=11/5=<b>2.2</b></p></div>
+          <p class="verdict"><strong>D<sub>u</sub>f = 11/5.</strong> Como la dirección no coincide con el gradiente, sale menos que la longitud de ∇f (que es √5 ≈ 2.24). Sin normalizar habrías obtenido 11, el error típico.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P10 SOLO : direccion de maximo ascenso + modelar ============ -->
+    <section class="prob" data-kind="prob" data-id="P10" data-tema="derivada_direccional" data-level="solo">
+      <div class="phead"><span class="pnum">10</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">La ladera: dirección de máximo ascenso</p>
+      <p class="pstatement">Estás sobre una ladera cuya altura es <strong>h(x, y) = x<sup>2</sup> + 2y<sup>2</sup></strong>, parada en el punto <strong>(2, 1)</strong>. Di <strong>en qué dirección subes más rápido</strong> y <strong>con qué pendiente máxima</strong>. Justifica por qué esa es la respuesta.</p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · gradiente general</div><p>La dirección de máximo ascenso es el gradiente. Lo armo:</p><p class="calc"><span class="rw">∂h/∂x</span> deriva x<sup>2</sup>=<b>2x</b> <span class="sep">•</span> <span class="rw">∂h/∂y</span> deriva 2y<sup>2</sup>=<b>4y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · evaluar en (2, 1)</div><p>Meto x = 2, y = 1:</p><p class="calc"><span class="rw">∇h(2,1)</span> 2·2=<b>4</b> <span class="sep">•</span> 4·1=<b>4</b> <span class="sep">•</span> ∇h=<b>(4, 4)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · pendiente máxima</div><p>Es la longitud del gradiente:</p><p class="calc"><span class="rw">|∇h|</span> 4<sup>2</sup>=16 <span class="sep">•</span> 4<sup>2</sup>=16 <span class="sep">•</span> √(16+16)=√32=<b>4√2</b></p></div>
+          <p class="verdict"><strong>Subes más rápido hacia (4, 4)</strong>, con pendiente máxima <strong>√32 = 4√2 ≈ 5.66</strong>. Es el gradiente porque D<sub>u</sub>h = ∇h · u se maximiza cuando u apunta igual que ∇h; ahí vale justo |∇h|.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P11 SOLO : parciales de orden superior + Clairaut ============ -->
+    <section class="prob" data-kind="prob" data-id="P11" data-tema="orden_superior" data-level="solo">
+      <div class="phead"><span class="pnum">11</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Parciales de orden superior y cruzadas</p>
+      <p class="pstatement">Para la función de abajo calcula <strong>∂<sup>2</sup>f/∂x<sup>2</sup></strong> y las dos cruzadas <strong>∂<sup>2</sup>f/∂x∂y</strong> y <strong>∂<sup>2</sup>f/∂y∂x</strong>. Verifica que las cruzadas salen iguales (Clairaut).</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x<sup>3</sup> y<sup>2</sup></span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · primeras parciales</div><p>Congelo la otra variable en cada caso:</p><p class="calc"><span class="rw">∂f/∂x</span> 3x<sup>2</sup>·y<sup>2</sup>=<b>3x<sup>2</sup> y<sup>2</sup></b> <span class="sep">•</span> <span class="rw">∂f/∂y</span> x<sup>3</sup>·2y=<b>2x<sup>3</sup> y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · ∂²f/∂x²</div><p>Derivo ∂f/∂x = 3x<sup>2</sup> y<sup>2</sup> otra vez respecto a x (y<sup>2</sup> constante):</p><p class="calc"><span class="rw">∂²f/∂x²</span> 3·2x·y<sup>2</sup>=<b>6x y<sup>2</sup></b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · cruzada ∂²f/∂x∂y</div><p>Tomo ∂f/∂y = 2x<sup>3</sup> y y derivo respecto a x (y constante):</p><p class="calc"><span class="rw">∂/∂x(2x<sup>3</sup>y)</span> 2·3x<sup>2</sup>·y=<b>6x<sup>2</sup> y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · cruzada ∂²f/∂y∂x</div><p>Ahora tomo ∂f/∂x = 3x<sup>2</sup> y<sup>2</sup> y derivo respecto a y (x constante):</p><p class="calc"><span class="rw">∂/∂y(3x<sup>2</sup>y<sup>2</sup>)</span> 3x<sup>2</sup>·2y=<b>6x<sup>2</sup> y</b></p></div>
+          <p class="verdict"><strong>∂<sup>2</sup>f/∂x<sup>2</sup> = 6x y<sup>2</sup></strong>; ambas cruzadas dan <strong>6x<sup>2</sup> y</strong>. Coinciden, tal como promete el teorema de Clairaut: el orden de derivación no importa cuando las segundas parciales son continuas.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P12 SOLO : diferenciable vs derivable (razonamiento) ============ -->
+    <section class="prob" data-kind="prob" data-id="P12" data-tema="diferenciabilidad" data-level="solo">
+      <div class="phead"><span class="pnum">12</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Derivable vs diferenciable</p>
+      <p class="pstatement">Una función tiene sus dos parciales <strong>∂f/∂x</strong> y <strong>∂f/∂y</strong> definidas en un punto. Un compañero concluye que por eso es <strong>diferenciable</strong> ahí. <strong>Decide si el razonamiento es correcto</strong> y explica qué significa cada término y qué condición sí garantiza la diferenciabilidad.</p>
+      <p class="paper">✍ Trabájalo en papel (esta es de argumentar, no de calcular)</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · qué es cada cosa</div><p><strong>Derivable</strong> en el punto = existen las dos parciales; solo mira dos direcciones (los ejes). <strong>Diferenciable</strong> es más fuerte: el plano tangente debe aproximar bien a f en <strong>todas</strong> las direcciones cerca del punto.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · por qué no basta</div><p>Existen funciones con las dos parciales definidas que <strong>no</strong> son diferenciables (fallan fuera de los ejes). Tener las parciales no implica que el plano tangente aproxime bien.</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · qué sí garantiza</div><p>Si las parciales son <strong>continuas</strong> en una vecindad del punto, entonces f sí es diferenciable ahí. Esa continuidad es la condición suficiente cómoda.</p></div>
+          <p class="verdict warn"><strong>El razonamiento es incorrecto.</strong> Derivable (existen las parciales) no implica diferenciable. Lo que sí lo garantiza es que las parciales sean <strong>continuas</strong> cerca del punto. Diferenciable ⇒ derivable, pero no al revés.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P13 SOLO : cadena mixta (dos variables independientes) ============ -->
+    <section class="prob" data-kind="prob" data-id="P13" data-tema="regla_cadena" data-level="solo">
+      <div class="phead"><span class="pnum">13</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Cadena hacia una variable intermedia</p>
+      <p class="pstatement">La función depende de x e y, pero ahora <strong>x e y dependen de s</strong>: x = s<sup>2</sup>, y = 2s. Calcula <strong>df/ds</strong> con la regla de la cadena y déjalo en términos de s. Verifica sustituyendo primero.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = 3x + y<sup>2</sup>,   x = s<sup>2</sup>,   y = 2s</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Fase 1 · parciales de f</div><p>Por x congelo y, por y congelo x:</p><p class="calc"><span class="rw">∂f/∂x</span> deriva 3x=<b>3</b> <span class="sep">•</span> <span class="rw">∂f/∂y</span> deriva y<sup>2</sup>=<b>2y</b></p></div>
+          <div class="estep"><div class="oprow">Fase 1 · derivadas en s</div><p>Derivo x = s<sup>2</sup> y y = 2s respecto a s:</p><p class="calc"><span class="rw">dx/ds</span> deriva s<sup>2</sup>=<b>2s</b> <span class="sep">•</span> <span class="rw">dy/ds</span> deriva 2s=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Fase 2 · armar la suma</div><p>Cada parcial por su derivada en s; se suman:</p><p class="calc"><span class="rw">camino x</span> (3)(2s)=<b>6s</b> <span class="sep">•</span> <span class="rw">camino y</span> (2y)(2)=<b>4y</b></p>
+            <div class="fx"><div class="sys"><span class="eq">df/ds = 6s + 4y</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Fase 2 · dejar todo en s</div><p>Sustituyo y = 2s:</p><p class="calc"><span class="rw">4y</span> y=2s: 4·2s=<b>8s</b> <span class="sep">•</span> con 6s: 6s+8s=<b>14s</b></p>
+            <div class="fx"><div class="sys"><span class="eq">df/ds = 14s</span></div></div>
+          </div>
+          <p class="verdict">Verificación: f = 3s<sup>2</sup> + (2s)<sup>2</sup> = 3s<sup>2</sup> + 4s<sup>2</sup> = 7s<sup>2</sup>, cuya derivada es <strong>14s</strong>. Coincide. En s = 1 da <strong>14</strong>.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P14 SOLO : modelar direccional aplicada ============ -->
+    <section class="prob" data-kind="prob" data-id="P14" data-tema="derivada_direccional" data-level="solo">
+      <div class="phead"><span class="pnum">14</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Temperatura de una placa</p>
+      <p class="pstatement">La temperatura de una placa metálica en cada punto es <strong>T(x, y) = x<sup>2</sup> − y<sup>2</sup></strong>. Un sensor está en <strong>(3, 1)</strong> y se mueve en la dirección <strong>(1, 1)</strong>. <strong>¿La temperatura sube o baja</strong> en ese instante, y a qué ritmo? Normaliza la dirección.</p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · gradiente en (3, 1)</div><p>∇T = (2x, −2y). Lo evalúo en (3, 1):</p><p class="calc"><span class="rw">∇T</span>=(2x, −2y) <span class="sep">•</span> en (3,1): (2·3, −2·1)=<b>(6, −2)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · dirección unitaria</div><p>La dirección (1, 1) mide √(1<sup>2</sup> + 1<sup>2</sup>) = √2, así que divido entre √2:</p><p class="calc"><span class="rw">|(1,1)|</span> √(1+1)=<b>√2</b> <span class="sep">•</span> <span class="rw">u</span>=(1/√2, 1/√2)</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · producto punto</div><p>D<sub>u</sub>T = ∇T · u:</p><p class="calc"><span class="rw">D<sub>u</sub>T</span> 6·(1/√2)=6/√2 <span class="sep">•</span> −2·(1/√2)=−2/√2 <span class="sep">•</span> (6−2)/√2=4/√2=<b>2√2</b></p></div>
+          <p class="verdict"><strong>La temperatura sube</strong>, porque D<sub>u</sub>T = 2√2 &gt; 0, a un ritmo de <strong>2√2 ≈ 2.83</strong> por unidad de distancia. El signo del producto punto decide si sube o baja: positivo sube, negativo baja.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Errores típicos que cuestan puntos</h3>
+      <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Derivar la variable congelada.</strong> Al hacer ∂f/∂x, la y es constante: en 5xy<sup>2</sup> queda 5y<sup>2</sup>, no 10xy. El factor no se toca.</li>
+        <li><span class="ck">✗</span> <strong>Perder un término constante o no anularlo.</strong> Un término sin la variable de derivación deriva a 0; olvidarlo o arrastrarlo cambia la parcial.</li>
+        <li><span class="ck">✗</span> <strong>Sumar las parciales en vez de agruparlas.</strong> El gradiente es un vector (∂f/∂x, ∂f/∂y); sumarlas da un número y pierde la dirección.</li>
+        <li><span class="ck">✗</span> <strong>Olvidar la altura en el plano tangente.</strong> Sin f(x<sub>0</sub>, y<sub>0</sub>) el plano no toca la superficie; sin los desplazamientos no comparte pendiente.</li>
+        <li><span class="ck">✗</span> <strong>Cruzar los desplazamientos.</strong> Cada pendiente va con la resta de SU variable: ∂f/∂x con (x − x<sub>0</sub>), no con (y − y<sub>0</sub>).</li>
+        <li><span class="ck">✗</span> <strong>No normalizar en la direccional.</strong> D<sub>u</sub>f pide u unitario; usar el vector sin dividir entre su longitud infla el resultado.</li>
+        <li><span class="ck">✗</span> <strong>Multiplicar parciales en la cadena.</strong> df/dt SUMA caminos: (∂f/∂x)(dx/dt) + (∂f/∂y)(dy/dt), no el producto de las parciales.</li>
+        <li><span class="ck">✗</span> <strong>Confundir derivable con diferenciable.</strong> Que existan las parciales no basta; la condición cómoda es que sean continuas cerca del punto.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre de sesión</h3>
+      <p class="nota">Qué tan segura te sientes derivando en varias variables en papel, sin calculadora. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="C4_teoria-formal.html"><span class="sp">← Teoría</span><span class="ti">Repasar fórmulas</span></a><a class="next" href="C4_evaluacion.html"><span class="sp">Siguiente →</span><span class="ti">Evaluación · demuéstralo</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Cálculo Multivariado · Unidad 4 — Diferenciación</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- render de matrices (por si se necesitan) ---------- */
+function mat(rows, augmented){
+  var cols = rows[0].length;
+  var coeffs = augmented ? cols-1 : cols;
+  var gtc = augmented ? ('repeat('+coeffs+',auto) 16px auto') : ('repeat('+coeffs+',auto)');
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    if(augmented){ cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>'; }
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setM(id, rows, aug){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows, !!aug); }
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo_multivariado", unidad:"U4_diferenciacion", leccion:"C4_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_calculo_U4_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

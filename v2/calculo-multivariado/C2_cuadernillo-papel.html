@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U2 — Cuadernillo de papel (El espacio Rⁿ)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0;white-space:normal}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+
+  /* ===== cuadernillo de papel ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora · en papel</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 2 · Cuadernillo</p>
+    <h1>El espacio Rⁿ, <mark>resuelto en una hoja</mark></h1>
+    <p class="lead">Aquí no se elige opción: se resuelve completo, a mano, como en el parcial. Cada problema trae su enunciado en palabras, su matemática, tu espacio para trabajarlo en papel y la solución paso a paso para cotejar. Toma lápiz y hoja antes de abrir cada respuesta.</p>
+    <div class="learn">
+      <h2>Lo que vas a entrenar</h2>
+      <ol>
+        <li><span class="n">1</span> Norma, distancia y producto punto</li>
+        <li><span class="n">2</span> Ángulo entre vectores y ortogonalidad</li>
+        <li><span class="n">3</span> Cauchy-Schwarz como cota</li>
+        <li><span class="n">4</span> Coordenadas polares y cuadrante</li>
+        <li><span class="n">5</span> Rectas y planos: dirección y normal</li>
+        <li><span class="n">6</span> Conjuntos abiertos y cerrados</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este cuadernillo</h2>
+    <section class="sec">
+      <h3>La regla de oro: papel primero</h3>
+      <p class="idea">Los dos primeros son <strong>resueltos-guía</strong>: léelos completos para fijar el método (normas, producto punto, coseno). El resto es <strong>producción</strong>: resuélvelos tú de principio a fin en una hoja <strong>antes</strong> de abrir la solución. Al terminar cada uno, dime cómo te fue con los tres botones. Eso arma tu reporte para el tutor sin escaneos ni fotos.</p>
+      <p class="idea">Método del curso, siempre por partes: la <strong>norma</strong> |v| es la raíz de la suma de cuadrados; la <strong>distancia</strong> entre dos puntos es |u − v|; el <strong>producto punto</strong> u·v suma las componentes emparejadas y da un número; el <strong>ángulo</strong> sale de u·v = |u| |v| cos θ. Si u·v = 0, son <strong>perpendiculares</strong>. Sin calculadora: los ángulos salen de cosenos que ya sabes de memoria (30°, 45°, 60°, 90°).</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago — resueltos-guía</h2>
+
+    <!-- ============ RESUELTO-GUÍA 1 : ángulo entre vectores R2 ============ -->
+    <section class="prob" data-kind="prob" data-id="RG1" data-tema="angulo_vectores" data-level="resuelto">
+      <div class="phead"><span class="pnum">1</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Ángulo entre dos vectores</p>
+      <p class="pstatement">Dos trayectorias salen del origen: una hacia <strong>u = (3, 0)</strong> y otra hacia <strong>v = (1, 1)</strong>. Encuentra el <strong>ángulo</strong> que abren entre sí. Da el resultado en grados, sin calculadora.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (3, 0)</span>
+        <span class="eq">v = (1, 1)</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · las dos normas</div><p>Elevo al cuadrado cada componente, sumo y saco raíz, un vector a la vez:</p><p class="calc"><span class="rw">|u|</span> √(3<sup>2</sup>+0<sup>2</sup>)=√9=<b>3</b> <span class="sep">•</span> <span class="rw">|v|</span> √(1<sup>2</sup>+1<sup>2</sup>)=√2=<b>√2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · producto punto</div><p>Empareja primera con primera, segunda con segunda, y suma:</p><p class="calc"><span class="rw">u·v</span> (3)(1)=<b>3</b> <span class="sep">•</span> (0)(1)=<b>0</b> <span class="sep">•</span> suma=<b>3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · el coseno</div><p>Despejo cos θ de u·v = |u| |v| cos θ, pasando el producto de normas dividiendo:</p><p class="calc"><span class="rw">cos θ</span> 3÷(3·√2)=3÷(3√2)=<b>1⁄√2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · el ángulo</div><p>El coseno 1⁄√2 es de un ángulo conocido de memoria:</p><p class="calc"><span class="rw">θ</span> cos θ = 1⁄√2 → θ = <b>45°</b></p></div>
+          <p class="verdict">El ángulo es <strong>45°</strong>. Orden del método: normas, producto punto, coseno, ángulo. Como u·v salió <strong>positivo</strong>, el ángulo es agudo; si hubiera dado cero, sería recto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (aunque sea de muestra, márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 2 : distancia en R3 ============ -->
+    <section class="prob" data-kind="prob" data-id="RG2" data-tema="distancia_R3" data-level="resuelto">
+      <div class="phead"><span class="pnum">2</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Distancia entre dos puntos de R³</p>
+      <p class="pstatement">¿Qué <strong>distancia</strong> hay entre los puntos <strong>P = (1, 2, 2)</strong> y <strong>Q = (3, 4, 3)</strong>? Recuerda: una distancia es solo la <strong>norma de la diferencia</strong>, así que va en dos etapas.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">P = (1, 2, 2)</span>
+        <span class="eq">Q = (3, 4, 3)</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Etapa 1 · la resta Q − P</div><p>Resto cada coordenada de Q menos la de P, una a la vez:</p><p class="calc"><span class="rw">Q−P</span> 3−1=<b>2</b> <span class="sep">•</span> 4−2=<b>2</b> <span class="sep">•</span> 3−2=<b>1</b> <span class="sep">•</span> = <b>(2, 2, 1)</b></p></div>
+          <div class="estep"><div class="oprow">Etapa 2 · la norma de (2, 2, 1)</div><p>A la diferencia le saco la norma: cuadro cada componente, sumo y saco raíz:</p><p class="calc"><span class="rw">d</span> 2<sup>2</sup>=<b>4</b> <span class="sep">•</span> 2<sup>2</sup>=<b>4</b> <span class="sep">•</span> 1<sup>2</sup>=<b>1</b> <span class="sep">•</span> √(4+4+1)=√9=<b>3</b></p></div>
+          <p class="verdict">La distancia es <strong>3</strong>. Fíjate en el orden: primero <strong>restas</strong> (componente a componente) y luego <strong>normas</strong>. El signo de cada resta no importa al final, porque al elevar al cuadrado desaparece.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Tu turno — producción</h2>
+
+    <!-- ============ P3 GUIADO : norma R3 ============ -->
+    <section class="prob" data-kind="prob" data-id="P3" data-tema="norma_R3" data-level="guiado">
+      <div class="phead"><span class="pnum">3</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Norma de un vector en R³</p>
+      <p class="pstatement">Calcula la <strong>norma</strong> del vector <strong>v = (2, −3, 6)</strong>. <em>Pista: no sumes las componentes; cuádralas primero.</em> Deja el resultado exacto (sin decimales).</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">| (2, −3, 6) | = ?</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · cuadra cada componente</div><p>Elevo al cuadrado una por una. El signo negativo desaparece al cuadrar:</p><p class="calc"><span class="rw">□</span> 2<sup>2</sup>=<b>4</b> <span class="sep">•</span> (−3)<sup>2</sup>=<b>9</b> <span class="sep">•</span> 6<sup>2</sup>=<b>36</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · suma y raíz</div><p>Sumo los tres cuadrados y saco raíz:</p><p class="calc"><span class="rw">|v|</span> 4+9=<b>13</b> <span class="sep">•</span> 13+36=<b>49</b> <span class="sep">•</span> √49=<b>7</b></p></div>
+          <p class="verdict">La norma es <strong>7</strong>. Salió entera porque 49 es cuadrado perfecto. El error clásico sería sumar 2 − 3 + 6 = 5: eso olvida los cuadrados y la raíz.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P4 GUIADO : producto punto + ortogonalidad ============ -->
+    <section class="prob" data-kind="prob" data-id="P4" data-tema="producto_punto" data-level="guiado">
+      <div class="phead"><span class="pnum">4</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Producto punto y qué significa el resultado</p>
+      <p class="pstatement">Calcula el <strong>producto punto</strong> de <strong>u = (4, −1, 2)</strong> y <strong>v = (1, 2, −1)</strong>. Luego <strong>interpreta</strong> el número: ¿qué te dice sobre el ángulo entre ellos?</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">(4, −1, 2)·(1, 2, −1) = ?</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · multiplica los pares</div><p>Empareja cada componente con la de su misma posición y multiplica:</p><p class="calc"><span class="rw">u·v</span> (4)(1)=<b>4</b> <span class="sep">•</span> (−1)(2)=<b>−2</b> <span class="sep">•</span> (2)(−1)=<b>−2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · suma los tres</div><p>Sumo los productos con su signo:</p><p class="calc"><span class="rw">suma</span> 4+(−2)=<b>2</b> <span class="sep">•</span> 2+(−2)=<b>0</b></p></div>
+          <p class="verdict">El producto punto da <strong>0</strong>. Como u·v = |u| |v| cos θ y ninguna norma es cero, la única salida es cos θ = 0, es decir <strong>θ = 90°</strong>: los vectores son <strong>perpendiculares</strong> (ortogonales).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P5 SOLO : hallar k perpendicular ============ -->
+    <section class="prob" data-kind="prob" data-id="P5" data-tema="ortogonalidad_parametro" data-level="solo">
+      <div class="phead"><span class="pnum">5</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">¿Para qué valor son perpendiculares?</p>
+      <p class="pstatement">Encuentra el valor de <strong>k</strong> que hace <strong>perpendiculares</strong> a <strong>u = (3, k, −2)</strong> y <strong>v = (2, 4, 1)</strong>. <em>La condición no es un cálculo: es una ecuación. Plantéala primero.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">(3, k, −2)·(2, 4, 1) = 0</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · arma el producto punto</div><p>Perpendiculares quiere decir producto punto <strong>igual a cero</strong>. Multiplico los pares dejando la k:</p><p class="calc"><span class="rw">u·v</span> (3)(2)=<b>6</b> <span class="sep">•</span> (k)(4)=<b>4k</b> <span class="sep">•</span> (−2)(1)=<b>−2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · iguala a cero y despeja</div><p>Sumo y pongo la expresión igual a 0, luego despejo k:</p><p class="calc"><span class="rw">ec</span> 6+4k−2=0 <span class="sep">•</span> 4k+4=0 <span class="sep">•</span> 4k=<b>−4</b> <span class="sep">•</span> k=<b>−1</b></p></div>
+          <p class="verdict"><strong>k = −1.</strong> Compruebo: (3, −1, −2)·(2, 4, 1) = 6 − 4 − 2 = 0 ✓. Solo con ese valor el ángulo es recto; con cualquier otro k el producto punto se aparta de cero.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P6 JUNTOS : ángulo 60 grados ============ -->
+    <section class="prob" data-kind="prob" data-id="P6" data-tema="angulo_vectores" data-level="juntos">
+      <div class="phead"><span class="pnum">6</span><span class="lvl guiado">Juntos</span></div>
+      <p class="ptitle">Otro ángulo, otro coseno de memoria</p>
+      <p class="pstatement">Encuentra el <strong>ángulo</strong> entre <strong>u = (1, √3)</strong> y <strong>v = (1, 0)</strong>. <em>Reconoce el coseno que salga: es uno de los ángulos de tabla.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (1, √3)</span>
+        <span class="eq">v = (1, 0)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · las normas</div><p>Cuadro, sumo y saco raíz para cada uno. Recuerda que (√3)<sup>2</sup> = 3:</p><p class="calc"><span class="rw">|u|</span> √(1<sup>2</sup>+(√3)<sup>2</sup>)=√(1+3)=√4=<b>2</b> <span class="sep">•</span> <span class="rw">|v|</span> √(1<sup>2</sup>+0<sup>2</sup>)=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · producto punto</div><p>Multiplico pares y sumo:</p><p class="calc"><span class="rw">u·v</span> (1)(1)=<b>1</b> <span class="sep">•</span> (√3)(0)=<b>0</b> <span class="sep">•</span> suma=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · coseno y ángulo</div><p>Divido el producto punto entre el producto de normas:</p><p class="calc"><span class="rw">cos θ</span> 1÷(2·1)=<b>1⁄2</b> <span class="sep">•</span> <span class="rw">θ</span> cos θ = 1⁄2 → <b>60°</b></p></div>
+          <p class="verdict">El ángulo es <strong>60°</strong>. La clave era ver que cos θ = 1⁄2 corresponde a 60°, no a 30° (ese es cos 30° = √3⁄2). Tener la tabla de senos y cosenos en la cabeza vale puntos aquí.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P7 SOLO : Cauchy-Schwarz como cota ============ -->
+    <section class="prob" data-kind="prob" data-id="P7" data-tema="cauchy_schwarz" data-level="solo">
+      <div class="phead"><span class="pnum">7</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Comprueba la cota de Cauchy-Schwarz</p>
+      <p class="pstatement">Para <strong>u = (2, 1)</strong> y <strong>v = (1, 3)</strong>, verifica que se cumple <strong>|u·v| ≤ |u| |v|</strong>. Calcula los dos lados y decide si la desigualdad es estricta o hay igualdad. <em>Recuerda: la igualdad solo ocurre si son paralelos.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">| u·v |  ≤  | u | · | v |</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · lado izquierdo |u·v|</div><p>Producto punto y luego valor absoluto:</p><p class="calc"><span class="rw">u·v</span> (2)(1)=<b>2</b> <span class="sep">•</span> (1)(3)=<b>3</b> <span class="sep">•</span> suma=<b>5</b> <span class="sep">•</span> |5|=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · lado derecho |u|·|v|</div><p>Cada norma por separado y luego el producto:</p><p class="calc"><span class="rw">|u|</span> √(2<sup>2</sup>+1<sup>2</sup>)=√5 <span class="sep">•</span> <span class="rw">|v|</span> √(1<sup>2</sup>+3<sup>2</sup>)=√10 <span class="sep">•</span> √5·√10=√50=<b>5√2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · compara</div><p>Comparo 5 contra 5√2. Como √2 ≈ 1.41, el lado derecho es mayor:</p><p class="calc"><span class="rw">cmp</span> 5 &lt; 5√2 <span class="sep">•</span> (√2≈1.41) <span class="sep">•</span> 5 &lt; <b>≈7.07</b></p></div>
+          <p class="verdict">Se cumple <strong>|u·v| = 5 ≤ 5√2 = |u| |v|</strong>, y es <strong>estricta</strong> (5 &lt; 5√2). No hay igualdad porque (2, 1) y (1, 3) <strong>no son paralelos</strong> (uno no es múltiplo del otro), así que el ángulo entre ellos no es 0° ni 180°.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P8 SOLO : cartesianas -> polares con cuadrante ============ -->
+    <section class="prob" data-kind="prob" data-id="P8" data-tema="polares_a" data-level="solo">
+      <div class="phead"><span class="pnum">8</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">De cartesianas a polares</p>
+      <p class="pstatement">Convierte el punto <strong>(−√3, 1)</strong> a coordenadas <strong>polares (r, θ)</strong>. <strong>Fíjate primero en el cuadrante</strong>: eso decide el ángulo, no la calculadora. Da θ en grados.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">(−√3, 1) → (r, θ)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · el radio r</div><p>El radio es la norma del punto. Cuidado: (−√3)<sup>2</sup> = 3:</p><p class="calc"><span class="rw">r</span> (−√3)<sup>2</sup>=<b>3</b> <span class="sep">•</span> 1<sup>2</sup>=<b>1</b> <span class="sep">•</span> √(3+1)=√4=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · el cuadrante</div><p>x es negativo y y es positivo: el punto está arriba a la izquierda, en el <strong>segundo cuadrante</strong>. Ahí θ va entre 90° y 180°.</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · el ángulo</div><p>El ángulo de referencia con tan = y/|x| = 1/√3 es 30°. Como estamos en el segundo cuadrante, resto de 180°:</p><p class="calc"><span class="rw">θ</span> ref = 30° <span class="sep">•</span> 180°−30°=<b>150°</b></p></div>
+          <p class="verdict"><strong>(r, θ) = (2, 150°).</strong> El radio siempre es positivo. El cuadrante fue lo que fijó 150° en lugar de 30°: sin ver el signo de x y y, el ángulo saldría mal.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P9 JUNTOS : polares -> cartesianas ============ -->
+    <section class="prob" data-kind="prob" data-id="P9" data-tema="polares_b" data-level="juntos">
+      <div class="phead"><span class="pnum">9</span><span class="lvl guiado">Juntos</span></div>
+      <p class="ptitle">De polares a cartesianas</p>
+      <p class="pstatement">Un punto tiene coordenadas polares <strong>r = 6, θ = 120°</strong>. Pásalo a cartesianas <strong>(x, y)</strong>. <em>Usa cos 120° = −1⁄2 y sen 120° = √3⁄2.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">r = 6,  θ = 120°</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · la x</div><p>La x usa el coseno: x = r·cos θ. El coseno de 120° es negativo:</p><p class="calc"><span class="rw">x</span> 6·(−1⁄2)=<b>−3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · la y</div><p>La y usa el seno: y = r·sen θ. El seno de 120° es positivo:</p><p class="calc"><span class="rw">y</span> 6·(√3⁄2)=<b>3√3</b></p></div>
+          <p class="verdict"><strong>(x, y) = (−3, 3√3).</strong> Coincide con el cuadrante: 120° está en el segundo cuadrante, donde x es negativo y y positivo. El coseno acompaña a x y el seno a y, nunca al revés.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P10 SOLO : vector unitario / normalizar ============ -->
+    <section class="prob" data-kind="prob" data-id="P10" data-tema="vector_unitario" data-level="solo">
+      <div class="phead"><span class="pnum">10</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Vector unitario en una dirección</p>
+      <p class="pstatement">Encuentra el <strong>vector unitario</strong> (de norma 1) que apunta en la misma dirección que <strong>w = (3, −4)</strong>. <em>Normalizar es dividir el vector entre su propia norma.</em> Comprueba al final que tu resultado mide 1.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">ŵ = w ÷ |w|</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · la norma de w</div><p>Cuadro, sumo y saco raíz:</p><p class="calc"><span class="rw">|w|</span> 3<sup>2</sup>=<b>9</b> <span class="sep">•</span> (−4)<sup>2</sup>=<b>16</b> <span class="sep">•</span> √(9+16)=√25=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · divide cada componente</div><p>Divido cada coordenada entre 5:</p><p class="calc"><span class="rw">ŵ</span> 3÷5=<b>3⁄5</b> <span class="sep">•</span> −4÷5=<b>−4⁄5</b> <span class="sep">•</span> = <b>(3⁄5, −4⁄5)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · verifica que mide 1</div><p>Le saco la norma al resultado para confirmar:</p><p class="calc"><span class="rw">|ŵ|</span> (3⁄5)<sup>2</sup>=<b>9⁄25</b> <span class="sep">•</span> (4⁄5)<sup>2</sup>=<b>16⁄25</b> <span class="sep">•</span> √(25⁄25)=<b>1</b></p></div>
+          <p class="verdict">El vector unitario es <strong>(3⁄5, −4⁄5)</strong>, y su norma es <strong>1</strong> ✓. Normalizar nunca cambia la dirección, solo la longitud: sigue apuntando hacia donde iba w.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P11 JUNTOS : recta punto + direccion, evaluar t ============ -->
+    <section class="prob" data-kind="prob" data-id="P11" data-tema="recta" data-level="juntos">
+      <div class="phead"><span class="pnum">11</span><span class="lvl guiado">Juntos</span></div>
+      <p class="ptitle">Un punto sobre la recta</p>
+      <p class="pstatement">Una recta se describe como <strong>(x, y) = (2, −1) + t·(1, 3)</strong>. Identifica su <strong>vector director</strong> y encuentra el <strong>punto</strong> que corresponde a <strong>t = 2</strong>. <em>El punto de paso va suelto; la dirección multiplica a t.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">(x, y) = (2, −1) + t·(1, 3)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · lee las piezas</div><p>El punto de paso es (2, −1); la <strong>dirección</strong> es el vector que acompaña a t: <strong>(1, 3)</strong>.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · escala la dirección por t = 2</div><p>Multiplico la dirección por 2, componente a componente:</p><p class="calc"><span class="rw">2·dir</span> 2·1=<b>2</b> <span class="sep">•</span> 2·3=<b>6</b> <span class="sep">•</span> = <b>(2, 6)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · suma el punto de paso</div><p>Sumo (2, 6) al punto de paso (2, −1):</p><p class="calc"><span class="rw">punto</span> 2+2=<b>4</b> <span class="sep">•</span> −1+6=<b>5</b> <span class="sep">•</span> = <b>(4, 5)</b></p></div>
+          <p class="verdict">Dirección: <strong>(1, 3)</strong>. En <strong>t = 2</strong>, el punto es <strong>(4, 5)</strong>. En t = 0 estarías en el punto de paso (2, −1); cada aumento de t te desplaza en múltiplos de la dirección.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P12 SOLO : plano normal + pertenencia ============ -->
+    <section class="prob" data-kind="prob" data-id="P12" data-tema="plano" data-level="solo">
+      <div class="phead"><span class="pnum">12</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Vector normal y un punto del plano</p>
+      <p class="pstatement">Dado el plano <strong>2x − y + 3z = 5</strong>, lee su <strong>vector normal</strong> y decide si el punto <strong>(1, 0, 1)</strong> <strong>pertenece</strong> al plano. <em>Un punto pertenece si al sustituirlo la igualdad se cumple.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">2x − y + 3z = 5</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · lee la normal</div><p>La normal de un plano ax + by + cz = d son sus coeficientes (a, b, c), con su signo:</p><p class="calc"><span class="rw">n</span> a=<b>2</b> <span class="sep">•</span> b=<b>−1</b> <span class="sep">•</span> c=<b>3</b> <span class="sep">•</span> n = <b>(2, −1, 3)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · sustituye el punto</div><p>Meto x = 1, y = 0, z = 1 en el lado izquierdo:</p><p class="calc"><span class="rw">izq</span> 2·1=<b>2</b> <span class="sep">•</span> −1·0=<b>0</b> <span class="sep">•</span> 3·1=<b>3</b> <span class="sep">•</span> 2+0+3=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · compara con el lado derecho</div><p>El lado izquierdo dio 5 y el derecho es 5:</p><p class="calc"><span class="rw">cmp</span> 5 = 5 <span class="sep">•</span> <b>se cumple</b></p></div>
+          <p class="verdict">La normal es <strong>(2, −1, 3)</strong> y el punto <strong>(1, 0, 1) sí pertenece</strong> al plano, porque al sustituirlo la ecuación queda 5 = 5. No metas el 5 del lado derecho en la normal: la normal son solo los coeficientes de la izquierda.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P13 JUNTOS : conjunto abierto/cerrado + frontera ============ -->
+    <section class="prob" data-kind="prob" data-id="P13" data-tema="conjuntos" data-level="juntos">
+      <div class="phead"><span class="pnum">13</span><span class="lvl guiado">Juntos</span></div>
+      <p class="ptitle">Abierto, cerrado y un punto de la frontera</p>
+      <p class="pstatement">Considera el conjunto <strong>{ (x, y) : x<sup>2</sup> + y<sup>2</sup> ≤ 9 }</strong>. <strong>Clasifícalo</strong> (abierto o cerrado), di quién es su <strong>frontera</strong>, y decide si el punto <strong>(3, 0)</strong> está adentro. <em>Todo se juega en el signo de la desigualdad.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">{ (x, y) : x<sup>2</sup> + y<sup>2</sup> ≤ 9 }</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · mira el signo</div><p>La desigualdad usa <strong>≤</strong> (menor o igual), no &lt; estricto. El ≤ incluye la orilla, así que el conjunto es <strong>cerrado</strong>.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · la frontera</div><p>La frontera es donde vale la <strong>igualdad</strong>: la circunferencia de radio 3 (porque √9 = 3):</p><p class="calc"><span class="rw">∂</span> x<sup>2</sup>+y<sup>2</sup>=9 <span class="sep">•</span> radio=√9=<b>3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · prueba el punto (3, 0)</div><p>Sustituyo y comparo con 9:</p><p class="calc"><span class="rw">(3,0)</span> 3<sup>2</sup>=<b>9</b> <span class="sep">•</span> 0<sup>2</sup>=<b>0</b> <span class="sep">•</span> 9+0=9 ≤ 9 <span class="sep">•</span> <b>sí entra</b></p></div>
+          <p class="verdict">Es un conjunto <strong>cerrado</strong> (incluye su frontera por el ≤); su frontera es la circunferencia <strong>x<sup>2</sup> + y<sup>2</sup> = 9</strong> de radio 3, y el punto <strong>(3, 0) sí pertenece</strong> (justo cae en la orilla). Si el signo fuera &lt; estricto, ese punto quedaría fuera y el conjunto sería abierto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P14 SOLO : clasificar conjunto abierto ============ -->
+    <section class="prob" data-kind="prob" data-id="P14" data-tema="conjuntos_analisis" data-level="solo">
+      <div class="phead"><span class="pnum">14</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Un anillo: ¿qué es y por qué?</p>
+      <p class="pstatement">Analiza el conjunto <strong>{ (x, y) : 1 &lt; x<sup>2</sup> + y<sup>2</sup> &lt; 4 }</strong> (los puntos entre dos círculos). <strong>Clasifícalo</strong> y justifica mirando <strong>los dos signos</strong>. <em>No basta un número: explica qué hace cada desigualdad.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">{ (x, y) : 1 &lt; x<sup>2</sup> + y<sup>2</sup> &lt; 4 }</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · lee cada frontera</div><p>Hay dos bordes: el círculo interior de radio 1 y el exterior de radio 2 (porque √4 = 2):</p><p class="calc"><span class="rw">int</span> x<sup>2</sup>+y<sup>2</sup>=1, radio=<b>1</b> <span class="sep">•</span> <span class="rw">ext</span> x<sup>2</sup>+y<sup>2</sup>=4, radio=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · mira los dos signos</div><p>Los <strong>dos</strong> son &lt; estrictos: ni el borde interior ni el exterior están incluidos. Ninguna de las dos circunferencias entra al conjunto.</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · prueba un punto de borde</div><p>Un punto con x<sup>2</sup> + y<sup>2</sup> = 4, como (2, 0), ¿entra? Necesitaría cumplir &lt; 4, pero da exactamente 4:</p><p class="calc"><span class="rw">(2,0)</span> 2<sup>2</sup>+0<sup>2</sup>=4 <span class="sep">•</span> 4 &lt; 4? <b>no</b> <span class="sep">•</span> queda fuera</p></div>
+          <p class="verdict">El conjunto es <strong>abierto</strong>: como ambas desigualdades son <strong>estrictas</strong>, no contiene ninguna de sus dos fronteras (ni el círculo de radio 1 ni el de radio 2). Es un anillo sin sus orillas. Si alguno de los signos fuera ≤, ya no sería abierto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P15 SOLO : distancia y comparación (análisis) ============ -->
+    <section class="prob" data-kind="prob" data-id="P15" data-tema="distancia_analisis" data-level="solo">
+      <div class="phead"><span class="pnum">15</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">¿Cuál está más cerca del origen?</p>
+      <p class="pstatement">Tienes dos puntos: <strong>A = (2, 3, 6)</strong> y <strong>B = (4, 4, 2)</strong>. <strong>Decide cuál está más cerca del origen</strong> comparando sus distancias. <em>Truco: para comparar distancias no hace falta la raíz; basta comparar las sumas de cuadrados.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">A = (2, 3, 6),  B = (4, 4, 2)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · suma de cuadrados de A</div><p>La distancia al origen es la norma. Cuadro y sumo, dejando la raíz para el final:</p><p class="calc"><span class="rw">A</span> 2<sup>2</sup>=<b>4</b> <span class="sep">•</span> 3<sup>2</sup>=<b>9</b> <span class="sep">•</span> 6<sup>2</sup>=<b>36</b> <span class="sep">•</span> 4+9+36=<b>49</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · suma de cuadrados de B</div><p>Lo mismo para B:</p><p class="calc"><span class="rw">B</span> 4<sup>2</sup>=<b>16</b> <span class="sep">•</span> 4<sup>2</sup>=<b>16</b> <span class="sep">•</span> 2<sup>2</sup>=<b>4</b> <span class="sep">•</span> 16+16+4=<b>36</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · compara</div><p>Como la raíz es creciente, la menor suma de cuadrados es la menor distancia:</p><p class="calc"><span class="rw">cmp</span> 36 &lt; 49 <span class="sep">•</span> |B|=√36=<b>6</b> <span class="sep">•</span> |A|=√49=<b>7</b></p></div>
+          <p class="verdict"><strong>B está más cerca del origen</strong> (distancia 6 contra 7 de A). El atajo fue comparar 36 &lt; 49 sin sacar raíz: como √ es creciente, quien tenga menor suma de cuadrados tiene menor norma. Aquí, además, ambas salieron enteras.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P16 SOLO : ángulo obtuso, coseno negativo ============ -->
+    <section class="prob" data-kind="prob" data-id="P16" data-tema="angulo_obtuso" data-level="solo">
+      <div class="phead"><span class="pnum">16</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Cuando el ángulo es obtuso</p>
+      <p class="pstatement">Encuentra el <strong>ángulo</strong> entre <strong>u = (−1, 0)</strong> y <strong>v = (1, 1)</strong>. <strong>Anticipa</strong> antes de calcular: por dónde apuntan, ¿esperas un ángulo agudo, recto u obtuso? Luego confírmalo con el coseno.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (−1, 0)</span>
+        <span class="eq">v = (1, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · las normas</div><p>Cuadro, sumo y saco raíz para cada uno:</p><p class="calc"><span class="rw">|u|</span> √((−1)<sup>2</sup>+0<sup>2</sup>)=<b>1</b> <span class="sep">•</span> <span class="rw">|v|</span> √(1<sup>2</sup>+1<sup>2</sup>)=<b>√2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · producto punto</div><p>Multiplico pares y sumo. Ojo con el signo del primer par:</p><p class="calc"><span class="rw">u·v</span> (−1)(1)=<b>−1</b> <span class="sep">•</span> (0)(1)=<b>0</b> <span class="sep">•</span> suma=<b>−1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · coseno y ángulo</div><p>El producto punto negativo hará el coseno negativo, señal de ángulo obtuso:</p><p class="calc"><span class="rw">cos θ</span> −1÷(1·√2)=<b>−1⁄√2</b> <span class="sep">•</span> <span class="rw">θ</span> <b>135°</b></p></div>
+          <p class="verdict">El ángulo es <strong>135°</strong>, <strong>obtuso</strong>. Lo anticipaste bien: como el producto punto salió <strong>negativo</strong>, el coseno es negativo y el ángulo pasa de 90°. El signo del producto punto ya te dice si el ángulo es agudo (+), recto (0) u obtuso (−) antes de terminar la cuenta.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Errores típicos que cuestan puntos</h3>
+      <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Sumar sin cuadrar.</strong> La norma NO es a + b + c: es la raíz de la suma de <em>cuadrados</em>. Sin el cuadrado y la raíz, no es longitud.</li>
+        <li><span class="ck">✗</span> <strong>Olvidar la raíz.</strong> a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> es la norma <em>al cuadrado</em>. La norma lleva raíz encima.</li>
+        <li><span class="ck">✗</span> <strong>Confundir producto punto con vector.</strong> u·v es un <em>número</em>, no un vector. Si te queda un par ordenado, algo salió mal.</li>
+        <li><span class="ck">✗</span> <strong>Cruzar las componentes.</strong> Al restar o multiplicar, cada coordenada va con la de su misma posición: primera con primera, segunda con segunda.</li>
+        <li><span class="ck">✗</span> <strong>Ignorar el cuadrante en polares.</strong> El signo de x y y decide el ángulo. La sola razón y/x da dos ángulos posibles: el cuadrante elige.</li>
+        <li><span class="ck">✗</span> <strong>Dar r negativo.</strong> El radio es una norma: siempre ≥ 0. Si te sale negativo, revisa.</li>
+        <li><span class="ck">✗</span> <strong>Meter el término independiente en la normal.</strong> En ax + by + cz = d, la normal es (a, b, c); el d no entra.</li>
+        <li><span class="ck">✗</span> <strong>Confundir &lt; con ≤.</strong> Estricto (&lt;) deja fuera la frontera → abierto; con igualdad (≤) la incluye → cerrado.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre de sesión</h3>
+      <p class="nota">Qué tan segura te sientes resolviendo Unidad 2 completa en papel. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="C2_teoria-formal.html"><span class="sp">← Teoría</span><span class="ti">Repasar fórmulas</span></a><a class="next" href="C2_evaluacion.html"><span class="sp">Siguiente →</span><span class="ti">Evaluación · demuéstralo</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Cálculo Multivariado · Unidad 2 — El espacio Rⁿ</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte (cuadernillo de papel)
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo_multivariado", unidad:"U2_espacio_Rn", leccion:"C2_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_calculo_U2_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

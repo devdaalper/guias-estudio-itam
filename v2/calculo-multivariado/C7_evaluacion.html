@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U7 — Evaluación: Integración múltiple</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:64ch;margin:.2em 0 0}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:12px 18px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .sys{display:grid;gap:6px;font-size:20px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:20px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:28px}
+  .mrow>span{text-align:right;min-width:22px}
+  .msep{justify-self:center;width:0;height:22px;border-left:2px solid var(--ink);min-width:0}
+
+  .block{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
+  .block .phead h3{margin:0;font-size:19px}
+  .block .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
+
+  .qcard{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff}
+  .qcard.correct{border-color:var(--green);background:#f3faf5}
+  .qcard.incorrect{border-color:#e9b8c6;background:#fdf2f5}
+  .qhead{display:flex;align-items:center;gap:10px}
+  .qnum{flex:0 0 auto;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:15px;border:2px solid var(--ink);background:#fff}
+  .blk{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .blk.teoria{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .blk.practica{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .blk.repaso{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .q{margin:0;font-weight:700;font-size:17px}
+
+  .opts{display:grid;gap:10px}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s;min-width:0}
+  .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .opt.sel{border-color:var(--navy);background:#eef1fb}
+  .opt:disabled{cursor:default}
+  .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .opt .mtx{font-size:18px}
+
+  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .why.show{display:block}
+  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .why.miss>.lbl{color:var(--deep)}
+  .why p{margin:0}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:14px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  .btn.dim{opacity:.45;filter:grayscale(.35)}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .notanswered{color:#a01243;font-weight:700;font-size:15px;margin:8px 0 0;min-height:1em}
+
+  .result{border-top:2px solid var(--line);margin-top:16px;padding-top:16px;display:none}
+  .result.show{display:block}
+  .verdict{font-size:24px;font-weight:800;letter-spacing:-.02em;margin:0}
+  .verdict.pass{color:var(--green-deep)}
+  .verdict.fail{color:var(--deep)}
+  .scorebar{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+  .scorechip{border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;font-weight:700;background:#fcfbf9}
+  .scorechip b{font-size:20px}
+  .scorechip.ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .scorechip.no{border-color:#e9b8c6;background:#fdf2f5;color:#a01243}
+  .repasa{border:1.5px solid #f0d6b8;background:var(--cream);border-radius:12px;padding:12px 15px;margin-top:8px;font-size:16px}
+  .repasa a{color:var(--deep);font-weight:800}
+  .advance{margin-top:8px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+
+  /*hardening-360*/
+  main,.block,.qcard,.opts,.cierre,.result{grid-template-columns:minmax(0,1fr);min-width:0}
+  .fx,.sys,.mtx,.opt,.qcard{max-width:100%;min-width:0}
+  .q,.why,.repasa{overflow-wrap:anywhere}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .nav-lecs a{flex:1;min-width:0;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Evaluación</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 7 · Evaluación</p>
+    <h1>¿Ya <mark>dominas</mark> la integración múltiple?</h1>
+    <p class="lead">Esta prueba decide si estás lista para cerrar la materia. Dos bloques: <strong>teoría</strong> (¿recuerdas las reglas?) y <strong>práctica</strong> (¿sabes plantear y resolver?). Contesta todo y pulsa <em>Calificar</em>. Necesitas <strong>80% en cada bloque</strong>. Todo a mano, sin calculadora. Las opciones se barajan cada vez.</p>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Bloque 1 · Teoría</h2>
+    <section class="block" data-bloque-sec="teoria">
+      <div class="phead"><h3>¿Recuerdas las reglas?</h3><p class="sub">Una respuesta por pregunta. No se revela hasta calificar.</p></div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="integral_iterada" data-id="T1">
+        <div class="qhead"><span class="qnum">1</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">En una integral iterada, al resolver la integral de adentro, ¿cómo se trata a la variable de afuera?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Como cero: se elimina del integrando</button>
+          <button class="opt" data-ok="1">Como una constante: no se mueve mientras se integra la de adentro</button>
+          <button class="opt" data-ok="0">Se integra también, al mismo tiempo que la de adentro</button>
+          <button class="opt" data-ok="0">Se deriva antes de integrar la de adentro</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Es el reflejo de la derivada parcial: al trabajar con una variable, las demás quedan <strong>fijas</strong>. Solo al pasar a la integral de afuera esa variable vuelve a moverse.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="limites_region" data-id="T2">
+        <div class="qhead"><span class="qnum">2</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">En una región general, ¿qué es siempre cierto de los límites de integración?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Los de afuera son constantes; los de adentro pueden depender de la variable de afuera</button>
+          <button class="opt" data-ok="0">Los de adentro son constantes; los de afuera dependen de la de adentro</button>
+          <button class="opt" data-ok="0">Los cuatro límites deben ser constantes siempre</button>
+          <button class="opt" data-ok="0">Cualquier límite puede depender de cualquier variable</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Si el límite de afuera dependiera de la variable de adentro, quedaría una variable suelta al final, sin valor. Por eso los de afuera son <strong>siempre constantes</strong>.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="fubini" data-id="T3">
+        <div class="qhead"><span class="qnum">3</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">El teorema de Fubini permite intercambiar el orden dx dy ↔ dy dx sin tocar los límites. ¿En qué caso aplica así de directo?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Siempre; el orden nunca afecta a los límites</button>
+          <button class="opt" data-ok="0">Solo cuando la función es constante</button>
+          <button class="opt" data-ok="1">Cuando la región es un rectángulo: los cuatro límites son constantes</button>
+          <button class="opt" data-ok="0">Nunca; cambiar de orden siempre exige rehacer los límites</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>En un rectángulo los límites no dependen de la otra variable, así que se copian tal cual. En una región de bordes curvos hay que redibujar y reescribir los límites al invertir.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="jacobiano_polares" data-id="T4">
+        <div class="qhead"><span class="qnum">4</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">Al pasar de dx dy a coordenadas polares, ¿cuál es el elemento de área correcto?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">dA = dr dθ, sin ningún factor extra</button>
+          <button class="opt" data-ok="1">dA = r dr dθ; aparece el factor r, el jacobiano de polares</button>
+          <button class="opt" data-ok="0">dA = r² dr dθ, el mismo factor que en esféricas</button>
+          <button class="opt" data-ok="0">dA = (1/r) dr dθ, el inverso del radio</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>En polares los cuadritos se estiran conforme te alejas del origen; ese estiramiento es el factor <strong>r</strong>. Sin él el número sale mal; el jacobiano no es opcional.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="jacobiano_3d" data-id="T5">
+        <div class="qhead"><span class="qnum">5</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">¿Cuál es el elemento de volumen en coordenadas esféricas?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">r dz dr dθ (ese es el de cilíndricas)</button>
+          <button class="opt" data-ok="0">ρ·sen φ dρ dφ dθ</button>
+          <button class="opt" data-ok="1">ρ²·sen φ dρ dφ dθ</button>
+          <button class="opt" data-ok="0">ρ² dρ dφ dθ, sin el seno</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El jacobiano esférico es <strong>ρ²·sen φ</strong>. El de cilíndricas es solo r. Confundirlos es el error más frecuente en triples: sin el sen φ el factor en φ da π en vez de 2.</p></div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Bloque 2 · Práctica</h2>
+    <section class="block" data-bloque-sec="practica">
+      <div class="phead"><h3>¿Sabes plantear y resolver?</h3><p class="sub">Problemas nuevos. Razónalos a mano antes de elegir.</p></div>
+
+      <div class="qcard" data-bloque="practica" data-tema="doble_rectangulo" data-id="P1">
+        <div class="qhead"><span class="qnum">6</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Calcula la integral doble de <strong>2x + 3y</strong> sobre el rectángulo con x de 0 a 2 y y de 0 a 1. ¿Cuánto vale?</p>
+        <div class="fx" id="p1m"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">5</button>
+          <button class="opt" data-ok="1">7</button>
+          <button class="opt" data-ok="0">10</button>
+          <button class="opt" data-ok="0">14</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Integro primero en x: ∫₀² (2x + 3y) dx = [x² + 3y·x]₀² = 4 + 6y. Luego en y: ∫₀¹ (4 + 6y) dy = [4y + 3y²]₀¹ = 4 + 3 = <strong>7</strong>.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="region_general" data-id="P2">
+        <div class="qhead"><span class="qnum">7</span><span class="blk practica">Práctica</span></div>
+        <p class="q">En la región tipo I donde y va de 0 a 2x y x de 0 a 1, resuelves la integral interior de la función <strong>1</strong> respecto a y. ¿Qué queda, ya solo en x?</p>
+        <div class="fx" id="p2m"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">1, la función no cambia al integrar</button>
+          <button class="opt" data-ok="1">2x, porque la primitiva de 1 es y, evaluada entre 0 y 2x</button>
+          <button class="opt" data-ok="0">x², porque se integra dos veces</button>
+          <button class="opt" data-ok="0">2, el coeficiente del límite superior</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>∫₀²ˣ 1 dy = [y]₀²ˣ = 2x − 0 = <strong>2x</strong>. Ese resultado, ya solo en x, pasa a la integral de afuera. (Cerrándola: ∫₀¹ 2x dx = 1, el área del triángulo.)</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="cambio_orden" data-id="P3">
+        <div class="qhead"><span class="qnum">8</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Esta integral está en el orden dy dx sobre la región 0 ≤ x ≤ 2, 0 ≤ y ≤ x². Al invertir a dx dy, ¿cómo quedan los límites?</p>
+        <div class="fx" id="p3m"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">y de 0 a 4 (afuera), x de √y a 2 (adentro)</button>
+          <button class="opt" data-ok="0">y de 0 a 4 (afuera), x de 0 a √y (adentro)</button>
+          <button class="opt" data-ok="0">y de 0 a 2 (afuera), x de √y a 2 (adentro)</button>
+          <button class="opt" data-ok="0">y de 0 a 2 (afuera), x de 0 a y² (adentro)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La curva de arriba es y = x²; despejando, x = √y. En el rango 0 ≤ y ≤ 4, para una y fija la región va de la parábola x = √y hasta x = 2. La y afuera cruza de 0 a 4 (el valor de x² en x = 2). El error típico: dejar y de 0 a 2 o poner x de 0 a √y.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="polares" data-id="P4">
+        <div class="qhead"><span class="qnum">9</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Calcula <strong>∬ (x² + y²) dA</strong> sobre el disco de radio 2, en polares. Recuerda que x² + y² = r² y que el elemento de área trae su propio factor. ¿Cuánto da?</p>
+        <div class="fx" id="p4m"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">4π, olvidando el factor r del jacobiano</button>
+          <button class="opt" data-ok="1">8π</button>
+          <button class="opt" data-ok="0">16π, con factor r² por error</button>
+          <button class="opt" data-ok="0">2π</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El integrando r² se multiplica por el jacobiano r: queda r³. ∫₀² r³ dr = [r⁴/4]₀² = 4; por ∫₀²π dθ = 2π da <strong>8π</strong>. Sin el factor r daría 4π (mal); ese es el distractor clásico.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="integral_triple" data-id="P5">
+        <div class="qhead"><span class="qnum">10</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Calcula el <strong>volumen del cilindro de radio 2 y altura 3</strong> en coordenadas cilíndricas (dV = r dz dr dθ). ¿Cuánto vale?</p>
+        <div class="fx" id="p5m"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">6π, olvidando el factor r</button>
+          <button class="opt" data-ok="1">12π</button>
+          <button class="opt" data-ok="0">24π</button>
+          <button class="opt" data-ok="0">4π</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con dV = r dz dr dθ: en z da r·3 = 3r; en r, ∫₀² 3r dr = [3r²/2]₀² = 6; por 2π da <strong>12π</strong>. Coincide con π·R²·h = π·4·3 = 12π. Sin el factor r saldría 6π (mal).</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="cambio_variable" data-id="P6">
+        <div class="qhead"><span class="qnum">11</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Con el cambio <strong>x = u + 2v</strong>, <strong>y = 3u + v</strong>, ¿cuál es el valor absoluto del jacobiano |J| que entra en la integral?</p>
+        <div class="fx" id="p6m"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">−5, el determinante tal cual con su signo</button>
+          <button class="opt" data-ok="1">5</button>
+          <button class="opt" data-ok="0">7, sumando la diagonal 1 + 1 + 2 + 3</button>
+          <button class="opt" data-ok="0">1, el determinante de la identidad</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La matriz de parciales es [[1, 2], [3, 1]]. Su determinante: (1)(1) − (2)(3) = 1 − 6 = −5. En la integral entra el <strong>valor absoluto</strong>, |J| = <strong>5</strong>: el área no puede ser negativa, así que el signo se descarta.</p></div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Bloque 3 · Repaso · Función implícita e inversa</h2>
+    <section class="block" data-bloque-sec="repaso">
+      <div class="phead"><h3>Un vistazo atrás</h3><p class="sub">Una pregunta de la unidad anterior. No gatea el avance, pero cuenta para tu reporte.</p></div>
+
+      <div class="qcard" data-bloque="repaso" data-tema="funcion_inversa" data-id="R1">
+        <div class="qhead"><span class="qnum">12</span><span class="blk repaso">Repaso</span></div>
+        <p class="q">Para una transformación de varias variables, ¿qué garantiza el teorema de la función inversa que exista una inversa local cerca de un punto?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Que la función sea lineal</button>
+          <button class="opt" data-ok="1">Que el determinante jacobiano sea distinto de cero en ese punto</button>
+          <button class="opt" data-ok="0">Que todas las parciales sean positivas</button>
+          <button class="opt" data-ok="0">Que el jacobiano sea igual a cero</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El determinante jacobiano ≠ 0 asegura inversa local: es el gemelo multivariado de la condición F<sub>y</sub> ≠ 0 de la función implícita. Ese mismo jacobiano reaparece aquí, en U7, como el factor |J| del cambio de variable.</p></div>
+      </div>
+    </section>
+
+    <section class="cierre">
+      <h3>Termina y califícate</h3>
+      <p class="nota">Se califican los dos bloques por separado. 80% en cada uno (teoría ≥ 4/5, práctica ≥ 5/6) = tema dominado. El repaso no gatea, solo informa.</p>
+      <p id="naWarn" class="notanswered"></p>
+      <button class="btn" id="calificar">Calificar</button>
+      <div class="result" id="result"></div>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="C7_cuadernillo-papel.html"><span class="sp">← Cuadernillo</span><span class="ti">Volver a practicar</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Evaluación · Cálculo Multivariado · Unidad 7 · Integración múltiple</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+function mat(rows){
+  var coeffs = rows[0].length - 1;
+  var gtc = 'repeat('+coeffs+',auto) 16px auto';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
+
+// helper: apila expresiones (integrales) en un bloque .sys sin romper el motor
+function fx(id, lines){ var el=document.getElementById(id); if(el){ el.innerHTML='<div class="sys">'+lines.map(function(s){return '<span class="eq">'+s+'</span>';}).join('')+'</div>'; } }
+
+// enunciados de los problemas de práctica
+fx('p1m',['∬<sub>R</sub> (2x + 3y) dA = ∫<sub>0</sub><sup>1</sup> ∫<sub>0</sub><sup>2</sup> (2x + 3y) dx dy']);
+fx('p2m',['∫<sub>0</sub><sup>2x</sup> 1 dy = [ y ]<sub>0</sub><sup>2x</sup> = ?']);
+fx('p3m',['∫<sub>0</sub><sup>2</sup> ∫<sub>0</sub><sup>x²</sup> f(x, y) dy dx','(región:  0 ≤ x ≤ 2,  0 ≤ y ≤ x²)']);
+fx('p4m',['∬ (x² + y²) dA = ∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>2</sup> r² · r dr dθ']);
+fx('p5m',['V = ∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>2</sup> ∫<sub>0</sub><sup>3</sup> r dz dr dθ']);
+fx('p6m',['x = u + 2v ,  y = 3u + v','|J| = | det [ [1, 2], [3, 1] ] | = ?']);
+
+// ===== barajar las opciones al cargar (mata el sesgo de posición; cambia cada intento) =====
+document.querySelectorAll('.qcard .opts').forEach(function(opts){
+  var arr = Array.prototype.slice.call(opts.children);
+  for(var i=arr.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=arr[i]; arr[i]=arr[j]; arr[j]=t; }
+  arr.forEach(function(el){ opts.appendChild(el); });
+});
+
+// ===== selección tipo examen (una por pregunta, sin revelar) =====
+var selections = {};
+document.querySelectorAll('.qcard').forEach(function(card){
+  var qid = card.getAttribute('data-id');
+  card.querySelectorAll('.opt').forEach(function(b){
+    b.onclick = function(){
+      if(card.classList.contains('graded')) return;
+      card.querySelectorAll('.opt').forEach(function(x){ x.classList.remove('sel'); });
+      b.classList.add('sel');
+      selections[qid] = b;
+    };
+  });
+});
+
+// ===== calificación =====
+var t0ms = Date.now();
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo", unidad:"U7_integracion", leccion:"C7_evaluacion", tipo:"evaluacion",
+  teoria:null, practica:null, aprobado:null, fallados:[], por_tema:{}, duracion_min:0, resumen_legible:""
+};
+
+document.getElementById('calificar').onclick = function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.qcard'));
+  var na = document.getElementById('naWarn');
+  var faltan = cards.filter(function(c){ return !selections[c.getAttribute('data-id')]; });
+  if(faltan.length){
+    na.textContent = 'Te faltan '+faltan.length+' pregunta(s) por contestar.';
+    faltan[0].scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  na.textContent='';
+  var tally = { teoria:{ok:0,tot:0}, practica:{ok:0,tot:0}, repaso:{ok:0,tot:0} };
+  var fallados = [], porTema = {};
+  cards.forEach(function(card){
+    card.classList.add('graded');
+    var qid=card.getAttribute('data-id'), blk=card.getAttribute('data-bloque'), tema=card.getAttribute('data-tema');
+    var sel=selections[qid], correct = sel.getAttribute('data-ok')==="1";
+    tally[blk].tot++; if(correct) tally[blk].ok++;
+    porTema[tema] = porTema[tema] || {ok:0,tot:0}; porTema[tema].tot++; if(correct) porTema[tema].ok++;
+    card.querySelectorAll('.opt').forEach(function(b){ b.disabled=true; if(b.getAttribute('data-ok')==="1") b.classList.add('right'); });
+    if(!correct){ sel.classList.add('wrong'); fallados.push(qid); }
+    card.classList.add(correct?'correct':'incorrect');
+    var why=card.querySelector('.why'); if(why){ why.classList.add('show'); if(!correct) why.classList.add('miss'); }
+  });
+
+  var tPct = Math.round(100*tally.teoria.ok/tally.teoria.tot);
+  var pPct = Math.round(100*tally.practica.ok/tally.practica.tot);
+  var rPct = tally.repaso.tot ? Math.round(100*tally.repaso.ok/tally.repaso.tot) : null;
+  var pass = tPct>=80 && pPct>=80; // el repaso NO gatea: solo teoría y práctica
+
+  session.teoria = {correctas:tally.teoria.ok, total:tally.teoria.tot, pct:tPct};
+  session.practica = {correctas:tally.practica.ok, total:tally.practica.tot, pct:pPct};
+  if(tally.repaso.tot) session.repaso = {correctas:tally.repaso.ok, total:tally.repaso.tot, pct:rPct};
+  session.aprobado = pass; session.fallados = fallados; session.por_tema = porTema;
+  session.duracion_min = Math.max(1, Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible = "Evaluación U7 (integración múltiple): teoría "+tally.teoria.ok+"/"+tally.teoria.tot+" ("+tPct+"%), práctica "+tally.practica.ok+"/"+tally.practica.tot+" ("+pPct+"%). "+(pass?"APROBADO — cerró la materia.":"NO aprobado.")+(fallados.length?" Falló: "+fallados.join(", ")+".":"");
+
+  var NEXT_URL="../index.html", NEXT_TI="Completaste Cálculo — volver al menú";
+  function chip(lbl,ok,tot,pct){ return '<div class="scorechip '+(pct>=80?'ok':'no')+'">'+lbl+' <b>'+ok+'/'+tot+'</b> · '+pct+'%</div>'; }
+  var bar = '<div class="scorebar">'+chip('Teoría',tally.teoria.ok,tally.teoria.tot,tPct)+chip('Práctica',tally.practica.ok,tally.practica.tot,pPct)+(rPct!==null?chip('Repaso',tally.repaso.ok,tally.repaso.tot,rPct):'')+'</div>';
+  var html='';
+  if(pass){
+    html += '<p class="verdict pass">Dominado ✓</p>';
+    html += '<p>Aprobaste teoría y práctica. Cerraste Cálculo Multivariado.</p>'+bar;
+    html += '<div class="advance"><a class="btn" href="'+NEXT_URL+'">Avanza al siguiente tema →<br><small style="font-weight:600;font-size:14px">'+NEXT_TI+'</small></a><button class="btn ghost" id="dl">Descargar reporte</button></div>';
+  } else {
+    html += '<p class="verdict fail">Aún no lo dominas</p>';
+    html += '<p>Repasa lo que falló antes de avanzar. Al reintentar, las opciones se rebarajan.</p>'+bar;
+    html += '<div class="repasa"><strong>Repasa esta unidad:</strong> <a href="C7_integracion.html">Guía</a> · <a href="C7_teoria-formal.html">Teoría</a> · <a href="C7_cuadernillo-papel.html">Cuadernillo</a></div>';
+    html += '<div class="advance"><button class="btn" id="retry">Reintentar</button><a class="btn dim" href="'+NEXT_URL+'">Avanzar de todos modos →</a><button class="btn ghost" id="dl">Descargar reporte</button></div>';
+  }
+  var res=document.getElementById('result'); res.innerHTML=html; res.classList.add('show');
+  var retry=document.getElementById('retry'); if(retry) retry.onclick=function(){ location.reload(); };
+  document.getElementById('dl').onclick=function(){
+    var nombre=session.fecha+"_calculo_U7_evaluacion.json";
+    var url=URL.createObjectURL(new Blob([JSON.stringify(session,null,2)],{type:"application/json"}));
+    var a=document.createElement('a'); a.href=url; a.download=nombre; a.click();
+  };
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+};
+</script>
+</body>
+</html>

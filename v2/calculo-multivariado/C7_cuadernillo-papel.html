@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U7 — Cuadernillo de papel (Integración múltiple)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .intg{font-size:22px}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+
+  /* ===== cuadernillo de papel ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0;white-space:normal}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora · en papel</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 7 · Cuadernillo</p>
+    <h1>Integración múltiple, <mark>resuelta en una hoja</mark></h1>
+    <p class="lead">Aquí no se elige opción: se dibuja la región, se ordenan los límites y se integra de adentro hacia afuera, a mano, como en el parcial. Cada problema trae su enunciado, la integral planteada, tu espacio para trabajarla en papel y la solución paso a paso para cotejar. Toma lápiz y hoja antes de abrir cada respuesta.</p>
+    <div class="learn">
+      <h2>Lo que vas a entrenar</h2>
+      <ol>
+        <li><span class="n">1</span> Integral doble en un rectángulo</li>
+        <li><span class="n">2</span> Regiones generales: tipo I y tipo II</li>
+        <li><span class="n">3</span> Invertir el orden de integración</li>
+        <li><span class="n">4</span> Coordenadas polares con jacobiano r</li>
+        <li><span class="n">5</span> Integral triple en cilíndricas y esféricas</li>
+        <li><span class="n">6</span> Cambio de variable con jacobiano general</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este cuadernillo</h2>
+    <section class="sec">
+      <h3>La regla de oro: papel primero</h3>
+      <p class="idea">Los tres primeros son <strong>resueltos-guía</strong>: léelos completos para fijar el método (dibujar la región, ordenar los límites, integrar de adentro hacia afuera). El resto es <strong>producción</strong>: resuélvelos tú de principio a fin en una hoja <strong>antes</strong> de abrir la solución. Al terminar cada uno, dime cómo te fue con los tres botones. Eso arma tu reporte para el tutor sin escaneos ni fotos.</p>
+      <p class="idea">Método del curso: primero <strong>dibujo la región</strong>, decido si la describo por tipo I (x afuera, y adentro) o tipo II (al revés), escribo la <strong>integral iterada</strong> con los límites correctos, y la resuelvo <strong>de adentro hacia afuera</strong> — la interior trata las demás variables como constantes. Al cambiar de coordenadas, nunca olvido el <strong>jacobiano</strong>: r en polares y cilíndricas, ρ²·sen φ en esféricas.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago — resueltos-guía</h2>
+
+    <!-- ============ RESUELTO-GUÍA 1 : doble en rectángulo ============ -->
+    <section class="prob" data-kind="prob" data-id="RG1" data-tema="integral_doble_rectangulo" data-level="resuelto">
+      <div class="phead"><span class="pnum">1</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Integral doble sobre un rectángulo</p>
+      <p class="pstatement">Calcula la integral de <strong>f(x, y) = x + 2y</strong> sobre el rectángulo R con <strong>x de 0 a 2</strong> y <strong>y de 0 a 1</strong>. Resuélvela como iterada, de adentro hacia afuera, e integra primero en x.</p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∬<sub>R</sub> (x + 2y) dA = ∫<sub>0</sub><sup>1</sup> ∫<sub>0</sub><sup>2</sup> (x + 2y) dx dy</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · integro por dentro (en x)</div><p>Trato a y como constante. La primitiva de (x + 2y) respecto a x es x²/2 + 2y·x. La evalúo entre x = 0 y x = 2:</p><p class="calc"><span class="rw">en x=2</span> 2²/2 + 2y·2 = 2 + 4y <span class="sep">•</span> <span class="rw">en x=0</span> <b>0</b> <span class="sep">•</span> queda <b>2 + 4y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro por fuera (en y)</div><p>Ya es una integral de una variable. La primitiva de (2 + 4y) respecto a y es 2y + 2y². La evalúo entre y = 0 y y = 1:</p><p class="calc"><span class="rw">en y=1</span> 2·1 + 2·1² = 2 + 2 = <b>4</b> <span class="sep">•</span> <span class="rw">en y=0</span> <b>0</b> <span class="sep">•</span> resta = <b>4</b></p></div>
+          <p class="verdict">La integral vale <strong>4</strong>. Como R es un rectángulo, por Fubini pudiste integrar primero en y y llegar al mismo número: el orden no cambia el resultado en un rectángulo.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (aunque sea de muestra, márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 2 : región general tipo I ============ -->
+    <section class="prob" data-kind="prob" data-id="RG2" data-tema="region_general" data-level="resuelto">
+      <div class="phead"><span class="pnum">2</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Región general (tipo I): un triángulo</p>
+      <p class="pstatement">Calcula la integral de <strong>f(x, y) = x + y</strong> sobre el triángulo donde <strong>y va de 0 hasta x</strong> y <strong>x va de 0 a 1</strong>. Es una región tipo I: la de afuera (x) entre constantes, la de adentro (y) entre curvas.</p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∫<sub>0</sub><sup>1</sup> ∫<sub>0</sub><sup>x</sup> (x + y) dy dx</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · integro por dentro (en y)</div><p>Trato a x como constante. La primitiva de (x + y) respecto a y es x·y + y²/2. La evalúo entre y = 0 y y = x:</p><p class="calc"><span class="rw">en y=x</span> x·x + x²/2 = x² + x²/2 = <b>3x²/2</b> <span class="sep">•</span> <span class="rw">en y=0</span> <b>0</b> <span class="sep">•</span> queda <b>3x²/2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro por fuera (en x)</div><p>Los límites de afuera eran x de 0 a 1. La primitiva de 3x²/2 es x³/2. La evalúo entre x = 0 y x = 1:</p><p class="calc"><span class="rw">en x=1</span> 1³/2 = <b>1/2</b> <span class="sep">•</span> <span class="rw">en x=0</span> <b>0</b> <span class="sep">•</span> resta = <b>1/2</b></p></div>
+          <p class="verdict">La integral vale <strong>1/2</strong>. Fíjate en el orden: primero <strong>adentro</strong> con la otra variable fija, luego <strong>afuera</strong> como integral normal. En una región no rectangular, el límite de adentro (aquí y = x) depende de la variable de afuera; el de afuera es siempre constante.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 3 : polares (disco) ============ -->
+    <section class="prob" data-kind="prob" data-id="RG3" data-tema="polares" data-level="resuelto">
+      <div class="phead"><span class="pnum">3</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Coordenadas polares: área de un disco</p>
+      <p class="pstatement">Calcula el área del <strong>disco de radio 1</strong> integrando en polares. Recuerda: al cambiar a polares, el elemento de área es <strong>dA = r dr dθ</strong> (el factor r es el jacobiano). La región es 0 ≤ r ≤ 1, 0 ≤ θ ≤ 2π, y el integrando es 1.</p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">área = ∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>1</sup> 1 · r dr dθ</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · integro en r</div><p>Trato θ como constante. El integrando 1·r = r. La primitiva de r es r²/2. La evalúo entre r = 0 y r = 1:</p><p class="calc"><span class="rw">en r=1</span> 1²/2 = <b>1/2</b> <span class="sep">•</span> <span class="rw">en r=0</span> <b>0</b> <span class="sep">•</span> queda <b>1/2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro en θ</div><p>Queda la constante 1/2 por dθ de 0 a 2π: solo multiplica por el largo del intervalo.</p><p class="calc"><span class="rw">θ</span> (1/2)·(2π − 0) = (1/2)·2π = <b>π</b></p></div>
+          <p class="verdict">El área es <strong>π</strong>, justo π·R² con R = 1. Sin el factor r el número saldría mal: el jacobiano <strong>no es opcional</strong>. Los cuadritos se estiran conforme te alejas del origen, y ese estiramiento es exactamente r.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Tu turno — producción</h2>
+
+    <!-- ============ P4 GUIADO : doble en rectángulo ============ -->
+    <section class="prob" data-kind="prob" data-id="P4" data-tema="integral_doble_rectangulo" data-level="guiado">
+      <div class="phead"><span class="pnum">4</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Doble sobre un rectángulo</p>
+      <p class="pstatement">Calcula la integral de <strong>f(x, y) = 6x²y</strong> sobre el rectángulo con <strong>x de 0 a 1</strong> y <strong>y de 0 a 2</strong>. <em>Pista: integra primero en x tratando a y como constante; el 6y sale de factor.</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∫<sub>0</sub><sup>2</sup> ∫<sub>0</sub><sup>1</sup> 6x²y dx dy</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · integro en x</div><p>Con y constante, la primitiva de 6x²y respecto a x es 2x³y. La evalúo entre x = 0 y x = 1:</p><p class="calc"><span class="rw">en x=1</span> 2·1³·y = <b>2y</b> <span class="sep">•</span> <span class="rw">en x=0</span> <b>0</b> <span class="sep">•</span> queda <b>2y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro en y</div><p>La primitiva de 2y respecto a y es y². La evalúo entre y = 0 y y = 2:</p><p class="calc"><span class="rw">en y=2</span> 2² = <b>4</b> <span class="sep">•</span> <span class="rw">en y=0</span> <b>0</b> <span class="sep">•</span> resta = <b>4</b></p></div>
+          <p class="verdict">La integral vale <strong>4</strong>. Al ser un rectángulo con f que se factoriza (6x²·y), pudiste separar en (∫ 6x² dx)·(∫ y dy) = 2·2 = 4 y llegar a lo mismo.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P5 GUIADO : región tipo I ============ -->
+    <section class="prob" data-kind="prob" data-id="P5" data-tema="region_general" data-level="guiado">
+      <div class="phead"><span class="pnum">5</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Región tipo I bajo una recta</p>
+      <p class="pstatement">Calcula la integral de <strong>f(x, y) = 2x</strong> sobre el triángulo donde <strong>y va de 0 a x</strong> y <strong>x de 0 a 2</strong>. <em>Pista: la interior deja algo solo en x; luego intégralo por fuera.</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∫<sub>0</sub><sup>2</sup> ∫<sub>0</sub><sup>x</sup> 2x dy dx</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · integro en y</div><p>Con x constante, 2x es constante frente a y, así que su primitiva es 2x·y. La evalúo entre y = 0 y y = x:</p><p class="calc"><span class="rw">en y=x</span> 2x·x = <b>2x²</b> <span class="sep">•</span> <span class="rw">en y=0</span> <b>0</b> <span class="sep">•</span> queda <b>2x²</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro en x</div><p>La primitiva de 2x² respecto a x es 2x³/3. La evalúo entre x = 0 y x = 2:</p><p class="calc"><span class="rw">en x=2</span> 2·2³/3 = 2·8/3 = <b>16/3</b> <span class="sep">•</span> <span class="rw">en x=0</span> <b>0</b> <span class="sep">•</span> resta = <b>16/3</b></p></div>
+          <p class="verdict">La integral vale <strong>16/3</strong>. El error típico es olvidar que 2x es constante en la interior (queda 2x·y, no 2·y²/2). Verifica siempre respecto a qué variable estás integrando.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P6 GUIADO : invertir el orden ============ -->
+    <section class="prob" data-kind="prob" data-id="P6" data-tema="cambio_orden" data-level="guiado">
+      <div class="phead"><span class="pnum">6</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Invertir el orden de integración</p>
+      <p class="pstatement">La integral está dada en el orden <strong>dy dx</strong> sobre el triángulo 0 ≤ y ≤ x ≤ 1. <strong>Reescríbela en el orden dx dy</strong> (misma región, límites nuevos). No la evalúes: solo pon los límites correctos y justifica el dibujo. <em>Pista: dibuja la recta y = x y decide, para una y fija, entre qué valores va x.</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∫<sub>0</sub><sup>1</sup> ∫<sub>0</sub><sup>x</sup> f(x, y) dy dx</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Fase 1 · dibujo y despejo</div><p>La región es el triángulo con vértices (0, 0), (1, 0) y (1, 1). La frontera de arriba es la recta y = x; la de la derecha es x = 1. Para invertir, fijo una y y veo entre qué x cae la región.</p><p class="calc"><span class="rw">en y=1/2</span> x arranca en la recta x=y = <b>0.5</b> <span class="sep">•</span> y termina en x=1 = <b>1</b></p></div>
+          <div class="estep"><div class="oprow">Fase 2 · reescribo (dx dy)</div><p>Con y fija entre 0 y 1, x va de la recta x = y hasta x = 1. La y por fuera queda entre las constantes 0 y 1.</p><div class="fx"><div class="sys intg"><span class="eq">∫<sub>0</sub><sup>1</sup> ∫<sub>y</sub><sup>1</sup> f(x, y) dx dy</span></div></div></div>
+          <p class="verdict">Los límites invertidos son <strong>x de y a 1</strong> (adentro) y <strong>y de 0 a 1</strong> (afuera). La región es la misma: solo la describimos por franjas horizontales en vez de verticales. El valor de la integral no cambia.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P7 SOLO : invertir + parábola ============ -->
+    <section class="prob" data-kind="prob" data-id="P7" data-tema="cambio_orden" data-level="solo">
+      <div class="phead"><span class="pnum">7</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Invertir con una frontera curva</p>
+      <p class="pstatement">La región está entre la parábola <strong>y = x²</strong> y la recta <strong>y = x</strong>, con x de 0 a 1, dada en el orden dy dx. <strong>Inviértela a dx dy</strong>: despeja cada curva y decide, para una y fija, cuál queda a la izquierda. Da los límites nuevos. <em>No basta con el resultado: señala qué curva es la izquierda y por qué.</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∫<sub>0</sub><sup>1</sup> ∫<sub>x²</sub><sup>x</sup> f(x, y) dy dx</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Fase 1 · despejo x en cada curva</div><p>De y = x² sale x = √y (rama positiva). De y = x sale x = y. Ahora comparo cuál es menor en el rango 0 ≤ y ≤ 1 para saber cuál va a la izquierda:</p><p class="calc"><span class="rw">en y=1/4</span> x=y da <b>0.25</b> <span class="sep">•</span> x=√y da <b>0.5</b> <span class="sep">•</span> así x=y &lt; x=√y</p></div>
+          <div class="estep"><div class="oprow">Fase 2 · reescribo (dx dy)</div><p>Para una y fija, x arranca en la recta x = y (izquierda) y termina en la parábola x = √y (derecha). La y por fuera va entre 0 y 1.</p><div class="fx"><div class="sys intg"><span class="eq">∫<sub>0</sub><sup>1</sup> ∫<sub>y</sub><sup>√y</sup> f(x, y) dx dy</span></div></div></div>
+          <p class="verdict">Límites invertidos: <strong>x de y a √y</strong> (adentro), <strong>y de 0 a 1</strong> (afuera). La clave es que en (0, 1) se cumple y ≤ √y, así que la recta queda a la izquierda. Con f = 1 el área da 1/6 en ambos órdenes: invertir nunca cambia el valor.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P8 SOLO : polares (disco radio 3) ============ -->
+    <section class="prob" data-kind="prob" data-id="P8" data-tema="polares" data-level="solo">
+      <div class="phead"><span class="pnum">8</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Área de un disco en polares</p>
+      <p class="pstatement">Calcula el área del <strong>disco de radio 3</strong> en polares. Pon los límites (r de 0 al borde, θ toda la vuelta), <strong>mete el jacobiano correcto</strong> e integra hasta el número. <em>Cuida el factor: sin él te sale un número lineal en el radio, no cuadrático.</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">área = ∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>3</sup> r dr dθ</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · integro en r</div><p>El integrando es r (el jacobiano). La primitiva de r es r²/2. La evalúo entre r = 0 y r = 3:</p><p class="calc"><span class="rw">en r=3</span> 3²/2 = 9/2 = <b>4.5</b> <span class="sep">•</span> <span class="rw">en r=0</span> <b>0</b> <span class="sep">•</span> queda <b>9/2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro en θ</div><p>Queda la constante 9/2 por dθ de 0 a 2π:</p><p class="calc"><span class="rw">θ</span> (9/2)·(2π − 0) = (9/2)·2π = <b>9π</b></p></div>
+          <p class="verdict">El área es <strong>9π</strong>, justo π·R² con R = 3. Errores clásicos: sin el factor r salen 6π (mal); con r² por confundir con esféricas salen 18π (mal). El jacobiano de polares es <strong>r</strong>, ni más ni menos.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P9 SOLO : polares con integrando radial ============ -->
+    <section class="prob" data-kind="prob" data-id="P9" data-tema="polares" data-level="solo">
+      <div class="phead"><span class="pnum">9</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Integrando radial en polares</p>
+      <p class="pstatement">Sobre el disco de radio 1, calcula <strong>∬ (x² + y²) dA</strong>. Como x² + y² = r², la integral se vuelve puramente radial. <strong>Escríbela en polares con su jacobiano</strong> y resuélvela. <em>Ojo: el integrando r² se multiplica por el factor r del elemento de área.</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∬ (x² + y²) dA = ∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>1</sup> r² · r dr dθ</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · sustituyo y junto potencias</div><p>Con x = r·cos θ, y = r·sen θ, se tiene x² + y² = r². El elemento de área aporta otro r, así que el integrando total es r²·r = r³.</p><p class="calc"><span class="rw">integrando</span> r² <span class="sep">•</span> por el jacobiano r <span class="sep">•</span> queda <b>r³</b></p></div>
+          <div class="estep"><div class="oprow">Paso 1 · integro en r</div><p>La primitiva de r³ es r⁴/4. La evalúo entre r = 0 y r = 1:</p><p class="calc"><span class="rw">en r=1</span> 1⁴/4 = <b>1/4</b> <span class="sep">•</span> <span class="rw">en r=0</span> <b>0</b> <span class="sep">•</span> queda <b>1/4</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro en θ</div><p>Queda la constante 1/4 por dθ de 0 a 2π:</p><p class="calc"><span class="rw">θ</span> (1/4)·2π = <b>π/2</b></p></div>
+          <p class="verdict">La integral vale <strong>π/2</strong>. La trampa: olvidar el factor r del jacobiano deja r² (primitiva r³/3, da 2π/3, mal). Recuerda: el integrando y el jacobiano se multiplican <strong>antes</strong> de integrar.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P10 SOLO : triple en caja ============ -->
+    <section class="prob" data-kind="prob" data-id="P10" data-tema="integral_triple" data-level="solo">
+      <div class="phead"><span class="pnum">10</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Integral triple sobre una caja</p>
+      <p class="pstatement">Calcula <strong>∭ xyz dV</strong> sobre la caja con <strong>x de 0 a 1, y de 0 a 2, z de 0 a 3</strong>. Como los límites son constantes y el integrando se factoriza, puedes separar en tres integrales. <strong>Resuélvela de adentro hacia afuera</strong> y da el número. <em>Anticipa: el integrando xyz se parte en (∫ x dx)(∫ y dy)(∫ z dz).</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∫<sub>0</sub><sup>3</sup> ∫<sub>0</sub><sup>2</sup> ∫<sub>0</sub><sup>1</sup> xyz dx dy dz</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · integro en x</div><p>Con y, z constantes, la primitiva de xyz respecto a x es (x²/2)·yz. La evalúo entre x = 0 y x = 1:</p><p class="calc"><span class="rw">en x=1</span> (1²/2)·yz = <b>yz/2</b> <span class="sep">•</span> <span class="rw">en x=0</span> <b>0</b> <span class="sep">•</span> queda <b>yz/2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro en y</div><p>La primitiva de (yz/2) respecto a y es (y²/2)·(z/2) = y²z/4. La evalúo entre y = 0 y y = 2:</p><p class="calc"><span class="rw">en y=2</span> 2²·z/4 = 4z/4 = <b>z</b> <span class="sep">•</span> <span class="rw">en y=0</span> <b>0</b> <span class="sep">•</span> queda <b>z</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · integro en z</div><p>La primitiva de z respecto a z es z²/2. La evalúo entre z = 0 y z = 3:</p><p class="calc"><span class="rw">en z=3</span> 3²/2 = <b>9/2</b> <span class="sep">•</span> <span class="rw">en z=0</span> <b>0</b> <span class="sep">•</span> resta = <b>9/2</b></p></div>
+          <p class="verdict">La integral vale <strong>9/2</strong>. Comprobación por separación: (∫<sub>0</sub><sup>1</sup> x dx)·(∫<sub>0</sub><sup>2</sup> y dy)·(∫<sub>0</sub><sup>3</sup> z dz) = (1/2)·(2)·(9/2) = 9/2 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P11 SOLO : cilíndricas (cilindro) ============ -->
+    <section class="prob" data-kind="prob" data-id="P11" data-tema="coordenadas_3d" data-level="solo">
+      <div class="phead"><span class="pnum">11</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Volumen en cilíndricas</p>
+      <p class="pstatement">Calcula el <strong>volumen de un cilindro de radio 1 y altura 2</strong> en coordenadas cilíndricas. El elemento de volumen es <strong>dV = r dz dr dθ</strong> (jacobiano r, el mismo de polares). La región es 0 ≤ r ≤ 1, 0 ≤ z ≤ 2, 0 ≤ θ ≤ 2π. <strong>Plantéala e intégrala de adentro hacia afuera</strong>. <em>Verifica al final con π·R²·h.</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">V = ∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>1</sup> ∫<sub>0</sub><sup>2</sup> r dz dr dθ</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · integro en z</div><p>r es constante frente a z. La primitiva de r respecto a z es r·z. La evalúo entre z = 0 y z = 2:</p><p class="calc"><span class="rw">en z=2</span> r·2 = <b>2r</b> <span class="sep">•</span> <span class="rw">en z=0</span> <b>0</b> <span class="sep">•</span> queda <b>2r</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro en r</div><p>La primitiva de 2r respecto a r es r². La evalúo entre r = 0 y r = 1:</p><p class="calc"><span class="rw">en r=1</span> 1² = <b>1</b> <span class="sep">•</span> <span class="rw">en r=0</span> <b>0</b> <span class="sep">•</span> queda <b>1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · integro en θ</div><p>Queda la constante 1 por dθ de 0 a 2π:</p><p class="calc"><span class="rw">θ</span> 1·(2π − 0) = <b>2π</b></p></div>
+          <p class="verdict">El volumen es <strong>2π</strong>, que coincide con π·R²·h = π·1²·2 = 2π ✓. Las cilíndricas son las polares con una integral en z de más; el jacobiano sigue siendo <strong>r</strong>.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P12 SOLO : esféricas (esfera) ============ -->
+    <section class="prob" data-kind="prob" data-id="P12" data-tema="coordenadas_3d" data-level="solo">
+      <div class="phead"><span class="pnum">12</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Volumen de una esfera en esféricas</p>
+      <p class="pstatement">Calcula el <strong>volumen de la esfera de radio 1</strong> en coordenadas esféricas. El elemento de volumen es <strong>dV = ρ²·sen φ dρ dφ dθ</strong>. La región es 0 ≤ ρ ≤ 1, 0 ≤ φ ≤ π, 0 ≤ θ ≤ 2π. Como los límites son constantes, los tres factores se separan. <strong>Resuélvelos uno por uno</strong> y multiplica. <em>Recuerda: la primitiva de sen φ es −cos φ.</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">V = ∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>π</sup> ∫<sub>0</sub><sup>1</sup> ρ²·sen φ dρ dφ dθ</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · integro en ρ</div><p>Con φ, θ fijas, sen φ sale de factor; el único término con ρ es ρ². Su primitiva es ρ³/3. La evalúo entre ρ = 0 y ρ = 1:</p><p class="calc"><span class="rw">en ρ=1</span> 1³/3 = <b>1/3</b> <span class="sep">•</span> <span class="rw">en ρ=0</span> <b>0</b> <span class="sep">•</span> queda <b>1/3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro en φ</div><p>La primitiva de sen φ es −cos φ. La evalúo entre φ = 0 y φ = π:</p><p class="calc"><span class="rw">en φ=π</span> −cos π = −(−1) = <b>1</b> <span class="sep">•</span> <span class="rw">en φ=0</span> −cos 0 = <b>−1</b> <span class="sep">•</span> resta = 1 − (−1) = <b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · integro en θ</div><p>Junto los factores: (1/3)·(2) por dθ de 0 a 2π.</p><p class="calc"><span class="rw">θ</span> (1/3)·2·(2π) = (2/3)·2π = <b>4π/3</b></p></div>
+          <p class="verdict">El volumen es <strong>4π/3</strong>, justo (4/3)π·R³ con R = 1. El jacobiano esférico ρ²·sen φ es de memoria obligada: sin el sen φ el factor en φ daría π (mal) en lugar de 2.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P13 SOLO : cambio de variable con jacobiano general ============ -->
+    <section class="prob" data-kind="prob" data-id="P13" data-tema="cambio_variable" data-level="solo">
+      <div class="phead"><span class="pnum">13</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Cambio de variable con jacobiano general</p>
+      <p class="pstatement">Con la transformación lineal <strong>x = 2u</strong>, <strong>y = 3v</strong>, calcula el jacobiano y úsalo para hallar el <strong>área de la región del plano xy que corresponde al cuadrado 0 ≤ u ≤ 1, 0 ≤ v ≤ 1</strong>. <strong>Arma la matriz de derivadas, saca su determinante</strong> e integra el 1 con ese factor. <em>El jacobiano de una transformación lineal es constante: no depende de u ni de v.</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">área = ∬ 1 dx dy = ∫<sub>0</sub><sup>1</sup> ∫<sub>0</sub><sup>1</sup> |J| du dv</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · armo el jacobiano</div><p>El jacobiano es el determinante de la matriz de derivadas parciales. Calculo cada una: ∂x/∂u = 2, ∂x/∂v = 0, ∂y/∂u = 0, ∂y/∂v = 3.</p><div class="fx" id="p13jac"></div><p class="calc"><span class="rw">det</span> (2)·(3) − (0)·(0) = <b>6</b> <span class="sep">•</span> |J| = <b>6</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro con el factor</div><p>El elemento de área en xy vale |J| du dv = 6 du dv. Como es constante, la integral del 1 es 6 por el área del cuadrado en uv:</p><p class="calc"><span class="rw">área uv</span> (1−0)·(1−0) = <b>1</b> <span class="sep">•</span> por |J|=6 <span class="sep">•</span> queda <b>6</b></p></div>
+          <p class="verdict">El área es <strong>6</strong>. Tiene sentido geométrico: la transformación estira por 2 en x y por 3 en y, así que un cuadrado de área 1 se convierte en un rectángulo de área 2·3 = 6. El jacobiano mide exactamente ese factor de estiramiento del área.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P14 SOLO : cambio de variable (transformación afín) ============ -->
+    <section class="prob" data-kind="prob" data-id="P14" data-tema="cambio_variable" data-level="solo">
+      <div class="phead"><span class="pnum">14</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Jacobiano de una transformación con mezcla</p>
+      <p class="pstatement">Con el cambio <strong>x = u + v</strong>, <strong>y = u − v</strong>, halla el jacobiano y con él el <strong>área de la región en xy asociada al cuadrado 0 ≤ u ≤ 1, 0 ≤ v ≤ 1</strong>. <strong>Arma la matriz 2×2, saca el determinante</strong> (cuida el signo) y toma su valor absoluto. <em>El determinante puede salir negativo: lo que entra en la integral es siempre |J|.</em></p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">área = ∫<sub>0</sub><sup>1</sup> ∫<sub>0</sub><sup>1</sup> |J| du dv</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · armo el jacobiano</div><p>Calculo las cuatro parciales: ∂x/∂u = 1, ∂x/∂v = 1, ∂y/∂u = 1, ∂y/∂v = −1.</p><div class="fx" id="p14jac"></div><p class="calc"><span class="rw">det</span> (1)·(−1) − (1)·(1) = −1 − 1 = <b>−2</b> <span class="sep">•</span> |J| = <b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro con el factor</div><p>El factor es |J| = 2. La integral del 1 sobre el cuadrado en uv (área 1) es 2 por esa área:</p><p class="calc"><span class="rw">área uv</span> 1·1 = <b>1</b> <span class="sep">•</span> por |J|=2 <span class="sep">•</span> queda <b>2</b></p></div>
+          <p class="verdict">El área es <strong>2</strong>. El determinante salió <strong>−2</strong> (signo negativo por el orden de las filas), pero el área no puede ser negativa: entra el <strong>valor absoluto</strong>, |J| = 2. Esa es la regla general del cambio de variable — el mismo motivo por el que en polares se usa |r| = r.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Errores típicos que cuestan puntos</h3>
+      <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Olvidar el jacobiano.</strong> Al cambiar de coordenadas nunca es solo sustituir: entra r en polares y cilíndricas, ρ²·sen φ en esféricas, |J| en un cambio general. Sin él, el número sale mal.</li>
+        <li><span class="ck">✗</span> <strong>Poner una variable de adentro en el límite de afuera.</strong> Los límites de afuera son SIEMPRE constantes; los de adentro pueden depender de la variable de afuera, nunca al revés.</li>
+        <li><span class="ck">✗</span> <strong>No dibujar la región antes de invertir.</strong> Invertir el orden sin el dibujo lleva a límites cambiados. Dibuja, despeja cada curva y decide cuál va a la izquierda.</li>
+        <li><span class="ck">✗</span> <strong>Integrar sin fijar la variable correcta.</strong> En la interior, todas las demás variables son constantes: 2x se integra como 2x·y en dy, no como x².</li>
+        <li><span class="ck">✗</span> <strong>Confundir los jacobianos 3D.</strong> Cilíndricas: r dz dr dθ. Esféricas: ρ²·sen φ dρ dφ dθ. Mezclarlos es el error más frecuente en triples.</li>
+        <li><span class="ck">✗</span> <strong>Perder el signo en el jacobiano general.</strong> El determinante puede salir negativo; en la integral entra su valor absoluto |J|, porque el área y el volumen no son negativos.</li>
+        <li><span class="ck">✗</span> <strong>No verificar el resultado.</strong> Áreas y volúmenes conocidos (π·R², π·R²·h, (4/3)π·R³) sirven de control: si tu número no cuadra, revisa el jacobiano o los límites.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre de sesión</h3>
+      <p class="nota">Qué tan segura te sientes resolviendo integrales múltiples completas en papel. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="C7_teoria-formal.html"><span class="sp">← Teoría</span><span class="ti">Repasar fórmulas</span></a><a class="next" href="C7_evaluacion.html"><span class="sp">Siguiente →</span><span class="ti">Evaluación · demuéstralo</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Cálculo Multivariado · Unidad 7 — Integración múltiple</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- render de matrices (jacobianos 2×2) ---------- */
+function mat(rows){
+  var cols = rows[0].length;
+  var gtc = 'repeat('+cols+',auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<cols;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setM(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
+
+/* ===== jacobianos que se muestran como matriz ===== */
+/* P13 : x=2u, y=3v  -> [[2,0],[0,3]] */
+setM('p13jac',[["2","0"],["0","3"]]);
+/* P14 : x=u+v, y=u-v -> [[1,1],[1,−1]] */
+setM('p14jac',[["1","1"],["1","−1"]]);
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo", unidad:"U7_integracion", leccion:"C7_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_calculo_U7_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

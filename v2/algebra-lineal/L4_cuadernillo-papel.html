@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U4 — Cuadernillo de papel (Álgebra matricial: operaciones e inversa)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+
+  /* ===== cuadernillo de papel ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora · en papel</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 4 · Cuadernillo</p>
+    <h1>Álgebra matricial, <mark>resuelta en una hoja</mark></h1>
+    <p class="lead">Aquí no se elige opción: se resuelve completo, a mano, como en el parcial. Cada problema trae su enunciado, su matemática, tu espacio para trabajarlo en papel y la solución paso a paso para cotejar. Multiplicas renglón por columna, transpones, y sobre todo inviertes por Gauss-Jordan. Toma lápiz y hoja antes de abrir cada respuesta.</p>
+    <div class="learn">
+      <h2>Lo que vas a entrenar</h2>
+      <ol>
+        <li><span class="n">1</span> Multiplicar dos matrices casilla por casilla</li>
+        <li><span class="n">2</span> Decidir cuándo el producto existe y su tamaño</li>
+        <li><span class="n">3</span> Transponer y usar (A·B)ᵀ = Bᵀ·Aᵀ</li>
+        <li><span class="n">4</span> Invertir una 2×2 por Gauss-Jordan</li>
+        <li><span class="n">5</span> Detectar una matriz singular (sin inversa)</li>
+        <li><span class="n">6</span> Reconocer diagonal, simétrica y triangular</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este cuadernillo</h2>
+    <section class="sec">
+      <h3>La regla de oro: papel primero</h3>
+      <p class="idea">Los tres primeros son <strong>resueltos-guía</strong>: léelos completos para fijar el mecanismo (producto, transpuesta e inversa). El resto es <strong>producción</strong>: resuélvelos tú de principio a fin en una hoja <strong>antes</strong> de abrir la solución. Al terminar cada uno, dime cómo te fue con los tres botones. Eso arma tu reporte para el tutor sin escaneos ni fotos.</p>
+      <p class="idea">Método del curso: el <strong>producto</strong> es <strong>renglón por columna</strong> (la casilla de fila <em>i</em>, columna <em>j</em> empareja el renglón <em>i</em> de la izquierda con la columna <em>j</em> de la derecha, término a término, y suma). La <strong>inversa</strong> se calcula pegando la identidad, <strong>[A | I]</strong>, y reduciendo con operaciones de renglón hasta que la izquierda sea la identidad: lo que queda a la derecha <strong>es</strong> la inversa. Si aparece un <strong>renglón de ceros a la izquierda</strong>, la matriz es <strong>singular</strong> y no hay inversa.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago — resueltos-guía</h2>
+
+    <!-- ============ RESUELTO-GUÍA 1 : producto 2x3 · 3x2 ============ -->
+    <section class="prob" data-kind="prob" data-id="RG1" data-tema="producto_matrices" data-level="resuelto">
+      <div class="phead"><span class="pnum">1</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Producto renglón por columna</p>
+      <p class="pstatement">Multiplica <strong>A</strong> (2×3) por <strong>B</strong> (3×2). Los treses de en medio coinciden, así que el producto existe y mide <strong>2×2</strong>. Calcula las cuatro casillas, una a la vez.</p>
+      <div class="fx" id="rg1p"></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Casilla c₁₁: renglón 1 × columna 1</div><p>Empareja el renglón 1 = (1, 2, 0) con la columna 1 = (2, 0, 4), término a término, y suma:</p><p class="calc"><span class="rw">c₁₁</span> 1·2=<b>2</b> <span class="sep">•</span> 2·0=<b>0</b> <span class="sep">•</span> 0·4=<b>0</b> <span class="sep">•</span> suma=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Casilla c₁₂: renglón 1 × columna 2</div><p>El mismo renglón 1 = (1, 2, 0) contra la columna 2 = (1, −2, 3):</p><p class="calc"><span class="rw">c₁₂</span> 1·1=<b>1</b> <span class="sep">•</span> 2·(−2)=<b>−4</b> <span class="sep">•</span> 0·3=<b>0</b> <span class="sep">•</span> suma=<b>−3</b></p></div>
+          <div class="estep"><div class="oprow">Casilla c₂₁: renglón 2 × columna 1</div><p>Bajo al renglón 2 = (3, −1, 1) contra la columna 1 = (2, 0, 4):</p><p class="calc"><span class="rw">c₂₁</span> 3·2=<b>6</b> <span class="sep">•</span> −1·0=<b>0</b> <span class="sep">•</span> 1·4=<b>4</b> <span class="sep">•</span> suma=<b>10</b></p></div>
+          <div class="estep"><div class="oprow">Casilla c₂₂: renglón 2 × columna 2</div><p>El renglón 2 = (3, −1, 1) contra la columna 2 = (1, −2, 3). Ojo con menos por menos:</p><p class="calc"><span class="rw">c₂₂</span> 3·1=<b>3</b> <span class="sep">•</span> −1·(−2)=<b>2</b> <span class="sep">•</span> 1·3=<b>3</b> <span class="sep">•</span> suma=<b>8</b></p></div>
+          <div class="estep"><div class="oprow">El producto completo</div><div class="fx" id="rg1r"></div></div>
+          <p class="verdict">Cuatro casillas, cada una un renglón contra una columna: <strong>A·B = renglón (2, −3), renglón (10, 8)</strong>. Una casilla a la vez, nunca todo de golpe.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (aunque sea de muestra, márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 2 : transpuesta + regla del producto ============ -->
+    <section class="prob" data-kind="prob" data-id="RG2" data-tema="transpuesta" data-level="resuelto">
+      <div class="phead"><span class="pnum">2</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Transpuesta y la regla del orden invertido</p>
+      <p class="pstatement">Transpón <strong>A</strong> (2×3). Luego comprueba en un caso pequeño la regla <strong>(A·B)ᵀ = Bᵀ·Aᵀ</strong>: el orden se invierte al transponer un producto.</p>
+      <div class="fx" id="rg2a"></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Transponer: renglones a columnas</div><p>El renglón 1 = (1, 2, 3) pasa a ser la <strong>columna 1</strong>; el renglón 2 = (4, 5, 6) pasa a ser la <strong>columna 2</strong>. Una de 2×3 se vuelve una de 3×2:</p><div class="fx" id="rg2b"></div></div>
+          <div class="estep"><div class="oprow">Regla del producto transpuesto</div><p>Tomo M = renglón (1, 2), renglón (0, 1) y N = renglón (1, 0), renglón (3, 1). Primero el producto M·N, casilla por casilla:</p>
+            <p class="calc"><span class="rw">c₁₁</span> 1·1=<b>1</b> <span class="sep">•</span> 2·3=<b>6</b> <span class="sep">•</span> suma=<b>7</b></p>
+            <p class="calc"><span class="rw">c₁₂</span> 1·0=<b>0</b> <span class="sep">•</span> 2·1=<b>2</b> <span class="sep">•</span> suma=<b>2</b></p>
+            <p class="calc"><span class="rw">c₂₁</span> 0·1=<b>0</b> <span class="sep">•</span> 1·3=<b>3</b> <span class="sep">•</span> suma=<b>3</b></p>
+            <p class="calc"><span class="rw">c₂₂</span> 0·0=<b>0</b> <span class="sep">•</span> 1·1=<b>1</b> <span class="sep">•</span> suma=<b>1</b></p>
+            <div class="fx" id="rg2c"></div>
+          </div>
+          <div class="estep"><p>Transpongo ese resultado (volteo sobre la diagonal, la casilla (1,2) y la (2,1) se intercambian):</p><div class="fx" id="rg2d"></div></div>
+          <div class="estep"><p>Ahora por el otro lado: Nᵀ·Mᵀ. Con Nᵀ = renglón (1, 3), renglón (0, 1) y Mᵀ = renglón (1, 0), renglón (2, 1):</p>
+            <p class="calc"><span class="rw">c₁₁</span> 1·1=<b>1</b> <span class="sep">•</span> 3·2=<b>6</b> <span class="sep">•</span> suma=<b>7</b></p>
+            <p class="calc"><span class="rw">c₂₁</span> 0·1=<b>0</b> <span class="sep">•</span> 1·2=<b>2</b> <span class="sep">•</span> suma=<b>2</b></p>
+            <div class="fx" id="rg2e"></div>
+          </div>
+          <p class="verdict">Los dos caminos dan lo mismo: <strong>(M·N)ᵀ = Nᵀ·Mᵀ</strong>. Al transponer un producto <strong>se voltea el orden</strong>; si lo dejas igual (Mᵀ·Nᵀ) el resultado sale distinto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 3 : inversa 2x2 por Gauss-Jordan ============ -->
+    <section class="prob" data-kind="prob" data-id="RG3" data-tema="inversa_gauss_jordan" data-level="resuelto">
+      <div class="phead"><span class="pnum">3</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Invertir una 2×2 por Gauss-Jordan</p>
+      <p class="pstatement">Invierte <strong>A = renglón (1, 3), renglón (2, 7)</strong>. Pega la identidad, forma <strong>[A | I]</strong>, y reduce con operaciones de renglón hasta que la izquierda sea la identidad. Cada operación se hace sobre <strong>toda</strong> la fila, identidad incluida.</p>
+      <div class="fx" id="rg3a"></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Pego la identidad: [A | I]</div><p>El renglón 1 ya empieza con 1; ese es mi primer pivote.</p><div class="fx" id="rg3b"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>A la fila 2 = (2, 7 | 0, 1) le resto 2 veces la fila 1 = (1, 3 | 1, 0), celda por celda:</p><p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 7−2·3=<b>1</b> <span class="sep">•</span> 0−2·1=<b>−2</b> <span class="sep">•</span> 1−2·0=<b>1</b></p><div class="fx" id="rg3c"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − 3·R2</div><p>El pivote de abajo ya es 1. Limpio el 3 de arriba en la segunda columna: a la fila 1 = (1, 3 | 1, 0) le resto 3 veces la fila 2 = (0, 1 | −2, 1):</p><p class="calc"><span class="rw">R1</span> 1−3·0=<b>1</b> <span class="sep">•</span> 3−3·1=<b>0</b> <span class="sep">•</span> 1−3·(−2)=<b>7</b> <span class="sep">•</span> 0−3·1=<b>−3</b></p><div class="fx" id="rg3d"></div></div>
+          <div class="estep"><div class="oprow">Comprobación: A · A⁻¹ = I</div><p>La izquierda ya es la identidad, así que la derecha es la inversa. Verifico la casilla de arriba a la izquierda del producto A·A⁻¹:</p><p class="calc"><span class="rw">c₁₁</span> 1·7=<b>7</b> <span class="sep">•</span> 3·(−2)=<b>−6</b> <span class="sep">•</span> suma=<b>1</b></p><div class="fx" id="rg3e"></div></div>
+          <p class="verdict"><strong>A⁻¹ = renglón (7, −3), renglón (−2, 1).</strong> Primero un cero <strong>abajo</strong>, luego limpiar <strong>arriba</strong>: igual que resolver un sistema, pero arrastrando la identidad. Ese 1 de la comprobación es la esquina de la identidad; las otras tres casillas salen igual.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Tu turno — producción</h2>
+
+    <!-- ============ P4 GUIADO : producto 2x2 · 2x2 ============ -->
+    <section class="prob" data-kind="prob" data-id="P4" data-tema="producto_matrices" data-level="guiado">
+      <div class="phead"><span class="pnum">4</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Un producto 2×2 completo</p>
+      <p class="pstatement">Calcula <strong>A·B</strong> casilla por casilla y escribe la matriz 2×2 resultante. <em>Pista: cada casilla es un renglón de A contra una columna de B; no lo hagas entrada por entrada.</em></p>
+      <div class="fx" id="p4p"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">c₁₁: renglón 1 × columna 1</div><p>Renglón 1 = (2, 1) contra columna 1 = (4, 3):</p><p class="calc"><span class="rw">c₁₁</span> 2·4=<b>8</b> <span class="sep">•</span> 1·3=<b>3</b> <span class="sep">•</span> suma=<b>11</b></p></div>
+          <div class="estep"><div class="oprow">c₁₂: renglón 1 × columna 2</div><p>Renglón 1 = (2, 1) contra columna 2 = (1, 5):</p><p class="calc"><span class="rw">c₁₂</span> 2·1=<b>2</b> <span class="sep">•</span> 1·5=<b>5</b> <span class="sep">•</span> suma=<b>7</b></p></div>
+          <div class="estep"><div class="oprow">c₂₁: renglón 2 × columna 1</div><p>Renglón 2 = (0, 5) contra columna 1 = (4, 3):</p><p class="calc"><span class="rw">c₂₁</span> 0·4=<b>0</b> <span class="sep">•</span> 5·3=<b>15</b> <span class="sep">•</span> suma=<b>15</b></p></div>
+          <div class="estep"><div class="oprow">c₂₂: renglón 2 × columna 2</div><p>Renglón 2 = (0, 5) contra columna 2 = (1, 5):</p><p class="calc"><span class="rw">c₂₂</span> 0·1=<b>0</b> <span class="sep">•</span> 5·5=<b>25</b> <span class="sep">•</span> suma=<b>25</b></p><div class="fx" id="p4r"></div></div>
+          <p class="verdict"><strong>A·B = renglón (11, 7), renglón (15, 25).</strong> Cada casilla usa su propio renglón y su propia columna; el orden de las casillas no importa, pero la pareja renglón-columna sí.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P5 GUIADO : orden importa, B·A distinto ============ -->
+    <section class="prob" data-kind="prob" data-id="P5" data-tema="no_conmutatividad" data-level="guiado">
+      <div class="phead"><span class="pnum">5</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">El orden importa: A·B contra B·A</p>
+      <p class="pstatement">Con estas dos matrices, calcula <strong>A·B</strong> y también <strong>B·A</strong>, y compáralas. <strong>Muestra que no coinciden</strong>: el producto de matrices no es conmutativo.</p>
+      <div class="fx" id="p5p"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">A·B, casilla por casilla</div><p>Con A = renglón (1, 2), renglón (0, 1) y B = renglón (2, 0), renglón (1, 3):</p>
+            <p class="calc"><span class="rw">c₁₁</span> 1·2=<b>2</b> <span class="sep">•</span> 2·1=<b>2</b> <span class="sep">•</span> suma=<b>4</b></p>
+            <p class="calc"><span class="rw">c₁₂</span> 1·0=<b>0</b> <span class="sep">•</span> 2·3=<b>6</b> <span class="sep">•</span> suma=<b>6</b></p>
+            <p class="calc"><span class="rw">c₂₁</span> 0·2=<b>0</b> <span class="sep">•</span> 1·1=<b>1</b> <span class="sep">•</span> suma=<b>1</b></p>
+            <p class="calc"><span class="rw">c₂₂</span> 0·0=<b>0</b> <span class="sep">•</span> 1·3=<b>3</b> <span class="sep">•</span> suma=<b>3</b></p>
+            <div class="fx" id="p5ab"></div>
+          </div>
+          <div class="estep"><div class="oprow">B·A, casilla por casilla</div><p>Ahora invierto el orden: B = renglón (2, 0), renglón (1, 3) por A = renglón (1, 2), renglón (0, 1):</p>
+            <p class="calc"><span class="rw">c₁₁</span> 2·1=<b>2</b> <span class="sep">•</span> 0·0=<b>0</b> <span class="sep">•</span> suma=<b>2</b></p>
+            <p class="calc"><span class="rw">c₁₂</span> 2·2=<b>4</b> <span class="sep">•</span> 0·1=<b>0</b> <span class="sep">•</span> suma=<b>4</b></p>
+            <p class="calc"><span class="rw">c₂₁</span> 1·1=<b>1</b> <span class="sep">•</span> 3·0=<b>0</b> <span class="sep">•</span> suma=<b>1</b></p>
+            <p class="calc"><span class="rw">c₂₂</span> 1·2=<b>2</b> <span class="sep">•</span> 3·1=<b>3</b> <span class="sep">•</span> suma=<b>5</b></p>
+            <div class="fx" id="p5ba"></div>
+          </div>
+          <p class="verdict warn"><strong>A·B = (4, 6 / 1, 3)</strong> pero <strong>B·A = (2, 4 / 1, 5)</strong>: son distintas. Con matrices <strong>el orden importa</strong>; escribir A·B cuando el problema pide B·A es un error que cambia la respuesta.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P6 SOLO : decidir dimensiones (análisis) ============ -->
+    <section class="prob" data-kind="prob" data-id="P6" data-tema="dimensiones" data-level="solo">
+      <div class="phead"><span class="pnum">6</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">¿Existe el producto? Decide y da el tamaño</p>
+      <p class="pstatement">Tienes tres matrices: <strong>M mide 3×4</strong>, <strong>N mide 4×2</strong> y <strong>P mide 2×3</strong>. <strong>Decide cuáles de estos productos existen y de qué tamaño son:</strong> M·N, N·M, N·P y P·M. No basta el número: di en cada caso qué números comparas.</p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Regla: el producto existe solo si <strong>los números de en medio coinciden</strong>; los de los extremos dan el tamaño. Reviso cada uno:</p>
+            <div class="fx"><div class="sys" style="font-size:17px">
+              <span class="eq">M·N: 3×4 · 4×2 → medios 4=4 ✓ → 3×2</span>
+              <span class="eq">N·M: 4×2 · 3×4 → medios 2≠3 ✗ no existe</span>
+              <span class="eq">N·P: 4×2 · 2×3 → medios 2=2 ✓ → 4×3</span>
+              <span class="eq">P·M: 2×3 · 3×4 → medios 3=3 ✓ → 2×4</span>
+            </div></div>
+          </div>
+          <p class="verdict"><strong>Existen M·N (3×2), N·P (4×3) y P·M (2×4); N·M no existe.</strong> Fíjate que M·N existe pero N·M no: otra prueba de que el orden manda. Siempre mira primero los dos números de en medio.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P7 SOLO : transpuesta 3x2 ============ -->
+    <section class="prob" data-kind="prob" data-id="P7" data-tema="transpuesta" data-level="solo">
+      <div class="phead"><span class="pnum">7</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Transpón y clasifica</p>
+      <p class="pstatement">Escribe la <strong>transpuesta</strong> de esta matriz 3×2. Luego decide: ¿es la matriz original <strong>simétrica</strong>? Justifica comparando la entrada (fila 1, columna 2) con la (fila 2, columna 1).</p>
+      <div class="fx" id="p7p"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Transponer: renglones a columnas</div><p>La original mide 3×2, así que la transpuesta mide <strong>2×3</strong>. El renglón 1 = (5, 2) pasa a columna 1; el renglón 2 = (1, 4) a columna 2; el renglón 3 = (0, 7) a columna 3:</p><div class="fx" id="p7t"></div></div>
+          <div class="estep"><p>Para ser simétrica una matriz debe ser <strong>cuadrada</strong> e igual a su transpuesta. Esta es 3×2 (no cuadrada), así que ni siquiera se puede comparar consigo misma: su transpuesta mide 2×3.</p></div>
+          <p class="verdict warn"><strong>Transpuesta = renglón (5, 1, 0), renglón (2, 4, 7).</strong> <strong>No es simétrica</strong>: la simetría solo tiene sentido en matrices cuadradas (donde la entrada (i, j) coincide con la (j, i)). Una 3×2 no puede ser simétrica por tamaño.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P8 SOLO : inversa 2x2 completa ============ -->
+    <section class="prob" data-kind="prob" data-id="P8" data-tema="inversa_gauss_jordan" data-level="solo">
+      <div class="phead"><span class="pnum">8</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Invierte tú sola, de principio a fin</p>
+      <p class="pstatement">Invierte <strong>A = renglón (1, 2), renglón (1, 3)</strong> por Gauss-Jordan: pega la identidad, reduce hasta que la izquierda sea la identidad y lee la inversa. Al final <strong>comprueba</strong> que A·A⁻¹ da la identidad.</p>
+      <div class="fx" id="p8p"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Pego la identidad: [A | I]</div><div class="fx" id="p8a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − R1</div><p>El renglón 1 empieza con 1. Hago cero el 1 de abajo a la izquierda: a la fila 2 = (1, 3 | 0, 1) le resto la fila 1 = (1, 2 | 1, 0):</p><p class="calc"><span class="rw">R2</span> 1−1=<b>0</b> <span class="sep">•</span> 3−2=<b>1</b> <span class="sep">•</span> 0−1=<b>−1</b> <span class="sep">•</span> 1−0=<b>1</b></p><div class="fx" id="p8b"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>El pivote de abajo ya es 1. Limpio el 2 de arriba en la segunda columna: a la fila 1 = (1, 2 | 1, 0) le resto 2 veces la fila 2 = (0, 1 | −1, 1):</p><p class="calc"><span class="rw">R1</span> 1−2·0=<b>1</b> <span class="sep">•</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·(−1)=<b>3</b> <span class="sep">•</span> 0−2·1=<b>−2</b></p><div class="fx" id="p8c"></div></div>
+          <div class="estep"><div class="oprow">Comprobación: A · A⁻¹ = I</div><p>La izquierda es la identidad, así que la derecha es A⁻¹ = renglón (3, −2), renglón (−1, 1). Verifico la casilla de arriba a la izquierda:</p><p class="calc"><span class="rw">c₁₁</span> 1·3=<b>3</b> <span class="sep">•</span> 2·(−1)=<b>−2</b> <span class="sep">•</span> suma=<b>1</b></p><div class="fx" id="p8d"></div></div>
+          <p class="verdict"><strong>A⁻¹ = renglón (3, −2), renglón (−1, 1).</strong> El 1 de la esquina confirma la primera casilla de la identidad; completa las otras tres y sale I entera. Primero cero abajo, luego limpiar arriba, siempre arrastrando la identidad.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P9 SOLO : inversa 2x2 con pivote que hay que normalizar ============ -->
+    <section class="prob" data-kind="prob" data-id="P9" data-tema="inversa_gauss_jordan" data-level="solo">
+      <div class="phead"><span class="pnum">9</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Inversa cuando el pivote no es 1</p>
+      <p class="pstatement">Invierte <strong>A = renglón (2, 4), renglón (1, 3)</strong>. Aquí la esquina de arriba a la izquierda es un 2: <strong>tendrás que normalizar el pivote</strong> en algún momento. Lleva [A | I] a la identidad y lee la inversa.</p>
+      <div class="fx" id="p9p"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Pego la identidad · R1 ↔ R2</div><p>Para no arrastrar fracciones, subo el renglón que ya empieza con 1. Intercambio los renglones (la identidad viaja con ellos):</p><div class="fx" id="p9a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>Ahora hago cero el 2 de abajo a la izquierda. A la fila 2 = (2, 4 | 1, 0) le resto 2 veces la fila 1 = (1, 3 | 0, 1):</p><p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 4−2·3=<b>−2</b> <span class="sep">•</span> 1−2·0=<b>1</b> <span class="sep">•</span> 0−2·1=<b>−2</b></p><div class="fx" id="p9b"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 ÷ (−2)</div><p>Normalizo el pivote de abajo a 1. Divido toda la fila 2 = (0, −2 | 1, −2) entre −2:</p><p class="calc"><span class="rw">R2</span> 0÷(−2)=<b>0</b> <span class="sep">•</span> −2÷(−2)=<b>1</b> <span class="sep">•</span> 1÷(−2)=<b>−½</b> <span class="sep">•</span> −2÷(−2)=<b>1</b></p><div class="fx" id="p9c"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − 3·R2</div><p>Limpio el 3 de arriba en la segunda columna. A la fila 1 = (1, 3 | 0, 1) le resto 3 veces la fila 2 = (0, 1 | −½, 1):</p><p class="calc"><span class="rw">R1</span> 1−3·0=<b>1</b> <span class="sep">•</span> 3−3·1=<b>0</b> <span class="sep">•</span> 0−3·(−½)=<b>3⁄2</b> <span class="sep">•</span> 1−3·1=<b>−2</b></p><div class="fx" id="p9d"></div></div>
+          <p class="verdict"><strong>A⁻¹ = renglón (3⁄2, −2), renglón (−½, 1).</strong> Cuando el pivote no es 1, en algún paso hay que dividir la fila entera para bajarlo a 1: por eso aparecen las fracciones. Comprueba multiplicando A·A⁻¹ y verás la identidad.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P10 SOLO : matriz singular (análisis) ============ -->
+    <section class="prob" data-kind="prob" data-id="P10" data-tema="existencia_inversa" data-level="solo">
+      <div class="phead"><span class="pnum">10</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">¿Tiene inversa? Decídelo y justifica</p>
+      <p class="pstatement">Intenta invertir <strong>A = renglón (2, 6), renglón (3, 9)</strong> por Gauss-Jordan. <strong>No basta con dar un sí o un no: reduce hasta que se vea la señal</strong> y explica qué significa. ¿Existe la inversa?</p>
+      <div class="fx" id="p10p"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Pego la identidad · R1 → R1 ÷ 2</div><p>Normalizo el pivote de arriba para tenerlo en 1. Divido la fila 1 = (2, 6 | 1, 0) entre 2:</p><p class="calc"><span class="rw">R1</span> 2÷2=<b>1</b> <span class="sep">•</span> 6÷2=<b>3</b> <span class="sep">•</span> 1÷2=<b>½</b> <span class="sep">•</span> 0÷2=<b>0</b></p><div class="fx" id="p10a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 3·R1</div><p>Hago cero el 3 de abajo a la izquierda. A la fila 2 = (3, 9 | 0, 1) le resto 3 veces la fila 1 = (1, 3 | ½, 0):</p><p class="calc"><span class="rw">R2</span> 3−3·1=<b>0</b> <span class="sep">•</span> 9−3·3=<b>0</b> <span class="sep">•</span> 0−3·½=<b>−3⁄2</b> <span class="sep">•</span> 1−3·0=<b>1</b></p><div class="fx" id="p10b"></div></div>
+          <div class="estep"><p>El segundo renglón quedó <strong>0 0</strong> en la parte izquierda. Ya no hay forma de conseguir un pivote en la segunda columna: la izquierda no puede llegar a la identidad.</p></div>
+          <p class="verdict warn"><strong>No tiene inversa: A es singular.</strong> La señal es el <strong>renglón de ceros a la izquierda</strong> al reducir. La causa: el renglón (3, 9) es <strong>1.5 veces</strong> el renglón (2, 6), o sea son proporcionales; siempre que un renglón sea múltiplo del otro, la matriz es singular.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P11 SOLO : reconocer nombradas (análisis) ============ -->
+    <section class="prob" data-kind="prob" data-id="P11" data-tema="matrices_nombradas" data-level="solo">
+      <div class="phead"><span class="pnum">11</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Ponles nombre a estas matrices</p>
+      <p class="pstatement">Aquí tienes tres matrices. <strong>Clasifica cada una</strong> como diagonal, simétrica o triangular superior, y di en cada caso qué regla cumple (dónde miras para decidirlo).</p>
+      <div class="fx" id="p11p"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p><strong>Primera:</strong> renglón (7, 0, 0), renglón (0, 4, 0), renglón (0, 0, 2). Fuera de la diagonal todo es cero ⇒ es <strong>diagonal</strong>. Miro que las entradas (i, j) con i ≠ j sean cero.</p></div>
+          <div class="estep"><p><strong>Segunda:</strong> renglón (3, 1, 5), renglón (1, 6, 2), renglón (5, 2, 8). La entrada (1,2) es 1 y la (2,1) también 1; la (1,3) es 5 y la (3,1) también 5; la (2,3) es 2 y la (3,2) también 2 ⇒ igual a su transpuesta ⇒ es <strong>simétrica</strong>. Miro que (i, j) coincida con (j, i).</p></div>
+          <div class="estep"><p><strong>Tercera:</strong> renglón (3, 5, 2), renglón (0, 4, 1), renglón (0, 0, 6). Todo lo que está <strong>debajo</strong> de la diagonal es cero ⇒ es <strong>triangular superior</strong>. Miro solo debajo de la diagonal principal.</p></div>
+          <p class="verdict"><strong>Diagonal, simétrica y triangular superior, en ese orden.</strong> La clave está en <em>dónde</em> miras: la diagonal para diagonal, el espejo (i,j) vs (j,i) para simétrica, y solo debajo de la diagonal para triangular.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P12 SOLO : cadena (A·B)·C = producto encadenado ============ -->
+    <section class="prob" data-kind="prob" data-id="P12" data-tema="producto_matrices" data-level="solo">
+      <div class="phead"><span class="pnum">12</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Multiplicar por la identidad y encadenar</p>
+      <p class="pstatement">Sea A = renglón (2, 1), renglón (0, 3) e I la identidad 2×2. <strong>Primero anticipa</strong>: ¿cuánto vale A·I? Luego calcula A·A (o sea A al cuadrado) casilla por casilla y confirma tu anticipación con la cuenta.</p>
+      <div class="fx" id="p12p"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Anticipación: la identidad es el <strong>1 de las matrices</strong>, así que A·I = A sin hacer cuentas. Lo confirmo con la casilla de arriba a la izquierda de A·I:</p><p class="calc"><span class="rw">c₁₁</span> 2·1=<b>2</b> <span class="sep">•</span> 1·0=<b>0</b> <span class="sep">•</span> suma=<b>2</b></p><p>Justo el 2 de A: multiplicar por I no cambia nada.</p></div>
+          <div class="estep"><div class="oprow">A·A casilla por casilla</div><p>Ahora A = renglón (2, 1), renglón (0, 3) por sí misma:</p>
+            <p class="calc"><span class="rw">c₁₁</span> 2·2=<b>4</b> <span class="sep">•</span> 1·0=<b>0</b> <span class="sep">•</span> suma=<b>4</b></p>
+            <p class="calc"><span class="rw">c₁₂</span> 2·1=<b>2</b> <span class="sep">•</span> 1·3=<b>3</b> <span class="sep">•</span> suma=<b>5</b></p>
+            <p class="calc"><span class="rw">c₂₁</span> 0·2=<b>0</b> <span class="sep">•</span> 3·0=<b>0</b> <span class="sep">•</span> suma=<b>0</b></p>
+            <p class="calc"><span class="rw">c₂₂</span> 0·1=<b>0</b> <span class="sep">•</span> 3·3=<b>9</b> <span class="sep">•</span> suma=<b>9</b></p>
+            <div class="fx" id="p12r"></div>
+          </div>
+          <p class="verdict"><strong>A·I = A</strong> (lo anticipado) y <strong>A·A = renglón (4, 5), renglón (0, 9)</strong>. Fíjate que A al cuadrado no es elevar cada entrada al cuadrado: es el producto renglón por columna de A consigo misma.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P13 SOLO : modelar recetas · precios ============ -->
+    <section class="prob" data-kind="prob" data-id="P13" data-tema="modelado" data-level="solo">
+      <div class="phead"><span class="pnum">13</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Modela: recetas por precios</p>
+      <p class="pstatement">Una tienda vende dos combos. El <strong>combo A lleva 2 cafés y 1 pan</strong>; el <strong>combo B lleva 1 café y 3 panes</strong>. Un café cuesta $30 y un pan $20. <strong>Arma la matriz de recetas</strong> (cada renglón un combo: café primero, pan después), multiplícala por la columna de precios y da el precio de cada combo.</p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Recetas: combo A = (2, 1), combo B = (1, 3). Columna de precios: café = 30, pan = 20. Planteo el producto (2×2 por 2×1 = 2×1):</p><div class="fx" id="p13p"></div></div>
+          <div class="estep"><div class="oprow">Precio del combo A</div><p>Renglón de A = (2, 1) contra la columna de precios (30, 20):</p><p class="calc"><span class="rw">A</span> 2·30=<b>60</b> <span class="sep">•</span> 1·20=<b>20</b> <span class="sep">•</span> suma=<b>80</b></p></div>
+          <div class="estep"><div class="oprow">Precio del combo B</div><p>Renglón de B = (1, 3) contra la misma columna (30, 20):</p><p class="calc"><span class="rw">B</span> 1·30=<b>30</b> <span class="sep">•</span> 3·20=<b>60</b> <span class="sep">•</span> suma=<b>90</b></p><div class="fx" id="p13r"></div></div>
+          <p class="verdict"><strong>Combo A = $80, combo B = $90.</strong> El producto de matrices hizo las dos cuentas de golpe: cada renglón de recetas contra la columna de precios da el precio de un combo. Así se usa el producto en la vida real.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P14 SOLO : inversa para "deshacer" (interpretación) ============ -->
+    <section class="prob" data-kind="prob" data-id="P14" data-tema="inversa_gauss_jordan" data-level="solo">
+      <div class="phead"><span class="pnum">14</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">La inversa deshace la cuenta</p>
+      <p class="pstatement">Sea A = renglón (2, 1), renglón (1, 1). <strong>Invierte A por Gauss-Jordan</strong> y luego explica, en una frase, qué significa que A·A⁻¹ dé la identidad: por qué la inversa "deshace" lo que hace A.</p>
+      <div class="fx" id="p14p"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Pego la identidad · R1 ↔ R2</div><p>Subo el renglón que empieza con 1 para no arrastrar fracciones:</p><div class="fx" id="p14a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>Hago cero el 2 de abajo a la izquierda. A la fila 2 = (2, 1 | 1, 0) le resto 2 veces la fila 1 = (1, 1 | 0, 1):</p><p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·1=<b>−1</b> <span class="sep">•</span> 1−2·0=<b>1</b> <span class="sep">•</span> 0−2·1=<b>−2</b></p><div class="fx" id="p14b"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 ÷ (−1)</div><p>Normalizo el pivote de abajo. Divido toda la fila 2 = (0, −1 | 1, −2) entre −1:</p><p class="calc"><span class="rw">R2</span> 0÷(−1)=<b>0</b> <span class="sep">•</span> −1÷(−1)=<b>1</b> <span class="sep">•</span> 1÷(−1)=<b>−1</b> <span class="sep">•</span> −2÷(−1)=<b>2</b></p><div class="fx" id="p14c"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − R2</div><p>Limpio el 1 de arriba en la segunda columna. A la fila 1 = (1, 1 | 0, 1) le resto la fila 2 = (0, 1 | −1, 2):</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 0−(−1)=<b>1</b> <span class="sep">•</span> 1−2=<b>−1</b></p><div class="fx" id="p14d"></div></div>
+          <p class="verdict"><strong>A⁻¹ = renglón (1, −1), renglón (−1, 2).</strong> Que A·A⁻¹ dé la identidad significa que aplicar A y luego A⁻¹ te devuelve al punto de partida: la inversa <strong>deshace</strong> exactamente lo que A hace, igual que dividir deshace multiplicar en los números.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Errores típicos que cuestan puntos</h3>
+      <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Multiplicar entrada por entrada.</strong> El producto NO es casilla contra casilla: cada casilla (i, j) nace de un renglón i contra una columna j, con suma.</li>
+        <li><span class="ck">✗</span> <strong>Ignorar el orden.</strong> A·B casi nunca es B·A; a veces uno existe y el otro ni siquiera está definido. Lee bien cuál te piden.</li>
+        <li><span class="ck">✗</span> <strong>Multiplicar sin revisar dimensiones.</strong> Si los números de en medio no coinciden, el producto no existe: no hay resultado que dar.</li>
+        <li><span class="ck">✗</span> <strong>Operar solo la parte izquierda al invertir.</strong> Cada operación de renglón se aplica a <em>toda</em> la fila de [A | I], identidad incluida.</li>
+        <li><span class="ck">✗</span> <strong>Olvidar normalizar el pivote a 1.</strong> Si el pivote no es 1, divide la fila entera; si no, la identidad no queda limpia y la inversa sale mal.</li>
+        <li><span class="ck">✗</span> <strong>No reconocer la matriz singular.</strong> Un renglón de ceros a la izquierda al reducir significa que NO hay inversa; seguir "forzando" es perder tiempo y puntos.</li>
+        <li><span class="ck">✗</span> <strong>Confundir A² con elevar cada entrada.</strong> A al cuadrado es A·A por renglón-columna, no cada número al cuadrado.</li>
+        <li><span class="ck">✗</span> <strong>No verificar con A·A⁻¹ = I.</strong> Multiplicar tu inversa por A atrapa al instante cualquier error de signo.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre de sesión</h3>
+      <p class="nota">Qué tan segura te sientes resolviendo Unidad 4 completa en papel: producto, transpuesta e inversa por Gauss-Jordan. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="L4_teoria-formal.html"><span class="sp">← Teoría</span><span class="ti">Repasar fórmulas</span></a><a class="next" href="L4_evaluacion.html"><span class="sp">Siguiente →</span><span class="ti">Evaluación · demuéstralo</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Álgebra Lineal · Unidad 4 — Álgebra matricial</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- render de matrices ---------- */
+// Matriz "plana" (sin barra de aumentada).
+function matN(rows){
+  var cols = rows[0].length;
+  var gtc = 'repeat('+cols+',auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<cols;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setN(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=matN(rows); }
+
+// [A | I] de 2×2: 4 columnas visibles, barra tras la 2ª.
+function aug4(rows){
+  var gtc='repeat(2,auto) 16px repeat(2,auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var c='<span>'+rows[r][0]+'</span><span>'+rows[r][1]+'</span><span class="msep"></span><span>'+rows[r][2]+'</span><span>'+rows[r][3]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+c+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setAug4(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=aug4(rows); }
+
+// junta dos matrices con un separador (o un signo · = →) entre ellas
+function pair(a,b,sym){
+  var mid = sym ? '<span style="display:inline-block;width:20px;text-align:center">'+sym+'</span>'
+               : '<span style="display:inline-block;width:14px"></span>';
+  return a + mid + b;
+}
+function setPair(id, a, b, sym){ var el=document.getElementById(id); if(el) el.innerHTML=pair(a,b,sym); }
+
+/* ===== RG1 : producto A(2×3)·B(3×2) = [[2,-3],[10,8]] ===== */
+setPair('rg1p', matN([["1","2","0"],["3","−1","1"]]), matN([["2","1"],["0","−2"],["4","3"]]));
+setN('rg1r',[["2","−3"],["10","8"]]);
+
+/* ===== RG2 : transpuesta + (M·N)ᵀ = Nᵀ·Mᵀ ===== */
+setN('rg2a',[["1","2","3"],["4","5","6"]]);          // A original (2×3)
+setN('rg2b',[["1","4"],["2","5"],["3","6"]]);
+setN('rg2c',[["7","2"],["3","1"]]);   // M·N
+setN('rg2d',[["7","3"],["2","1"]]);   // (M·N)ᵀ
+setN('rg2e',[["7","3"],["2","1"]]);   // Nᵀ·Mᵀ (igual)
+
+/* ===== RG3 : inversa de A=[[1,3],[2,7]] → [[7,-3],[-2,1]] ===== */
+setN('rg3a',[["1","3"],["2","7"]]);
+setAug4('rg3b',[["1","3","1","0"],["2","7","0","1"]]);
+setAug4('rg3c',[["1","3","1","0"],["0","1","−2","1"]]);
+setAug4('rg3d',[["1","0","7","−3"],["0","1","−2","1"]]);
+document.getElementById('rg3e').innerHTML =
+  pair(pair(matN([["1","3"],["2","7"]]), matN([["7","−3"],["−2","1"]])), matN([["1","0"],["0","1"]]), "=");
+
+/* ===== P4 : producto [[2,1],[0,5]]·[[4,1],[3,5]] = [[11,7],[15,25]] ===== */
+setPair('p4p', matN([["2","1"],["0","5"]]), matN([["4","1"],["3","5"]]));
+setN('p4r',[["11","7"],["15","25"]]);
+
+/* ===== P5 : A·B vs B·A con A=[[1,2],[0,1]] B=[[2,0],[1,3]] ===== */
+setPair('p5p', matN([["1","2"],["0","1"]]), matN([["2","0"],["1","3"]]));
+setN('p5ab',[["4","6"],["1","3"]]);
+setN('p5ba',[["2","4"],["1","5"]]);
+
+/* ===== P7 : transpuesta de [[5,2],[1,4],[0,7]] (3×2) → [[5,1,0],[2,4,7]] ===== */
+setN('p7p',[["5","2"],["1","4"],["0","7"]]);
+setN('p7t',[["5","1","0"],["2","4","7"]]);
+
+/* ===== P8 : inversa de A=[[1,2],[1,3]] → [[3,-2],[-1,1]] ===== */
+setN('p8p',[["1","2"],["1","3"]]);
+setAug4('p8a',[["1","2","1","0"],["1","3","0","1"]]);
+setAug4('p8b',[["1","2","1","0"],["0","1","−1","1"]]);
+setAug4('p8c',[["1","0","3","−2"],["0","1","−1","1"]]);
+document.getElementById('p8d').innerHTML =
+  pair(pair(matN([["1","2"],["1","3"]]), matN([["3","−2"],["−1","1"]])), matN([["1","0"],["0","1"]]), "=");
+
+/* ===== P9 : inversa de A=[[2,4],[1,3]] → [[3/2,-2],[-1/2,1]] ===== */
+setN('p9p',[["2","4"],["1","3"]]);
+setAug4('p9a',[["1","3","0","1"],["2","4","1","0"]]);
+setAug4('p9b',[["1","3","0","1"],["0","−2","1","−2"]]);
+setAug4('p9c',[["1","3","0","1"],["0","1","−½","1"]]);
+setAug4('p9d',[["1","0","3⁄2","−2"],["0","1","−½","1"]]);
+
+/* ===== P10 : A=[[2,6],[3,9]] singular ===== */
+setN('p10p',[["2","6"],["3","9"]]);
+setAug4('p10a',[["1","3","½","0"],["3","9","0","1"]]);
+setAug4('p10b',[["1","3","½","0"],["0","0","−3⁄2","1"]]);
+
+/* ===== P11 : diagonal · simétrica · triangular superior ===== */
+document.getElementById('p11p').innerHTML =
+  pair(pair(matN([["7","0","0"],["0","4","0"],["0","0","2"]]), matN([["3","1","5"],["1","6","2"],["5","2","8"]])),
+       matN([["3","5","2"],["0","4","1"],["0","0","6"]]));
+
+/* ===== P12 : A=[[2,1],[0,3]] con I; A·A = [[4,5],[0,9]] ===== */
+setPair('p12p', matN([["2","1"],["0","3"]]), matN([["1","0"],["0","1"]]));
+setN('p12r',[["4","5"],["0","9"]]);
+
+/* ===== P13 : recetas [[2,1],[1,3]] · precios [30,20] = [80,90] ===== */
+setPair('p13p', matN([["2","1"],["1","3"]]), matN([["30"],["20"]]));
+setN('p13r',[["80"],["90"]]);
+
+/* ===== P14 : inversa de A=[[2,1],[1,1]] → [[1,-1],[-1,2]] ===== */
+setN('p14p',[["2","1"],["1","1"]]);
+setAug4('p14a',[["1","1","0","1"],["2","1","1","0"]]);
+setAug4('p14b',[["1","1","0","1"],["0","−1","1","−2"]]);
+setAug4('p14c',[["1","1","0","1"],["0","1","−1","2"]]);
+setAug4('p14d',[["1","0","1","−1"],["0","1","−1","2"]]);
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U4_matricial", leccion:"L4_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U4_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

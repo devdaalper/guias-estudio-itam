@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U2 — Evaluación: El espacio Rⁿ</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:64ch;margin:.2em 0 0}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:12px 18px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .sys{display:grid;gap:6px;font-size:20px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:20px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:28px}
+  .mrow>span{text-align:right;min-width:22px}
+  .msep{justify-self:center;width:0;height:22px;border-left:2px solid var(--ink);min-width:0}
+
+  .block{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
+  .block .phead h3{margin:0;font-size:19px}
+  .block .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
+
+  .qcard{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff}
+  .qcard.correct{border-color:var(--green);background:#f3faf5}
+  .qcard.incorrect{border-color:#e9b8c6;background:#fdf2f5}
+  .qhead{display:flex;align-items:center;gap:10px}
+  .qnum{flex:0 0 auto;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:15px;border:2px solid var(--ink);background:#fff}
+  .blk{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .blk.teoria{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .blk.practica{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .blk.repaso{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .q{margin:0;font-weight:700;font-size:17px}
+
+  .opts{display:grid;gap:10px}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s;min-width:0}
+  .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .opt.sel{border-color:var(--navy);background:#eef1fb}
+  .opt:disabled{cursor:default}
+  .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .opt .mtx{font-size:18px}
+
+  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .why.show{display:block}
+  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .why.miss>.lbl{color:var(--deep)}
+  .why p{margin:0}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:14px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  .btn.dim{opacity:.45;filter:grayscale(.35)}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .notanswered{color:#a01243;font-weight:700;font-size:15px;margin:8px 0 0;min-height:1em}
+
+  .result{border-top:2px solid var(--line);margin-top:16px;padding-top:16px;display:none}
+  .result.show{display:block}
+  .verdict{font-size:24px;font-weight:800;letter-spacing:-.02em;margin:0}
+  .verdict.pass{color:var(--green-deep)}
+  .verdict.fail{color:var(--deep)}
+  .scorebar{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+  .scorechip{border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;font-weight:700;background:#fcfbf9}
+  .scorechip b{font-size:20px}
+  .scorechip.ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .scorechip.no{border-color:#e9b8c6;background:#fdf2f5;color:#a01243}
+  .repasa{border:1.5px solid #f0d6b8;background:var(--cream);border-radius:12px;padding:12px 15px;margin-top:8px;font-size:16px}
+  .repasa a{color:var(--deep);font-weight:800}
+  .advance{margin-top:8px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+
+  /*hardening-360*/
+  main,.block,.qcard,.opts,.cierre,.result{grid-template-columns:minmax(0,1fr);min-width:0}
+  .fx,.sys,.mtx,.opt,.qcard{max-width:100%;min-width:0}
+  .q,.why,.repasa{overflow-wrap:anywhere}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .nav-lecs a{flex:1;min-width:0;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Evaluación</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 2 · Evaluación</p>
+    <h1>¿Ya <mark>dominas</mark> el espacio Rⁿ?</h1>
+    <p class="lead">Esta prueba decide si estás lista para el siguiente tema. Dos bloques: <strong>teoría</strong> (¿recuerdas las definiciones y las condiciones?) y <strong>práctica</strong> (¿sabes razonar un caso nuevo?). Contesta todo y pulsa <em>Calificar</em>. Necesitas <strong>80% en cada bloque</strong>. Todo a mano, sin calculadora. Las opciones se barajan cada vez.</p>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Bloque 1 · Teoría</h2>
+    <section class="block" data-bloque-sec="teoria">
+      <div class="phead"><h3>¿Recuerdas las definiciones?</h3><p class="sub">Una respuesta por pregunta. No se revela hasta calificar.</p></div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="producto_punto" data-id="T1">
+        <div class="qhead"><span class="qnum">1</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">El producto punto u·v de dos vectores de Rⁿ produce…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Otro vector, con las componentes multiplicadas</button>
+          <button class="opt" data-ok="1">Un solo número (un escalar)</button>
+          <button class="opt" data-ok="0">Un vector perpendicular a los dos</button>
+          <button class="opt" data-ok="0">La longitud del vector más largo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El producto punto empareja componentes, las multiplica y suma todo: el resultado es un número, no un vector. El vector perpendicular a dos vectores sería el producto cruz, otra cosa distinta.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="ortogonalidad" data-id="T2">
+        <div class="qhead"><span class="qnum">2</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">Dos vectores distintos de cero son <strong>perpendiculares</strong> exactamente cuando…</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Su producto punto vale cero</button>
+          <button class="opt" data-ok="0">Sus normas son iguales</button>
+          <button class="opt" data-ok="0">Su producto punto es negativo</button>
+          <button class="opt" data-ok="0">Uno es múltiplo del otro</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Como u·v = |u| |v| cos θ y ninguna norma es cero, el producto punto solo se anula cuando cos θ = 0, es decir θ = 90°. Un producto negativo indica ángulo obtuso; ser múltiplo indica paralelismo.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="norma" data-id="T3">
+        <div class="qhead"><span class="qnum">3</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">La <strong>distancia</strong> entre dos puntos P y Q de Rⁿ se define como…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">El producto punto P·Q</button>
+          <button class="opt" data-ok="0">La suma de las componentes de Q − P</button>
+          <button class="opt" data-ok="1">La norma de la diferencia, |Q − P|</button>
+          <button class="opt" data-ok="0">La diferencia de las normas, |Q| − |P|</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Una distancia no es un objeto nuevo: primero se resta (Q − P, componente a componente) y luego se le saca la norma. La resta de normas |Q| − |P| no mide la separación entre los puntos.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="cauchy_schwarz" data-id="T4">
+        <div class="qhead"><span class="qnum">4</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">La igualdad en Cauchy-Schwarz, |u·v| = |u| |v|, ocurre <strong>solo</strong> cuando los vectores son…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Perpendiculares</button>
+          <button class="opt" data-ok="0">Vectores unitarios</button>
+          <button class="opt" data-ok="1">Paralelos (uno es múltiplo del otro)</button>
+          <button class="opt" data-ok="0">De componentes positivas</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La cota |u·v| ≤ |u| |v| se satura solo cuando cos θ = ±1, o sea cuando el ángulo es 0° o 180°: los vectores apuntan sobre la misma recta, uno es múltiplo del otro. Perpendiculares darían el otro extremo (producto punto cero).</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="conjuntos" data-id="T5">
+        <div class="qhead"><span class="qnum">5</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">¿Qué distingue a un conjunto <strong>cerrado</strong> de uno abierto en Rⁿ?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">El cerrado es más pequeño que el abierto</button>
+          <button class="opt" data-ok="0">El cerrado usa desigualdad estricta (&lt;)</button>
+          <button class="opt" data-ok="0">El cerrado siempre es un círculo perfecto</button>
+          <button class="opt" data-ok="1">El cerrado contiene toda su frontera (desigualdad con ≤)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Un conjunto es cerrado cuando incluye su orilla: la desigualdad es ≤ (o ≥), de modo que los puntos con distancia exactamente igual al radio sí pertenecen. El signo estricto &lt; deja fuera la frontera y define un conjunto abierto.</p></div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Bloque 2 · Práctica</h2>
+    <section class="block" data-bloque-sec="practica">
+      <div class="phead"><h3>¿Sabes razonar?</h3><p class="sub">Casos nuevos. Trabájalos a mano antes de elegir.</p></div>
+
+      <div class="qcard" data-bloque="practica" data-tema="norma" data-id="P1">
+        <div class="qhead"><span class="qnum">6</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Un dron parte de A = (2, 1, 2) y llega a B = (6, 4, 14). ¿Qué <strong>distancia</strong> recorrió en línea recta?</p>
+        <div class="fx"><div class="sys"><span class="eq">A = (2, 1, 2),  B = (6, 4, 14)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">13</button>
+          <button class="opt" data-ok="0">19</button>
+          <button class="opt" data-ok="0">169</button>
+          <button class="opt" data-ok="0">√19</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Primero la diferencia B − A = (4, 3, 12). Luego su norma: √(4<sup>2</sup> + 3<sup>2</sup> + 12<sup>2</sup>) = √(16 + 9 + 144) = √169 = 13. El 169 es la norma al cuadrado (falta la raíz); el 19 sale de sumar 4 + 3 + 12 sin cuadrar.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="ortogonalidad" data-id="P2">
+        <div class="qhead"><span class="qnum">7</span><span class="blk practica">Práctica</span></div>
+        <p class="q">¿Para qué valor de <strong>k</strong> los vectores (k, 3, 2) y (2, −4, 5) son <strong>perpendiculares</strong>?</p>
+        <div class="fx"><div class="sys"><span class="eq">(k, 3, 2)·(2, −4, 5) = 0</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">k = −1</button>
+          <button class="opt" data-ok="0">k = 2</button>
+          <button class="opt" data-ok="1">k = 1</button>
+          <button class="opt" data-ok="0">k = 11</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Perpendiculares significa producto punto cero: 2k + (3)(−4) + (2)(5) = 2k − 12 + 10 = 2k − 2 = 0, así que k = 1. El error k = −1 sale de sumar mal los signos (−12 + 10 = −22 en vez de −2).</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="angulo" data-id="P3">
+        <div class="qhead"><span class="qnum">8</span><span class="blk practica">Práctica</span></div>
+        <p class="q">¿Qué <strong>ángulo</strong> forman u = (2, 2√3) y v = (0, 5)?</p>
+        <div class="fx"><div class="sys"><span class="eq">u = (2, 2√3),  v = (0, 5)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">60°</button>
+          <button class="opt" data-ok="1">30°</button>
+          <button class="opt" data-ok="0">45°</button>
+          <button class="opt" data-ok="0">90°</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>u·v = (2)(0) + (2√3)(5) = 10√3. |u| = √(4 + 12) = 4; |v| = 5. Entonces cos θ = 10√3 ÷ (4·5) = 10√3⁄20 = √3⁄2, que es el coseno de 30°. Confundir √3⁄2 con 1⁄2 llevaría por error a 60°.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="polares" data-id="P4">
+        <div class="qhead"><span class="qnum">9</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Convierte el punto (−2, −2) a coordenadas <strong>polares (r, θ)</strong>. Cuida el cuadrante.</p>
+        <div class="fx"><div class="sys"><span class="eq">(−2, −2) → (r, θ)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">r = 2√2, θ = 45°</button>
+          <button class="opt" data-ok="0">r = 4, θ = 225°</button>
+          <button class="opt" data-ok="1">r = 2√2, θ = 225°</button>
+          <button class="opt" data-ok="0">r = 2√2, θ = 135°</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El radio es la norma: √((−2)<sup>2</sup> + (−2)<sup>2</sup>) = √8 = 2√2. Ambas coordenadas negativas ubican el punto en el tercer cuadrante (abajo a la izquierda), donde el ángulo de referencia 45° se mide como 180° + 45° = 225°. El 45° ignora el cuadrante y el 135° corresponde al segundo.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="conjuntos" data-id="P5">
+        <div class="qhead"><span class="qnum">10</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Clasifica el conjunto de puntos del plano que cumplen la condición de abajo.</p>
+        <div class="fx"><div class="sys"><span class="eq">{ (x, y) : x<sup>2</sup> + y<sup>2</sup> ≥ 4 }</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">Abierto: la desigualdad tiene un signo de mayor</button>
+          <button class="opt" data-ok="0">Ni abierto ni cerrado, porque es infinito</button>
+          <button class="opt" data-ok="1">Cerrado: el ≥ incluye la frontera x<sup>2</sup> + y<sup>2</sup> = 4</button>
+          <button class="opt" data-ok="0">Abierto: es el exterior de un círculo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Lo que decide no es que sea "mayor" ni que sea el exterior, sino el signo: el ≥ incluye la igualdad, así que los puntos de la circunferencia x<sup>2</sup> + y<sup>2</sup> = 4 pertenecen al conjunto. Contener toda su frontera lo hace cerrado, aunque se extienda al infinito.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="recta_plano" data-id="P6">
+        <div class="qhead"><span class="qnum">11</span><span class="blk practica">Práctica</span></div>
+        <p class="q">¿El punto (2, −1, 3) <strong>pertenece</strong> al plano de abajo?</p>
+        <div class="fx"><div class="sys"><span class="eq">x + 2y − z = −3</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Sí: al sustituir, el lado izquierdo da −3 y coincide con el derecho</button>
+          <button class="opt" data-ok="0">No: el lado izquierdo da 3, no −3</button>
+          <button class="opt" data-ok="0">No: el punto tiene una coordenada negativa</button>
+          <button class="opt" data-ok="0">No se puede saber sin un segundo punto</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Un punto pertenece si al sustituirlo se cumple la igualdad: (2) + 2(−1) − (3) = 2 − 2 − 3 = −3, que coincide con el lado derecho, así que sí pertenece. La normal (1, 2, −1) marca la orientación del plano, no si un punto está en él; el signo de una coordenada tampoco decide nada.</p></div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Repaso · Sucesiones y series</h2>
+    <section class="block" data-bloque-sec="repaso">
+      <div class="phead"><h3>Una idea de la unidad anterior</h3><p class="sub">No gatea el avance: es recuperación espaciada de la U1.</p></div>
+
+      <div class="qcard" data-bloque="repaso" data-tema="serie_geometrica" data-id="R1">
+        <div class="qhead"><span class="qnum">12</span><span class="blk repaso">Repaso</span></div>
+        <p class="q">¿Cuánto suma la serie geométrica de primer término 9 y razón <sup>2</sup>⁄<sub>3</sub>?</p>
+        <div class="fx"><div class="sys"><span class="eq">9 + 6 + 4 + <sup>8</sup>⁄<sub>3</sub> + …</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">6, que es el segundo término</button>
+          <button class="opt" data-ok="1">27, porque es 9 ÷ (1 − <sup>2</sup>⁄<sub>3</sub>) = 9 ÷ <sup>1</sup>⁄<sub>3</sub></button>
+          <button class="opt" data-ok="0">Diverge: hay infinitos sumandos</button>
+          <button class="opt" data-ok="0"><sup>27</sup>⁄<sub>5</sub>, usando 1 + <sup>2</sup>⁄<sub>3</sub> abajo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Como | <sup>2</sup>⁄<sub>3</sub> | &lt; 1 la serie converge, y su suma es a ÷ (1 − r) = 9 ÷ (1 − <sup>2</sup>⁄<sub>3</sub>) = 9 ÷ <sup>1</sup>⁄<sub>3</sub> = 27. El denominador es 1 <strong>menos</strong> r, no 1 más r; que haya infinitos sumandos no impide una suma finita cuando los términos se encogen.</p></div>
+      </div>
+    </section>
+
+    <section class="cierre">
+      <h3>Termina y califícate</h3>
+      <p class="nota">Se califican los dos bloques por separado. 80% en cada uno (teoría ≥ 4/5, práctica ≥ 5/6) = tema dominado. El repaso no gatea.</p>
+      <p id="naWarn" class="notanswered"></p>
+      <button class="btn" id="calificar">Calificar</button>
+      <div class="result" id="result"></div>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="C2_cuadernillo-papel.html"><span class="sp">← Cuadernillo</span><span class="ti">Volver a practicar</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Evaluación · Cálculo Multivariado · Unidad 2 · El espacio Rⁿ</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+function mat(rows){
+  var coeffs = rows[0].length - 1;
+  var gtc = 'repeat('+coeffs+',auto) 16px auto';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
+
+// ===== barajar las opciones al cargar (mata el sesgo de posición; cambia cada intento) =====
+document.querySelectorAll('.qcard .opts').forEach(function(opts){
+  var arr = Array.prototype.slice.call(opts.children);
+  for(var i=arr.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=arr[i]; arr[i]=arr[j]; arr[j]=t; }
+  arr.forEach(function(el){ opts.appendChild(el); });
+});
+
+// ===== selección tipo examen (una por pregunta, sin revelar) =====
+var selections = {};
+document.querySelectorAll('.qcard').forEach(function(card){
+  var qid = card.getAttribute('data-id');
+  card.querySelectorAll('.opt').forEach(function(b){
+    b.onclick = function(){
+      if(card.classList.contains('graded')) return;
+      card.querySelectorAll('.opt').forEach(function(x){ x.classList.remove('sel'); });
+      b.classList.add('sel');
+      selections[qid] = b;
+    };
+  });
+});
+
+// ===== calificación =====
+var t0ms = Date.now();
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo", unidad:"U2_espacio_Rn", leccion:"C2_evaluacion", tipo:"evaluacion",
+  teoria:null, practica:null, aprobado:null, fallados:[], por_tema:{}, duracion_min:0, resumen_legible:""
+};
+
+document.getElementById('calificar').onclick = function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.qcard'));
+  var na = document.getElementById('naWarn');
+  var faltan = cards.filter(function(c){ return !selections[c.getAttribute('data-id')]; });
+  if(faltan.length){
+    na.textContent = 'Te faltan '+faltan.length+' pregunta(s) por contestar.';
+    faltan[0].scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  na.textContent='';
+  var tally = { teoria:{ok:0,tot:0}, practica:{ok:0,tot:0}, repaso:{ok:0,tot:0} };
+  var fallados = [], porTema = {};
+  cards.forEach(function(card){
+    card.classList.add('graded');
+    var qid=card.getAttribute('data-id'), blk=card.getAttribute('data-bloque'), tema=card.getAttribute('data-tema');
+    var sel=selections[qid], correct = sel.getAttribute('data-ok')==="1";
+    tally[blk].tot++; if(correct) tally[blk].ok++;
+    porTema[tema] = porTema[tema] || {ok:0,tot:0}; porTema[tema].tot++; if(correct) porTema[tema].ok++;
+    card.querySelectorAll('.opt').forEach(function(b){ b.disabled=true; if(b.getAttribute('data-ok')==="1") b.classList.add('right'); });
+    if(!correct){ sel.classList.add('wrong'); fallados.push(qid); }
+    card.classList.add(correct?'correct':'incorrect');
+    var why=card.querySelector('.why'); if(why){ why.classList.add('show'); if(!correct) why.classList.add('miss'); }
+  });
+
+  var tPct = Math.round(100*tally.teoria.ok/tally.teoria.tot);
+  var pPct = Math.round(100*tally.practica.ok/tally.practica.tot);
+  var rPct = tally.repaso.tot ? Math.round(100*tally.repaso.ok/tally.repaso.tot) : null;
+  var pass = tPct>=80 && pPct>=80; // el repaso NO gatea: solo teoría y práctica
+
+  session.teoria = {correctas:tally.teoria.ok, total:tally.teoria.tot, pct:tPct};
+  session.practica = {correctas:tally.practica.ok, total:tally.practica.tot, pct:pPct};
+  if(tally.repaso.tot) session.repaso = {correctas:tally.repaso.ok, total:tally.repaso.tot, pct:rPct};
+  session.aprobado = pass; session.fallados = fallados; session.por_tema = porTema;
+  session.duracion_min = Math.max(1, Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible = "Evaluación U2 (espacio Rⁿ): teoría "+tally.teoria.ok+"/"+tally.teoria.tot+" ("+tPct+"%), práctica "+tally.practica.ok+"/"+tally.practica.tot+" ("+pPct+"%). "+(pass?"APROBADO — listo para U3.":"NO aprobado.")+(fallados.length?" Falló: "+fallados.join(", ")+".":"");
+
+  var NEXT_URL="C3_funciones-varias-variables.html", NEXT_TI="U3 · Funciones de varias variables";
+  function chip(lbl,ok,tot,pct){ return '<div class="scorechip '+(pct>=80?'ok':'no')+'">'+lbl+' <b>'+ok+'/'+tot+'</b> · '+pct+'%</div>'; }
+  var bar = '<div class="scorebar">'+chip('Teoría',tally.teoria.ok,tally.teoria.tot,tPct)+chip('Práctica',tally.practica.ok,tally.practica.tot,pPct)+(rPct!==null?chip('Repaso',tally.repaso.ok,tally.repaso.tot,rPct):'')+'</div>';
+  var html='';
+  if(pass){
+    html += '<p class="verdict pass">Dominado ✓</p>';
+    html += '<p>Aprobaste teoría y práctica. Estás lista para el siguiente tema.</p>'+bar;
+    html += '<div class="advance"><a class="btn" href="'+NEXT_URL+'">Avanza al siguiente tema →<br><small style="font-weight:600;font-size:14px">'+NEXT_TI+'</small></a><button class="btn ghost" id="dl">Descargar reporte</button></div>';
+  } else {
+    html += '<p class="verdict fail">Aún no lo dominas</p>';
+    html += '<p>Repasa lo que falló antes de avanzar. Al reintentar, las opciones se rebarajan.</p>'+bar;
+    html += '<div class="repasa"><strong>Repasa esta unidad:</strong> <a href="C2_espacio-Rn.html">Guía</a> · <a href="C2_teoria-formal.html">Teoría</a> · <a href="C2_cuadernillo-papel.html">Cuadernillo</a></div>';
+    html += '<div class="advance"><button class="btn" id="retry">Reintentar</button><a class="btn dim" href="'+NEXT_URL+'">Avanzar de todos modos →</a><button class="btn ghost" id="dl">Descargar reporte</button></div>';
+  }
+  var res=document.getElementById('result'); res.innerHTML=html; res.classList.add('show');
+  var retry=document.getElementById('retry'); if(retry) retry.onclick=function(){ location.reload(); };
+  document.getElementById('dl').onclick=function(){
+    var nombre=session.fecha+"_calculo_U2_evaluacion.json";
+    var url=URL.createObjectURL(new Blob([JSON.stringify(session,null,2)],{type:"application/json"}));
+    var a=document.createElement('a'); a.href=url; a.download=nombre; a.click();
+  };
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+};
+</script>
+</body>
+</html>

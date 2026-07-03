@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U5 — Cuadernillo de papel (Optimización)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0;white-space:normal}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+
+  /* ===== cuadernillo de papel ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora · en papel</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 5 · Cuadernillo</p>
+    <h1>Optimización, <mark>resuelta en una hoja</mark></h1>
+    <p class="lead">Aquí no se elige opción: se resuelve completo, a mano, como en el parcial. Cada problema trae su enunciado, tu espacio para trabajarlo en papel y la solución paso a paso para cotejar. Punto crítico → hessiana → un número decide; y con restricción, Lagrange. Toma lápiz y hoja antes de abrir cada respuesta.</p>
+    <div class="learn">
+      <h2>Lo que vas a entrenar</h2>
+      <ol>
+        <li><span class="n">1</span> Hallar puntos críticos resolviendo el sistema</li>
+        <li><span class="n">2</span> Armar la hessiana y calcular D</li>
+        <li><span class="n">3</span> Clasificar: mínimo, máximo o silla</li>
+        <li><span class="n">4</span> Evaluar cuando la hessiana lleva variables</li>
+        <li><span class="n">5</span> Optimizar con restricción por Lagrange</li>
+        <li><span class="n">6</span> Modelar y resolver un problema real</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este cuadernillo</h2>
+    <section class="sec">
+      <h3>La regla de oro: papel primero</h3>
+      <p class="idea">Los dos primeros son <strong>resueltos-guía</strong>: léelos completos para fijar el método. El resto es <strong>producción</strong>: resuélvelos tú de principio a fin en una hoja <strong>antes</strong> de abrir la solución. Al terminar cada uno, dime cómo te fue con los tres botones. Eso arma tu reporte para el tutor sin escaneos ni fotos.</p>
+      <p class="idea">Método del curso, sin calculadora: <strong>1)</strong> igualo las parciales a cero (f<sub>x</sub> = 0, f<sub>y</sub> = 0) y despejo los puntos críticos; <strong>2)</strong> armo la hessiana con las segundas derivadas; <strong>3)</strong> calculo <strong>D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup></strong> evaluando en cada punto; <strong>4)</strong> leo el veredicto. Con una restricción, cambio a <strong>Lagrange</strong>: ∇f = λ∇g más la ecuación de la restricción.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago — resueltos-guía</h2>
+
+    <!-- ============ RESUELTO-GUÍA 1 : clasificación completa (silla + mínimo) ============ -->
+    <section class="prob" data-kind="prob" data-id="RG1" data-tema="clasificacion_hessiana_variable" data-level="resuelto">
+      <div class="phead"><span class="pnum">1</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Todos los puntos críticos y su clasificación</p>
+      <p class="pstatement">Halla los puntos críticos de la función, arma la hessiana, y clasifica <strong>cada uno</strong>. Ojo: la hessiana va a depender del punto, así que hay que evaluar por separado.</p>
+      <div class="fx" id="rg1f"></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · parciales = 0</div><p>Derivo respecto a cada variable y las igualo a cero:</p><p class="calc"><span class="rw">f<sub>x</sub></span> ∂/∂x(x<sup>3</sup>−3xy)=<b>3x<sup>2</sup>−3y</b> <span class="sep">•</span> <span class="rw">f<sub>y</sub></span> ∂/∂y(−3xy+3y<sup>2</sup>)=<b>−3x+6y</b></p><div class="fx" id="rg1a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · resolver el sistema</div><p>De la segunda ecuación despejo x en función de y, y lo meto en la primera:</p><p class="calc"><span class="rw">x</span> −3x+6y=0 → <b>x=2y</b> <span class="sep">•</span> <span class="rw">sust.</span> 3(2y)<sup>2</sup>−3y=12y<sup>2</sup>−3y=<b>3y(4y−1)</b></p><p class="calc"><span class="rw">y</span> 3y(4y−1)=0 → y=0 <span class="sep">o</span> <b>y=¼</b></p><div class="fx" id="rg1b"></div></div>
+          <div class="estep"><p>Cada valor de y da su x con x = 2y:</p><p class="calc"><span class="rw">y=0</span> x=2·0=<b>0</b> → (0, 0) <span class="sep">•</span> <span class="rw">y=¼</span> x=2·¼=<b>½</b> → (½, ¼)</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · hessiana genérica</div><p>Las segundas derivadas: f<sub>xx</sub> = 6x, f<sub>yy</sub> = 6, f<sub>xy</sub> = −3. Como f<sub>xx</sub> lleva la x, D también:</p><p class="calc"><span class="rw">D</span> (6x)(6)−(−3)<sup>2</sup>=36x−9</p><div class="fx" id="rg1c"></div></div>
+          <div class="estep"><div class="oprow">Paso 4 · evaluar en (0, 0)</div><p>Sustituyo x = 0 en D = 36x − 9:</p><p class="calc"><span class="rw">D</span> 36·0−9=<b>−9</b> <span class="sep">•</span> −9 &lt; 0 <span class="sep">•</span> <b>punto silla</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · evaluar en (½, ¼)</div><p>Sustituyo x = ½; ahí además f<sub>xx</sub> = 6·½ = 3 &gt; 0:</p><p class="calc"><span class="rw">D</span> 36·½−9=18−9=<b>9</b> <span class="sep">•</span> 9 &gt; 0 <span class="sep">•</span> f<sub>xx</sub>=3 &gt; 0 <span class="sep">•</span> <b>mínimo</b></p></div>
+          <p class="verdict">Dos puntos, dos veredictos: <strong>(0, 0) es punto silla</strong> y <strong>(½, ¼) es un mínimo local</strong>. Cuando la hessiana lleva variables, cada punto se juzga aparte: el mismo D = 36x − 9 cambia de signo entre uno y otro.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (aunque sea de muestra, márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 2 : Lagrange con restricción ============ -->
+    <section class="prob" data-kind="prob" data-id="RG2" data-tema="lagrange" data-level="resuelto">
+      <div class="phead"><span class="pnum">2</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Optimizar con una restricción (Lagrange)</p>
+      <p class="pstatement">Una lámina rectangular tiene <strong>perímetro fijo 20</strong>. ¿Qué medidas dan el <strong>área máxima</strong>? Es decir: maximiza el área x·y sujeto a que 2x + 2y = 20. Plantea el sistema de Lagrange y resuélvelo.</p>
+      <div class="fx" id="rg2f"></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · gradientes</div><p>La función es f = x·y, así que ∇f = (y, x). La restricción g: 2x + 2y = 20 tiene ∇g = (2, 2). Escribo ∇f = λ∇g componente a componente:</p><p class="calc"><span class="rw">x</span> y=λ·2=<b>2λ</b> <span class="sep">•</span> <span class="rw">y</span> x=λ·2=<b>2λ</b></p><div class="fx" id="rg2a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · relacionar x e y</div><p>De las dos ecuaciones, y = 2λ y x = 2λ, así que los dos valen lo mismo:</p><p class="calc"><span class="rw">rel.</span> x=2λ, y=2λ → <b>x=y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · usar la restricción</div><p>Meto x = y en 2x + 2y = 20 y despejo:</p><p class="calc"><span class="rw">x</span> 2x+2x=20 → 4x=20 → <b>x=5</b> <span class="sep">•</span> <span class="rw">y</span> <b>y=5</b></p><div class="fx" id="rg2b"></div></div>
+          <p class="verdict">Sale <strong>x = 5, y = 5</strong>: un cuadrado, con área máxima <strong>25</strong>. Tiene sentido — con perímetro fijo, el rectángulo de área máxima siempre es el cuadrado. Verifico la restricción: 2(5) + 2(5) = 20 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Tu turno — producción</h2>
+
+    <!-- ============ P3 GUIADO : clasificación básica constante ============ -->
+    <section class="prob" data-kind="prob" data-id="P3" data-tema="clasificacion_constante" data-level="guiado">
+      <div class="phead"><span class="pnum">3</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Punto crítico, hessiana y veredicto</p>
+      <p class="pstatement">Halla el punto crítico de la función, arma la hessiana y clasifícalo. <em>Pista: las segundas derivadas salen constantes, así que hay un solo cálculo de D.</em></p>
+      <div class="fx" id="p3f"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · parciales = 0</div><p>Derivo e igualo a cero. Cada ecuación despeja sola:</p><p class="calc"><span class="rw">f<sub>x</sub></span> 2x+4=0 → 2x=−4 → <b>x=−2</b> <span class="sep">•</span> <span class="rw">f<sub>y</sub></span> 2y−2=0 → 2y=2 → <b>y=1</b></p><div class="fx" id="p3a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · hessiana</div><p>Las segundas: f<sub>xx</sub> = 2, f<sub>yy</sub> = 2, f<sub>xy</sub> = 0. Son constantes:</p><div class="fx" id="p3b"></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · determinante</div><p>Aplico D y leo el signo:</p><p class="calc"><span class="rw">D</span> (2)(2)−(0)<sup>2</sup>=4−0=<b>4</b> <span class="sep">•</span> 4 &gt; 0 <span class="sep">•</span> f<sub>xx</sub>=2 &gt; 0</p></div>
+          <p class="verdict">En <strong>(−2, 1)</strong>: D = 4 &gt; 0 y f<sub>xx</sub> &gt; 0, así que el terreno se curva hacia arriba ⇒ <strong>mínimo local</strong>. Como no hay términos cruzados, es un hoyo perfectamente alineado con los ejes.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P4 GUIADO : máximo (fxx negativo) ============ -->
+    <section class="prob" data-kind="prob" data-id="P4" data-tema="clasificacion_maximo" data-level="guiado">
+      <div class="phead"><span class="pnum">4</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">¿Cima o hoyo? Que el signo de f<sub>xx</sub> desempate</p>
+      <p class="pstatement">Clasifica el punto crítico de esta función. <strong>No basta con el signo de D: cuando D &gt; 0, el signo de f<sub>xx</sub> decide entre máximo y mínimo.</strong></p>
+      <div class="fx" id="p4f"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · parciales = 0</div><p>Derivo (recuerda: la derivada de −x<sup>2</sup> es −2x) e igualo a cero:</p><p class="calc"><span class="rw">f<sub>x</sub></span> −2x+6=0 → 2x=6 → <b>x=3</b> <span class="sep">•</span> <span class="rw">f<sub>y</sub></span> −2y+2=0 → 2y=2 → <b>y=1</b></p><div class="fx" id="p4a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · hessiana</div><p>Segundas derivadas: f<sub>xx</sub> = −2, f<sub>yy</sub> = −2, f<sub>xy</sub> = 0:</p><div class="fx" id="p4b"></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · determinante</div><p>Un producto de dos negativos da positivo:</p><p class="calc"><span class="rw">D</span> (−2)(−2)−(0)<sup>2</sup>=4−0=<b>4</b> <span class="sep">•</span> 4 &gt; 0 <span class="sep">•</span> f<sub>xx</sub>=−2 &lt; 0</p></div>
+          <p class="verdict">En <strong>(3, 1)</strong>: D = 4 &gt; 0 (cima o hoyo) y f<sub>xx</sub> = −2 &lt; 0 (se curva hacia abajo) ⇒ <strong>máximo local</strong>. El truco está en no confundirse: D positivo no significa mínimo por defecto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P5 SOLO : punto silla directo (D<0) ============ -->
+    <section class="prob" data-kind="prob" data-id="P5" data-tema="clasificacion_silla" data-level="solo">
+      <div class="phead"><span class="pnum">5</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Cuando D sale negativo</p>
+      <p class="pstatement">Halla el punto crítico y clasifícalo. <strong>Explica en qué momento ya no hace falta mirar f<sub>xx</sub></strong> y por qué.</p>
+      <div class="fx" id="p5f"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · parciales = 0</div><p>Derivo (la derivada de −y<sup>2</sup> es −2y) e igualo a cero:</p><p class="calc"><span class="rw">f<sub>x</sub></span> 2x=0 → <b>x=0</b> <span class="sep">•</span> <span class="rw">f<sub>y</sub></span> −2y=0 → <b>y=0</b></p><div class="fx" id="p5a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · hessiana</div><p>Segundas: f<sub>xx</sub> = 2, f<sub>yy</sub> = −2, f<sub>xy</sub> = 0. Una positiva y otra negativa:</p><div class="fx" id="p5b"></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · determinante</div><p>Producto de signos opuestos ⇒ negativo:</p><p class="calc"><span class="rw">D</span> (2)(−2)−(0)<sup>2</sup>=−4−0=<b>−4</b> <span class="sep">•</span> −4 &lt; 0</p></div>
+          <p class="verdict warn">En <strong>(0, 0)</strong>: D = −4 &lt; 0 ⇒ <strong>punto silla</strong>. Con D negativo el veredicto es directo y <strong>no hace falta mirar f<sub>xx</sub></strong>: el terreno sube por un eje y baja por el otro, así que no puede ser ni cima ni hoyo, sin importar la curvatura de cada eje.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P6 SOLO : término cruzado no nulo ============ -->
+    <section class="prob" data-kind="prob" data-id="P6" data-tema="clasificacion_cruzada" data-level="solo">
+      <div class="phead"><span class="pnum">6</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Con término cruzado: cuidado con la resta al cuadrado</p>
+      <p class="pstatement">Esta función tiene un producto x·y, así que la derivada cruzada f<sub>xy</sub> <strong>no</strong> es cero. Halla el punto crítico y clasifícalo, prestando atención al término (f<sub>xy</sub>)<sup>2</sup> de D.</p>
+      <div class="fx" id="p6f"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · parciales = 0</div><p>Al derivar, el término x·y aporta y a f<sub>x</sub> y x a f<sub>y</sub>:</p><p class="calc"><span class="rw">f<sub>x</sub></span> 2x+y=0 <span class="sep">•</span> <span class="rw">f<sub>y</sub></span> x+2y−6=0</p><div class="fx" id="p6a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · resolver el sistema</div><p>De la primera, y = −2x. Lo meto en la segunda:</p><p class="calc"><span class="rw">sust.</span> x+2(−2x)−6=x−4x−6=<b>−3x−6</b> <span class="sep">•</span> −3x−6=0 → <b>x=−2</b></p><p class="calc"><span class="rw">y</span> y=−2·(−2)=<b>4</b> → (−2, 4)</p><div class="fx" id="p6b"></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · hessiana</div><p>Segundas: f<sub>xx</sub> = 2, f<sub>yy</sub> = 2, y la cruzada f<sub>xy</sub> = 1 (viene del x·y):</p><div class="fx" id="p6c"></div></div>
+          <div class="estep"><div class="oprow">Paso 4 · determinante</div><p>Aquí (f<sub>xy</sub>)<sup>2</sup> = 1<sup>2</sup> = 1, no cero:</p><p class="calc"><span class="rw">D</span> (2)(2)−(1)<sup>2</sup>=4−1=<b>3</b> <span class="sep">•</span> 3 &gt; 0 <span class="sep">•</span> f<sub>xx</sub>=2 &gt; 0</p></div>
+          <p class="verdict">En <strong>(−2, 4)</strong>: D = 3 &gt; 0 y f<sub>xx</sub> = 2 &gt; 0 ⇒ <strong>mínimo local</strong>. El error clásico es olvidar restar (f<sub>xy</sub>)<sup>2</sup>: si pusieras D = 4 seguirías bien aquí, pero en otros casos ese término cambia el signo y el veredicto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P7 SOLO : D = 0 inconcluso ============ -->
+    <section class="prob" data-kind="prob" data-id="P7" data-tema="criterio_inconcluso" data-level="solo">
+      <div class="phead"><span class="pnum">7</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Cuando el criterio no decide</p>
+      <p class="pstatement">Halla el punto crítico, calcula D y <strong>decide qué puedes concluir</strong>. Si el criterio de la segunda derivada no alcanza, dilo y explica qué harías en su lugar. <em>No supongas un veredicto que el número no te da.</em></p>
+      <div class="fx" id="p7f"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · parciales = 0</div><p>Derivo (la derivada de x<sup>4</sup> es 4x<sup>3</sup>) e igualo a cero:</p><p class="calc"><span class="rw">f<sub>x</sub></span> 4x<sup>3</sup>=0 → <b>x=0</b> <span class="sep">•</span> <span class="rw">f<sub>y</sub></span> 4y<sup>3</sup>=0 → <b>y=0</b></p><div class="fx" id="p7a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · hessiana genérica</div><p>Segundas: f<sub>xx</sub> = 12x<sup>2</sup>, f<sub>yy</sub> = 12y<sup>2</sup>, f<sub>xy</sub> = 0. Todas llevan variable:</p><div class="fx" id="p7b"></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · evaluar en (0, 0)</div><p>Sustituyo x = 0 e y = 0. Las dos curvaturas se apagan:</p><p class="calc"><span class="rw">f<sub>xx</sub></span> 12·0<sup>2</sup>=<b>0</b> <span class="sep">•</span> <span class="rw">f<sub>yy</sub></span> 12·0<sup>2</sup>=<b>0</b> <span class="sep">•</span> <span class="rw">D</span> (0)(0)−0<sup>2</sup>=<b>0</b></p></div>
+          <p class="verdict warn">D = 0 ⇒ <strong>el criterio no decide</strong>. Hay que ir por otro camino: mirando la función f = x<sup>4</sup> + y<sup>4</sup> directamente, en (0, 0) vale 0 y en cualquier otro punto es positiva (potencias pares), así que <strong>es un mínimo</strong> — pero eso lo concluyes por inspección, no por D. La trampa es dar un veredicto cuando D = 0.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P8 SOLO : Lagrange máximo producto ============ -->
+    <section class="prob" data-kind="prob" data-id="P8" data-tema="lagrange_producto" data-level="solo">
+      <div class="phead"><span class="pnum">8</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Lagrange con coeficientes distintos</p>
+      <p class="pstatement">Maximiza el producto x·y sujeto a la restricción <strong>3x + y = 12</strong>. Plantea el sistema de Lagrange, resuélvelo y da x, y y el producto. <em>Ojo: aquí los coeficientes de la restricción no son iguales, así que x e y no salen iguales.</em></p>
+      <div class="fx" id="p8f"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · gradientes</div><p>∇f = (y, x) y ∇g = (3, 1). Igualo ∇f = λ∇g componente a componente:</p><p class="calc"><span class="rw">x</span> y=λ·3=<b>3λ</b> <span class="sep">•</span> <span class="rw">y</span> x=λ·1=<b>λ</b></p><div class="fx" id="p8a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · relacionar x e y</div><p>De y = 3λ y x = λ, divido para eliminar λ (o sustituyo λ = x):</p><p class="calc"><span class="rw">rel.</span> y=3λ=3·x → <b>y=3x</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · usar la restricción</div><p>Meto y = 3x en 3x + y = 12:</p><p class="calc"><span class="rw">x</span> 3x+3x=12 → 6x=12 → <b>x=2</b> <span class="sep">•</span> <span class="rw">y</span> y=3·2=<b>6</b></p><div class="fx" id="p8b"></div></div>
+          <p class="verdict">En el óptimo: <strong>x = 2, y = 6</strong>, con producto máximo <strong>12</strong>. Verifico la restricción: 3(2) + 6 = 12 ✓. Aquí x e y no son iguales porque los coeficientes de la restricción no lo son: el reparto se ajusta al "precio" de cada variable.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P9 SOLO : Lagrange distancia mínima ============ -->
+    <section class="prob" data-kind="prob" data-id="P9" data-tema="lagrange_distancia" data-level="solo">
+      <div class="phead"><span class="pnum">9</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">El punto de la recta más cercano al origen</p>
+      <p class="pstatement">Encuentra el punto de la recta <strong>x + 2y = 10</strong> que está <strong>más cerca del origen</strong>. Minimiza el cuadrado de la distancia f = x<sup>2</sup> + y<sup>2</sup> sujeto a esa recta. Plantea Lagrange y resuélvelo. <em>Trabajar con el cuadrado de la distancia evita la raíz y da el mismo punto.</em></p>
+      <div class="fx" id="p9f"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · gradientes</div><p>∇f = (2x, 2y) y ∇g = (1, 2). Igualo ∇f = λ∇g:</p><p class="calc"><span class="rw">x</span> 2x=λ·1=<b>λ</b> <span class="sep">•</span> <span class="rw">y</span> 2y=λ·2=<b>2λ</b></p><div class="fx" id="p9a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · relacionar x e y</div><p>De la primera λ = 2x. Lo meto en la segunda:</p><p class="calc"><span class="rw">sust.</span> 2y=2λ=2·(2x)=4x → <b>y=2x</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · usar la restricción</div><p>Meto y = 2x en x + 2y = 10:</p><p class="calc"><span class="rw">x</span> x+2(2x)=x+4x=5x=10 → <b>x=2</b> <span class="sep">•</span> <span class="rw">y</span> y=2·2=<b>4</b></p><div class="fx" id="p9b"></div></div>
+          <p class="verdict">El punto más cercano es <strong>(2, 4)</strong>. Verifico la recta: 2 + 2(4) = 10 ✓. Geométricamente, el segmento del origen a (2, 4) es <strong>perpendicular</strong> a la recta — por eso ∇f (que apunta radial) queda alineado con ∇g (la normal de la recta): esa es la idea de Lagrange en acción.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P10 SOLO : modelar caja / suma máxima ============ -->
+    <section class="prob" data-kind="prob" data-id="P10" data-tema="modelar_lagrange" data-level="solo">
+      <div class="phead"><span class="pnum">10</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Modela tú el problema y optimízalo</p>
+      <p class="pstatement">Un jardín rectangular va a tener <strong>área fija de 36 m<sup>2</sup></strong>, y quieres gastar la <strong>menor cantidad de cerca</strong> posible (minimizar el perímetro). <strong>Define las variables, plantea el sistema de Lagrange</strong> y encuentra las medidas. <em>Aquí la restricción es el área (producto), y la función a minimizar es el perímetro.</em></p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Defino <strong>x</strong> y <strong>y</strong> como los lados. Minimizo el perímetro f = 2x + 2y sujeto a que el área g: x·y = 36. Los gradientes:</p><div class="fx" id="p10f"></div></div>
+          <div class="estep"><div class="oprow">Paso 1 · igualar gradientes</div><p>∇f = (2, 2) y ∇g = (y, x). Igualo ∇f = λ∇g:</p><p class="calc"><span class="rw">x</span> 2=λ·y <span class="sep">•</span> <span class="rw">y</span> 2=λ·x</p><div class="fx" id="p10a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · relacionar x e y</div><p>Los dos lados izquierdos valen 2, así que igualo λy = λx (con λ ≠ 0):</p><p class="calc"><span class="rw">rel.</span> λy=λx → <b>x=y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · usar la restricción</div><p>Meto x = y en x·y = 36:</p><p class="calc"><span class="rw">x</span> x·x=36 → x<sup>2</sup>=36 → <b>x=6</b> <span class="sep">•</span> <span class="rw">y</span> <b>y=6</b></p><div class="fx" id="p10b"></div></div>
+          <p class="verdict">Las medidas son <strong>x = 6, y = 6</strong>: otra vez el cuadrado. Con área fija, el cuadrado minimiza el perímetro (perímetro 24). Verifico el área: 6·6 = 36 ✓. Tomamos x = 6 positivo porque son longitudes.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P11 SOLO : parámetro / decisión ============ -->
+    <section class="prob" data-kind="prob" data-id="P11" data-tema="parametro_clasificacion" data-level="solo">
+      <div class="phead"><span class="pnum">11</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Discute según el parámetro k</p>
+      <p class="pstatement">La función depende de un número <strong>k</strong>. Su único punto crítico es el origen (0, 0), donde la hessiana queda como abajo. <strong>Decide para qué valores de k el origen es un mínimo, para cuáles un punto silla, y dónde el criterio no decide.</strong> <em>No se pide un número: se pide analizar todos los casos.</em></p>
+      <div class="fx" id="p11f"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · D en función de k</div><p>Con f<sub>xx</sub> = 2, f<sub>yy</sub> = 2 y f<sub>xy</sub> = k, el determinante lleva la k adentro:</p><p class="calc"><span class="rw">D</span> (2)(2)−(k)<sup>2</sup>=<b>4−k<sup>2</sup></b></p><div class="fx" id="p11a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · dónde cambia de signo</div><p>D = 4 − k<sup>2</sup> se anula cuando k<sup>2</sup> = 4, es decir en k = ±2. Analizo los tramos:</p><p class="calc"><span class="rw">|k|&lt;2</span> 4−k<sup>2</sup> &gt; 0 <span class="sep">•</span> <span class="rw">|k|=2</span> 4−k<sup>2</sup>=0 <span class="sep">•</span> <span class="rw">|k|&gt;2</span> 4−k<sup>2</sup> &lt; 0</p></div>
+          <div class="estep"><p>Como f<sub>xx</sub> = 2 &gt; 0 siempre, cuando D &gt; 0 el veredicto es mínimo:</p>
+            <div class="fx"><div class="sys" style="font-size:16px">
+              <span class="eq">−2 &lt; k &lt; 2</span>
+              <span class="eq">→ D &gt; 0, f<sub>xx</sub> &gt; 0 → mínimo</span>
+              <span class="eq">k = 2 o k = −2</span>
+              <span class="eq">→ D = 0 → no decide</span>
+              <span class="eq">k &lt; −2 o k &gt; 2</span>
+              <span class="eq">→ D &lt; 0 → punto silla</span>
+            </div></div>
+          </div>
+          <p class="verdict"><strong>|k| &lt; 2 ⇒ mínimo</strong> (curvatura hacia arriba en las dos direcciones). <strong>|k| &gt; 2 ⇒ punto silla</strong> (el término cruzado vence a la diagonal). <strong>k = ±2 ⇒ el criterio no decide</strong> (D = 0). Un solo parámetro recorre los tres finales posibles: todo depende de cómo compite (f<sub>xy</sub>)<sup>2</sup> contra f<sub>xx</sub>·f<sub>yy</sub>.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P12 SOLO : el corral del inicio ============ -->
+    <section class="prob" data-kind="prob" data-id="P12" data-tema="modelar_corral" data-level="solo">
+      <div class="phead"><span class="pnum">12</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">El corral de la guía, entero y en papel</p>
+      <p class="pstatement">Cierra el ciclo. Cercas un <strong>corral rectangular contra un muro</strong>: hay malla solo para tres lados y tienes <strong>40 metros</strong>. Maximiza el área x·y sujeta a que la malla 2x + y = 40 alcance. Plantea Lagrange, resuélvelo y da medidas y área. <em>x es el lado que se repite (dos veces); y es el lado paralelo al muro.</em></p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Maximizo el área A = x·y sujeto a la malla g: 2x + y = 40. Los gradientes:</p><div class="fx" id="p12f"></div></div>
+          <div class="estep"><div class="oprow">Paso 1 · igualar gradientes</div><p>∇A = (y, x) y ∇g = (2, 1). Igualo ∇A = λ∇g:</p><p class="calc"><span class="rw">x</span> y=λ·2=<b>2λ</b> <span class="sep">•</span> <span class="rw">y</span> x=λ·1=<b>λ</b></p><div class="fx" id="p12a"></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · relacionar x e y</div><p>De y = 2λ y x = λ (o sea λ = x), sustituyo:</p><p class="calc"><span class="rw">rel.</span> y=2λ=2·x → <b>y=2x</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · usar la malla</div><p>Meto y = 2x en 2x + y = 40:</p><p class="calc"><span class="rw">x</span> 2x+2x=40 → 4x=40 → <b>x=10</b> <span class="sep">•</span> <span class="rw">y</span> y=2·10=<b>20</b></p><div class="fx" id="p12b"></div></div>
+          <p class="verdict">Medidas: <strong>x = 10 m</strong> (cada lado perpendicular al muro) y <strong>y = 20 m</strong> (lado paralelo al muro). Área máxima = 10·20 = <strong>200 m<sup>2</sup></strong>. Verifico la malla: 2(10) + 20 = 40 ✓. El tanteo del inicio (5×30 = 150, 15×10 = 150) se queda corto: el método da el punto exacto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Errores típicos que cuestan puntos</h3>
+      <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Igualar la función a cero.</strong> El punto crítico sale de f<sub>x</sub> = 0 y f<sub>y</sub> = 0, no de f(x, y) = 0. La función puede valer lo que sea en un punto llano.</li>
+        <li><span class="ck">✗</span> <strong>Olvidar restar (f<sub>xy</sub>)<sup>2</sup>.</strong> D = f<sub>xx</sub>·f<sub>yy</sub> <em>menos</em> el cuadrado de la cruzada. Con término x·y ese cuadrado no es cero y puede cambiar el signo.</li>
+        <li><span class="ck">✗</span> <strong>Suponer que D &gt; 0 es mínimo.</strong> Con D &gt; 0 puede ser mínimo o máximo; el signo de f<sub>xx</sub> desempata. Positivo = mínimo, negativo = máximo.</li>
+        <li><span class="ck">✗</span> <strong>Dar un veredicto con D = 0.</strong> El criterio de la segunda derivada no decide; hay que analizar por otro medio (inspección, curvas de nivel).</li>
+        <li><span class="ck">✗</span> <strong>Evaluar la hessiana en un solo punto.</strong> Si f<sub>xx</sub> lleva variable, D cambia de punto a punto: hay que sustituir cada punto crítico por separado.</li>
+        <li><span class="ck">✗</span> <strong>Sustituir la restricción en vez de usar Lagrange cuando se pide Lagrange.</strong> Se iguala ∇f = λ∇g componente a componente y se suma la ecuación de la restricción.</li>
+        <li><span class="ck">✗</span> <strong>No definir variables al modelar.</strong> Antes de escribir el sistema, di qué es x y qué es y; sin eso el planteamiento no da puntos.</li>
+        <li><span class="ck">✗</span> <strong>No verificar en el enunciado.</strong> Sustituye tu solución en la restricción original; atrapa errores de signo al instante.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre de sesión</h3>
+      <p class="nota">Qué tan segura te sientes resolviendo Unidad 5 completa en papel: clasificar puntos críticos y optimizar por Lagrange. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="C5_teoria-formal.html"><span class="sp">← Teoría</span><span class="ti">Repasar fórmulas</span></a><a class="next" href="C5_evaluacion.html"><span class="sp">Siguiente →</span><span class="ti">Evaluación · demuéstralo</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Cálculo Multivariado · Unidad 5 — Optimización</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- render de sistemas de ecuaciones ---------- */
+function setSys(id, eqs){
+  var el=document.getElementById(id); if(!el) return;
+  el.innerHTML='<div class="sys">'+eqs.map(function(e){return '<span class="eq">'+e+'</span>';}).join('')+'</div>';
+}
+
+/* ---------- render de matriz cuadrada (hessiana) con corchetes ---------- */
+function matSq(rows){
+  var n=rows[0].length;
+  var gtc='repeat('+n+',auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<n;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setSq(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=matSq(rows); }
+
+/* ===== RG1 : f = x³ − 3xy + 3y²  (silla en (0,0), mínimo en (½,¼)) ===== */
+setSys('rg1f',["f(x, y) = x<sup>3</sup> − 3xy + 3y<sup>2</sup>"]);
+setSys('rg1a',["f<sub>x</sub> = 3x<sup>2</sup> − 3y = 0","f<sub>y</sub> = −3x + 6y = 0"]);
+setSys('rg1b',["x = 2y","3y(4y − 1) = 0  →  y = 0, y = ¼"]);
+setSq('rg1c',[["6x","−3"],["−3","6"]]);
+
+/* ===== RG2 : max x·y sujeto a 2x+2y=20  → (5,5) ===== */
+setSys('rg2f',["maximizar  A = x · y","sujeto a  g:  2x + 2y = 20","∇A = (y, x),  ∇g = (2, 2)"]);
+setSys('rg2a',["y = 2λ","x = 2λ"]);
+setSys('rg2b',["4x = 20  →  x = 5","y = 5"]);
+
+/* ===== P3 : f = x² + 4x + y² − 2y  → (−2,1) mínimo ===== */
+setSys('p3f',["f(x, y) = x<sup>2</sup> + 4x + y<sup>2</sup> − 2y"]);
+setSys('p3a',["f<sub>x</sub> = 2x + 4 = 0","f<sub>y</sub> = 2y − 2 = 0"]);
+setSq('p3b',[["2","0"],["0","2"]]);
+
+/* ===== P4 : f = −x² + 6x − y² + 2y  → (3,1) máximo ===== */
+setSys('p4f',["f(x, y) = −x<sup>2</sup> + 6x − y<sup>2</sup> + 2y"]);
+setSys('p4a',["f<sub>x</sub> = −2x + 6 = 0","f<sub>y</sub> = −2y + 2 = 0"]);
+setSq('p4b',[["−2","0"],["0","−2"]]);
+
+/* ===== P5 : f = x² − y²  → (0,0) punto silla ===== */
+setSys('p5f',["f(x, y) = x<sup>2</sup> − y<sup>2</sup>"]);
+setSys('p5a',["f<sub>x</sub> = 2x = 0","f<sub>y</sub> = −2y = 0"]);
+setSq('p5b',[["2","0"],["0","−2"]]);
+
+/* ===== P6 : f = x² + xy + y² − 6y  → (−2,4) mínimo (cruzada ≠ 0) ===== */
+setSys('p6f',["f(x, y) = x<sup>2</sup> + x·y + y<sup>2</sup> − 6y"]);
+setSys('p6a',["f<sub>x</sub> = 2x + y = 0","f<sub>y</sub> = x + 2y − 6 = 0"]);
+setSys('p6b',["y = −2x","−3x − 6 = 0  →  x = −2,  y = 4"]);
+setSq('p6c',[["2","1"],["1","2"]]);
+
+/* ===== P7 : f = x⁴ + y⁴  → (0,0) D=0 inconcluso ===== */
+setSys('p7f',["f(x, y) = x<sup>4</sup> + y<sup>4</sup>"]);
+setSys('p7a',["f<sub>x</sub> = 4x<sup>3</sup> = 0","f<sub>y</sub> = 4y<sup>3</sup> = 0"]);
+setSq('p7b',[["12x<sup>2</sup>","0"],["0","12y<sup>2</sup>"]]);
+
+/* ===== P8 : max x·y sujeto a 3x+y=12  → (2,6) ===== */
+setSys('p8f',["maximizar  f = x · y","sujeto a  g:  3x + y = 12","∇f = (y, x),  ∇g = (3, 1)"]);
+setSys('p8a',["y = 3λ","x = λ"]);
+setSys('p8b',["6x = 12  →  x = 2","y = 6"]);
+
+/* ===== P9 : min x²+y² sujeto a x+2y=10  → (2,4) ===== */
+setSys('p9f',["minimizar  f = x<sup>2</sup> + y<sup>2</sup>","sujeto a  g:  x + 2y = 10","∇f = (2x, 2y),  ∇g = (1, 2)"]);
+setSys('p9a',["2x = λ","2y = 2λ"]);
+setSys('p9b',["5x = 10  →  x = 2","y = 4"]);
+
+/* ===== P10 : min 2x+2y sujeto a xy=36  → (6,6) ===== */
+setSys('p10f',["minimizar  f = 2x + 2y","sujeto a  g:  x · y = 36","∇f = (2, 2),  ∇g = (y, x)"]);
+setSys('p10a',["2 = λ · y","2 = λ · x"]);
+setSys('p10b',["x<sup>2</sup> = 36  →  x = 6","y = 6"]);
+
+/* ===== P11 : hessiana con parámetro k en (0,0) ===== */
+setSys('p11f',["hessiana en (0, 0):"]);
+setSq('p11a',[["2","k"],["k","2"]]);
+
+/* ===== P12 : el corral — max x·y sujeto a 2x+y=40  → (10,20) ===== */
+setSys('p12f',["maximizar  A = x · y","sujeto a  g:  2x + y = 40","∇A = (y, x),  ∇g = (2, 1)"]);
+setSys('p12a',["y = 2λ","x = λ"]);
+setSys('p12b',["4x = 40  →  x = 10","y = 20"]);
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo", unidad:"U5_optimizacion", leccion:"C5_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_calculo_U5_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

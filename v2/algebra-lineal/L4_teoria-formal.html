@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U4 — Teoría formal (álgebra matricial)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  /* tarjeta de teoría: etiqueta tipo Definición / Teorema */
+  .card{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:0;display:grid;box-shadow:var(--shadow);overflow:hidden}
+  .card .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 20px;border-bottom:2px solid var(--ink)}
+  .card .head .badge{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:999px;padding:4px 12px;border:2px solid}
+  .card .head .badge.def{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .card .head .badge.teo{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .card .head .badge.cor{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .card .head h3{margin:0;font-size:clamp(17px,2vw,20px);letter-spacing:-.02em}
+  .card .body{padding:18px 20px;display:grid;gap:13px}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .stmt{display:grid;gap:7px;font-size:clamp(17px,1.9vw,19px);line-height:1.55}
+  .stmt .eq{white-space:normal;font-variant-numeric:tabular-nums}
+  .stmt .lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:2px}
+  .cond{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
+  .cond li{display:flex;gap:10px;align-items:flex-start;font-size:clamp(16px,1.8vw,18px)}
+  .cond li .k{flex:0 0 auto;width:24px;height:24px;border-radius:7px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  .porque{border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .porque .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .porque p{margin:0;line-height:1.55}
+
+  /* recall drill: enuncia de memoria → revela → autorreporta */
+  .drill{display:grid;gap:11px;padding:16px 18px;border:1.5px dashed var(--navy);border-radius:12px;background:#eef1fb}
+  .drill .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .drill .qtag::before{content:"⟲ "}
+  .drill .q{margin:0;font-weight:700;font-size:17px}
+  .drill .revealbtn{font:inherit;font-weight:800;font-size:16px;padding:11px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer;justify-self:start;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
+  .drill .revealbtn:hover{transform:translate(-1px,-1px)}
+  .drill .answer{display:none;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:13px 16px}
+  .drill .answer.show{display:block}
+  .drill .answer .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:5px}
+  .drill .answer .stmt{font-size:17px}
+  .selfrep{display:none;gap:9px;flex-wrap:wrap}
+  .selfrep.show{display:flex}
+  .selfrep .srtag{flex:0 0 100%;font-size:13px;font-weight:700;color:var(--slate);margin-bottom:-2px}
+  .selfrep button{flex:1;min-width:120px;font:inherit;font-weight:700;font-size:15px;padding:11px 12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .selfrep button:hover{transform:translateY(-1px)}
+  .selfrep button.pick-mem{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .selfrep button.pick-pista{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .selfrep button.pick-falla{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .selfrep.locked button{opacity:.45;cursor:default}
+  .selfrep.locked button.sel{opacity:1}
+  .drill.answered{border-style:solid;border-color:var(--green)}
+
+  /* matrices */
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:20px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:28px}
+  .mrow>span{text-align:right;min-width:22px}
+  .msep{justify-self:center;width:0;height:22px;border-left:2px solid var(--ink);min-width:0}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.mem{background:var(--green-tint);color:var(--green-deep)}
+  .pill.pista{background:var(--cream);color:var(--deep)}
+  .pill.falla{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin formulario</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 4 · Teoría formal</p>
+    <h1>Álgebra <mark>matricial</mark> para memorizar</h1>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <div class="learn">
+      <h2>Vas a poder enunciar de memoria</h2>
+      <ol>
+        <li><span class="n">1</span> Suma, resta y múltiplo escalar de matrices</li>
+        <li><span class="n">2</span> Producto renglón por columna (fórmula exacta)</li>
+        <li><span class="n">3</span> Cuándo está definido y qué tamaño da</li>
+        <li><span class="n">4</span> Propiedades del producto y no conmutatividad</li>
+        <li><span class="n">5</span> Transpuesta y sus reglas (incluida (AB)ᵀ)</li>
+        <li><span class="n">6</span> Matriz identidad y matrices con nombre</li>
+        <li><span class="n">7</span> Inversa: definición, unicidad y (AB)⁻¹</li>
+        <li><span class="n">8</span> Inversa por Gauss-Jordan y criterio de singular</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <p class="idea" style="margin-top:4px">
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+    </p>
+
+    <h2 class="modhead">Operaciones básicas con matrices</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Matriz, suma y múltiplo escalar</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Una <strong>matriz</strong> A de tamaño m×n es un arreglo rectangular de m renglones y n columnas de números reales; su entrada en el renglón i, columna j se denota a<sub>ij</sub>.</span>
+            <span class="eq">La <strong>suma</strong> A + B y la <strong>resta</strong> A − B solo se definen si A y B tienen <strong>el mismo tamaño</strong>, y se hacen <strong>entrada por entrada</strong>: (A + B)<sub>ij</sub> = a<sub>ij</sub> + b<sub>ij</sub>.</span>
+            <span class="eq">El <strong>múltiplo escalar</strong> c·A multiplica <strong>cada</strong> entrada por c: (c·A)<sub>ij</sub> = c·a<sub>ij</sub>.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Suma y escalar sí son «entrada por entrada»; el que <strong>no</strong> lo es (y es el error clásico) es el <strong>producto</strong>. Que la suma exija mismo tamaño es lo que vuelve al conjunto de matrices m×n un espacio vectorial: se comportan como vectores con dos índices.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F1_def_suma_escalar" data-tema="operaciones_basicas">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Cómo se define la suma de matrices y el múltiplo escalar? ¿Qué condición pide la suma?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Suma y escalar son entrada por entrada: (A + B)<sub>ij</sub> = a<sub>ij</sub> + b<sub>ij</sub>, (c·A)<sub>ij</sub> = c·a<sub>ij</sub>. La suma exige que A y B tengan el mismo tamaño.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Producto de matrices</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Producto renglón por columna</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Sean A de tamaño m×p y B de tamaño p×n. El <strong>producto</strong> C = A·B es de tamaño m×n, y su entrada en el renglón i, columna j es</span>
+            <span class="eq">c<sub>ij</sub> = a<sub>i1</sub>b<sub>1j</sub> + a<sub>i2</sub>b<sub>2j</sub> + … + a<sub>ip</sub>b<sub>pj</sub> = ∑<sub>k=1</sub><sup>p</sup> a<sub>ik</sub>b<sub>kj</sub>.</span>
+            <span class="eq">Es decir, c<sub>ij</sub> empareja el <strong>renglón i de A</strong> con la <strong>columna j de B</strong>: se multiplican término a término y se suma.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>El producto <strong>no</strong> es entrada por entrada: cada casilla es un producto punto entre un renglón y una columna. Por eso el número de columnas de A (p) debe igualar el número de renglones de B (p): sin esa coincidencia no hay pares que sumar.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F2_def_producto_ij" data-tema="producto_matrices">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Escribe la fórmula de la entrada c<sub>ij</sub> del producto A·B. Di qué renglón y qué columna usa.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">c<sub>ij</sub> = ∑<sub>k</sub> a<sub>ik</sub>b<sub>kj</sub> = a<sub>i1</sub>b<sub>1j</sub> + … + a<sub>ip</sub>b<sub>pj</sub>: renglón i de A contra columna j de B, término a término y se suma.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Regla</span><h3>Cuándo está definido y qué tamaño da</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">El producto A·B <strong>está definido</strong> si y solo si el número de <strong>columnas de A</strong> es igual al número de <strong>renglones de B</strong> (las dimensiones <strong>de en medio coinciden</strong>).</span>
+            <span class="eq">Regla de las dimensiones: (m×p)·(p×n) = m×n. Las <strong>de en medio deben coincidir</strong>; las <strong>de los extremos</strong> dan el tamaño del resultado.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Si las de en medio no coinciden, un renglón de A y una columna de B tienen distinta cantidad de números y no se pueden emparejar: el producto ni siquiera existe. Por eso A·B puede existir y B·A no.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F3_regla_dimensiones" data-tema="dimensiones">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Cuándo está definido A·B y qué tamaño tiene? Enuncia la regla de dimensiones.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Definido ⇔ columnas de A = renglones de B (las de en medio coinciden). (m×p)·(p×n) = m×n: los extremos dan el tamaño.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Propiedades del producto (y qué falla)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Cuando los tamaños encajan, el producto de matrices cumple:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span><strong>Asociativo</strong>: (A·B)·C = A·(B·C).</span></li>
+              <li><span class="k">2</span><span><strong>Distributivo</strong>: A·(B + C) = A·B + A·C, y (A + B)·C = A·C + B·C.</span></li>
+              <li><span class="k">3</span><span><strong>Escalar</strong>: c·(A·B) = (c·A)·B = A·(c·B).</span></li>
+              <li><span class="k">4</span><span><strong>Neutro</strong>: A·I = A e I·A = A (identidad del tamaño correcto).</span></li>
+            </ul>
+            <span class="eq"><strong>NO</strong> es conmutativo: en general A·B ≠ B·A. Tampoco vale la <strong>ley de cancelación</strong> (A·B = A·C no implica B = C) ni que A·B = 0 obligue a A = 0 o B = 0.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>El producto hereda asociatividad y distributividad de que cada entrada es una suma de productos de números. Pero la conmutatividad se pierde: incluso cuando A·B y B·A existen y son del mismo tamaño, casi nunca coinciden, porque emparejan renglones y columnas distintos.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F4_teo_propiedades_producto" data-tema="producto_matrices">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia las propiedades del producto (asociativo, distributivo, neutro) y las tres cosas que NO se cumplen.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Asociativo, distributivo, saca escalares, A·I = A. NO conmutativo (A·B ≠ B·A), no hay cancelación, y A·B = 0 no obliga a que A o B sean 0.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Transpuesta</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Transpuesta de una matriz</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">La <strong>transpuesta</strong> de A (de tamaño m×n), denotada Aᵀ, es la matriz de tamaño n×m que intercambia renglones y columnas: (Aᵀ)<sub>ij</sub> = a<sub>ji</sub>.</span>
+            <span class="eq">El renglón i de A se vuelve la columna i de Aᵀ. Volcar dos veces regresa a A: (Aᵀ)ᵀ = A.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Transponer es reflejar sobre la diagonal principal: la entrada (i, j) va a la posición (j, i). Por eso una matriz de m×n pasa a n×m. La diagonal queda fija; solo se intercambia lo de fuera.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F5_def_transpuesta" data-tema="transpuesta">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define la transpuesta con la fórmula de entradas. ¿Qué tamaño tiene y cuánto vale (Aᵀ)ᵀ?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">(Aᵀ)<sub>ij</sub> = a<sub>ji</sub>: intercambia renglones y columnas; si A es m×n, Aᵀ es n×m. Y (Aᵀ)ᵀ = A.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Reglas de la transpuesta (el orden se invierte)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span>(A + B)ᵀ = Aᵀ + Bᵀ.</span></li>
+              <li><span class="k">2</span><span>(c·A)ᵀ = c·Aᵀ.</span></li>
+              <li><span class="k">3</span><span><strong>(A·B)ᵀ = Bᵀ·Aᵀ</strong> — el orden se <strong>invierte</strong>.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La regla clave es la 3: al transponer un producto, los factores se voltean. Suma y escalar sí conservan el orden; el producto no, porque para que Bᵀ·Aᵀ esté definido los tamaños obligan a ese orden. Es la misma inversión que aparece en la inversa de un producto.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F6_teo_transpuesta_producto" data-tema="transpuesta">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Da las reglas de la transpuesta para suma, escalar y producto. ¿Qué pasa con el orden en (A·B)ᵀ?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">(A + B)ᵀ = Aᵀ + Bᵀ; (c·A)ᵀ = c·Aᵀ; (A·B)ᵀ = Bᵀ·Aᵀ. En el producto el orden se invierte.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Identidad y matrices con nombre</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Matriz identidad</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">La <strong>matriz identidad</strong> I<sub>n</sub> es la matriz cuadrada n×n con <strong>unos en la diagonal</strong> y <strong>ceros</strong> fuera de ella: I<sub>ij</sub> = 1 si i = j, y 0 si i ≠ j.</span>
+            <span class="eq">Es el <strong>neutro del producto</strong>: para toda A de tamaño m×n, A·I<sub>n</sub> = A e I<sub>m</sub>·A = A.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La identidad hace en las matrices lo que el número 1 hace en los reales: multiplicar por ella no cambia nada. Es la referencia para definir la inversa: A⁻¹ es la que devuelve la identidad al multiplicar por A.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F7_def_identidad" data-tema="identidad">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define la matriz identidad por sus entradas y di qué propiedad la caracteriza en el producto.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">I<sub>n</sub>: cuadrada, unos en la diagonal y ceros afuera (I<sub>ij</sub> = 1 si i = j, 0 si no). Es el neutro: A·I = A e I·A = A.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Matrices con nombre propio</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span><strong>Diagonal</strong>: cuadrada con a<sub>ij</sub> = 0 siempre que i ≠ j (solo la diagonal puede ser no nula).</span></li>
+              <li><span class="k">2</span><span><strong>Simétrica</strong>: A = Aᵀ, es decir a<sub>ij</sub> = a<sub>ji</sub> (espejo sobre la diagonal). Debe ser cuadrada.</span></li>
+              <li><span class="k">3</span><span><strong>Triangular superior</strong>: a<sub>ij</sub> = 0 para i &gt; j (todo cero <strong>debajo</strong> de la diagonal). La <strong>inferior</strong>: ceros arriba (a<sub>ij</sub> = 0 para i &lt; j).</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La condición de simétrica es un espejo: la entrada (1,2) coincide con la (2,1), la (1,3) con la (3,1). La triangular superior tiene ceros abajo, así que no coincide con lo de arriba y en general no es simétrica. La diagonal es a la vez triangular superior e inferior.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F8_def_matrices_nombradas" data-tema="matrices_nombradas">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define diagonal, simétrica y triangular superior por sus entradas. ¿Qué relación cumple una simétrica con su transpuesta?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Diagonal: a<sub>ij</sub> = 0 si i ≠ j. Simétrica: A = Aᵀ (a<sub>ij</sub> = a<sub>ji</sub>). Triangular superior: a<sub>ij</sub> = 0 para i &gt; j (ceros debajo de la diagonal).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Matriz inversa</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Inversa y matriz invertible</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Una matriz cuadrada A de tamaño n×n es <strong>invertible</strong> (o <strong>no singular</strong>) si existe una matriz B, también n×n, tal que</span>
+            <span class="eq">A·B = I<sub>n</sub>   y   B·A = I<sub>n</sub>.</span>
+            <span class="eq">Esa B es única, se llama la <strong>inversa</strong> de A y se denota A⁻¹. Si no existe tal B, A es <strong>singular</strong> (no invertible). Solo las matrices <strong>cuadradas</strong> pueden tener inversa.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La inversa «deshace» a A: aplicar A y luego A⁻¹ deja todo igual, porque el producto da la identidad. Es única porque si B y C cumplieran ambas, entonces B = B·I = B·(A·C) = (B·A)·C = I·C = C.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F9_def_inversa" data-tema="inversa">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define matriz invertible y su inversa. ¿Qué dos productos deben dar la identidad y es única?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">A (cuadrada) es invertible si existe B con A·B = I y B·A = I. Esa B es única, se llama A⁻¹. Si no existe, A es singular.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Inversa de un producto y de la transpuesta</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Si A y B son invertibles del mismo tamaño, entonces A·B es invertible y</span>
+            <span class="eq"><strong>(A·B)⁻¹ = B⁻¹·A⁻¹</strong>   — el orden se <strong>invierte</strong>.</span>
+            <span class="eq">Además: (A⁻¹)⁻¹ = A, (c·A)⁻¹ = <sup>1</sup>⁄<sub>c</sub>·A⁻¹ para c ≠ 0, y <strong>(Aᵀ)⁻¹ = (A⁻¹)ᵀ</strong>.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Se verifica multiplicando: (A·B)·(B⁻¹·A⁻¹) = A·(B·B⁻¹)·A⁻¹ = A·I·A⁻¹ = I. El orden se invierte por la misma razón que en la transpuesta: para «deshacer» A·B hay que soltar primero lo último que se aplicó, B.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F10_teo_inversa_producto" data-tema="inversa">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Da la fórmula de (A·B)⁻¹ y de (Aᵀ)⁻¹. ¿Por qué se invierte el orden en el producto?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">(A·B)⁻¹ = B⁻¹·A⁻¹ (orden invertido). (Aᵀ)⁻¹ = (A⁻¹)ᵀ. Se comprueba porque (A·B)(B⁻¹A⁻¹) = A·I·A⁻¹ = I.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Método</span><h3>Inversa por Gauss-Jordan</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Para invertir A (n×n), se forma el bloque aumentado <strong>[A | I]</strong> y se reduce por operaciones elementales de renglón hasta que la parte izquierda sea la identidad:</span>
+            <span class="eq">[A | I]  →  [I | A⁻¹].</span>
+            <span class="eq">Lo que quede a la <strong>derecha</strong> de la barra <strong>es</strong> A⁻¹. Cada operación de renglón se aplica a <strong>toda</strong> la fila (izquierda e identidad juntas).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Cada operación de renglón equivale a multiplicar por la izquierda por una matriz elemental E. Reducir A a I significa E<sub>k</sub>…E<sub>1</sub>·A = I, así que E<sub>k</sub>…E<sub>1</sub> = A⁻¹; y esas mismas operaciones, aplicadas a I, la convierten en A⁻¹. Por eso arrastramos la identidad al lado.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F11_metodo_inversa_gj" data-tema="inversa_gauss_jordan">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Describe el método de Gauss-Jordan para hallar A⁻¹. ¿Qué bloque formas y dónde queda la inversa?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Formas [A | I] y reduces por renglones hasta [I | A⁻¹]: cuando la izquierda es la identidad, la derecha es A⁻¹. Cada operación va sobre toda la fila.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Criterio de existencia (matriz singular)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Una matriz cuadrada A es <strong>invertible</strong> si y solo si su RREF es la identidad; equivalentemente, si y solo si <strong>rango(A) = n</strong> (todas las columnas tienen pivote).</span>
+            <span class="eq">Al reducir [A | I], A es <strong>singular</strong> exactamente cuando aparece un <strong>renglón de ceros</strong> en la parte izquierda: ahí ya no puede llegar a la identidad, y no existe inversa.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Si falta un pivote, un renglón de la izquierda se vuelve todo ceros: esa fila no puede convertirse en una fila de la identidad. Rango &lt; n significa columnas dependientes, y una matriz con columnas dependientes no puede deshacer nada: colapsa información, así que no hay inversa.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F12_teo_singular" data-tema="existencia_inversa">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Da el criterio de existencia de la inversa (con rango y con RREF) y la señal de que A es singular al reducir [A | I].</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">A invertible ⇔ RREF de A es I ⇔ rango(A) = n. Singular ⇔ al reducir [A | I] aparece un renglón de ceros a la izquierda (no llega a la identidad).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chuleta">
+      <h3>La ficha de memoria</h3>
+      <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
+      <ul>
+        <li><span class="ck">✓</span> Suma y escalar: entrada por entrada, mismo tamaño. (A + B)<sub>ij</sub> = a<sub>ij</sub> + b<sub>ij</sub>; (c·A)<sub>ij</sub> = c·a<sub>ij</sub>.</li>
+        <li><span class="ck">✓</span> Producto: c<sub>ij</sub> = ∑<sub>k</sub> a<sub>ik</sub>b<sub>kj</sub>. Renglón i de A contra columna j de B.</li>
+        <li><span class="ck">✓</span> Definido ⇔ columnas de A = renglones de B. (m×p)·(p×n) = m×n.</li>
+        <li><span class="ck">✓</span> Asociativo y distributivo, pero NO conmutativo (A·B ≠ B·A) ni con cancelación.</li>
+        <li><span class="ck">✓</span> Transpuesta: (Aᵀ)<sub>ij</sub> = a<sub>ji</sub>; m×n → n×m. (A·B)ᵀ = Bᵀ·Aᵀ (orden invertido).</li>
+        <li><span class="ck">✓</span> Identidad: unos en la diagonal, ceros afuera. A·I = A. Es el neutro.</li>
+        <li><span class="ck">✓</span> Diagonal: 0 fuera de la diagonal · Simétrica: A = Aᵀ · Triangular superior: 0 debajo de la diagonal.</li>
+        <li><span class="ck">✓</span> Invertible: existe A⁻¹ con A·A⁻¹ = A⁻¹·A = I; única; solo cuadradas.</li>
+        <li><span class="ck">✓</span> (A·B)⁻¹ = B⁻¹·A⁻¹ · (Aᵀ)⁻¹ = (A⁻¹)ᵀ · (A⁻¹)⁻¹ = A.</li>
+        <li><span class="ck">✓</span> Inversa por Gauss-Jordan: [A | I] → [I | A⁻¹]; la derecha es la inversa.</li>
+        <li><span class="ck">✓</span> Invertible ⇔ rango = n ⇔ RREF = I. Singular ⇔ renglón de ceros a la izquierda al reducir.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue con el recall?</h3>
+      <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="L4_algebra-matricial.html"><span class="sp">← Guía</span><span class="ti">Entender el tema</span></a><a class="next" href="L4_cuadernillo-papel.html"><span class="sp">Siguiente →</span><span class="ti">Cuadernillo · practica</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 4 · Teoría formal</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+// ===== instrumentación (session / reporte / recall) =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U4_algebra_matricial", leccion:"L4_teoria-formal",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_REC = document.querySelectorAll('[data-kind="recall"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.formulas.length+"/"+TOT_REC+" recalls"; }
+
+// cada drill: revelar → autorreporte (de_memoria / con_pista / falla) → session.formulas
+document.querySelectorAll('.drill[data-kind="recall"]').forEach(function(block){
+  var reveal = block.querySelector('.revealbtn');
+  var answer = block.querySelector('.answer');
+  var selfrep = block.querySelector('.selfrep');
+  var done = false;
+  if(reveal){
+    reveal.onclick = function(){
+      if(answer) answer.classList.add('show');
+      if(selfrep) selfrep.classList.add('show');
+      reveal.style.display = 'none';
+    };
+  }
+  block.querySelectorAll('.selfrep button').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      done = true;
+      var rep = b.getAttribute('data-rep');
+      b.classList.add('sel');
+      if(rep==="de_memoria") b.classList.add('pick-mem');
+      else if(rep==="con_pista") b.classList.add('pick-pista');
+      else b.classList.add('pick-falla');
+      selfrep.classList.add('locked');
+      block.classList.add('answered');
+      session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:rep });
+      updateCont();
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var mem=session.formulas.filter(function(f){return f.recall==="de_memoria";}).length;
+  var pista=session.formulas.filter(function(f){return f.recall==="con_pista";}).length;
+  var falla=session.formulas.filter(function(f){return f.recall==="falla";}).length;
+  var fallidas=session.formulas.filter(function(f){return f.recall==="falla";}).map(function(f){return f.id;});
+  var s="Recall de teoría formal U4: "+session.formulas.length+"/"+TOT_REC+" enunciados. ";
+  s+="De memoria: "+mem+" · con pista: "+pista+" · falla: "+falla+". ";
+  s+= fallidas.length? ("Falló en: "+fallidas.join(", ")+". ") : "Sin fallas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U4_teoria-formal.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){
+    var cls = f.recall==="de_memoria" ? "mem" : (f.recall==="con_pista" ? "pista" : "falla");
+    return '<span class="pill '+cls+'">'+f.id+": "+f.recall+'</span>';
+  }).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.formulas.length+'/'+TOT_REC+'</strong> recalls · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Enunciados: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>
