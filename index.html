@@ -16,7 +16,7 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
-  .wrap{max-width:900px;margin:0 auto;padding:0 20px 48px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px 48px}
 
   .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0 0}
   .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
@@ -29,14 +29,16 @@
   .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
   .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:20ch}
   .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
-  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
-  .stats{display:flex;gap:22px;flex-wrap:wrap;margin:20px 0 0}
-  .stat{display:flex;align-items:baseline;gap:8px}
-  .stat .num{font-size:26px;font-weight:800;letter-spacing:-.03em;color:var(--navy)}
-  .stat .lbl{font-size:15px;font-weight:700;color:var(--muted)}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:64ch;margin:.2em 0 0}
+
+  .leyenda{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0 0}
+  .ldef{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--slate)}
+  .ldef .dot{width:12px;height:12px;border-radius:50%;flex:0 0 auto;border:1.5px solid var(--ink)}
+  .ldef .dg{background:var(--cream)} .ldef .dt{background:#fff} .ldef .dc{background:var(--navy)}
+  .ldef b{font-weight:800}
 
   main{display:grid;gap:26px;margin-top:26px}
-  @media(min-width:760px){main{grid-template-columns:1fr 1fr;align-items:start}}
+  @media(min-width:780px){main{grid-template-columns:1fr 1fr;align-items:start}}
 
   .col{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
   .colhead{padding:20px 22px 16px;border-bottom:2px solid var(--ink)}
@@ -49,19 +51,22 @@
   .colhead .msub{margin:0;font-size:15px;color:var(--muted);font-weight:600}
 
   .units{list-style:none;margin:0;padding:14px;display:grid;gap:11px}
-  .unit{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;
-    border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;background:#fcfbf9;
-    transition:transform .1s,border-color .1s,box-shadow .1s}
-  .unit:hover{transform:translate(-2px,-2px);border-color:var(--ink);box-shadow:4px 4px 0 var(--ink);background:#fff}
-  .unit .badge{flex:0 0 auto;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
-    font-size:17px;font-weight:800;border:2px solid var(--ink)}
+  .unit{display:flex;align-items:flex-start;gap:14px;border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;background:#fcfbf9}
+  .unit .badge{flex:0 0 auto;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+    font-size:16px;font-weight:800;border:2px solid var(--ink);margin-top:1px}
   .unit.alg .badge{background:var(--orange);color:#fff}
   .unit.calc .badge{background:var(--navy);color:#fff}
-  .unit .body{display:grid;gap:1px;min-width:0}
+  .unit .body{display:grid;gap:2px;min-width:0}
   .unit .uno{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
   .unit .uti{font-size:17px;font-weight:700;letter-spacing:-.01em;line-height:1.25}
-  .unit .arrow{margin-left:auto;flex:0 0 auto;font-size:20px;font-weight:800;color:var(--muted);transition:transform .1s,color .1s}
-  .unit:hover .arrow{color:var(--orange);transform:translateX(3px)}
+  .capas{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+  .capa{font-size:14px;font-weight:700;text-decoration:none;padding:6px 13px;border-radius:999px;
+    border:1.5px solid var(--line);color:var(--slate);background:#fff;
+    transition:transform .1s,border-color .1s,box-shadow .1s,background .1s}
+  .capa:hover{transform:translate(-1px,-1px);border-color:var(--ink);box-shadow:2px 2px 0 var(--ink)}
+  .capa.guia{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
+  .capa.guia:hover{background:#fff}
+  .capa .ic{font-weight:800;margin-right:5px}
 
   footer{margin-top:34px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -77,13 +82,13 @@
   </div>
 
   <header class="hero">
-    <p class="kick">Prep de vacaciones · ITAM</p>
+    <p class="kick">Prep · ITAM</p>
     <h1>Todas tus <mark>guías</mark> en un solo lugar</h1>
-    <p class="lead">Dos materias, catorce temas. Cada tarjeta te lleva a la guía completa: la idea, los ejemplos paso a paso y la práctica. Toca la que quieras estudiar hoy.</p>
-    <div class="stats">
-      <div class="stat"><span class="num">2</span><span class="lbl">materias</span></div>
-      <div class="stat"><span class="num">14</span><span class="lbl">unidades</span></div>
-      <div class="stat"><span class="num">100%</span><span class="lbl">a mano</span></div>
+    <p class="lead">Dos materias, catorce unidades. Cada unidad se estudia en capas: la <b>Guía</b> para entender, la <b>Teoría</b> para memorizar las fórmulas, y el <b>Cuadernillo</b> para resolver en papel como en el examen. Toca la capa que quieras trabajar hoy.</p>
+    <div class="leyenda">
+      <span class="ldef"><span class="dot dg"></span><b>Guía</b> — entiende</span>
+      <span class="ldef"><span class="dot dt"></span><b>Teoría</b> — memoriza</span>
+      <span class="ldef"><span class="dot dc"></span><b>Cuadernillo</b> — produce en papel</span>
     </div>
   </header>
 
@@ -96,41 +101,24 @@
         <p class="msub">7 unidades · de sistemas a Rⁿ euclídeo</p>
       </div>
       <ul class="units">
-        <li><a class="unit alg" href="algebra-lineal/L1_sistemas_gauss-jordan.html">
-          <span class="badge">U1</span>
-          <span class="body"><span class="uno">Unidad 1</span><span class="uti">Sistemas y Gauss-Jordan</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit alg" href="algebra-lineal/L2_vectores-subespacios.html">
-          <span class="badge">U2</span>
-          <span class="body"><span class="uno">Unidad 2</span><span class="uti">Vectores y subespacios</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit alg" href="algebra-lineal/L3_transformaciones-lineales.html">
-          <span class="badge">U3</span>
-          <span class="body"><span class="uno">Unidad 3</span><span class="uti">Transformaciones lineales</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit alg" href="algebra-lineal/L4_algebra-matricial.html">
-          <span class="badge">U4</span>
-          <span class="body"><span class="uno">Unidad 4</span><span class="uti">Álgebra matricial</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit alg" href="algebra-lineal/L5_determinantes.html">
-          <span class="badge">U5</span>
-          <span class="body"><span class="uno">Unidad 5</span><span class="uti">Determinantes</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit alg" href="algebra-lineal/L6_diagonalizacion.html">
-          <span class="badge">U6</span>
-          <span class="body"><span class="uno">Unidad 6</span><span class="uti">Diagonalización</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit alg" href="algebra-lineal/L7_espacio-euclideo.html">
-          <span class="badge">U7</span>
-          <span class="body"><span class="uno">Unidad 7</span><span class="uti">Rⁿ euclídeo</span></span>
-          <span class="arrow">→</span>
-        </a></li>
+        <li class="unit alg"><span class="badge">U1</span><div class="body"><span class="uno">Unidad 1</span><span class="uti">Sistemas y Gauss-Jordan</span>
+          <div class="capas"><a class="capa guia" href="algebra-lineal/L1_sistemas_gauss-jordan.html">Guía →</a></div></div></li>
+        <li class="unit alg"><span class="badge">U2</span><div class="body"><span class="uno">Unidad 2</span><span class="uti">Vectores y subespacios</span>
+          <div class="capas">
+            <a class="capa guia" href="algebra-lineal/L2_vectores-subespacios.html">Guía</a>
+            <a class="capa" href="algebra-lineal/L2_teoria-formal.html">Teoría</a>
+            <a class="capa" href="algebra-lineal/L2_cuadernillo-papel.html">Cuadernillo</a>
+          </div></div></li>
+        <li class="unit alg"><span class="badge">U3</span><div class="body"><span class="uno">Unidad 3</span><span class="uti">Transformaciones lineales</span>
+          <div class="capas"><a class="capa guia" href="algebra-lineal/L3_transformaciones-lineales.html">Guía →</a></div></div></li>
+        <li class="unit alg"><span class="badge">U4</span><div class="body"><span class="uno">Unidad 4</span><span class="uti">Álgebra matricial</span>
+          <div class="capas"><a class="capa guia" href="algebra-lineal/L4_algebra-matricial.html">Guía →</a></div></div></li>
+        <li class="unit alg"><span class="badge">U5</span><div class="body"><span class="uno">Unidad 5</span><span class="uti">Determinantes</span>
+          <div class="capas"><a class="capa guia" href="algebra-lineal/L5_determinantes.html">Guía →</a></div></div></li>
+        <li class="unit alg"><span class="badge">U6</span><div class="body"><span class="uno">Unidad 6</span><span class="uti">Diagonalización</span>
+          <div class="capas"><a class="capa guia" href="algebra-lineal/L6_diagonalizacion.html">Guía →</a></div></div></li>
+        <li class="unit alg"><span class="badge">U7</span><div class="body"><span class="uno">Unidad 7</span><span class="uti">Rⁿ euclídeo</span>
+          <div class="capas"><a class="capa guia" href="algebra-lineal/L7_espacio-euclideo.html">Guía →</a></div></div></li>
       </ul>
     </section>
 
@@ -141,41 +129,20 @@
         <p class="msub">7 unidades · de sucesiones a integración múltiple</p>
       </div>
       <ul class="units">
-        <li><a class="unit calc" href="calculo-multivariado/C1_sucesiones-series.html">
-          <span class="badge">U1</span>
-          <span class="body"><span class="uno">Unidad 1</span><span class="uti">Sucesiones y series</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit calc" href="calculo-multivariado/C2_espacio-Rn.html">
-          <span class="badge">U2</span>
-          <span class="body"><span class="uno">Unidad 2</span><span class="uti">El espacio Rⁿ</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit calc" href="calculo-multivariado/C3_funciones-varias-variables.html">
-          <span class="badge">U3</span>
-          <span class="body"><span class="uno">Unidad 3</span><span class="uti">Funciones de varias variables</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit calc" href="calculo-multivariado/C4_diferenciacion.html">
-          <span class="badge">U4</span>
-          <span class="body"><span class="uno">Unidad 4</span><span class="uti">Diferenciación</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit calc" href="calculo-multivariado/C5_optimizacion.html">
-          <span class="badge">U5</span>
-          <span class="body"><span class="uno">Unidad 5</span><span class="uti">Optimización</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit calc" href="calculo-multivariado/C6_funcion-implicita-inversa.html">
-          <span class="badge">U6</span>
-          <span class="body"><span class="uno">Unidad 6</span><span class="uti">Función implícita e inversa</span></span>
-          <span class="arrow">→</span>
-        </a></li>
-        <li><a class="unit calc" href="calculo-multivariado/C7_integracion.html">
-          <span class="badge">U7</span>
-          <span class="body"><span class="uno">Unidad 7</span><span class="uti">Integración múltiple</span></span>
-          <span class="arrow">→</span>
-        </a></li>
+        <li class="unit calc"><span class="badge">U1</span><div class="body"><span class="uno">Unidad 1</span><span class="uti">Sucesiones y series</span>
+          <div class="capas"><a class="capa guia" href="calculo-multivariado/C1_sucesiones-series.html">Guía →</a></div></div></li>
+        <li class="unit calc"><span class="badge">U2</span><div class="body"><span class="uno">Unidad 2</span><span class="uti">El espacio Rⁿ</span>
+          <div class="capas"><a class="capa guia" href="calculo-multivariado/C2_espacio-Rn.html">Guía →</a></div></div></li>
+        <li class="unit calc"><span class="badge">U3</span><div class="body"><span class="uno">Unidad 3</span><span class="uti">Funciones de varias variables</span>
+          <div class="capas"><a class="capa guia" href="calculo-multivariado/C3_funciones-varias-variables.html">Guía →</a></div></div></li>
+        <li class="unit calc"><span class="badge">U4</span><div class="body"><span class="uno">Unidad 4</span><span class="uti">Diferenciación</span>
+          <div class="capas"><a class="capa guia" href="calculo-multivariado/C4_diferenciacion.html">Guía →</a></div></div></li>
+        <li class="unit calc"><span class="badge">U5</span><div class="body"><span class="uno">Unidad 5</span><span class="uti">Optimización</span>
+          <div class="capas"><a class="capa guia" href="calculo-multivariado/C5_optimizacion.html">Guía →</a></div></div></li>
+        <li class="unit calc"><span class="badge">U6</span><div class="body"><span class="uno">Unidad 6</span><span class="uti">Función implícita e inversa</span>
+          <div class="capas"><a class="capa guia" href="calculo-multivariado/C6_funcion-implicita-inversa.html">Guía →</a></div></div></li>
+        <li class="unit calc"><span class="badge">U7</span><div class="body"><span class="uno">Unidad 7</span><span class="uti">Integración múltiple</span>
+          <div class="capas"><a class="capa guia" href="calculo-multivariado/C7_integracion.html">Guía →</a></div></div></li>
       </ul>
     </section>
 
