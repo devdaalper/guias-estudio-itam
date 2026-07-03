@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -59,6 +66,8 @@
   .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
   .mrow>span{text-align:right;min-width:24px}
   .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+  /* barras verticales para determinantes (det = |A|) */
+  .bar{width:0;border-left:2.5px solid var(--ink);align-self:stretch}
 
   .check{display:grid;gap:11px;padding:16px 18px;border:1.5px solid #cfd6f2;border-radius:12px;background:#eef1fb}
   .check .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
@@ -132,9 +141,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -153,7 +176,7 @@
     <div class="learn">
       <h2>Al terminar vas a poder</h2>
       <ol>
-        <li><span class="n">1</span> Calcular el determinante de una matriz 2×2</li>
+        <li><span class="n">1</span> Calcular el determinante de una 2×2</li>
         <li><span class="n">2</span> Calcular un 3×3 por cofactores</li>
         <li><span class="n">3</span> Usar las propiedades para ahorrarte cuentas</li>
         <li><span class="n">4</span> Decidir si una matriz es invertible</li>
@@ -165,83 +188,172 @@
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Tienes un terreno en forma de romboide. Sale de la esquina y lo cierran dos lados: uno avanza <strong>3 al este y 1 al norte</strong>, el otro <strong>1 al este y 2 al norte</strong>. ¿Cuántos metros cuadrados encierra?</p>
+      <div class="fx"><div class="sys"><span class="eq">lado A → (3, 1)</span><span class="eq">lado B → (1, 2)</span></div></div>
+      <p class="idea" style="font-size:17px">Podrías dibujarlo y contar cuadritos, pero eso no escala ni sirve para responder la pregunta que de verdad importa: ¿este par de lados encierra área o se aplanan sobre una recta? Hay un solo número que contesta las dos cosas de un tiro —el <strong>determinante</strong>— y se calcula a mano, sin calculadora. Para el final de esta guía vas a sacar esa área tú sola.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>Un número que resume a toda la matriz</h3>
-      <p class="idea">A cada matriz <strong>cuadrada</strong> le asignamos un número: su <strong>determinante</strong>. No es un capricho: ese número decide si la matriz se puede invertir, si un sistema tiene solución única, y mide cuánto “estira o encoge” el espacio. Se escribe con barras verticales, no con corchetes:</p>
-      <div class="fx"><div class="sys"><span class="eq">A = matriz &nbsp;→&nbsp; det(A) = |A| = un número</span></div></div>
-      <p class="idea">Empecemos por el caso más pequeño. Para una <strong>2×2</strong> la regla es una cruz: <strong>producto de la diagonal principal menos producto de la otra</strong>.</p>
-      <div class="fx" id="def2x2"></div>
-      <p class="fx-note">Diagonal principal (↘) menos la antidiagonal (↙): a·d − b·c.</p>
+      <h3>1 · Un número que resume a toda la matriz</h3>
+      <p class="idea">A cada matriz <strong>cuadrada</strong> le asignamos un número: su <strong>determinante</strong>. Ese número decide si la matriz se puede invertir, si un sistema tiene solución única, y mide cuánto “estira o encoge” el espacio. Se escribe con <strong>barras verticales</strong>, no con corchetes:</p>
+      <div class="fx"><div class="sys"><span class="eq">A = una matriz cuadrada</span><span class="eq">det(A) = |A| = un número</span></div></div>
+      <p class="idea">Ojo con una condición clave antes de seguir: el determinante <strong>solo existe para matrices cuadradas</strong>. Comprueba que tienes eso claro:</p>
+      <div class="check" data-kind="item" data-id="CUADchk" data-tema="determinante_definicion" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿A cuál de estas matrices SÍ se le puede calcular determinante?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Una de 3 renglones y 3 columnas</button>
+          <button class="opt" data-ok="0">Una de 2 renglones y 3 columnas</button>
+          <button class="opt" data-ok="0">A cualquier matriz, con o sin misma cantidad de renglones y columnas</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El determinante <strong>solo</strong> está definido para matrices <strong>cuadradas</strong> (mismo número de renglones que de columnas). Una 2×3 no tiene determinante.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>Recuerda la regla del 2×2</h3>
-      <p class="idea">Antes de seguir, fíjala. Es la base de todo lo demás en esta unidad.</p>
+      <h3>2 · El caso más chico: la 2×2 es una cruz</h3>
+      <p class="idea">Para una <strong>2×2</strong> la regla es una cruz: <strong>producto de la diagonal principal menos producto de la otra</strong>. Con renglones (a, b) y (c, d):</p>
+      <div class="fx" id="def2x2"></div>
+      <p class="fx-note">Diagonal principal (↘) menos la antidiagonal (↗): a·d − b·c.</p>
       <div class="check" data-kind="recall" data-fid="F1_det_2x2" data-tema="determinante_2x2">
         <div class="qtag">Te toca · recuerda</div>
-        <p class="q">¿Cuál es el determinante de una matriz 2×2 con renglones (a, b) y (c, d)?</p>
+        <p class="q">¿Cuál es el determinante de una 2×2 con renglones (a, b) y (c, d)?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">a·d − b·c</button>
           <button class="opt" data-ok="0">a·b − c·d</button>
+          <button class="opt" data-ok="1">a·d − b·c</button>
           <button class="opt" data-ok="0">a·d + b·c</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Es diagonal principal menos antidiagonal: <strong>a·d</strong> (las esquinas ↘) menos <strong>b·c</strong> (las esquinas ↙). El signo del medio es un menos, no un más.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Es diagonal principal menos antidiagonal: <strong>a·d</strong> (las esquinas ↘) menos <strong>b·c</strong> (las esquinas ↗). El signo del medio es un menos, no un más.</p></div>
       </div>
     </section>
 
     <section class="sec">
-      <h3>El 3×3: cofactores</h3>
-      <p class="idea">Para una <strong>3×3</strong> no hay cruz directa: la rompemos en tres determinantes 2×2. Elige un renglón (o columna). Por cada entrada, tapas su renglón y su columna, calculas el 2×2 que sobra (su <strong>menor</strong>), y le pones un signo según el tablero de ajedrez:</p>
+      <h3>3 · Para el 3×3: cofactores</h3>
+      <p class="idea">Una <strong>3×3</strong> no tiene cruz directa: la rompemos en tres determinantes 2×2. Eliges un renglón (o columna). Por cada entrada, tapas su renglón y su columna, calculas el 2×2 que sobra —su <strong>menor</strong>— y le pones un signo según este tablero de ajedrez:</p>
       <div class="fx" id="signos"></div>
-      <p class="idea">La entrada por su menor con signo es su <strong>cofactor</strong>. El determinante es la suma de cada entrada del renglón elegido por su cofactor. <strong>Truco de examen:</strong> desarrolla por el renglón o columna con más ceros, porque esos términos se anulan solos.</p>
-    </section>
-
-    <h2 class="modhead">Yo lo hago</h2>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Calculemos este 2×2. Solo aplico la cruz.</p>
-      <div class="estep"><div class="oprow">La matriz</div><div class="fx" id="e2m"></div></div>
-      <div class="estep"><div class="oprow">Diagonal principal</div><p>Multiplico las esquinas ↘: 3 · 4 = 12.</p></div>
-      <div class="estep"><div class="oprow">Antidiagonal</div><p>Multiplico las esquinas ↙: 1 · 2 = 2. Y resto.</p></div>
-      <p class="idea" style="font-size:17px">Determinante = 12 − 2 = <strong>10</strong>. Como no dio cero, esta matriz <strong>sí</strong> es invertible.</p>
-    </section>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora un <strong>3×3</strong> por cofactores. Desarrollo por el <strong>primer renglón</strong>. Fíjate que la entrada del centro es 0: ese término desaparece.</p>
-      <div class="estep"><div class="oprow">La matriz</div><div class="fx" id="e3m"></div></div>
-      <div class="estep"><div class="oprow">Menor de la entrada (1,1) = 2</div><p>Tapo renglón 1 y columna 1. Queda un 2×2 con determinante 1·3 − 2·0 = 3.</p><div class="fx" id="e3a"></div></div>
-
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="cofactores">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">La entrada del centro del primer renglón vale 0. ¿Qué le pasa a su término en la suma de cofactores?</p>
+      <p class="idea">La entrada por su menor con signo es su <strong>cofactor</strong>. El determinante es la suma de cada entrada del renglón (o columna) elegido por su cofactor. La decisión inteligente ya la puedes anticipar:</p>
+      <div class="check" data-kind="item" data-id="ELIGchk" data-tema="cofactores" data-level="guiado">
+        <div class="qtag">Te toca · decide</div>
+        <p class="q">Para gastar la menor cantidad de cuentas, ¿por cuál renglón o columna conviene desarrollar una 3×3?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Se vuelve cero y no hay que calcular su menor</button>
-          <button class="opt" data-ok="0">Hay que calcular su menor de todas formas</button>
-          <button class="opt" data-ok="0">Cambia el signo de todo el determinante</button>
+          <button class="opt" data-ok="0">Por el que tenga los números más grandes</button>
+          <button class="opt" data-ok="1">Por el que tenga más ceros</button>
+          <button class="opt" data-ok="0">Siempre por el primer renglón, sin excepción</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Cada término es entrada × cofactor. Si la entrada es 0, el producto es 0 sin importar su menor. Por eso conviene desarrollar por donde hay ceros.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Cada término es entrada × cofactor. Si la entrada es <strong>0</strong>, todo su término vale 0 y te ahorras calcular ese menor. Por eso desarrollas por donde haya más ceros.</p></div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Yo lo hago · contigo</h2>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Calculemos el determinante de esta 2×2. No la mires nada más: en cada paso <strong>tú decides la operación</strong> y yo la aplico.</p>
+      <div class="fx" id="e2m"></div>
+
+      <div class="check" data-kind="item" data-id="E1dec" data-tema="determinante_2x2" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Primer producto de la cruz: ¿cuáles dos números multiplico para la diagonal principal (↘)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El 3 y el 4 (las esquinas de arriba-izquierda y abajo-derecha)</button>
+          <button class="opt" data-ok="0">El 1 y el 2 (las esquinas de arriba-derecha y abajo-izquierda)</button>
+          <button class="opt" data-ok="0">El 3 y el 1 (todo el primer renglón)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La diagonal principal baja de la esquina superior izquierda a la inferior derecha: aquí es 3 y 4. El renglón completo no es una diagonal.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Diagonal principal ↘</div><p>Multiplico las esquinas 3 y 4:</p><p class="calc"><span class="rw">↘</span> 3·4=<b>12</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E2dec" data-tema="determinante_2x2" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ahora la antidiagonal (↗). ¿Qué hago con su producto?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Lo sumo a los 12 de la diagonal principal</button>
+          <button class="opt" data-ok="1">Lo resto a los 12 de la diagonal principal</button>
+          <button class="opt" data-ok="0">Lo multiplico por los 12</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La regla es diagonal principal <strong>menos</strong> antidiagonal. El producto de la otra diagonal siempre se resta.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Antidiagonal ↗</div><p>Multiplico las esquinas 1 y 2, y ese producto lo restaré:</p><p class="calc"><span class="rw">↗</span> 1·2=<b>2</b></p></div>
+
+      <div class="estep"><div class="oprow">Junto la cruz</div><p>Diagonal principal menos antidiagonal:</p><p class="calc"><span class="rw">det</span> 12−2=<b>10</b></p></div>
+      <p class="idea" style="font-size:17px">Determinante = <strong>10</strong>. Como no dio cero, esta matriz <strong>sí</strong> se puede invertir. Fíjate en el orden: producto de una diagonal, producto de la otra, y restas. Eso es todo el 2×2.</p>
+    </section>
+
+    <h2 class="modhead">Sube el tamaño · el 3×3 por cofactores</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">El 2×2 salió de un tiro. El <strong>3×3</strong> tiene demasiado para una cruz, así que lo partimos: se convierte en <strong>una suma de 2×2 con signos</strong>. El salto se ordena en tres pasos:</p>
+      <ul class="fases">
+        <li><strong>Elige</strong> el renglón o columna con más ceros (menos cuentas).</li>
+        <li><strong>Por cada entrada:</strong> tapa su renglón y su columna, saca el 2×2 que sobra (su menor) y ponle el signo del tablero.</li>
+        <li><strong>Suma</strong> entrada × menor con signo.</li>
+      </ul>
+      <div class="estep"><div class="oprow">La matriz</div><div class="fx" id="e3m"></div></div>
+
+      <div class="check" data-kind="item" data-id="T1dec" data-tema="cofactores" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Mira la <strong>columna del medio</strong>: sus entradas son 0, 1, 0. ¿Por qué conviene desarrollar justo por ahí?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Porque dos de sus tres entradas son 0, así que solo sobrevive un término</button>
+          <button class="opt" data-ok="0">Porque está en el centro y siempre se empieza por el centro</button>
+          <button class="opt" data-ok="0">Porque sus números son los más pequeños</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Dos entradas valen 0: sus términos se anulan solos. Solo hay que calcular el menor de la única entrada distinta de cero, el 1. Un menor en vez de tres.</p></div>
       </div>
 
-      <div class="estep"><div class="oprow">Menor de la entrada (1,3) = 1</div><p>Tapo renglón 1 y columna 3. Queda un 2×2 con determinante 3·0 − 1·1 = −1. Su signo en el tablero es +.</p><div class="fx" id="e3c"></div></div>
-      <div class="estep"><div class="oprow">Sumo los cofactores</div><p>2·(+3) + 0·(algo) + 1·(−1) = 6 + 0 − 1.</p><div class="fx"><div class="sys"><span class="eq">det = 2(3) − 0 + 1(−1) = 5</span></div></div></div>
-      <p class="idea" style="font-size:17px">Determinante = <strong>5</strong>. Un solo número, saliendo de tres 2×2 y un tablero de signos.</p>
+      <div class="estep"><div class="oprow">Entradas 0 → se anulan</div><p>Las dos entradas cero de la columna del medio matan sus términos sin calcular nada:</p><p class="calc"><span class="rw">arriba</span> 0·(menor)=<b>0</b> <span class="sep">•</span> <span class="rw">abajo</span> 0·(menor)=<b>0</b></p></div>
+
+      <div class="check" data-kind="item" data-id="T2dec" data-tema="cofactores" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Solo queda el <strong>1</strong> del centro, en la posición (2,2). ¿Qué menor le corresponde?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Tapo renglón 2 y columna 2; queda el 2×2 con las cuatro esquinas: (2, 1) arriba y (1, 3) abajo</button>
+          <button class="opt" data-ok="0">Tapo solo la columna 2; queda una 3×2</button>
+          <button class="opt" data-ok="0">Tapo renglón 1 y columna 1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El menor de una entrada tapa <strong>su</strong> renglón y <strong>su</strong> columna. Para el 1 en (2,2), tapas el renglón 2 y la columna 2; sobran las cuatro esquinas de la matriz.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Menor del 1 en (2,2)</div><p>Tapo renglón 2 y columna 2. Queda este 2×2:</p><div class="fx" id="e3a"></div><p>Su determinante (cruz):</p><p class="calc"><span class="rw">menor</span> 2·3−1·1=<b>5</b></p></div>
+
+      <div class="check" data-kind="item" data-id="T3dec" data-tema="cofactores" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">La entrada 1 está en (2,2). Según el tablero + − + / − + − / + − +, ¿qué signo lleva su término?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Negativo, porque está en el renglón del medio</button>
+          <button class="opt" data-ok="1">Positivo: la posición (2,2) es un + en el tablero</button>
+          <button class="opt" data-ok="0">Depende del valor del menor</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El tablero solo depende de la <strong>posición</strong>, no del número. La casilla (2,2) es un +, así que el término se suma tal cual.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Sumo el único término vivo</div><p>Entrada 1 × su menor 5 × signo +:</p><p class="calc"><span class="rw">det</span> 0 + 1·(+5) + 0 = <b>5</b></p></div>
+      <p class="idea" style="font-size:17px">Determinante = <strong>5</strong>. Mismo método que el 2×2, solo que primero eliges por dónde y usas el tablero de signos. Desarrollar por la columna con dos ceros convirtió un 3×3 en <strong>un solo</strong> 2×2.</p>
     </section>
 
     <section class="sec">
       <h3>Propiedades que te ahorran cuentas</h3>
       <p class="idea">No siempre hay que calcular todo. Vale la pena memorizar estos atajos:</p>
       <ul style="margin:0;padding-left:1.2em;display:grid;gap:8px">
-        <li><strong>Triangular:</strong> si la matriz es triangular (ceros de un lado de la diagonal), el determinante es el <strong>producto de la diagonal</strong>. Nada más.</li>
+        <li><strong>Triangular:</strong> si hay ceros de un lado de la diagonal, el determinante es el <strong>producto de la diagonal</strong>. Nada más.</li>
         <li><strong>Renglón o columna de ceros</strong> → determinante 0.</li>
         <li><strong>Dos renglones (o columnas) iguales o proporcionales</strong> → determinante 0.</li>
         <li><strong>Intercambiar dos renglones</strong> cambia el <strong>signo</strong> del determinante.</li>
         <li><strong>Del producto:</strong> det(AB) = det(A)·det(B).</li>
       </ul>
-      <p class="idea">Ejemplo de la triangular: esta matriz tiene puros ceros bajo la diagonal, así que su determinante es 2·3·1.</p>
+      <p class="idea">Ejemplo de la triangular: esta matriz tiene puros ceros debajo de la diagonal, así que su determinante es 2·3·1, sin cofactores.</p>
       <div class="fx" id="triang"></div>
-      <p class="fx-note">Determinante = 2·3·1 = 6. Ni cofactores hicieron falta.</p>
+      <p class="fx-note">Determinante = 2·3·1 = 6. Los números de arriba de la diagonal no cuentan.</p>
+      <div class="check" data-kind="recall" data-fid="F2_triangular" data-tema="propiedades">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Cuál es el atajo para el determinante de una matriz triangular?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Sumar los números de la diagonal</button>
+          <button class="opt" data-ok="1">Multiplicar los números de la diagonal</button>
+          <button class="opt" data-ok="0">Restar la antidiagonal a la diagonal</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>En una triangular, al desarrollar por cofactores todo se cancela salvo el <strong>producto de la diagonal</strong>. Es sumar solo en la 2×2 con la cruz; en triangular se <strong>multiplica</strong> la diagonal.</p></div>
+      </div>
     </section>
 
     <section class="sec">
@@ -256,24 +368,25 @@
         <div class="viz-legend"><span><i style="background:#F5821F"></i>Renglón 1</span><span><i style="background:#283891"></i>Renglón 2</span></div>
         <p class="viz-cap" id="vizCap"></p>
       </div>
+      <p class="fx-note">El caso de la izquierda es justo el terreno del inicio: lados (3, 1) y (1, 2). Su área es 3·2 − 1·1 = 5 metros cuadrados. Ya lo puedes cerrar tú sola.</p>
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">El determinante también <strong>resuelve sistemas</strong>. Si det ≠ 0, hay solución única y la da la <strong>regla de Cramer</strong>: cada incógnita es un cociente de determinantes. Tomemos este sistema:</p>
+      <p class="idea" style="font-size:17px">El determinante también <strong>resuelve sistemas</strong>. Si det ≠ 0, hay solución única y la da la <strong>regla de Cramer</strong>: cada incógnita es un cociente de determinantes. Vamos paso a paso con este sistema:</p>
       <div class="fx"><div class="sys"><span class="eq">2x + y = 5</span><span class="eq">x + 3y = 10</span></div></div>
-      <div class="estep"><div class="oprow">Determinante del sistema</div><p>Es el de la matriz de coeficientes: 2·3 − 1·1 = 5. Como no es cero, hay solución única.</p><div class="fx" id="cr0"></div></div>
-      <div class="estep"><div class="oprow">Para x: reemplazo la columna de x por los resultados</div><p>det = 5·3 − 1·10 = 5. Entonces x = 5 ÷ 5.</p><div class="fx" id="cr1"></div></div>
-      <div class="estep"><div class="oprow">Para y: reemplazo la columna de y por los resultados</div><p>det = 2·10 − 5·1 = 15. Entonces y = 15 ÷ 5.</p><div class="fx" id="cr2"></div></div>
+      <div class="estep"><div class="oprow">Determinante del sistema</div><p>Es el de la matriz de coeficientes. Con la cruz:</p><p class="calc"><span class="rw">det</span> 2·3−1·1=<b>5</b></p><div class="fx" id="cr0"></div></div>
+      <div class="estep"><div class="oprow">Para x: reemplazo la columna de x por los resultados</div><p>Cambio la columna 2 y 1 por 5 y 10, y saco su determinante. Luego divido entre 5:</p><p class="calc"><span class="rw">det<sub>x</sub></span> 5·3−1·10=<b>5</b> <span class="sep">•</span> <span class="rw">x</span> 5÷5=<b>1</b></p><div class="fx" id="cr1"></div></div>
+      <div class="estep"><div class="oprow">Para y: reemplazo la columna de y por los resultados</div><p>Ahora cambio la columna de y por 5 y 10, saco su determinante y divido entre 5:</p><p class="calc"><span class="rw">det<sub>y</sub></span> 2·10−5·1=<b>15</b> <span class="sep">•</span> <span class="rw">y</span> 15÷5=<b>3</b></p><div class="fx" id="cr2"></div></div>
       <p class="idea" style="font-size:17px">Solución: <strong>x = 1</strong>, <strong>y = 3</strong>. Cada incógnita salió de dividir dos determinantes, sin reducir la matriz.</p>
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Por último, el determinante <strong>invierte</strong> matrices. La fórmula por <strong>adjunta</strong>: la inversa es <strong>uno sobre el determinante</strong> por la matriz adjunta. Para 2×2 la adjunta es fácil: <strong>intercambias la diagonal principal y cambias de signo la otra</strong>. Invirtamos esta:</p>
+      <p class="idea" style="font-size:17px">Por último, el determinante <strong>invierte</strong> matrices. La fórmula por <strong>adjunta</strong>: la inversa es <strong>uno sobre el determinante</strong> por la matriz adjunta. En 2×2 la adjunta es fácil: <strong>intercambias la diagonal principal y cambias de signo la otra</strong>. Invirtamos esta, paso a paso:</p>
       <div class="estep"><div class="oprow">La matriz</div><div class="fx" id="in0"></div></div>
-      <div class="estep"><div class="oprow">Determinante</div><p>4·2 − 3·2 = 2. No es cero, así que sí tiene inversa.</p></div>
-      <div class="estep"><div class="oprow">Adjunta</div><p>Intercambio 4 y 2 (diagonal principal), y cambio el signo de 3 y de 2 (la otra diagonal).</p><div class="fx" id="in1"></div></div>
-      <div class="estep"><div class="oprow">Divido la adjunta entre el determinante</div><p>Multiplico cada entrada por 1/2.</p><div class="fx" id="in2"></div></div>
-      <p class="idea" style="font-size:17px">Esa es la inversa. En esta unidad la <strong>inversa por adjunta la trabajamos en 2×2</strong>, donde la adjunta sale de intercambiar la diagonal principal y cambiar el signo de la otra. (En 3×3 se puede, pero conviene invertir por Gauss-Jordan, que verás en otra unidad.)</p>
+      <div class="estep"><div class="oprow">Determinante</div><p>Con la cruz, y compruebo que no sea cero:</p><p class="calc"><span class="rw">det</span> 4·2−3·2=<b>2</b></p></div>
+      <div class="estep"><div class="oprow">Adjunta</div><p>Intercambio 4 y 2 (diagonal principal) y cambio el signo de 3 y de 2 (la otra diagonal):</p><div class="fx" id="in1"></div></div>
+      <div class="estep"><div class="oprow">Divido la adjunta entre el determinante</div><p>Multiplico cada entrada por 1/2:</p><p class="calc"><span class="rw">1/det</span> 2÷2=<b>1</b> <span class="sep">•</span> −3÷2=<b>−3/2</b> <span class="sep">•</span> −2÷2=<b>−1</b> <span class="sep">•</span> 4÷2=<b>2</b></p><div class="fx" id="in2"></div></div>
+      <p class="idea" style="font-size:17px">Esa es la inversa. En esta unidad la <strong>inversa por adjunta la trabajamos en 2×2</strong>. (En 3×3 se puede, pero conviene invertir por Gauss-Jordan, de otra unidad.)</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>
@@ -282,19 +395,19 @@
 
       <div class="pitem" data-kind="item" data-id="P1" data-tema="determinante_2x2" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Calcula el determinante de esta matriz 2×2.</p>
+        <p class="pstatement">Calcula el determinante de esta 2×2.</p>
         <div class="fx" id="p1"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">−2</button>
           <button class="opt" data-ok="0">2</button>
+          <button class="opt" data-ok="1">−2</button>
           <button class="opt" data-ok="0">10</button>
         </div>
         <div class="aux"><details><summary>Pista</summary><p>Diagonal principal menos antidiagonal: (1·4) − (2·3). Cuida el signo del resultado.</p></details></div>
         <div class="why"><span class="lbl">Por qué</span><p>1·4 = 4 y 2·3 = 6. Entonces 4 − 6 = −2. Un determinante puede ser negativo sin problema.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="invertibilidad" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="invertibilidad" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
         <p class="pstatement">Sin invertir nada: ¿esta matriz tiene inversa?</p>
         <div class="fx" id="p2"></div>
         <div class="opts">
@@ -302,52 +415,67 @@
           <button class="opt" data-ok="0">Sí, toda matriz cuadrada tiene inversa</button>
           <button class="opt" data-ok="0">No se puede saber sin calcular la inversa</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>2·2 − 4·1 = 0. Una matriz es invertible <strong>si y solo si</strong> su determinante es distinto de cero. El segundo renglón es la mitad del primero: proporcionales.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Saca el determinante con la cruz: 2·2 − 4·1. ¿Qué te dice ese número sobre la inversa?</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>2·2 − 4·1 = 0. Una matriz es invertible <strong>si y solo si</strong> su determinante es distinto de cero. Además, el segundo renglón es la mitad del primero: proporcionales.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2b" data-tema="cofactores" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="propiedades" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Calcula el determinante de esta 3×3 por cofactores.</p>
-        <div class="fx" id="p2b"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">8</button>
-          <button class="opt" data-ok="0">10</button>
-          <button class="opt" data-ok="0">6</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Desarrolla por donde haya ceros: el tercer renglón es (0, 0, 2), así que solo sobrevive el término del 2. Tablero de signos: + − + / − + − / + − +, entonces el signo del 2 (posición 3,3) es +. Su menor es tapar renglón 3 y columna 3: det de [[4,0],[2,1]].</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Por el tercer renglón: 0 − 0 + 2·(+menor). El menor del 2 es 4·1 − 0·2 = 4. Entonces det = 2·4 = 8. Desarrollar por donde hay ceros ahorra dos determinantes 2×2.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P2c" data-tema="cofactores" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Ahora tú, la expansión completa: calcula el determinante de esta 3×3 por cofactores, desarrollando por el primer renglón.</p>
-        <div class="fx" id="p2c"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">9</button>
-          <button class="opt" data-ok="0">13</button>
-          <button class="opt" data-ok="0">10</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Por el primer renglón, con el tablero + − +: 1·(1·1 − 0·3) − 1·(2·1 − 0·1) + 2·(2·3 − 1·1) = 1·1 − 1·2 + 2·5 = 1 − 2 + 10 = <strong>9</strong>. (Si te salió 13, sumaste los tres términos sin respetar el − del tablero; si salió 10, te quedaste solo con el término del 2.)</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="propiedades" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">¿Cuánto vale el determinante de esta matriz triangular?</p>
+        <p class="pstatement">¿Cuánto vale el determinante de esta matriz triangular? (Aprovecha el atajo.)</p>
         <div class="fx" id="p3"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">30</button>
           <button class="opt" data-ok="0">10</button>
+          <button class="opt" data-ok="1">30</button>
           <button class="opt" data-ok="0">0</button>
         </div>
+        <div class="aux"><details><summary>Pista</summary><p>Es triangular (puros ceros bajo la diagonal). El determinante es el producto de la diagonal: 2·3·5. Los 1 y 7 de arriba no cuentan.</p></details></div>
         <div class="why"><span class="lbl">Por qué</span><p>En una triangular el determinante es el producto de la diagonal: 2·3·5 = 30. Los números de arriba no cuentan.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="regla_de_cramer" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="propiedades" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Resuelve este sistema por Cramer y da el valor de <strong>x</strong>. Primero calculamos el determinante del sistema; luego el de arriba con la columna de x reemplazada por los resultados.</p>
+        <p class="pstatement">Sin calcular la cruz: ¿cuánto vale el determinante de esta matriz? Fíjate en los renglones.</p>
+        <div class="fx" id="p4"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">0, porque el segundo renglón es el triple del primero</button>
+          <button class="opt" data-ok="0">6, hay que hacer la cruz igual</button>
+          <button class="opt" data-ok="0">No se puede saber sin la cuenta</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Compara los dos renglones: (1, 2) y (3, 6). ¿El de abajo es un múltiplo del de arriba? Si dos renglones son proporcionales, hay un atajo.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>(3, 6) = 3·(1, 2): renglones proporcionales → determinante 0. Si haces la cruz confirmas: 1·6 − 2·3 = 0. Esas flechas apuntan igual, no encierran área.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="cofactores" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Calcula el determinante de esta 3×3. El tercer renglón es (0, 0, 2): desarrolla por ahí.</p>
+        <div class="fx" id="p5"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">10</button>
+          <button class="opt" data-ok="1">8</button>
+          <button class="opt" data-ok="0">6</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Solo sobrevive el término del 2 (posición 3,3, signo +). Su menor tapa renglón 3 y columna 3: det de [[4, 0], [2, 1]] = 4·1 − 0·2 = 4. Ahora multiplica por el 2.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Por el tercer renglón: 0 − 0 + 2·(+menor). El menor del 2 es 4·1 − 0·2 = 4. Entonces det = 2·4 = 8. Desarrollar por donde hay ceros ahorró dos determinantes 2×2.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="cofactores" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Ahora la expansión completa: calcula el determinante de esta 3×3 desarrollando por el primer renglón.</p>
+        <div class="fx" id="p6"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">13</button>
+          <button class="opt" data-ok="1">9</button>
+          <button class="opt" data-ok="0">10</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Por el primer renglón, con el tablero + − +: 1·(1·1 − 0·3) − 1·(2·1 − 0·1) + 2·(2·3 − 1·1) = 1 − 2 + 10 = <strong>9</strong>. (Si te salió 13, sumaste los tres términos sin respetar el − del tablero; si salió 10, te quedaste solo con el término del 2.)</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="regla_de_cramer" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Resuelve este sistema por Cramer y da el valor de <strong>x</strong>. Primero el determinante del sistema; luego el de arriba con la columna de x reemplazada por los resultados.</p>
         <div class="fx"><div class="sys"><span class="eq">3x + y = 9</span><span class="eq">x + 2y = 8</span></div></div>
-        <div class="fx" id="p4sys"></div>
-        <div class="fx" id="p4x"></div>
+        <div class="fx" id="p7sys"></div>
+        <div class="fx" id="p7x"></div>
         <div class="opts">
           <button class="opt" data-ok="1">x = 2</button>
           <button class="opt" data-ok="0">x = 10</button>
@@ -357,7 +485,7 @@
         <div class="why"><span class="lbl">Por qué</span><p>Determinante del sistema = 5. El de x = 9·2 − 1·8 = 10. Entonces x = 10 ÷ 5 = <strong>2</strong>. Cada incógnita es un cociente de determinantes, sin reducir la matriz.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4b" data-tema="regla_de_cramer" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="regla_de_cramer" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">Ahora tú, de principio a fin: resuelve por Cramer y da el valor de <strong>x</strong>.</p>
         <div class="fx"><div class="sys"><span class="eq">2x + y = 5</span><span class="eq">x + y = 3</span></div></div>
@@ -369,26 +497,25 @@
         <div class="why"><span class="lbl">Por qué</span><p>Determinante del sistema = 2·1 − 1·1 = 1. Para x, reemplazas su columna por los resultados: 5·1 − 1·3 = 2. Entonces x = 2 ÷ 1 = <strong>2</strong>. (Si te salió 1, calculaste y por error; si salió 5, olvidaste dividir.)</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="adjunta_inversa" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">¿Cuál es la adjunta de esta matriz? (Intercambia la diagonal principal y cambia el signo de la otra.)</p>
-        <div class="fx" id="p5"></div>
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="adjunta_inversa" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">¿Cuál es la adjunta de esta 2×2? (Intercambia la diagonal principal y cambia el signo de la otra.)</p>
+        <div class="fx" id="p9"></div>
         <div class="opts">
-          <button class="opt" data-ok="1" id="p5a"></button>
-          <button class="opt" data-ok="0" id="p5b"></button>
-          <button class="opt" data-ok="0" id="p5c"></button>
+          <button class="opt" data-ok="1" id="p9a"></button>
+          <button class="opt" data-ok="0" id="p9b"></button>
+          <button class="opt" data-ok="0" id="p9c"></button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Es la misma regla del ejemplo resuelto. La diagonal principal es 2 y 1: intercámbialos, quedan 1 y 2. La otra diagonal es 1 y 1: cámbiales el signo, quedan −1 y −1.</p></details></div>
         <div class="why"><span class="lbl">Por qué</span><p>Intercambias las esquinas de la diagonal principal (2 y 1 pasan a 1 y 2) y cambias el signo de la otra diagonal (1 y 1 se vuelven −1 y −1). Como el determinante es 2·1 − 1·1 = 1, esa adjunta ya es la inversa.</p></div>
       </div>
     </section>
 
-    <div class="check" data-kind="recall" data-fid="F2_invertibilidad" data-tema="invertibilidad">
+    <div class="check" data-kind="recall" data-fid="F3_invertibilidad" data-tema="invertibilidad">
       <div class="qtag">Te toca · recuerda</div>
       <p class="q">¿Cuándo una matriz cuadrada NO tiene inversa?</p>
       <div class="opts">
-        <button class="opt" data-ok="1">Cuando su determinante es igual a cero</button>
         <button class="opt" data-ok="0">Cuando su determinante es negativo</button>
+        <button class="opt" data-ok="1">Cuando su determinante es igual a cero</button>
         <button class="opt" data-ok="0">Cuando tiene alguna entrada igual a cero</button>
       </div>
       <div class="why"><span class="lbl">Por qué</span><p>Invertible ⇔ determinante ≠ 0. Un determinante negativo está perfecto (la matriz sí se invierte). Tener alguna entrada cero no dice nada por sí solo.</p></div>
@@ -398,6 +525,7 @@
       <h3>Para memorizar</h3>
       <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
       <ul>
+        <li><span class="ck">✓</span> Solo las matrices cuadradas tienen determinante.</li>
         <li><span class="ck">✓</span> 2×2: diagonal principal menos antidiagonal, a·d − b·c.</li>
         <li><span class="ck">✓</span> 3×3: cofactores. Entrada × menor con signo (tablero + − + / − + − / + − +); desarrolla por donde haya ceros.</li>
         <li><span class="ck">✓</span> Triangular → producto de la diagonal. Renglón/columna de ceros, o dos renglones proporcionales → determinante 0.</li>
@@ -414,6 +542,11 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="L4_algebra-matricial.html"><span class="sp">← Anterior</span><span class="ti">U4 · Álgebra matricial</span></a>
+      <a class="next" href="L6_diagonalizacion.html"><span class="sp">Siguiente →</span><span class="ti">U6 · Diagonalización</span></a>
+    </nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 5</p></footer>
 
@@ -452,51 +585,55 @@ function sq(rows){
 }
 function setsq(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=sq(rows); }
 
-// definiciones
-setsq('def2x2',[["a","b"],["c","d"]]);
-setsq('signos',[["+","−","+"],["−","+","−"],["+","−","+"]]);
+// ===== La idea =====
+setsq('def2x2',[["a","b"],["c","d"]]);            // definición 2x2 (cruz)
+setsq('signos',[["+","−","+"],["−","+","−"],["+","−","+"]]); // tablero de signos
 
-// ejemplo 2x2: det [[3,1],[2,4]] = 12 - 2 = 10
+// ===== Yo lo hago · contigo (2x2) =====
+// det [[3,1],[2,4]] = 3*4 - 1*2 = 12 - 2 = 10
 setsq('e2m',[["3","1"],["2","4"]]);
 
-// ejemplo 3x3: [[2,0,1],[3,1,2],[1,0,3]] -> det = 2(3) - 0 + 1(-1) = 5
+// ===== Sube el tamaño (3x3 por cofactores, columna del medio) =====
+// [[2,0,1],[3,1,2],[1,0,3]] -> por columna 2: solo sobrevive el 1 en (2,2)
+// menor de (2,2): tapo renglon 2 y columna 2 -> [[2,1],[1,3]] = 2*3 - 1*1 = 5
+// signo (2,2) = + -> det = 1*(+5) = 5
 setsq('e3m',[["2","0","1"],["3","1","2"],["1","0","3"]]);
-setsq('e3a',[["1","2"],["0","3"]]);  // menor de (1,1): renglones 2-3, columnas 2-3
-setsq('e3c',[["3","1"],["1","0"]]);  // menor de (1,3): renglones 2-3, columnas 1-2
+setsq('e3a',[["2","1"],["1","3"]]);   // menor de (2,2): renglones 1-3, columnas 1-3 (esquinas)
 
 // triangular: det = 2*3*1 = 6
 setsq('triang',[["2","5","1"],["0","3","4"],["0","0","1"]]);
 
-// Cramer: 2x+y=5 ; x+3y=10. d=5, dx=5, dy=15 -> x=1, y=3
+// ===== Cramer: 2x+y=5 ; x+3y=10. d=5, dx=5, dy=15 -> x=1, y=3 =====
 setsq('cr0',[["2","1"],["1","3"]]);
 setsq('cr1',[["5","1"],["10","3"]]);
 setsq('cr2',[["2","5"],["1","10"]]);
 
-// inversa por adjunta 2x2: [[4,3],[2,2]], det=2, adj=[[2,-3],[-2,4]], inv=[[1,-3/2],[-1,2]]
+// ===== inversa por adjunta 2x2: [[4,3],[2,2]], det=2, adj=[[2,-3],[-2,4]], inv=[[1,-3/2],[-1,2]] =====
 setsq('in0',[["4","3"],["2","2"]]);
 setsq('in1',[["2","−3"],["−2","4"]]);
 setsq('in2',[["1","−3/2"],["−1","2"]]);
 
-// práctica
-setsq('p1',[["1","2"],["3","4"]]);         // det = 4 - 6 = -2
-setsq('p2',[["2","4"],["1","2"]]);         // det = 4 - 4 = 0 -> no invertible
-setsq('p2b',[["4","0","1"],["2","1","3"],["0","0","2"]]); // por 3er renglón: 2*(4*1-0*2)=8
-// P2c (solo): expansión completa por cofactores. [[1,1,2],[2,1,0],[1,3,1]]
-// por renglón 1: 1(1·1−0·3) − 1(2·1−0·1) + 2(2·3−1·1) = 1 − 2 + 10 = 9
-setsq('p2c',[["1","1","2"],["2","1","0"],["1","3","1"]]);
+// ===== práctica =====
+setsq('p1',[["1","2"],["3","4"]]);          // det = 4 - 6 = -2
+setsq('p2',[["2","4"],["1","2"]]);          // det = 4 - 4 = 0 -> no invertible
 setsq('p3',[["2","1","7"],["0","3","4"],["0","0","5"]]); // triangular -> 2*3*5 = 30
-// P4 Cramer (juntos): sistema 3x+y=9 ; x+2y=8. det sistema=5, det_x=10 -> x=2
-setsq('p4sys',[["3","1"],["1","2"]]);      // determinante del sistema = 3*2-1*1 = 5
-setsq('p4x',[["9","1"],["8","2"]]);        // columna de x reemplazada por (9,8): 9*2-1*8 = 10
-setsq('p5',[["2","1"],["1","1"]]);         // matriz cuya adjunta es [[1,-1],[-1,2]]
-// opciones del P5 (adjunta de [[2,1],[1,1]])
-document.getElementById('p5a').innerHTML = sq([["1","−1"],["−1","2"]]);   // correcta
-document.getElementById('p5b').innerHTML = sq([["1","1"],["1","2"]]);
-document.getElementById('p5c').innerHTML = sq([["2","−1"],["−1","1"]]);
+setsq('p4',[["1","2"],["3","6"]]);          // renglones proporcionales -> det 0
+setsq('p5',[["4","0","1"],["2","1","3"],["0","0","2"]]); // por 3er renglon: 2*(4*1-0*2)=8
+// P6 (solo): expansion completa. [[1,1,2],[2,1,0],[1,3,1]]
+// por renglon 1: 1(1*1-0*3) - 1(2*1-0*1) + 2(2*3-1*1) = 1 - 2 + 10 = 9
+setsq('p6',[["1","1","2"],["2","1","0"],["1","3","1"]]);
+// P7 Cramer (juntos): sistema 3x+y=9 ; x+2y=8. det sistema=5, det_x=10 -> x=2
+setsq('p7sys',[["3","1"],["1","2"]]);       // determinante del sistema = 3*2-1*1 = 5
+setsq('p7x',[["9","1"],["8","2"]]);         // columna de x reemplazada por (9,8): 9*2-1*8 = 10
+// P9 adjunta de [[2,1],[1,1]] -> [[1,-1],[-1,2]]
+setsq('p9',[["2","1"],["1","1"]]);
+document.getElementById('p9a').innerHTML = sq([["1","−1"],["−1","2"]]);   // correcta
+document.getElementById('p9b').innerHTML = sq([["1","1"],["1","2"]]);
+document.getElementById('p9c').innerHTML = sq([["2","−1"],["−1","1"]]);
 
-// ===== visual: el determinante 2x2 como área de un paralelogramo =====
-// renglones r1=(3,1), r2=(1,2) -> det = 3*2 - 1*1 = 5 (área)
-// caso cero: r1=(3,1), r2=(6,2) proporcionales -> det = 0 (sin área)
+// ===== visual: el determinante 2x2 como area de un paralelogramo =====
+// renglones r1=(3,1), r2=(1,2) -> det = 3*2 - 1*1 = 5 (area)
+// caso cero: r1=(3,1), r2=(6,2) proporcionales -> det = 0 (sin area)
 function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
 var VG='', VA='';
 (function(){

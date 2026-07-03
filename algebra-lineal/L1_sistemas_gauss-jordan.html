@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -165,19 +186,37 @@
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">En una cafetería, <strong>2 cafés y 3 jugos cuestan $13</strong>. Y <strong>1 café y 2 jugos cuestan $8</strong>. ¿Cuánto cuesta cada uno?</p>
+      <div class="fx"><div class="sys"><span class="eq">2c + 3j = 13</span><span class="eq">1c + 2j = 8</span></div></div>
+      <p class="idea" style="font-size:17px">Con dos incógnitas quizá lo tantees. Pero con tres o cuatro, el tanteo se derrumba. Necesitamos un método que <strong>siempre</strong> funcione y que se haga <strong>a mano, sin calculadora</strong>. Ese método es <strong>Gauss-Jordan</strong>: para el final de esta guía vas a resolver justo este problema tú sola.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>De ecuaciones a una tabla de números</h3>
-      <p class="idea">Un sistema de ecuaciones lo reescribimos como una <strong>matriz aumentada</strong>: los coeficientes a la izquierda, los resultados a la derecha, separados por una barra. Mira el mismo sistema en sus dos formas:</p>
+      <h3>1 · De ecuaciones a una tabla de números</h3>
+      <p class="idea">Lo primero es soltar las letras y quedarnos con los números ordenados. Un sistema se reescribe como una <strong>matriz aumentada</strong>: los coeficientes a la izquierda, los resultados a la derecha, separados por una barra. El mismo sistema en sus dos formas:</p>
       <div class="fx"><div class="sys"><span class="eq">x + 2y = 5</span><span class="eq">3x − y = 1</span></div></div>
       <div class="fx" id="mtxIntro"></div>
-      <p class="idea">Resolver el sistema es <strong>simplificar</strong> esa tabla con operaciones permitidas hasta poder <strong>leer</strong> la respuesta directamente.</p>
+      <p class="idea">Cada renglón es una ecuación; cada columna, una incógnita. Resolver el sistema será <strong>simplificar</strong> esta tabla hasta poder <strong>leer</strong> la respuesta directamente. Antes de seguir, comprueba que la lees bien:</p>
+      <div class="check" data-kind="item" data-id="MAchk" data-tema="matriz_aumentada" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿Cuál matriz aumentada corresponde a este sistema?</p>
+        <div class="fx"><div class="sys"><span class="eq">2x − y = 3</span><span class="eq">x + 4y = 5</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1" id="ma_a"></button>
+          <button class="opt" data-ok="0" id="ma_b"></button>
+          <button class="opt" data-ok="0" id="ma_c"></button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El coeficiente de y en la primera ecuación es <strong>−1</strong> (por el signo menos). Las columnas van en orden x, y, y la barra guarda los resultados 3 y 5.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>Las 3 operaciones permitidas</h3>
-      <p class="idea">Solo hay tres movidas válidas. Ninguna cambia las soluciones porque todas se pueden deshacer. ¿Las recuerdas antes de mirarlas?</p>
+      <h3>2 · Las 3 operaciones permitidas</h3>
+      <p class="idea">Para simplificar la tabla solo hay <strong>tres movidas válidas</strong>. Ninguna cambia las soluciones porque todas se pueden deshacer. ¿Las recuerdas antes de mirarlas?</p>
       <div class="check" data-kind="recall" data-fid="F1_operaciones_renglon" data-tema="operaciones_elementales">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Cuál de estas SÍ es el conjunto correcto de operaciones de renglón?</p>
@@ -191,42 +230,97 @@
     </section>
 
     <section class="sec">
-      <h3>La meta: la forma reducida</h3>
-      <p class="idea">El objetivo es dejar la matriz en su <strong>forma escalonada reducida</strong>: cada variable con un <strong>1</strong> solo en su columna (un pivote) y ceros en el resto. Cuando llegas ahí, la solución se lee sola. Así se ve una matriz ya reducida de un sistema 2×2:</p>
+      <h3>3 · La meta: la forma reducida</h3>
+      <p class="idea">¿Hasta dónde simplificamos? Hasta la <strong>forma escalonada reducida</strong> (RREF): cada variable con un <strong>1</strong> solo en su columna —un <strong>pivote</strong>— y ceros en el resto. Cuando la matriz llega ahí, la solución se lee sola:</p>
       <div class="fx" id="rrefEx"></div>
       <p class="fx-note">Se lee directo: la primera variable vale 4, la segunda vale −1.</p>
+      <div class="check" data-kind="item" data-id="RREFchk" data-tema="forma_reducida" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿Cuál de estas matrices YA está en forma reducida?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1" id="rr_a"></button>
+          <button class="opt" data-ok="0" id="rr_b"></button>
+          <button class="opt" data-ok="0" id="rr_c"></button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>En la reducida cada pivote es un <strong>1</strong> y es el <strong>único</strong> número no nulo de su columna. Si arriba del 1 todavía queda algo, o el pivote no es 1, aún no terminas.</p></div>
+      </div>
     </section>
 
-    <h2 class="modhead">Yo lo hago</h2>
+    <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Reduzcamos la matriz del sistema de arriba hasta su forma más simple. Voy paso a paso; tú solo sigue el hilo.</p>
-      <div class="estep"><div class="oprow">R2 → R2 − 3·R1</div><p>Resto 3 veces el renglón 1 al renglón 2 para que la x del renglón 2 desaparezca.</p><div class="fx" id="e1"></div></div>
+      <p class="idea" style="font-size:17px">Reduzcamos la matriz del sistema x + 2y = 5, 3x − y = 1. No la mires nada más: en cada paso <strong>tú eliges la operación</strong> y yo la aplico.</p>
+      <div class="fx" id="e0"></div>
 
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="gauss_jordan">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">El renglón 2 quedó como “−7 por y, igual a −14”. ¿Cuál es el siguiente movimiento natural?</p>
+      <div class="check" data-kind="item" data-id="E1pred" data-tema="gauss_jordan" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Primer objetivo: hacer <strong>cero</strong> la x del renglón 2 (abajo hay un 3, arriba un 1). ¿Qué operación lo logra?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">R2 → R2 − 3·R1</button>
+          <button class="opt" data-ok="0">R2 → R2 + 3·R1</button>
+          <button class="opt" data-ok="0">R1 → R1 − 3·R2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Arriba la x vale 1; restar 3 veces ese renglón deja 3 − 3·1 = 0.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">R2 → R2 − 3·R1</div><p>Tomo el renglón 2 = [3, −1, 1] y le resto 3 veces el renglón 1 = [1, 2, 5], celda por celda:</p><p class="calc"><span class="rw">R2</span> 3−3·1=<b>0</b> <span class="sep">•</span> −1−3·2=<b>−7</b> <span class="sep">•</span> 1−3·5=<b>−14</b></p><div class="fx" id="e1"></div></div>
+
+      <div class="check" data-kind="item" data-id="EJpred" data-tema="gauss_jordan" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">El renglón 2 quedó como “−7 por y, igual a −14”. Para tener un pivote limpio, ¿cuál es el siguiente movimiento?</p>
         <div class="opts">
           <button class="opt" data-ok="1">Dividir el renglón 2 entre −7, para que el coeficiente de y sea 1</button>
           <button class="opt" data-ok="0">Multiplicar el renglón 2 por −7</button>
           <button class="opt" data-ok="0">Intercambiar el renglón 1 y el renglón 2</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Buscamos un 1 limpio en la posición de y. Dividir entre −7 lo logra y deja el renglón listo para leer.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Buscamos un 1 limpio en la posición de y. Dividir entre −7 lo logra.</p></div>
       </div>
+      <div class="estep"><div class="oprow">R2 → R2 ÷ (−7)</div><p>Divido cada número del renglón 2 = [0, −7, −14] entre −7 para que el pivote sea 1:</p><p class="calc"><span class="rw">R2</span> 0÷(−7)=<b>0</b> <span class="sep">•</span> −7÷(−7)=<b>1</b> <span class="sep">•</span> −14÷(−7)=<b>2</b></p><div class="fx" id="e2"></div></div>
 
-      <div class="estep"><div class="oprow">R2 → R2 ÷ (−7)</div><p>Ahora el renglón 2 dice directamente cuánto vale y.</p><div class="fx" id="e2"></div></div>
-      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>Uso ese renglón para limpiar la y del renglón 1.</p><div class="fx" id="e3"></div></div>
-      <p class="idea" style="font-size:17px">Quedó tan simple que se lee sola: <strong>x = 1</strong>, <strong>y = 2</strong>. Esa es la meta de Gauss-Jordan.</p>
+      <div class="check" data-kind="item" data-id="E3pred" data-tema="gauss_jordan" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ya tienes <strong>y = 2</strong> abajo. Pero el renglón 1 todavía trae una y (un 2). ¿Qué operación la limpia sin dañar la x?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">R1 → R1 − 2·R2</button>
+          <button class="opt" data-ok="0">R1 → R1 + 2·R2</button>
+          <button class="opt" data-ok="0">R2 → R2 − 2·R1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El renglón 2 ya es “y = 2”. Restarlo dos veces al renglón 1 cancela el 2 de la y, y no toca la x (ahí el renglón 2 tiene 0).</p></div>
+      </div>
+      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>El renglón 2 ya es [0, 1, 2]. Al renglón 1 = [1, 2, 5] le resto 2 veces ese renglón:</p><p class="calc"><span class="rw">R1</span> 1−2·0=<b>1</b> <span class="sep">•</span> 2−2·1=<b>0</b> <span class="sep">•</span> 5−2·2=<b>1</b></p><div class="fx" id="e3"></div></div>
+
+      <p class="idea" style="font-size:17px">Se lee sola: <strong>x = 1</strong>, <strong>y = 2</strong>. Fíjate en el orden que seguiste: primero un cero <strong>abajo</strong>, luego el pivote en <strong>1</strong>, luego limpiar <strong>arriba</strong>. Ese es todo el método.</p>
+      <p class="fx-note">Con esto ya puedes resolver el café y el jugo del inicio (sale café = 2, jugo = 3). Hazlo en papel para comprobar que el método ya es tuyo.</p>
     </section>
 
+    <h2 class="modhead">Sube el tamaño · el 3×3 en dos fases</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora uno <strong>3×3</strong>, que es lo que de verdad cae en examen. Mismo método, más renglones. El sistema es: x + y + z = 6, x − y + z = 2, 2x + y − z = 1.</p>
+      <p class="idea" style="font-size:17px">El 2×2 casi salió de un tiro. Con <strong>3×3</strong> hay demasiado que limpiar a la vez, así que se hace en <strong>dos fases ordenadas</strong>:</p>
+      <ul class="fases">
+        <li><strong>Fase 1 — baja:</strong> haz ceros <em>debajo</em> de cada pivote, de izquierda a derecha, hasta dejar una escalera.</li>
+        <li><strong>Fase 2 — sube:</strong> con los pivotes ya en 1, limpia lo que quede <em>arriba</em> de ellos.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Sistema: x + y + z = 6, x − y + z = 2, 2x + y − z = 1.</p>
       <div class="estep"><div class="oprow">Matriz inicial</div><div class="fx" id="t0"></div></div>
-      <div class="estep"><div class="oprow">R2 → R2 − R1 · R3 → R3 − 2·R1</div><p>Uso el primer renglón para hacer cero la x en los otros dos.</p><div class="fx" id="t1"></div></div>
-      <div class="estep"><div class="oprow">R2 → R2 ÷ (−2) · R3 → R3 + R2</div><p>Hago 1 el pivote de y, y con él limpio la y del tercer renglón.</p><div class="fx" id="t2"></div></div>
-      <div class="estep"><div class="oprow">R3 → R3 ÷ (−3)</div><p>El tercer renglón ya dice cuánto vale z.</p><div class="fx" id="t3"></div></div>
-      <div class="estep"><div class="oprow">R1 → R1 − R2 − R3</div><p>Subo a limpiar la y y la z del primer renglón. Listo.</p><div class="fx" id="t4"></div></div>
-      <p class="idea" style="font-size:17px">Forma reducida: <strong>x = 1</strong>, <strong>y = 2</strong>, <strong>z = 3</strong>. Mismo ritmo que el 2×2, solo que bajas primero (hacer ceros) y luego subes (limpiar).</p>
+
+      <div class="check" data-kind="item" data-id="T1pred" data-tema="gauss_jordan" data-level="juntos">
+        <div class="qtag">Te toca · decide la fase</div>
+        <p class="q">Empieza la <strong>Fase 1 (baja)</strong>. ¿Qué renglón usas como herramienta para hacer cero las x de los renglones 2 y 3?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El renglón 1: su x ya es 1, así que R2 → R2 − R1 y R3 → R3 − 2·R1</button>
+          <button class="opt" data-ok="0">El renglón 3, porque tiene el número más grande</button>
+          <button class="opt" data-ok="0">Ninguno; primero divido todo entre 6</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El pivote de la primera columna es el 1 del renglón 1. Con él se hacen cero las x de abajo: siempre se baja desde el pivote de arriba.</p></div>
+      </div>
+
+      <div class="estep"><div class="oprow">Fase 1 · R2 → R2 − R1</div><p>Hago cero la x del renglón 2. R2 = [1, −1, 1, 2] menos R1 = [1, 1, 1, 6]:</p><p class="calc"><span class="rw">R2</span> 1−1=<b>0</b> <span class="sep">•</span> −1−1=<b>−2</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 2−6=<b>−4</b></p><div class="fx" id="t1a"></div></div>
+      <div class="estep"><div class="oprow">Fase 1 · R3 → R3 − 2·R1</div><p>Ahora la x del renglón 3. R3 = [2, 1, −1, 1] menos 2 veces R1:</p><p class="calc"><span class="rw">R3</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·1=<b>−1</b> <span class="sep">•</span> −1−2·1=<b>−3</b> <span class="sep">•</span> 1−2·6=<b>−11</b></p><div class="fx" id="t1b"></div></div>
+      <div class="estep"><div class="oprow">Fase 1 · R2 → R2 ÷ (−2)</div><p>Pongo el pivote de y en 1. Divido R2 = [0, −2, 0, −4] entre −2:</p><p class="calc"><span class="rw">R2</span> 0÷(−2)=<b>0</b> <span class="sep">•</span> −2÷(−2)=<b>1</b> <span class="sep">•</span> 0÷(−2)=<b>0</b> <span class="sep">•</span> −4÷(−2)=<b>2</b></p><div class="fx" id="t2a"></div></div>
+      <div class="estep"><div class="oprow">Fase 1 · R3 → R3 + R2</div><p>Con ese pivote hago cero la y del renglón 3. R3 = [0, −1, −3, −11] más R2 = [0, 1, 0, 2]:</p><p class="calc"><span class="rw">R3</span> 0+0=<b>0</b> <span class="sep">•</span> −1+1=<b>0</b> <span class="sep">•</span> −3+0=<b>−3</b> <span class="sep">•</span> −11+2=<b>−9</b></p><div class="fx" id="t2b"></div></div>
+      <div class="estep"><div class="oprow">Fase 1 · R3 → R3 ÷ (−3)</div><p>Fin de la bajada: pivote de z en 1. Divido R3 = [0, 0, −3, −9] entre −3:</p><p class="calc"><span class="rw">R3</span> 0÷(−3)=<b>0</b> <span class="sep">•</span> 0÷(−3)=<b>0</b> <span class="sep">•</span> −3÷(−3)=<b>1</b> <span class="sep">•</span> −9÷(−3)=<b>3</b></p><div class="fx" id="t3"></div></div>
+      <div class="estep"><div class="oprow">Fase 2 · R1 → R1 − R2</div><p>Empieza la subida: limpio la y del renglón 1. R1 = [1, 1, 1, 6] menos R2 = [0, 1, 0, 2]:</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 1−0=<b>1</b> <span class="sep">•</span> 6−2=<b>4</b></p><div class="fx" id="t4a"></div></div>
+      <div class="estep"><div class="oprow">Fase 2 · R1 → R1 − R3</div><p>Ahora la z del renglón 1. R1 = [1, 0, 1, 4] menos R3 = [0, 0, 1, 3]:</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 0−0=<b>0</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 4−3=<b>1</b></p><div class="fx" id="t4b"></div></div>
+      <p class="idea" style="font-size:17px">Forma reducida: <strong>x = 1</strong>, <strong>y = 2</strong>, <strong>z = 3</strong>. Mismo método del 2×2, solo que primero <strong>bajas</strong> y luego <strong>subes</strong>.</p>
     </section>
 
     <section class="sec">
@@ -247,7 +341,10 @@
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">Cuando hay <strong>infinitas</strong> soluciones, no escribes un número: escribes una <strong>fórmula</strong>. Aparece una <strong>variable libre</strong> (una columna sin pivote) que se vuelve un parámetro. Reduzcamos este sistema: x + y + z = 4, 2x + y − z = 5.</p>
       <div class="estep"><div class="oprow">Matriz inicial</div><div class="fx" id="f0"></div></div>
-      <div class="estep"><div class="oprow">R2 → R2 − 2·R1, luego ajustar signos</div><p>Tras reducir, la columna de z se queda sin pivote: z es libre.</p><div class="fx" id="f1"></div></div>
+      <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>Hago cero la x del renglón 2. R2 = [2, 1, −1, 5] menos 2 veces R1 = [1, 1, 1, 4]:</p><p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·1=<b>−1</b> <span class="sep">•</span> −1−2·1=<b>−3</b> <span class="sep">•</span> 5−2·4=<b>−3</b></p><div class="fx" id="fA"></div></div>
+      <div class="estep"><div class="oprow">R2 → R2 · (−1)</div><p>Dejo el pivote de y en 1 multiplicando todo el renglón por −1:</p><p class="calc"><span class="rw">R2</span> 0·(−1)=<b>0</b> <span class="sep">•</span> −1·(−1)=<b>1</b> <span class="sep">•</span> −3·(−1)=<b>3</b> <span class="sep">•</span> −3·(−1)=<b>3</b></p><div class="fx" id="fB"></div></div>
+      <div class="estep"><div class="oprow">R1 → R1 − R2</div><p>Limpio la y del renglón 1. R1 = [1, 1, 1, 4] menos R2 = [0, 1, 3, 3]:</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 1−3=<b>−2</b> <span class="sep">•</span> 4−3=<b>1</b></p><div class="fx" id="f1"></div></div>
+      <p class="fx-note">La columna de z se quedó <strong>sin pivote</strong> (no hay un 1 que la mande): por eso z es la variable libre.</p>
       <p class="idea" style="font-size:17px">Llamamos <strong>z = t</strong> (el parámetro). Despejando cada pivote, la solución general es:</p>
       <div class="fx"><div class="sys"><span class="eq">x = 1 + 2t</span><span class="eq">y = 3 − 3t</span><span class="eq">z = t</span></div></div>
       <p class="fx-note">Cada valor de t da una solución distinta: por eso son infinitas, pero todas con la misma forma.</p>
@@ -308,13 +405,13 @@
 
       <div class="pitem" data-kind="item" data-id="P5" data-tema="modelado" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Dos cafés y tres jugos cuestan 13. Un café y dos jugos cuestan 8. ¿Cuál matriz aumentada modela el problema? (café = primera columna, jugo = segunda)</p>
+        <p class="pstatement">Nuevo problema: <strong>3 boletos de adulto y 2 de niño cuestan $34</strong>; <strong>1 de adulto y 4 de niño cuestan $28</strong>. ¿Cuál matriz aumentada lo modela? (adulto = primera columna, niño = segunda)</p>
         <div class="opts">
           <button class="opt" data-ok="1" id="p5a"></button>
           <button class="opt" data-ok="0" id="p5b"></button>
           <button class="opt" data-ok="0" id="p5c"></button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>“Dos cafés y tres jugos = 13” es el renglón 2, 3, 13; “un café y dos jugos = 8” es 1, 2, 8.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>“3 adultos y 2 niños = 34” es el renglón 3, 2, 34; “1 adulto y 4 niños = 28” es el renglón 1, 4, 28. Cada número va en la columna de su incógnita.</p></div>
       </div>
     </section>
 
@@ -350,6 +447,10 @@
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
 
+    <nav class="nav-lecs">
+      <a class="next" href="L2_vectores-subespacios.html"><span class="sp">Siguiente →</span><span class="ti">U2 · Vectores y subespacios</span></a>
+    </nav>
+
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 1</p></footer>
 
   </main>
@@ -374,18 +475,31 @@ function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=
 
 set('mtxIntro',[["1","2","5"],["3","−1","1"]]);
 set('rrefEx',[["1","0","4"],["0","1","−1"]]);
-// 2x2
+// micro-checks de reconocimiento (La idea)
+set('ma_a',[["2","−1","3"],["1","4","5"]]);
+set('ma_b',[["2","1","3"],["1","4","5"]]);
+set('ma_c',[["2","−1","3"],["4","1","5"]]);
+set('rr_a',[["1","0","3"],["0","1","2"]]);
+set('rr_b',[["1","2","3"],["0","1","2"]]);
+set('rr_c',[["2","0","4"],["0","1","2"]]);
+// 2x2 (co-producido)
+set('e0',[["1","2","5"],["3","−1","1"]]);
 set('e1',[["1","2","5"],["0","−7","−14"]]);
 set('e2',[["1","2","5"],["0","1","2"]]);
 set('e3',[["1","0","1"],["0","1","2"]]);
-// 3x3
+// 3x3 (paso a paso, una operación por matriz)
 set('t0',[["1","1","1","6"],["1","−1","1","2"],["2","1","−1","1"]]);
-set('t1',[["1","1","1","6"],["0","−2","0","−4"],["0","−1","−3","−11"]]);
-set('t2',[["1","1","1","6"],["0","1","0","2"],["0","0","−3","−9"]]);
+set('t1a',[["1","1","1","6"],["0","−2","0","−4"],["2","1","−1","1"]]);
+set('t1b',[["1","1","1","6"],["0","−2","0","−4"],["0","−1","−3","−11"]]);
+set('t2a',[["1","1","1","6"],["0","1","0","2"],["0","−1","−3","−11"]]);
+set('t2b',[["1","1","1","6"],["0","1","0","2"],["0","0","−3","−9"]]);
 set('t3',[["1","1","1","6"],["0","1","0","2"],["0","0","1","3"]]);
-set('t4',[["1","0","0","1"],["0","1","0","2"],["0","0","1","3"]]);
-// infinitas
+set('t4a',[["1","0","1","4"],["0","1","0","2"],["0","0","1","3"]]);
+set('t4b',[["1","0","0","1"],["0","1","0","2"],["0","0","1","3"]]);
+// infinitas (paso a paso)
 set('f0',[["1","1","1","4"],["2","1","−1","5"]]);
+set('fA',[["1","1","1","4"],["0","−1","−3","−3"]]);
+set('fB',[["1","1","1","4"],["0","1","3","3"]]);
 set('f1',[["1","0","−2","1"],["0","1","3","3"]]);
 // práctica
 set('p1',[["1","2","5"],["3","−1","1"]]);
@@ -393,9 +507,9 @@ set('p2',[["1","0","3"],["0","1","−1"]]);
 set('p3',[["1","2","4"],["0","0","3"]]);
 set('p4',[["1","0","−2","1"],["0","1","3","3"]]);
 // opciones-matriz del modelado (P5)
-document.getElementById('p5a').innerHTML = mat([["2","3","13"],["1","2","8"]]);
-document.getElementById('p5b').innerHTML = mat([["2","3","8"],["1","2","13"]]);
-document.getElementById('p5c').innerHTML = mat([["3","2","13"],["2","1","8"]]);
+document.getElementById('p5a').innerHTML = mat([["3","2","34"],["1","4","28"]]);
+document.getElementById('p5b').innerHTML = mat([["3","2","28"],["1","4","34"]]);
+document.getElementById('p5c').innerHTML = mat([["2","3","34"],["4","1","28"]]);
 
 // ===== visual: el sistema como dos rectas =====
 function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }

@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -165,86 +186,180 @@
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Un editor de imágenes tiene que <strong>estirar</strong> una figura: el ancho se duplica y, además, cada punto se <strong>inclina</strong> un poco hacia arriba según qué tan a la derecha esté. La figura tiene miles de puntos. La regla que se aplica a cada punto (x, y) es la misma:</p>
+      <div class="fx"><div class="sys"><span class="eq">T(x, y) = (2x, x + y)</span></div></div>
+      <p class="idea" style="font-size:17px">Aplicar esto punto por punto sería eterno. Pero si la regla <strong>respeta la suma y el escalado</strong>, ocurre algo mágico: toda la transformación se guarda en <strong>una sola matriz pequeña</strong>, y basta multiplicar. La pregunta del capítulo es cuándo se puede y qué información esconde esa matriz. Al final vas a leer de ella qué se aplasta al cero y qué queda cubierto.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>Una función que respeta la suma y el escalado</h3>
-      <p class="idea">Una <strong>transformación lineal</strong> es una función entre espacios vectoriales que respeta las dos operaciones básicas: sumar vectores y multiplicarlos por un número. Formalmente pide que se cumplan estas dos condiciones para todo par de vectores y todo escalar:</p>
+      <h3>1 · Respetar la suma y el escalado</h3>
+      <p class="idea">Una <strong>transformación lineal</strong> es una función entre espacios de vectores que no rompe las dos operaciones básicas: sumar vectores y multiplicarlos por un número. Formalmente, para todo par de vectores y todo escalar debe cumplir estas dos igualdades:</p>
       <div class="fx"><div class="sys"><span class="eq">T(u + v) = T(u) + T(v)</span><span class="eq">T(c·u) = c·T(u)</span></div></div>
-      <p class="idea">La consecuencia inmediata: como <strong>T(0) = 0</strong> siempre, cualquier función que mueva el cero de lugar ya <strong>no</strong> es lineal. Ese es el filtro rápido antes de calcular nada.</p>
-    </section>
-
-    <section class="sec">
-      <h3>¿Qué es lineal y qué no?</h3>
-      <p class="idea">La linealidad es una condición estricta: en cada coordenada solo caben <strong>combinaciones de las variables por constantes</strong>. Nada de cuadrados, sumar un número fijo, valores absolutos ni productos entre variables. ¿Reconoces cuál regla sí es lineal?</p>
+      <p class="idea">En palabras: da lo mismo <strong>operar antes</strong> o <strong>después</strong> de aplicar T. Antes de mirar la definición otra vez, fíjala tú:</p>
       <div class="check" data-kind="recall" data-fid="F1_definicion_lineal" data-tema="definicion">
         <div class="qtag">Te toca · recuerda</div>
-        <p class="q">¿Cuál de estas reglas SÍ define una transformación lineal?</p>
+        <p class="q">¿Qué dos cosas debe respetar una función para ser lineal?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">A cada punto le asigna: primera coordenada, la resta de sus dos entradas; segunda coordenada, el doble de la primera</button>
-          <button class="opt" data-ok="0">A cada punto le asigna sus mismas entradas pero sumándole 1 a la primera</button>
-          <button class="opt" data-ok="0">A cada punto le asigna el cuadrado de su primera entrada y su segunda entrada sin cambio</button>
+          <button class="opt" data-ok="1">La suma de vectores y la multiplicación por un escalar</button>
+          <button class="opt" data-ok="0">La suma de vectores y el producto entre dos vectores</button>
+          <button class="opt" data-ok="0">El orden de las entradas y la distancia entre puntos</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Solo la primera usa combinaciones de las variables por constantes. Sumar <strong>1</strong> mueve el cero (rompe T(0)=0) y elevar al <strong>cuadrado</strong> no respeta el escalado.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Son exactamente esas dos: sumar y escalar. El producto entre vectores y las distancias no entran en la definición.</p></div>
       </div>
     </section>
 
     <section class="sec">
-      <h3>Toda transformación lineal es una matriz</h3>
-      <p class="idea">El hecho clave: cada transformación lineal de un espacio de flechas a otro se puede escribir como <strong>una matriz</strong>. Se llama <strong>matriz canónica</strong> y se arma con una receta simple: aplica T a cada vector de la base canónica y esos resultados son las <strong>columnas</strong>. Para la transformación que manda a cada punto a "suma de entradas, y el triple de la primera menos la segunda":</p>
+      <h3>2 · El filtro rápido: el cero va al cero</h3>
+      <p class="idea">De la condición del escalado sale un atajo enorme. Si tomas el factor <strong>c = 0</strong>, entonces T(0) = 0·T(u) = 0. Así que <strong>toda</strong> transformación lineal manda el vector cero al vector cero. Cualquier regla que mueva el cero de lugar queda descartada <strong>sin calcular nada</strong>. Además, en cada coordenada solo caben combinaciones de las variables por constantes: nada de cuadrados, valores absolutos, ni sumar un número fijo.</p>
+      <div class="check" data-kind="item" data-id="C1_filtro" data-tema="definicion" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿Cuál de estas reglas queda descartada de inmediato por el filtro del cero?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">T(x, y) = (x + 1, y): al meter (0, 0) sale (1, 0), no el cero</button>
+          <button class="opt" data-ok="0">T(x, y) = (y, x): al meter (0, 0) sale (0, 0)</button>
+          <button class="opt" data-ok="0">T(x, y) = (3x, −y): al meter (0, 0) sale (0, 0)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Sumar el <strong>1</strong> fijo empuja el (0, 0) a (1, 0): mueve el cero, así que no puede ser lineal. Las otras dos dejan el cero quieto.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>3 · Toda transformación lineal es una matriz</h3>
+      <p class="idea">El hecho central de todo el tema: cada transformación lineal se puede escribir como <strong>una matriz</strong>, la <strong>matriz canónica</strong>. La receta es sencilla: aplica T a cada vector de la base canónica y esos resultados son las <strong>columnas</strong>, en orden. Para T(x, y) = (x + y, 3x − y):</p>
+      <div class="fx"><div class="sys"><span class="eq">T(1, 0) = (1, 3)   → primera columna</span><span class="eq">T(0, 1) = (1, −1)   → segunda columna</span></div></div>
       <div class="fx" id="canonEx"></div>
-      <p class="fx-note">Primera columna = imagen de (1, 0); segunda columna = imagen de (0, 1). Multiplicar por esta matriz reproduce la transformación entera.</p>
-    </section>
-
-    <h2 class="modhead">Yo lo hago</h2>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Primero comprobemos que una regla es lineal. Tomo la que manda a cada punto a "la suma de sus entradas, y el doble de la primera". Voy verificando las dos condiciones con vectores concretos; tú solo sigue el hilo.</p>
-      <div class="estep"><div class="oprow">La regla en fórmula</div><div class="fx"><div class="sys"><span class="eq">T(x, y) = (x + y, 2x)</span></div></div></div>
-      <div class="estep"><div class="oprow">Prueba la suma</div><p>Con dos vectores concretos, sumo primero y luego aplico T; después aplico T a cada uno y sumo. Deben coincidir.</p><div class="fx"><div class="sys"><span class="eq">u = (1, 2),  v = (3, 1)</span><span class="eq">T(u + v) = T(4, 3) = (7, 8)</span><span class="eq">T(u) + T(v) = (3, 2) + (4, 6) = (7, 8)</span></div></div></div>
-
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="definicion">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">Ya salió que la suma se respeta. ¿Qué falta para poder afirmar que T es lineal?</p>
+      <p class="fx-note">Multiplicar cualquier vector por esta matriz reproduce la transformación entera. Toda la información de T cabe aquí.</p>
+      <div class="check" data-kind="item" data-id="C2_columna" data-tema="matriz_canonica" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Para T(x, y) = (x − 2y, 4x), ¿qué es la <strong>segunda</strong> columna de su matriz canónica?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Verificar también el escalado: que sacar el factor por fuera dé lo mismo que meterlo antes de aplicar T</button>
-          <button class="opt" data-ok="0">Nada más: con que respete la suma ya es lineal</button>
-          <button class="opt" data-ok="0">Comprobar que T mande el vector cero a un vector distinto de cero</button>
+          <button class="opt" data-ok="1" id="c2_a"></button>
+          <button class="opt" data-ok="0" id="c2_b"></button>
+          <button class="opt" data-ok="0" id="c2_c"></button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La definición pide <strong>las dos</strong> condiciones. Y el cero debe ir al cero, nunca a otro punto.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>La segunda columna es T(0, 1). Sustituyendo x = 0, y = 1: primera entrada 0 − 2·1 = −2; segunda entrada 4·0 = 0. Da (−2, 0).</p></div>
       </div>
-
-      <div class="estep"><div class="oprow">Prueba el escalado</div><p>Escalo el vector por un factor antes de aplicar T y comparo con escalar el resultado.</p><div class="fx"><div class="sys"><span class="eq">c = 5,  u = (1, 2)</span><span class="eq">T(5·u) = T(5, 10) = (15, 10)</span><span class="eq">5·T(u) = 5·(3, 2) = (15, 10)</span></div></div></div>
-      <p class="idea" style="font-size:17px">Las dos condiciones se cumplen, así que <strong>T sí es lineal</strong>. Su matriz canónica sale de aplicar T a cada vector de la base canónica; esas imágenes son las columnas:</p>
-      <div class="fx"><div class="sys"><span class="eq">T(1, 0) = (1, 2)</span><span class="eq">T(0, 1) = (1, 0)</span></div></div>
     </section>
 
+    <h2 class="modhead">Yo lo hago · contigo</h2>
+
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora lo que de verdad cae en examen: hallar el <strong>núcleo</strong> (qué vectores van a parar al cero) y el <strong>rango</strong>. Parto de una transformación con regla explícita, del dominio de dimensión 3 al de dimensión 2:</p>
+      <p class="idea" style="font-size:17px">Volvamos al editor de imágenes: la regla era T(x, y) = (2x, x + y). Vamos a <strong>probar que es lineal</strong> y luego a sacar su matriz. No lo mires nada más: en cada paso <strong>tú decides qué toca</strong> y yo lo ejecuto.</p>
+      <div class="fx"><div class="sys"><span class="eq">T(x, y) = (2x, x + y)</span></div></div>
+
+      <div class="check" data-kind="item" data-id="E1_decide" data-tema="definicion" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Para verificar la <strong>suma</strong>, ¿qué dos cosas debo comparar?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">T(u + v) contra T(u) + T(v): sumar primero contra aplicar T y luego sumar</button>
+          <button class="opt" data-ok="0">T(u) contra T(v): comparar las dos imágenes entre sí</button>
+          <button class="opt" data-ok="0">u + v contra T(u + v): el vector original contra su imagen</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La condición de la suma pide justo eso: que dé lo mismo sumar antes o después de aplicar T.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Prueba de la suma</div><p>Tomo u = (1, 2) y v = (3, 1). Primero sumo y aplico T; luego aplico T a cada uno y sumo. Calculo cada entrada:</p><p class="calc"><span class="rw">u+v</span> (1+3,2+1)=<b>(4,3)</b> <span class="sep">•</span> T(4,3)=(2·4,4+3)=<b>(8,7)</b></p><p class="calc"><span class="rw">T(u)</span> (2·1,1+2)=<b>(2,3)</b> <span class="sep">•</span> <span class="rw">T(v)</span> (2·3,3+1)=<b>(6,4)</b> <span class="sep">•</span> suma=<b>(8,7)</b></p><p>Los dos caminos dan (8, 7). La suma se respeta.</p></div>
+
+      <div class="check" data-kind="item" data-id="E2_decide" data-tema="definicion" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ya salió la suma. ¿Qué falta para afirmar que T es lineal?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Verificar el escalado: que c·T(u) coincida con T(c·u)</button>
+          <button class="opt" data-ok="0">Nada más: con la suma ya basta</button>
+          <button class="opt" data-ok="0">Comprobar que T mande el cero a un punto distinto de cero</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La definición pide <strong>las dos</strong> condiciones. Y el cero, si acaso, debe ir al cero, nunca a otro punto.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Prueba del escalado</div><p>Tomo c = 5 y u = (1, 2). Escalo antes de aplicar T y lo comparo con escalar el resultado:</p><p class="calc"><span class="rw">c·u</span> (5·1,5·2)=<b>(5,10)</b> <span class="sep">•</span> T(5,10)=(2·5,5+10)=<b>(10,15)</b></p><p class="calc"><span class="rw">5·T(u)</span> T(1,2)=(2,3) <span class="sep">•</span> 5·(2,3)=<b>(10,15)</b></p><p>Otra vez coinciden: (10, 15). El escalado se respeta, así que <strong>T sí es lineal</strong>.</p></div>
+
+      <div class="check" data-kind="item" data-id="E3_decide" data-tema="matriz_canonica" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ahora la matriz canónica. ¿Qué vectores hay que meter en T para obtener las columnas?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Los de la base canónica: (1, 0) para la primera columna y (0, 1) para la segunda</button>
+          <button class="opt" data-ok="0">Los que salieron en la prueba: (1, 2) y (3, 1)</button>
+          <button class="opt" data-ok="0">El vector cero (0, 0) dos veces</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La matriz canónica se arma aplicando T a los vectores de la base canónica; cada imagen es una columna.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Armo las columnas</div><p>Aplico T a (1, 0) y a (0, 1), entrada por entrada:</p><p class="calc"><span class="rw">T(1,0)</span> (2·1,1+0)=<b>(2,1)</b> <span class="sep">•</span> <span class="rw">T(0,1)</span> (2·0,0+1)=<b>(0,1)</b></p><div class="fx" id="e_canon"></div></div>
+      <p class="idea" style="font-size:17px">Esa matriz <strong>es</strong> el editor de imágenes: multiplicar cualquier punto por ella lo estira e inclina de un solo golpe. Pasamos de aplicar la regla miles de veces a una tabla de cuatro números.</p>
+    </section>
+
+    <h2 class="modhead">Sube el tamaño · núcleo e imagen en dos preguntas</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Lo que de verdad cae en examen: dada T, hallar su <strong>núcleo</strong> (qué vectores se aplastan al cero) y su <strong>imagen</strong> (qué queda cubierto). Se resuelve en <strong>dos preguntas ordenadas</strong> sobre la matriz reducida:</p>
+      <ul class="fases">
+        <li><strong>Pregunta 1 — reducir:</strong> arma la matriz de T y llévala a forma reducida por Gauss-Jordan. Las columnas <em>con pivote</em> mandan; las <em>sin pivote</em> son libres.</li>
+        <li><strong>Pregunta 2 — leer:</strong> las columnas sin pivote dan el <em>núcleo</em> (su cantidad = nulidad); las columnas originales con pivote dan la <em>imagen</em> (su cantidad = rango).</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Tomo T de un dominio de dimensión 3 a uno de dimensión 2:</p>
       <div class="fx"><div class="sys"><span class="eq">T(x, y, z) = (x + 2y − z, x + 3y + z)</span></div></div>
-      <div class="estep"><div class="oprow">Matriz de la transformación</div><p>Sus columnas son T aplicado a cada vector de la base canónica: T(1,0,0) = (1, 1), T(0,1,0) = (2, 3), T(0,0,1) = (−1, 1). Esas tres imágenes son las columnas. Reduzco por Gauss-Jordan.</p><div class="fx" id="k0"></div></div>
-      <div class="estep"><div class="oprow">R2 → R2 − R1</div><p>Hago cero la primera entrada del renglón 2.</p><div class="fx" id="k1"></div></div>
-      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>Limpio la segunda columna del renglón 1. Ya está reducida.</p><div class="fx" id="k2"></div></div>
-      <p class="idea" style="font-size:17px">Hay <strong>2 pivotes</strong> (columnas 1 y 2), así que el <strong>rango es 2</strong>. La tercera columna no tiene pivote: esa variable es libre. Al parametrizar con la variable libre, el <strong>núcleo</strong> es la recta generada por un solo vector:</p>
-      <div class="fx"><div class="sys"><span class="eq">z = t</span><span class="eq">(x, y, z) = t·(5, −2, 1)</span></div></div>
-      <p class="fx-note">La nulidad (dimensión del núcleo) es 1: el cero solo sale con múltiplos de ese vector. Comprobación con la matriz original:</p>
-      <div class="fx"><div class="sys"><span class="eq">5 − 4 − 1 = 0   (renglón de arriba)</span><span class="eq">5 + 1 − 6 = 0   (renglón de abajo)</span></div></div>
-      <div class="estep"><div class="oprow">Y la imagen</div><p>Los pivotes cayeron en las columnas 1 y 2. Cuidado con la trampa: la base de la imagen NO son las columnas de la matriz reducida, sino las <strong>columnas 1 y 2 de la matriz ORIGINAL</strong>. Esas dos flechas generan todo lo que T alcanza.</p><div class="fx"><div class="sys"><span class="eq">base de la imagen = { (1, 1),  (2, 3) }</span><span class="eq">dim de la imagen = rango = 2</span></div></div></div>
-      <p class="fx-note">Cierra el objetivo 3: núcleo = recta t·(5, −2, 1) · imagen = plano generado por (1, 1) y (2, 3), que ya llena todo el codominio de dimensión 2.</p>
+      <div class="estep"><div class="oprow">Matriz de T</div><p>Sus columnas son T de la base canónica: T(1,0,0) = (1, 1), T(0,1,0) = (2, 3), T(0,0,1) = (−1, 1). Las apilo como columnas:</p><div class="fx" id="k0"></div></div>
+
+      <div class="check" data-kind="item" data-id="K1_decide" data-tema="rango_nulidad" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Empieza la reducción. Abajo, en la primera columna, hay un 1 igual que arriba. ¿Qué operación hace cero esa entrada del renglón 2?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">R2 → R2 − R1</button>
+          <button class="opt" data-ok="0">R2 → R2 + R1</button>
+          <button class="opt" data-ok="0">R1 → R1 − R2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Arriba la primera entrada es 1; restar ese renglón deja 1 − 1 = 0 en el renglón 2.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">R2 → R2 − R1</div><p>Al renglón 2 = [1, 3, 1] le resto el renglón 1 = [1, 2, −1], entrada por entrada:</p><p class="calc"><span class="rw">R2</span> 1−1=<b>0</b> <span class="sep">•</span> 3−2=<b>1</b> <span class="sep">•</span> 1−(−1)=<b>2</b></p><div class="fx" id="k1"></div></div>
+
+      <div class="check" data-kind="item" data-id="K2_decide" data-tema="rango_nulidad" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">El renglón 2 ya es pivote limpio [0, 1, 2]. Pero arriba, en la segunda columna, todavía hay un 2. ¿Qué operación lo limpia sin dañar la primera columna?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">R1 → R1 − 2·R2</button>
+          <button class="opt" data-ok="0">R1 → R1 + 2·R2</button>
+          <button class="opt" data-ok="0">R2 → R2 − 2·R1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El renglón 2 tiene 0 en la primera columna y 1 en la segunda; restarlo dos veces cancela el 2 de arriba y no toca la primera columna.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>Al renglón 1 = [1, 2, −1] le resto 2 veces el renglón 2 = [0, 1, 2]:</p><p class="calc"><span class="rw">R1</span> 1−2·0=<b>1</b> <span class="sep">•</span> 2−2·1=<b>0</b> <span class="sep">•</span> −1−2·2=<b>−5</b></p><div class="fx" id="k2"></div></div>
+
+      <p class="idea" style="font-size:17px">Ya está reducida. Hay <strong>2 pivotes</strong> (columnas 1 y 2), así que el <strong>rango es 2</strong>. La tercera columna no tiene pivote: esa variable es <strong>libre</strong>. Llamo z = t, despejo los pivotes del sistema reducido y sale el núcleo como una sola recta:</p>
+      <div class="fx"><div class="sys"><span class="eq">x = 5t,   y = −2t,   z = t</span><span class="eq">núcleo = t·(5, −2, 1)</span></div></div>
+      <p class="fx-note">La nulidad (dimensión del núcleo) es 1. Comprobación rápida con la matriz original, metiendo (5, −2, 1):</p>
+      <p class="calc"><span class="rw">R1</span> 5+2·(−2)−1=5−4−1=<b>0</b> <span class="sep">•</span> <span class="rw">R2</span> 5+3·(−2)+1=5−6+1=<b>0</b></p>
+      <div class="estep"><div class="oprow">Y la imagen</div><p>Los pivotes cayeron en las columnas 1 y 2. Ojo con la trampa: la base de la imagen <strong>no</strong> son las columnas de la matriz reducida, sino las columnas <strong>1 y 2 de la matriz ORIGINAL</strong>. Esas dos flechas generan todo lo que T alcanza:</p><div class="fx"><div class="sys"><span class="eq">base de la imagen = { (1, 1),  (2, 3) }</span><span class="eq">dim de la imagen = rango = 2</span></div></div></div>
+      <p class="fx-note">Núcleo = recta t·(5, −2, 1) · imagen = plano generado por (1, 1) y (2, 3), que ya llena todo el codominio de dimensión 2.</p>
     </section>
 
     <section class="sec">
-      <h3>Míralo: el teorema de rango-nulidad</h3>
-      <p class="idea">Todo cuadra por una razón. Las columnas de la matriz se reparten en <strong>dos grupos</strong>: las que tienen pivote alimentan la <strong>imagen</strong> (su cantidad es el rango) y las que no tienen pivote dan las variables libres del <strong>núcleo</strong> (su cantidad es la nulidad). Como cada columna cae en exactamente un grupo:</p>
+      <h3>Míralo: cada columna cae en un solo grupo</h3>
+      <p class="idea">El teorema de <strong>rango-nulidad</strong> no es magia: es contar. Cada columna del dominio, al reducir, o <strong>tiene pivote</strong> (alimenta la imagen → cuenta para el rango) o <strong>no lo tiene</strong> (da una variable libre → cuenta para la nulidad). Ninguna columna cae en los dos grupos ni se queda fuera. Toca cada caso para verlo:</p>
+      <div class="viz">
+        <div class="viz-tabs" id="vizTabs">
+          <button class="viz-tab" data-case="a">Rango 2 · nulidad 1</button>
+          <button class="viz-tab" data-case="b">Rango 1 · nulidad 2</button>
+          <button class="viz-tab" data-case="c">Rango 3 · nulidad 0</button>
+        </div>
+        <div class="viz-plane fx" id="vizPlane"></div>
+        <div class="viz-legend"><span><i style="background:#39B54A"></i>Con pivote → rango</span><span><i style="background:#F5821F"></i>Sin pivote → nulidad</span></div>
+        <p class="viz-cap" id="vizCap"></p>
+      </div>
       <div class="fx"><div class="sys"><span class="eq">rango + nulidad = número de columnas</span></div></div>
-      <p class="idea">El "número de columnas" es la dimensión del <strong>dominio</strong> (de dónde salen los vectores). Por eso, si conoces dos de los tres números, el tercero sale solo. En el ejemplo de arriba: 2 + 1 = 3, y la matriz tenía 3 columnas.</p>
+      <p class="idea">El "número de columnas" es la dimensión del <strong>dominio</strong>. Por eso, si conoces dos de los tres números, el tercero sale solo.</p>
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Cerremos con la clasificación. La transformación es <strong>inyectiva</strong> cuando lo único que va al cero es el cero (nulidad 0), y <strong>suprayectiva</strong> cuando su imagen llena todo el <strong>codominio</strong> (el rango iguala la dimensión del destino, es decir, el número de renglones). Tomo T de un dominio de dimensión 3 a un codominio de dimensión 2, con esta matriz reducida:</p>
+      <p class="idea" style="font-size:17px">Cerremos con la <strong>clasificación</strong>. Con dos comparaciones basta:</p>
+      <ul class="fases">
+        <li><strong>Inyectiva</strong> ⇔ lo único que va al cero es el cero, o sea <em>nulidad = 0</em>.</li>
+        <li><strong>Suprayectiva</strong> ⇔ la imagen llena todo el codominio, o sea <em>rango = número de renglones</em> (dimensión del destino).</li>
+        <li><strong>Biyectiva</strong> = las dos a la vez.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Retomo la T de arriba (dominio dimensión 3, codominio dimensión 2), ya reducida:</p>
       <div class="estep"><div class="oprow">Matriz reducida</div><div class="fx" id="c0"></div></div>
-      <p class="idea" style="font-size:17px">Hay 2 pivotes → <strong>rango 2</strong>, que es justo la dimensión del codominio: <strong>suprayectiva</strong>. Pero por rango-nulidad, la nulidad es 3 − 2 = 1 &gt; 0: hay más que el cero en el núcleo, así que <strong>no</strong> es inyectiva. Como falla la inyectividad, tampoco es biyectiva.</p>
-      <p class="fx-note">Regla de bolsillo: si el dominio es "más grande" que el codominio, jamás será inyectiva; si es "más chico", jamás será suprayectiva. Biyectiva exige que ambos espacios tengan la misma dimensión.</p>
+      <p class="idea" style="font-size:17px">Hay 2 pivotes → <strong>rango 2</strong>, justo la dimensión del codominio (2 renglones): <strong>suprayectiva</strong>. Pero por rango-nulidad, nulidad = 3 − 2 = 1 &gt; 0: hay algo más que el cero en el núcleo, así que <strong>no</strong> es inyectiva. Como falla la inyectividad, tampoco es biyectiva.</p>
+      <p class="fx-note">Regla de bolsillo: si el dominio es más grande que el codominio, nunca será inyectiva; si es más chico, nunca será suprayectiva. Biyectiva exige que ambos espacios tengan la misma dimensión.</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>
@@ -253,100 +368,136 @@
 
       <div class="pitem" data-kind="item" data-id="P1" data-tema="matriz_canonica" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Una transformación manda a cada punto a "la suma de sus entradas, y el triple de la primera menos la segunda". ¿Cuál es la primera columna de su matriz canónica?</p>
-        <div class="fx"><div class="sys"><span class="eq">T(x, y) = (x + y, 3x − y)</span></div></div>
+        <p class="pstatement">Para T(x, y) = (5x − y, 2y), ¿cuál es la <strong>primera</strong> columna de su matriz canónica?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">La imagen de (1, 0), o sea (1, 3)</button>
-          <button class="opt" data-ok="0">La imagen de (0, 1), o sea (1, −1)</button>
+          <button class="opt" data-ok="1">La imagen de (1, 0): (5, 0)</button>
+          <button class="opt" data-ok="0">La imagen de (0, 1): (−1, 2)</button>
           <button class="opt" data-ok="0">El vector (1, 0) tal cual, sin aplicar T</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>La receta: cada columna es T aplicado a un vector de la base canónica. La primera columna usa (1, 0).</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Aplicas T al primer vector de la base canónica; el resultado es la primera columna:</p><div class="fx"><div class="sys"><span class="eq">T(1, 0) = (1+0, 3·1 − 0) = (1, 3)</span></div></div></div>
+        <div class="aux"><details><summary>Pista</summary><p>La primera columna es T(1, 0). Sustituye x = 1, y = 0 en cada entrada de la regla.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con x = 1, y = 0: primera entrada 5·1 − 0 = 5; segunda entrada 2·0 = 0. La columna es (5, 0).</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P1b" data-tema="rango_nulidad" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Ahora arma tú la matriz y redúcela. Para esta regla, ¿cuánto valen el rango y la nulidad?</p>
-        <div class="fx"><div class="sys"><span class="eq">T(x, y, z) = (x + y + z, 2x + 2y + 2z)</span></div></div>
-        <div class="estep"><div class="oprow">Sigue el hilo</div><p>Las columnas son T de la base canónica: T(1,0,0)=(1,2), T(0,1,0)=(1,2), T(0,0,1)=(1,2). Al reducir, el renglón 2 se hace R2 − 2·R1 y queda todo cero: solo sobrevive un pivote.</p><div class="fx" id="p1b"></div></div>
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="definicion" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Sin calcular nada más que el cero: ¿cuál de estas reglas <strong>no</strong> puede ser lineal?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Rango 1, nulidad 2: solo hay un pivote, sobran dos columnas libres</button>
-          <button class="opt" data-ok="0">Rango 2, nulidad 1: hay dos pivotes</button>
+          <button class="opt" data-ok="1">T(x, y) = (x, y + 3)</button>
+          <button class="opt" data-ok="0">T(x, y) = (2x − y, x)</button>
+          <button class="opt" data-ok="0">T(x, y) = (0, x + y)</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Mete (0, 0) en cada una. La que no devuelve (0, 0) queda descartada al instante.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Al meter (0, 0), la primera da (0, 3): mueve el cero. Las otras dos devuelven (0, 0).</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="rango_nulidad" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Arma la matriz de esta regla y redúcela. ¿Cuánto valen el rango y la nulidad?</p>
+        <div class="fx"><div class="sys"><span class="eq">T(x, y, z) = (x + y + z, 2x + 2y + 2z)</span></div></div>
+        <div class="estep"><div class="oprow">Sigue el hilo</div><p>Las columnas son T de la base: T(1,0,0)=(1,2), T(0,1,0)=(1,2), T(0,0,1)=(1,2). Al hacer R2 − 2·R1 el renglón 2 se anula: sobrevive un solo pivote.</p><div class="fx" id="p3"></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Rango 1, nulidad 2: un pivote, dos columnas libres</button>
+          <button class="opt" data-ok="0">Rango 2, nulidad 1: dos pivotes</button>
           <button class="opt" data-ok="0">Rango 3, nulidad 0: cada columna es un pivote</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Cuenta los renglones no nulos de la forma reducida: ese es el rango. La nulidad es columnas − rango = 3 − rango.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Las tres columnas son iguales, así que al reducir solo queda <strong>1 pivote</strong> → rango 1. Por rango-nulidad, nulidad = 3 − 1 = 2.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Cuenta los renglones no nulos de la forma reducida: ese es el rango. La nulidad es 3 − rango.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Las tres columnas son iguales, así que al reducir queda <strong>1 pivote</strong> → rango 1. Por rango-nulidad, nulidad = 3 − 1 = 2.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P1c" data-tema="rango_nulidad" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="rango_nulidad" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Esta es la matriz reducida de una transformación con 3 columnas. ¿Cuál es su nulidad (la dimensión del núcleo)?</p>
+        <div class="fx" id="p4"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Uno: la tercera columna no tiene pivote</button>
+          <button class="opt" data-ok="0">Cero: solo el vector cero va al núcleo</button>
+          <button class="opt" data-ok="0">Dos: sobran dos columnas</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Hay pivotes en las columnas 1 y 2 (rango 2). La tercera no tiene pivote: una variable libre → nulidad 1. Comprueba: 2 + 1 = 3 columnas.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="imagen" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Para la T de la matriz de abajo, los pivotes cayeron en las columnas 1 y 2 al reducir. ¿Cuál es una base correcta de la <strong>imagen</strong>?</p>
+        <div class="fx" id="p5"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Las columnas 1 y 2 de esta matriz original: (1, 0) y (2, 1)</button>
+          <button class="opt" data-ok="0">Las columnas 1 y 2 de la matriz ya reducida</button>
+          <button class="opt" data-ok="0">Las tres columnas, porque todas aportan a la imagen</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>La base de la imagen son las columnas <strong>originales</strong> donde cayeron los pivotes, no las de la matriz reducida.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Reducir cambia las columnas. La imagen se genera con las columnas ORIGINALES en las posiciones de pivote: aquí, las columnas 1 y 2.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="rango_nulidad" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Sola esta vez: arma la matriz de esta regla, redúcela y di cuánto valen el rango y la nulidad.</p>
+        <p class="pstatement">Una transformación sale de un espacio de dimensión 5 y su núcleo tiene dimensión 2. ¿Cuál es su rango?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Tres</button>
+          <button class="opt" data-ok="0">Siete</button>
+          <button class="opt" data-ok="0">Dos</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Por rango-nulidad, rango + nulidad = columnas = 5. Entonces rango = 5 − 2 = 3.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="rango_nulidad" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Arma y reduce tú sola. Para esta regla, ¿cuánto valen el rango y la nulidad?</p>
         <div class="fx"><div class="sys"><span class="eq">T(x, y) = (x − y, 2x − 2y)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">Rango 1, nulidad 1</button>
           <button class="opt" data-ok="0">Rango 2, nulidad 0</button>
           <button class="opt" data-ok="0">Rango 1, nulidad 2</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>La matriz es [[1, −1],[2, −2]]. Haz R2 − 2·R1 y mira cuántos renglones quedan con pivote. La nulidad es 2 − rango.</p></details></div>
+        <div class="aux"><details><summary>Pista</summary><p>La matriz es [[1, −1], [2, −2]]. Haz R2 − 2·R1 y cuenta pivotes. La nulidad es 2 − rango.</p></details></div>
         <div class="why"><span class="lbl">Por qué</span><p>El segundo renglón es el doble del primero: al reducir se anula. Queda <strong>1 pivote</strong> → rango 1, y nulidad = 2 − 1 = 1.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="rango_nulidad" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="clasificacion" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Esta es la matriz reducida de una transformación con 3 columnas. ¿Cuál es su nulidad (la dimensión del núcleo)?</p>
-        <div class="fx" id="p2"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">Uno: la tercera columna no tiene pivote</button>
-          <button class="opt" data-ok="0">Cero: solo el vector cero va al núcleo</button>
-          <button class="opt" data-ok="0">Dos: sobran dos columnas</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Hay pivotes en las columnas 1 y 2 (rango 2). La tercera no tiene pivote: una variable libre → nulidad 1. Y checa: 2 + 1 = 3 columnas.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="rango_nulidad" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Una transformación sale de un espacio de dimensión 4 y su núcleo tiene dimensión 2. ¿Cuál es su rango?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Dos</button>
-          <button class="opt" data-ok="0">Cuatro</button>
-          <button class="opt" data-ok="0">Seis</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Por rango-nulidad, rango + nulidad = columnas = 4. Entonces rango = 4 − 2 = 2.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3b" data-tema="clasificacion" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Primera vez clasificando: aquí tienes la matriz reducida de una T de un dominio de dimensión 3 a un codominio de dimensión 3. Hay 3 pivotes → rango 3, nulidad 0. ¿Cómo se clasifica?</p>
-        <div class="fx" id="p3b"></div>
+        <p class="pstatement">Aquí tienes la matriz reducida de una T de un dominio de dimensión 3 a un codominio de dimensión 3. Hay 3 pivotes → rango 3, nulidad 0. ¿Cómo se clasifica?</p>
+        <div class="fx" id="p8"></div>
         <div class="opts">
           <button class="opt" data-ok="1">Biyectiva: rango 3 = dimensión del codominio (suprayectiva) y nulidad 0 (inyectiva)</button>
           <button class="opt" data-ok="0">Solo suprayectiva: llena el codominio pero no es inyectiva</button>
           <button class="opt" data-ok="0">Ni inyectiva ni suprayectiva</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Compara dos cosas: rango contra la dimensión del codominio (¿supra?) y nulidad contra 0 (¿inyectiva?). Si ambas se cumplen, es biyectiva.</p></details></div>
+        <div class="aux"><details><summary>Pista</summary><p>Compara rango contra la dimensión del codominio (¿supra?) y nulidad contra 0 (¿inyectiva?). Ambas → biyectiva.</p></details></div>
         <div class="why"><span class="lbl">Por qué</span><p>Nulidad 0 → <strong>inyectiva</strong>. Rango 3 = dimensión del codominio → <strong>suprayectiva</strong>. Las dos juntas → <strong>biyectiva</strong>.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="clasificacion" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="clasificacion" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Una transformación va de un espacio de dimensión 2 a uno de dimensión 3. ¿Qué NUNCA podrá ser?</p>
+        <p class="pstatement">Una transformación va de un espacio de dimensión 2 a uno de dimensión 4. ¿Qué NUNCA podrá ser?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Suprayectiva: su imagen jamás llena las 3 dimensiones del codominio</button>
+          <button class="opt" data-ok="1">Suprayectiva: su imagen jamás llena las 4 dimensiones del codominio</button>
           <button class="opt" data-ok="0">Inyectiva: siempre mandará dos puntos distintos al mismo lugar</button>
           <button class="opt" data-ok="0">Lineal: cambiar de dimensión rompe la linealidad</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El rango no puede pasar de 2 (solo hay 2 columnas), y la dimensión de destino es 3. Nunca alcanza para ser suprayectiva. Inyectiva sí puede.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>El rango no pasa de 2 (solo hay 2 columnas), y el destino tiene dimensión 4. Nunca alcanza a ser suprayectiva. Inyectiva sí puede.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="definicion" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P10" data-tema="clasificacion" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Una T de un dominio de dimensión 3 a un codominio de dimensión 3 tiene nulidad 1. ¿Cómo se clasifica?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Ni inyectiva ni suprayectiva</button>
+          <button class="opt" data-ok="0">Biyectiva</button>
+          <button class="opt" data-ok="0">Suprayectiva pero no inyectiva</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Nulidad 1 &gt; 0 rompe la inyectividad. Y por rango-nulidad, rango = 3 − 1 = 2, que es menor que la dimensión del codominio.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Nulidad 1 &gt; 0 → no inyectiva. Rango = 3 − 1 = 2 &lt; 3 = dimensión del codominio → no suprayectiva. Falla en las dos.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P11" data-tema="definicion" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">De estas tres reglas, ¿cuál NO es una transformación lineal?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">La que deja igual la segunda entrada y a la primera le suma 1</button>
+          <button class="opt" data-ok="1">La que eleva la primera entrada al cuadrado y deja la segunda igual</button>
           <button class="opt" data-ok="0">La que intercambia las dos entradas de cada punto</button>
           <button class="opt" data-ok="0">La que duplica la primera entrada y anula la segunda</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Sumar 1 fijo manda el (0, 0) a (1, 0): mueve el cero, así que rompe T(0)=0. Intercambiar y duplicar sí son combinaciones lineales de las variables.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>El cuadrado rompe el escalado: T(2·u) daría el cuádruple, no el doble. Intercambiar y duplicar sí son combinaciones lineales de las variables.</p></div>
       </div>
     </section>
 
@@ -368,7 +519,7 @@
         <li><span class="ck">✓</span> Lineal = respeta suma y escalado. Filtro rápido: si mueve el cero, no es lineal.</li>
         <li><span class="ck">✓</span> Matriz canónica: sus columnas son T aplicado a cada vector de la base canónica.</li>
         <li><span class="ck">✓</span> Núcleo = vectores que van al cero; su dimensión es la nulidad (columnas sin pivote).</li>
-        <li><span class="ck">✓</span> Imagen = lo que sí se alcanza; su dimensión es el rango (columnas con pivote).</li>
+        <li><span class="ck">✓</span> Imagen = lo que sí se alcanza; base = columnas ORIGINALES con pivote; su dimensión es el rango.</li>
         <li><span class="ck">✓</span> Rango-nulidad: rango + nulidad = número de columnas (dimensión del dominio).</li>
         <li><span class="ck">✓</span> Inyectiva ⇔ nulidad 0 · Suprayectiva ⇔ rango = dimensión del codominio · Biyectiva = ambas.</li>
       </ul>
@@ -381,6 +532,11 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="L2_vectores-subespacios.html"><span class="sp">← Anterior</span><span class="ti">U2 · Vectores y subespacios</span></a>
+      <a class="next" href="L4_algebra-matricial.html"><span class="sp">Siguiente →</span><span class="ti">U4 · Álgebra matricial</span></a>
+    </nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 3</p></footer>
 
@@ -403,18 +559,56 @@ function mat(rows){
 }
 function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
 
-// matriz canónica de T(x,y)=(x+y, 3x-y)
+// La idea: matriz canónica de T(x,y)=(x+y, 3x-y)
 set('canonEx',[["1","1"],["3","−1"]]);
-// núcleo/rango: A = [[1,2,-1],[1,3,1]] -> rref
+// micro-check 3: segunda columna de T(x,y)=(x-2y, 4x)  → T(0,1)=(-2,0)
+set('c2_a',[["−2"],["0"]]);
+set('c2_b',[["1"],["4"]]);
+set('c2_c',[["0"],["−2"]]);
+// Yo lo hago: matriz canónica de T(x,y)=(2x, x+y)
+set('e_canon',[["2","0"],["1","1"]]);
+// Sube el tamaño: A = [[1,2,-1],[1,3,1]] -> rref
 set('k0',[["1","2","−1"],["1","3","1"]]);
 set('k1',[["1","2","−1"],["0","1","2"]]);
 set('k2',[["1","0","−5"],["0","1","2"]]);
 // clasificación 3->2: matriz reducida rango 2, nulidad 1
 set('c0',[["1","0","−5"],["0","1","2"]]);
 // práctica
-set('p1b',[["1","1","1"],["0","0","0"]]);
-set('p2',[["1","0","−5"],["0","1","2"]]);
-set('p3b',[["1","0","0"],["0","1","0"],["0","0","1"]]);
+set('p3',[["1","1","1"],["0","0","0"]]);
+set('p4',[["1","0","−5"],["0","1","2"]]);
+set('p5',[["1","2","4"],["0","1","3"]]);
+set('p8',[["1","0","0"],["0","1","0"],["0","0","1"]]);
+
+// ===== visual: reparto de columnas en rango + nulidad =====
+function drawColumns(cse){
+  var groups, cap, ncol;
+  if(cse==='a'){ groups=['piv','piv','free']; ncol=3;
+    cap='3 columnas: 2 con pivote (rango 2) + 1 libre (nulidad 1). Suman 3 = dimensión del dominio.'; }
+  else if(cse==='b'){ groups=['piv','free','free']; ncol=3;
+    cap='3 columnas: 1 con pivote (rango 1) + 2 libres (nulidad 2). Suman 3.'; }
+  else { groups=['piv','piv','piv']; ncol=3;
+    cap='3 columnas, las 3 con pivote (rango 3) + 0 libres (nulidad 0). Suman 3: nada se aplasta al cero.'; }
+  var W=300, H=170, pad=30, gap=16;
+  var bw=(W-2*pad-(ncol-1)*gap)/ncol;
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Columnas repartidas en rango y nulidad">';
+  for(var i=0;i<ncol;i++){
+    var x=pad+i*(bw+gap);
+    var col = groups[i]==='piv' ? '#39B54A' : '#F5821F';
+    var tint = groups[i]==='piv' ? '#E6F5EC' : '#FFF3E7';
+    var lbl = groups[i]==='piv' ? 'pivote' : 'libre';
+    svg+='<rect x="'+x+'" y="35" width="'+bw+'" height="95" rx="8" fill="'+tint+'" stroke="'+col+'" stroke-width="3"/>';
+    svg+='<text x="'+(x+bw/2)+'" y="88" text-anchor="middle" font-size="15" font-weight="800" fill="'+col+'">C'+(i+1)+'</text>';
+    svg+='<text x="'+(x+bw/2)+'" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">'+lbl+'</text>';
+    svg+='<text x="'+(x+bw/2)+'" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="'+col+'">'+(groups[i]==='piv'?'→ rango':'→ nulidad')+'</text>';
+  }
+  svg+='</svg>';
+  document.getElementById('vizPlane').innerHTML=svg;
+  document.getElementById('vizCap').textContent=cap;
+}
+document.querySelectorAll('.viz-tab').forEach(function(b){
+  b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawColumns(b.getAttribute('data-case')); };
+});
+(function(){ var f=document.querySelector('.viz-tab'); f.classList.add('active'); drawColumns('a'); })();
 
 // ===== instrumentación =====
 var session = {

@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -157,7 +178,7 @@
         <li><span class="n">2</span> Describir su imagen (el conjunto de valores)</li>
         <li><span class="n">3</span> Dibujar curvas de nivel (y saber qué es una superficie de nivel)</li>
         <li><span class="n">4</span> Probar que un límite no existe con dos caminos</li>
-        <li><span class="n">5</span> Calcular un límite que sí existe</li>
+        <li><span class="n">5</span> Calcular un límite que sí existe (polares)</li>
         <li><span class="n">6</span> Decidir si una función es continua en un punto</li>
       </ol>
     </div>
@@ -165,17 +186,34 @@
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Estás mirando el <strong>mapa de una montaña</strong>. A cada punto del terreno —una pareja de coordenadas (x, y)— le corresponde <strong>una sola</strong> altura. Un modelo sencillo de la loma es:</p>
+      <div class="fx"><div class="sys"><span class="eq">altura(x, y) = √(9 − x² − y²)</span></div></div>
+      <p class="idea" style="font-size:17px">Tres preguntas caen solas: ¿en qué zona del terreno tiene sentido la fórmula (dónde <strong>no</strong> se rompe)? ¿Qué alturas llega a alcanzar? Y si trazamos las líneas de igual altura —como en un mapa topográfico— ¿qué forma tienen? Todo eso son <strong>dominio</strong>, <strong>imagen</strong> y <strong>curvas de nivel</strong>. Además, en los bordes filosos aparece un problema fino: el de los <strong>límites</strong>. Al final de esta guía respondes justo estas preguntas tú sola.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>Una máquina con dos entradas</h3>
+      <h3>1 · Una máquina con dos entradas</h3>
       <p class="idea">Una <strong>función de dos variables</strong> toma un par de números —un punto del plano— y devuelve <strong>un solo</strong> número. La entrada es una pareja; la salida es una altura. En símbolos:</p>
       <div class="fx"><div class="sys"><span class="eq">f(x, y) = √(9 − x² − y²)</span></div></div>
-      <p class="idea">El <strong>dominio</strong> es el conjunto de parejas que la función acepta sin romperse; la <strong>imagen</strong> es el conjunto de alturas que llega a producir. Igual que en una variable, pero ahora la entrada vive en el plano.</p>
+      <p class="idea">El <strong>dominio</strong> es el conjunto de parejas que la función acepta sin romperse; la <strong>imagen</strong> es el conjunto de alturas que llega a producir. Antes de seguir, aclara qué es cada cosa:</p>
+      <div class="check" data-kind="item" data-id="IDchk" data-tema="dominio_imagen" data-level="guiado">
+        <div class="qtag">Te toca · distingue</div>
+        <p class="q">Para f(x, y), ¿en qué conjunto vive el <strong>dominio</strong> y en cuál la <strong>imagen</strong>?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Dominio: parejas (x, y) del plano · Imagen: números sueltos (las alturas de salida)</button>
+          <button class="opt" data-ok="0">Dominio: números sueltos · Imagen: parejas (x, y) del plano</button>
+          <button class="opt" data-ok="0">Los dos viven en el plano: ambos son conjuntos de parejas (x, y)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La <strong>entrada</strong> es una pareja del plano: ahí vive el dominio. La <strong>salida</strong> es un solo número: la imagen es un conjunto de esas alturas, no de parejas.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>Qué puede prohibir un dominio</h3>
+      <h3>2 · Qué puede prohibir un dominio</h3>
       <p class="idea">Solo tres cosas rompen una fórmula, exactamente las mismas de una variable: <strong>dividir entre cero</strong>, sacar <strong>raíz par de un negativo</strong> y tomar <strong>logaritmo de algo no positivo</strong>. Todo lo demás está permitido. ¿Lo recuerdas antes de mirarlo?</p>
       <div class="check" data-kind="recall" data-fid="F1_restricciones_dominio" data-tema="dominio">
         <div class="qtag">Te toca · recuerda</div>
@@ -190,21 +228,42 @@
     </section>
 
     <section class="sec">
-      <h3>Rebanar la superficie: curvas de nivel</h3>
+      <h3>3 · Rebanar la superficie: curvas de nivel</h3>
       <p class="idea">Fijar la altura en un valor <em>k</em> y preguntar “¿en qué puntos vale eso la función?” da una <strong>curva de nivel</strong>. Es la fórmula igualada a una constante:</p>
       <div class="fx"><div class="sys"><span class="eq">f(x, y) = k</span></div></div>
-      <p class="idea">Es exactamente lo que hace un mapa topográfico: cada línea une los puntos a la misma altura. El nombre paraguas para esto es <strong>conjunto de nivel</strong>: son <strong>curvas de nivel</strong> cuando la función tiene dos variables y <strong>superficies de nivel</strong> cuando tiene tres. Juntar varios conjuntos de nivel para distintos valores de <em>k</em> retrata la función sin necesidad de dibujarla en 3D.</p>
+      <p class="idea">Es exactamente lo que hace un mapa topográfico: cada línea une los puntos a la misma altura. El nombre paraguas es <strong>conjunto de nivel</strong>: son <strong>curvas de nivel</strong> cuando la función tiene dos variables y <strong>superficies de nivel</strong> cuando tiene tres.</p>
+      <div class="check" data-kind="item" data-id="NIVchk" data-tema="curvas_nivel" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Para f(x, y) = x² + y², ¿qué es la curva de nivel k = 9?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El conjunto de puntos con x² + y² = 9: un círculo de radio 3</button>
+          <button class="opt" data-ok="0">La superficie completa en 3D del tazón x² + y²</button>
+          <button class="opt" data-ok="0">La recta y = 9</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Igualar la fórmula a la constante da x² + y² = 9. Esa ecuación es un círculo de radio √9 = 3. La curva de nivel vive en el plano, no en 3D.</p></div>
+      </div>
     </section>
 
-    <h2 class="modhead">Yo lo hago</h2>
+    <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Hallemos el dominio y la imagen de la función de la primera sección. Voy paso a paso; tú solo sigue el hilo.</p>
+      <p class="idea" style="font-size:17px">Hallemos el <strong>dominio</strong> y la <strong>imagen</strong> de la función de la montaña. No la mires nada más: en cada paso <strong>tú eliges qué hacer</strong> y yo lo aplico.</p>
       <div class="estep"><div class="oprow">La función</div><div class="fx" id="e0"></div></div>
-      <div class="estep"><div class="oprow">Impongo la restricción</div><p>Hay una raíz cuadrada: lo de adentro no puede ser negativo. Escribo esa condición.</p><div class="fx" id="e1"></div></div>
 
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="dominio">
-        <div class="qtag">Te toca · predice</div>
+      <div class="check" data-kind="item" data-id="E1pred" data-tema="dominio" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">¿Qué es lo primero que hay que imponer para que la fórmula no se rompa?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Que lo de adentro de la raíz sea mayor o igual que cero: 9 − x² − y² ≥ 0</button>
+          <button class="opt" data-ok="0">Que x y y sean positivas</button>
+          <button class="opt" data-ok="0">Que el resultado de la raíz sea positivo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La única operación delicada es la raíz cuadrada (raíz par): su argumento no puede ser negativo. No hay denominador ni logaritmo que cuidar.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Impongo la restricción</div><p>Pido que el radicando no sea negativo y despejo pasando x² + y² al otro lado:</p><p class="calc"><span class="rw">raíz</span> 9−x²−y²<b>≥0</b> <span class="sep">•</span> paso x²+y²<b>→</b> x²+y²<b>≤9</b></p><div class="fx" id="e1"></div></div>
+
+      <div class="check" data-kind="item" data-id="EJpred" data-tema="dominio" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
         <p class="q">La condición quedó como “x² + y² menor o igual que 9”. ¿Qué región del plano describe eso?</p>
         <div class="opts">
           <button class="opt" data-ok="1">Un disco: el interior de un círculo de radio 3, con su borde incluido</button>
@@ -213,10 +272,60 @@
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>La distancia al origen al cuadrado es x² + y². Pedir que sea a lo más 9 es pedir distancia a lo más 3: el disco cerrado de radio 3.</p></div>
       </div>
+      <div class="estep"><div class="oprow">Leo el dominio</div><p>Traduzco la desigualdad a una región. Como √9 = 3, es el disco cerrado de radio 3:</p><p class="calc"><span class="rw">radio</span> √9<b>=3</b> <span class="sep">•</span> incluye el borde<b>(cerrado)</b></p><div class="fx" id="e2"></div></div>
 
-      <div class="estep"><div class="oprow">Leo el dominio</div><p>El dominio es ese disco cerrado de radio 3 centrado en el origen.</p><div class="fx" id="e2"></div></div>
-      <div class="estep"><div class="oprow">Busco la imagen</div><p>Adentro del disco, x² + y² va de 0 (en el centro) hasta 9 (en el borde). Entonces 9 − x² − y² va de 9 a 0, y su raíz va de 3 a 0.</p><div class="fx" id="e3"></div></div>
-      <p class="idea" style="font-size:17px">Resultado: dominio = disco cerrado de radio 3; imagen = <strong>el intervalo de 0 a 3</strong>. Ese es todo el trabajo.</p>
+      <div class="check" data-kind="item" data-id="E3pred" data-tema="imagen" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Para la <strong>imagen</strong>, hay que ver hasta dónde llega la salida. Dentro del disco, x² + y² recorre de 0 a 9. ¿Entre qué valores queda entonces √(9 − x² − y²)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Entre 0 y 3: cuando x² + y² = 9 da 0, y cuando x² + y² = 0 da 3</button>
+          <button class="opt" data-ok="0">Entre −3 y 3, porque la raíz puede ser negativa</button>
+          <button class="opt" data-ok="0">Cualquier número real</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Si x² + y² va de 0 a 9, entonces 9 − x² − y² va de 9 a 0, y su raíz va de 3 a 0. La raíz cuadrada nunca da negativos.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Leo la imagen</div><p>Rastreo la salida en los dos extremos del disco (centro y borde):</p><p class="calc"><span class="rw">centro</span> √(9−0)<b>=3</b> <span class="sep">•</span> <span class="rw">borde</span> √(9−9)<b>=0</b></p><div class="fx" id="e3"></div></div>
+
+      <p class="idea" style="font-size:17px">Se lee solo: <strong>dominio = disco cerrado de radio 3</strong>; <strong>imagen = el intervalo de 0 a 3</strong>. Fíjate en el orden: primero <strong>restringes</strong>, luego <strong>lees la región</strong>, luego <strong>rastreas la salida</strong> en los extremos. Ese es todo el trabajo.</p>
+    </section>
+
+    <h2 class="modhead">Sube el tamaño · el límite y sus infinitos caminos</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">El dominio y la imagen casi salen de un tiro. El <strong>límite</strong> es el salto real, y es lo que de verdad cae en examen. En una variable te acercas por izquierda y por derecha —dos caminos. En el plano te puedes acercar por <strong>infinitos caminos</strong>, y el límite solo existe si <strong>todos</strong> dan lo mismo. La estrategia se parte en dos:</p>
+      <ul class="fases">
+        <li><strong>Fase 1 — sospecha:</strong> prueba <em>dos caminos fáciles</em> (ejes, la recta y = x). Si discrepan, ya terminaste: el límite <em>no existe</em>.</li>
+        <li><strong>Fase 2 — confirma:</strong> si todos los caminos coinciden, no basta probar más; hay que <em>demostrar</em> con polares o un sándwich.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Empecemos con un caso que <strong>falla</strong>. Estudiemos el límite en el origen de:</p>
+      <div class="estep"><div class="oprow">El límite</div><div class="fx" id="t0"></div></div>
+
+      <div class="check" data-kind="item" data-id="T1pred" data-tema="limites" data-level="juntos">
+        <div class="qtag">Te toca · decide el camino</div>
+        <p class="q">Para el <strong>camino 1</strong> quieres el más simple. ¿Cuál conviene y qué da?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El eje x (y = 0): el numerador xy se vuelve 0, así que el cociente es 0</button>
+          <button class="opt" data-ok="0">La recta y = x: da un valor complicado, mejor empezar por ahí</button>
+          <button class="opt" data-ok="0">Ningún camino sirve; hay que ir directo a polares</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El más simple es un eje: con y = 0 el producto xy se anula y el cociente colapsa a 0. Conviene sacar primero el camino barato.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Camino 1 · eje x (y = 0)</div><p>Sustituyo y = 0 en numerador y denominador:</p><p class="calc"><span class="rw">num</span> x·0<b>=0</b> <span class="sep">•</span> <span class="rw">den</span> x²+0<b>=x²</b> <span class="sep">•</span> 0÷x²<b>=0</b></p><div class="fx" id="t1"></div></div>
+
+      <div class="check" data-kind="item" data-id="T2pred" data-tema="limites" data-level="juntos">
+        <div class="qtag">Te toca · decide el camino</div>
+        <p class="q">Ahora el <strong>camino 2</strong>: la recta y = x. Al sustituir, ¿qué valor sale?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">½: el cociente queda x²⁄2x² = ½, constante</button>
+          <button class="opt" data-ok="0">0, igual que por el eje x</button>
+          <button class="opt" data-ok="0">Infinito: el denominador se anula</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con y = x el numerador es x·x = x² y el denominador x² + x² = 2x². El cociente x²⁄2x² se simplifica a ½, sin importar qué tan cerca estés del origen.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Camino 2 · recta y = x</div><p>Sustituyo y = x y simplifico el cociente:</p><p class="calc"><span class="rw">num</span> x·x<b>=x²</b> <span class="sep">•</span> <span class="rw">den</span> x²+x²<b>=2x²</b> <span class="sep">•</span> x²÷2x²<b>=½</b></p><div class="fx" id="t2"></div></div>
+
+      <div class="estep"><div class="oprow">Comparo</div><p>Un camino da 0 y el otro da ½. No coinciden:</p><p class="calc"><span class="rw">caminos</span> 0<b>≠</b>½ <span class="sep">•</span> el límite <b>no existe</b></p><div class="fx" id="t3"></div></div>
+
+      <p class="idea" style="font-size:17px">Como dos caminos dan valores distintos, <strong>el límite no existe</strong>. Con encontrar dos caminos que discrepen basta: no hay que probar todos. Esa es la Fase 1.</p>
     </section>
 
     <section class="sec">
@@ -236,18 +345,11 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora un <strong>límite</strong>, que es lo que de verdad cae en examen. En una variable te acercas por izquierda y por derecha; en el plano te puedes acercar por <strong>infinitos caminos</strong>, y el límite solo existe si todos dan lo mismo. Estudiemos:</p>
-      <div class="estep"><div class="oprow">El límite</div><div class="fx" id="t0"></div></div>
-      <div class="estep"><div class="oprow">Camino 1: por el eje x (y = 0)</div><p>Sustituyo y = 0. La fracción se vuelve 0 sobre x², que es 0. Por este camino el valor tiende a 0.</p><div class="fx" id="t1"></div></div>
-      <div class="estep"><div class="oprow">Camino 2: por la recta y = x</div><p>Sustituyo y = x y simplifico el cociente. Por este camino el valor queda constante.</p><div class="fx" id="t2"></div></div>
-      <div class="estep"><div class="oprow">Comparo</div><p>Un camino da 0 y otro da ½. No coinciden.</p><div class="fx" id="t3"></div></div>
-      <p class="idea" style="font-size:17px">Como dos caminos dan valores distintos, <strong>el límite no existe</strong>. Con encontrar dos caminos que discrepen basta: no hay que probar todos.</p>
-    </section>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">No siempre falla. Cuando el límite <strong>sí existe</strong>, un buen truco es pasar a <strong>coordenadas polares</strong>: x = r·cos θ, y = r·sen θ. Acercarse al origen es hacer r → 0, sin importar el ángulo. Estudiemos:</p>
+      <p class="idea" style="font-size:17px">No siempre falla. Cuando el límite <strong>sí existe</strong> (Fase 2), el truco estrella es pasar a <strong>coordenadas polares</strong>: x = r·cos θ, y = r·sen θ. Acercarse al origen es hacer r → 0, sin importar el ángulo. Estudiemos:</p>
       <div class="estep"><div class="oprow">El límite</div><div class="fx" id="f0"></div></div>
-      <div class="estep"><div class="oprow">Cambio a polares</div><p>Sustituyo x = r·cos θ, y = r·sen θ arriba y abajo, y simplifico la potencia de r.</p><div class="fx" id="f1"></div></div>
+      <div class="estep"><div class="oprow">Cambio a polares · numerador</div><p>Sustituyo x = r·cos θ, y = r·sen θ en x²y:</p><p class="calc"><span class="rw">num</span> x²<b>=r²cos²θ</b> <span class="sep">•</span> y<b>=r·senθ</b> <span class="sep">•</span> x²y<b>=r³cos²θ·senθ</b></p></div>
+      <div class="estep"><div class="oprow">Cambio a polares · denominador</div><p>El patrón x² + y² se vuelve r² (el corazón del truco):</p><p class="calc"><span class="rw">den</span> x²+y²<b>=r²</b></p></div>
+      <div class="estep"><div class="oprow">Divido y simplifico</div><p>Cancelo dos erres arriba con las dos de abajo:</p><p class="calc"><span class="rw">r³÷r²</span> r³⁄r²<b>=r</b> <span class="sep">•</span> queda r·cos²θ·senθ</p><div class="fx" id="f1"></div></div>
       <p class="idea" style="font-size:17px">Queda <strong>r · cos²θ · sen θ</strong>. El factor de ángulo nunca pasa de 1 en tamaño, así que todo está atrapado entre −r y r. Cuando <strong>r → 0</strong>, el sándwich lo aplasta a 0, sea cual sea el ángulo.</p>
       <div class="fx"><div class="sys"><span class="eq">límite = 0</span></div></div>
       <p class="fx-note">Como todos los caminos dan 0, el límite existe y vale 0. Polares sirven cuando aparece el patrón x² + y².</p>
@@ -256,9 +358,9 @@
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">Un paso más: la <strong>continuidad</strong>. Una función es <strong>continua en un punto</strong> cuando el límite existe ahí <strong>y coincide con el valor</strong> que la función toma en ese punto. Tres cosas: que exista el valor, que exista el límite, y que sean iguales. Usemos la función del ejemplo anterior, definida <strong>a trozos</strong> para cubrir el origen:</p>
       <div class="estep"><div class="oprow">La función</div><div class="fx" id="c0"></div></div>
-      <div class="estep"><div class="oprow">El valor en el punto</div><p>Por la definición a trozos, en el origen la función vale f(0, 0) = 0. Ese valor existe.</p><div class="fx" id="c1"></div></div>
-      <div class="estep"><div class="oprow">El límite en el punto</div><p>Ya lo calculamos con polares: el límite cuando (x, y) → (0, 0) es 0. También existe.</p><div class="fx" id="c2"></div></div>
-      <div class="estep"><div class="oprow">Comparo</div><p>El límite (0) coincide con el valor de la función (0). Se cumplen las tres condiciones.</p><div class="fx" id="c3"></div></div>
+      <div class="estep"><div class="oprow">El valor en el punto</div><p>Por la definición a trozos, en el origen la función vale f(0, 0) = 0. Ese valor existe:</p><p class="calc"><span class="rw">valor</span> f(0,0)<b>=0</b> <span class="sep">•</span> existe <b>✓</b></p><div class="fx" id="c1"></div></div>
+      <div class="estep"><div class="oprow">El límite en el punto</div><p>Ya lo calculamos con polares: el límite cuando (x, y) → (0, 0) es 0. También existe:</p><p class="calc"><span class="rw">límite</span> lím<b>=0</b> <span class="sep">•</span> existe <b>✓</b></p><div class="fx" id="c2"></div></div>
+      <div class="estep"><div class="oprow">Comparo</div><p>El límite (0) coincide con el valor de la función (0). Se cumplen las tres condiciones:</p><p class="calc"><span class="rw">compara</span> límite 0<b>=</b>valor 0 <span class="sep">•</span> <b>continua</b></p><div class="fx" id="c3"></div></div>
       <p class="idea" style="font-size:17px">Como límite y valor coinciden, la función <strong>es continua en el origen</strong>. Si el valor asignado hubiera sido otro —digamos 5— el límite (0) no coincidiría con él, y habría un salto: discontinua.</p>
     </section>
 
@@ -279,10 +381,23 @@
         <div class="why"><span class="lbl">Por qué</span><p>El logaritmo solo acepta argumentos <strong>estrictamente positivos</strong>. El dominio es el semiplano donde x + y &gt; 0.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P1b" data-tema="imagen" data-level="guiado">
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="dominio" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">¿Cuál es la imagen (el conjunto de alturas que llega a producir) de la función de abajo?</p>
-        <div class="fx" id="p1b"></div>
+        <p class="pstatement">Ahora una con denominador. ¿Cuál es el dominio de la función de abajo?</p>
+        <div class="fx" id="p2"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Todo el plano salvo el origen: hay que pedir x² + y² ≠ 0</button>
+          <button class="opt" data-ok="0">Solo los puntos con x² + y² &gt; 0 y además x &gt; 0</button>
+          <button class="opt" data-ok="0">Todo el plano, sin ninguna restricción</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>El único riesgo es dividir entre cero. ¿Para qué punto se anula el denominador x² + y²?</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>x² + y² solo vale 0 en el origen (0, 0). El denominador exige x² + y² ≠ 0, así que se prohíbe exactamente ese punto y nada más.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="imagen" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Vamos juntos con la imagen. ¿Cuál es el conjunto de alturas que llega a producir la función de abajo?</p>
+        <div class="fx" id="p3"></div>
         <div class="opts">
           <button class="opt" data-ok="1">El intervalo de 0 en adelante: nunca es negativa y crece sin tope</button>
           <button class="opt" data-ok="0">Todos los números reales, positivos y negativos</button>
@@ -292,21 +407,23 @@
         <div class="why"><span class="lbl">Por qué</span><p>x² + y² vale 0 en el origen y crece sin límite al alejarse. La imagen es el intervalo de 0 en adelante; nunca toma valores negativos.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="curvas_nivel" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="curvas_nivel" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Para la función de abajo, ¿qué figura es la curva de nivel k = 4?</p>
-        <div class="fx" id="p2"></div>
+        <p class="pstatement">Para la función de abajo, ¿qué figura es la curva de nivel k = 5?</p>
+        <div class="fx" id="p4"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">Un círculo de radio 2 centrado en el origen</button>
-          <button class="opt" data-ok="0">Una recta horizontal</button>
-          <button class="opt" data-ok="0">Un círculo de radio 4</button>
+          <button class="opt" data-ok="1">Una recta: la ecuación x + y = 5 es una recta del plano</button>
+          <button class="opt" data-ok="0">Un círculo de radio √5</button>
+          <button class="opt" data-ok="0">Una parábola</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Nivel k es x² + y² = 4, un círculo de radio √4 = 2.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Iguala la fórmula a k = 5. ¿Qué tipo de ecuación queda: cuadrática (círculo) o lineal (recta)?</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Nivel k es x + y = 5, una ecuación lineal: su gráfica es una recta. Solo salen círculos cuando aparece x² + y², no aquí.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="curvas_nivel" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="curvas_nivel" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Para esa misma función, x² + y², ¿qué pasa con la curva de nivel cuando pides k = −1?</p>
+        <p class="pstatement">Para x² + y², ¿qué pasa con la curva de nivel cuando pides k = −1?</p>
+        <div class="fx" id="p5"></div>
         <div class="opts">
           <button class="opt" data-ok="1">No existe: ningún punto la cumple, porque x² + y² nunca es negativo</button>
           <button class="opt" data-ok="0">Es un círculo de radio 1</button>
@@ -315,10 +432,10 @@
         <div class="why"><span class="lbl">Por qué</span><p>Una suma de cuadrados nunca da un número negativo, así que ningún punto vale −1. La curva de nivel es vacía.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4a" data-tema="limites" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="limites" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">Vamos juntos con la prueba de dos caminos para el límite de abajo. Por el eje x (y = 0) el cociente ya da 0. Ahora sustituye la recta y = x y calcula: ¿a qué valor tiende?</p>
-        <div class="fx" id="p4a"></div>
+        <div class="fx" id="p6"></div>
         <div class="opts">
           <button class="opt" data-ok="1">A ½</button>
           <button class="opt" data-ok="0">A 0</button>
@@ -328,23 +445,23 @@
         <div class="why"><span class="lbl">Por qué</span><p>Con y = x: numerador x·x = x², denominador x² + x² = 2x². La fracción vale x²⁄2x² = ½, constante. Por el eje x daba 0 y por y = x da ½: dos caminos discrepan → el límite no existe.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4a2" data-tema="limites_polares" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="limites_polares" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">Vamos juntos con el truco de polares en el límite de abajo. Arriba, x³ se vuelve r³·cos³θ; abajo, x² + y² se vuelve r². Tras dividir, ¿qué queda?</p>
-        <div class="fx" id="p4a2"></div>
+        <div class="fx" id="p7"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">r·cos³θ</button>
-          <button class="opt" data-ok="0">cos³θ</button>
+          <button class="opt" data-ok="1">r·cos³θ, que tiende a 0 cuando r → 0</button>
+          <button class="opt" data-ok="0">cos³θ, que depende del ángulo</button>
           <button class="opt" data-ok="0">r²·cos³θ</button>
         </div>
         <div class="aux"><details><summary>Pista</summary><p>Divide r³·cos³θ entre r²: se cancelan dos erres y sobra una r.</p></details></div>
         <div class="why"><span class="lbl">Por qué</span><p>r³·cos³θ ÷ r² = r·cos³θ. El factor cos³θ nunca pasa de 1 en tamaño, así que cuando r → 0 el producto tiende a 0: el límite existe y vale 0.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4b" data-tema="limites" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="limites_polares" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">Ahora sola, con el truco de polares. Pasa el límite de abajo a coordenadas polares (x = r·cos θ, y = r·sen θ), simplifica y decide su valor cuando r → 0.</p>
-        <div class="fx" id="p4b"></div>
+        <div class="fx" id="p8"></div>
         <div class="opts">
           <button class="opt" data-ok="1">El límite existe y vale 0</button>
           <button class="opt" data-ok="0">No existe: depende del ángulo</button>
@@ -354,10 +471,10 @@
         <div class="why"><span class="lbl">Por qué</span><p>Arriba: 3x²y = 3·r³·cos²θ·sen θ. Abajo: x² + y² = r². El cociente es 3·r·cos²θ·sen θ. El factor cos²θ·sen θ nunca pasa de 1 en tamaño, así que todo queda atrapado entre −3r y 3r; cuando r → 0 el sándwich lo aplasta a 0, sea cual sea el ángulo.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4c" data-tema="limites" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="limites" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">Sola, con la prueba de dos caminos: decide si el límite de abajo existe.</p>
-        <div class="fx" id="p4c"></div>
+        <div class="fx" id="p9"></div>
         <div class="opts">
           <button class="opt" data-ok="1">No existe: dos caminos discrepan</button>
           <button class="opt" data-ok="0">Existe y vale 0</button>
@@ -367,7 +484,7 @@
         <div class="why"><span class="lbl">Por qué</span><p>Por el eje x (y = 0): x²⁄x² = 1. Por el eje y (x = 0): −y²⁄y² = −1. Dos caminos dan 1 y −1: como discrepan, el límite no existe.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="continuidad" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P10" data-tema="continuidad" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">Vamos juntos con la continuidad. Para decidir si una función es continua en un punto, ¿qué tres cosas hay que verificar?</p>
         <div class="opts">
@@ -379,15 +496,15 @@
         <div class="why"><span class="lbl">Por qué</span><p>Continua en un punto pide tres cosas a la vez: existe f en el punto, existe el límite, y son <strong>iguales</strong>. Si el límite y el valor difieren, hay un salto.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P6" data-tema="continuidad" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P11" data-tema="continuidad" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Una función coincide con una fórmula agradable en todos lados salvo en el origen, donde la definen aparte con el valor 0. Ya sabes que el límite de la fórmula en el origen es 0. ¿Es continua ahí?</p>
+        <p class="pstatement">Una función coincide con una fórmula agradable en todos lados salvo en el origen, donde la definen aparte con el valor <strong>5</strong>. Ya sabes que el límite de la fórmula en el origen es <strong>0</strong>. ¿Es continua ahí?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Sí: el límite (0) coincide con el valor asignado (0)</button>
-          <button class="opt" data-ok="0">No: como la definen aparte, hay un salto seguro</button>
+          <button class="opt" data-ok="1">No: el límite (0) no coincide con el valor asignado (5), hay un salto</button>
+          <button class="opt" data-ok="0">Sí: el límite existe, con eso basta</button>
           <button class="opt" data-ok="0">No se puede decidir sin más datos</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Continua en un punto significa que el límite existe y es igual al valor de la función ahí. Aquí ambos valen 0, así que sí es continua.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Existe el valor (5) y existe el límite (0), pero <strong>no coinciden</strong>. Falla la tercera condición: hay un salto de 5 a 0, así que la función es discontinua en el origen.</p></div>
       </div>
     </section>
 
@@ -400,6 +517,17 @@
         <button class="opt" data-ok="0">Que la función no esté definida exactamente en ese punto</button>
       </div>
       <div class="why"><span class="lbl">Por qué</span><p>Si dos caminos discrepan, no puede haber un único límite. Un solo camino que coincida no prueba nada; y no estar definida en el punto es normal al tomar límites.</p></div>
+    </div>
+
+    <div class="check" data-kind="recall" data-fid="F3_polares" data-tema="limites_polares">
+      <div class="qtag">Te toca · recuerda</div>
+      <p class="q">¿Cuándo conviene el cambio a coordenadas polares para un límite en el origen?</p>
+      <div class="opts">
+        <button class="opt" data-ok="1">Cuando aparece el patrón x² + y², porque se vuelve r² y acercarse al origen es r → 0</button>
+        <button class="opt" data-ok="0">Siempre: polares resuelve cualquier límite de dos variables</button>
+        <button class="opt" data-ok="0">Solo cuando la función no tiene ni raíces ni logaritmos</button>
+      </div>
+      <div class="why"><span class="lbl">Por qué</span><p>El truco funciona porque x² + y² = r² colapsa la distancia en una sola variable, r. Si no aparece ese patrón, polares suele complicar más que ayudar.</p></div>
     </div>
 
     <section class="chuleta">
@@ -422,6 +550,11 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="C2_espacio-Rn.html"><span class="sp">← Anterior</span><span class="ti">U2 · El espacio Rⁿ</span></a>
+      <a class="next" href="C4_diferenciacion.html"><span class="sp">Siguiente →</span><span class="ti">U4 · Diferenciación</span></a>
+    </nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 3</p></footer>
 
@@ -446,32 +579,34 @@ function mat(rows){
 // helper para inyectar fórmulas/expresiones apiladas en un bloque .fx
 function fx(id, lines){ var el=document.getElementById(id); if(el) el.innerHTML='<div class="sys">'+lines.map(function(t){return '<span class="eq">'+t+'</span>';}).join('')+'</div>'; }
 
-// ejemplo 1: dominio e imagen de f = √(9 − x² − y²)
+// ejemplo 1 (co-producido): dominio e imagen de f = √(9 − x² − y²)
 fx('e0',["f(x, y) = √(9 − x² − y²)"]);
 fx('e1',["9 − x² − y² ≥ 0","x² + y² ≤ 9"]);
 fx('e2',["Dominio: x² + y² ≤ 9","(disco cerrado de radio 3)"]);
-fx('e3',["0 ≤ 9 − x² − y² ≤ 9","0 ≤ √(9 − x² − y²) ≤ 3","Imagen: [0, 3]"]);
-// ejemplo 2: límite que no existe, xy/(x²+y²) en (0,0)
+fx('e3',["0 ≤ √(9 − x² − y²) ≤ 3","Imagen: [0, 3]"]);
+// sube el tamaño: límite que no existe, xy/(x²+y²) en (0,0)
 fx('t0',["lím (x,y)→(0,0)  xy ⁄ (x² + y²)"]);
 fx('t1',["y = 0:   0 ⁄ x² = 0   →   0"]);
 fx('t2',["y = x:   x·x ⁄ (x² + x²)","= x² ⁄ 2x² = ½   →   ½"]);
 fx('t3',["0 ≠ ½   ⇒   el límite no existe"]);
-// ejemplo 3: límite que sí existe, x²y/(x²+y²) en (0,0), por polares
+// ejemplo polares: límite que sí existe, x²y/(x²+y²) en (0,0)
 fx('f0',["lím (x,y)→(0,0)  x²y ⁄ (x² + y²)"]);
 fx('f1',["x²y = r³·cos²θ·sen θ","x² + y² = r²","= r³·cos²θ·sen θ ⁄ r² = r · cos²θ · sen θ"]);
-// ejemplo 4: continuidad de la función a trozos en el origen
+// continuidad de la función a trozos en el origen
 fx('c0',["f(x, y) = x²y ⁄ (x² + y²)   si (x,y) ≠ (0,0)","f(0, 0) = 0"]);
 fx('c1',["valor:   f(0, 0) = 0"]);
 fx('c2',["límite:  lím (x,y)→(0,0) f = 0"]);
 fx('c3',["límite = valor = 0   ⇒   continua en (0,0)"]);
 // práctica
 fx('p1',["f(x, y) = ln(x + y)"]);
-fx('p1b',["f(x, y) = x² + y²"]);
-fx('p2',["f(x, y) = x² + y²"]);
-fx('p4a',["lím (x,y)→(0,0)  xy ⁄ (x² + y²)","y = x:   x·x ⁄ (x² + x²) = ?"]);
-fx('p4a2',["lím (x,y)→(0,0)  x³ ⁄ (x² + y²)"]);
-fx('p4b',["lím (x,y)→(0,0)  3x²y ⁄ (x² + y²)"]);
-fx('p4c',["lím (x,y)→(0,0)  (x² − y²) ⁄ (x² + y²)"]);
+fx('p2',["f(x, y) = 1 ⁄ (x² + y²)"]);
+fx('p3',["f(x, y) = x² + y²"]);
+fx('p4',["f(x, y) = x + y"]);
+fx('p5',["f(x, y) = x² + y²"]);
+fx('p6',["lím (x,y)→(0,0)  xy ⁄ (x² + y²)","y = x:   x·x ⁄ (x² + x²) = ?"]);
+fx('p7',["lím (x,y)→(0,0)  x³ ⁄ (x² + y²)"]);
+fx('p8',["lím (x,y)→(0,0)  3x²y ⁄ (x² + y²)"]);
+fx('p9',["lím (x,y)→(0,0)  (x² − y²) ⁄ (x² + y²)"]);
 
 // ===== visual: curvas de nivel de x² + y² (círculos concéntricos) =====
 function PT(x,y){ return [150+x*24, 150-y*24]; }   // centro (150,150), 24 px por unidad
@@ -507,7 +642,7 @@ document.querySelectorAll('.viz-tab').forEach(function(b){
 // ===== instrumentación =====
 var session = {
   fecha:new Date().toISOString().slice(0,10),
-  materia:"calculo_multivariado", unidad:"U3_funciones_varias", leccion:"C3_funciones-varias-variables",
+  materia:"calculo", unidad:"U3_funciones_varias", leccion:"C3_funciones-varias-variables",
   duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
 };
 var t0ms = Date.now();

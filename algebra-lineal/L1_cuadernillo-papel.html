@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U1 — Cuadernillo de papel (Sistemas y Gauss-Jordan)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .vecs{display:flex;gap:22px;flex-wrap:wrap;font-size:21px;font-variant-numeric:tabular-nums;align-items:center}
+  .colvec{display:inline-flex;align-items:center;gap:6px}
+  .colvec .lab{font-weight:700;color:var(--navy);font-size:17px}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+
+  /* ===== cuadernillo de papel ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora · en papel</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 1 · Cuadernillo</p>
+    <h1>Sistemas y Gauss-Jordan, <mark>resueltos en una hoja</mark></h1>
+    <p class="lead">Aquí no se elige opción: se resuelve completo, a mano, como en el parcial. Cada problema trae su enunciado en palabras, su matemática, tu espacio para trabajarlo en papel y la solución paso a paso para cotejar. Toma lápiz y hoja antes de abrir cada respuesta.</p>
+    <div class="learn">
+      <h2>Lo que vas a entrenar</h2>
+      <ol>
+        <li><span class="n">1</span> Gauss-Jordan en 2×2 y en 3×3</li>
+        <li><span class="n">2</span> Clasificar: única, ninguna o infinitas</li>
+        <li><span class="n">3</span> Escribir la solución en forma paramétrica</li>
+        <li><span class="n">4</span> Discutir un sistema con parámetro</li>
+        <li><span class="n">5</span> Modelar un problema en palabras como sistema</li>
+        <li><span class="n">6</span> Interpretar el resultado geométricamente</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este cuadernillo</h2>
+    <section class="sec">
+      <h3>La regla de oro: papel primero</h3>
+      <p class="idea">Los dos primeros son <strong>resueltos-guía</strong>: léelos completos para fijar el método de Gauss-Jordan. El resto es <strong>producción</strong>: resuélvelos tú de principio a fin en una hoja <strong>antes</strong> de abrir la solución. Al terminar cada uno, dime cómo te fue con los tres botones. Eso arma tu reporte para el tutor sin escaneos ni fotos.</p>
+      <p class="idea">Método del curso: escribo el sistema como <strong>matriz aumentada</strong> <strong>[A | b]</strong>, la llevo a <strong>forma escalonada reducida</strong> (RREF) con operaciones de renglón, y leo la solución. Al final decido: <strong>única</strong> (tantos pivotes como incógnitas), <strong>ninguna</strong> (aparece un renglón <strong>0 = número ≠ 0</strong>) o <strong>infinitas</strong> (hay columna sin pivote → variable libre → forma paramétrica).</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago — resueltos-guía</h2>
+
+    <!-- ============ RESUELTO-GUÍA 1 : 2x2 unica ============ -->
+    <section class="prob" data-kind="prob" data-id="RG1" data-tema="gauss_jordan_2x2" data-level="resuelto">
+      <div class="phead"><span class="pnum">1</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Gauss-Jordan en un sistema 2×2</p>
+      <p class="pstatement">Dos números cumplen que <strong>el doble del primero más el triple del segundo es 7</strong>, y que <strong>el primero menos el segundo es 1</strong>. Resuélvelo por Gauss-Jordan (llévalo a RREF) y di si la solución es única.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">2x + 3y = 7</span>
+        <span class="eq">x − y = 1</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Escribo la <strong>matriz aumentada</strong> [A | b]. Me conviene un <strong>1</strong> arriba a la izquierda, así que primero intercambio renglones para no arrastrar fracciones.</p><div class="fx" id="rg1a"></div></div>
+          <div class="estep"><div class="oprow">R1 ↔ R2</div><p>El renglón con el 1 pasa arriba; ese será mi primer pivote.</p><div class="fx" id="rg1b"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>Hago cero el 2 de abajo usando el pivote de la primera columna.</p><div class="fx" id="rg1c"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 ÷ 5</div><p>Normalizo el pivote de y a 1.</p><div class="fx" id="rg1d"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 + R2</div><p>Subo y limpio la y del primer renglón: ya es forma escalonada reducida.</p><div class="fx" id="rg1e"></div></div>
+          <p class="verdict">Leo la RREF: <strong>x = 2, y = 1</strong>. Hay <strong>2 pivotes</strong> para <strong>2 incógnitas</strong> ⇒ <strong>solución única</strong>. Geométricamente, dos rectas que se cruzan en un solo punto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (aunque sea de muestra, márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 2 : 3x3 unica ============ -->
+    <section class="prob" data-kind="prob" data-id="RG2" data-tema="gauss_jordan_3x3" data-level="resuelto">
+      <div class="phead"><span class="pnum">2</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Gauss-Jordan en un sistema 3×3</p>
+      <p class="pstatement">Resuelve el sistema por Gauss-Jordan y clasifícalo. Lleva la matriz aumentada a RREF renglón por renglón.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + y + z = 6</span>
+        <span class="eq">2x − y + z = 3</span>
+        <span class="eq">x + 2y − z = 2</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz aumentada [A | b]</div><div class="fx" id="rg2a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1 · R3 → R3 − R1</div><p>Hago ceros bajo el primer pivote (el 1 de la columna x).</p><div class="fx" id="rg2b"></div></div>
+          <div class="estep"><div class="oprow">R2 ↔ R3</div><p>Subo el renglón con el pivote limpio (+1) en la columna y para evitar fracciones.</p><div class="fx" id="rg2c"></div></div>
+          <div class="estep"><div class="oprow">R3 → R3 + 3·R2</div><p>Elimino el −3 de abajo en la columna y.</p><div class="fx" id="rg2d"></div></div>
+          <div class="estep"><div class="oprow">R3 → R3 ÷ (−7)</div><p>Normalizo el pivote de z a 1.</p><div class="fx" id="rg2e"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 + 2·R3 · R1 → R1 − R3</div><p>Subo y limpio la columna z.</p><div class="fx" id="rg2f"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − R2</div><p>Limpio la y del primer renglón: ya es RREF.</p><div class="fx" id="rg2g"></div></div>
+          <p class="verdict">RREF ⇒ <strong>x = 1, y = 2, z = 3</strong>. <strong>3 pivotes</strong> para <strong>3 incógnitas</strong> ⇒ <strong>solución única</strong>. Compruebo en la primera ecuación: 1+2+3 = 6 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Tu turno — producción</h2>
+
+    <!-- ============ P3 GUIADO : infinitas -> parametrica ============ -->
+    <section class="prob" data-kind="prob" data-id="P3" data-tema="clasificar_parametrica" data-level="guiado">
+      <div class="phead"><span class="pnum">3</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Clasifica y, si hace falta, parametriza</p>
+      <p class="pstatement">Lleva el sistema a RREF, decide si tiene solución <strong>única, ninguna o infinitas</strong>, y si son infinitas escribe la solución en <strong>forma paramétrica</strong>. <em>Pista: mira qué pasa con el segundo renglón respecto al primero.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + y + z = 6</span>
+        <span class="eq">2x + 2y + 2z = 12</span>
+        <span class="eq">x − y + z = 2</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz aumentada</div><div class="fx" id="p3a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1 · R3 → R3 − R1</div><p>La segunda ecuación era el doble de la primera: su renglón se anula (0 = 0, no aporta nada).</p><div class="fx" id="p3b"></div></div>
+          <div class="estep"><div class="oprow">R2 ↔ R3 · R2 → R2 ÷ (−2)</div><p>Subo el renglón útil y normalizo el pivote de y.</p><div class="fx" id="p3c"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − R2</div><p>RREF. Pivotes en x y en y; la columna z <strong>no tiene pivote</strong> ⇒ z es libre.</p><div class="fx" id="p3d"></div></div>
+          <div class="estep"><p>Leo los renglones: <strong>x + z = 4</strong> y <strong>y = 2</strong>. Hago <strong>z = t</strong> libre y despejo:</p>
+            <div class="fx"><div class="sys"><span class="eq">x = 4 − t</span><span class="eq">y = 2</span><span class="eq">z = t</span></div></div>
+          </div>
+          <p class="verdict warn"><strong>Infinitas soluciones</strong> (una variable libre). En forma paramétrica: <strong>(x,y,z) = (4, 2, 0) + t·(−1, 0, 1)</strong>, con t ∈ ℝ. Es una <strong>recta</strong> de soluciones.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P4 SOLO : sin solucion ============ -->
+    <section class="prob" data-kind="prob" data-id="P4" data-tema="clasificar_ninguna" data-level="solo">
+      <div class="phead"><span class="pnum">4</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">¿Tiene solución? Decídelo y justifica</p>
+      <p class="pstatement">Aplica Gauss-Jordan y decide cuántas soluciones tiene. <strong>No basta con decir el número: señala en qué renglón se ve</strong> y explica qué significa geométricamente.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + y + z = 3</span>
+        <span class="eq">2x + 2y + 2z = 7</span>
+        <span class="eq">x − y + z = 1</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz aumentada</div><div class="fx" id="p4a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>La segunda ecuación tiene el mismo lado izquierdo que el doble de la primera, pero el lado derecho no cuadra: 2·3 = 6 ≠ 7.</p><div class="fx" id="p4b"></div></div>
+          <div class="estep"><p>El segundo renglón quedó <strong>0 0 0 | 1</strong>, es decir <strong>0 = 1</strong>: una contradicción. No hace falta seguir escalonando.</p></div>
+          <p class="verdict warn"><strong>No tiene solución</strong> (sistema inconsistente). Aparece un renglón <strong>0 = número ≠ 0</strong>. Geométricamente, la primera y la segunda ecuación son <strong>planos paralelos</strong> (misma normal, distinto término): nunca se cortan, así que las tres no tienen punto común.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P5 SOLO : infinitas 3x3 -> parametrica ============ -->
+    <section class="prob" data-kind="prob" data-id="P5" data-tema="parametrica_3x3" data-level="solo">
+      <div class="phead"><span class="pnum">5</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Forma paramétrica de un 3×3</p>
+      <p class="pstatement">Resuelve por Gauss-Jordan. Si hay infinitas soluciones, escríbelas en <strong>forma paramétrica</strong> e identifica cuántas variables libres hay.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + y + z = 2</span>
+        <span class="eq">2x + 3y + z = 3</span>
+        <span class="eq">3x + 4y + 2z = 5</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz aumentada</div><div class="fx" id="p5a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1 · R3 → R3 − 3·R1</div><p>Hago ceros bajo el primer pivote. Los dos renglones de abajo salen idénticos.</p><div class="fx" id="p5b"></div></div>
+          <div class="estep"><div class="oprow">R3 → R3 − R2 · R1 → R1 − R2</div><p>El tercer renglón se anula (0 = 0). Limpio la y del primer renglón. La columna z queda sin pivote ⇒ libre.</p><div class="fx" id="p5c"></div></div>
+          <div class="estep"><p>Renglones: <strong>x + 2z = 3</strong> y <strong>y − z = −1</strong>. Hago <strong>z = t</strong> y despejo:</p>
+            <div class="fx"><div class="sys"><span class="eq">x = 3 − 2t</span><span class="eq">y = −1 + t</span><span class="eq">z = t</span></div></div>
+          </div>
+          <p class="verdict"><strong>Infinitas soluciones</strong>, <strong>una variable libre</strong>. Forma paramétrica: <strong>(x,y,z) = (3, −1, 0) + t·(−2, 1, 1)</strong>, t ∈ ℝ. Verifico t = 0 en la segunda ecuación: 2(3)+3(−1)+0 = 3 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P6 SOLO : gauss-jordan 2 ec 3 incog -> parametrica ============ -->
+    <section class="prob" data-kind="prob" data-id="P6" data-tema="gauss_jordan_parametrica" data-level="solo">
+      <div class="phead"><span class="pnum">6</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Dos ecuaciones, tres incógnitas</p>
+      <p class="pstatement">Resuelve por Gauss-Jordan. Antes de calcular, <strong>anticipa</strong>: con menos ecuaciones que incógnitas, ¿qué tipo de solución esperas? Luego confírmalo y da la forma paramétrica.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + 2y − z = 3</span>
+        <span class="eq">2x + y + z = 3</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz aumentada (2×4)</div><div class="fx" id="p6a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>Hago cero el 2 de abajo en la columna x.</p><div class="fx" id="p6b"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 ÷ (−3)</div><p>Normalizo el pivote de y.</p><div class="fx" id="p6c"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>Limpio la y del primer renglón. RREF: pivotes en x, y; z sin pivote ⇒ libre.</p><div class="fx" id="p6d"></div></div>
+          <div class="estep"><p>Renglones: <strong>x + z = 1</strong> y <strong>y − z = 1</strong>. Con <strong>z = t</strong>:</p>
+            <div class="fx"><div class="sys"><span class="eq">x = 1 − t</span><span class="eq">y = 1 + t</span><span class="eq">z = t</span></div></div>
+          </div>
+          <p class="verdict"><strong>Lo anticipado se cumple:</strong> 2 ecuaciones y 3 incógnitas ⇒ a lo más 2 pivotes, así que <strong>no puede haber solución única</strong>; aquí es consistente, luego <strong>infinitas</strong>. Solución: <strong>(x,y,z) = (1, 1, 0) + t·(−1, 1, 1)</strong>.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P7 SOLO : sistema con parametro k (decision) ============ -->
+    <section class="prob" data-kind="prob" data-id="P7" data-tema="parametro_k" data-level="solo">
+      <div class="phead"><span class="pnum">7</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Discute el sistema según el parámetro k</p>
+      <p class="pstatement">El sistema depende de un número <strong>k</strong>. <strong>Decide para qué valores de k</strong> tiene solución única y para cuáles no tiene solución. Justifica dónde se rompe. <em>No se pide un número: se pide analizar todos los casos.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + y = 5</span>
+        <span class="eq">x + k·y = 7</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz aumentada</div><div class="fx" id="p7a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − R1</div><p>Resto el primer renglón al segundo para aislar la y.</p><div class="fx" id="p7b"></div></div>
+          <div class="estep"><p>El segundo renglón dice <strong>(k − 1)·y = 2</strong>. Todo depende del coeficiente <strong>k − 1</strong>:</p>
+            <div class="fx"><div class="sys" style="font-size:17px">
+              <span class="eq">Si k ≠ 1:  y = 2/(k−1),  x = 5 − y  → única.</span>
+              <span class="eq">Si k = 1:  0·y = 2, o sea 0 = 2  → ninguna.</span>
+            </div></div>
+          </div>
+          <p class="verdict"><strong>k ≠ 1 ⇒ solución única.</strong> <strong>k = 1 ⇒ sin solución</strong> (las dos ecuaciones serían x+y=5 y x+y=7, rectas paralelas). Nunca hay infinitas aquí, porque para eso el renglón tendría que quedar 0 = 0, y el lado derecho es 2 ≠ 0. Ejemplo con k = 3: y = 1, x = 4.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P8 SOLO : parametro a con 3 casos (decision) ============ -->
+    <section class="prob" data-kind="prob" data-id="P8" data-tema="parametro_a_tres_casos" data-level="solo">
+      <div class="phead"><span class="pnum">8</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Un parámetro con los tres finales posibles</p>
+      <p class="pstatement">Este sistema con parámetro <strong>a</strong> puede caer en los tres casos. <strong>Encuentra los valores de a que dan solución única, los que dan ninguna y los que dan infinitas</strong>, y explica por qué. Interpreta cada caso con rectas.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">a·x + y = 3</span>
+        <span class="eq">x + a·y = 3</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>El sistema tiene solución única exactamente cuando el <strong>determinante</strong> de la matriz de coeficientes no es cero. Calculo:</p>
+            <div class="fx"><div class="sys"><span class="eq">det = a·a − 1·1 = a² − 1 = (a−1)(a+1)</span></div></div>
+            <p>Se anula solo en <strong>a = 1</strong> y <strong>a = −1</strong>. Fuera de esos dos valores, única.</p>
+          </div>
+          <div class="estep"><p><strong>Caso a = 1:</strong> el sistema es <strong>x + y = 3</strong> en las dos ecuaciones (idénticas). Un renglón se anula (0 = 0), queda una libre.</p>
+            <div class="fx" id="p8a"></div>
+          </div>
+          <div class="estep"><p><strong>Caso a = −1:</strong> queda <strong>−x + y = 3</strong> y <strong>x − y = 3</strong>. Al sumar renglones aparece 0 = 6.</p>
+            <div class="fx" id="p8b"></div>
+          </div>
+          <p class="verdict"><strong>a ≠ ±1 ⇒ única</strong> (dos rectas que se cruzan). <strong>a = 1 ⇒ infinitas</strong> (la misma recta dos veces; solución (x,y) = (3,0)+t·(−1,1)). <strong>a = −1 ⇒ ninguna</strong> (rectas paralelas, 0 = 6). Ejemplo de única con a = 2: x = y = 1.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P9 SOLO : modelar 2x2 ============ -->
+    <section class="prob" data-kind="prob" data-id="P9" data-tema="modelar_2x2" data-level="solo">
+      <div class="phead"><span class="pnum">9</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Modela el problema y resuélvelo</p>
+      <p class="pstatement">En una cafetería, <strong>2 cafés y 3 panes cuestan $85</strong>; <strong>1 café y 2 panes cuestan $50</strong>. <strong>Plantea el sistema</strong> (define tus variables), resuélvelo por Gauss-Jordan y da el precio de cada cosa.</p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Defino <strong>c = precio del café</strong>, <strong>p = precio del pan</strong>. Traduzco cada frase a una ecuación:</p>
+            <div class="fx"><div class="sys"><span class="eq">2c + 3p = 85</span><span class="eq">c + 2p = 50</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Matriz aumentada · R1 ↔ R2</div><p>Pongo arriba el renglón que ya tiene un 1 en la columna c.</p><div class="fx" id="p9a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>Hago cero el 2 de la columna c.</p><div class="fx" id="p9b"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 ÷ (−1) · R1 → R1 − 2·R2</div><p>Normalizo el pivote de p y limpio arriba. RREF.</p><div class="fx" id="p9c"></div></div>
+          <p class="verdict"><strong>Café = $20, pan = $15.</strong> Compruebo con la segunda frase: 20 + 2(15) = 50 ✓. Como hay 2 pivotes para 2 incógnitas, la solución es única (los precios están determinados).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P10 SOLO : modelar 3x3 ============ -->
+    <section class="prob" data-kind="prob" data-id="P10" data-tema="modelar_3x3" data-level="solo">
+      <div class="phead"><span class="pnum">10</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Modela un 3×3 desde el enunciado</p>
+      <p class="pstatement">Una tienda vende <strong>tres productos: A, B y C</strong>. En total se vendieron <strong>12 unidades</strong>. Por precios, <strong>2·A + B + 3·C = 25</strong> (en cierta unidad de ingreso), y además se vendieron <strong>A + 2·B + C = 15</strong> unidades ponderadas. <strong>Plantea el sistema</strong>, resuélvelo por Gauss-Jordan y da cuántas unidades de cada producto se vendieron.</p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Llamo <strong>x, y, z</strong> a las unidades de A, B y C. Las tres condiciones son:</p>
+            <div class="fx"><div class="sys"><span class="eq">x + y + z = 12</span><span class="eq">2x + y + 3z = 25</span><span class="eq">x + 2y + z = 15</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Matriz aumentada</div><div class="fx" id="p10a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1 · R3 → R3 − R1</div><p>Ceros bajo el primer pivote.</p><div class="fx" id="p10b"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 ÷ (−1)</div><p>Normalizo el pivote de y (renglón 2).</p><div class="fx" id="p10c"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − R2 · R3 → R3 − R2</div><p>Limpio la columna y arriba y abajo. El pivote de z queda directo.</p><div class="fx" id="p10d"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − 2·R3</div><p>Limpio la última columna arriba. RREF.</p><div class="fx" id="p10e"></div></div>
+          <p class="verdict"><strong>A = 5, B = 3, C = 4.</strong> Compruebo: 5+3+4 = 12 ✓ y 2(5)+3+3(4) = 25 ✓. Solución única (3 pivotes, 3 incógnitas), y las tres cantidades son enteras positivas, así que tiene sentido físico.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Errores típicos que cuestan puntos</h3>
+      <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Operar por columnas.</strong> Gauss-Jordan solo permite operaciones de <em>renglón</em>. Si mezclas columnas, cambias el sistema.</li>
+        <li><span class="ck">✗</span> <strong>Perder el término independiente.</strong> La barra de la aumentada separa A de b; opera SIEMPRE también sobre esa última columna.</li>
+        <li><span class="ck">✗</span> <strong>No clasificar.</strong> Escalonar sin decir "única / ninguna / infinitas" deja el problema a medias: la clasificación es la respuesta.</li>
+        <li><span class="ck">✗</span> <strong>Confundir 0 = 0 con 0 = número.</strong> Un renglón <em>todo cero</em> (0=0) da variable libre → infinitas; un <em>0 = número ≠ 0</em> da inconsistencia → ninguna.</li>
+        <li><span class="ck">✗</span> <strong>Dar un punto cuando hay variable libre.</strong> Si una columna no tiene pivote, la solución es paramétrica (punto + t·vector), no un solo punto.</li>
+        <li><span class="ck">✗</span> <strong>Olvidar normalizar el pivote a 1.</strong> RREF exige pivotes iguales a 1 y ceros arriba y abajo de cada pivote.</li>
+        <li><span class="ck">✗</span> <strong>No definir variables al modelar.</strong> Antes de escribir el sistema, di qué es x, qué es y: sin eso, el planteamiento no da puntos.</li>
+        <li><span class="ck">✗</span> <strong>No verificar en el enunciado original.</strong> Sustituye tu solución en las ecuaciones de partida; atrapa errores de signo al instante.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre de sesión</h3>
+      <p class="nota">Qué tan segura te sientes resolviendo Unidad 1 completa en papel. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Álgebra Lineal · Unidad 1 — Sistemas y Gauss-Jordan</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- render de matrices aumentadas ---------- */
+function mat(rows, augmented){
+  var cols = rows[0].length;
+  var coeffs = augmented ? cols-1 : cols;
+  var gtc = augmented ? ('repeat('+coeffs+',auto) 16px auto') : ('repeat('+coeffs+',auto)');
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    if(augmented){ cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>'; }
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setM(id, rows, aug){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows, !!aug); }
+
+/* ---------- render de vectores columna en línea ---------- */
+function colvec(entries){
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var i=0;i<entries.length;i++) h+='<div class="mrow" style="grid-template-columns:auto"><span>'+entries[i]+'</span></div>';
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setVecs(id, vectors){
+  var el=document.getElementById(id); if(!el) return;
+  var h='';
+  for(var i=0;i<vectors.length;i++){
+    h+='<span class="colvec"><span class="lab">'+vectors[i].lab+'</span>'+colvec(vectors[i].v)+'</span>';
+  }
+  el.innerHTML=h;
+}
+
+/* ===== RG1 : 2x+3y=7 ; x-y=1  (única) ===== */
+setM('rg1a',[["2","3","7"],["1","−1","1"]], true);
+setM('rg1b',[["1","−1","1"],["2","3","7"]], true);
+setM('rg1c',[["1","−1","1"],["0","5","5"]], true);
+setM('rg1d',[["1","−1","1"],["0","1","1"]], true);
+setM('rg1e',[["1","0","2"],["0","1","1"]], true);
+
+/* ===== RG2 : x+y+z=6 ; 2x-y+z=3 ; x+2y-z=2  -> (1,2,3) ===== */
+setM('rg2a',[["1","1","1","6"],["2","−1","1","3"],["1","2","−1","2"]], true);
+setM('rg2b',[["1","1","1","6"],["0","−3","−1","−9"],["0","1","−2","−4"]], true);
+setM('rg2c',[["1","1","1","6"],["0","1","−2","−4"],["0","−3","−1","−9"]], true);
+setM('rg2d',[["1","1","1","6"],["0","1","−2","−4"],["0","0","−7","−21"]], true);
+setM('rg2e',[["1","1","1","6"],["0","1","−2","−4"],["0","0","1","3"]], true);
+setM('rg2f',[["1","1","0","3"],["0","1","0","2"],["0","0","1","3"]], true);
+setM('rg2g',[["1","0","0","1"],["0","1","0","2"],["0","0","1","3"]], true);
+
+/* ===== P3 : x+y+z=6 ; 2x+2y+2z=12 ; x-y+z=2  (infinitas) ===== */
+setM('p3a',[["1","1","1","6"],["2","2","2","12"],["1","−1","1","2"]], true);
+setM('p3b',[["1","1","1","6"],["0","0","0","0"],["0","−2","0","−4"]], true);
+setM('p3c',[["1","1","1","6"],["0","1","0","2"],["0","0","0","0"]], true);
+setM('p3d',[["1","0","1","4"],["0","1","0","2"],["0","0","0","0"]], true);
+
+/* ===== P4 : x+y+z=3 ; 2x+2y+2z=7 ; x-y+z=1  (ninguna) ===== */
+setM('p4a',[["1","1","1","3"],["2","2","2","7"],["1","−1","1","1"]], true);
+setM('p4b',[["1","1","1","3"],["0","0","0","1"],["1","−1","1","1"]], true);
+
+/* ===== P5 : x+y+z=2 ; 2x+3y+z=3 ; 3x+4y+2z=5  (infinitas) ===== */
+setM('p5a',[["1","1","1","2"],["2","3","1","3"],["3","4","2","5"]], true);
+setM('p5b',[["1","1","1","2"],["0","1","−1","−1"],["0","1","−1","−1"]], true);
+setM('p5c',[["1","0","2","3"],["0","1","−1","−1"],["0","0","0","0"]], true);
+
+/* ===== P6 : x+2y-z=3 ; 2x+y+z=3  (infinitas, 2x4) ===== */
+setM('p6a',[["1","2","−1","3"],["2","1","1","3"]], true);
+setM('p6b',[["1","2","−1","3"],["0","−3","3","−3"]], true);
+setM('p6c',[["1","2","−1","3"],["0","1","−1","1"]], true);
+setM('p6d',[["1","0","1","1"],["0","1","−1","1"]], true);
+
+/* ===== P7 : x+y=5 ; x+ky=7  (parámetro k) ===== */
+setM('p7a',[["1","1","5"],["1","k","7"]], true);
+setM('p7b',[["1","1","5"],["0","k − 1","2"]], true);
+
+/* ===== P8 : ax+y=3 ; x+ay=3  (parámetro a, casos degenerados) ===== */
+setM('p8a',[["1","1","3"],["0","0","0"]], true);   // a=1
+setM('p8b',[["−1","1","3"],["0","0","6"]], true);  // a=-1 tras sumar renglones
+
+/* ===== P9 : 2c+3p=85 ; c+2p=50  -> (20,15) ===== */
+setM('p9a',[["1","2","50"],["2","3","85"]], true);
+setM('p9b',[["1","2","50"],["0","−1","−15"]], true);
+setM('p9c',[["1","0","20"],["0","1","15"]], true);
+
+/* ===== P10 : x+y+z=12 ; 2x+y+3z=25 ; x+2y+z=15  -> (5,3,4) ===== */
+setM('p10a',[["1","1","1","12"],["2","1","3","25"],["1","2","1","15"]], true);
+setM('p10b',[["1","1","1","12"],["0","−1","1","1"],["0","1","0","3"]], true);
+setM('p10c',[["1","1","1","12"],["0","1","−1","−1"],["0","1","0","3"]], true);
+setM('p10d',[["1","0","2","13"],["0","1","−1","−1"],["0","0","1","4"]], true);
+setM('p10e',[["1","0","0","5"],["0","1","0","3"],["0","0","1","4"]], true);
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U1_sistemas", leccion:"L1_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      // reset visual state on this block
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U1_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

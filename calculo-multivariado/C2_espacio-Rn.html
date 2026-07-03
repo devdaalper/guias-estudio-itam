@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -148,7 +169,7 @@
 
   <header class="hero">
     <p class="kick">Cálculo Multivariado · Unidad 2</p>
-    <h1>El espacio <mark>Rⁿ</mark>: vectores, distancias y regiones</h1>
+    <h1>El espacio <mark>Rⁿ</mark>: vectores, distancias y ángulos</h1>
     <p class="lead">El terreno donde vive todo el cálculo de varias variables. Aquí no se adivina: se recuerda la definición y se razona el paso. Todo a mano, sin calculadora.</p>
     <div class="learn">
       <h2>Al terminar vas a poder</h2>
@@ -158,7 +179,7 @@
         <li><span class="n">3</span> Usar el producto punto y el ángulo</li>
         <li><span class="n">4</span> Aplicar la desigualdad de Cauchy-Schwarz</li>
         <li><span class="n">5</span> Describir una recta y un plano</li>
-        <li><span class="n">6</span> Convertir entre coordenadas polares</li>
+        <li><span class="n">6</span> Convertir a coordenadas polares</li>
         <li><span class="n">7</span> Distinguir conjuntos abiertos y cerrados</li>
       </ol>
     </div>
@@ -166,93 +187,181 @@
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Un dron sube desde el origen hasta el punto <strong>(1, 0)</strong> y otro hasta el punto <strong>(1, 1)</strong>. ¿Qué <strong>ángulo</strong> abren sus trayectorias entre sí? Y una segunda: si un tercer dron va al punto <strong>(4, 6)</strong> partiendo de <strong>(1, 2)</strong>, ¿qué <strong>distancia</strong> recorre?</p>
+      <div class="fx"><div class="sys"><span class="eq">u = (1, 0)</span><span class="eq">v = (1, 1)</span></div></div>
+      <p class="idea" style="font-size:17px">Con una regla y un transportador lo medirías... si tuvieras el dibujo perfecto. Pero en el examen no hay dibujo ni calculadora, y en R⁴ o R⁵ no hay dibujo posible. Necesitamos un método que <strong>siempre</strong> funcione con puros números: la <strong>norma</strong> y el <strong>producto punto</strong>. Para el final de esta guía vas a resolver justo estas dos preguntas tú sola.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>Un punto de Rⁿ es una lista de números</h3>
-      <p class="idea">Rⁿ es el conjunto de todas las <strong>listas ordenadas de n números reales</strong>. Cada lista es a la vez un <strong>punto</strong> (una ubicación) y un <strong>vector</strong> (una flecha desde el origen). En R² son pares; en R³, tríadas. Este es un vector de R³:</p>
-      <div class="fx"><div class="sys"><span class="eq">v = (3, −1, 2)</span></div></div>
-      <p class="idea">Se <strong>suman</strong> y se <strong>escalan</strong> componente a componente. Sumar dos vectores es coordenada con coordenada; multiplicar por un número real estira o encoge cada coordenada por igual:</p>
+      <h3>1 · Un punto de Rⁿ es una lista de números</h3>
+      <p class="idea">Rⁿ es el conjunto de todas las <strong>listas ordenadas de n números reales</strong>. Cada lista es a la vez un <strong>punto</strong> (una ubicación) y un <strong>vector</strong> (una flecha desde el origen). En R² son pares; en R³, tríadas. Se <strong>suman</strong> y se <strong>escalan</strong> componente a componente: sumar es coordenada con coordenada; multiplicar por un número real estira o encoge cada coordenada por igual.</p>
       <div class="fx"><div class="sys"><span class="eq">(3, −1, 2) + (2, 4, 1) = (5, 3, 3)</span><span class="eq">2·(3, −1, 2) = (6, −2, 4)</span></div></div>
+      <div class="check" data-kind="item" data-id="I1_operar" data-tema="operaciones_vectores" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿Cuánto vale 2·(1, 3) + (0, −1)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">(2, 4)</button>
+          <button class="opt" data-ok="1">(2, 5)</button>
+          <button class="opt" data-ok="0">(1, 5)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Primero escala: 2·(1, 3) = (2, 6). Luego suma: (2, 6) + (0, −1) = (2, 5). Cada operación es coordenada por coordenada. El (2, 4) resta mal el segundo par (6 − 1 = 5, no 4).</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>Norma: qué tan largo es un vector</h3>
-      <p class="idea">La <strong>norma</strong> |v| mide la longitud del vector, es decir, su distancia al origen. Es Pitágoras extendido: se suman los cuadrados de todas las componentes y se saca raíz. ¿Recuerdas la fórmula antes de mirarla?</p>
+      <h3>2 · Norma: qué tan largo es un vector</h3>
+      <p class="idea">La <strong>norma</strong> |v| mide la longitud del vector, es decir, su distancia al origen. Es Pitágoras extendido: se suman los cuadrados de todas las componentes y se saca raíz. La <strong>distancia</strong> entre dos puntos es la norma de su diferencia, |u − v|. ¿Recuerdas la fórmula antes de mirarla?</p>
       <div class="check" data-kind="recall" data-fid="F1_norma" data-tema="norma">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Cómo se calcula la norma de un vector v = (a, b, c) en R³?</p>
         <div class="opts">
           <button class="opt" data-ok="0">a + b + c</button>
-          <button class="opt" data-ok="1">La raíz cuadrada de a² + b² + c²</button>
-          <button class="opt" data-ok="0">a² + b² + c², sin raíz</button>
+          <button class="opt" data-ok="1">La raíz cuadrada de a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup></button>
+          <button class="opt" data-ok="0">a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup>, sin raíz</button>
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>Es el teorema de Pitágoras en varias dimensiones. La <strong>raíz</strong> es clave: sin ella tendrías la longitud al cuadrado, no la longitud.</p></div>
       </div>
-      <p class="idea">La <strong>distancia</strong> entre dos puntos es la norma de su diferencia: |u − v|. Un vector de norma 1 se llama <strong>unitario</strong>; para conseguir uno, se divide un vector entre su propia norma.</p>
     </section>
 
     <section class="sec">
-      <h3>Producto punto: un número que mide alineación</h3>
-      <p class="idea">El <strong>producto punto</strong> u·v multiplica las componentes emparejadas y suma todo. El resultado es un <strong>número</strong>, no un vector. Sirve para dos cosas: mide el ángulo entre los vectores y detecta perpendicularidad.</p>
-      <div class="fx"><div class="sys"><span class="eq">(3, −1, 2)·(2, 4, 1) = 6 − 4 + 2 = 4</span></div></div>
-      <p class="idea">La conexión con el ángulo es directa:</p>
-      <div class="fx"><div class="sys"><span class="eq">u·v = |u| |v| cos θ</span></div></div>
-      <p class="idea">De ahí sale la regla de oro: si el producto punto da <strong>cero</strong>, los vectores son <strong>perpendiculares</strong> (ortogonales), porque cos 90° = 0. Míralo con un par concreto:</p>
-      <div class="fx"><div class="sys"><span class="eq">(2, 1)·(1, −2) = 2 − 2 = 0</span></div></div>
-      <p class="fx-note">El resultado es cero, así que esos dos vectores forman un ángulo recto.</p>
-    </section>
-
-    <section class="sec">
-      <h3>Cauchy-Schwarz: un tope universal</h3>
-      <p class="idea">La <strong>desigualdad de Cauchy-Schwarz</strong> dice que el producto punto nunca puede ser más grande, en valor absoluto, que el producto de las normas. Es lo que garantiza que el coseno del ángulo siempre quede entre −1 y 1.</p>
-      <div class="fx"><div class="sys"><span class="eq">| u·v |  ≤  | u | · | v |</span></div></div>
-      <p class="idea">La igualdad ocurre <strong>solo</strong> cuando los vectores son <strong>paralelos</strong> (uno es múltiplo del otro). En cualquier otro caso, el lado izquierdo es estrictamente menor.</p>
-    </section>
-
-    <h2 class="modhead">Yo lo hago</h2>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Calculemos la <strong>norma</strong> y el <strong>ángulo</strong> entre dos vectores. Voy paso a paso; tú solo sigue el hilo. Tomo u = (1, 0) y v = (1, 1).</p>
-      <div class="estep"><div class="oprow">Paso 1 · normas</div><p>Cada norma es la raíz de la suma de cuadrados. |u| = raíz de 1 = 1. |v| = raíz de 1 + 1.</p><div class="fx"><div class="sys"><span class="eq">| u | = 1</span><span class="eq">| v | = √2</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · producto punto</div><p>Multiplico componente con componente y sumo.</p><div class="fx"><div class="sys"><span class="eq">u·v = (1)(1) + (0)(1) = 1</span></div></div></div>
-
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="angulo">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">Ya tengo u·v = 1, |u| = 1 y |v| = √2. Usando u·v = |u||v|cos θ, ¿cuánto vale cos θ?</p>
+      <h3>3 · Producto punto: un número que mide alineación</h3>
+      <p class="idea">El <strong>producto punto</strong> u·v multiplica las componentes emparejadas y suma todo. El resultado es un <strong>número</strong>, no un vector. Su conexión con el ángulo es directa: u·v = |u| |v| cos θ. De ahí sale la regla de oro: si el producto punto da <strong>cero</strong>, los vectores son <strong>perpendiculares</strong> (ortogonales), porque cos 90° = 0.</p>
+      <div class="fx"><div class="sys"><span class="eq">(3, −1, 2)·(2, 4, 1) = 6 − 4 + 2 = 4</span><span class="eq">(2, 1)·(1, −2) = 2 − 2 = 0</span></div></div>
+      <div class="check" data-kind="item" data-id="I2_dot" data-tema="producto_punto" data-level="guiado">
+        <div class="qtag">Te toca · decide</div>
+        <p class="q">El producto punto de (2, 1)·(1, −2) dio 0. ¿Qué te dice ese cero?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">1 dividido entre √2</button>
-          <button class="opt" data-ok="0">√2</button>
-          <button class="opt" data-ok="0">1</button>
+          <button class="opt" data-ok="0">Que los dos vectores son iguales</button>
+          <button class="opt" data-ok="1">Que forman un ángulo recto: son perpendiculares</button>
+          <button class="opt" data-ok="0">Que uno de los dos es el vector cero</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Despejando, cos θ = (u·v) ÷ (|u||v|) = 1 ÷ (1·√2) = 1/√2. Ese coseno corresponde a un ángulo de 45°.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Como u·v = |u||v|cos θ y ninguna norma es cero, la única forma de que el producto sea cero es cos θ = 0, o sea θ = 90°.</p></div>
       </div>
-
-      <div class="estep"><div class="oprow">Paso 3 · ángulo</div><p>El coseno 1/√2 es el de un ángulo conocido de memoria.</p><div class="fx"><div class="sys"><span class="eq">cos θ = 1/√2  →  θ = 45°</span></div></div></div>
-      <p class="idea" style="font-size:17px">El producto punto dio positivo y el ángulo salió agudo: <strong>45°</strong>. Si hubiera dado cero, el ángulo sería recto.</p>
     </section>
 
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora una <strong>distancia</strong> entre dos puntos, que es solo la norma de su diferencia. Midamos la distancia entre P = (1, 2) y Q = (4, 6).</p>
-      <div class="estep"><div class="oprow">Paso 1 · la diferencia</div><p>Resto componente a componente: Q − P.</p><div class="fx"><div class="sys"><span class="eq">Q − P = (4 − 1, 6 − 2) = (3, 4)</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · la norma</div><p>La distancia es la norma de ese vector: raíz de la suma de cuadrados.</p><div class="fx"><div class="sys"><span class="eq">d(P, Q) = | (3, 4) | = √(3² + 4²) = √25 = 5</span></div></div></div>
-      <p class="idea" style="font-size:17px">La distancia entre (1, 2) y (4, 6) es <strong>5</strong>. Siempre: distancia = norma de la diferencia.</p>
+    <section class="sec">
+      <h3>4 · Cauchy-Schwarz: un tope universal</h3>
+      <p class="idea">La <strong>desigualdad de Cauchy-Schwarz</strong> dice que el producto punto nunca puede ser más grande, en valor absoluto, que el producto de las normas: |u·v| ≤ |u|·|v|. Es lo que garantiza que el coseno del ángulo siempre quede entre −1 y 1. La igualdad ocurre <strong>solo</strong> cuando los vectores son <strong>paralelos</strong> (uno es múltiplo del otro).</p>
+      <div class="fx"><div class="sys"><span class="eq">| u·v |  ≤  | u | · | v |</span></div></div>
+      <div class="check" data-kind="recall" data-fid="F2_cauchy_schwarz" data-tema="cauchy_schwarz">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Qué afirma la desigualdad de Cauchy-Schwarz?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El valor absoluto del producto punto nunca supera al producto de las normas</button>
+          <button class="opt" data-ok="0">La norma de una suma es igual a la suma de las normas</button>
+          <button class="opt" data-ok="0">El producto punto siempre es positivo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>|u·v| ≤ |u||v|, con igualdad solo si son paralelos. Es lo que hace que el coseno del ángulo quede siempre entre −1 y 1.</p></div>
+      </div>
     </section>
 
+    <h2 class="modhead">Yo lo hago · contigo</h2>
+
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora <strong>coordenadas polares</strong>, que reaparecen en todo el curso. Un punto del plano se puede dar por (x, y) o por su <strong>radio</strong> r (distancia al origen) y su <strong>ángulo</strong> θ. Convirtamos el punto (−1, 1) a polares.</p>
-      <div class="estep"><div class="oprow">Paso 1 · el radio</div><p>El radio es la norma del punto: raíz de la suma de cuadrados.</p><div class="fx"><div class="sys"><span class="eq">r = √((−1)² + 1²) = √2</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · el ángulo</div><p>El punto (−1, 1) está en el segundo cuadrante (x negativo, y positivo). Ahí el ángulo es 135°.</p><div class="fx"><div class="sys"><span class="eq">θ = 135°  (o 3π/4)</span></div></div></div>
-      <p class="idea" style="font-size:17px">Listo: (−1, 1) en polares es <strong>r = √2, θ = 135°</strong>. Para volver a cartesianas se usan estas dos fórmulas:</p>
-      <div class="fx"><div class="sys"><span class="eq">x = r·cos θ</span><span class="eq">y = r·sen θ</span></div></div>
-      <p class="idea" style="font-size:17px">El cuadrante decide el ángulo: cuídalo siempre.</p>
+      <p class="idea" style="font-size:17px">Resolvamos el <strong>ángulo</strong> del problema del inicio: u = (1, 0) y v = (1, 1). No lo mires nada más: en cada paso <strong>tú eliges la operación</strong> y yo la aplico. El plan tiene tres piezas: las dos normas, el producto punto, y al final el coseno.</p>
+
+      <div class="check" data-kind="item" data-id="E1_paso" data-tema="norma" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Primer objetivo: la norma de cada vector. ¿Cómo se calcula |v| para v = (1, 1)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Sumando las componentes: 1 + 1 = 2</button>
+          <button class="opt" data-ok="1">Raíz de la suma de cuadrados: √(1<sup>2</sup> + 1<sup>2</sup>)</button>
+          <button class="opt" data-ok="0">Multiplicando las componentes: 1·1 = 1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La norma es Pitágoras: se elevan al cuadrado las componentes, se suman y se saca raíz. Sumar directo (1 + 1) olvida el cuadrado y la raíz.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 1 · las normas</div><p>Elevo al cuadrado cada componente, sumo y saco raíz, un vector a la vez:</p><p class="calc"><span class="rw">|u|</span> √(1<sup>2</sup>+0<sup>2</sup>)=√1=<b>1</b> <span class="sep">•</span> <span class="rw">|v|</span> √(1<sup>2</sup>+1<sup>2</sup>)=√2=<b>√2</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E2_paso" data-tema="producto_punto" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ya tengo las normas. Ahora falta el <strong>producto punto</strong> u·v. ¿Cómo se arma?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Multiplico componentes emparejadas y sumo: (1)(1) + (0)(1)</button>
+          <button class="opt" data-ok="0">Multiplico las dos normas: 1 · √2</button>
+          <button class="opt" data-ok="0">Sumo todas las componentes: 1 + 0 + 1 + 1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El producto punto empareja componente con componente, las multiplica y suma. Da un número, no un vector.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 2 · producto punto</div><p>Empareja la primera con la primera, la segunda con la segunda, y suma:</p><p class="calc"><span class="rw">u·v</span> (1)(1)=<b>1</b> <span class="sep">•</span> (0)(1)=<b>0</b> <span class="sep">•</span> suma=<b>1</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E3_paso" data-tema="angulo" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Tengo u·v = 1, |u| = 1 y |v| = √2. Usando u·v = |u||v|cos θ, ¿cómo despejo cos θ?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">cos θ = u·v · |u| · |v| = 1·1·√2</button>
+          <button class="opt" data-ok="1">cos θ = (u·v) ÷ (|u|·|v|) = 1 ÷ (1·√2)</button>
+          <button class="opt" data-ok="0">cos θ = |u|·|v| ÷ (u·v) = √2 ÷ 1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El producto punto está igualado a |u||v|cos θ. Para dejar solo el coseno, se pasa |u||v| dividiendo al otro lado.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 3 · el coseno</div><p>Sustituyo los tres números en el despeje:</p><p class="calc"><span class="rw">cos θ</span> 1÷(1·√2)=<b>1⁄√2</b></p></div>
+
+      <div class="estep"><div class="oprow">Paso 4 · el ángulo</div><p>El coseno 1⁄√2 es el de un ángulo conocido de memoria:</p><p class="calc"><span class="rw">θ</span> cos θ = 1⁄√2 → θ = <b>45°</b></p></div>
+      <p class="idea" style="font-size:17px">El producto punto dio positivo y el ángulo salió agudo: <strong>45°</strong>. Fíjate en el orden que seguiste: normas, producto punto, coseno, ángulo. Ese es todo el método. Si el producto punto hubiera dado cero, el ángulo sería recto.</p>
+    </section>
+
+    <h2 class="modhead">Sube el tamaño · la distancia en dos partes</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">La segunda pregunta del inicio era una <strong>distancia</strong>: del punto P = (1, 2) al punto Q = (4, 6). El truco es que una distancia no es un objeto nuevo: es solo la <strong>norma de la diferencia</strong>. Así que se parte en <strong>dos etapas</strong>:</p>
+      <ul class="fases">
+        <li><strong>Etapa 1 — resta:</strong> arma el vector diferencia Q − P, <em>componente a componente</em>.</li>
+        <li><strong>Etapa 2 — norma:</strong> a ese vector le sacas la norma, y esa es la distancia.</li>
+      </ul>
+
+      <div class="check" data-kind="item" data-id="E4_paso" data-tema="distancia" data-level="juntos">
+        <div class="qtag">Te toca · decide la etapa</div>
+        <p class="q">Empieza la <strong>Etapa 1 (resta)</strong>. ¿Cuál es el vector diferencia Q − P para P = (1, 2) y Q = (4, 6)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(4 − 1, 6 − 2) = (3, 4)</button>
+          <button class="opt" data-ok="0">(4 + 1, 6 + 2) = (5, 8)</button>
+          <button class="opt" data-ok="0">(4 − 2, 6 − 1) = (2, 5)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La diferencia se resta coordenada por coordenada, cada componente con la suya: (4 − 1, 6 − 2) = (3, 4). Sumar da (5, 8); cruzar las coordenadas da (2, 5). Ambos rompen el emparejamiento.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Etapa 1 · Q − P</div><p>Resto cada coordenada de Q menos la de P:</p><p class="calc"><span class="rw">Q−P</span> 4−1=<b>3</b> <span class="sep">•</span> 6−2=<b>4</b> <span class="sep">•</span> = <b>(3, 4)</b></p></div>
+
+      <div class="estep"><div class="oprow">Etapa 2 · norma de (3, 4)</div><p>A la diferencia le saco la norma: raíz de la suma de cuadrados:</p><p class="calc"><span class="rw">d</span> 3<sup>2</sup>=<b>9</b> <span class="sep">•</span> 4<sup>2</sup>=<b>16</b> <span class="sep">•</span> √(9+16)=√25=<b>5</b></p></div>
+      <p class="idea" style="font-size:17px">La distancia entre (1, 2) y (4, 6) es <strong>5</strong>. Mismo método de siempre, solo que primero <strong>restas</strong> y luego <strong>normas</strong>. Con esto ya cerraste las dos preguntas del dron.</p>
+    </section>
+
+    <h2 class="modhead">Otros casos que reaparecen</h2>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Las <strong>coordenadas polares</strong> vuelven en todo el curso. Un punto del plano se puede dar por (x, y) o por su <strong>radio</strong> r (distancia al origen) y su <strong>ángulo</strong> θ. Convirtamos el punto (−1, 1) a polares, otra vez por partes.</p>
+      <div class="estep"><div class="oprow">Parte 1 · el radio</div><p>El radio es la norma del punto: raíz de la suma de cuadrados:</p><p class="calc"><span class="rw">r</span> (−1)<sup>2</sup>=<b>1</b> <span class="sep">•</span> 1<sup>2</sup>=<b>1</b> <span class="sep">•</span> √(1+1)=<b>√2</b></p></div>
+      <div class="check" data-kind="item" data-id="E5_paso" data-tema="polares" data-level="juntos">
+        <div class="qtag">Te toca · decide la parte</div>
+        <p class="q">Antes de dar el ángulo: el punto (−1, 1) tiene x negativo y y positivo. ¿En qué cuadrante cae, y qué le pasa a θ ahí?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Segundo cuadrante: θ está entre 90° y 180°</button>
+          <button class="opt" data-ok="0">Primer cuadrante: θ está entre 0° y 90°</button>
+          <button class="opt" data-ok="0">Cuarto cuadrante: θ está entre 270° y 360°</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>x negativo y y positivo es arriba a la izquierda: el segundo cuadrante. Ahí el ángulo medido desde el eje +x va entre 90° y 180°. El cuadrante es lo que decide el ángulo; no basta la calculadora.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Parte 2 · el ángulo</div><p>El punto (−1, 1) tiene x negativo y y positivo: cae en el <strong>segundo cuadrante</strong>. Ahí el ángulo es:</p><p class="calc"><span class="rw">θ</span> segundo cuadrante → <b>135°</b> (o 3π⁄4)</p></div>
+      <p class="idea" style="font-size:17px">Listo: (−1, 1) en polares es <strong>r = √2, θ = 135°</strong>. Para volver a cartesianas se usan x = r·cos θ, y = r·sen θ. El <strong>cuadrante</strong> decide el ángulo: cuídalo siempre.</p>
     </section>
 
     <section class="sec">
       <h3>Rectas y planos: puntos que cumplen una regla</h3>
       <p class="idea">Una <strong>recta</strong> se describe con un punto de paso y una <strong>dirección</strong>: caminas desde el punto en múltiplos del vector director. Un <strong>plano</strong> en R³ se describe con un punto y una <strong>normal</strong>: son todos los puntos cuyo desplazamiento es perpendicular a ese vector normal.</p>
-      <div class="fx"><div class="sys"><span class="eq">Recta: (x, y) = (1, 2) + t·(3, −1)</span><span class="eq">Plano: 2(x−1) + (y) − (z) = 0  →  2x + y − z = 2</span></div></div>
+      <div class="fx"><div class="sys"><span class="eq">Recta: (x, y) = (1, 2) + t·(3, −1)</span><span class="eq">Plano: 2x + y − z = 2</span></div></div>
       <p class="fx-note">En el plano, los coeficientes (2, 1, −1) son justo el vector normal: perpendicular a toda la superficie.</p>
+      <div class="check" data-kind="item" data-id="I3_recta_plano" data-tema="recta_plano" data-level="guiado">
+        <div class="qtag">Te toca · decide</div>
+        <p class="q">En la recta (x, y) = (1, 2) + t·(3, −1), ¿cuál pieza es la <strong>dirección</strong> (el vector director)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">El (1, 2): es por donde arranca la recta</button>
+          <button class="opt" data-ok="1">El (3, −1): es el que multiplica al parámetro t</button>
+          <button class="opt" data-ok="0">El 2 del plano de abajo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La dirección siempre es el vector que acompaña a t: (3, −1). El (1, 2) es solo el punto de paso. En el plano, en cambio, la dirección clave es la normal: los coeficientes (2, 1, −1).</p></div>
+      </div>
     </section>
 
     <section class="sec">
@@ -271,17 +380,27 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Por último, <strong>conjuntos abiertos y cerrados</strong>, la base para hablar de regiones. Piensa en una <strong>bola</strong>: todos los puntos a distancia menor que r de un centro. Si <strong>no</strong> incluye su orilla, es <strong>abierta</strong>; si <strong>sí</strong> la incluye, es <strong>cerrada</strong>.</p>
-      <div class="estep"><div class="oprow">Bola abierta</div><p>La condición usa &lt; estricto: los puntos de la frontera (distancia exactamente r) quedan fuera.</p><div class="fx"><div class="sys"><span class="eq">{ (x, y) : x² + y² &lt; 1 }</span></div></div></div>
-      <div class="estep"><div class="oprow">Bola cerrada</div><p>La condición usa ≤: se agregan los puntos de la frontera.</p><div class="fx"><div class="sys"><span class="eq">{ (x, y) : x² + y² ≤ 1 }</span></div></div></div>
-      <p class="idea" style="font-size:17px">Regla práctica: un conjunto es <strong>abierto</strong> si todo punto tiene algo de espacio alrededor sin salirse (desigualdad estricta); es <strong>cerrado</strong> si contiene toda su frontera (desigualdad con igualdad). El punto (1, 0) está en la bola cerrada, pero no en la abierta.</p>
+      <p class="idea" style="font-size:17px">Por último, <strong>conjuntos abiertos y cerrados</strong>, la base para hablar de regiones. Piensa en una <strong>bola</strong>: todos los puntos a distancia menor que r de un centro. Si <strong>no</strong> incluye su orilla, es <strong>abierta</strong>; si <strong>sí</strong> la incluye, es <strong>cerrada</strong>. Todo se juega en el <strong>signo</strong> de la desigualdad.</p>
+      <div class="check" data-kind="item" data-id="E6_paso" data-tema="conjuntos" data-level="juntos">
+        <div class="qtag">Te toca · predice</div>
+        <p class="q">Antes de ver la fórmula: si quiero una bola que <strong>no</strong> incluya su orilla (abierta), ¿qué signo de desigualdad necesito?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Estricto (&lt;): deja fuera los puntos con distancia exactamente r</button>
+          <button class="opt" data-ok="0">Con igualdad (≤): así también entra la orilla</button>
+          <button class="opt" data-ok="0">Da igual el signo: solo importa el radio r</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El &lt; estricto excluye la igualdad, así que los puntos de la frontera (distancia = r) quedan fuera: eso es una bola abierta. El ≤ los incluiría y la haría cerrada. Todo está en el signo.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Bola abierta</div><p>La condición usa &lt; estricto: los puntos de la frontera (distancia exactamente r) quedan fuera.</p><div class="fx"><div class="sys"><span class="eq">{ (x, y) : x<sup>2</sup> + y<sup>2</sup> &lt; 1 }</span></div></div></div>
+      <div class="estep"><div class="oprow">Bola cerrada</div><p>La condición usa ≤: se agregan los puntos de la frontera.</p><div class="fx"><div class="sys"><span class="eq">{ (x, y) : x<sup>2</sup> + y<sup>2</sup> ≤ 1 }</span></div></div></div>
+      <p class="idea" style="font-size:17px">Regla práctica: un conjunto es <strong>abierto</strong> si su desigualdad es estricta (&lt;); es <strong>cerrado</strong> si contiene toda su frontera (≤). El punto (1, 0) está en la bola cerrada, pero no en la abierta.</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>
     <section class="practice">
       <div class="phead"><h3>De guiado a solo</h3><p class="sub">Toca tu respuesta. Si fallas, vuelve a intentar. El apoyo se va retirando. · <span class="cont" id="cont"></span></p></div>
 
-      <div class="pitem" data-kind="item" data-id="P0a" data-tema="operaciones_vectores" data-level="guiado">
+      <div class="pitem" data-kind="item" data-id="P1" data-tema="operaciones_vectores" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
         <p class="pstatement">Escala y suma paso a paso. ¿Cuánto vale 2·(3, −1, 2) + (1, 0, 4)?</p>
         <div class="fx"><div class="sys"><span class="eq">2·(3, −1, 2) + (1, 0, 4) = ?</span></div></div>
@@ -294,141 +413,117 @@
         <div class="why"><span class="lbl">Por qué</span><p>2·(3, −1, 2) = (6, −2, 4); después (6, −2, 4) + (1, 0, 4) = (7, −2, 8). Se escala y se suma coordenada por coordenada.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P0b" data-tema="operaciones_vectores" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="operaciones_vectores" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Ahora tú sola: suma y escala. ¿Cuánto vale 3·(1, 2) − (2, 1)?</p>
+        <p class="pstatement">Ahora tú sola: combina resta y escala. ¿Cuánto vale 3·(1, 2) − (2, 1)?</p>
         <div class="fx"><div class="sys"><span class="eq">3·(1, 2) − (2, 1) = ?</span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">(1, 5)</button>
           <button class="opt" data-ok="0">(5, 5)</button>
+          <button class="opt" data-ok="1">(1, 5)</button>
           <button class="opt" data-ok="0">(1, 7)</button>
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>3·(1, 2) = (3, 6); luego (3, 6) − (2, 1) = (1, 5). Restar es sumar componente a componente el opuesto.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P1" data-tema="norma" data-level="guiado">
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="norma" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">¿Cuánto vale la norma del vector (3, 4)?</p>
-        <div class="fx"><div class="sys"><span class="eq">| (3, 4) | = ?</span></div></div>
+        <p class="pstatement">¿Cuánto vale la norma del vector (5, 12)?</p>
+        <div class="fx"><div class="sys"><span class="eq">| (5, 12) | = ?</span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">5</button>
-          <button class="opt" data-ok="0">7</button>
-          <button class="opt" data-ok="0">12</button>
+          <button class="opt" data-ok="0">17</button>
+          <button class="opt" data-ok="1">13</button>
+          <button class="opt" data-ok="0">169</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Suma los cuadrados: 3² + 4² = 9 + 16 = 25. Ahora saca la raíz de 25.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>√(9 + 16) = √25 = 5. Sumar 3 + 4 = 7 sería el error clásico: falta elevar al cuadrado y sacar raíz.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Suma los cuadrados: 5<sup>2</sup> + 12<sup>2</sup> = 25 + 144 = 169. Ahora saca la raíz de 169.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>√(25 + 144) = √169 = 13. Sumar 5 + 12 = 17 sería el error clásico: falta elevar al cuadrado. El 169 es la norma al cuadrado: falta la raíz.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="producto_punto" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="distancia" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Calcula el producto punto de estos dos vectores.</p>
-        <div class="fx"><div class="sys"><span class="eq">(2, 1, 3)·(1, −2, 0) = ?</span></div></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">0</button>
-          <button class="opt" data-ok="0">4</button>
-          <button class="opt" data-ok="0">−4</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>(2)(1) + (1)(−2) + (3)(0) = 2 − 2 + 0 = 0. Como da cero, además son <strong>perpendiculares</strong>.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="norma" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Calcula tú sola la norma de este vector.</p>
-        <div class="fx"><div class="sys"><span class="eq">| (6, 8) | = ?</span></div></div>
-        <div class="opts">
-          <button class="opt" data-ok="0">14</button>
-          <button class="opt" data-ok="1">10</button>
-          <button class="opt" data-ok="0">100</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>√(6² + 8²) = √(36 + 64) = √100 = 10. Ni 6 + 8 = 14 (falta el cuadrado) ni 100 (falta la raíz).</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3c" data-tema="distancia" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">La distancia entre dos puntos es la norma de su diferencia. ¿Cuál es la distancia entre (1, 2) y (4, 6)?</p>
-        <div class="fx"><div class="sys"><span class="eq">d = | (4, 6) − (1, 2) |</span></div></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">5</button>
-          <button class="opt" data-ok="0">7</button>
-          <button class="opt" data-ok="0">25</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Primero la diferencia: (4, 6) − (1, 2) = (3, 4). Luego su norma: raíz de 3² + 4².</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>(4, 6) − (1, 2) = (3, 4); su norma es √(9 + 16) = √25 = 5. Ni 3 + 4 = 7 ni el 25 sin raíz.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3d" data-tema="distancia" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Calcula tú sola la distancia entre los puntos (2, −1) y (−1, 3).</p>
+        <p class="pstatement">La distancia entre dos puntos es la norma de su diferencia. ¿Cuál es la distancia entre (2, −1) y (−1, 3)?</p>
         <div class="fx"><div class="sys"><span class="eq">d = | (−1, 3) − (2, −1) |</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">5</button>
           <button class="opt" data-ok="0">7</button>
           <button class="opt" data-ok="0">25</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>(−1, 3) − (2, −1) = (−3, 4); su norma es √((−3)² + 4²) = √(9 + 16) = √25 = 5. El 25 es la distancia al cuadrado: falta la raíz.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Primero la diferencia: (−1 − 2, 3 − (−1)) = (−3, 4). Luego su norma: raíz de (−3)<sup>2</sup> + 4<sup>2</sup>.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>(−1, 3) − (2, −1) = (−3, 4); su norma es √(9 + 16) = √25 = 5. El signo no importa: al elevar al cuadrado desaparece.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P3b" data-tema="ortogonalidad" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">¿Cuál de estas afirmaciones es cierta cuando el producto punto de dos vectores no nulos vale cero?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Los vectores son perpendiculares entre sí</button>
-          <button class="opt" data-ok="0">Los vectores son paralelos</button>
-          <button class="opt" data-ok="0">Los dos vectores tienen norma cero</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Como u·v = |u||v|cos θ y las normas no son cero, la única forma de que dé cero es cos θ = 0, o sea θ = 90°.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P4a" data-tema="angulo" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="producto_punto" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Vamos a preparar el ángulo entre estos dos vectores. Primero el producto punto y las dos normas: ¿cuánto vale cada uno?</p>
-        <div class="fx"><div class="sys"><span class="eq">u = (0, 2)</span><span class="eq">v = (2, 2)</span></div></div>
+        <p class="pstatement">Calcula el producto punto de estos dos vectores.</p>
+        <div class="fx"><div class="sys"><span class="eq">(2, 1, 3)·(1, −2, 0) = ?</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">4</button>
+          <button class="opt" data-ok="1">0</button>
+          <button class="opt" data-ok="0">−4</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>(2)(1) + (1)(−2) + (3)(0) = 2 − 2 + 0 = 0. Como da cero, además son <strong>perpendiculares</strong>.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="ortogonalidad" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">¿Cuál valor de k hace que (2, k) y (3, 6) sean perpendiculares?</p>
+        <div class="fx"><div class="sys"><span class="eq">(2, k)·(3, 6) = 0</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">k = −1</button>
+          <button class="opt" data-ok="0">k = 1</button>
+          <button class="opt" data-ok="0">k = 0</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Perpendiculares significa producto punto cero: (2)(3) + (k)(6) = 6 + 6k = 0, así que k = −1. Con k = 0 el producto sería 6, no cero.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="angulo" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Vamos a preparar el ángulo entre u = (0, 2) y v = (2, 2). Primero el producto punto y las dos normas: ¿cuánto vale cada uno?</p>
+        <div class="fx"><div class="sys"><span class="eq">u = (0, 2),  v = (2, 2)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">u·v = 4, |u| = 2, |v| = 2√2</button>
           <button class="opt" data-ok="0">u·v = 0, |u| = 2, |v| = 4</button>
           <button class="opt" data-ok="0">u·v = 4, |u| = 4, |v| = 8</button>
         </div>
         <div class="aux"><details><summary>Pista</summary><p>Producto punto: (0)(2) + (2)(2). Normas: raíz de la suma de cuadrados de cada vector.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>u·v = (0)(2) + (2)(2) = 4. |u| = √(0² + 2²) = 2. |v| = √(2² + 2²) = √8 = 2√2. Estas tres piezas son lo que entra en la fórmula del ángulo.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>u·v = (0)(2) + (2)(2) = 4. |u| = √(0<sup>2</sup> + 2<sup>2</sup>) = 2. |v| = √(2<sup>2</sup> + 2<sup>2</sup>) = √8 = 2√2. Estas tres piezas entran en la fórmula del ángulo.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4b" data-tema="angulo" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="angulo" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Con las piezas del paso anterior, termina tú el ángulo: usa u·v = |u||v|cos θ para hallar θ.</p>
-        <div class="fx"><div class="sys"><span class="eq">u·v = 4,  |u| = 2,  |v| = 2√2</span></div></div>
+        <p class="pstatement">Con las piezas del paso anterior (u·v = 4, |u| = 2, |v| = 2√2), termina tú el ángulo usando u·v = |u||v|cos θ.</p>
+        <div class="fx"><div class="sys"><span class="eq">cos θ = 4 ÷ (2·2√2)</span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">θ = 45° (porque cos θ = 4 ÷ (2·2√2) = 1/√2)</button>
-          <button class="opt" data-ok="0">θ = 90° (porque el producto punto es cero)</button>
-          <button class="opt" data-ok="0">θ = 60° (porque cos θ = 1/2)</button>
+          <button class="opt" data-ok="0">θ = 90° (el producto punto es cero)</button>
+          <button class="opt" data-ok="1">θ = 45° (cos θ = 1⁄√2)</button>
+          <button class="opt" data-ok="0">θ = 60° (cos θ = 1⁄2)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>cos θ = (u·v) ÷ (|u||v|) = 4 ÷ (2·2√2) = 4 ÷ (4√2) = 1/√2. Ese coseno es el de 45°. El producto punto NO es cero, así que no es un ángulo recto.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>cos θ = 4 ÷ (2·2√2) = 4 ÷ (4√2) = 1⁄√2, que es el coseno de 45°. El producto punto NO es cero, así que no es un ángulo recto.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="polares" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="polares" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Un punto tiene coordenadas polares r = 2, θ = 60°. Sabiendo que cos 60° = 1/2 y sen 60° = √3/2, ¿cuáles son sus coordenadas cartesianas (x, y)?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">(1, √3)</button>
-          <button class="opt" data-ok="0">(√3, 1)</button>
-          <button class="opt" data-ok="0">(2, 60)</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Recuerda las fórmulas de conversión: x = r·cos θ, y = r·sen θ. Sustituye r = 2 y los valores del coseno y el seno.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>x = r·cos θ = 2·(1/2) = 1; y = r·sen θ = 2·(√3/2) = √3. Nunca son directamente r y θ.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P6" data-tema="polares" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Convierte tú sola: un punto tiene r = 4 y θ = 30°. Sabiendo que cos 30° = √3/2 y sen 30° = 1/2, halla sus coordenadas cartesianas (x, y).</p>
-        <div class="fx"><div class="sys"><span class="eq">r = 4,  θ = 30°</span></div></div>
+        <p class="pstatement">Un punto tiene coordenadas polares r = 4, θ = 30°. Sabiendo que cos 30° = √3⁄2 y sen 30° = 1⁄2, ¿cuáles son sus coordenadas cartesianas (x, y)?</p>
         <div class="opts">
           <button class="opt" data-ok="1">(2√3, 2)</button>
           <button class="opt" data-ok="0">(2, 2√3)</button>
           <button class="opt" data-ok="0">(4, 30)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>x = r·cos θ = 4·(√3/2) = 2√3; y = r·sen θ = 4·(1/2) = 2. El coseno acompaña a x y el seno a y, nunca al revés.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Usa x = r·cos θ y y = r·sen θ. El coseno acompaña a x, el seno a y.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>x = r·cos θ = 4·(√3⁄2) = 2√3; y = r·sen θ = 4·(1⁄2) = 2. Nunca son directamente r y θ, ni se intercambian seno y coseno.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P7" data-tema="recta_plano" data-level="guiado">
+      <div class="pitem" data-kind="item" data-id="P10" data-tema="polares" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">El punto (0, −3) está sobre el eje y negativo. ¿Cuáles son sus coordenadas polares (r, θ)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">r = 3, θ = 270°</button>
+          <button class="opt" data-ok="0">r = 3, θ = 90°</button>
+          <button class="opt" data-ok="0">r = −3, θ = 90°</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El radio es la norma: √(0<sup>2</sup> + (−3)<sup>2</sup>) = 3, siempre positivo. Apuntar hacia abajo por el eje y es 270° (no 90°, que apunta hacia arriba).</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P11" data-tema="recta_plano" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
         <p class="pstatement">De esta recta escrita como punto + dirección, ¿cuál es su vector director?</p>
         <div class="fx"><div class="sys"><span class="eq">(x, y) = (1, 2) + t·(3, −1)</span></div></div>
@@ -437,56 +532,45 @@
           <button class="opt" data-ok="0">(1, 2)</button>
           <button class="opt" data-ok="0">(4, 1)</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>El punto de paso es el que va suelto; la dirección es el vector que multiplica al parámetro t.</p></details></div>
+        <div class="aux"><details><summary>Pista</summary><p>El punto de paso va suelto; la dirección es el vector que multiplica al parámetro t.</p></details></div>
         <div class="why"><span class="lbl">Por qué</span><p>La dirección es el vector que acompaña a t: (3, −1). El (1, 2) es solo el punto por donde pasa la recta.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P8" data-tema="recta_plano" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P12" data-tema="recta_plano" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">De este plano en R³, lee su vector normal (el vector perpendicular a toda la superficie).</p>
-        <div class="fx"><div class="sys"><span class="eq">2x + y − z = 2</span></div></div>
+        <p class="pstatement">De este plano en R³, lee su vector normal (el perpendicular a toda la superficie).</p>
+        <div class="fx"><div class="sys"><span class="eq">3x − 2y + z = 7</span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">(2, 1, −1)</button>
-          <button class="opt" data-ok="0">(2, 2, 2)</button>
-          <button class="opt" data-ok="0">(0, 0, 2)</button>
+          <button class="opt" data-ok="0">(3, 2, 7)</button>
+          <button class="opt" data-ok="1">(3, −2, 1)</button>
+          <button class="opt" data-ok="0">(7, 7, 7)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La normal de un plano ax + by + cz = d son justo sus coeficientes: (a, b, c) = (2, 1, −1). El lado derecho (el 2) no forma parte de la normal.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>La normal de un plano ax + by + cz = d son sus coeficientes (a, b, c) = (3, −2, 1). Cuida el signo de la y y no metas el lado derecho (el 7).</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P9" data-tema="conjuntos" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P13" data-tema="conjuntos" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Antes de clasificar, fíjate solo en el signo. En el conjunto { (x, y) : x² + y² &lt; 4 }, ¿la frontera (los puntos con x² + y² = 4) está incluida o no?</p>
+        <p class="pstatement">Antes de clasificar, fíjate solo en el signo. En el conjunto { (x, y) : x<sup>2</sup> + y<sup>2</sup> &lt; 4 }, ¿la frontera (los puntos con x<sup>2</sup> + y<sup>2</sup> = 4) está incluida?</p>
         <div class="opts">
-          <button class="opt" data-ok="0">Sí está incluida, porque aparece el número 4</button>
-          <button class="opt" data-ok="1">No está incluida, porque el signo es &lt; estricto</button>
+          <button class="opt" data-ok="0">Sí, porque aparece el número 4</button>
+          <button class="opt" data-ok="1">No, porque el signo es &lt; estricto</button>
           <button class="opt" data-ok="0">Depende del centro del disco</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>El signo &lt; (menor estricto) deja fuera la igualdad; el signo ≤ la incluye. Pregúntate: ¿un punto con x² + y² = 4 cumple x² + y² &lt; 4?</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Con &lt; estricto, los puntos que cumplen x² + y² = 4 quedan fuera: la frontera no está incluida. Ese es justo el criterio de un conjunto <strong>abierto</strong>.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>El signo &lt; (menor estricto) deja fuera la igualdad. ¿Un punto con x<sup>2</sup> + y<sup>2</sup> = 4 cumple x<sup>2</sup> + y<sup>2</sup> &lt; 4?</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con &lt; estricto, los puntos que cumplen x<sup>2</sup> + y<sup>2</sup> = 4 quedan fuera: la frontera no está incluida. Ese es el criterio de un conjunto <strong>abierto</strong>.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P10" data-tema="conjuntos" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P14" data-tema="conjuntos" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Considera el conjunto de puntos del plano que cumplen x² + y² ≤ 1 (el disco con su orilla). ¿Cómo se clasifica?</p>
+        <p class="pstatement">Considera el conjunto de puntos del plano que cumplen x<sup>2</sup> + y<sup>2</sup> ≤ 1 (el disco con su orilla). ¿Cómo se clasifica?</p>
         <div class="opts">
           <button class="opt" data-ok="1">Cerrado, porque incluye su frontera (la desigualdad usa ≤)</button>
           <button class="opt" data-ok="0">Abierto, porque la desigualdad tiene un signo de menor</button>
           <button class="opt" data-ok="0">Ni abierto ni cerrado, porque tiene borde</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El ≤ agrega los puntos con x² + y² = 1, que son la frontera. Un conjunto que contiene toda su frontera es <strong>cerrado</strong>.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>El ≤ agrega los puntos con x<sup>2</sup> + y<sup>2</sup> = 1, que son la frontera. Un conjunto que contiene toda su frontera es <strong>cerrado</strong>.</p></div>
       </div>
     </section>
-
-    <div class="check" data-kind="recall" data-fid="F2_cauchy_schwarz" data-tema="cauchy_schwarz">
-      <div class="qtag">Te toca · recuerda</div>
-      <p class="q">¿Qué afirma la desigualdad de Cauchy-Schwarz?</p>
-      <div class="opts">
-        <button class="opt" data-ok="1">El valor absoluto del producto punto nunca supera al producto de las normas</button>
-        <button class="opt" data-ok="0">La norma de una suma es igual a la suma de las normas</button>
-        <button class="opt" data-ok="0">El producto punto siempre es positivo</button>
-      </div>
-      <div class="why"><span class="lbl">Por qué</span><p>|u·v| ≤ |u||v|, con igualdad solo si son paralelos. Es lo que hace que el coseno del ángulo quede siempre entre −1 y 1.</p></div>
-    </div>
 
     <section class="chuleta">
       <h3>Para memorizar</h3>
@@ -510,6 +594,11 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="C1_sucesiones-series.html"><span class="sp">← Anterior</span><span class="ti">U1 · Sucesiones y series</span></a>
+      <a class="next" href="C3_funciones-varias-variables.html"><span class="sp">Siguiente →</span><span class="ti">U3 · Funciones de varias variables</span></a>
+    </nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 2</p></footer>
 

@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -165,25 +186,56 @@
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Una tienda vende dos combos. El <strong>combo A lleva 2 cafés y 1 pan</strong>; el <strong>combo B lleva 1 café y 3 panes</strong>. Un café cuesta $30 y un pan $20. Quieres el precio de cada combo, y además saber: si te dan el precio total, ¿puedes <strong>deshacer</strong> la cuenta y recuperar cuántos cafés y panes había?</p>
+      <div class="fx" id="prob0"></div>
+      <p class="idea" style="font-size:17px">La tabla de la izquierda son las <strong>recetas</strong>; la de la derecha, los <strong>precios</strong>. Multiplicarlas te da el precio de cada combo en un solo paso. Y ese “deshacer” la cuenta es justo la <strong>matriz inversa</strong>. Para el final de esta guía vas a multiplicar tablas como esta e invertir una tú sola, <strong>sin calculadora</strong>.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>Multiplicar es renglón por columna</h3>
-      <p class="idea">El producto de matrices no se hace entrada por entrada. Cada número del resultado nace de <strong>un renglón de la izquierda</strong> emparejado con <strong>una columna de la derecha</strong>: se multiplican término a término y se suma todo. La entrada de la fila <em>i</em>, columna <em>j</em> usa el renglón <em>i</em> y la columna <em>j</em>.</p>
+      <h3>1 · Multiplicar es renglón por columna</h3>
+      <p class="idea">El producto de matrices <strong>no</strong> se hace entrada por entrada. Cada número del resultado nace de <strong>un renglón de la izquierda</strong> emparejado con <strong>una columna de la derecha</strong>: se multiplican término a término y se suma todo. La entrada de la fila <em>i</em>, columna <em>j</em> usa el renglón <em>i</em> y la columna <em>j</em>.</p>
       <div class="fx" id="prodA"></div>
-      <p class="fx-note">Para la entrada de arriba a la izquierda: primer renglón de la primera, primera columna de la segunda.</p>
+      <p class="fx-note">Para la casilla de arriba a la izquierda: primer renglón de la primera contra primera columna de la segunda.</p>
       <div class="fx"><div class="sys"><span class="eq">(1)(2) + (2)(0) + (0)(4) = 2</span></div></div>
-      <p class="idea">Se repite ese emparejamiento para cada casilla del resultado. Dos matrices, un renglón y una columna a la vez.</p>
+      <div class="check" data-kind="item" data-id="PRODchk" data-tema="producto_matrices" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Para la casilla de arriba a la <strong>derecha</strong> del resultado, ¿qué renglón y qué columna emparejas?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Renglón 1 de la izquierda con columna 2 de la derecha</button>
+          <button class="opt" data-ok="0">Renglón 2 de la izquierda con columna 1 de la derecha</button>
+          <button class="opt" data-ok="0">Renglón 1 de la izquierda con renglón 1 de la derecha</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La casilla de fila <em>i</em>, columna <em>j</em> siempre usa el <strong>renglón i</strong> de la izquierda y la <strong>columna j</strong> de la derecha. Arriba a la derecha es fila 1, columna 2.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>Cuándo el producto está definido</h3>
-      <p class="idea">No cualesquiera dos matrices se pueden multiplicar. Para hacer renglón por columna, el renglón de la izquierda y la columna de la derecha deben tener <strong>la misma cantidad de números</strong>. En dimensiones: las <strong>de en medio deben coincidir</strong>, y las <strong>de los extremos</strong> te dan el tamaño del resultado.</p>
+      <h3>2 · Cuándo el producto está definido</h3>
+      <p class="idea">No cualesquiera dos matrices se pueden multiplicar. Para hacer renglón por columna, el renglón de la izquierda y la columna de la derecha deben tener <strong>la misma cantidad de números</strong>. En dimensiones: las <strong>de en medio deben coincidir</strong>, y las <strong>de los extremos</strong> dan el tamaño del resultado.</p>
       <div class="viz">
         <div class="viz-plane fx" id="dimViz"></div>
-        <p class="viz-cap" id="dimCap">Multiplica una de 2×3 por una de 3×2: los treses de en medio coinciden, así que el producto existe y mide 2×2.</p>
+        <p class="viz-cap" id="dimCap">Una de 2×3 por una de 3×2: los treses de en medio coinciden, así que el producto existe y mide 2×2.</p>
       </div>
       <p class="fx-note">Si los números de en medio no coinciden, el producto ni siquiera existe.</p>
+      <div class="check" data-kind="item" data-id="DIMchk" data-tema="dimensiones" data-level="guiado">
+        <div class="qtag">Te toca · decide</div>
+        <p class="q">Quieres multiplicar una de <strong>4×2</strong> por una de <strong>3×5</strong>, en ese orden. ¿Se puede?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">No: los de en medio son 2 y 3, no coinciden</button>
+          <button class="opt" data-ok="0">Sí, y mide 4×5</button>
+          <button class="opt" data-ok="0">Sí, y mide 2×3</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Los números de en medio son <strong>2</strong> (de la primera) y <strong>3</strong> (de la segunda). Como no son iguales, no hay forma de emparejar renglón con columna: el producto no existe.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>3 · El orden importa</h3>
+      <p class="idea">Con números da igual: 3 por 5 es lo mismo que 5 por 3. Con matrices <strong>no</strong>. A veces <em>A por B</em> existe pero <em>B por A</em> ni siquiera está definido; y cuando ambos existen, casi nunca dan lo mismo. Por eso siempre importa quién va primero.</p>
       <div class="check" data-kind="recall" data-fid="F1_conmutatividad" data-tema="producto_matrices">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">Con matrices, ¿el orden en que multiplicas importa?</p>
@@ -197,52 +249,139 @@
     </section>
 
     <section class="sec">
-      <h3>Dos herramientas: transpuesta e identidad</h3>
-      <p class="idea">La <strong>transpuesta</strong> vuelca la matriz sobre su diagonal: el renglón 1 se convierte en la columna 1, el renglón 2 en la columna 2. Una de 2×3 se transpone a una de 3×2.</p>
+      <h3>4 · La transpuesta: voltear sobre la diagonal</h3>
+      <p class="idea">La <strong>transpuesta</strong> vuelca la matriz sobre su diagonal: el renglón 1 se convierte en la columna 1, el renglón 2 en la columna 2. Una de 2×3 se transpone a una de 3×2 (se intercambian filas y columnas).</p>
       <div class="fx" id="transEx"></div>
-      <p class="idea">La <strong>matriz identidad</strong> tiene unos en la diagonal y ceros afuera. Es el <strong>1 de las matrices</strong>: multiplicar por ella no cambia nada. Esta es la identidad de tamaño 3:</p>
-      <div class="fx" id="identEx"></div>
-      <p class="fx-note">Multiplicar cualquier matriz por la identidad del tamaño correcto la deja igual.</p>
-    </section>
-
-    <h2 class="modhead">Yo lo hago</h2>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Multipliquemos una de 2×3 por una de 3×2. Como los treses de en medio coinciden, el resultado es 2×2. Voy casilla por casilla; tú solo sigue el hilo.</p>
-      <div class="estep"><div class="oprow">Las dos matrices</div><div class="fx" id="pe0"></div></div>
-      <div class="estep"><div class="oprow">Fila 1 × Columna 1</div><p>Emparejo el renglón (1, 2, 0) con la columna (2, 0, 4). Esa es la casilla de arriba a la izquierda: da 2.</p><div class="fx"><div class="sys"><span class="eq">(1)(2) + (2)(0) + (0)(4) = 2</span></div></div></div>
-
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="producto_matrices" data-level="predice">
+      <p class="fx-note">Cada renglón de la izquierda es una columna a la derecha, en el mismo orden.</p>
+      <div class="check" data-kind="item" data-id="TRchk" data-tema="transpuesta" data-level="guiado">
         <div class="qtag">Te toca · predice</div>
-        <p class="q">Para la casilla de arriba a la derecha uso el mismo primer renglón, pero ¿con cuál columna de la segunda matriz?</p>
+        <p class="q">Si una matriz mide <strong>3×5</strong>, ¿qué tamaño tiene su transpuesta?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Con la segunda columna: (1, −2, 3)</button>
-          <button class="opt" data-ok="0">Con el segundo renglón de la primera matriz</button>
-          <button class="opt" data-ok="0">Otra vez con la primera columna: (2, 0, 4)</button>
+          <button class="opt" data-ok="1">5×3</button>
+          <button class="opt" data-ok="0">3×5, no cambia</button>
+          <button class="opt" data-ok="0">5×5</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La casilla de fila 1, columna 2 siempre empareja el <strong>renglón 1</strong> con la <strong>columna 2</strong>.</p><div class="fx"><div class="sys"><span class="eq">(1)(1) + (2)(−2) + (0)(3) = −3</span></div></div></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Transponer intercambia filas y columnas: lo que era 3×5 pasa a 5×3. Los renglones se vuelven columnas.</p></div>
       </div>
-
-      <div class="estep"><div class="oprow">Fila 2 × Columna 1</div><p>Ahora el renglón (3, −1, 1) contra la columna 1: da 10.</p><div class="fx"><div class="sys"><span class="eq">(3)(2) + (−1)(0) + (1)(4) = 10</span></div></div></div>
-      <div class="estep"><div class="oprow">Fila 2 × Columna 2</div><p>El mismo renglón contra la columna 2: da 8.</p><div class="fx"><div class="sys"><span class="eq">(3)(1) + (−1)(−2) + (1)(3) = 8</span></div></div></div>
-      <div class="estep"><div class="oprow">El producto completo</div><div class="fx" id="pe1"></div></div>
-      <p class="idea" style="font-size:17px">Cuatro casillas, cada una un renglón contra una columna. Ese es todo el mecanismo.</p>
     </section>
 
+    <section class="sec">
+      <h3>5 · La identidad: el 1 de las matrices</h3>
+      <p class="idea">La <strong>matriz identidad</strong> tiene unos en la diagonal y ceros afuera. Es el <strong>1 de las matrices</strong>: multiplicar por ella no cambia nada, igual que multiplicar un número por 1. Esta es la identidad de tamaño 3:</p>
+      <div class="fx" id="identEx"></div>
+      <p class="fx-note">Multiplicar cualquier matriz por la identidad del tamaño correcto la deja igual: A por I es A.</p>
+      <div class="check" data-kind="item" data-id="IDchk" data-tema="identidad" data-level="guiado">
+        <div class="qtag">Te toca · decide</div>
+        <p class="q">Multiplicas una matriz A por la identidad de su mismo tamaño. ¿Qué obtienes?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">La misma A, sin ningún cambio</button>
+          <button class="opt" data-ok="0">La matriz identidad</button>
+          <button class="opt" data-ok="0">Una matriz de puros ceros</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La identidad hace en las matrices lo que el <strong>1</strong> hace en los números: no altera nada. A por I es A (y también I por A es A).</p></div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Yo lo hago · contigo</h2>
+
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora lo que de verdad cae en examen: <strong>invertir una matriz por Gauss-Jordan</strong>. La receta es pegar la identidad a la derecha para formar <strong>[A | I]</strong> y reducir hasta que la izquierda sea la identidad; lo que quede a la derecha es la inversa. Tomemos esta 2×2:</p>
+      <p class="idea" style="font-size:17px">Multipliquemos una de 2×3 por una de 3×2. Como los treses de en medio coinciden, el resultado es 2×2. No mires nada más: en cada casilla <strong>tú decides el emparejamiento</strong> y yo hago la cuenta.</p>
+      <div class="estep"><div class="oprow">Las dos matrices</div><div class="fx" id="pe0"></div></div>
+
+      <div class="check" data-kind="item" data-id="E1pred" data-tema="producto_matrices" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Empezamos por la casilla de <strong>arriba a la izquierda</strong> del resultado (fila 1, columna 1). ¿Qué emparejas?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Renglón 1 (1, 2, 0) con columna 1 (2, 0, 4)</button>
+          <button class="opt" data-ok="0">Renglón 1 (1, 2, 0) con renglón 1 (2, 1)</button>
+          <button class="opt" data-ok="0">Columna 1 con columna 1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Fila 1, columna 1 usa el <strong>renglón 1</strong> de la izquierda y la <strong>columna 1</strong> de la derecha. Se multiplican en pares y se suma.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fila 1 × Columna 1</div><p>Empareja (1, 2, 0) con (2, 0, 4), término a término, y suma:</p><p class="calc"><span class="rw">c₁₁</span> 1·2=<b>2</b> <span class="sep">•</span> 2·0=<b>0</b> <span class="sep">•</span> 0·4=<b>0</b> <span class="sep">•</span> suma=<b>2</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E2pred" data-tema="producto_matrices" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Para la casilla de arriba a la <strong>derecha</strong> (fila 1, columna 2) usas el mismo primer renglón, pero ¿con cuál columna?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Con la columna 2: (1, −2, 3)</button>
+          <button class="opt" data-ok="0">Con el renglón 2 de la primera matriz</button>
+          <button class="opt" data-ok="0">Otra vez con la columna 1: (2, 0, 4)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La casilla de fila 1, columna 2 empareja el <strong>renglón 1</strong> con la <strong>columna 2</strong>.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fila 1 × Columna 2</div><p>Ahora (1, 2, 0) contra la columna 2 = (1, −2, 3):</p><p class="calc"><span class="rw">c₁₂</span> 1·1=<b>1</b> <span class="sep">•</span> 2·(−2)=<b>−4</b> <span class="sep">•</span> 0·3=<b>0</b> <span class="sep">•</span> suma=<b>−3</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E3pred" data-tema="producto_matrices" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ahora bajamos a la casilla de <strong>abajo a la izquierda</strong> (fila 2, columna 1). ¿Qué emparejas?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Renglón 2 (3, −1, 1) con columna 1 (2, 0, 4)</button>
+          <button class="opt" data-ok="0">Renglón 1 (1, 2, 0) con columna 1 (2, 0, 4)</button>
+          <button class="opt" data-ok="0">Renglón 2 (3, −1, 1) con columna 2 (1, −2, 3)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Fila 2, columna 1 usa el <strong>renglón 2</strong> de la izquierda y la <strong>columna 1</strong> de la derecha. Cambia el renglón, no la columna.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fila 2 × Columna 1</div><p>Bajo al renglón 2 = (3, −1, 1) contra la columna 1 = (2, 0, 4):</p><p class="calc"><span class="rw">c₂₁</span> 3·2=<b>6</b> <span class="sep">•</span> −1·0=<b>0</b> <span class="sep">•</span> 1·4=<b>4</b> <span class="sep">•</span> suma=<b>10</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E4pred" data-tema="producto_matrices" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Falta la última casilla, abajo a la <strong>derecha</strong> (fila 2, columna 2). Antes de ver la cuenta, ¿cuánto crees que da? Pista: (3, −1, 1) contra (1, −2, 3).</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">3·1 + (−1)·(−2) + 1·3 = 8</button>
+          <button class="opt" data-ok="0">3·1 + (−1)·(−2) + 1·3 = 4</button>
+          <button class="opt" data-ok="0">3·1 + (−1)·2 + 1·3 = 4</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Renglón 2 con columna 2, en pares: 3·1=3, (−1)·(−2)=2 (menos por menos, más), 1·3=3. Suma 3 + 2 + 3 = 8.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fila 2 × Columna 2</div><p>El mismo renglón 2 = (3, −1, 1) contra la columna 2 = (1, −2, 3):</p><p class="calc"><span class="rw">c₂₂</span> 3·1=<b>3</b> <span class="sep">•</span> −1·(−2)=<b>2</b> <span class="sep">•</span> 1·3=<b>3</b> <span class="sep">•</span> suma=<b>8</b></p></div>
+      <div class="estep"><div class="oprow">El producto completo</div><div class="fx" id="pe1"></div></div>
+      <p class="idea" style="font-size:17px">Cuatro casillas, cada una un renglón contra una columna. Fíjate: <strong>una casilla a la vez</strong>, nunca todo de golpe. Ese es todo el mecanismo.</p>
+    </section>
+
+    <h2 class="modhead">Sube el tamaño · invertir por Gauss-Jordan</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Ahora lo que de verdad cae en examen: <strong>invertir una matriz</strong>. La inversa es la matriz que “deshace” a la original —multiplicarlas da la identidad—. El truco es hacerlo en <strong>dos movimientos</strong> conocidos:</p>
+      <ul class="fases">
+        <li><strong>Pega la identidad:</strong> forma el bloque <em>[A | I]</em>, con A a la izquierda y la identidad a la derecha.</li>
+        <li><strong>Reduce hasta la identidad:</strong> con operaciones de renglón, lleva la izquierda a la identidad; lo que quede a la derecha <em>es</em> la inversa.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Tomemos A = renglón (1, 3) y renglón (2, 7). Cada operación se hace sobre <strong>toda</strong> la fila, identidad incluida.</p>
       <div class="estep"><div class="oprow">Pego la identidad: [A | I]</div><div class="fx" id="in0"></div></div>
-      <div class="estep"><div class="oprow">R2 → R2 − 3·R1</div><p>El renglón 1 ya empieza con 1. Resto 3 veces ese renglón al segundo para hacer cero la esquina de abajo a la izquierda.</p><div class="fx" id="in1"></div></div>
-      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>El pivote de abajo ya es 1. Ahora limpio el 2 que quedaba arriba usando el renglón 2.</p><div class="fx" id="in2"></div></div>
-      <p class="idea" style="font-size:17px">La izquierda ya es la identidad, así que la derecha es la inversa. La comprobamos: multiplicarla por la original tiene que dar la identidad.</p>
-      <div class="fx" id="inChk"></div>
-      <div class="fx"><div class="sys"><span class="eq">(1)(7) + (2)(−3) = 1</span></div></div>
-      <p class="fx-note">Ese 1 es la esquina de arriba a la izquierda; hazlo con las cuatro casillas y sale la identidad. Si sale, la inversa es correcta.</p>
+
+      <div class="check" data-kind="item" data-id="I1pred" data-tema="inversa_gauss_jordan" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">El renglón 1 ya empieza con 1. Quieres hacer <strong>cero</strong> la esquina de abajo a la izquierda (hay un 2). ¿Qué operación lo logra?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">R2 → R2 − 2·R1</button>
+          <button class="opt" data-ok="0">R2 → R2 + 2·R1</button>
+          <button class="opt" data-ok="0">R1 → R1 − 2·R2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Arriba la primera columna vale 1; restar 2 veces ese renglón deja 2 − 2·1 = 0 en la esquina de abajo.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>A la fila 2 = (2, 7 | 0, 1) le resto 2 veces la fila 1 = (1, 3 | 1, 0), celda por celda:</p><p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 7−2·3=<b>1</b> <span class="sep">•</span> 0−2·1=<b>−2</b> <span class="sep">•</span> 1−2·0=<b>1</b></p><div class="fx" id="in1"></div></div>
+
+      <div class="check" data-kind="item" data-id="I2pred" data-tema="inversa_gauss_jordan" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">El pivote de abajo ya es 1. Pero arriba, en la segunda columna, todavía queda un 3. ¿Qué lo limpia sin dañar el pivote de la izquierda?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">R1 → R1 − 3·R2</button>
+          <button class="opt" data-ok="0">R1 → R1 + 3·R2</button>
+          <button class="opt" data-ok="0">R2 → R2 − 3·R1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La fila 2 ya es (0, 1 | …). Restar 3 veces esa fila a la fila 1 cancela el 3 de la segunda columna y no toca la primera (ahí la fila 2 tiene 0).</p></div>
+      </div>
+      <div class="estep"><div class="oprow">R1 → R1 − 3·R2</div><p>A la fila 1 = (1, 3 | 1, 0) le resto 3 veces la fila 2 = (0, 1 | −2, 1):</p><p class="calc"><span class="rw">R1</span> 1−3·0=<b>1</b> <span class="sep">•</span> 3−3·1=<b>0</b> <span class="sep">•</span> 1−3·(−2)=<b>7</b> <span class="sep">•</span> 0−3·1=<b>−3</b></p><div class="fx" id="in2"></div></div>
+
+      <p class="idea" style="font-size:17px">La izquierda ya es la identidad, así que la <strong>derecha es la inversa</strong>: renglón (7, −3) y renglón (−2, 1). Fíjate en el orden: primero un cero <strong>abajo</strong>, luego limpiar <strong>arriba</strong>. Igual que resolver un sistema, pero arrastrando la identidad.</p>
+      <div class="estep"><div class="oprow">Comprobación: A por su inversa da I</div><div class="fx" id="inChk"></div></div>
+      <p class="calc"><span class="rw">c₁₁</span> 1·7=<b>7</b> <span class="sep">•</span> 3·(−2)=<b>−6</b> <span class="sep">•</span> suma=<b>1</b></p>
+      <p class="fx-note">Ese 1 es la esquina de arriba a la izquierda de la identidad. Haz las otras tres casillas y sale I completa: la inversa es correcta.</p>
     </section>
 
     <section class="sec">
       <h3>Cuándo existe la inversa</h3>
-      <p class="idea">No toda matriz cuadrada tiene inversa. Al reducir <strong>[A | I]</strong> pueden pasar dos cosas: o la izquierda llega a la identidad —y entonces existe— o aparece un <strong>renglón de ceros</strong> en la parte izquierda, y ahí se atora: <strong>no hay inversa</strong>. Esa matriz se llama <strong>singular</strong>. Toca cada caso:</p>
+      <p class="idea">No toda matriz cuadrada tiene inversa. Al reducir <strong>[A | I]</strong> pasa una de dos cosas: o la izquierda llega a la identidad —y entonces existe— o aparece un <strong>renglón de ceros</strong> en la parte izquierda y ahí se atora: <strong>no hay inversa</strong>. Esa matriz se llama <strong>singular</strong>. Toca cada caso:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="existe">Sí existe</button>
@@ -252,14 +391,33 @@
         <p class="viz-cap" id="vizCap"></p>
       </div>
       <p class="fx-note">La señal de que no hay inversa es siempre la misma: un renglón entero de ceros a la izquierda al reducir.</p>
+      <div class="check" data-kind="item" data-id="SINGchk" data-tema="existencia_inversa" data-level="juntos">
+        <div class="qtag">Te toca · decide</div>
+        <p class="q">Reduces [A | I] y en la parte izquierda te sale un renglón de puros ceros. ¿Qué concluyes?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">A no tiene inversa: es singular</button>
+          <button class="opt" data-ok="0">La inversa es la propia identidad</button>
+          <button class="opt" data-ok="0">Hay que reordenar los renglones y volver a empezar</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Un renglón de ceros a la izquierda significa que esa parte <strong>ya no puede</strong> llegar a la identidad. La matriz es singular: no existe inversa.</p></div>
+      </div>
     </section>
 
     <section class="sec">
       <h3>Matrices con nombre propio</h3>
-      <p class="idea">Algunas matrices aparecen tanto que tienen nombre. Conviene reconocerlas de un vistazo:</p>
-      <p class="idea"><strong>Diagonal</strong>: solo la diagonal puede ser distinta de cero. <strong>Simétrica</strong>: es igual a su transpuesta, es un espejo sobre la diagonal (la entrada de fila <em>i</em>, columna <em>j</em> coincide con la de fila <em>j</em>, columna <em>i</em>). <strong>Triangular superior</strong>: todo lo de debajo de la diagonal es cero.</p>
+      <p class="idea">Algunas matrices aparecen tanto que tienen nombre. Conviene reconocerlas de un vistazo. <strong>Diagonal</strong>: solo la diagonal puede ser distinta de cero. <strong>Simétrica</strong>: es igual a su transpuesta, un espejo sobre la diagonal (la entrada de fila <em>i</em>, columna <em>j</em> coincide con la de fila <em>j</em>, columna <em>i</em>). <strong>Triangular superior</strong>: todo lo de debajo de la diagonal es cero.</p>
       <div class="fx" id="specEx"></div>
       <p class="fx-note">De izquierda a derecha: diagonal, simétrica, triangular superior.</p>
+      <div class="check" data-kind="item" data-id="SPECchk" data-tema="matrices_nombradas" data-level="solo">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿Cuál de estas matrices es <strong>simétrica</strong>?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1" id="sp_a"></button>
+          <button class="opt" data-ok="0" id="sp_b"></button>
+          <button class="opt" data-ok="0" id="sp_c"></button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Simétrica = igual a su transpuesta: al voltearla sobre la diagonal no cambia. La entrada (1,2) debe ser igual a la (2,1), la (1,3) a la (3,1), etc. La triangular tiene ceros abajo (no coincide con arriba) y la diagonal tiene ceros donde la otra no.</p></div>
+      </div>
     </section>
 
     <h2 class="modhead">Tu turno</h2>
@@ -268,20 +426,33 @@
 
       <div class="pitem" data-kind="item" data-id="P1" data-tema="producto_matrices" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">En este producto de dos matrices, ¿cuánto vale la casilla de arriba a la izquierda del resultado?</p>
+        <p class="pstatement">En este producto, ¿cuánto vale la casilla de arriba a la izquierda del resultado?</p>
         <div class="fx" id="p1"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">8</button>
-          <button class="opt" data-ok="0">5</button>
-          <button class="opt" data-ok="0">14</button>
+          <button class="opt" data-ok="1">11</button>
+          <button class="opt" data-ok="0">7</button>
+          <button class="opt" data-ok="0">13</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Empareja el <strong>primer renglón</strong> (1, 2) con la <strong>primera columna</strong> (4, 2): multiplica en pares y suma.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Fila 1 por columna 1: emparejas el primer renglón con la primera columna, multiplicas en pares y sumas.</p><div class="fx"><div class="sys"><span class="eq">(1)(4) + (2)(2) = 4 + 4 = 8</span></div></div></div>
+        <div class="aux"><details><summary>Pista</summary><p>Empareja el <strong>primer renglón</strong> (2, 1) con la <strong>primera columna</strong> (4, 3): multiplica en pares y suma.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Fila 1 por columna 1: emparejas el primer renglón con la primera columna, multiplicas en pares y sumas.</p><div class="fx"><div class="sys"><span class="eq">(2)(4) + (1)(3) = 8 + 3 = 11</span></div></div></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="dimensiones" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="producto_matrices" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Quieres multiplicar una matriz de tamaño 3×2 por otra de tamaño 2×4, en ese orden. ¿El producto existe y de qué tamaño es?</p>
+        <p class="pstatement">En ese mismo producto, ¿cuánto vale la casilla de <strong>abajo a la derecha</strong>?</p>
+        <div class="fx" id="p2"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">25</button>
+          <button class="opt" data-ok="0">20</button>
+          <button class="opt" data-ok="0">15</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Abajo a la derecha es fila 2 (0, 5) contra columna 2 (1, 5).</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Fila 2, columna 2: (0)(1) + (5)(5) = 0 + 25 = 25. Cada casilla usa su propio renglón y su propia columna.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="dimensiones" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Quieres multiplicar una de tamaño <strong>3×2</strong> por otra de <strong>2×4</strong>, en ese orden. ¿El producto existe y de qué tamaño es?</p>
         <div class="opts">
           <button class="opt" data-ok="1">Sí existe, y mide 3×4</button>
           <button class="opt" data-ok="0">No existe: los tamaños no encajan</button>
@@ -290,43 +461,30 @@
         <div class="why"><span class="lbl">Por qué</span><p>Los números de en medio (2 y 2) coinciden, así que existe. Los de los extremos, 3 y 4, dan el tamaño: 3×4.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="transpuesta" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="transpuesta" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">¿Cuál es la transpuesta de esta matriz?</p>
-        <div class="fx" id="p3"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="p3a"></button>
-          <button class="opt" data-ok="0" id="p3b"></button>
-          <button class="opt" data-ok="0" id="p3c"></button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Vuelca la matriz sobre su diagonal: el <strong>primer renglón</strong> (1, 2, 3) pasa a ser la <strong>primera columna</strong>. Una de 2×3 se transpone a una de 3×2.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Cada renglón se vuelve columna: el renglón (1, 2, 3) pasa a ser la primera columna. Una de 2×3 se transpone a una de 3×2.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="existencia_inversa" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Intentas invertir esta matriz por Gauss-Jordan y, al reducir, el segundo renglón se vuelve todo ceros a la izquierda. ¿Qué concluyes?</p>
         <div class="fx" id="p4"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">No tiene inversa: es singular</button>
-          <button class="opt" data-ok="0">Su inversa es ella misma</button>
-          <button class="opt" data-ok="0">Hay que empezar de nuevo con otro orden de renglones</button>
+          <button class="opt" data-ok="1" id="p4a"></button>
+          <button class="opt" data-ok="0" id="p4b"></button>
+          <button class="opt" data-ok="0" id="p4c"></button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Un renglón de ceros a la izquierda es la señal fija: la izquierda ya no puede llegar a la identidad. Recuerda cómo se llama esa matriz.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>El primer renglón es 2 veces el segundo, así que un renglón es múltiplo del otro y al reducir aparece un renglón de ceros. Un renglón de ceros a la izquierda significa que no se puede llegar a la identidad: no hay inversa.</p><div class="fx"><div class="sys"><span class="eq">2·(1, 2) = (2, 4)</span></div></div></div>
+        <div class="aux"><details><summary>Pista</summary><p>El <strong>primer renglón</strong> (2, 5, 1) pasa a ser la <strong>primera columna</strong>. Una de 2×3 se transpone a una de 3×2.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Cada renglón se vuelve columna: (2, 5, 1) pasa a ser la primera columna y (0, 3, 4) la segunda. El resultado mide 3×2.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P5" data-tema="inversa_gauss_jordan" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Quieres invertir esta matriz por Gauss-Jordan. Ya pegaste la identidad para formar [A | I]. El primer renglón ya empieza con 1; ahora quieres hacer cero la esquina de abajo a la izquierda (el 2). ¿Qué operación de renglón lo logra?</p>
+        <p class="pstatement">Vas a invertir A = renglón (1, 4), renglón (3, 13). Ya pegaste la identidad. El renglón 1 empieza con 1; quieres hacer cero la esquina de abajo a la izquierda (el 3). ¿Qué operación lo logra?</p>
         <div class="fx" id="p5"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">Restar 2 veces el renglón 1 al renglón 2</button>
-          <button class="opt" data-ok="0">Sumar 2 veces el renglón 1 al renglón 2</button>
-          <button class="opt" data-ok="0">Dividir el renglón 2 entre 2</button>
+          <button class="opt" data-ok="1">R2 → R2 − 3·R1</button>
+          <button class="opt" data-ok="0">R2 → R2 + 3·R1</button>
+          <button class="opt" data-ok="0">R2 → R2 ÷ 3</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Mira la primera columna: arriba hay un 1, abajo un 2. ¿Qué múltiplo del renglón de arriba cancela el 2 de abajo? Trabajas sobre <strong>toda</strong> la fila, identidad incluida.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>El renglón 1 tiene un 1 en la primera columna; al restar 2 veces ese renglón, el 2 de abajo se vuelve cero y el renglón 2 cambia así:</p><div class="fx"><div class="sys"><span class="eq">R2 − 2·R1:  (2, 7 | 0, 1) → (0, 1 | −2, 1)</span></div></div></div>
+        <div class="aux"><details><summary>Pista</summary><p>Arriba, en la primera columna, hay un 1; abajo un 3. ¿Qué múltiplo del renglón de arriba cancela el 3 de abajo? Trabajas sobre <strong>toda</strong> la fila, identidad incluida.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>El renglón 1 tiene un 1 en la primera columna; restar 3 veces ese renglón deja 3 − 3·1 = 0 abajo.</p><div class="fx"><div class="sys"><span class="eq">R2 − 3·R1: (3, 13 | 0, 1) → (0, 1 | −3, 1)</span></div></div></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P6" data-tema="inversa_gauss_jordan" data-level="juntos">
@@ -339,32 +497,57 @@
           <button class="opt" data-ok="0" id="p6c"></button>
         </div>
         <div class="aux"><details><summary>Pista</summary><p>Cuando la izquierda ya es la identidad, la inversa es <strong>exactamente lo que quedó a la derecha</strong> de la barra. No hay que hacer más cuentas: solo leerla.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>La izquierda llegó a la identidad, así que la derecha es la inversa: el bloque de la derecha de la barra. Puedes comprobar que A por esa matriz da la identidad.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>La izquierda llegó a la identidad, así que la derecha es la inversa: el bloque a la derecha de la barra, renglón (13, −4), renglón (−3, 1).</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P7" data-tema="inversa_gauss_jordan" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Invierte esta matriz por Gauss-Jordan, tú sola de principio a fin: pega la identidad, reduce hasta que la izquierda sea la identidad y lee la inversa. ¿Cuál es la inversa de A?</p>
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="existencia_inversa" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Intentas invertir esta matriz por Gauss-Jordan y, al reducir, el segundo renglón se vuelve todo ceros a la izquierda. ¿Qué concluyes?</p>
         <div class="fx" id="p7"></div>
         <div class="opts">
-          <button class="opt" data-ok="1" id="p7a"></button>
-          <button class="opt" data-ok="0" id="p7b"></button>
-          <button class="opt" data-ok="0" id="p7c"></button>
+          <button class="opt" data-ok="1">No tiene inversa: es singular</button>
+          <button class="opt" data-ok="0">Su inversa es ella misma</button>
+          <button class="opt" data-ok="0">Hay que empezar de nuevo con otro orden de renglones</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Forma [A | I]. El renglón 1 ya empieza con 1: haz R2 → R2 − R1 para poner cero abajo a la izquierda. Luego, con el pivote de abajo, limpia el 2 de arriba: R1 → R1 − 2·R2. Lo que quede a la derecha de la barra es la inversa.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Partes de [A | I]. Tras R2 → R2 − R1 y luego R1 → R1 − 2·R2, la izquierda llega a la identidad y a la derecha queda la inversa. Compruébalo abajo: A por esa matriz da la identidad.</p><div class="fx" id="p7chk"></div></div>
+        <div class="aux"><details><summary>Pista</summary><p>Fíjate si un renglón es múltiplo del otro. Si lo es, al restar aparece un renglón de ceros.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>El segundo renglón (2, 6) es 2 veces el primero (1, 3), así que al reducir aparece un renglón de ceros a la izquierda. Eso ya no puede llegar a la identidad: no hay inversa.</p><div class="fx"><div class="sys"><span class="eq">2·(1, 3) = (2, 6)</span></div></div></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P8" data-tema="identidad" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Multiplicas una matriz A de 2×2 por la matriz identidad del mismo tamaño. ¿Qué obtienes?</p>
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="inversa_gauss_jordan" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Invierte esta matriz por Gauss-Jordan, tú sola de principio a fin: pega la identidad, reduce hasta que la izquierda sea la identidad y lee la inversa. ¿Cuál es la inversa de A?</p>
+        <div class="fx" id="p8"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">La misma matriz A, sin cambios</button>
-          <button class="opt" data-ok="0">La matriz identidad</button>
-          <button class="opt" data-ok="0">Una matriz de puros ceros</button>
+          <button class="opt" data-ok="1" id="p8a"></button>
+          <button class="opt" data-ok="0" id="p8b"></button>
+          <button class="opt" data-ok="0" id="p8c"></button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>La identidad hace en las matrices lo que el 1 hace en los números: multiplicar por ella deja todo igual.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>La identidad es el <strong>1 de las matrices</strong>: multiplicar por ella no cambia nada. A·I = A.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Forma [A | I]. El renglón 1 ya empieza con 1: haz R2 → R2 − R1 para poner cero abajo a la izquierda. Luego, con el pivote de abajo, limpia el 2 de arriba: R1 → R1 − 2·R2. Lo que quede a la derecha de la barra es la inversa.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Partes de [A | I]. Tras R2 → R2 − R1 y luego R1 → R1 − 2·R2, la izquierda llega a la identidad y a la derecha queda la inversa, renglón (3, −2), renglón (−1, 1). Compruébalo: A por esa matriz da la identidad.</p><div class="fx" id="p8chk"></div></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="modelado" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Volviendo al inicio: el <strong>combo A lleva 2 cafés y 1 pan</strong>, el <strong>combo B lleva 1 café y 3 panes</strong>. En la tabla de recetas, cada renglón es un combo (café primero, pan después). ¿Cuál matriz de recetas es la correcta?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1" id="p9a"></button>
+          <button class="opt" data-ok="0" id="p9b"></button>
+          <button class="opt" data-ok="0" id="p9c"></button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Renglón del combo A = (cafés de A, panes de A) = (2, 1). Renglón del combo B = (1, 3). Columna 1 = café, columna 2 = pan.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Combo A = (2, 1): 2 cafés, 1 pan. Combo B = (1, 3): 1 café, 3 panes. Cada número va en la columna de su ingrediente.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P10" data-tema="matrices_nombradas" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">¿Cuál de estas matrices es <strong>triangular superior</strong> (todo cero debajo de la diagonal)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1" id="p10a"></button>
+          <button class="opt" data-ok="0" id="p10b"></button>
+          <button class="opt" data-ok="0" id="p10c"></button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Mira solo lo que hay <strong>debajo</strong> de la diagonal principal: en una triangular superior todo eso es cero.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Triangular superior = ceros debajo de la diagonal. La diagonal y lo de arriba pueden ser cualquier cosa; lo de abajo debe ser todo cero.</p></div>
       </div>
     </section>
 
@@ -388,7 +571,7 @@
         <li><span class="ck">✓</span> El producto NO es conmutativo: A·B casi nunca es igual a B·A.</li>
         <li><span class="ck">✓</span> Transpuesta = renglones a columnas; (A·B) transpuesta = B transpuesta · A transpuesta.</li>
         <li><span class="ck">✓</span> Identidad = unos en la diagonal, ceros afuera. Es el 1: A·I = A.</li>
-        <li><span class="ck">✓</span> Inversa por Gauss-Jordan: reduce [A | I]; lo que queda en la derecha es la inversa.</li>
+        <li><span class="ck">✓</span> Inversa por Gauss-Jordan: reduce [A | I]; lo que queda a la derecha es la inversa.</li>
         <li><span class="ck">✓</span> No hay inversa (singular) si al reducir aparece un renglón de ceros a la izquierda.</li>
       </ul>
     </section>
@@ -400,6 +583,11 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="L3_transformaciones-lineales.html"><span class="sp">← Anterior</span><span class="ti">U3 · Transformaciones lineales</span></a>
+      <a class="next" href="L5_determinantes.html"><span class="sp">Siguiente →</span><span class="ti">U5 · Determinantes</span></a>
+    </nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 4</p></footer>
 
@@ -423,8 +611,7 @@ function mat(rows){
 }
 function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
 
-// Una matriz sin barra: reutilizamos mat() dejando la última columna aparte no aplica aquí,
-// así que las matrices "planas" (sin aumentar) se arman con matN().
+// Matrices "planas" (sin barra de aumentada) se arman con matN().
 function matN(rows){
   var cols = rows[0].length;
   var gtc = 'repeat('+cols+',auto)';
@@ -438,30 +625,8 @@ function matN(rows){
 }
 function setN(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=matN(rows); }
 
-// ===== La idea =====
-document.getElementById('prodA').innerHTML =           // A (2×3) · B (3×2)
-  matN([["1","2","0"],["3","−1","1"]]) + '<span style="display:inline-block;width:14px"></span>' +
-  matN([["2","1"],["0","−2"],["4","3"]]);
-document.getElementById('transEx').innerHTML =        // A (2×3)  →  Aᵀ (3×2)
-  matN([["1","2","3"],["4","5","6"]]) + '<span style="display:inline-block;width:10px">→</span>' +
-  matN([["1","4"],["2","5"],["3","6"]]);
-setN('identEx',[["1","0","0"],["0","1","0"],["0","0","1"]]); // I₃
-// matrices especiales (diagonal · simétrica · triangular superior), lado a lado
-document.getElementById('specEx').innerHTML =
-  matN([["2","0","0"],["0","5","0"],["0","0","3"]]) + '<span style="display:inline-block;width:18px"></span>' +
-  matN([["1","2","3"],["2","5","6"],["3","6","9"]]) + '<span style="display:inline-block;width:18px"></span>' +
-  matN([["1","2","3"],["0","1","4"],["0","0","1"]]);
-
-// ===== Yo lo hago: producto 2×3 · 3×2 =====
-document.getElementById('pe0').innerHTML =
-  matN([["1","2","0"],["3","−1","1"]]) + '<span style="display:inline-block;width:14px"></span>' +
-  matN([["2","1"],["0","−2"],["4","3"]]);
-setN('pe1',[["2","−3"],["10","8"]]);
-
-// ===== Yo lo hago: inversa por Gauss-Jordan de A=[[1,2],[3,7]] =====
-// [A | I] con barra: usamos mat() (última "columna" no aplica), así que armamos aumentada 2 col + 2 col
-// mat() separa SOLO la última columna; aquí queremos separar A (2 col) de I (2 col): usamos aug4().
-function aug4(rows){ // 4 columnas visibles, barra tras la 2ª
+// [A | I] de 2×2: 4 columnas visibles, barra tras la 2ª.
+function aug4(rows){
   var gtc='repeat(2,auto) 16px repeat(2,auto)';
   var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
   for(var r=0;r<rows.length;r++){
@@ -470,104 +635,80 @@ function aug4(rows){ // 4 columnas visibles, barra tras la 2ª
   }
   return h+'</div><span class="brk brk-r"></span></div>';
 }
-document.getElementById('in0').innerHTML = aug4([["1","2","1","0"],["3","7","0","1"]]);
-document.getElementById('in1').innerHTML = aug4([["1","2","1","0"],["0","1","−3","1"]]);
-document.getElementById('in2').innerHTML = aug4([["1","0","7","−2"],["0","1","−3","1"]]);
-// comprobación A · A⁻¹ = I : mostramos A, A⁻¹ y el resultado I
+// junta dos matrices con un separador (o un signo · = →) entre ellas
+function pair(a,b,sym){
+  var mid = sym ? '<span style="display:inline-block;width:20px;text-align:center">'+sym+'</span>'
+               : '<span style="display:inline-block;width:14px"></span>';
+  return a + mid + b;
+}
+
+// ===== Empecemos por un problema: recetas × precios =====
+document.getElementById('prob0').innerHTML =
+  pair(matN([["2","1"],["1","3"]]), matN([["30"],["20"]]));
+
+// ===== La idea =====
+document.getElementById('prodA').innerHTML =            // A (2×3) · B (3×2)
+  pair(matN([["1","2","0"],["3","−1","1"]]), matN([["2","1"],["0","−2"],["4","3"]]));
+document.getElementById('transEx').innerHTML =         // A (2×3)  →  Aᵀ (3×2)
+  pair(matN([["1","2","3"],["4","5","6"]]), matN([["1","4"],["2","5"],["3","6"]]), "→");
+setN('identEx',[["1","0","0"],["0","1","0"],["0","0","1"]]); // I₃
+// matrices especiales (diagonal · simétrica · triangular superior), lado a lado
+document.getElementById('specEx').innerHTML =
+  pair(pair(matN([["2","0","0"],["0","5","0"],["0","0","3"]]), matN([["1","2","3"],["2","5","6"],["3","6","9"]])),
+       matN([["1","2","3"],["0","1","4"],["0","0","1"]]));
+// micro-check: ¿cuál es simétrica?  (a: simétrica · b: triangular · c: diagonal con hueco)
+document.getElementById('sp_a').innerHTML = matN([["4","1","2"],["1","5","0"],["2","0","3"]]);
+document.getElementById('sp_b').innerHTML = matN([["4","1","2"],["0","5","6"],["0","0","3"]]);
+document.getElementById('sp_c').innerHTML = matN([["4","0","0"],["3","5","0"],["0","0","3"]]);
+
+// ===== Yo lo hago · contigo: producto 2×3 · 3×2 =====
+document.getElementById('pe0').innerHTML =
+  pair(matN([["1","2","0"],["3","−1","1"]]), matN([["2","1"],["0","−2"],["4","3"]]));
+setN('pe1',[["2","−3"],["10","8"]]);
+
+// ===== Sube el tamaño: inversa por Gauss-Jordan de A=[[1,3],[2,7]] =====
+document.getElementById('in0').innerHTML = aug4([["1","3","1","0"],["2","7","0","1"]]);
+document.getElementById('in1').innerHTML = aug4([["1","3","1","0"],["0","1","−2","1"]]);
+document.getElementById('in2').innerHTML = aug4([["1","0","7","−3"],["0","1","−2","1"]]);
+// comprobación A · A⁻¹ = I
 document.getElementById('inChk').innerHTML =
-  matN([["1","2"],["3","7"]]) + '<span style="display:inline-block;width:10px"></span>' +
-  matN([["7","−2"],["−3","1"]]) + '<span style="display:inline-block;width:10px">=</span>' +
-  matN([["1","0"],["0","1"]]);
+  pair(pair(matN([["1","3"],["2","7"]]), matN([["7","−3"],["−2","1"]])), matN([["1","0"],["0","1"]]), "=");
 
 // ===== Práctica =====
-document.getElementById('p1').innerHTML =
-  matN([["1","2"],["0","3"]]) + '<span style="display:inline-block;width:12px"></span>' + matN([["4","1"],["2","5"]]);
-setN('p3',[["1","2","3"],["4","5","6"]]);
-document.getElementById('p3a').innerHTML = matN([["1","4"],["2","5"],["3","6"]]);
-document.getElementById('p3b').innerHTML = matN([["1","2","3"],["4","5","6"]]);
-document.getElementById('p3c').innerHTML = matN([["6","3"],["5","2"],["4","1"]]);
-setN('p4',[["2","4"],["1","2"]]);
-// P5 (guiado): [A|I] con A=[[1,3],[2,7]], antes de reducir → elegir R2−2·R1
-document.getElementById('p5').innerHTML = aug4([["1","3","1","0"],["2","7","0","1"]]);
-// P6 (juntos): la misma [A|I] ya reducida → leer la inversa en la derecha
-document.getElementById('p6').innerHTML = aug4([["1","0","7","−3"],["0","1","−2","1"]]);
-document.getElementById('p6a').innerHTML = matN([["7","−3"],["−2","1"]]);
-document.getElementById('p6b').innerHTML = matN([["1","3"],["2","7"]]);
+// P1 / P2: mismo producto [[2,1],[0,5]] · [[4,1],[3,5]] = [[11,7],[15,25]]
+document.getElementById('p1').innerHTML = pair(matN([["2","1"],["0","5"]]), matN([["4","1"],["3","5"]]));
+document.getElementById('p2').innerHTML = pair(matN([["2","1"],["0","5"]]), matN([["4","1"],["3","5"]]));
+// P4: transpuesta de [[2,5,1],[0,3,4]] → [[2,0],[5,3],[1,4]]
+setN('p4',[["2","5","1"],["0","3","4"]]);
+document.getElementById('p4a').innerHTML = matN([["2","0"],["5","3"],["1","4"]]);
+document.getElementById('p4b').innerHTML = matN([["2","5","1"],["0","3","4"]]);
+document.getElementById('p4c').innerHTML = matN([["1","4"],["5","3"],["2","0"]]);
+// P5 (guiado): [A|I] con A=[[1,4],[3,13]], antes de reducir → elegir R2−3·R1
+document.getElementById('p5').innerHTML = aug4([["1","4","1","0"],["3","13","0","1"]]);
+// P6 (juntos): esa misma [A|I] ya reducida → leer la inversa a la derecha (A⁻¹=[[13,−4],[−3,1]])
+document.getElementById('p6').innerHTML = aug4([["1","0","13","−4"],["0","1","−3","1"]]);
+document.getElementById('p6a').innerHTML = matN([["13","−4"],["−3","1"]]);
+document.getElementById('p6b').innerHTML = matN([["1","4"],["3","13"]]);
 document.getElementById('p6c').innerHTML = matN([["1","0"],["0","1"]]);
-// P7 (solo): inversión completa de A=[[1,2],[1,3]] por Gauss-Jordan → inversa [[3,−2],[−1,1]]
-setN('p7',[["1","2"],["1","3"]]);
-document.getElementById('p7a').innerHTML = matN([["3","−2"],["−1","1"]]);
-document.getElementById('p7b').innerHTML = matN([["1","2"],["1","3"]]);
-document.getElementById('p7c').innerHTML = matN([["3","2"],["1","1"]]);
-// comprobación A · A⁻¹ = I para P7
-document.getElementById('p7chk').innerHTML =
-  matN([["1","2"],["1","3"]]) + '<span style="display:inline-block;width:10px"></span>' +
-  matN([["3","−2"],["−1","1"]]) + '<span style="display:inline-block;width:10px">=</span>' +
-  matN([["1","0"],["0","1"]]);
+// P7 (juntos): singular, renglón 2 = 2× renglón 1
+setN('p7',[["1","3"],["2","6"]]);
+// P8 (solo): inversión completa de A=[[1,2],[1,3]] → inversa [[3,−2],[−1,1]]
+setN('p8',[["1","2"],["1","3"]]);
+document.getElementById('p8a').innerHTML = matN([["3","−2"],["−1","1"]]);
+document.getElementById('p8b').innerHTML = matN([["1","2"],["1","3"]]);
+document.getElementById('p8c').innerHTML = matN([["3","2"],["1","1"]]);
+document.getElementById('p8chk').innerHTML =
+  pair(pair(matN([["1","2"],["1","3"]]), matN([["3","−2"],["−1","1"]])), matN([["1","0"],["0","1"]]), "=");
+// P9 (modelado): recetas de combos → [[2,1],[1,3]]
+document.getElementById('p9a').innerHTML = matN([["2","1"],["1","3"]]);
+document.getElementById('p9b').innerHTML = matN([["2","1"],["3","1"]]);
+document.getElementById('p9c').innerHTML = matN([["1","2"],["3","1"]]);
+// P10 (matrices nombradas): triangular superior
+document.getElementById('p10a').innerHTML = matN([["3","5","2"],["0","4","1"],["0","0","6"]]);
+document.getElementById('p10b').innerHTML = matN([["3","0","0"],["5","4","0"],["2","1","6"]]);
+document.getElementById('p10c').innerHTML = matN([["3","5","2"],["1","4","1"],["0","0","6"]]);
 
-// ===== visual: ¿cuándo existe la inversa? (motor de plano intacto abajo, no usado) =====
-function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
-function clip(a,b,c){
-  var pts=[], E=1e-9;
-  if(Math.abs(b)>E){ [-1,5].forEach(function(x){ var y=(c-a*x)/b; if(y>=-1-E&&y<=5+E) pts.push([x,y]); }); }
-  if(Math.abs(a)>E){ [-1,5].forEach(function(y){ var x=(c-b*y)/a; if(x>=-1-E&&x<=5+E) pts.push([x,y]); }); }
-  var u=[]; pts.forEach(function(p){ if(!u.some(function(q){return Math.abs(q[0]-p[0])<1e-6&&Math.abs(q[1]-p[1])<1e-6;})) u.push(p); });
-  return u.slice(0,2);
-}
-function lineSVG(a,b,c,color,dash){
-  var e=clip(a,b,c); if(e.length<2) return '';
-  var p0=PT(e[0][0],e[0][1]), p1=PT(e[1][0],e[1][1]);
-  return '<line x1="'+p0[0]+'" y1="'+p0[1]+'" x2="'+p1[0]+'" y2="'+p1[1]+'" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"'+(dash?' stroke-dasharray="8 7"':'')+'/>';
-}
-var VG='', VA='';
-(function(){
-  for(var g=-1; g<=5; g++){
-    var a=PT(g,-1), b=PT(g,5), c=PT(-1,g), d=PT(5,g);
-    VG+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/>'+'<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';
-  }
-  var x0=PT(-1,0), x1=PT(5,0), y0=PT(0,-1), y1=PT(0,5);
-  VA='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/>'+'<line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';
-})();
-function drawPlane(cse){
-  var L, cap;
-  if(cse==='una'){
-    L=lineSVG(1,2,5,'#F5821F')+lineSVG(3,-1,1,'#283891');
-    var dp=PT(1,2);
-    L+='<circle cx="'+dp[0]+'" cy="'+dp[1]+'" r="11" fill="none" stroke="#F5821F" stroke-width="2.5"/><circle cx="'+dp[0]+'" cy="'+dp[1]+'" r="6.5" fill="#181B22"/>';
-    cap='Las dos rectas se cruzan en un punto. Ese punto —x = 1, y = 2— es la única solución.';
-  } else if(cse==='ninguna'){
-    L=lineSVG(1,2,5,'#F5821F')+lineSVG(1,2,8,'#283891');
-    cap='Las rectas son paralelas: nunca se cruzan. El sistema no tiene solución.';
-  } else {
-    L=lineSVG(1,2,5,'#F5821F')+lineSVG(2,4,10,'#283891',true);
-    cap='Las dos ecuaciones son la misma recta. Coinciden en todos sus puntos: infinitas soluciones.';
-  }
-  document.getElementById('vizPlane').innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plano cartesiano con dos rectas">'+VG+VA+L+'</svg>';
-  document.getElementById('vizCap').textContent=cap;
-}
-// --- visual propio: el "dominó" de dimensiones (2×3 · 3×2 → 2×2) ---
-(function(){
-  var el=document.getElementById('dimViz'); if(!el) return;
-  function box(x,label,fill,stroke){
-    return '<rect x="'+x+'" y="34" width="86" height="52" rx="10" fill="'+fill+'" stroke="'+stroke+'" stroke-width="2.5"/>'+
-           '<text x="'+(x+43)+'" y="66" text-anchor="middle" font-family="'+"-apple-system,Segoe UI,Roboto,sans-serif"+'" font-size="22" font-weight="800" fill="#181B22">'+label+'</text>';
-  }
-  var svg='<svg viewBox="0 0 380 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Compatibilidad de dimensiones para el producto de matrices">';
-  svg+=box(6,'2×3','#FFF3E7','#F5821F');
-  svg+='<text x="106" y="66" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="22" font-weight="800" fill="#334155">·</text>';
-  svg+=box(120,'3×2','#eef1fb','#283891');
-  svg+='<text x="230" y="66" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="22" font-weight="800" fill="#334155">=</text>';
-  svg+=box(250,'2×2','#fff','#334155');
-  // arco "en medio coincide": une el 3 de A con el 3 de B
-  svg+='<path d="M78 100 C 78 122, 150 122, 150 100" fill="none" stroke="#334155" stroke-width="2.5"/>';
-  svg+='<text x="114" y="140" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" font-weight="700" fill="#C75D08">3 = 3 → sí se puede</text>';
-  // llaves a los extremos: 2 (de A) y 2 (de B) dan el tamaño
-  svg+='<text x="300" y="24" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12" font-weight="700" fill="#C75D08">extremos → tamaño</text>';
-  svg+='</svg>';
-  el.innerHTML=svg;
-})();
-
-// --- visual con tabs: ¿existe la inversa? mostramos la [A|I] ya reducida en cada caso ---
+// ===== visual con tabs: ¿existe la inversa? mostramos la [A|I] ya reducida en cada caso =====
 function drawInv(cse){
   var html, cap;
   if(cse==='existe'){
@@ -584,6 +725,26 @@ document.querySelectorAll('.viz-tab').forEach(function(b){
   b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawInv(b.getAttribute('data-case')); };
 });
 (function(){ var f=document.querySelector('.viz-tab'); f.classList.add('active'); drawInv('existe'); })();
+
+// --- visual propio: el "dominó" de dimensiones (2×3 · 3×2 → 2×2) ---
+(function(){
+  var el=document.getElementById('dimViz'); if(!el) return;
+  function box(x,label,fill,stroke){
+    return '<rect x="'+x+'" y="34" width="86" height="52" rx="10" fill="'+fill+'" stroke="'+stroke+'" stroke-width="2.5"/>'+
+           '<text x="'+(x+43)+'" y="66" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="22" font-weight="800" fill="#181B22">'+label+'</text>';
+  }
+  var svg='<svg viewBox="0 0 380 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Compatibilidad de dimensiones para el producto de matrices">';
+  svg+=box(6,'2×3','#FFF3E7','#F5821F');
+  svg+='<text x="106" y="66" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="22" font-weight="800" fill="#334155">·</text>';
+  svg+=box(120,'3×2','#eef1fb','#283891');
+  svg+='<text x="230" y="66" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="22" font-weight="800" fill="#334155">=</text>';
+  svg+=box(250,'2×2','#fff','#334155');
+  svg+='<path d="M78 100 C 78 122, 150 122, 150 100" fill="none" stroke="#334155" stroke-width="2.5"/>';
+  svg+='<text x="114" y="140" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" font-weight="700" fill="#C75D08">3 = 3 → sí se puede</text>';
+  svg+='<text x="300" y="24" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12" font-weight="700" fill="#C75D08">extremos → tamaño</text>';
+  svg+='</svg>';
+  el.innerHTML=svg;
+})();
 
 // ===== instrumentación =====
 var session = {

@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -153,7 +174,7 @@
     <div class="learn">
       <h2>Al terminar vas a poder</h2>
       <ol>
-        <li><span class="n">1</span> Encontrar los puntos críticos de una función de dos variables</li>
+        <li><span class="n">1</span> Hallar los puntos críticos de una función de dos variables</li>
         <li><span class="n">2</span> Armar la matriz hessiana</li>
         <li><span class="n">3</span> Aplicar el criterio de la segunda derivada</li>
         <li><span class="n">4</span> Clasificar: mínimo, máximo o punto silla</li>
@@ -165,73 +186,149 @@
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Vas a cercar un <strong>corral rectangular</strong> contra un muro. Tienes <strong>40 metros de malla</strong> para los otros tres lados, y quieres que el corral encierre <strong>la mayor área posible</strong>. ¿De qué medidas lo haces?</p>
+      <div class="fx" id="corralF"></div>
+      <p class="idea" style="font-size:17px">Podrías tantear: 5 por 30, 10 por 20, 15 por 10… pero cada intento es a ciegas. Necesitamos un método que encuentre el <strong>punto exacto</strong> donde el área ya no puede crecer más, y que además nos diga si de verdad es un máximo y no otra cosa. Ese método es el <strong>criterio de la segunda derivada</strong> (y su primo <strong>Lagrange</strong>, para cuando hay una restricción como esos 40 metros). Al final de la guía vas a resolver justo este corral tú sola.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>Optimizar es buscar el punto llano</h3>
-      <p class="idea">Piensa en una función de dos variables como una <strong>superficie</strong>: colinas y hoyos. En una cima o en el fondo de un hoyo, el terreno está <strong>llano</strong>: no sube ni baja en ninguna dirección. Ahí las dos derivadas parciales valen cero a la vez. Ese es un <strong>punto crítico</strong>.</p>
+      <h3>1 · Un punto crítico es terreno llano</h3>
+      <p class="idea">Piensa en una función de dos variables como una <strong>superficie</strong>: colinas y hoyos. En una cima o en el fondo de un hoyo el terreno está <strong>llano</strong>: no sube ni baja en ninguna dirección. Ahí las dos derivadas parciales valen cero a la vez. Eso es un <strong>punto crítico</strong>: el candidato a máximo o mínimo.</p>
       <div class="fx"><div class="sys"><span class="eq">∂f/∂x = 0</span><span class="eq">∂f/∂y = 0</span></div></div>
-      <p class="idea">Resolver ese pequeño sistema te da los <strong>candidatos</strong> a máximo o mínimo. Pero un punto llano no siempre es cima ni hoyo: puede ser un <strong>punto silla</strong> (sube por un lado y baja por el otro). Falta una prueba para decidir cuál es.</p>
+      <p class="idea">Resolver ese pequeño sistema te da los candidatos. Pero cuidado: un punto llano <strong>no siempre</strong> es cima ni hoyo. Antes de seguir, asegúrate de tener clara la condición:</p>
+      <div class="check" data-kind="item" data-id="PCchk" data-tema="puntos_criticos" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿Cuándo un punto (a, b) es punto crítico de f(x, y)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Cuando f<sub>x</sub> y f<sub>y</sub> valen <strong>cero</strong> ahí, las dos a la vez</button>
+          <button class="opt" data-ok="0">Cuando la función vale cero ahí</button>
+          <button class="opt" data-ok="0">Cuando solo f<sub>x</sub> vale cero, sin importar f<sub>y</sub></button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Terreno llano = pendiente cero en <strong>ambas</strong> direcciones. Que f valga cero no dice nada de la pendiente; y con una sola parcial en cero el terreno todavía puede subir por la otra dirección.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>La matriz hessiana</h3>
-      <p class="idea">Para clasificar un punto crítico miramos las <strong>segundas</strong> derivadas: la curvatura. Las ordenamos en una tabla de 2×2 llamada <strong>matriz hessiana</strong>. En la diagonal, cuánto se curva en cada eje; fuera, la derivada cruzada.</p>
+      <h3>2 · La matriz hessiana guarda la curvatura</h3>
+      <p class="idea">Para clasificar un punto crítico miramos las <strong>segundas</strong> derivadas: la curvatura. Las ordenamos en una tabla de 2×2 llamada <strong>matriz hessiana</strong>. En la diagonal, cuánto se curva en cada eje; fuera de ella, la derivada cruzada.</p>
       <div class="fx" id="hessDef"></div>
-      <p class="fx-note">Por el teorema de Clairaut, la parcial cruzada no depende del orden: f<sub>xy</sub> = f<sub>yx</sub>. Por eso la hessiana es simétrica.</p>
+      <p class="fx-note">Por el teorema de Clairaut la parcial cruzada no depende del orden: f<sub>xy</sub> = f<sub>yx</sub>. Por eso la hessiana es simétrica.</p>
+      <div class="check" data-kind="recall" data-fid="F1_hessiana" data-tema="hessiana">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Qué va en las cuatro casillas de la hessiana de una función de dos variables?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Las cuatro <strong>segundas</strong> derivadas: f<sub>xx</sub>, f<sub>xy</sub>, f<sub>yx</sub>, f<sub>yy</sub></button>
+          <button class="opt" data-ok="0">Las dos primeras derivadas f<sub>x</sub> y f<sub>y</sub>, repetidas</button>
+          <button class="opt" data-ok="0">Los valores de la función en cuatro puntos cercanos</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La hessiana es la tabla de <strong>segundas</strong> derivadas. La diagonal lleva f<sub>xx</sub> y f<sub>yy</sub> (curvatura en cada eje) y fuera van las cruzadas f<sub>xy</sub> = f<sub>yx</sub>.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>El criterio de la segunda derivada</h3>
-      <p class="idea">Todo se decide con un número: el <strong>determinante de la hessiana</strong>, que llamamos D. Se calcula así y se lee con esta regla, evaluando en el punto crítico:</p>
+      <h3>3 · Un solo número decide: el determinante D</h3>
+      <p class="idea">Todo el veredicto sale de un número: el <strong>determinante de la hessiana</strong>, que llamamos D. Se calcula así y se lee con esta regla, siempre <strong>evaluando en el punto crítico</strong>:</p>
       <div class="fx" id="Ddef"></div>
-      <div class="check" data-kind="recall" data-fid="F1_criterio_D" data-tema="criterio_segunda_derivada">
+      <div class="check" data-kind="recall" data-fid="F2_criterio_D" data-tema="criterio_segunda_derivada">
         <div class="qtag">Te toca · recuerda</div>
-        <p class="q">Si al evaluar sale D &gt; 0 y f<sub>xx</sub> &gt; 0, ¿qué tipo de punto es?</p>
+        <p class="q">Al evaluar en el punto crítico sale D &gt; 0 y f<sub>xx</sub> &gt; 0. ¿Qué tipo de punto es?</p>
         <div class="opts">
           <button class="opt" data-ok="1">Un mínimo local (el terreno se curva hacia arriba en las dos direcciones)</button>
           <button class="opt" data-ok="0">Un máximo local</button>
           <button class="opt" data-ok="0">Un punto silla</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Con D &gt; 0 el punto es cima o hoyo; el signo de f<sub>xx</sub> desempata. Positivo = se curva hacia arriba = <strong>mínimo</strong>. Si fuera f<sub>xx</sub> &lt; 0 sería máximo. Y si D &lt; 0, es punto silla sin importar f<sub>xx</sub>.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con D &gt; 0 el punto es cima o hoyo; el signo de f<sub>xx</sub> desempata. Positivo = se curva hacia arriba = <strong>mínimo</strong>. Si f<sub>xx</sub> &lt; 0 sería máximo. Y si D &lt; 0 es punto silla, sin importar f<sub>xx</sub>.</p></div>
       </div>
     </section>
 
-    <h2 class="modhead">Yo lo hago</h2>
+    <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Clasifiquemos los puntos críticos de una función concreta. Voy paso a paso; tú solo sigue el hilo. La función es la superficie “f igual a x cuadrada más y cuadrada, menos cuatro x, menos seis y, más cinco”.</p>
+      <p class="idea" style="font-size:17px">Clasifiquemos el punto crítico de una función concreta. No la mires nada más: en cada paso <strong>tú decides la operación</strong> y yo la ejecuto. La función es:</p>
       <div class="fx" id="ej1f"></div>
-      <div class="estep"><div class="oprow">Paso 1 · derivadas parciales</div><p>Derivo respecto a cada variable y las igualo a cero para hallar el punto llano.</p><div class="fx" id="ej1a"></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · resolver el sistema</div><p>Cada ecuación despeja limpio: el único punto crítico es (2, 3).</p><div class="fx" id="ej1b"></div></div>
 
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="clasificacion">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">Ya tengo las segundas derivadas (abajo). Sin calcular todavía, ¿qué esperas que salga el determinante D?</p>
+      <div class="check" data-kind="item" data-id="E1pred" data-tema="puntos_criticos" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Primero hay que hallar el punto llano. ¿Qué planteas?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Derivar respecto a x y respecto a y, e igualar <strong>cada</strong> parcial a cero</button>
+          <button class="opt" data-ok="0">Igualar la función a cero: f(x, y) = 0</button>
+          <button class="opt" data-ok="0">Calcular ya la hessiana, sin hallar el punto</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El candidato vive donde el terreno es llano, es decir f<sub>x</sub> = 0 y f<sub>y</sub> = 0. La hessiana viene después, solo para clasificar.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 1 · derivadas parciales = 0</div><p>Derivo respecto a cada variable y las igualo a cero:</p><p class="calc"><span class="rw">f<sub>x</sub></span> ∂/∂x(x<sup>2</sup>−4x)=<b>2x−4</b> <span class="sep">•</span> <span class="rw">f<sub>y</sub></span> ∂/∂y(y<sup>2</sup>−6y)=<b>2y−6</b></p><div class="fx" id="ej1a"></div></div>
+
+      <div class="check" data-kind="item" data-id="E2pred" data-tema="puntos_criticos" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Tienes 2x − 4 = 0 y 2y − 6 = 0. ¿Cuál es el punto crítico?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(2, 3)</button>
+          <button class="opt" data-ok="0">(4, 6)</button>
+          <button class="opt" data-ok="0">(−2, −3)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Cada ecuación despeja sola: 2x = 4 → x = 2, y 2y = 6 → y = 3. Único punto llano: (2, 3).</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 2 · despejar el sistema</div><p>Cada ecuación despeja limpio:</p><p class="calc"><span class="rw">x</span> 4÷2=<b>2</b> <span class="sep">•</span> <span class="rw">y</span> 6÷2=<b>3</b></p><div class="fx" id="ej1b"></div></div>
+
+      <div class="check" data-kind="item" data-id="E3pred" data-tema="clasificacion" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ya tengo las segundas derivadas (abajo). Sin calcular todavía, ¿qué esperas del determinante D?</p>
         <div class="fx" id="ejpredD"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">Positivo, porque D = (2)(2) − 0² = 4, y como f<sub>xx</sub> &gt; 0 será un mínimo</button>
+          <button class="opt" data-ok="1">Positivo: D = (2)(2) − 0<sup>2</sup> = 4, y como f<sub>xx</sub> &gt; 0 será un mínimo</button>
           <button class="opt" data-ok="0">Negativo, así que será un punto silla</button>
           <button class="opt" data-ok="0">Cero, así que el criterio no decide</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)² = (2)(2) − 0 = 4 &gt; 0. Con D positivo y f<sub>xx</sub> positivo, el terreno se curva hacia arriba: es un <strong>mínimo</strong>.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup> = (2)(2) − 0 = 4 &gt; 0. Con D positivo y f<sub>xx</sub> positivo el terreno se curva hacia arriba: mínimo.</p></div>
       </div>
-
-      <div class="estep"><div class="oprow">Paso 3 · hessiana y determinante</div><p>Armo la hessiana con las segundas derivadas y calculo D.</p><div class="fx" id="ej1c"></div></div>
-      <div class="estep"><div class="oprow">Paso 4 · leer el criterio</div><p>Evalúo el determinante y miro el signo de f<sub>xx</sub>.</p><div class="fx" id="ej1d"></div></div>
-      <p class="idea" style="font-size:17px">Conclusión: en (2, 3) hay un <strong>mínimo local</strong>, con valor f(2, 3) = <strong>−8</strong>. Como la superficie es un tazón que abre hacia arriba, también es el mínimo global.</p>
+      <div class="estep"><div class="oprow">Paso 3 · hessiana y determinante</div><p>Armo la hessiana con las segundas derivadas (aquí son constantes) y calculo D:</p><p class="calc"><span class="rw">D</span> (2)(2)−(0)<sup>2</sup>=4−0=<b>4</b></p><div class="fx" id="ej1c"></div></div>
+      <div class="estep"><div class="oprow">Paso 4 · leer el criterio</div><p>Evalúo el signo de D y el de f<sub>xx</sub>:</p><p class="calc"><span class="rw">D</span> 4 &gt; 0 <span class="sep">•</span> <span class="rw">f<sub>xx</sub></span> 2 &gt; 0 <span class="sep">•</span> <b>mínimo</b></p><div class="fx" id="ej1d"></div></div>
+      <p class="idea" style="font-size:17px">Conclusión: en (2, 3) hay un <strong>mínimo local</strong>, con valor f(2, 3) = <strong>−8</strong>. Fíjate en el orden que seguiste: parciales a cero → punto → hessiana → un número decide. Ese es todo el criterio.</p>
     </section>
 
+    <h2 class="modhead">Sube el tamaño · cuando la hessiana depende del punto</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora uno con <strong>punto silla</strong>, que es lo que de verdad separa a quien entendió el criterio. La función es “f igual a x cúbica, menos tres x, más y cuadrada”.</p>
+      <p class="idea" style="font-size:17px">En el caso anterior las segundas derivadas eran constantes, así que un solo cálculo resolvía todo. El salto ahora es este: cuando f<sub>xx</sub> <strong>lleva una variable</strong>, el determinante <strong>cambia de punto a punto</strong>, así que hay que evaluar en cada punto crítico por separado. Se hace en fases:</p>
+      <ul class="fases">
+        <li><strong>Fase 1 — hallar los puntos:</strong> parciales a cero; aquí salen <em>varios</em> puntos.</li>
+        <li><strong>Fase 2 — D genérico:</strong> escribe D dejando la variable adentro.</li>
+        <li><strong>Fase 3 — evaluar:</strong> mete cada punto en D y clasifica uno por uno.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">La función:</p>
       <div class="fx" id="ej2f"></div>
-      <div class="estep"><div class="oprow">Paso 1 · puntos críticos</div><p>Igualo las parciales a cero. De 3x² − 3 = 0 salen dos valores de x; de 2y = 0 sale y = 0.</p><div class="fx" id="ej2a"></div></div>
-      <p class="idea" style="font-size:17px">Hay <strong>dos</strong> puntos críticos: (−1, 0) y (1, 0). Ojo: aquí f<sub>xx</sub> = 6x <strong>depende del punto</strong>, así que hay que evaluar en cada uno.</p>
-      <div class="estep"><div class="oprow">Paso 2 · hessiana genérica</div><p>Las segundas derivadas son f<sub>xx</sub> = 6x, f<sub>yy</sub> = 2, f<sub>xy</sub> = 0. Como f<sub>xx</sub> lleva la x, el determinante también depende del punto.</p><div class="fx" id="ej2b"></div><div class="fx" id="ej2bD"></div></div>
-      <div class="estep"><div class="oprow">Paso 3 · evaluar en (−1, 0)</div><p>Sustituyo x = −1 en el determinante.</p><div class="fx" id="ej2c"></div></div>
-      <p class="idea" style="font-size:17px">D negativo → <strong>punto silla</strong> en (−1, 0): la superficie sube por un lado y baja por el otro.</p>
-      <div class="estep"><div class="oprow">Paso 4 · evaluar en (1, 0)</div><p>Sustituyo x = 1, y ahí f<sub>xx</sub> = 6(1) = 6 &gt; 0.</p><div class="fx" id="ej2d"></div></div>
-      <p class="idea" style="font-size:17px">D positivo con f<sub>xx</sub> positivo → <strong>mínimo local</strong> en (1, 0), con valor f(1, 0) = <strong>−2</strong>. Un mismo criterio, dos veredictos distintos según el punto.</p>
+
+      <div class="check" data-kind="item" data-id="T1pred" data-tema="puntos_criticos" data-level="juntos">
+        <div class="qtag">Te toca · decide la fase</div>
+        <p class="q">Fase 1. De f<sub>x</sub> = 3x<sup>2</sup> − 3 = 0 y f<sub>y</sub> = 2y = 0, ¿cuántos puntos críticos salen?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Dos: como 3x<sup>2</sup> = 3 da x = ±1 y y = 0, quedan (−1, 0) y (1, 0)</button>
+          <button class="opt" data-ok="0">Uno solo: (1, 0)</button>
+          <button class="opt" data-ok="0">Ninguno, porque 3x<sup>2</sup> − 3 no tiene solución</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>3x<sup>2</sup> = 3 → x<sup>2</sup> = 1 → x = ±1. La otra ecuación fija y = 0. Combinando: (−1, 0) y (1, 0). Dos candidatos.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fase 1 · puntos críticos</div><p>Igualo las parciales a cero y despejo cada una:</p><p class="calc"><span class="rw">x</span> 3x<sup>2</sup>=3 → x<sup>2</sup>=1 → <b>x=±1</b> <span class="sep">•</span> <span class="rw">y</span> 2y=0 → <b>y=0</b></p><div class="fx" id="ej2a"></div></div>
+
+      <div class="estep"><div class="oprow">Fase 2 · D genérico</div><p>Las segundas derivadas son f<sub>xx</sub> = 6x, f<sub>yy</sub> = 2, f<sub>xy</sub> = 0. Como f<sub>xx</sub> lleva la x, el determinante también:</p><p class="calc"><span class="rw">D</span> (6x)(2)−(0)<sup>2</sup>=<b>12x</b></p><div class="fx" id="ej2b"></div><div class="fx" id="ej2bD"></div></div>
+
+      <div class="check" data-kind="item" data-id="T2pred" data-tema="clasificacion" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Fase 3, primer punto. Metes x = −1 en D = 12x. ¿Qué sale y qué es el punto?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">D = 12(−1) = −12 &lt; 0 → <strong>punto silla</strong></button>
+          <button class="opt" data-ok="0">D = −12, pero como f<sub>xx</sub> &lt; 0 es un máximo</button>
+          <button class="opt" data-ok="0">D = 12 &gt; 0 → mínimo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>D = 12(−1) = −12 &lt; 0. Con D negativo el veredicto es <strong>punto silla</strong> directo, sin mirar f<sub>xx</sub>.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fase 3 · evaluar en (−1, 0)</div><p>Sustituyo x = −1 en D = 12x:</p><p class="calc"><span class="rw">D</span> 12·(−1)=<b>−12</b> <span class="sep">•</span> −12 &lt; 0 <span class="sep">•</span> <b>punto silla</b></p><div class="fx" id="ej2c"></div></div>
+      <div class="estep"><div class="oprow">Fase 3 · evaluar en (1, 0)</div><p>Sustituyo x = 1; ahí también f<sub>xx</sub> = 6(1) = 6 &gt; 0:</p><p class="calc"><span class="rw">D</span> 12·(1)=<b>12</b> <span class="sep">•</span> 12 &gt; 0 <span class="sep">•</span> f<sub>xx</sub>=6 &gt; 0 <span class="sep">•</span> <b>mínimo</b></p><div class="fx" id="ej2d"></div></div>
+      <p class="idea" style="font-size:17px">Un mismo criterio, <strong>dos veredictos</strong>: silla en (−1, 0) y mínimo en (1, 0), con valor f(1, 0) = <strong>−2</strong>. Cuando la hessiana lleva variables, cada punto se juzga por separado.</p>
     </section>
 
     <section class="sec">
@@ -250,12 +347,13 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Otro tipo de problema: optimizar <strong>con una restricción</strong>. Ejemplo clásico: reparto un total de 10 entre dos números para que su <strong>producto</strong> sea máximo. Es decir, maximizar el producto sujeto a que la suma sea 10.</p>
+      <p class="idea" style="font-size:17px">Falta el otro tipo de problema: optimizar <strong>con una restricción</strong>, justo lo que pide el corral. Ejemplo limpio primero: reparto un total de <strong>10</strong> entre dos números para que su <strong>producto</strong> sea máximo. O sea: maximizar el producto sujeto a que la suma sea 10.</p>
       <div class="fx" id="lagf"></div>
-      <p class="idea" style="font-size:17px">El método de <strong>Lagrange</strong> dice: en el óptimo, el gradiente de la función es un múltiplo del gradiente de la restricción. Ese múltiplo es λ (lambda). Se arma un sistema:</p>
-      <div class="estep"><div class="oprow">Paso 1 · igualar gradientes</div><p>∂f/∂x = λ·∂g/∂x y lo mismo en y. Aquí: y = λ y x = λ.</p><div class="fx" id="laga"></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · usar la restricción</div><p>De arriba, x = y. Sustituyo en x + y = 10.</p><div class="fx" id="lagb"></div></div>
-      <p class="idea" style="font-size:17px">Sale <strong>x = 5</strong>, <strong>y = 5</strong>, con producto máximo <strong>25</strong>. Tiene sentido: repartir por igual maximiza el producto.</p>
+      <p class="idea" style="font-size:17px">El método de <strong>Lagrange</strong> dice: en el óptimo, el gradiente de la función es un <strong>múltiplo</strong> del gradiente de la restricción. Ese múltiplo es λ (lambda). Se arma un sistema; vamos por partes.</p>
+      <div class="estep"><div class="oprow">Paso 1 · igualar gradientes</div><p>∇f = (y, x) y ∇g = (1, 1). Igualo componente a componente ∇f = λ∇g:</p><p class="calc"><span class="rw">x</span> y=λ·1=<b>λ</b> <span class="sep">•</span> <span class="rw">y</span> x=λ·1=<b>λ</b></p><div class="fx" id="laga"></div></div>
+      <div class="estep"><div class="oprow">Paso 2 · usar la restricción</div><p>De arriba x = y = λ, así que x = y. Meto eso en x + y = 10:</p><p class="calc"><span class="rw">x</span> x+x=10 → 2x=10 → <b>x=5</b> <span class="sep">•</span> <span class="rw">y</span> <b>y=5</b></p><div class="fx" id="lagb"></div></div>
+      <p class="idea" style="font-size:17px">Sale <strong>x = 5</strong>, <strong>y = 5</strong>, con producto máximo <strong>25</strong>. Tiene sentido: repartir por igual maximiza el producto. Ese es todo el método de Lagrange.</p>
+      <p class="fx-note">Con esto ya puedes con el corral del inicio: maximizas área = x·y sujeto a que la malla 2x + y = 40 alcance. Sale x = 10, y = 20 (área 200). Hazlo en papel para comprobar que el método ya es tuyo.</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>
@@ -264,43 +362,45 @@
 
       <div class="pitem" data-kind="item" data-id="P1" data-tema="puntos_criticos" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Para hallar los puntos críticos de una función de dos variables, ¿qué condición se plantea?</p>
+        <p class="pstatement">Para la función de abajo, ¿cuál es el sistema que da los puntos críticos?</p>
+        <div class="fx" id="p1"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">Que las dos derivadas parciales sean cero a la vez</button>
-          <button class="opt" data-ok="0">Que la función valga cero</button>
-          <button class="opt" data-ok="0">Que el determinante de la hessiana sea cero</button>
+          <button class="opt" data-ok="1">f<sub>x</sub> = 2x + 2 = 0 y f<sub>y</sub> = 2y − 8 = 0</button>
+          <button class="opt" data-ok="0">f<sub>x</sub> = x<sup>2</sup> = 0 y f<sub>y</sub> = y<sup>2</sup> = 0</button>
+          <button class="opt" data-ok="0">2x + 2y = 0 y una sola ecuación</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Un punto crítico es donde el terreno queda “llano”: no sube ni baja en ninguna dirección. Eso se traduce en las pendientes en x y en y.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>El punto llano exige pendiente cero en ambas direcciones: f<sub>x</sub> = 0 y f<sub>y</sub> = 0. El determinante viene después, solo para clasificar.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Deriva x<sup>2</sup> + 2x respecto a x (baja el exponente) y y<sup>2</sup> − 8y respecto a y, cada una por separado, e iguálalas a cero.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>f<sub>x</sub> deriva solo lo que tiene x: 2x + 2. f<sub>y</sub> deriva solo lo que tiene y: 2y − 8. Cada parcial se iguala a cero. (Da el punto (−1, 4).)</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="criterio_segunda_derivada" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">En un punto crítico, las segundas derivadas dan esta hessiana. Calcula D y clasifica el punto.</p>
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="criterio_segunda_derivada" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">En un punto crítico, las segundas derivadas dan esta hessiana. Calcula D y clasifica.</p>
         <div class="fx" id="p2"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">D = (−2)(−2) − 0² = 4 &gt; 0 y f<sub>xx</sub> &lt; 0 → máximo local</button>
+          <button class="opt" data-ok="1">D = (−2)(−2) − 0<sup>2</sup> = 4 &gt; 0 y f<sub>xx</sub> &lt; 0 → máximo local</button>
           <button class="opt" data-ok="0">D = 4 &gt; 0 y f<sub>xx</sub> &lt; 0 → mínimo local</button>
           <button class="opt" data-ok="0">D = −4 &lt; 0 → punto silla</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>D = (−2)(−2) − 0² = 4 &gt; 0, así que es cima o hoyo. Como f<sub>xx</sub> = −2 &lt; 0, el terreno se curva hacia abajo: <strong>máximo</strong>.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup>. Aquí f<sub>xx</sub> = f<sub>yy</sub> = −2 y la cruzada es 0. El signo de f<sub>xx</sub> desempata.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>D = (−2)(−2) − 0<sup>2</sup> = 4 &gt; 0, así que es cima o hoyo. Como f<sub>xx</sub> = −2 &lt; 0 el terreno se curva hacia abajo: máximo.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="criterio_segunda_derivada" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">La función f = xy tiene un punto crítico en el origen, con esta hessiana. ¿Qué es ese punto?</p>
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="criterio_segunda_derivada" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">La función f = x·y tiene un punto crítico en el origen, con esta hessiana. ¿Qué es ese punto?</p>
         <div class="fx" id="p3"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">Un punto silla, porque D = (0)(0) − 1² = −1 &lt; 0</button>
+          <button class="opt" data-ok="1">Un punto silla, porque D = (0)(0) − 1<sup>2</sup> = −1 &lt; 0</button>
           <button class="opt" data-ok="0">Un mínimo local</button>
           <button class="opt" data-ok="0">Un máximo local</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)² = (0)(0) − 1² = −1 &lt; 0. Con D negativo el criterio dictamina <strong>punto silla</strong>, sin mirar f<sub>xx</sub>.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup> = (0)(0) − 1<sup>2</sup> = −1 &lt; 0. Con D negativo el criterio dictamina punto silla, sin mirar f<sub>xx</sub>.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P4" data-tema="clasificacion" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Aplicas el criterio en un punto crítico y el determinante de la hessiana te sale cero. ¿Qué concluyes?</p>
+        <p class="pstatement">Aplicas el criterio en un punto crítico y el determinante te sale exactamente cero. ¿Qué concluyes?</p>
         <div class="opts">
           <button class="opt" data-ok="1">El criterio no decide: hay que analizar el punto por otro medio</button>
           <button class="opt" data-ok="0">Es automáticamente un punto silla</button>
@@ -309,59 +409,72 @@
         <div class="why"><span class="lbl">Por qué</span><p>D = 0 es el caso <strong>inconcluso</strong>: el criterio de la segunda derivada no distingue. Se necesita otro argumento (curvas de nivel, valores cercanos, etc.).</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="lagrange" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="clasificacion" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Repasemos Lagrange juntos. Queremos el producto máximo de dos números cuya suma es 8. Con los datos de abajo, ¿cuál es el sistema correcto al igualar los gradientes y sumar la restricción?</p>
-        <div class="fx" id="p5data"></div>
+        <p class="pstatement">Aquí f<sub>xx</sub> depende del punto. La hessiana genérica está abajo; el punto crítico a evaluar es (0, 1). ¿Qué es?</p>
+        <div class="fx" id="p5"></div>
         <div class="opts">
-          <button class="opt" data-ok="1" id="p5a"></button>
-          <button class="opt" data-ok="0" id="p5b"></button>
-          <button class="opt" data-ok="0" id="p5c"></button>
+          <button class="opt" data-ok="1">D = (6·0)(2) − 0<sup>2</sup> = 0 → el criterio no decide en (0, 1)</button>
+          <button class="opt" data-ok="0">D = 12 &gt; 0 y f<sub>xx</sub> &gt; 0 → mínimo</button>
+          <button class="opt" data-ok="0">D = −12 &lt; 0 → punto silla</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>∇f = λ∇g significa igualar componente a componente: la primera de ∇f con λ por la primera de ∇g, y lo mismo con la segunda. Al final agregas la restricción tal cual.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>∇f = (y, x), ∇g = (1, 1). Igualando ∇f = λ∇g queda <strong>y = λ, x = λ</strong>, y se suma la restricción x + y = 8. De ahí x = y.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Sustituye x = 0 (la primera coordenada) en la hessiana: f<sub>xx</sub> = 6x se vuelve 6·0 = 0. Luego arma D con ese valor.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>En (0, 1): f<sub>xx</sub> = 6·0 = 0, f<sub>yy</sub> = 2, f<sub>xy</sub> = 0. Entonces D = (0)(2) − 0<sup>2</sup> = 0. D = 0 → el criterio no decide; hay que ir por otro camino.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P6" data-tema="lagrange" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Seguimos con el mismo problema. El sistema de Lagrange ya está planteado: y = λ, x = λ, x + y = 8. Resuélvelo: ¿cuánto valen x e y en el óptimo?</p>
-        <div class="fx" id="p6"></div>
+        <p class="pstatement">Repasemos Lagrange. Queremos el producto máximo de dos números cuya suma es 8. Con los datos de abajo, ¿cuál es el sistema correcto al igualar los gradientes y sumar la restricción?</p>
+        <div class="fx" id="p6data"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1" id="p6a"></button>
+          <button class="opt" data-ok="0" id="p6b"></button>
+          <button class="opt" data-ok="0" id="p6c"></button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>∇f = λ∇g se iguala componente a componente: la primera de ∇f con λ por la primera de ∇g, igual con la segunda. Al final agregas la restricción tal cual.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>∇f = (y, x), ∇g = (1, 1). Igualando ∇f = λ∇g queda <strong>y = λ, x = λ</strong>, y se suma la restricción x + y = 8. De ahí x = y.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="lagrange" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Seguimos con el mismo problema. El sistema de Lagrange ya está planteado (abajo). Resuélvelo: ¿cuánto valen x e y en el óptimo?</p>
+        <div class="fx" id="p7"></div>
         <div class="opts">
           <button class="opt" data-ok="1">x = 4, y = 4 (producto máximo 16)</button>
           <button class="opt" data-ok="0">x = 8, y = 0 (producto 0)</button>
           <button class="opt" data-ok="0">x = 2, y = 6 (producto 12)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>De y = λ y x = λ sale x = y. Sustituyendo en x + y = 8: 2x = 8 → x = 4, y = 4. Repartir por igual maximiza el producto.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>De y = λ y x = λ sale x = y. En x + y = 8: 2x = 8 → x = 4, y = 4. Repartir por igual maximiza el producto.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P7" data-tema="lagrange" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="lagrange" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Ahora un problema de distancia. Quieres el punto de la recta más cercano al origen; es decir, minimizar el cuadrado de la distancia sujeto a esa recta. Con los datos de abajo, ¿cuál sistema plantea Lagrange?</p>
-        <div class="fx" id="p7data"></div>
+        <p class="pstatement">Un problema de distancia. Quieres el punto de la recta más cercano al origen; o sea, minimizar el cuadrado de la distancia sujeto a esa recta. Con los datos de abajo, ¿cuál sistema plantea Lagrange?</p>
+        <div class="fx" id="p8data"></div>
         <div class="opts">
-          <button class="opt" data-ok="1" id="p7a"></button>
-          <button class="opt" data-ok="0" id="p7b"></button>
-          <button class="opt" data-ok="0" id="p7c"></button>
+          <button class="opt" data-ok="1" id="p8a"></button>
+          <button class="opt" data-ok="0" id="p8b"></button>
+          <button class="opt" data-ok="0" id="p8c"></button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Minimizamos f = x² + y², así que ∇f = (2x, 2y). La restricción g = x + 2y − 5 tiene ∇g = (1, 2). Lagrange iguala ∇f = λ∇g: <strong>2x = λ, 2y = 2λ</strong>, más la restricción. (La solución es x = 1, y = 2.)</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Minimizamos f = x<sup>2</sup> + y<sup>2</sup>, así que ∇f = (2x, 2y). La restricción g: x + 2y = 5 tiene ∇g = (1, 2). Lagrange iguala ∇f = λ∇g: <strong>2x = λ, 2y = 2λ</strong>, más la restricción. (La solución es x = 1, y = 2.)</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P8" data-tema="clasificacion" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="clasificacion" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Todo el proceso, sin apoyo. Para la función de abajo: halla su único punto crítico, arma la hessiana, calcula D y clasifica el punto.</p>
-        <div class="fx" id="p8"></div>
+        <p class="pstatement">Todo el proceso, sin apoyo. Para la función de abajo: halla su único punto crítico, arma la hessiana, calcula D y clasifica.</p>
+        <div class="fx" id="p9"></div>
         <div class="opts">
-          <button class="opt" data-ok="1">Punto crítico (−1, 2); D = (2)(2) − 1² = 3 &gt; 0 y f<sub>xx</sub> = 2 &gt; 0 → mínimo local</button>
-          <button class="opt" data-ok="0">Punto crítico (−1, 2); D = 3 &gt; 0 y f<sub>xx</sub> &gt; 0 → máximo local</button>
-          <button class="opt" data-ok="0">Punto crítico (−1, 2); D = (2)(2) − 1² = 3 &lt; 0 → punto silla</button>
+          <button class="opt" data-ok="1">Punto (−1, 2); D = (2)(2) − 1<sup>2</sup> = 3 &gt; 0 y f<sub>xx</sub> = 2 &gt; 0 → mínimo local</button>
+          <button class="opt" data-ok="0">Punto (−1, 2); D = 3 &gt; 0 y f<sub>xx</sub> &gt; 0 → máximo local</button>
+          <button class="opt" data-ok="0">Punto (−1, 2); D = (2)(2) − 1<sup>2</sup> = 3 &lt; 0 → punto silla</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>De f<sub>x</sub> = 2x + y = 0 y f<sub>y</sub> = x + 2y − 3 = 0 sale (−1, 2). Las segundas son f<sub>xx</sub> = 2, f<sub>yy</sub> = 2, f<sub>xy</sub> = 1, así que D = (2)(2) − 1² = 3 &gt; 0. Con D positivo y f<sub>xx</sub> positivo: <strong>mínimo local</strong>.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>De f<sub>x</sub> = 2x + y = 0 y f<sub>y</sub> = x + 2y − 3 = 0 sale (−1, 2). Las segundas: f<sub>xx</sub> = 2, f<sub>yy</sub> = 2, f<sub>xy</sub> = 1, así que D = (2)(2) − 1<sup>2</sup> = 3 &gt; 0. Con D positivo y f<sub>xx</sub> positivo: mínimo local.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P9" data-tema="lagrange" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P10" data-tema="lagrange" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">Cierra el ciclo tú sola. Con los datos de abajo, plantea el sistema de Lagrange, resuélvelo y di cuánto valen x e y en el máximo.</p>
-        <div class="fx" id="p9"></div>
+        <div class="fx" id="p10"></div>
         <div class="opts">
           <button class="opt" data-ok="1">x = 2, y = 4 (producto máximo 8)</button>
           <button class="opt" data-ok="0">x = 4, y = 0 (producto 0)</button>
@@ -370,9 +483,22 @@
         <div class="aux"><details><summary>Pista</summary><p>∇f = (y, x) y ∇g = (2, 1). Iguala ∇f = λ∇g componente a componente, despeja para relacionar x con y, y mete eso en la restricción.</p></details></div>
         <div class="why"><span class="lbl">Por qué</span><p>∇f = (y, x), ∇g = (2, 1). Igualando: y = 2λ y x = λ, así que y = 2x. En 2x + y = 8: 2x + 2x = 8 → x = 2, y = 4. Producto 8.</p></div>
       </div>
+
+      <div class="pitem" data-kind="item" data-id="P11" data-tema="lagrange" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">De vuelta al corral del inicio. Con 40 m de malla para tres lados (el cuarto es el muro), maximizas el área x·y sujeto a 2x + y = 40. Con los datos de abajo, ¿qué medidas dan el área máxima?</p>
+        <div class="fx" id="p11"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">x = 10, y = 20 (área máxima 200 m<sup>2</sup>)</button>
+          <button class="opt" data-ok="0">x = 20, y = 0 (área 0)</button>
+          <button class="opt" data-ok="0">x = 13, y = 14 (área 182 m<sup>2</sup>)</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>∇f = (y, x), ∇g = (2, 1). Igualando: y = 2λ, x = λ, así que y = 2x. Mete y = 2x en la malla 2x + y = 40.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>De y = 2λ y x = λ sale y = 2x. En 2x + y = 40: 2x + 2x = 40 → x = 10, y = 20. Área = 10·20 = 200 m<sup>2</sup>. El tanteo del inicio se queda corto.</p></div>
+      </div>
     </section>
 
-    <div class="check" data-kind="recall" data-fid="F2_lagrange" data-tema="lagrange">
+    <div class="check" data-kind="recall" data-fid="F3_lagrange" data-tema="lagrange">
       <div class="qtag">Te toca · recuerda</div>
       <p class="q">¿Cuál es la idea central del método de multiplicadores de Lagrange?</p>
       <div class="opts">
@@ -389,7 +515,7 @@
       <ul>
         <li><span class="ck">✓</span> Punto crítico: f<sub>x</sub> = 0 y f<sub>y</sub> = 0 a la vez (el terreno queda llano).</li>
         <li><span class="ck">✓</span> Hessiana = tabla 2×2 de segundas derivadas; es simétrica (f<sub>xy</sub> = f<sub>yx</sub>).</li>
-        <li><span class="ck">✓</span> Determinante: D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)², evaluado en el punto crítico.</li>
+        <li><span class="ck">✓</span> Determinante: D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup>, evaluado en el punto crítico.</li>
         <li><span class="ck">✓</span> D &gt; 0 y f<sub>xx</sub> &gt; 0 → mínimo · D &gt; 0 y f<sub>xx</sub> &lt; 0 → máximo.</li>
         <li><span class="ck">✓</span> D &lt; 0 → punto silla · D = 0 → el criterio no decide.</li>
         <li><span class="ck">✓</span> Con restricción: Lagrange, ∇f = λ∇g, más la ecuación de la restricción.</li>
@@ -403,6 +529,11 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="C4_diferenciacion.html"><span class="sp">← Anterior</span><span class="ti">U4 · Diferenciación</span></a>
+      <a class="next" href="C6_funcion-implicita-inversa.html"><span class="sp">Siguiente →</span><span class="ti">U6 · Función implícita e inversa</span></a>
+    </nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 5</p></footer>
 
@@ -442,53 +573,59 @@ function setSq(id, rows){ var el=document.getElementById(id); if(el) el.innerHTM
 // pila de ecuaciones dentro de un .fx
 function setSys(id, eqs){ var el=document.getElementById(id); if(el) el.innerHTML='<div class="sys">'+eqs.map(function(e){return '<span class="eq">'+e+'</span>';}).join('')+'</div>'; }
 
+// ---- Empecemos por un problema ----
+setSys('corralF',["maximizar  A = x · y","malla (tres lados):  2x + y = 40"]);
+
 // ---- La idea ----
-setSq('hessDef',[["f_xx","f_xy"],["f_yx","f_yy"]]);
-setSys('Ddef',["D = f_xx · f_yy − (f_xy)²","D > 0, f_xx > 0  →  mínimo","D > 0, f_xx < 0  →  máximo","D < 0  →  punto silla","D = 0  →  no decide"]);
+setSq('hessDef',[["f<sub>xx</sub>","f<sub>xy</sub>"],["f<sub>yx</sub>","f<sub>yy</sub>"]]);
+setSys('Ddef',["D = f<sub>xx</sub> · f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup>","D &gt; 0, f<sub>xx</sub> &gt; 0  →  mínimo","D &gt; 0, f<sub>xx</sub> &lt; 0  →  máximo","D &lt; 0  →  punto silla","D = 0  →  no decide"]);
 
-// ---- Ejemplo 1: mínimo ----
-setSys('ej1f',["f(x, y) = x² + y² − 4x − 6y + 5"]);
-setSys('ej1a',["f_x = 2x − 4 = 0","f_y = 2y − 6 = 0"]);
+// ---- Yo lo hago · contigo (mínimo) ----
+setSys('ej1f',["f(x, y) = x<sup>2</sup> + y<sup>2</sup> − 4x − 6y + 5"]);
+setSys('ej1a',["f<sub>x</sub> = 2x − 4 = 0","f<sub>y</sub> = 2y − 6 = 0"]);
 setSys('ej1b',["x = 2","y = 3"]);
+setSys('ejpredD',["f<sub>xx</sub> = 2","f<sub>yy</sub> = 2","f<sub>xy</sub> = 0"]);
 setSq('ej1c',[["2","0"],["0","2"]]);
-setSys('ej1d',["D = (2)(2) − 0² = 4 > 0","f_xx = 2 > 0"]);
+setSys('ej1d',["D = (2)(2) − 0<sup>2</sup> = 4 &gt; 0","f<sub>xx</sub> = 2 &gt; 0"]);
 
-// ---- Ejemplo 2: punto silla ----
-setSys('ej2f',["f(x, y) = x³ − 3x + y²"]);
-setSys('ej2a',["f_x = 3x² − 3 = 0  →  x = ±1","f_y = 2y = 0  →  y = 0"]);
+// ---- Sube el tamaño (punto silla) ----
+setSys('ej2f',["f(x, y) = x<sup>3</sup> − 3x + y<sup>2</sup>"]);
+setSys('ej2a',["f<sub>x</sub> = 3x<sup>2</sup> − 3 = 0  →  x = ±1","f<sub>y</sub> = 2y = 0  →  y = 0"]);
 setSq('ej2b',[["6x","0"],["0","2"]]);
-setSys('ej2bD',["D = (6x)(2) − 0² = 12x"]);
-setSys('ej2c',["D = 12(−1) = −12 < 0"]);
-setSys('ej2d',["D = 12(1) = 12 > 0"]);
+setSys('ej2bD',["D = (6x)(2) − 0<sup>2</sup> = 12x"]);
+setSys('ej2c',["D = 12(−1) = −12 &lt; 0"]);
+setSys('ej2d',["D = 12(1) = 12 &gt; 0"]);
 
 // ---- Ejemplo Lagrange ----
-setSys('lagf',["maximizar  f = x·y","sujeto a  g:  x + y = 10"]);
+setSys('lagf',["maximizar  f = x · y","sujeto a  g:  x + y = 10","∇f = (y, x),  ∇g = (1, 1)"]);
 setSys('laga',["y = λ","x = λ"]);
 setSys('lagb',["x + x = 10  →  x = 5","y = 5"]);
 
-// ---- predicción del ejemplo 1: segundas derivadas fuera del enunciado ----
-setSys('ejpredD',["f_xx = 2","f_yy = 2","f_xy = 0"]);
-// ---- práctica: hessianas ----
+// ---- práctica ----
+// P1 (guiado): función para plantear puntos críticos
+setSys('p1',["f(x, y) = x<sup>2</sup> + 2x + y<sup>2</sup> − 8y"]);
+// P2, P3, P5: hessianas
 setSq('p2',[["−2","0"],["0","−2"]]);
 setSq('p3',[["0","1"],["1","0"]]);
-// datos de P5 (fuera del enunciado): función, restricción y gradientes — Juntos
-setSys('p5data',["f = x · y","g:  x + y = 8","∇f = (y, x),  ∇g = (1, 1)"]);
-// opciones-sistema de Lagrange — Juntos (P5): maximizar x·y sujeto a x + y = 8
-document.getElementById('p5a').innerHTML = '<div class="sys"><span class="eq">y = λ</span><span class="eq">x = λ</span><span class="eq">x + y = 8</span></div>';
-document.getElementById('p5b').innerHTML = '<div class="sys"><span class="eq">y = λ</span><span class="eq">x = 2λ</span><span class="eq">x + y = 8</span></div>';
-document.getElementById('p5c').innerHTML = '<div class="sys"><span class="eq">x = λ</span><span class="eq">y = λ</span><span class="eq">x · y = 8</span></div>';
-// sistema ya planteado a resolver — Juntos (P6)
-setSys('p6',["y = λ","x = λ","x + y = 8"]);
-// datos de P7 (fuera del enunciado): función, restricción y gradientes — Juntos
-setSys('p7data',["f = x² + y²","g:  x + 2y = 5","∇f = (2x, 2y),  ∇g = (1, 2)"]);
-// opciones-sistema de Lagrange — Juntos (P7): minimizar x² + y² sujeto a x + 2y = 5
-document.getElementById('p7a').innerHTML = '<div class="sys"><span class="eq">2x = λ</span><span class="eq">2y = 2λ</span><span class="eq">x + 2y = 5</span></div>';
-document.getElementById('p7b').innerHTML = '<div class="sys"><span class="eq">2x = λ</span><span class="eq">2y = λ</span><span class="eq">x + 2y = 5</span></div>';
-document.getElementById('p7c').innerHTML = '<div class="sys"><span class="eq">x = 2λ</span><span class="eq">y = λ</span><span class="eq">x² + y² = 5</span></div>';
-// datos de P8 (Solo, proceso completo de clasificación): función fresca
-setSys('p8',["f(x, y) = x² + x·y + y² − 3y"]);
-// datos de P9 (Solo, Lagrange completo): función, restricción y gradientes
-setSys('p9',["maximizar  f = x · y","sujeto a  g:  2x + y = 8","∇f = (y, x),  ∇g = (2, 1)"]);
+setSq('p5',[["6x","0"],["0","2"]]);
+// P6 (juntos): datos + opciones-sistema — maximizar x·y sujeto a x + y = 8
+setSys('p6data',["f = x · y","g:  x + y = 8","∇f = (y, x),  ∇g = (1, 1)"]);
+document.getElementById('p6a').innerHTML = '<div class="sys"><span class="eq">y = λ</span><span class="eq">x = λ</span><span class="eq">x + y = 8</span></div>';
+document.getElementById('p6b').innerHTML = '<div class="sys"><span class="eq">y = λ</span><span class="eq">x = 2λ</span><span class="eq">x + y = 8</span></div>';
+document.getElementById('p6c').innerHTML = '<div class="sys"><span class="eq">x = λ</span><span class="eq">y = λ</span><span class="eq">x · y = 8</span></div>';
+// P7 (juntos): sistema ya planteado a resolver
+setSys('p7',["y = λ","x = λ","x + y = 8"]);
+// P8 (juntos): datos + opciones-sistema — minimizar x²+y² sujeto a x + 2y = 5
+setSys('p8data',["f = x<sup>2</sup> + y<sup>2</sup>","g:  x + 2y = 5","∇f = (2x, 2y),  ∇g = (1, 2)"]);
+document.getElementById('p8a').innerHTML = '<div class="sys"><span class="eq">2x = λ</span><span class="eq">2y = 2λ</span><span class="eq">x + 2y = 5</span></div>';
+document.getElementById('p8b').innerHTML = '<div class="sys"><span class="eq">2x = λ</span><span class="eq">2y = λ</span><span class="eq">x + 2y = 5</span></div>';
+document.getElementById('p8c').innerHTML = '<div class="sys"><span class="eq">x = 2λ</span><span class="eq">y = λ</span><span class="eq">x<sup>2</sup> + y<sup>2</sup> = 5</span></div>';
+// P9 (solo): función fresca para clasificación completa
+setSys('p9',["f(x, y) = x<sup>2</sup> + x·y + y<sup>2</sup> − 3y"]);
+// P10 (solo): Lagrange completo — maximizar x·y sujeto a 2x + y = 8
+setSys('p10',["maximizar  f = x · y","sujeto a  g:  2x + y = 8","∇f = (y, x),  ∇g = (2, 1)"]);
+// P11 (solo): el corral del inicio — maximizar x·y sujeto a 2x + y = 40
+setSys('p11',["maximizar  A = x · y","sujeto a  g:  2x + y = 40","∇A = (y, x),  ∇g = (2, 1)"]);
 
 // ===== visual: los tres tipos de punto crítico (curvas de nivel) =====
 function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }   // rango [-1,5] en ambos ejes; centro (2,2)
@@ -534,7 +671,7 @@ document.querySelectorAll('.viz-tab').forEach(function(b){
 // ===== instrumentación =====
 var session = {
   fecha:new Date().toISOString().slice(0,10),
-  materia:"calculo_multivariado", unidad:"U5_optimizacion", leccion:"C5_optimizacion",
+  materia:"calculo", unidad:"U5_optimizacion", leccion:"C5_optimizacion",
   duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
 };
 var t0ms = Date.now();

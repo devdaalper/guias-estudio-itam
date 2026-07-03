@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -157,28 +178,45 @@
         <li><span class="n">2</span> Describir el generado (span) de un conjunto</li>
         <li><span class="n">3</span> Decidir si un conjunto es independiente</li>
         <li><span class="n">4</span> Verificar si un conjunto es subespacio</li>
-        <li><span class="n">5</span> Reconocer una base de un subespacio</li>
-        <li><span class="n">6</span> Calcular la dimensión contando pivotes</li>
-        <li><span class="n">7</span> Distinguir subespacio de subespacio afín</li>
-        <li><span class="n">8</span> Hallar espacio nulo, columna y nulidad</li>
+        <li><span class="n">5</span> Reconocer una base y su dimensión</li>
+        <li><span class="n">6</span> Distinguir subespacio de subespacio afín</li>
+        <li><span class="n">7</span> Hallar espacio nulo, columna y nulidad</li>
+        <li><span class="n">8</span> Escribir soluciones en forma paramétrica</li>
       </ol>
     </div>
   </header>
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Un taller mezcla pintura solo con <strong>dos botes base</strong>. El bote A aporta <strong>(1, 3)</strong> —1 parte de rojo, 3 de azul— y el bote B aporta <strong>(2, −1)</strong>. Puedes usar cuantas medidas quieras de cada uno (incluso fracciones). Un cliente pide un tono que corresponde a <strong>(5, 1)</strong>.</p>
+      <div class="fx"><div class="sys"><span class="eq">a·(1, 3) + b·(2, −1) = (5, 1)</span></div></div>
+      <p class="idea" style="font-size:17px">La pregunta es: ¿ese tono <strong>se puede</strong> con los dos botes, y con cuántas medidas de cada uno? Con dos vectores quizá lo tantees. Pero con tres o cuatro colores base, el tanteo se derrumba. Necesitamos un método que <strong>siempre</strong> funcione y que se haga <strong>a mano, sin calculadora</strong>. La herramienta es la <strong>combinación lineal</strong> convertida en sistema: para el final de esta guía vas a resolver justo este color tú sola.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>Un vector y sus combinaciones</h3>
-      <p class="idea">Un <strong>vector</strong> en Rⁿ es una lista de números (una flecha desde el origen). Con dos vectores puedes formar otros <strong>estirándolos</strong> (multiplicar por un número) y <strong>sumándolos</strong>. Eso es una <strong>combinación lineal</strong>: pesos por vectores, sumados.</p>
+      <h3>1 · Un vector y sus combinaciones</h3>
+      <p class="idea">Un <strong>vector</strong> en Rⁿ es una lista de números: una flecha desde el origen. Con dos vectores puedes armar otros <strong>estirándolos</strong> (multiplicar por un número) y <strong>sumándolos</strong>. Eso es una <strong>combinación lineal</strong>: pesos por vectores, sumados. Los botes de pintura del inicio son exactamente esto.</p>
       <div class="fx"><div class="sys"><span class="eq">2·(1, 0) + 3·(0, 1) = (2, 3)</span><span class="eq">a·u + b·v = w</span></div></div>
-      <p class="idea">Preguntar si <strong>w es combinación lineal</strong> de u y v es preguntar si existen pesos a, b que la produzcan. Eso se vuelve un <strong>sistema</strong>: pones los vectores en columnas y resuelves.</p>
+      <p class="idea">Preguntar si <strong>w es combinación lineal</strong> de u y v es preguntar si existen pesos a, b que la produzcan. Antes de seguir, asegúrate de leer bien lo que es "combinar":</p>
+      <div class="check" data-kind="item" data-id="CLchk" data-tema="combinacion_lineal" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Con u = (1, 2) y v = (3, 0), ¿cuál de estas SÍ es una combinación lineal de u y v?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">2·u + 1·v = (2, 4) + (3, 0) = (5, 4)</button>
+          <button class="opt" data-ok="0">u · v = (1·3, 2·0) = (3, 0), multiplicando entrada por entrada</button>
+          <button class="opt" data-ok="0">u<sup>2</sup> + v = (1, 4) + (3, 0) = (4, 4), elevando u al cuadrado</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Combinar es <strong>escalar y sumar</strong>: cada vector se multiplica por un número (peso) y luego se suman. No se multiplican entre sí ni se elevan al cuadrado; esas operaciones no existen aquí.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>El generado: todo lo que alcanzas</h3>
-      <p class="idea">El <strong>generado</strong> (span) de un conjunto es <strong>todo</strong> lo que puedes armar con sus combinaciones lineales. Un solo vector no nulo genera una <strong>recta</strong>; dos vectores que apunten en direcciones distintas generan <strong>todo el plano</strong>. ¿Recuerdas qué genera un solo vector?</p>
+      <h3>2 · El generado: todo lo que alcanzas</h3>
+      <p class="idea">El <strong>generado</strong> (span) de un conjunto es <strong>todo</strong> lo que puedes armar con sus combinaciones lineales. Un solo vector no nulo genera una <strong>recta</strong>; dos vectores que apunten en direcciones distintas generan <strong>todo el plano</strong>. Es el "catálogo de tonos" que alcanzas con tus botes. ¿Recuerdas qué genera un solo vector?</p>
       <div class="check" data-kind="recall" data-fid="F1_generado" data-tema="generado">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué es el generado (span) de un solo vector no nulo v en R²?</p>
@@ -192,22 +230,44 @@
     </section>
 
     <section class="sec">
-      <h3>Independencia: ¿alguno sobra?</h3>
-      <p class="idea">Un conjunto es <strong>linealmente independiente</strong> si la única combinación que da el vector cero es la trivial (todos los pesos en cero). Si algún vector es combinación de los otros, <strong>sobra</strong>: el conjunto es <strong>dependiente</strong>. La prueba es armar la matriz con los vectores en columnas y reducir: si hay un <strong>pivote en cada columna</strong>, son independientes.</p>
+      <h3>3 · Independencia: ¿alguno sobra?</h3>
+      <p class="idea">Un conjunto es <strong>linealmente independiente</strong> si la única combinación que da el vector cero es la trivial (todos los pesos en cero). Si algún vector es combinación de los otros, <strong>sobra</strong>: el conjunto es <strong>dependiente</strong>. La prueba a mano: arma la matriz con los vectores en <strong>columnas</strong> y reduce. Si hay un <strong>pivote en cada columna</strong>, son independientes.</p>
       <div class="fx" id="indepEx"></div>
       <p class="fx-note">Dos pivotes para dos columnas: estos dos vectores son independientes.</p>
+      <div class="check" data-kind="item" data-id="INDchk" data-tema="independencia" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Pones 3 vectores en columnas, reduces, y la tercera columna queda <strong>sin pivote</strong> (su renglón es de ceros). ¿Qué concluyes?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Son dependientes: el tercer vector es combinación de los otros dos</button>
+          <button class="opt" data-ok="0">Son independientes: siempre que haya 3 columnas hay 3 vectores válidos</button>
+          <button class="opt" data-ok="0">No se puede decidir sin una columna de resultados a la derecha</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Una columna sin pivote significa que ese vector <strong>no aporta una dirección nueva</strong>: se puede escribir con los otros. Basta un pivote faltante para que el conjunto sea dependiente. No hace falta barra ni resultados: la independencia se prueba con A·x = 0.</p></div>
+      </div>
     </section>
 
-    <h2 class="modhead">Yo lo hago</h2>
+    <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">¿Es <strong>w = (5, 1)</strong> combinación lineal de <strong>u = (1, 3)</strong> y <strong>v = (2, −1)</strong>? Busco pesos a, b con a·u + b·v = w. Pongo u y v en columnas, w a la derecha, y reduzco. Voy paso a paso; tú solo sigue el hilo.</p>
-      <div class="estep"><div class="oprow">Matriz [u · v | w]</div><p>Cada columna es un vector; la barra es el vector meta.</p><div class="fx" id="e0"></div></div>
-      <div class="estep"><div class="oprow">R2 → R2 − 3·R1</div><p>Resto 3 veces el renglón 1 al renglón 2 para hacer cero abajo a la izquierda.</p><div class="fx" id="e1"></div></div>
+      <p class="idea" style="font-size:17px">Volvamos a la pintura: ¿es <strong>w = (5, 1)</strong> combinación de <strong>u = (1, 3)</strong> y <strong>v = (2, −1)</strong>? Busco pesos a, b con a·u + b·v = w. Pongo u y v en <strong>columnas</strong>, w tras la barra, y reduzco. En cada paso <strong>tú eliges la operación</strong> y yo la aplico.</p>
+      <div class="fx" id="e0"></div>
+      <p class="fx-note">Columna 1 = u = (1, 3); columna 2 = v = (2, −1); tras la barra, w = (5, 1).</p>
 
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="combinacion_lineal">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">El renglón 2 quedó como “−7 por b, igual a −14”. ¿Cuál es el siguiente movimiento natural?</p>
+      <div class="check" data-kind="item" data-id="E1pred" data-tema="combinacion_lineal" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Primer objetivo: hacer <strong>cero</strong> el número de abajo a la izquierda (hay un 3, arriba un 1). ¿Qué operación lo logra?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">R2 → R2 − 3·R1</button>
+          <button class="opt" data-ok="0">R2 → R2 + 3·R1</button>
+          <button class="opt" data-ok="0">R1 → R1 − 3·R2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Arriba a la izquierda hay un 1; restar 3 veces ese renglón deja 3 − 3·1 = 0 abajo.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">R2 → R2 − 3·R1</div><p>Tomo el renglón 2 = [3, −1, 1] y le resto 3 veces el renglón 1 = [1, 2, 5], celda por celda:</p><p class="calc"><span class="rw">R2</span> 3−3·1=<b>0</b> <span class="sep">•</span> −1−3·2=<b>−7</b> <span class="sep">•</span> 1−3·5=<b>−14</b></p><div class="fx" id="e1"></div></div>
+
+      <div class="check" data-kind="item" data-id="E2pred" data-tema="combinacion_lineal" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">El renglón 2 quedó como "−7 por b, igual a −14". Para un pivote limpio, ¿cuál es el siguiente movimiento?</p>
         <div class="opts">
           <button class="opt" data-ok="1">Dividir el renglón 2 entre −7, para que el coeficiente de b sea 1</button>
           <button class="opt" data-ok="0">Multiplicar el renglón 2 por −7</button>
@@ -215,18 +275,61 @@
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>Buscamos un 1 limpio en la posición de b. Dividir entre −7 lo logra y deja el renglón listo para leer el peso.</p></div>
       </div>
+      <div class="estep"><div class="oprow">R2 → R2 ÷ (−7)</div><p>Divido cada número del renglón 2 = [0, −7, −14] entre −7 para que el pivote sea 1:</p><p class="calc"><span class="rw">R2</span> 0÷(−7)=<b>0</b> <span class="sep">•</span> −7÷(−7)=<b>1</b> <span class="sep">•</span> −14÷(−7)=<b>2</b></p><div class="fx" id="e2"></div></div>
 
-      <div class="estep"><div class="oprow">R2 → R2 ÷ (−7)</div><p>Ahora el renglón 2 dice directamente cuánto vale b.</p><div class="fx" id="e2"></div></div>
-      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>Uso ese renglón para despejar a en el renglón 1.</p><div class="fx" id="e3"></div></div>
-      <p class="idea" style="font-size:17px">Se lee solo: <strong>a = 1</strong>, <strong>b = 2</strong>. Sí es combinación: <strong>w = 1·u + 2·v</strong>. Como el sistema tuvo solución, w vive en el generado de {u, v}.</p>
+      <div class="check" data-kind="item" data-id="E3pred" data-tema="combinacion_lineal" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ya tienes <strong>b = 2</strong> abajo. Pero el renglón 1 todavía trae una b (un 2). ¿Qué operación la limpia sin dañar la a?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">R1 → R1 − 2·R2</button>
+          <button class="opt" data-ok="0">R1 → R1 + 2·R2</button>
+          <button class="opt" data-ok="0">R2 → R2 − 2·R1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El renglón 2 ya es "b = 2". Restarlo dos veces al renglón 1 cancela el 2 de la columna de b, y no toca la a (ahí el renglón 2 tiene 0).</p></div>
+      </div>
+      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>El renglón 2 ya es [0, 1, 2]. Al renglón 1 = [1, 2, 5] le resto 2 veces ese renglón:</p><p class="calc"><span class="rw">R1</span> 1−2·0=<b>1</b> <span class="sep">•</span> 2−2·1=<b>0</b> <span class="sep">•</span> 5−2·2=<b>1</b></p><div class="fx" id="e3"></div></div>
+
+      <p class="idea" style="font-size:17px">Se lee sola: <strong>a = 1</strong>, <strong>b = 2</strong>. Sí es combinación: <strong>w = 1·u + 2·v</strong>. Como el sistema tuvo solución, <strong>w vive en el generado</strong> de {u, v}. En pintura: 1 medida del bote A y 2 del bote B dan justo el tono pedido.</p>
     </section>
 
+    <h2 class="modhead">Sube el tamaño · tres vectores en R³, en dos fases</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora una <strong>base y su dimensión</strong>. Tengo tres vectores en R³: v₁ = (1, 1, 2), v₂ = (1, −1, 1), v₃ = (2, 0, 3). ¿Son independientes? ¿Cuál es la dimensión de su generado? Los pongo en columnas y reduzco.</p>
-      <div class="estep"><div class="oprow">Matriz [v₁ · v₂ · v₃]</div><div class="fx" id="t0"></div></div>
-      <div class="estep"><div class="oprow">R2 → R2 − R1 · R3 → R3 − 2·R1</div><p>Uso el primer renglón para hacer ceros bajo el primer pivote.</p><div class="fx" id="t1"></div></div>
-      <div class="estep"><div class="oprow">R2 → R2 ÷ (−2) · R3 → R3 + R2</div><p>Hago 1 el segundo pivote y limpio abajo. Mira el tercer renglón.</p><div class="fx" id="t2"></div></div>
-      <p class="idea" style="font-size:17px">El tercer renglón quedó <strong>todo ceros</strong>: la tercera columna <strong>no</strong> tiene pivote. Eso delata que <strong>v₃ = v₁ + v₂</strong> (sobra). Hay <strong>2 pivotes</strong>, así que solo dos vectores son independientes: la <strong>dimensión del generado es 2</strong> (un plano en R³) y una <strong>base</strong> es {v₁, v₂}.</p>
+      <p class="idea" style="font-size:17px">El 2×2 casi salió de un tiro. Con <strong>tres vectores en R³</strong> hay demasiado que limpiar a la vez, así que se hace en <strong>dos fases ordenadas</strong>. La pregunta cambia un poco: ya no busco un solo peso, sino <strong>si sobra algún vector</strong> (independencia) y <strong>cuánto genera</strong> (dimensión).</p>
+      <ul class="fases">
+        <li><strong>Fase 1 — baja:</strong> haz ceros <em>debajo</em> de cada pivote, de izquierda a derecha, hasta dejar una escalera.</li>
+        <li><strong>Fase 2 — lee:</strong> cuenta los pivotes; cada pivote es un vector que aporta dirección nueva.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Vectores: v<sub>1</sub> = (1, 1, 2), v<sub>2</sub> = (1, −1, 1), v<sub>3</sub> = (2, 0, 3). Los pongo en columnas.</p>
+      <div class="estep"><div class="oprow">Matriz [v<sub>1</sub> · v<sub>2</sub> · v<sub>3</sub>]</div><div class="fx" id="t0"></div></div>
+
+      <div class="check" data-kind="item" data-id="T1pred" data-tema="independencia" data-level="juntos">
+        <div class="qtag">Te toca · decide la fase</div>
+        <p class="q">Empieza la <strong>Fase 1 (baja)</strong>. ¿Qué renglón usas como herramienta para hacer cero la primera entrada de los renglones 2 y 3?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El renglón 1: su primera entrada ya es 1, así que R2 → R2 − R1 y R3 → R3 − 2·R1</button>
+          <button class="opt" data-ok="0">El renglón 3, porque tiene el número más grande</button>
+          <button class="opt" data-ok="0">Ninguno; primero divido todo entre 2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El pivote de la primera columna es el 1 del renglón 1. Con él se hacen cero las primeras entradas de abajo: siempre se baja desde el pivote de arriba.</p></div>
+      </div>
+
+      <div class="estep"><div class="oprow">Fase 1 · R2 → R2 − R1</div><p>Hago cero la primera entrada del renglón 2. R2 = [1, −1, 0] menos R1 = [1, 1, 2]:</p><p class="calc"><span class="rw">R2</span> 1−1=<b>0</b> <span class="sep">•</span> −1−1=<b>−2</b> <span class="sep">•</span> 0−2=<b>−2</b></p><div class="fx" id="t1a"></div></div>
+      <div class="estep"><div class="oprow">Fase 1 · R3 → R3 − 2·R1</div><p>Ahora la primera entrada del renglón 3. R3 = [2, 1, 3] menos 2 veces R1:</p><p class="calc"><span class="rw">R3</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·1=<b>−1</b> <span class="sep">•</span> 3−2·2=<b>−1</b></p><div class="fx" id="t1b"></div></div>
+      <div class="estep"><div class="oprow">Fase 1 · R2 → R2 ÷ (−2)</div><p>Pongo el segundo pivote en 1. Divido R2 = [0, −2, −2] entre −2:</p><p class="calc"><span class="rw">R2</span> 0÷(−2)=<b>0</b> <span class="sep">•</span> −2÷(−2)=<b>1</b> <span class="sep">•</span> −2÷(−2)=<b>1</b></p><div class="fx" id="t2a"></div></div>
+
+      <div class="check" data-kind="item" data-id="T2pred" data-tema="independencia" data-level="juntos">
+        <div class="qtag">Te toca · predice</div>
+        <p class="q">El renglón 3 es [0, −1, −1] y el renglón 2 ya es [0, 1, 1]. ¿Qué crees que pasa al hacer <strong>R3 → R3 + R2</strong>?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El renglón 3 se vuelve todo ceros: la tercera columna se queda sin pivote</button>
+          <button class="opt" data-ok="0">Aparece un tercer pivote y los tres vectores son independientes</button>
+          <button class="opt" data-ok="0">Se rompe el sistema porque no se pueden sumar renglones</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>[0, −1, −1] + [0, 1, 1] = [0, 0, 0]. El renglón de ceros delata que la tercera columna no tiene pivote: el tercer vector sobra.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fase 1 · R3 → R3 + R2</div><p>Con el segundo pivote hago cero abajo. R3 = [0, −1, −1] más R2 = [0, 1, 1]:</p><p class="calc"><span class="rw">R3</span> 0+0=<b>0</b> <span class="sep">•</span> −1+1=<b>0</b> <span class="sep">•</span> −1+1=<b>0</b></p><div class="fx" id="t2b"></div></div>
+
+      <p class="idea" style="font-size:17px">El tercer renglón quedó <strong>todo ceros</strong>: la tercera columna <strong>no</strong> tiene pivote. Eso delata que <strong>v<sub>3</sub> = v<sub>1</sub> + v<sub>2</sub></strong> (sobra). Hay <strong>2 pivotes</strong>, así que solo dos vectores son independientes: la <strong>dimensión del generado es 2</strong> (un plano en R³) y una <strong>base</strong> es {v<sub>1</sub>, v<sub>2</sub>}. Regla que se repite: <strong>dimensión = número de pivotes</strong>.</p>
     </section>
 
     <section class="sec">
@@ -249,13 +352,23 @@
       <p class="idea">Un <strong>subespacio</strong> de Rⁿ es un conjunto que (1) <strong>contiene al cero</strong>, (2) al sumar dos de sus vectores el resultado <strong>sigue dentro</strong>, y (3) al multiplicar uno por un escalar <strong>sigue dentro</strong>. Los generados <strong>siempre</strong> son subespacios; una recta o plano que <strong>no pasa por el origen</strong>, no.</p>
       <div class="fx"><div class="sys"><span class="eq">0 ∈ S</span><span class="eq">u, v ∈ S  ⇒  u + v ∈ S</span><span class="eq">u ∈ S, c escalar  ⇒  c·u ∈ S</span></div></div>
       <p class="fx-note">Si falla cualquiera de las tres, no es subespacio. La más rápida de checar: ¿contiene al vector cero?</p>
+      <div class="check" data-kind="item" data-id="SUBchk" data-tema="subespacio" data-level="juntos">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿Cuál de estos conjuntos <strong>sí</strong> es un subespacio de R²?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">La recta y = 3x (pasa por el origen y es cerrada bajo suma y escalar)</button>
+          <button class="opt" data-ok="0">La recta y = 3x + 2 (una recta cualquiera)</button>
+          <button class="opt" data-ok="0">El primer cuadrante (todos los (x, y) con x ≥ 0, y ≥ 0)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>y = 3x pasa por (0, 0) y sus combinaciones se quedan en la recta. y = 3x + 2 no contiene al cero. El primer cuadrante contiene al cero pero <strong>no</strong> es cerrado bajo escalar: multiplicar (1, 1) por −1 da (−1, −1), que se sale.</p></div>
+      </div>
     </section>
 
     <section class="sec">
       <h3>Subespacio afín: el mismo plano, corrido</h3>
-      <p class="idea">Cuando resuelves <strong>A·x = b</strong> con <strong>b ≠ 0</strong> (sistema <strong>no homogéneo</strong>), la solución <strong>no</strong> pasa por el origen: es un <strong>subespacio afín</strong>. Se escribe como <strong>una solución particular más el generado de las soluciones del homogéneo</strong>: x = xₚ + (solución de A·x = 0). Es un subespacio <strong>trasladado</strong> (recta o plano corrido), que por eso <strong>no</strong> es subespacio: le falta el cero.</p>
-      <div class="fx"><div class="sys"><span class="eq">A·x = 0  →  homogéneo (pasa por 0): subespacio</span><span class="eq">A·x = b, b ≠ 0  →  no homogéneo: subespacio afín</span><span class="eq">x = x_p + t·v   (particular + homogénea)</span></div></div>
-      <p class="fx-note">La <strong>forma paramétrica</strong> es justo esa: fijas las variables libres como parámetros (t, s…) y expresas toda la solución como xₚ más combinaciones de vectores dirección.</p>
+      <p class="idea">Cuando resuelves <strong>A·x = b</strong> con <strong>b ≠ 0</strong> (sistema <strong>no homogéneo</strong>), la solución <strong>no</strong> pasa por el origen: es un <strong>subespacio afín</strong>. Se escribe como <strong>una solución particular más el generado de las soluciones del homogéneo</strong>: x = x<sub>p</sub> + (solución de A·x = 0). Es un subespacio <strong>trasladado</strong> (recta o plano corrido), que por eso <strong>no</strong> es subespacio: le falta el cero.</p>
+      <div class="fx"><div class="sys"><span class="eq">A·x = 0  →  homogéneo (pasa por 0): subespacio</span><span class="eq">A·x = b, b ≠ 0  →  no homogéneo: afín</span><span class="eq">x = x<sub>p</sub> + t·v   (particular + homogénea)</span></div></div>
+      <p class="fx-note">La <strong>forma paramétrica</strong> es justo esa: fijas las variables libres como parámetros (t, s…) y expresas toda la solución como x<sub>p</sub> más combinaciones de vectores dirección.</p>
       <div class="check" data-kind="recall" data-fid="F3_afin" data-tema="subespacio_afin">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">La solución de A·x = b con b ≠ 0, ¿por qué NO es un subespacio?</p>
@@ -264,22 +377,22 @@
           <button class="opt" data-ok="0">Porque tiene infinitas soluciones y un subespacio debe ser finito</button>
           <button class="opt" data-ok="0">Porque b ≠ 0 hace que el sistema no tenga solución</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>x = 0 daría A·0 = 0 ≠ b, así que el cero no está en el conjunto solución. Es el subespacio homogéneo <strong>corrido</strong> por xₚ: un subespacio afín, no un subespacio.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>x = 0 daría A·0 = 0 ≠ b, así que el cero no está en el conjunto solución. Es el subespacio homogéneo <strong>corrido</strong> por x<sub>p</sub>: un subespacio afín, no un subespacio.</p></div>
       </div>
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Escribe en <strong>forma paramétrica</strong> la solución de este sistema no homogéneo. Ya reducido, queda: x₁ + 2·x₃ = 5 y x₂ − x₃ = 1. La variable <strong>x₃ es libre</strong>: la llamo t.</p>
-      <div class="estep"><div class="oprow">Sistema ya reducido</div><p>Dos pivotes (x₁, x₂), una variable libre (x₃ = t).</p><div class="fx" id="pf0"></div></div>
-      <div class="estep"><div class="oprow">Despejo pivotes</div><p>x₁ = 5 − 2t y x₂ = 1 + t; x₃ = t.</p></div>
-      <p class="idea" style="font-size:17px">Junto todo en un vector: <strong>x = (5, 1, 0) + t·(−2, 1, 1)</strong>. El punto <strong>(5, 1, 0)</strong> es la solución particular xₚ; la dirección <strong>(−2, 1, 1)</strong> genera el espacio nulo. Es una <strong>recta afín</strong>: el generado de (−2, 1, 1) corrido hasta (5, 1, 0), sin pasar por el origen.</p>
+      <p class="idea" style="font-size:17px">Escribe en <strong>forma paramétrica</strong> la solución de este sistema no homogéneo. Ya reducido, queda: x<sub>1</sub> + 2·x<sub>3</sub> = 5 y x<sub>2</sub> − x<sub>3</sub> = 1. La variable <strong>x<sub>3</sub> es libre</strong> (su columna no tiene pivote): la llamo t.</p>
+      <div class="estep"><div class="oprow">Sistema ya reducido</div><p>Dos pivotes (x<sub>1</sub>, x<sub>2</sub>), una variable libre (x<sub>3</sub> = t).</p><div class="fx" id="pf0"></div></div>
+      <div class="estep"><div class="oprow">Despejo cada pivote</div><p>Paso x<sub>3</sub> = t al otro lado, celda por celda:</p><p class="calc"><span class="rw">x<sub>1</sub></span> 5−2·t=<b>5 − 2t</b> <span class="sep">•</span> <span class="rw">x<sub>2</sub></span> 1+1·t=<b>1 + t</b> <span class="sep">•</span> <span class="rw">x<sub>3</sub></span> =<b>t</b></p></div>
+      <p class="idea" style="font-size:17px">Junto todo en un vector: <strong>x = (5, 1, 0) + t·(−2, 1, 1)</strong>. El punto <strong>(5, 1, 0)</strong> es la solución particular x<sub>p</sub>; la dirección <strong>(−2, 1, 1)</strong> genera el espacio nulo. Es una <strong>recta afín</strong>: el generado de (−2, 1, 1) corrido hasta (5, 1, 0), sin pasar por el origen.</p>
     </section>
 
     <section class="sec">
       <h3>Espacio nulo, espacio columna y nulidad</h3>
       <p class="idea">Toda matriz A trae dos subespacios. El <strong>espacio nulo</strong> (kernel) es el conjunto de soluciones de <strong>A·x = 0</strong>: los vectores que A manda al cero. El <strong>espacio columna</strong> es el <strong>generado de las columnas</strong> de A: todo lo que A puede producir. La <strong>nulidad</strong> es la dimensión del espacio nulo; el <strong>rango</strong>, la del espacio columna.</p>
       <div class="fx"><div class="sys"><span class="eq">Nul(A) = { x : A·x = 0 }   (subespacio)</span><span class="eq">Col(A) = generado de las columnas</span><span class="eq">nulidad = variables libres · rango = pivotes</span></div></div>
-      <p class="fx-note">Al reducir A: cada <strong>columna con pivote</strong> aporta al rango (y su columna original entra en una base de Col); cada <strong>columna libre</strong> aporta a la nulidad. Por eso rango + nulidad = número de columnas.</p>
+      <p class="fx-note">Al reducir A: cada <strong>columna con pivote</strong> aporta al rango; cada <strong>columna libre</strong> aporta a la nulidad. Por eso rango + nulidad = número de columnas.</p>
       <div class="check" data-kind="recall" data-fid="F4_nulidad" data-tema="nulidad">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">Reduces una matriz A de 5 columnas y encuentras 3 pivotes. ¿Cuánto valen el rango y la nulidad?</p>
@@ -308,22 +421,45 @@
         <div class="why"><span class="lbl">Por qué</span><p>a·u + b·v = w es un sistema con incógnitas a, b: los coeficientes son u y v (columnas) y el término independiente es w.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="independencia" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="combinacion_lineal" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Con u = (2, 0) y v = (0, 5), ¿qué vector es la combinación 3·u − 1·v?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(6, −5)</button>
+          <button class="opt" data-ok="0">(6, 5)</button>
+          <button class="opt" data-ok="0">(5, 5)</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Escala cada vector primero: 3·(2, 0) = (6, 0) y −1·(0, 5) = (0, −5). Luego suma entrada por entrada.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>3·(2, 0) = (6, 0); −1·(0, 5) = (0, −5); su suma es (6 + 0, 0 − 5) = (6, −5). El signo del peso viaja con el vector.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="generado" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Los vectores (1, 0) y (2, 0) apuntan en la misma dirección. ¿Qué es su generado en R²?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Solo el eje x (una recta): son dependientes, no aportan una segunda dirección</button>
+          <button class="opt" data-ok="0">Todo R², porque son dos vectores distintos</button>
+          <button class="opt" data-ok="0">Solo los dos puntos (1, 0) y (2, 0)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>(2, 0) = 2·(1, 0): uno es múltiplo del otro. Dos vectores alineados generan solo una recta. Para llenar el plano hacen falta dos direcciones distintas.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="independencia" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">Al poner tres vectores en columnas y reducir, obtienes esta matriz. ¿Son independientes?</p>
-        <div class="fx" id="p2"></div>
+        <div class="fx" id="p4"></div>
         <div class="opts">
           <button class="opt" data-ok="1">Sí: hay un pivote en cada una de las 3 columnas</button>
           <button class="opt" data-ok="0">No: falta un pivote en la última columna</button>
           <button class="opt" data-ok="0">No se puede saber sin la columna de resultados</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Un pivote por columna significa que la única combinación que da cero es la trivial: independientes.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Un pivote por columna significa que la única combinación que da cero es la trivial: independientes. Para probar independencia no hace falta barra ni resultados.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="dimension" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="dimension" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">Reduces cuatro vectores de R⁴ y quedan 3 pivotes. ¿Cuál es la dimensión de su generado?</p>
-        <div class="fx" id="p3"></div>
+        <div class="fx" id="p5"></div>
         <div class="opts">
           <button class="opt" data-ok="1">3 (una base tiene 3 vectores; uno era dependiente)</button>
           <button class="opt" data-ok="0">4, porque partiste de 4 vectores</button>
@@ -332,7 +468,7 @@
         <div class="why"><span class="lbl">Por qué</span><p>La dimensión del generado = número de pivotes = 3. El vector sin pivote es combinación de los otros y no suma dimensión.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="subespacio" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="subespacio" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">¿Cuál de estos conjuntos NO es un subespacio de R²?</p>
         <div class="opts">
@@ -343,18 +479,30 @@
         <div class="why"><span class="lbl">Por qué</span><p>Un subespacio debe contener al vector cero. y = x + 1 no pasa por (0, 0), así que falla la primera condición.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="combinacion_lineal" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="subespacio" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Para probar si w = (5, 1) es combinación de u = (1, 3) y v = (2, −1), ¿cuál matriz [u · v | w] planteas? (u = primera columna, v = segunda)</p>
+        <p class="pstatement">El conjunto de vectores (x, y) con <strong>x·y = 0</strong> (los que están sobre alguno de los dos ejes). ¿Es subespacio de R²?</p>
         <div class="opts">
-          <button class="opt" data-ok="1" id="p5a"></button>
-          <button class="opt" data-ok="0" id="p5b"></button>
-          <button class="opt" data-ok="0" id="p5c"></button>
+          <button class="opt" data-ok="1">No: contiene al cero, pero (1, 0) + (0, 1) = (1, 1) se sale (falla la suma)</button>
+          <button class="opt" data-ok="0">Sí: contiene al cero y ambos ejes pasan por el origen</button>
+          <button class="opt" data-ok="0">No: porque no contiene al vector cero</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>u = (1, 3) va en la primera columna, v = (2, −1) en la segunda, y w = (5, 1) a la derecha de la barra: renglones (1, 2 | 5) y (3, −1 | 1).</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Toma un vector de cada eje y súmalos. ¿El resultado sigue teniendo alguna coordenada en cero?</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Sí contiene al cero, pero <strong>no</strong> es cerrado bajo suma: (1, 0) y (0, 1) están en el conjunto, pero su suma (1, 1) no cumple x·y = 0. Basta que falle una condición.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P6" data-tema="nulidad" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="combinacion_lineal" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Para probar si w = (7, 4) es combinación de u = (1, 2) y v = (3, 1), ¿cuál matriz [u · v | w] planteas? (u = primera columna, v = segunda)</p>
+        <div class="opts">
+          <button class="opt" data-ok="1" id="p8a"></button>
+          <button class="opt" data-ok="0" id="p8b"></button>
+          <button class="opt" data-ok="0" id="p8c"></button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>u = (1, 2) va en la primera columna, v = (3, 1) en la segunda y w = (7, 4) tras la barra: renglones (1, 3 | 7) y (2, 1 | 4). Las entradas de cada vector se apilan hacia abajo, no de lado.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="nulidad" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">Una matriz A tiene 4 columnas. Al reducirla salen 2 pivotes. ¿Cuál es la nulidad (dimensión del espacio nulo)?</p>
         <div class="opts">
@@ -366,7 +514,7 @@
         <div class="why"><span class="lbl">Por qué</span><p>Nulidad = variables libres = columnas − pivotes = 4 − 2 = 2. Y rango + nulidad = 2 + 2 = 4 = número de columnas.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P7" data-tema="subespacio_afin" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P10" data-tema="subespacio_afin" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">La solución de A·x = b se escribe x = (3, 0, 2) + t·(1, 1, 0). ¿Qué es este conjunto?</p>
         <div class="opts">
@@ -375,6 +523,29 @@
           <button class="opt" data-ok="0">Un solo punto, el (3, 0, 2)</button>
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>Es una solución particular (3, 0, 2) más el espacio nulo generado por (1, 1, 0): un subespacio afín. En t = 0 da (3, 0, 2) ≠ 0, así que no contiene al cero y no es subespacio.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P11" data-tema="parametrica" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Un sistema reducido deja x<sub>1</sub> − 3·x<sub>3</sub> = 2 y x<sub>2</sub> + x<sub>3</sub> = 4, con x<sub>3</sub> = t libre. ¿Cuál es la forma paramétrica correcta?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">x = (2, 4, 0) + t·(3, −1, 1)</button>
+          <button class="opt" data-ok="0">x = (2, 4, 0) + t·(−3, 1, 1)</button>
+          <button class="opt" data-ok="0">x = (2, 4, 0), un solo punto sin parámetro</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Despeja cada pivote: x<sub>1</sub> = 2 + 3t y x<sub>2</sub> = 4 − t. El coeficiente de t en cada renglón es la dirección.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>x<sub>1</sub> = 2 + 3t, x<sub>2</sub> = 4 − t, x<sub>3</sub> = t. El punto es (2, 4, 0) y la dirección es (3, −1, 1). Cuidado con los signos al pasar x<sub>3</sub> al otro lado.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P12" data-tema="espacio_columna" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Una matriz A de 3 renglones y 4 columnas se reduce y tiene 3 pivotes. ¿Qué es su espacio columna?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Todo R³: el rango es 3 y las columnas generan las 3 dimensiones del espacio de llegada</button>
+          <button class="opt" data-ok="0">Todo R⁴, porque A tiene 4 columnas</button>
+          <button class="opt" data-ok="0">Una recta, porque solo sobra una columna</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El espacio columna vive en R³ (hay 3 renglones). Con 3 pivotes su dimensión (el rango) es 3, así que llena todo R³. La cuarta columna es dependiente y no agrega dimensión.</p></div>
       </div>
     </section>
 
@@ -400,7 +571,7 @@
         <li><span class="ck">✓</span> Base = conjunto independiente que genera; su tamaño es la dimensión.</li>
         <li><span class="ck">✓</span> Dimensión del generado = número de pivotes.</li>
         <li><span class="ck">✓</span> Subespacio afín = subespacio corrido (A·x = b, b ≠ 0); no contiene al cero.</li>
-        <li><span class="ck">✓</span> Forma paramétrica: x = xₚ + parámetros por vectores dirección (particular + homogénea).</li>
+        <li><span class="ck">✓</span> Forma paramétrica: x = x<sub>p</sub> + parámetros por vectores dirección.</li>
         <li><span class="ck">✓</span> Espacio nulo = soluciones de A·x = 0; espacio columna = generado de las columnas.</li>
         <li><span class="ck">✓</span> Rango = pivotes · nulidad = columnas libres; rango + nulidad = nº de columnas.</li>
       </ul>
@@ -414,6 +585,11 @@
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
 
+    <nav class="nav-lecs">
+      <a class="prev" href="L1_sistemas_gauss-jordan.html"><span class="sp">← Anterior</span><span class="ti">U1 · Sistemas y Gauss-Jordan</span></a>
+      <a class="next" href="L3_transformaciones-lineales.html"><span class="sp">Siguiente →</span><span class="ti">U3 · Transformaciones lineales</span></a>
+    </nav>
+
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 2</p></footer>
 
   </main>
@@ -422,46 +598,52 @@
 <script>
 "use strict";
 
-function mat(rows){
-  var coeffs = rows[0].length - 1;
-  var gtc = 'repeat('+coeffs+',auto) 16px auto';
+// aug:true (por defecto) → última columna aumentada, con barra (sistemas [A|b]).
+// aug:false → matriz de vectores en columnas, SIN barra (independencia, base, dimensión).
+function mat(rows, opts){
+  var aug = !opts || opts.aug !== false;
+  var ncol = rows[0].length;
+  var coeffs = aug ? ncol - 1 : ncol;
+  var gtc = aug ? 'repeat('+coeffs+',auto) 16px auto' : 'repeat('+coeffs+',auto)';
   var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
   for(var r=0;r<rows.length;r++){
     var cells='';
     for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
-    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
+    if(aug) cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
     h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
   }
   return h+'</div><span class="brk brk-r"></span></div>';
 }
-function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
+function set(id, rows, opts){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows, opts); }
 
-set('indepEx',[["1","0","0"],["0","1","0"]]);
-// combinación lineal: [u · v | w]
+// La idea · independencia (dos vectores en columnas, sin barra)
+set('indepEx',[["1","0"],["0","1"]],{aug:false});
+// combinación lineal (co-producido): [u · v | w]
 set('e0',[["1","2","5"],["3","−1","1"]]);
 set('e1',[["1","2","5"],["0","−7","−14"]]);
 set('e2',[["1","2","5"],["0","1","2"]]);
 set('e3',[["1","0","1"],["0","1","2"]]);
-// base y dimensión: [v1 · v2 · v3]
-set('t0',[["1","1","2"],["1","−1","0"],["2","1","3"]]);
-set('t1',[["1","1","2"],["0","−2","−2"],["0","−1","−1"]]);
-set('t2',[["1","1","2"],["0","1","1"],["0","0","0"]]);
+// sube el tamaño · base y dimensión: [v1 · v2 · v3] (vectores en columnas, sin barra), una operación por matriz
+set('t0',[["1","1","2"],["1","−1","0"],["2","1","3"]],{aug:false});
+set('t1a',[["1","1","2"],["0","−2","−2"],["2","1","3"]],{aug:false});
+set('t1b',[["1","1","2"],["0","−2","−2"],["0","−1","−1"]],{aug:false});
+set('t2a',[["1","1","2"],["0","1","1"],["0","−1","−1"]],{aug:false});
+set('t2b',[["1","1","2"],["0","1","1"],["0","0","0"]],{aug:false});
 // forma paramétrica: sistema reducido [I libre | b]
 set('pf0',[["1","0","2","5"],["0","1","−1","1"]]);
-// práctica
-set('p2',[["1","0","0"],["0","1","0"],["0","0","1"]]);
-set('p3',[["1","0","0","0"],["0","1","0","0"],["0","0","1","0"],["0","0","0","0"]]);
-// opciones-matriz de combinación lineal (P5): [u · v | w]
-document.getElementById('p5a').innerHTML = mat([["1","2","5"],["3","−1","1"]]);
-document.getElementById('p5b').innerHTML = mat([["1","3","5"],["2","−1","1"]]);
-document.getElementById('p5c').innerHTML = mat([["5","1","2"],["1","3","−1"]]);
+// práctica (vectores en columnas, sin barra: independencia / dimensión)
+set('p4',[["1","0","0"],["0","1","0"],["0","0","1"]],{aug:false});
+set('p5',[["1","0","0","0"],["0","1","0","0"],["0","0","1","0"],["0","0","0","0"]],{aug:false});
+// opciones-matriz de combinación lineal (P8): [u · v | w] con u=(1,2), v=(3,1), w=(7,4)
+document.getElementById('p8a').innerHTML = mat([["1","3","7"],["2","1","4"]]);
+document.getElementById('p8b').innerHTML = mat([["1","2","7"],["3","1","4"]]);
+document.getElementById('p8c').innerHTML = mat([["7","4","1"],["1","3","2"]]);
 
 // ===== visual: vectores y su generado =====
 function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
 // recta por el origen en dirección (dx,dy), recortada a la ventana [-1,5]
 function spanLine(dx,dy,color,dash){
   var E=1e-9, pts=[];
-  // intersección con x=-1, x=5 (usando y = (dy/dx)*x cuando dx≠0)
   if(Math.abs(dx)>E){ [-1,5].forEach(function(x){ var y=dy*x/dx; if(y>=-1-E&&y<=5+E) pts.push([x,y]); }); }
   if(Math.abs(dy)>E){ [-1,5].forEach(function(y){ var x=dx*y/dy; if(x>=-1-E&&x<=5+E) pts.push([x,y]); }); }
   var u=[]; pts.forEach(function(p){ if(!u.some(function(q){return Math.abs(q[0]-p[0])<1e-6&&Math.abs(q[1]-p[1])<1e-6;})) u.push(p); });
@@ -490,15 +672,12 @@ var VG='', VA='';
 function drawPlane(cse){
   var L, cap;
   if(cse==='una'){
-    // un vector: genera una recta
     L=spanLine(2,3,'#F5821F')+vecSVG(2,3,'#F5821F');
     cap='Un solo vector genera una recta: todos sus múltiplos t·v. La dimensión del generado es 1.';
   } else if(cse==='infinitas'){
-    // dos alineados (dependientes): siguen generando una recta
     L=spanLine(2,3,'#F5821F')+vecSVG(2,3,'#F5821F')+vecSVG(3,4.5,'#283891');
     cap='Los dos vectores apuntan en la misma dirección (uno es múltiplo del otro): son dependientes y solo generan una recta. Dimensión 1.';
   } else {
-    // dos en cruz (independientes): generan todo el plano
     L='<rect x="'+PT(-1,5)[0]+'" y="'+PT(-1,5)[1]+'" width="240" height="240" fill="#F5821F" fill-opacity="0.07"/>'+
       vecSVG(2,1,'#F5821F')+vecSVG(1,3,'#283891');
     cap='Dos vectores en direcciones distintas son independientes: sus combinaciones llenan todo el plano. Dimensión 2, y {v₁, v₂} es una base.';

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cálculo Multivariado · U4 — Diferenciación: parciales, plano tangente y gradiente</title>
+<title>Cálculo Multivariado · U4 — Diferenciación: parciales, gradiente y regla de la cadena</title>
 <style>
   :root{
     --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -153,80 +174,153 @@
     <div class="learn">
       <h2>Al terminar vas a poder</h2>
       <ol>
-        <li><span class="n">1</span> Calcular derivadas parciales tratando la otra variable como constante</li>
-        <li><span class="n">2</span> Escribir el plano tangente a una superficie</li>
-        <li><span class="n">3</span> Distinguir diferenciable de solo derivable</li>
+        <li><span class="n">1</span> Calcular parciales tratando la otra variable como constante</li>
+        <li><span class="n">2</span> Armar el gradiente y leer qué significa</li>
+        <li><span class="n">3</span> Escribir el plano tangente a una superficie</li>
         <li><span class="n">4</span> Aplicar la regla de la cadena multivariada</li>
-        <li><span class="n">5</span> Armar el gradiente y leer qué significa</li>
-        <li><span class="n">6</span> Calcular derivadas direccionales y de orden superior</li>
+        <li><span class="n">5</span> Calcular derivadas direccionales</li>
+        <li><span class="n">6</span> Distinguir derivable de diferenciable</li>
       </ol>
     </div>
   </header>
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Estás parada sobre una <strong>ladera</strong>. La altura del terreno en cada punto (x, y) la da una función:</p>
+      <div class="fx"><div class="sys"><span class="eq">h(x, y) = x<sup>2</sup> + y<sup>2</sup></span></div></div>
+      <p class="idea" style="font-size:17px">Estás en el punto <strong>(3, 4)</strong>. Y quieres saber dos cosas: <strong>¿hacia dónde subo más rápido?</strong> y <strong>¿qué tan empinado está justo por donde apunto?</strong> Con una sola variable bastaba una derivada. Aquí, en cada punto hay <strong>infinitas direcciones</strong> posibles, así que una sola pendiente no alcanza.</p>
+      <p class="idea" style="font-size:17px">La herramienta que responde ambas preguntas es el <strong>gradiente</strong>, y para armarlo primero hay que aprender a derivar “mirando en una sola dirección”. Para el final de esta guía vas a contestar la ladera tú sola.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>Derivar “mirando en una sola dirección”</h3>
-      <p class="idea">Cuando una función depende de dos variables, no hay <strong>una</strong> derivada: hay una por cada dirección en la que te muevas. La <strong>derivada parcial</strong> es la más simple: derivas respecto a una variable y tratas la otra como si fuera un <strong>número fijo</strong>. Considera esta función:</p>
-      <div class="fx"><div class="sys"><span class="eq">f(x, y) = x² y + 3y²</span></div></div>
-      <p class="idea">Para la parcial respecto a x congelas la y (es constante); para la parcial respecto a y congelas la x. Cada una mide qué tan rápido cambia f si te mueves solo por ese eje.</p>
-      <div class="fx"><div class="sys"><span class="eq">∂f/∂x = 2xy</span><span class="eq">∂f/∂y = x² + 6y</span></div></div>
-      <p class="fx-note">En ∂f/∂x, el término 3y² es constante y su derivada es 0; por eso no aparece.</p>
-    </section>
-
-    <section class="sec">
-      <h3>Congelar la otra variable</h3>
-      <p class="idea">Todo el truco de la parcial es ese: tratar la otra variable como constante. ¿Lo recuerdas antes de seguir?</p>
-      <div class="check" data-kind="recall" data-fid="F1_parcial_regla" data-tema="derivadas_parciales">
-        <div class="qtag">Te toca · recuerda</div>
-        <p class="q">Para calcular la derivada parcial respecto a x, ¿qué haces con la variable y?</p>
+      <h3>1 · Derivar mirando en una sola dirección</h3>
+      <p class="idea">Cuando f depende de dos variables, no hay <strong>una</strong> derivada: hay una por cada eje. La <strong>derivada parcial</strong> es la más simple: derivas respecto a una variable y tratas la otra como si fuera un <strong>número fijo</strong>. Mira esta función y su parcial respecto a x:</p>
+      <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> y + 3y<sup>2</sup></span><span class="eq">∂f/∂x = 2xy</span></div></div>
+      <p class="fx-note">Congelas la y. El término 3y<sup>2</sup> es constante, su derivada es 0, por eso no aparece. Y en x<sup>2</sup> y, la y es un factor constante que se queda.</p>
+      <div class="check" data-kind="item" data-id="PARchk" data-tema="derivadas_parciales" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Para la misma f(x, y) = x<sup>2</sup> y + 3y<sup>2</sup>, ¿cuál es la parcial respecto a <strong>y</strong>?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">La tratas como una constante y derivas normalmente respecto a x</button>
-          <button class="opt" data-ok="0">La derivas también, al mismo tiempo que x</button>
-          <button class="opt" data-ok="0">La igualas a cero antes de derivar</button>
+          <button class="opt" data-ok="1">∂f/∂y = x<sup>2</sup> + 6y</button>
+          <button class="opt" data-ok="0">∂f/∂y = 2xy + 6y</button>
+          <button class="opt" data-ok="0">∂f/∂y = 2x + 6y</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La parcial respecto a x mide el cambio moviéndote <strong>solo</strong> en x. La y no se mueve: entra como constante, no se anula.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Ahora congelas la x. En x<sup>2</sup> y, el factor x<sup>2</sup> es constante y multiplica a y, así que su derivada respecto a y es x<sup>2</sup>. Y 3y<sup>2</sup> deriva a 6y. La x no se toca.</p></div>
       </div>
     </section>
 
     <section class="sec">
-      <h3>La meta: el gradiente</h3>
-      <p class="idea">Junta las dos parciales en un vector y tienes el <strong>gradiente</strong>: apunta hacia donde f <strong>crece más rápido</strong>, y su longitud es esa tasa máxima de cambio. Para la f de arriba, evaluado en el punto (2, 1):</p>
-      <div class="fx"><div class="sys"><span class="eq">∇f = ( ∂f/∂x , ∂f/∂y ) = ( 2xy , x² + 6y )</span><span class="eq">∇f(2, 1) = ( 4 , 10 )</span></div></div>
-      <p class="fx-note">Se lee directo: parado en (2, 1), f sube más rápido en la dirección (4, 10).</p>
+      <h3>2 · Juntar las parciales: el gradiente</h3>
+      <p class="idea">Guarda las dos parciales en un <strong>vector</strong> y tienes el <strong>gradiente</strong> ∇f. No es un número: es una <strong>flecha</strong> que apunta hacia donde f crece más rápido, y su longitud es esa tasa máxima de cambio. Para la f de arriba:</p>
+      <div class="fx"><div class="sys"><span class="eq">∇f = ( ∂f/∂x , ∂f/∂y ) = ( 2xy , x<sup>2</sup> + 6y )</span><span class="eq">∇f(2, 1) = ( 4 , 10 )</span></div></div>
+      <p class="fx-note">Parada en (2, 1), f sube más rápido en la dirección (4, 10). El gradiente se <strong>evalúa</strong> en un punto: primero armas la fórmula, luego metes los números.</p>
+      <div class="check" data-kind="recall" data-fid="F1_gradiente" data-tema="gradiente">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Qué es el gradiente ∇f de una función de dos variables?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El vector formado por las dos derivadas parciales: (∂f/∂x, ∂f/∂y)</button>
+          <button class="opt" data-ok="0">Un número igual a la suma de las dos parciales</button>
+          <button class="opt" data-ok="0">La segunda derivada de f respecto a x</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El gradiente <strong>agrupa</strong> las parciales en un vector; por eso tiene dirección y longitud. Sumarlas daría un número y perderías la dirección, que es justo lo que buscamos.</p></div>
+      </div>
     </section>
 
-    <h2 class="modhead">Yo lo hago</h2>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Construyamos el <strong>plano tangente</strong> a la superficie z = x² + y² en el punto donde x = 1, y = 2. Voy paso a paso; tú solo sigue el hilo.</p>
-      <div class="estep"><div class="oprow">Paso 1 · altura</div><p>Evalúo la función en el punto para saber a qué altura toco la superficie.</p><div class="fx"><div class="sys"><span class="eq">f(1, 2) = 1² + 2² = 5</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · parciales</div><p>Derivo respecto a cada variable. Aquí cada término tiene una sola variable, así que es directo.</p><div class="fx"><div class="sys"><span class="eq">∂f/∂x = 2x → en (1, 2) vale 2</span><span class="eq">∂f/∂y = 2y → en (1, 2) vale 4</span></div></div></div>
-
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="plano_tangente">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">Ya tengo la altura (5) y las dos pendientes (2 y 4). La fórmula del plano tangente es la altura más cada pendiente por su avance. ¿Cuál de estas la arma bien?</p>
+    <section class="sec">
+      <h3>3 · El plano tangente: aproximar cerca del punto</h3>
+      <p class="idea">Con una variable, la recta tangente era la mejor aproximación cerca de un punto. Con dos, esa recta se vuelve un <strong>plano tangente</strong>: parte de la <strong>altura</strong> en el punto y le suma cada parcial multiplicada por cuánto te alejas de ahí. La fórmula:</p>
+      <div class="fx"><div class="sys"><span class="eq">z = f(x<sub>0</sub>, y<sub>0</sub>) + ∂f/∂x·(x − x<sub>0</sub>) + ∂f/∂y·(y − y<sub>0</sub>)</span></div></div>
+      <p class="fx-note">Tres piezas: la altura, y las dos pendientes por su desplazamiento (x − x<sub>0</sub>) y (y − y<sub>0</sub>). Sin la altura, el plano no toca la superficie; sin los desplazamientos, no comparte pendiente.</p>
+      <div class="check" data-kind="item" data-id="PLNchk" data-tema="plano_tangente" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Una superficie tiene altura <strong>5</strong> en el punto (1, 2), y ahí sus pendientes valen <strong>2</strong> y <strong>4</strong>. ¿Cuál plano tangente está bien armado?</p>
         <div class="opts">
           <button class="opt" data-ok="1">z = 5 + 2(x − 1) + 4(y − 2)</button>
           <button class="opt" data-ok="0">z = 5 + 2x + 4y</button>
           <button class="opt" data-ok="0">z = 2(x − 1) + 4(y − 2)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El plano tangente parte de la altura en el punto y suma cada parcial multiplicada por cuánto te alejas de ese punto: (x − 1) y (y − 2). Sin la altura o sin los desplazamientos, no toca la superficie donde debe.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>La primera junta las tres piezas: altura 5, pendiente 2 por (x − 1) y pendiente 4 por (y − 2). La segunda usa x, y sueltas en vez de los desplazamientos; la tercera olvidó la altura.</p></div>
       </div>
-
-      <div class="estep"><div class="oprow">Paso 3 · armar el plano</div><p>Meto todo en la fórmula: altura en el punto, más cada pendiente por su desplazamiento.</p><div class="fx"><div class="sys"><span class="eq">z = 5 + 2(x − 1) + 4(y − 2)</span></div></div></div>
-      <p class="idea" style="font-size:17px">Ese plano <strong>toca</strong> la superficie en (1, 2, 5) y tiene sus mismas pendientes ahí. Es la mejor aproximación plana cerca del punto: eso es <strong>diferenciar</strong> en varias variables.</p>
     </section>
 
+    <h2 class="modhead">Yo lo hago · contigo</h2>
+
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora la <strong>regla de la cadena</strong>, que es lo que de verdad cae en examen. Tengo una función de x e y, donde a su vez x e y dependen del tiempo. Quiero df/dt sin sustituir todo.</p>
-      <div class="fx"><div class="sys"><span class="eq">f(x, y) = x² + y²,   x = t,   y = t²</span></div></div>
-      <div class="estep"><div class="oprow">Paso 1 · las piezas</div><p>Necesito las dos parciales de f y las derivadas de cada variable respecto a t.</p><div class="fx"><div class="sys"><span class="eq">∂f/∂x = 2x   ∂f/∂y = 2y</span><span class="eq">dx/dt = 1   dy/dt = 2t</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · sumar los caminos</div><p>La regla de la cadena suma la contribución de cada camino por el que t llega a f.</p><div class="fx"><div class="sys"><span class="eq">df/dt = (∂f/∂x)(dx/dt) + (∂f/∂y)(dy/dt)</span><span class="eq">df/dt = (2x)(1) + (2y)(2t)</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 3 · en términos de t</div><p>Sustituyo x = t, y = t² para dejar todo en t.</p><div class="fx"><div class="sys"><span class="eq">df/dt = 2t + (2t²)(2t) = 2t + 4t³</span></div></div></div>
-      <p class="idea" style="font-size:17px">Verificación rápida: si sustituyes primero, f = t² + t⁴, y su derivada es <strong>2t + 4t³</strong>. Coincide. En t = 1 ambas dan <strong>6</strong>. La cadena te ahorra la sustitución cuando f es complicada.</p>
+      <p class="idea" style="font-size:17px">Construyamos el <strong>plano tangente</strong> a la superficie z = x<sup>2</sup> + y<sup>2</sup> en el punto donde x = 1, y = 2. No lo mires nada más: en cada paso <strong>tú decides</strong> qué toca y yo hago la cuenta.</p>
+      <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> + y<sup>2</sup>,   punto (1, 2)</span></div></div>
+
+      <div class="check" data-kind="item" data-id="E1pred" data-tema="plano_tangente" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">La fórmula del plano necesita tres piezas: la altura y las dos pendientes. ¿Cuál calculamos <strong>primero</strong>?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">La altura: evaluar f en el punto (1, 2)</button>
+          <button class="opt" data-ok="0">El desplazamiento (x − 1) directamente</button>
+          <button class="opt" data-ok="0">La segunda parcial ∂<sup>2</sup>f/∂x<sup>2</sup></button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La altura es el punto de apoyo del plano: sin ella no sabemos dónde toca la superficie. El desplazamiento no se “calcula”, queda como (x − 1); y las segundas parciales no entran en el plano tangente.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 1 · altura</div><p>Meto x = 1, y = 2 en la función, término por término:</p><p class="calc"><span class="rw">f(1,2)</span> 1<sup>2</sup>=<b>1</b> <span class="sep">•</span> 2<sup>2</sup>=<b>4</b> <span class="sep">•</span> 1+4=<b>5</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E2pred" data-tema="plano_tangente" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ya tengo la altura (5). Para la pendiente en x, ¿qué opero sobre f = x<sup>2</sup> + y<sup>2</sup>?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">∂f/∂x, congelando la y: deriva x<sup>2</sup> y deja y<sup>2</sup> como constante</button>
+          <button class="opt" data-ok="0">Derivo x<sup>2</sup> y también y<sup>2</sup> respecto a x al mismo tiempo</button>
+          <button class="opt" data-ok="0">Vuelvo a evaluar f en (1, 2)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La pendiente en x es la parcial respecto a x: derivas x<sup>2</sup> y tratas y<sup>2</sup> como número fijo (su derivada es 0). No se derivan las dos variables a la vez.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 2 · pendiente en x</div><p>Derivo respecto a x (la y<sup>2</sup> es constante) y luego evalúo en (1, 2):</p><p class="calc"><span class="rw">∂f/∂x</span> deriva x<sup>2</sup>=<b>2x</b> <span class="sep">•</span> en x=1: 2·1=<b>2</b></p></div>
+
+      <div class="estep"><div class="oprow">Paso 3 · pendiente en y</div><p>Ahora al revés: derivo respecto a y (la x<sup>2</sup> es constante) y evalúo en (1, 2):</p><p class="calc"><span class="rw">∂f/∂y</span> deriva y<sup>2</sup>=<b>2y</b> <span class="sep">•</span> en y=2: 2·2=<b>4</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E4pred" data-tema="plano_tangente" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ya tengo las tres piezas: altura 5, pendientes 2 y 4. ¿Cómo las meto en la fórmula z = altura + ∂f/∂x·(x − x<sub>0</sub>) + ∂f/∂y·(y − y<sub>0</sub>)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">z = 5 + 2(x − 1) + 4(y − 2)</button>
+          <button class="opt" data-ok="0">z = 5 + 2(x − 2) + 4(y − 1)</button>
+          <button class="opt" data-ok="0">z = 5 + 1(x − 2) + 2(y − 4)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Cada pendiente va con el desplazamiento de <strong>su</strong> variable: 2 con (x − 1) y 4 con (y − 2). El punto es (1, 2), así que x<sub>0</sub> = 1 y y<sub>0</sub> = 2 (no al revés).</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 4 · armar el plano</div><p>Coloco altura, pendiente en x por (x − 1), pendiente en y por (y − 2):</p><p class="calc"><span class="rw">z</span> altura=<b>5</b> <span class="sep">•</span> +2(x−1) <span class="sep">•</span> +4(y−2)</p><div class="fx"><div class="sys"><span class="eq">z = 5 + 2(x − 1) + 4(y − 2)</span></div></div></div>
+
+      <p class="idea" style="font-size:17px">Ese plano <strong>toca</strong> la superficie en (1, 2, 5) y comparte sus pendientes ahí. Fíjate en el orden: <strong>altura</strong>, luego <strong>cada pendiente</strong>, luego <strong>ensamblar</strong>. Nada salió por arte de magia.</p>
+    </section>
+
+    <h2 class="modhead">Sube el tamaño · la regla de la cadena en dos fases</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">El plano fue directo. La <strong>regla de la cadena</strong> es lo que de verdad cae en examen: f depende de x e y, pero a su vez x e y dependen del <strong>tiempo t</strong>. Queremos df/dt <strong>sin sustituir todo primero</strong>. El salto se hace en dos fases:</p>
+      <ul class="fases">
+        <li><strong>Fase 1 — las piezas:</strong> junta las dos parciales de f y las derivadas de cada variable respecto a t.</li>
+        <li><strong>Fase 2 — suma los caminos:</strong> cada variable es un camino por el que t llega a f; se suman sus contribuciones.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Sistema: f(x, y) = x<sup>2</sup> + y<sup>2</sup>, con x = t, y = t<sup>2</sup>.</p>
+
+      <div class="estep"><div class="oprow">Fase 1 · parciales de f</div><p>Las dos parciales de siempre: por x congelo y, por y congelo x.</p><p class="calc"><span class="rw">∂f/∂x</span>=<b>2x</b> <span class="sep">•</span> <span class="rw">∂f/∂y</span>=<b>2y</b></p></div>
+      <div class="estep"><div class="oprow">Fase 1 · derivadas en t</div><p>Ahora cómo cambia cada variable con el tiempo: derivo x = t y y = t<sup>2</sup> respecto a t.</p><p class="calc"><span class="rw">dx/dt</span> deriva t=<b>1</b> <span class="sep">•</span> <span class="rw">dy/dt</span> deriva t<sup>2</sup>=<b>2t</b></p></div>
+
+      <div class="check" data-kind="item" data-id="T1pred" data-tema="regla_cadena" data-level="juntos">
+        <div class="qtag">Te toca · decide la fase</div>
+        <p class="q">Empieza la <strong>Fase 2 (sumar caminos)</strong>. ¿Cómo se combinan las piezas para df/dt?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">df/dt = (∂f/∂x)(dx/dt) + (∂f/∂y)(dy/dt)</button>
+          <button class="opt" data-ok="0">df/dt = (∂f/∂x)(∂f/∂y)</button>
+          <button class="opt" data-ok="0">df/dt = (dx/dt) + (dy/dt)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Cada variable aporta un camino: su parcial <strong>por</strong> su ritmo de cambio en t. Se <strong>suman</strong> los caminos. Multiplicar las parciales entre sí, o sumar solo los ritmos, no es la regla.</p></div>
+      </div>
+
+      <div class="estep"><div class="oprow">Fase 2 · armar la suma</div><p>Coloco cada parcial por su derivada en t, camino por camino:</p><p class="calc"><span class="rw">camino x</span> (2x)(1)=<b>2x</b> <span class="sep">•</span> <span class="rw">camino y</span> (2y)(2t)=<b>4yt</b></p><div class="fx"><div class="sys"><span class="eq">df/dt = 2x + 4yt</span></div></div></div>
+      <div class="estep"><div class="oprow">Fase 2 · dejar todo en t</div><p>Sustituyo x = t y y = t<sup>2</sup> para que quede solo en términos de t:</p><p class="calc"><span class="rw">2x</span> x=t: <b>2t</b> <span class="sep">•</span> <span class="rw">4yt</span> y=t<sup>2</sup>: 4·t<sup>2</sup>·t=<b>4t<sup>3</sup></b></p><div class="fx"><div class="sys"><span class="eq">df/dt = 2t + 4t<sup>3</sup></span></div></div></div>
+
+      <p class="idea" style="font-size:17px">Verificación: si sustituyes primero, f = t<sup>2</sup> + t<sup>4</sup>, y su derivada es <strong>2t + 4t<sup>3</sup></strong>. Coincide. En t = 1 ambas dan <strong>6</strong>. La cadena te ahorra la sustitución cuando f es complicada.</p>
     </section>
 
     <section class="sec">
@@ -245,21 +339,23 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Cerremos con la <strong>derivada direccional</strong> y las de <strong>orden superior</strong>. Primero la direccional de la función de abajo en el punto (3, 4), en la dirección que apunta hacia (3, 4) desde el origen.</p>
-      <div class="fx"><div class="sys"><span class="eq">f(x, y) = x² + y²,   punto (3, 4)</span></div></div>
-      <div class="estep"><div class="oprow">Paso 1 · gradiente en el punto</div><p>Calculo el gradiente y lo evalúo.</p><div class="fx"><div class="sys"><span class="eq">∇f = (2x, 2y)   →   ∇f(3, 4) = (6, 8)</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · dirección unitaria</div><p>La dirección (3, 4) tiene longitud 5, así que el vector unitario es dividir entre 5. Debe medir 1 para que la derivada direccional sea comparable.</p><div class="fx"><div class="sys"><span class="eq">u = (3/5, 4/5)</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 3 · producto punto</div><p>La derivada direccional es el gradiente punto la dirección unitaria.</p><div class="fx"><div class="sys"><span class="eq">D_u f = (6)(3/5) + (8)(4/5) = 18/5 + 32/5 = 10</span></div></div></div>
-      <p class="idea" style="font-size:17px">Como elegí justo la dirección del gradiente, salió el máximo posible: <strong>10</strong>, que es la longitud de ∇f(3, 4). En cualquier otra dirección saldría menos.</p>
-    </section>
+      <p class="idea" style="font-size:17px">Cerramos con la <strong>derivada direccional</strong>: la pendiente en una dirección cualquiera. Volvamos a la ladera del inicio, f = x<sup>2</sup> + y<sup>2</sup>, parada en (3, 4), mirando hacia la dirección (3, 4). Paso a paso.</p>
+      <div class="estep"><div class="oprow">Paso 1 · gradiente en el punto</div><p>Armo el gradiente y lo evalúo en (3, 4):</p><p class="calc"><span class="rw">∇f</span>=(2x, 2y) <span class="sep">•</span> en (3,4): (2·3, 2·4)=<b>(6, 8)</b></p></div>
 
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Y las derivadas de <strong>orden superior</strong>: derivas, y sobre el resultado vuelves a derivar. Sigamos con la misma función del inicio, paso a paso.</p>
-      <div class="fx"><div class="sys"><span class="eq">f(x, y) = x²y + 3y²</span></div></div>
-      <div class="estep"><div class="oprow">Paso 1 · primeras parciales</div><p>Primero las dos parciales de siempre: por x congelo y, por y congelo x.</p><div class="fx"><div class="sys"><span class="eq">∂f/∂x = 2xy</span><span class="eq">∂f/∂y = x² + 6y</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · segundas puras</div><p>Vuelvo a derivar cada parcial por su misma variable.</p><div class="fx"><div class="sys"><span class="eq">∂²f/∂x² = ∂(2xy)/∂x = 2y</span><span class="eq">∂²f/∂y² = ∂(x² + 6y)/∂y = 6</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 3 · la cruzada</div><p>Tomo ∂f/∂x = 2xy y ahora derivo respecto a y (o al revés: da lo mismo).</p><div class="fx"><div class="sys"><span class="eq">∂²f/∂x∂y = ∂(2xy)/∂y = 2x</span></div></div></div>
-      <p class="idea" style="font-size:17px">La cruzada sale <strong>igual en cualquier orden</strong>: derives primero por x o primero por y, llegas a 2x. Eso es el <strong>teorema de Clairaut</strong>.</p>
+      <div class="check" data-kind="item" data-id="D2pred" data-tema="derivada_direccional" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Antes del producto punto, la dirección (3, 4) hay que volverla <strong>unitaria</strong> (longitud 1). ¿Por qué?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Para que la pendiente no dependa del largo del vector, solo de la dirección</button>
+          <button class="opt" data-ok="0">Porque el gradiente ya es unitario y deben tener la misma longitud</button>
+          <button class="opt" data-ok="0">Porque así el resultado siempre da 1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Un vector más largo inflaría el producto punto sin que la dirección cambie. Normalizando, la derivada direccional mide pendiente pura. El gradiente <strong>no</strong> es unitario.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 2 · dirección unitaria</div><p>La dirección (3, 4) mide 5 (porque 3<sup>2</sup> + 4<sup>2</sup> = 25, y √25 = 5). Divido entre 5:</p><p class="calc"><span class="rw">|(3,4)|</span> √(9+16)=√25=<b>5</b> <span class="sep">•</span> <span class="rw">u</span>=(3/5, 4/5)</p></div>
+      <div class="estep"><div class="oprow">Paso 3 · producto punto</div><p>La derivada direccional es ∇f punto u: multiplico componente a componente y sumo.</p><p class="calc"><span class="rw">D<sub>u</sub>f</span> 6·(3/5)=18/5 <span class="sep">•</span> 8·(4/5)=32/5 <span class="sep">•</span> 18/5+32/5=50/5=<b>10</b></p></div>
+
+      <p class="idea" style="font-size:17px">Como elegí justo la dirección del gradiente, salió el <strong>máximo</strong> posible: <strong>10</strong>, que es la longitud de ∇f(3, 4). En cualquier otra dirección saldría menos. Esa es la respuesta a la ladera: subes más rápido hacia (6, 8), con pendiente 10.</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>
@@ -268,94 +364,71 @@
 
       <div class="pitem" data-kind="item" data-id="P1" data-tema="derivadas_parciales" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Calcula la derivada parcial respecto a y de la función siguiente.</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x, y) = 3x²y + y³</span></div></div>
+        <p class="pstatement">Calcula la derivada parcial respecto a <strong>y</strong> de la función siguiente.</p>
+        <div class="fx"><div class="sys"><span class="eq">f(x, y) = 4x<sup>3</sup>y + y<sup>4</sup></span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">3x² + 3y²</button>
-          <button class="opt" data-ok="0">6xy + 3y²</button>
-          <button class="opt" data-ok="0">3x² + y³</button>
+          <button class="opt" data-ok="1">4x<sup>3</sup> + 4y<sup>3</sup></button>
+          <button class="opt" data-ok="0">12x<sup>2</sup>y + 4y<sup>3</sup></button>
+          <button class="opt" data-ok="0">4x<sup>3</sup> + y<sup>4</sup></button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Congela la x (es constante). En 3x²y, el factor 3x² es la “constante” que multiplica a y; su derivada respecto a y es 3x². Y y³ deriva a 3y².</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Con x fija: derivar 3x²y respecto a y deja 3x²; derivar y³ da 3y². La opción 6xy es la parcial respecto a x, no a y.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Congela la x. En 4x<sup>3</sup>y, el factor 4x<sup>3</sup> es la constante que multiplica a y; su derivada respecto a y es 4x<sup>3</sup>. Y y<sup>4</sup> deriva a 4y<sup>3</sup>.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con x fija: 4x<sup>3</sup>y deriva a 4x<sup>3</sup> (baja la y), y y<sup>4</sup> deriva a 4y<sup>3</sup>. La opción 12x<sup>2</sup>y es la parcial respecto a x, no a y.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="gradiente" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="derivadas_parciales" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Una estudiante calculó ∂f/∂x = 2x + 10xy para la función de abajo. ¿Cuál fue su error?</p>
+        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> + 5xy<sup>2</sup></span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">Ninguno, ∂f/∂x = 2x + 10xy está bien</button>
+          <button class="opt" data-ok="1">Derivó también la y<sup>2</sup>; como la y es constante, 5xy<sup>2</sup> deriva a 5y<sup>2</sup>, no a 10xy</button>
+          <button class="opt" data-ok="0">Debió tratar la x<sup>2</sup> como constante y no derivarla</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Al derivar respecto a x, la y es constante. En 5xy<sup>2</sup>, solo la x se deriva: el factor 5y<sup>2</sup> se queda tal cual.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con x variable e y constante: x<sup>2</sup> → 2x, y 5xy<sup>2</sup> → 5y<sup>2</sup> (la y<sup>2</sup> no se toca). Lo correcto es ∂f/∂x = 2x + 5y<sup>2</sup>. El error fue derivar la y<sup>2</sup> como si fuera variable, que produjo el 10xy.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="gradiente" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">Para la función siguiente, ¿cuál es el gradiente evaluado en el punto (1, 1)?</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x² + xy</span></div></div>
+        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> + xy</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">(3, 1)</button>
           <button class="opt" data-ok="0">(2, 1)</button>
           <button class="opt" data-ok="0">(3, 2)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>∂f/∂x = 2x + y = 2 + 1 = 3. ∂f/∂y = x = 1. El gradiente es (3, 1).</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>∂f/∂x = 2x + y (la y de xy queda como constante que multiplica a x). ∂f/∂y = x. Ahora evalúa cada una en (1, 1).</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>∂f/∂x = 2x + y = 2 + 1 = 3. ∂f/∂y = x = 1. El gradiente es (3, 1). La opción (2, 1) olvida sumar la y en la parcial de x.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2b" data-tema="gradiente" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="gradiente" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">La habilidad estrella, ahora sin apoyo: arma el gradiente de la función siguiente y evalúalo en el punto (2, 1).</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x²y</span></div></div>
+        <p class="pstatement">La habilidad estrella, sin apoyo: arma el gradiente de la función siguiente y evalúalo en el punto (2, 1).</p>
+        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> y</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">(4, 4)</button>
           <button class="opt" data-ok="0">(4, 2)</button>
           <button class="opt" data-ok="0">(2, 4)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>∂f/∂x = 2xy = 2·2·1 = 4 (y es constante). ∂f/∂y = x² = 4 (x es constante). El gradiente es ∇f(2, 1) = (4, 4).</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>∂f/∂x = 2xy = 2·2·1 = 4 (la y es constante). ∂f/∂y = x<sup>2</sup> = 4 (la x es constante). El gradiente es ∇f(2, 1) = (4, 4).</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="regla_cadena" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Regla de la cadena, ejecutándola. Para la función de abajo, arma df/dt y déjala en términos de t. ¿Cuál es?</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x² + y²,   x = t²,   y = t</span><span class="eq">df/dt = (∂f/∂x)(dx/dt) + (∂f/∂y)(dy/dt)</span></div></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">4t³ + 2t</button>
-          <button class="opt" data-ok="0">2t² + t</button>
-          <button class="opt" data-ok="0">4t + 2</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>∂f/∂x = 2x y ∂f/∂y = 2y. Además dx/dt = 2t y dy/dt = 1. Sustituye y luego cambia x = t², y = t: 2x·2t = 2t²·2t = 4t³, y 2y·1 = 2t.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>df/dt = (2x)(2t) + (2y)(1) = 4t³ + 2t con x = t², y = t. Comprobación: f = t⁴ + t², cuya derivada es 4t³ + 2t. En t = 1 da 6.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="regla_cadena" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Misma habilidad, ahora sin apoyo. Para la función de abajo, con las variables dependiendo de t, calcula df/dt en términos de t.</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x, y) = xy</span><span class="eq">x = t,   y = t²</span></div></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">3t²</button>
-          <button class="opt" data-ok="0">2t</button>
-          <button class="opt" data-ok="0">t² + 2t</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>∂f/∂x = y, ∂f/∂y = x; dx/dt = 1, dy/dt = 2t. df/dt = y·1 + x·2t = t² + t·2t = t² + 2t² = 3t². Comprobación: f = t·t² = t³, cuya derivada es 3t².</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="orden_superior" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Igual que en el ejemplo de orden superior: para la función siguiente calcula la segunda derivada parcial respecto a x dos veces.</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x³y</span></div></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">6xy</button>
-          <button class="opt" data-ok="0">3x²y</button>
-          <button class="opt" data-ok="0">6x</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>∂f/∂x = 3x²y (y es constante). Derivando otra vez respecto a x: 6xy. La opción 3x²y es solo la primera parcial.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P6" data-tema="plano_tangente" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="plano_tangente" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">Arma el plano tangente a la superficie de abajo en el punto (2, 1). Ya tienes las piezas calculadas. ¿Cuál lo escribe bien?</p>
-        <div class="fx"><div class="sys"><span class="eq">z = x² + 3y   ·   punto (2, 1)</span><span class="eq">f(2, 1) = 7</span><span class="eq">∂f/∂x(2, 1) = 4     ∂f/∂y(2, 1) = 3</span><span class="eq">plano: z = altura + (∂f/∂x)(x − x₀) + (∂f/∂y)(y − y₀)</span></div></div>
+        <div class="fx"><div class="sys"><span class="eq">z = x<sup>2</sup> + 3y   ·   punto (2, 1)</span><span class="eq">altura f(2, 1) = 7</span><span class="eq">∂f/∂x(2, 1) = 4   ∂f/∂y(2, 1) = 3</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">z = 7 + 4(x − 2) + 3(y − 1)</button>
           <button class="opt" data-ok="0">z = 7 + 2x + 3y</button>
           <button class="opt" data-ok="0">z = 7 + 4(x − 1) + 3(y − 2)</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Evalúa las parciales en el punto: ∂f/∂x = 2x = 4 y ∂f/∂y = 3. Luego multiplica cada una por su desplazamiento: (x − 2) y (y − 1).</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Altura 7, más ∂f/∂x = 2·2 = 4 por (x − 2), más ∂f/∂y = 3 por (y − 1): z = 7 + 4(x − 2) + 3(y − 1). Los desplazamientos se miden desde el punto (2, 1).</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>La fórmula es altura + ∂f/∂x·(x − x<sub>0</sub>) + ∂f/∂y·(y − y<sub>0</sub>). Cada desplazamiento se mide desde el punto (2, 1): (x − 2) y (y − 1).</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Altura 7, más 4·(x − 2), más 3·(y − 1). Los desplazamientos se miden desde (2, 1); la última opción los cruzó (usó 1 con x y 2 con y).</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P7" data-tema="plano_tangente" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="plano_tangente" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Misma habilidad, ahora sin apoyo: escribe el plano tangente a la superficie z = xy en el punto donde x = 2, y = 3.</p>
+        <p class="pstatement">Misma habilidad, sin apoyo: escribe el plano tangente a la superficie z = xy en el punto donde x = 2, y = 3.</p>
         <div class="fx"><div class="sys"><span class="eq">f(x, y) = xy,   punto (2, 3)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">z = 6 + 3(x − 2) + 2(y − 3)</button>
@@ -365,17 +438,66 @@
         <div class="why"><span class="lbl">Por qué</span><p>Altura f(2, 3) = 6. ∂f/∂x = y = 3, ∂f/∂y = x = 2. El plano es z = 6 + 3(x − 2) + 2(y − 3). Cuidado: ∂f/∂x usa la y del punto (3), no la x.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P8" data-tema="derivada_direccional" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="regla_cadena" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Calcula la derivada direccional de la función de abajo en el punto (1, 1), en la dirección que apunta hacia (3, 4). Recuerda: gradiente, normalizar la dirección, y producto punto.</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x² + y,   punto (1, 1),   dirección (3, 4)</span><span class="eq">D_u f = ∇f · u,   con u unitario</span></div></div>
+        <p class="pstatement">Regla de la cadena, ejecutándola. Para la función de abajo, arma df/dt y déjala en términos de t. ¿Cuál es?</p>
+        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> + y<sup>2</sup>,   x = t<sup>2</sup>,   y = t</span><span class="eq">df/dt = (∂f/∂x)(dx/dt) + (∂f/∂y)(dy/dt)</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">4t<sup>3</sup> + 2t</button>
+          <button class="opt" data-ok="0">2t<sup>2</sup> + t</button>
+          <button class="opt" data-ok="0">4t + 2</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>∂f/∂x = 2x y ∂f/∂y = 2y. Además dx/dt = 2t y dy/dt = 1. Sustituye y luego cambia x = t<sup>2</sup>, y = t: 2x·2t = 2t<sup>2</sup>·2t = 4t<sup>3</sup>, y 2y·1 = 2t.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>df/dt = (2x)(2t) + (2y)(1) = 4t<sup>3</sup> + 2t con x = t<sup>2</sup>, y = t. Comprobación: f = t<sup>4</sup> + t<sup>2</sup>, cuya derivada es 4t<sup>3</sup> + 2t. En t = 1 da 6.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="regla_cadena" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Misma habilidad, sin apoyo. Para la función de abajo, con las variables dependiendo de t, calcula df/dt en términos de t.</p>
+        <div class="fx"><div class="sys"><span class="eq">f(x, y) = xy,   x = t,   y = t<sup>2</sup></span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">3t<sup>2</sup></button>
+          <button class="opt" data-ok="0">2t</button>
+          <button class="opt" data-ok="0">t<sup>2</sup> + 2t</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>∂f/∂x = y, ∂f/∂y = x; dx/dt = 1, dy/dt = 2t. df/dt = y·1 + x·2t = t<sup>2</sup> + t·2t = t<sup>2</sup> + 2t<sup>2</sup> = 3t<sup>2</sup>. Comprobación: f = t·t<sup>2</sup> = t<sup>3</sup>, cuya derivada es 3t<sup>2</sup>.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="derivada_direccional" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Calcula la derivada direccional de la función de abajo en el punto (1, 1), en la dirección que apunta hacia (3, 4). Recuerda: gradiente, normalizar la dirección, producto punto.</p>
+        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> + y,   punto (1, 1),   dirección (3, 4)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">2</button>
           <button class="opt" data-ok="0">10</button>
           <button class="opt" data-ok="0">6/5</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>∇f = (2x, 1) = (2, 1). La dirección (3, 4) mide 5, así que u = (3/5, 4/5). Ahora haz el producto punto ∇f · u.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>∇f(1, 1) = (2, 1). La dirección (3, 4) tiene longitud 5, así que u = (3/5, 4/5). D_u f = 2·(3/5) + 1·(4/5) = 6/5 + 4/5 = 2. Sin normalizar saldría 10, que es el error típico.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>∇f = (2x, 1) = (2, 1) en (1, 1). La dirección (3, 4) mide 5, así que u = (3/5, 4/5). Ahora haz el producto punto ∇f · u.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>∇f(1, 1) = (2, 1). u = (3/5, 4/5). D<sub>u</sub>f = 2·(3/5) + 1·(4/5) = 6/5 + 4/5 = 2. Sin normalizar saldría 10, que es el error típico.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P10" data-tema="derivada_direccional" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Estás sobre la ladera h = x<sup>2</sup> + y<sup>2</sup> en el punto (1, 2). ¿En qué dirección subes más rápido, y con qué pendiente?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Hacia (2, 4), con pendiente máxima √20</button>
+          <button class="opt" data-ok="0">Hacia (1, 2), con pendiente máxima 5</button>
+          <button class="opt" data-ok="0">Hacia (0, 0), con pendiente máxima 3</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>La dirección de máximo crecimiento es el gradiente. ∇h = (2x, 2y). Evalúalo en (1, 2). La pendiente máxima es su longitud.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>∇h(1, 2) = (2·1, 2·2) = (2, 4): esa es la dirección de máximo ascenso. Su longitud es √(2<sup>2</sup> + 4<sup>2</sup>) = √(4 + 16) = √20, la pendiente máxima. Hacia (1, 2) es el punto, no la dirección de subida.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P11" data-tema="orden_superior" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Derivadas de orden superior: para la función siguiente calcula la segunda parcial respecto a x <strong>dos veces</strong> (∂<sup>2</sup>f/∂x<sup>2</sup>).</p>
+        <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>3</sup> y</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">6xy</button>
+          <button class="opt" data-ok="0">3x<sup>2</sup>y</button>
+          <button class="opt" data-ok="0">6x</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>∂f/∂x = 3x<sup>2</sup>y (la y es constante). Derivando otra vez respecto a x: 6xy. La opción 3x<sup>2</sup>y es solo la primera parcial; 6x olvidó la y.</p></div>
       </div>
     </section>
 
@@ -383,11 +505,22 @@
       <div class="qtag">Te toca · recuerda</div>
       <p class="q">Decimos que f es <strong>derivable</strong> en un punto cuando existen ahí sus dos derivadas parciales. ¿Basta con eso para que además sea <strong>diferenciable</strong>?</p>
       <div class="opts">
-        <button class="opt" data-ok="1">No: además se necesita que el plano tangente aproxime bien la función cerca del punto</button>
+        <button class="opt" data-ok="1">No: además el plano tangente debe aproximar bien la función cerca del punto</button>
         <button class="opt" data-ok="0">Sí: si existen las dos parciales, la función siempre es diferenciable</button>
         <button class="opt" data-ok="0">No: hace falta que las parciales valgan cero</button>
       </div>
-      <div class="why"><span class="lbl">Por qué</span><p><strong>Derivable</strong> = existen las parciales; solo mira dos direcciones. <strong>Diferenciable</strong> es más fuerte: el plano tangente debe aproximar a f en <strong>todas</strong> las direcciones. Hay funciones derivables (con parciales) que no son diferenciables. (Si las parciales son continuas cerca del punto, entonces sí se garantiza.)</p></div>
+      <div class="why"><span class="lbl">Por qué</span><p><strong>Derivable</strong> = existen las parciales; solo mira dos direcciones. <strong>Diferenciable</strong> es más fuerte: el plano tangente debe aproximar a f en <strong>todas</strong> las direcciones. Hay funciones con parciales que no son diferenciables. (Si las parciales son continuas cerca del punto, entonces sí se garantiza.)</p></div>
+    </div>
+
+    <div class="check" data-kind="recall" data-fid="F3_clairaut" data-tema="orden_superior">
+      <div class="qtag">Te toca · recuerda</div>
+      <p class="q">Al calcular las parciales cruzadas ∂<sup>2</sup>f/∂x∂y y ∂<sup>2</sup>f/∂y∂x de una función “normal”, ¿qué esperas?</p>
+      <div class="opts">
+        <button class="opt" data-ok="1">Que salgan iguales, sin importar el orden de derivación (teorema de Clairaut)</button>
+        <button class="opt" data-ok="0">Que salgan opuestas, una el negativo de la otra</button>
+        <button class="opt" data-ok="0">Que la primera valga cero siempre</button>
+      </div>
+      <div class="why"><span class="lbl">Por qué</span><p>Si las segundas parciales son continuas, el orden no importa: ∂<sup>2</sup>f/∂x∂y = ∂<sup>2</sup>f/∂y∂x. Es el teorema de Clairaut. Por eso derives primero por x o por y, llegas al mismo resultado.</p></div>
     </div>
 
     <section class="chuleta">
@@ -395,11 +528,11 @@
       <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
       <ul>
         <li><span class="ck">✓</span> Parcial respecto a una variable: derivas por ella, la otra es constante.</li>
-        <li><span class="ck">✓</span> Plano tangente: z = altura + (∂f/∂x)(x − x₀) + (∂f/∂y)(y − y₀).</li>
-        <li><span class="ck">✓</span> Derivable = existen las parciales. Diferenciable ⇒ el plano tangente aproxima bien; ser derivable no basta.</li>
-        <li><span class="ck">✓</span> Regla de la cadena: df/dt = (∂f/∂x)(dx/dt) + (∂f/∂y)(dy/dt).</li>
         <li><span class="ck">✓</span> Gradiente ∇f = (∂f/∂x, ∂f/∂y): apunta al máximo crecimiento; su longitud es esa tasa.</li>
-        <li><span class="ck">✓</span> Direccional: D_u f = ∇f · u con u unitario. Segundas cruzadas iguales (Clairaut).</li>
+        <li><span class="ck">✓</span> Plano tangente: z = altura + (∂f/∂x)(x − x<sub>0</sub>) + (∂f/∂y)(y − y<sub>0</sub>).</li>
+        <li><span class="ck">✓</span> Regla de la cadena: df/dt = (∂f/∂x)(dx/dt) + (∂f/∂y)(dy/dt).</li>
+        <li><span class="ck">✓</span> Direccional: D<sub>u</sub>f = ∇f · u, con u unitario (normaliza la dirección primero).</li>
+        <li><span class="ck">✓</span> Derivable = existen las parciales. Diferenciable ⇒ el plano tangente aproxima bien; ser derivable no basta. Cruzadas iguales (Clairaut).</li>
       </ul>
     </section>
 
@@ -410,6 +543,11 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="C3_funciones-varias-variables.html"><span class="sp">← Anterior</span><span class="ti">U3 · Funciones de varias variables</span></a>
+      <a class="next" href="C5_optimizacion.html"><span class="sp">Siguiente →</span><span class="ti">U5 · Optimización</span></a>
+    </nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 4</p></footer>
 
@@ -433,7 +571,7 @@ function mat(rows){
 }
 function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
 
-// (mat/set quedan disponibles; esta lección usa bloques .sys en línea)
+// (mat/set quedan disponibles; esta lección usa bloques .sys y .calc en línea)
 
 // ===== visual: gradiente y curva de nivel =====
 function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
@@ -443,11 +581,6 @@ function clip(a,b,c){
   if(Math.abs(a)>E){ [-1,5].forEach(function(y){ var x=(c-b*y)/a; if(x>=-1-E&&x<=5+E) pts.push([x,y]); }); }
   var u=[]; pts.forEach(function(p){ if(!u.some(function(q){return Math.abs(q[0]-p[0])<1e-6&&Math.abs(q[1]-p[1])<1e-6;})) u.push(p); });
   return u.slice(0,2);
-}
-function lineSVG(a,b,c,color,dash){
-  var e=clip(a,b,c); if(e.length<2) return '';
-  var p0=PT(e[0][0],e[0][1]), p1=PT(e[1][0],e[1][1]);
-  return '<line x1="'+p0[0]+'" y1="'+p0[1]+'" x2="'+p1[0]+'" y2="'+p1[1]+'" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"'+(dash?' stroke-dasharray="8 7"':'')+'/>';
 }
 var VG='', VA='';
 (function(){
@@ -459,7 +592,7 @@ var VG='', VA='';
   VA='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/>'+'<line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';
 })();
 // Curvas de nivel de f=x²+y²: círculos centrados en el origen. Punto de trabajo P=(2,1).
-// ∇f(2,1)=(4,2), dirección unitaria (2,1)/√5. Perpendicular a la curva de nivel r=√5.
+// ∇f(2,1)=(4,2), perpendicular a la curva de nivel r=√5.
 function arrow(px,py,dx,dy,len,color){
   var m=Math.sqrt(dx*dx+dy*dy); var ux=dx/m, uy=dy/m;
   var tip=PT(px+ux*len, py+uy*len), base=PT(px,py);
@@ -481,18 +614,15 @@ function drawPlane(cse){
   var body, cap;
   var P=[2,1]; var pS=PT(P[0],P[1]);
   var pointDot='<circle cx="'+pS[0]+'" cy="'+pS[1]+'" r="5.5" fill="#181B22"/>';
-  // curva de nivel que pasa por P: círculo r=√5 (resaltado en navy)
   var o=PT(0,0);
   var levelP='<circle cx="'+o[0]+'" cy="'+o[1]+'" r="'+(Math.sqrt(5)*40)+'" fill="none" stroke="#283891" stroke-width="3"/>';
   if(cse==='grad'){
     body=levelCircles()+levelP+arrow(P[0],P[1],4,2,1.6,'#F5821F')+pointDot;
     cap='El gradiente ∇f = (4, 2) sale perpendicular a la curva de nivel y apunta cuesta arriba: la dirección de máximo crecimiento.';
   } else if(cse==='dir'){
-    // otra dirección: a lo largo del eje x positivo (1,0)
     body=levelCircles()+levelP+arrow(P[0],P[1],4,2,1.6,'#c9d0ee')+arrow(P[0],P[1],1,0,1.4,'#F5821F')+pointDot;
-    cap='En otra dirección (aquí horizontal), la pendiente es menor: la derivada direccional D_u f es máxima solo cuando u apunta como el gradiente.';
+    cap='En otra dirección (aquí horizontal), la pendiente es menor: la derivada direccional es máxima solo cuando apuntas como el gradiente.';
   } else {
-    // a lo largo de la curva de nivel: tangente, perpendicular al gradiente, dirección (-1,2)
     body=levelCircles()+levelP+arrow(P[0],P[1],-1,2,1.4,'#F5821F')+arrow(P[0],P[1],1,-2,1.4,'#F5821F')+pointDot;
     cap='Si te mueves a lo largo de la curva de nivel, la altura no cambia: la derivada direccional vale cero. Por eso el gradiente es perpendicular a ella.';
   }
@@ -507,7 +637,7 @@ document.querySelectorAll('.viz-tab').forEach(function(b){
 // ===== instrumentación =====
 var session = {
   fecha:new Date().toISOString().slice(0,10),
-  materia:"calculo_multivariado", unidad:"U4_diferenciacion", leccion:"C4_diferenciacion",
+  materia:"calculo", unidad:"U4_diferenciacion", leccion:"C4_diferenciacion",
   duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
 };
 var t0ms = Date.now();

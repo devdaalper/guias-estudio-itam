@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -148,8 +169,8 @@
 
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 7</p>
-    <h1>Rⁿ euclídeo y <mark>ortogonalidad</mark></h1>
-    <p class="lead">El producto punto le da a los vectores longitud, ángulo y perpendicularidad. Con eso podemos proyectar, ortogonalizar y aproximar. Todo a mano, con números limpios, sin calculadora.</p>
+    <h1>R<sup>n</sup> euclídeo y <mark>ortogonalidad</mark></h1>
+    <p class="lead">El producto punto le da a los vectores longitud, ángulo y perpendicularidad. Con un solo número decides si dos direcciones se cruzan en recto, y proyectas una sobre otra. Todo a mano, con números limpios, sin calculadora.</p>
     <div class="learn">
       <h2>Al terminar vas a poder</h2>
       <ol>
@@ -165,18 +186,35 @@
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Un dron sale del origen y viaja en la dirección u = (3, 4). En el punto p = (7, 1) hay una torre. ¿Cuál es el <strong>punto de la trayectoria del dron más cercano a la torre</strong>, y qué tan lejos pasa de ella?</p>
+      <div class="fx"><div class="sys"><span class="eq">trayectoria del dron: dirección u = (3, 4)</span><span class="eq">torre en p = (7, 1)</span></div></div>
+      <p class="idea" style="font-size:17px">A ojo no se sabe. Podrías tantear puntos sobre la recta y medir distancias, pero eso nunca cierra exacto. Necesitamos una operación que, con puros números, encuentre <strong>la sombra</strong> de la torre sobre la trayectoria y mida la distancia perpendicular. Esa operación es la <strong>proyección</strong>, y todo arranca de un solo número: el <strong>producto punto</strong>. Al final de la guía vas a resolver justo este caso.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>El producto punto: una sola operación que lo desata todo</h3>
+      <h3>1 · El producto punto: un solo número que lo desata todo</h3>
       <p class="idea">A dos vectores del mismo tamaño les asignamos un <strong>número</strong>: multiplicas coordenada con coordenada y sumas. Ese número es el <strong>producto punto</strong>. Con este ejemplo:</p>
       <div class="fx"><div class="sys"><span class="eq">u = (2, 3, −1)</span><span class="eq">v = (1, −2, 4)</span></div></div>
       <div class="fx"><div class="sys"><span class="eq">u · v = (2)(1) + (3)(−2) + (−1)(4)</span><span class="eq">u · v = 2 − 6 − 4 = −8</span></div></div>
-      <p class="idea">De este solo número salen la <strong>longitud</strong>, el <strong>ángulo</strong> y la <strong>perpendicularidad</strong>. Todo lo demás de la unidad es leerlo bien.</p>
+      <p class="idea">De este solo número salen la <strong>longitud</strong>, el <strong>ángulo</strong> y la <strong>perpendicularidad</strong>. Todo lo demás de la unidad es leerlo bien. Antes de seguir, comprueba que sabes formarlo:</p>
+      <div class="check" data-kind="item" data-id="PPchk" data-tema="producto_punto" data-level="guiado">
+        <div class="qtag">Te toca · calcula</div>
+        <p class="q">¿Cuánto vale el producto punto de a = (4, −1) y b = (2, 5)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">3</button>
+          <button class="opt" data-ok="0">13</button>
+          <button class="opt" data-ok="0">(8, −5)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>(4)(2) + (−1)(5) = 8 − 5 = <strong>3</strong>. Da un número, nunca un vector. El (8, −5) es multiplicar coordenadas sin sumar; el 13 es olvidar el signo del −5.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>La norma: la longitud de un vector</h3>
+      <h3>2 · La norma: la longitud de un vector</h3>
       <p class="idea">La <strong>norma</strong> es qué tan largo es el vector. Sale del producto punto de un vector consigo mismo: sumas los cuadrados de sus coordenadas y sacas raíz. Con un vector limpio:</p>
       <div class="fx"><div class="sys"><span class="eq">‖w‖ = √(w · w)</span><span class="eq">w = (3, 4)  →  ‖w‖ = √(9 + 16) = √25 = 5</span></div></div>
       <p class="idea">Un vector de norma <strong>1</strong> se llama <strong>unitario</strong>. Para volver unitario cualquier vector, lo divides entre su norma. ¿Recuerdas la fórmula antes de mirar el resto?</p>
@@ -188,70 +226,133 @@
           <button class="opt" data-ok="0">La suma de sus coordenadas</button>
           <button class="opt" data-ok="0">La suma de los cuadrados de sus coordenadas, sin raíz</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La norma es <strong>√(v · v)</strong>. La suma de cuadrados sin raíz es ‖v‖², útil, pero no es la longitud.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>La norma es <strong>√(v · v)</strong>. La suma de cuadrados sin raíz es ‖v‖<sup>2</sup>, útil, pero no es la longitud.</p></div>
       </div>
     </section>
 
     <section class="sec">
-      <h3>Ángulo y ortogonalidad</h3>
+      <h3>3 · Ángulo y ortogonalidad</h3>
       <p class="idea">El coseno del ángulo entre dos vectores sale del producto punto dividido entre las dos normas. Esta es la fórmula clave:</p>
       <div class="fx"><div class="sys"><span class="eq">cos θ = (u · v) / (‖u‖ · ‖v‖)</span></div></div>
       <p class="idea">De aquí sale lo más importante de la unidad: si <strong>u · v = 0</strong>, entonces cos θ = 0, o sea θ = 90°. Dos vectores son <strong>ortogonales</strong> (perpendiculares) exactamente cuando su producto punto es cero. Ya no necesitas dibujar nada: <strong>calculas el producto punto y ves si da cero</strong>. Mira el ejemplo:</p>
       <div class="fx"><div class="sys"><span class="eq">(2, 3) · (3, −2) = 6 − 6 = 0</span><span class="eq">→ son perpendiculares</span></div></div>
-    </section>
-
-    <h2 class="modhead">Yo lo hago</h2>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Calculemos el <strong>ángulo</strong> entre dos vectores. Voy paso a paso; tú solo sigue el hilo. Los vectores son u = (1, 1) y v = (1, 0).</p>
-      <div class="estep"><div class="oprow">Paso 1 · producto punto</div><p>Multiplico coordenada con coordenada y sumo.</p><div class="fx"><div class="sys"><span class="eq">u · v = (1)(1) + (1)(0) = 1</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · las dos normas</div><p>Longitud de cada vector.</p><div class="fx"><div class="sys"><span class="eq">‖u‖ = √(1 + 1) = √2</span><span class="eq">‖v‖ = √(1 + 0) = 1</span></div></div></div>
-
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="angulo">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">Ya tengo u · v = 1, ‖u‖ = √2 y ‖v‖ = 1. ¿Cuánto vale cos θ?</p>
+      <div class="check" data-kind="item" data-id="ORTchk" data-tema="ortogonalidad" data-level="guiado">
+        <div class="qtag">Te toca · decide</div>
+        <p class="q">¿Cuál de estas parejas es ortogonal (perpendicular)?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">1 dividido entre √2, que es un valor conocido: θ = 45°</button>
-          <button class="opt" data-ok="0">√2 dividido entre 1, o sea √2</button>
-          <button class="opt" data-ok="0">Cero, así que θ = 90°</button>
+          <button class="opt" data-ok="1">(5, 2) y (−2, 5)</button>
+          <button class="opt" data-ok="0">(5, 2) y (2, 5)</button>
+          <button class="opt" data-ok="0">(5, 2) y (10, 4)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>cos θ = (u · v)/(‖u‖‖v‖) = 1/(√2 · 1) = 1/√2. Ese coseno corresponde a <strong>45°</strong>, un ángulo que conviene tener de memoria.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>(5)(−2) + (2)(5) = −10 + 10 = <strong>0</strong>: perpendiculares. La segunda pareja da 20 y la tercera 58, ninguno cero. La tercera además es un múltiplo: apuntan en la misma dirección.</p></div>
       </div>
-
-      <div class="estep"><div class="oprow">Paso 3 · junta todo</div><p>Divido el producto punto entre las dos normas.</p><div class="fx"><div class="sys"><span class="eq">cos θ = 1 / (√2 · 1) = 1/√2</span><span class="eq">θ = 45°</span></div></div></div>
-      <p class="idea" style="font-size:17px">Listo: el ángulo es <strong>45°</strong>. Nota que nunca dibujé nada; solo apliqué la fórmula con números limpios.</p>
     </section>
 
+    <h2 class="modhead">Yo lo hago · contigo</h2>
+
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora la operación estrella de la unidad: <strong>proyectar</strong> un vector sobre otro. La proyección de u sobre v es la “sombra” de u en la dirección de v. Su fórmula:</p>
-      <div class="fx"><div class="sys"><span class="eq">proy_v(u) = ( (u · v) / (v · v) ) · v</span></div></div>
+      <p class="idea" style="font-size:17px">Calculemos el <strong>ángulo</strong> entre u = (1, 1) y v = (1, 0). No lo mires nada más: en cada paso <strong>tú decides qué toca</strong> y yo hago la cuenta.</p>
+
+      <div class="check" data-kind="item" data-id="E1dec" data-tema="angulo" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">La fórmula es cos θ = (u · v)/(‖u‖‖v‖). ¿Qué conviene calcular primero?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El producto punto u · v, que va arriba de la fracción</button>
+          <button class="opt" data-ok="0">El ángulo θ directamente, sin calcular nada más</button>
+          <button class="opt" data-ok="0">La suma de coordenadas de cada vector</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La fórmula necesita tres números: u · v arriba, y las dos normas abajo. Empezamos por el de arriba.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 1 · producto punto</div><p>Multiplico coordenada con coordenada y sumo:</p><p class="calc"><span class="rw">u·v</span> (1)(1)=<b>1</b> <span class="sep">•</span> (1)(0)=<b>0</b> <span class="sep">•</span> suma=<b>1</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E2dec" data-tema="norma" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ya tengo u · v = 1. Falta la parte de abajo. ¿Qué sigue?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Calcular las dos normas, ‖u‖ y ‖v‖</button>
+          <button class="opt" data-ok="0">Dividir 1 entre 1 y terminar</button>
+          <button class="opt" data-ok="0">Volver a hacer el producto punto</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Abajo de la fracción van ‖u‖·‖v‖. Sin las dos normas no puedo dividir.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 2 · las dos normas</div><p>Cada norma es la raíz de la suma de cuadrados:</p><p class="calc"><span class="rw">‖u‖</span> √(1+1)=<b>√2</b> <span class="sep">•</span> <span class="rw">‖v‖</span> √(1+0)=<b>1</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E3dec" data-tema="angulo" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Tengo u · v = 1, ‖u‖ = √2 y ‖v‖ = 1. ¿Cuánto vale cos θ y qué ángulo es?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">cos θ = 1/√2, un valor conocido: θ = 45°</button>
+          <button class="opt" data-ok="0">cos θ = √2, así que θ = 90°</button>
+          <button class="opt" data-ok="0">cos θ = 0, así que θ = 90°</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>cos θ = (u·v)/(‖u‖‖v‖) = 1/(√2·1) = 1/√2. Ese coseno corresponde a <strong>45°</strong>, un ángulo que conviene tener de memoria.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 3 · junta todo</div><p>Divido el producto punto entre las dos normas:</p><p class="calc"><span class="rw">cos θ</span> 1÷(√2·1)=<b>1/√2</b> <span class="sep">•</span> θ=<b>45°</b></p></div>
+
+      <p class="idea" style="font-size:17px">Listo: el ángulo es <strong>45°</strong>. Nunca dibujé nada; solo apliqué la fórmula con números limpios, y en el orden que tú fuiste marcando: arriba, abajo, divide.</p>
+    </section>
+
+    <h2 class="modhead">Sube el tamaño · la proyección en tres pasos</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">La operación estrella de la unidad es <strong>proyectar</strong> un vector sobre otro: la “sombra” de u en la dirección de v. Es más pesada que el ángulo, así que se hace en <strong>tres pasos ordenados</strong>:</p>
+      <ul class="fases">
+        <li><strong>Paso 1 — los dos productos punto:</strong> arriba <em>u · v</em>, abajo <em>v · v</em>.</li>
+        <li><strong>Paso 2 — el factor:</strong> divides <em>arriba entre abajo</em>. Sale un número.</li>
+        <li><strong>Paso 3 — escalas v:</strong> multiplicas ese factor por el vector v.</li>
+      </ul>
+      <div class="fx"><div class="sys"><span class="eq">proy<sub>v</sub>(u) = ( (u · v) / (v · v) ) · v</span></div></div>
       <p class="idea" style="font-size:17px">Proyectemos u = (2, 4) sobre v = (1, 1), paso a paso.</p>
-      <div class="estep"><div class="oprow">Paso 1 · los dos productos punto</div><p>Arriba u · v, abajo v · v.</p><div class="fx"><div class="sys"><span class="eq">u · v = (2)(1) + (4)(1) = 6</span><span class="eq">v · v = (1)(1) + (1)(1) = 2</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · el factor</div><p>Divido: ese número escala a v.</p><div class="fx"><div class="sys"><span class="eq">6 / 2 = 3</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 3 · escala v</div><p>Multiplico v por el factor 3.</p><div class="fx"><div class="sys"><span class="eq">proy_v(u) = 3 · (1, 1) = (3, 3)</span></div></div></div>
-      <p class="idea" style="font-size:17px">Lo que sobra al restarle la proyección a u es <strong>perpendicular</strong> a v. Ese “resto perpendicular” es la clave de todo lo que sigue; compruébalo abajo:</p>
-      <div class="fx"><div class="sys"><span class="eq">u − proy_v(u) = (2, 4) − (3, 3) = (−1, 1)</span><span class="eq">(−1, 1) · (1, 1) = −1 + 1 = 0</span></div></div>
+
+      <div class="check" data-kind="item" data-id="PR1dec" data-tema="proyeccion" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">La fórmula pide dos productos punto. ¿Cuáles son, exactamente?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">u · v (arriba) y v · v (abajo, v consigo mismo)</button>
+          <button class="opt" data-ok="0">u · v arriba y u · u abajo</button>
+          <button class="opt" data-ok="0">‖u‖ arriba y ‖v‖ abajo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Abajo va <strong>v · v</strong> (el vector sobre el que proyectas, consigo mismo), no u · u. Confundirlos cambia el factor.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 1 · los dos productos punto</div><p>Arriba u · v, abajo v consigo mismo:</p><p class="calc"><span class="rw">u·v</span> (2)(1)+(4)(1)=<b>6</b> <span class="sep">•</span> <span class="rw">v·v</span> (1)(1)+(1)(1)=<b>2</b></p></div>
+      <div class="estep"><div class="oprow">Paso 2 · el factor</div><p>Divido arriba entre abajo; ese número escala a v:</p><p class="calc"><span class="rw">factor</span> 6÷2=<b>3</b></p></div>
+
+      <div class="check" data-kind="item" data-id="PR2dec" data-tema="proyeccion" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">El factor es 3. ¿Cómo termino la proyección?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Multiplico v = (1, 1) por 3: proyección = (3, 3)</button>
+          <button class="opt" data-ok="0">Multiplico u = (2, 4) por 3: (6, 12)</button>
+          <button class="opt" data-ok="0">Sumo 3 a cada coordenada de v: (4, 4)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El factor escala a <strong>v</strong>, la dirección sobre la que proyectas, no a u. Escalar es multiplicar cada coordenada, no sumar.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Paso 3 · escala v</div><p>Multiplico cada coordenada de v por el factor 3:</p><p class="calc"><span class="rw">proy</span> 3·(1,1)=<b>(3, 3)</b></p></div>
+
+      <p class="idea" style="font-size:17px">Lo que sobra al restarle la proyección a u es <strong>perpendicular</strong> a v. Ese “resto perpendicular” es la distancia más corta a la recta; compruébalo:</p>
+      <div class="estep"><div class="oprow">Comprobación · el resto</div><p>Resto = u − proyección, y su producto punto con v da cero:</p><p class="calc"><span class="rw">resto</span> (2,4)−(3,3)=<b>(−1, 1)</b> <span class="sep">•</span> (−1,1)·(1,1)=<b>0</b></p></div>
     </section>
 
     <section class="sec">
       <h3>Míralo: la proyección y su sombra</h3>
-      <p class="idea">Aquí sí vale un dibujo, porque la palabra “proyección” <strong>es</strong> geométrica. <span style="color:var(--deep);font-weight:700">u</span> se apoya sobre la recta que marca <span style="color:var(--navy);font-weight:700">v</span>; su sombra es <span style="color:var(--ink);font-weight:700">proy_v(u)</span>, y lo que sobra (la línea punteada) cae en ángulo recto sobre v.</p>
+      <p class="idea">Aquí sí vale un dibujo, porque la palabra “proyección” <strong>es</strong> geométrica. <span style="color:var(--deep);font-weight:700">u</span> se apoya sobre la recta que marca <span style="color:var(--navy);font-weight:700">v</span>; su sombra es <span style="color:var(--ink);font-weight:700">proy<sub>v</sub>(u)</span>, y lo que sobra (la línea punteada) cae en ángulo recto sobre v.</p>
       <div class="fx" style="padding:10px"><div id="projPlane"></div></div>
       <div class="viz-legend">
         <span><i style="background:#C75D08"></i>u = (2, 4)</span>
         <span><i style="background:#283891"></i>dirección de v</span>
-        <span><i style="background:#181B22"></i>proy_v(u) = (3, 3)</span>
+        <span><i style="background:#181B22"></i>proy<sub>v</sub>(u) = (3, 3)</span>
       </div>
       <p class="fx-note">La punteada mide (−1, 1): toca la recta de v formando un ángulo recto. Por eso la proyección es el punto de la recta <strong>más cercano</strong> a u.</p>
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Cuando quieres una base <strong>ortogonal</strong> a partir de vectores cualesquiera, usas <strong>Gram-Schmidt</strong>: al segundo vector le quitas su proyección sobre el primero, y lo que queda ya es perpendicular. Hagámoslo con v₁ = (3, 0) y v₂ = (2, 2).</p>
-      <div class="estep"><div class="oprow">Paso 1 · el primero se queda</div><p>Tomo u₁ = v₁ como está.</p><div class="fx"><div class="sys"><span class="eq">u₁ = (3, 0)</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · proyecta v₂ sobre u₁</div><p>Mismo cálculo del ejemplo anterior.</p><div class="fx"><div class="sys"><span class="eq">v₂ · u₁ = (2)(3) + (2)(0) = 6</span><span class="eq">u₁ · u₁ = 9   →   factor = 6/9 = 2/3</span><span class="eq">proy = (2/3)(3, 0) = (2, 0)</span></div></div></div>
-      <div class="estep"><div class="oprow">Paso 3 · quita la proyección</div><p>Lo que sobra es el segundo vector ortogonal.</p><div class="fx"><div class="sys"><span class="eq">u₂ = v₂ − proy = (2, 2) − (2, 0) = (0, 2)</span></div></div></div>
-      <p class="idea" style="font-size:17px">Compruebo que ya son perpendiculares con el producto punto; da cero:</p>
-      <div class="fx"><div class="sys"><span class="eq">u₁ · u₂ = (3)(0) + (0)(2) = 0</span></div></div>
+      <p class="idea" style="font-size:17px">Con la proyección lista, aparece <strong>Gram-Schmidt</strong>: cuando quieres una base <strong>ortogonal</strong> a partir de vectores cualesquiera, al segundo le quitas su proyección sobre el primero, y lo que queda ya es perpendicular. Hagámoslo con v<sub>1</sub> = (3, 0) y v<sub>2</sub> = (2, 2).</p>
+      <div class="estep"><div class="oprow">Paso 1 · el primero se queda</div><p>Tomo u<sub>1</sub> = v<sub>1</sub> como está:</p><p class="calc"><span class="rw">u₁</span> =<b>(3, 0)</b></p></div>
+      <div class="estep"><div class="oprow">Paso 2a · los dos productos punto</div><p>Arriba v₂ con u₁, abajo u₁ consigo mismo:</p><p class="calc"><span class="rw">v₂·u₁</span> (2)(3)+(2)(0)=<b>6</b> <span class="sep">•</span> <span class="rw">u₁·u₁</span> (3)(3)+(0)(0)=<b>9</b></p></div>
+      <div class="estep"><div class="oprow">Paso 2b · el factor</div><p>Divido arriba entre abajo:</p><p class="calc"><span class="rw">factor</span> 6÷9=<b>2/3</b></p></div>
+      <div class="estep"><div class="oprow">Paso 2c · escala u₁</div><p>Multiplico cada coordenada de u₁ por el factor:</p><p class="calc"><span class="rw">proy</span> (2/3)·(3,0)=<b>(2, 0)</b></p></div>
+      <div class="estep"><div class="oprow">Paso 3 · quita la proyección</div><p>Lo que sobra es el segundo vector ortogonal:</p><p class="calc"><span class="rw">u₂</span> (2,2)−(2,0)=<b>(0, 2)</b></p></div>
+      <p class="idea" style="font-size:17px">Compruebo que ya son perpendiculares; su producto punto da cero:</p>
+      <div class="fx"><div class="sys"><span class="eq">u<sub>1</sub> · u<sub>2</sub> = (3)(0) + (0)(2) = 0</span></div></div>
       <p class="idea" style="font-size:17px">Si además divides cada uno entre su norma, obtienes una base <strong>ortonormal</strong>: (1, 0) y (0, 1).</p>
       <p class="fx-note">Idea de mínimos cuadrados: cuando un sistema no tiene solución exacta (más ecuaciones que incógnitas), la mejor respuesta posible es <strong>proyectar</strong> el vector de datos sobre lo alcanzable y quedarte con esa sombra. Es la misma proyección de esta unidad, aplicada para aproximar.</p>
     </section>
@@ -282,10 +383,21 @@
           <button class="opt" data-ok="0">14</button>
           <button class="opt" data-ok="0">100</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>‖w‖ = √(36 + 64) = √100 = 10. El 100 es ‖w‖² (sin la raíz); el 14 sería sumar las coordenadas.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>‖w‖ = √(36 + 64) = √100 = 10. El 100 es ‖w‖<sup>2</sup> (sin la raíz); el 14 sería sumar las coordenadas.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="ortogonalidad" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="unitario" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">¿Cuál de estos vectores es <strong>unitario</strong> (norma 1)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(3/5, 4/5)</button>
+          <button class="opt" data-ok="0">(1, 1)</button>
+          <button class="opt" data-ok="0">(3, 4)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>(3/5)<sup>2</sup> + (4/5)<sup>2</sup> = 9/25 + 16/25 = 25/25 = 1, así que su norma es √1 = 1. El (3, 4) tiene norma 5, y (1, 1) tiene norma √2, ninguno unitario.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="ortogonalidad" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">¿Cuál de estos vectores es ortogonal a (2, 1)?</p>
         <div class="opts">
@@ -296,7 +408,19 @@
         <div class="why"><span class="lbl">Por qué</span><p>(2, 1) · (1, −2) = 2 − 2 = 0, así que son perpendiculares. Los otros dos apuntan en la misma dirección (producto punto 5 y 10, no cero).</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="Pang1" data-tema="angulo" data-level="guiado">
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="ortogonalidad" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Quieres que (a, 6) sea ortogonal a (2, −3). ¿Qué valor de <strong>a</strong> lo logra?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">9</button>
+          <button class="opt" data-ok="0">−9</button>
+          <button class="opt" data-ok="0">4</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Su producto punto debe dar cero: (a)(2) + (6)(−3) = 0. Despeja a.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>2a − 18 = 0 → 2a = 18 → a = 9. Con a = −9 el producto punto daría −36, no cero.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="angulo" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
         <p class="pstatement">Empieza calculando el producto punto de estos dos vectores. Con ese número deduce el ángulo que forman.</p>
         <div class="fx"><div class="sys"><span class="eq">u = (1, 1)</span><span class="eq">v = (2, −2)</span></div></div>
@@ -309,7 +433,7 @@
         <div class="why"><span class="lbl">Por qué</span><p>(1)(2) + (1)(−2) = 2 − 2 = 0. Producto punto cero significa cos θ = 0, o sea θ = 90°: son perpendiculares.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="Pang2" data-tema="angulo" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="angulo" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">Halla el ángulo entre estos dos vectores de principio a fin: producto punto, las dos normas y el coseno.</p>
         <div class="fx"><div class="sys"><span class="eq">u = (3, 3)</span><span class="eq">v = (3, 0)</span></div></div>
@@ -321,7 +445,7 @@
         <div class="why"><span class="lbl">Por qué</span><p>u · v = (3)(3) + (3)(0) = 9. ‖u‖ = √(9 + 9) = 3√2 y ‖v‖ = √9 = 3. cos θ = 9/(3√2 · 3) = 1/√2, que es <strong>45°</strong>. El 90° saldría si el producto punto fuera cero; el 0° si los vectores fueran paralelos.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="proyeccion" data-level="guiado">
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="proyeccion" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
         <p class="pstatement">Vamos a proyectar u = (3, 1) sobre v = (1, 1). Primer paso: calcula los dos productos punto que necesita la fórmula, u · v y v · v.</p>
         <div class="fx"><div class="sys"><span class="eq">u = (3, 1)</span><span class="eq">v = (1, 1)</span></div></div>
@@ -334,7 +458,7 @@
         <div class="why"><span class="lbl">Por qué</span><p>u · v = (3)(1) + (1)(1) = 4. v · v = (1)(1) + (1)(1) = 2. Estos dos números arman el factor de la proyección.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="proyeccion" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="proyeccion" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">Seguimos con los mismos u = (3, 1) y v = (1, 1). Ya sabes que u · v = 4 y v · v = 2. Termina la proyección: forma el factor y escala v.</p>
         <div class="opts">
@@ -345,7 +469,7 @@
         <div class="why"><span class="lbl">Por qué</span><p>Factor = (u · v)/(v · v) = 4/2 = 2. Proyección = 2·(1, 1) = (2, 2). El (4, 4) sale de usar u · v sin dividir; el (3, 1) es u sin proyectar.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P6" data-tema="proyeccion" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P10" data-tema="proyeccion" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">Proyecta u = (7, 4) sobre v = (1, 2). ¿Cuál es la proyección?</p>
         <div class="opts">
@@ -356,40 +480,75 @@
         <div class="why"><span class="lbl">Por qué</span><p>u · v = (7)(1) + (4)(2) = 15. v · v = 1 + 4 = 5. Factor = 15/5 = 3. Proyección = 3·(1, 2) = (3, 6). Ni (7, 4) ni (1, 2) usan la fórmula: uno es u, el otro es v.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P7" data-tema="gram_schmidt" data-level="guiado">
+      <div class="pitem" data-kind="item" data-id="P11" data-tema="proyeccion" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Después de proyectar u = (5, 2) sobre v = (1, 0), su proyección es (5, 0). ¿Cuál es el <strong>resto perpendicular</strong> a v?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(0, 2)</button>
+          <button class="opt" data-ok="0">(5, 2)</button>
+          <button class="opt" data-ok="0">(10, 2)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El resto es u − proyección = (5, 2) − (5, 0) = (0, 2). Comprueba: (0, 2) · (1, 0) = 0, perpendicular. El (5, 2) es u sin restar; sumar daría (10, 2), que no es perpendicular.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P12" data-tema="gram_schmidt" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Gram-Schmidt con v₁ = (2, 0) y v₂ = (3, 3). Tomamos u₁ = v₁. Primer paso del cómputo: proyecta v₂ sobre u₁. ¿Cuánto vale esa proyección?</p>
-        <div class="fx"><div class="sys"><span class="eq">u₁ = (2, 0)</span><span class="eq">v₂ = (3, 3)</span></div></div>
+        <p class="pstatement">Gram-Schmidt con v<sub>1</sub> = (2, 0) y v<sub>2</sub> = (3, 3). Tomamos u<sub>1</sub> = v<sub>1</sub>. Primer paso del cómputo: proyecta v<sub>2</sub> sobre u<sub>1</sub>. ¿Cuánto vale esa proyección?</p>
+        <div class="fx"><div class="sys"><span class="eq">u<sub>1</sub> = (2, 0)</span><span class="eq">v<sub>2</sub> = (3, 3)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">(3, 0)</button>
           <button class="opt" data-ok="0">(3, 3)</button>
           <button class="opt" data-ok="0">(6, 0)</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>v₂ · u₁ = (3)(2) + (3)(0) = 6. u₁ · u₁ = 4. El factor es 6/4, y multiplica a u₁ = (2, 0).</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>v₂ · u₁ = 6 y u₁ · u₁ = 4, así que el factor es 6/4 = 3/2. Proyección = (3/2)·(2, 0) = (3, 0). El (6, 0) olvida dividir entre u₁ · u₁.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>v<sub>2</sub> · u<sub>1</sub> = (3)(2) + (3)(0) = 6. u<sub>1</sub> · u<sub>1</sub> = 4. El factor es 6/4, y multiplica a u<sub>1</sub> = (2, 0).</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>v<sub>2</sub> · u<sub>1</sub> = 6 y u<sub>1</sub> · u<sub>1</sub> = 4, así que el factor es 6/4 = 3/2. Proyección = (3/2)·(2, 0) = (3, 0). El (6, 0) olvida dividir entre u<sub>1</sub> · u<sub>1</sub>.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P8" data-tema="gram_schmidt" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P13" data-tema="gram_schmidt" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Sigue con v₂ = (3, 3) y la proyección (3, 0) que acabas de obtener. Réstala para hallar u₂, el vector ortogonal a u₁ = (2, 0). ¿Cuál es u₂?</p>
+        <p class="pstatement">Sigue con v<sub>2</sub> = (3, 3) y la proyección (3, 0) que acabas de obtener. Réstala para hallar u<sub>2</sub>, el vector ortogonal a u<sub>1</sub> = (2, 0). ¿Cuál es u<sub>2</sub>?</p>
         <div class="opts">
           <button class="opt" data-ok="1">(0, 3)</button>
           <button class="opt" data-ok="0">(6, 3)</button>
           <button class="opt" data-ok="0">(0, 6)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>u₂ = v₂ − proyección = (3, 3) − (3, 0) = (0, 3). Comprueba: u₁ · u₂ = (2)(0) + (0)(3) = 0, perpendiculares. Restar es el paso clave; sumar daría (6, 3), que no es ortogonal.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>u<sub>2</sub> = v<sub>2</sub> − proyección = (3, 3) − (3, 0) = (0, 3). Comprueba: u<sub>1</sub> · u<sub>2</sub> = (2)(0) + (0)(3) = 0, perpendiculares. Restar es el paso clave; sumar daría (6, 3), que no es ortogonal.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P9" data-tema="gram_schmidt" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P14" data-tema="gram_schmidt" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Aplica Gram-Schmidt completo a estos dos vectores: toma u₁ = v₁, proyecta v₂ sobre u₁, réstala y da el segundo vector ortogonal u₂.</p>
-        <div class="fx"><div class="sys"><span class="eq">v₁ = (1, 0)</span><span class="eq">v₂ = (4, 3)</span></div></div>
+        <p class="pstatement">Aplica Gram-Schmidt completo a estos dos vectores: toma u<sub>1</sub> = v<sub>1</sub>, proyecta v<sub>2</sub> sobre u<sub>1</sub>, réstala y da el segundo vector ortogonal u<sub>2</sub>.</p>
+        <div class="fx"><div class="sys"><span class="eq">v<sub>1</sub> = (1, 0)</span><span class="eq">v<sub>2</sub> = (4, 3)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">(0, 3)</button>
           <button class="opt" data-ok="0">(4, 0)</button>
           <button class="opt" data-ok="0">(4, 3)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>u₁ = (1, 0). Factor = (v₂ · u₁)/(u₁ · u₁) = 4/1 = 4, así que la proyección es 4·(1, 0) = (4, 0). u₂ = v₂ − proyección = (4, 3) − (4, 0) = (0, 3). Comprueba: u₁ · u₂ = 0. El (4, 0) es la proyección (falta restar); el (4, 3) es v₂ sin tocar.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>u<sub>1</sub> = (1, 0). Factor = (v<sub>2</sub> · u<sub>1</sub>)/(u<sub>1</sub> · u<sub>1</sub>) = 4/1 = 4, así que la proyección es 4·(1, 0) = (4, 0). u<sub>2</sub> = v<sub>2</sub> − proyección = (4, 3) − (4, 0) = (0, 3). Comprueba: u<sub>1</sub> · u<sub>2</sub> = 0. El (4, 0) es la proyección (falta restar); el (4, 3) es v<sub>2</sub> sin tocar.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P15" data-tema="modelado" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Vuelve al dron del inicio: viaja en dirección u = (3, 4) desde el origen, y la torre está en p = (7, 1). El punto más cercano de la trayectoria a la torre es la proyección de p sobre u. ¿Cuál es ese punto?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(3, 4)</button>
+          <button class="opt" data-ok="0">(7, 1)</button>
+          <button class="opt" data-ok="0">(21, 4)</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>p · u = (7)(3) + (1)(4) = 25. u · u = 9 + 16 = 25. El factor 25/25 escala a u = (3, 4).</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>p · u = 21 + 4 = 25 y u · u = 25, así que el factor es 25/25 = 1. Proyección = 1·(3, 4) = (3, 4): ese es el punto más cercano. El (7, 1) es la torre, no un punto de la trayectoria. Falta la otra mitad del problema: qué tan lejos pasa el dron de la torre.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P16" data-tema="modelado" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Cierra el problema del dron: el punto más cercano es (3, 4) y la torre está en p = (7, 1). ¿Qué tan lejos pasa el dron de la torre, es decir, la distancia perpendicular?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">5</button>
+          <button class="opt" data-ok="0">10</button>
+          <button class="opt" data-ok="0">7</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>El resto perpendicular es torre − punto cercano = (7, 1) − (3, 4). Su norma es la distancia: √(coord₁² + coord₂²).</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Resto = (7, 1) − (3, 4) = (4, −3). Distancia = ‖(4, −3)‖ = √(16 + 9) = √25 = <strong>5</strong>. El dron pasa a 5 unidades de la torre: ese es el número que faltaba. Comprueba que el resto es perpendicular a la trayectoria: (4, −3) · (3, 4) = 12 − 12 = 0.</p></div>
       </div>
     </section>
 
@@ -404,6 +563,17 @@
       <div class="why"><span class="lbl">Por qué</span><p>Si u · v = 0, entonces cos θ = 0 y θ = 90°. Que un vector sea múltiplo de otro es justo lo contrario: son <strong>paralelos</strong>.</p></div>
     </div>
 
+    <div class="check" data-kind="recall" data-fid="F3_proyeccion" data-tema="proyeccion">
+      <div class="qtag">Te toca · recuerda</div>
+      <p class="q">En la fórmula de la proyección de u sobre v, ¿qué va en el denominador del factor?</p>
+      <div class="opts">
+        <button class="opt" data-ok="1">v · v (el vector sobre el que proyectas, consigo mismo)</button>
+        <button class="opt" data-ok="0">u · u</button>
+        <button class="opt" data-ok="0">‖u‖ · ‖v‖</button>
+      </div>
+      <div class="why"><span class="lbl">Por qué</span><p>El factor es (u · v)/(<strong>v · v</strong>). Abajo va siempre v consigo mismo; poner u · u proyecta en la dirección equivocada.</p></div>
+    </div>
+
     <section class="chuleta">
       <h3>Para memorizar</h3>
       <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
@@ -412,7 +582,7 @@
         <li><span class="ck">✓</span> Norma: ‖v‖ = √(v · v). Unitario = norma 1 (divide entre su norma).</li>
         <li><span class="ck">✓</span> Ángulo: cos θ = (u · v)/(‖u‖‖v‖).</li>
         <li><span class="ck">✓</span> Ortogonales ⇔ u · v = 0 (perpendiculares, 90°).</li>
-        <li><span class="ck">✓</span> Proyección: proy_v(u) = ((u · v)/(v · v))·v. Lo que sobra es perpendicular a v.</li>
+        <li><span class="ck">✓</span> Proyección: proy<sub>v</sub>(u) = ((u · v)/(v · v))·v. Lo que sobra es perpendicular a v.</li>
         <li><span class="ck">✓</span> Gram-Schmidt: al siguiente vector réstale su proyección sobre los anteriores.</li>
         <li><span class="ck">✓</span> Mínimos cuadrados: la mejor aproximación es proyectar los datos sobre lo alcanzable.</li>
       </ul>
@@ -425,6 +595,10 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="L6_diagonalizacion.html"><span class="sp">← Anterior</span><span class="ti">U6 · Diagonalización</span></a>
+    </nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 7</p></footer>
 
@@ -494,51 +668,6 @@ function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=
   host.innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proyección del vector u sobre la dirección de v, con el resto perpendicular" style="display:block;width:100%;height:auto;max-width:340px;margin:0 auto">'
     + g + axes + vline + pvec + res + uvec + rightangle + dots + labels + '</svg>';
 })();
-
-// ===== motor de plano (intacto; disponible para futuras versiones con rectas) =====
-function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
-function clip(a,b,c){
-  var pts=[], E=1e-9;
-  if(Math.abs(b)>E){ [-1,5].forEach(function(x){ var y=(c-a*x)/b; if(y>=-1-E&&y<=5+E) pts.push([x,y]); }); }
-  if(Math.abs(a)>E){ [-1,5].forEach(function(y){ var x=(c-b*y)/a; if(x>=-1-E&&x<=5+E) pts.push([x,y]); }); }
-  var u=[]; pts.forEach(function(p){ if(!u.some(function(q){return Math.abs(q[0]-p[0])<1e-6&&Math.abs(q[1]-p[1])<1e-6;})) u.push(p); });
-  return u.slice(0,2);
-}
-function lineSVG(a,b,c,color,dash){
-  var e=clip(a,b,c); if(e.length<2) return '';
-  var p0=PT(e[0][0],e[0][1]), p1=PT(e[1][0],e[1][1]);
-  return '<line x1="'+p0[0]+'" y1="'+p0[1]+'" x2="'+p1[0]+'" y2="'+p1[1]+'" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"'+(dash?' stroke-dasharray="8 7"':'')+'/>';
-}
-var VG='', VA='';
-(function(){
-  for(var g=-1; g<=5; g++){
-    var a=PT(g,-1), b=PT(g,5), c=PT(-1,g), d=PT(5,g);
-    VG+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/>'+'<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';
-  }
-  var x0=PT(-1,0), x1=PT(5,0), y0=PT(0,-1), y1=PT(0,5);
-  VA='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/>'+'<line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';
-})();
-function drawPlane(cse){
-  var L, cap;
-  if(cse==='una'){
-    L=lineSVG(1,2,5,'#F5821F')+lineSVG(3,-1,1,'#283891');
-    var dp=PT(1,2);
-    L+='<circle cx="'+dp[0]+'" cy="'+dp[1]+'" r="11" fill="none" stroke="#F5821F" stroke-width="2.5"/><circle cx="'+dp[0]+'" cy="'+dp[1]+'" r="6.5" fill="#181B22"/>';
-    cap='Las dos rectas se cruzan en un punto. Ese punto —x = 1, y = 2— es la única solución.';
-  } else if(cse==='ninguna'){
-    L=lineSVG(1,2,5,'#F5821F')+lineSVG(1,2,8,'#283891');
-    cap='Las rectas son paralelas: nunca se cruzan. El sistema no tiene solución.';
-  } else {
-    L=lineSVG(1,2,5,'#F5821F')+lineSVG(2,4,10,'#283891',true);
-    cap='Las dos ecuaciones son la misma recta. Coinciden en todos sus puntos: infinitas soluciones.';
-  }
-  document.getElementById('vizPlane').innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plano cartesiano con dos rectas">'+VG+VA+L+'</svg>';
-  document.getElementById('vizCap').textContent=cap;
-}
-document.querySelectorAll('.viz-tab').forEach(function(b){
-  b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawPlane(b.getAttribute('data-case')); };
-});
-(function(){ var f=document.querySelector('.viz-tab'); if(f){ f.classList.add('active'); drawPlane('una'); } })();
 
 // ===== instrumentación =====
 var session = {

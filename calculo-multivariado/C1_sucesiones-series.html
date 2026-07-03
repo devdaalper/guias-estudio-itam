@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -149,7 +170,7 @@
   <header class="hero">
     <p class="kick">Cálculo Multivariado · Unidad 1</p>
     <h1>Sucesiones y <mark>series</mark></h1>
-    <p class="lead">Lo esencial de la unidad, de principio a fin. Aquí no se adivina: se recuerda el criterio y se razona el paso. Todo a mano, sin calculadora.</p>
+    <p class="lead">El tema completo, de principio a fin. Aquí no se adivina: se recuerda el criterio y se razona el paso. Todo a mano, sin calculadora.</p>
     <div class="learn">
       <h2>Al terminar vas a poder</h2>
       <ol>
@@ -165,78 +186,215 @@
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Sueltas una pelota desde <strong>2 metros</strong>. En cada rebote sube <strong>la mitad</strong> de lo que subió antes: 1 m, luego 0.5 m, luego 0.25 m… y así <strong>para siempre</strong>. La pregunta incómoda: si rebota infinitas veces, ¿recorre una distancia <strong>infinita</strong>?</p>
+      <div class="fx"><div class="sys"><span class="eq">subidas: 1 + <sup>1</sup>⁄<sub>2</sub> + <sup>1</sup>⁄<sub>4</sub> + <sup>1</sup>⁄<sub>8</sub> + …</span></div></div>
+      <p class="idea" style="font-size:17px">Son <strong>infinitos</strong> sumandos, así que la intuición grita “infinito”. Pero cada uno es minúsculo, y la suma podría <strong>quedarse quieta</strong> en un número. Sumar de a uno no termina nunca; necesitamos una herramienta que diga, sin sumar a mano, si el total se estabiliza y en qué valor. Para el final de esta guía vas a cerrar este número tú sola.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>Una sucesión es una lista con orden</h3>
-      <p class="idea">Una <strong>sucesión</strong> es una lista infinita de números, uno por cada entero positivo: hay un primer término, un segundo, un tercero, y así sin fin. La regla que da el término general se escribe como una fórmula en <em>n</em>. Por ejemplo:</p>
+      <h3>1 · Una sucesión es una lista con orden</h3>
+      <p class="idea">Antes de sumar hay que ordenar. Una <strong>sucesión</strong> es una lista infinita de números, uno por cada entero positivo: hay un primero, un segundo, un tercero, sin fin. La regla que da el término general se escribe como una fórmula en <em>n</em>:</p>
       <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = (2n + 1) / (n + 3)</span></div></div>
-      <p class="idea">Sus primeros términos son estos. Fíjate hacia dónde se acercan conforme <em>n</em> crece:</p>
-      <div class="fx"><div class="sys"><span class="eq">a<sub>1</sub> = 3/4,&nbsp;&nbsp; a<sub>2</sub> = 1,&nbsp;&nbsp; a<sub>10</sub> ≈ 1.62,&nbsp;&nbsp; a<sub>100</sub> ≈ 1.95</span></div></div>
-      <p class="idea">El <strong>límite</strong> de la sucesión es el número al que se pegan los términos cuando <em>n</em> tiende a infinito. Si ese número existe, la sucesión <strong>converge</strong>; si no, <strong>diverge</strong>.</p>
+      <p class="idea">Sus primeros términos van acercándose a un valor conforme <em>n</em> crece. El <strong>límite</strong> es ese número al que se pegan cuando <em>n</em> → ∞: si existe, la sucesión <strong>converge</strong>; si no, <strong>diverge</strong>.</p>
+      <div class="fx"><div class="sys"><span class="eq">a<sub>1</sub> = <sup>3</sup>⁄<sub>4</sub>,   a<sub>2</sub> = 1,   a<sub>10</sub> ≈ 1.62,   a<sub>100</sub> ≈ 1.95</span></div></div>
+      <div class="check" data-kind="item" data-id="IDEA1chk" data-tema="sucesion" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Mirando los términos de arriba, ¿hacia qué número parece dirigirse la sucesión?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Hacia 0: cada término es más chico que el anterior</button>
+          <button class="opt" data-ok="1">Hacia 2: los términos suben pero se frenan cerca de 2</button>
+          <button class="opt" data-ok="0">Hacia infinito: como n crece, el término también</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Los valores 1, 1.62, 1.95… se acercan a 2 sin pasarse. No van a 0 (crecen) ni a infinito (se frenan): tienen un techo, y ese techo es el límite.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>El truco del término dominante</h3>
-      <p class="idea">Para un cociente de polinomios, el límite lo decide el <strong>término de mayor grado</strong> de arriba y de abajo. Divides todo entre la potencia más alta de <em>n</em> y los términos con <em>n</em> en el denominador se van a cero. Ese es el límite:</p>
-      <div class="fx"><div class="sys"><span class="eq">lím (2n + 1)/(n + 3) = 2/1 = 2</span></div></div>
+      <h3>2 · El truco del término dominante</h3>
+      <p class="idea">Para un cociente de polinomios no hace falta tabular: el límite lo decide el <strong>término de mayor grado</strong> de arriba y de abajo. Si los grados empatan, el límite es el <strong>cociente de sus coeficientes</strong>; lo demás se vuelve despreciable cuando <em>n</em> es enorme.</p>
+      <div class="fx"><div class="sys"><span class="eq">lím (2n + 1)/(n + 3) = <sup>2</sup>⁄<sub>1</sub> = 2</span></div></div>
       <div class="check" data-kind="recall" data-fid="F1_limite_sucesion" data-tema="limite_sucesion">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿A qué número tiende la sucesión de término general “tres n cuadrada, entre dos n cuadrada más cinco”?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">A 3/2, porque manda el cociente de los términos de mayor grado</button>
           <button class="opt" data-ok="0">A 0, porque el denominador crece más</button>
+          <button class="opt" data-ok="1">A <sup>3</sup>⁄<sub>2</sub>, porque manda el cociente de los términos de mayor grado</button>
           <button class="opt" data-ok="0">A infinito, porque el numerador crece sin parar</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Arriba y abajo el grado es 2. El límite es el cociente de los coeficientes de <em>n²</em>: 3 entre 2. El “más cinco” se vuelve despreciable.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Arriba y abajo el grado es 2. El límite es el cociente de los coeficientes de <em>n</em><sup>2</sup>: 3 entre 2. El “más cinco” se vuelve despreciable.</p></div>
       </div>
     </section>
 
     <section class="sec">
-      <h3>De sucesión a serie: ahora sumamos</h3>
-      <p class="idea">Una <strong>serie</strong> es lo que resulta de <strong>sumar</strong> todos los términos de una sucesión. No sumas de golpe: vas acumulando. La <strong>suma parcial</strong> S<sub>n</sub> es el total hasta el término <em>n</em>:</p>
+      <h3>3 · De sucesión a serie: ahora sumamos</h3>
+      <p class="idea">Una <strong>serie</strong> es lo que resulta de <strong>sumar</strong> todos los términos de una sucesión. No se suma de golpe: se va acumulando. La <strong>suma parcial</strong> S<sub>n</sub> es el total hasta el término <em>n</em>:</p>
       <div class="fx"><div class="sys"><span class="eq">S<sub>1</sub> = a<sub>1</sub></span><span class="eq">S<sub>2</sub> = a<sub>1</sub> + a<sub>2</sub></span><span class="eq">S<sub>3</sub> = a<sub>1</sub> + a<sub>2</sub> + a<sub>3</sub></span></div></div>
-      <p class="idea">La serie <strong>converge</strong> si esas sumas parciales se acercan a un número fijo. Ese número es la <strong>suma de la serie</strong>. Si las sumas crecen sin freno o van saltando, la serie <strong>diverge</strong>.</p>
+      <p class="idea">La serie <strong>converge</strong> si esas sumas parciales se acercan a un número fijo —la <strong>suma de la serie</strong>—. Si crecen sin freno o van saltando, <strong>diverge</strong>.</p>
       <div class="check" data-kind="recall" data-fid="F0_sucesion_vs_serie" data-tema="sucesion_vs_serie">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Cuál es la diferencia entre una sucesión y una serie?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">La sucesión es la lista de términos; la serie es lo que resulta de sumarlos</button>
           <button class="opt" data-ok="0">Son lo mismo, solo cambia el nombre según el libro</button>
+          <button class="opt" data-ok="1">La sucesión es la lista de términos; la serie es lo que resulta de sumarlos</button>
           <button class="opt" data-ok="0">La sucesión siempre converge; la serie siempre diverge</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La sucesión aₙ es la lista con orden; la serie Σ aₙ es la suma de esa lista. Una sucesión puede converger a un límite mientras su serie diverge (la armónica 1/n → 0 pero Σ 1/n diverge).</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>La sucesión a<sub>n</sub> es la lista con orden; la serie ∑ a<sub>n</sub> es la suma de esa lista. Una sucesión puede converger mientras su serie diverge: la armónica <sup>1</sup>⁄<sub>n</sub> → 0, pero ∑ <sup>1</sup>⁄<sub>n</sub> diverge.</p></div>
       </div>
     </section>
 
-    <h2 class="modhead">Yo lo hago</h2>
+    <section class="sec">
+      <h3>4 · La serie estrella: la geométrica</h3>
+      <p class="idea">La serie que hay que dominar de memoria es la <strong>geométrica</strong>: cada término es el anterior multiplicado por una misma <strong>razón</strong> r. Solo converge si la razón, en valor absoluto, es <strong>menor que 1</strong> (los términos deben encogerse). Y cuando converge, su suma tiene fórmula cerrada:</p>
+      <div class="fx"><div class="sys"><span class="eq">a + a·r + a·r<sup>2</sup> + … = <sup>a</sup>⁄<sub>(1 − r)</sub>,  para | r | &lt; 1</span></div></div>
+      <p class="idea">Esta es la herramienta que resuelve la pelota del inicio: los rebotes son una geométrica con razón <sup>1</sup>⁄<sub>2</sub>.</p>
+      <div class="check" data-kind="item" data-id="IDEA4chk" data-tema="serie_geometrica" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿Cuál de estas geométricas <strong>converge</strong> (o sea, tiene suma finita)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">1 + 3 + 9 + 27 + …  (razón 3)</button>
+          <button class="opt" data-ok="1">1 + <sup>1</sup>⁄<sub>3</sub> + <sup>1</sup>⁄<sub>9</sub> + <sup>1</sup>⁄<sub>27</sub> + …  (razón <sup>1</sup>⁄<sub>3</sub>)</button>
+          <button class="opt" data-ok="0">2 + 2 + 2 + 2 + …  (razón 1)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Solo converge si | r | &lt; 1. Con r = <sup>1</sup>⁄<sub>3</sub> los términos se encogen; con r = 3 se disparan y con r = 1 se repiten sin frenar: esas dos divergen.</p></div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">La serie estrella es la <strong>geométrica</strong>: cada término es el anterior multiplicado por una misma <strong>razón</strong> r. Sumemos esta, donde el primer término es 3 y la razón es 1/2. Voy paso a paso; tú solo sigue el hilo.</p>
-      <div class="estep"><div class="oprow">Identifico a y r</div><p>El primer término es a = 3. Cada término es la mitad del anterior, así que r = 1/2.</p><div class="fx"><div class="sys"><span class="eq">3 + 3/2 + 3/4 + 3/8 + …</span></div></div></div>
-      <div class="estep"><div class="oprow">Reviso si converge</div><p>Una geométrica converge solo si el valor absoluto de la razón es menor que 1. Aquí r = 1/2, y 1/2 sí es menor que 1: converge.</p><div class="fx"><div class="sys"><span class="eq">| r | = 1/2 &lt; 1&nbsp;&nbsp;→&nbsp;&nbsp;converge</span></div></div></div>
+      <p class="idea" style="font-size:17px">Cerremos las <strong>subidas de la pelota</strong>: 1 + <sup>1</sup>⁄<sub>2</sub> + <sup>1</sup>⁄<sub>4</sub> + … No la mires nada más: en cada paso <strong>tú eliges qué hacer</strong> y yo lo aplico.</p>
+      <div class="fx"><div class="sys"><span class="eq">1 + <sup>1</sup>⁄<sub>2</sub> + <sup>1</sup>⁄<sub>4</sub> + <sup>1</sup>⁄<sub>8</sub> + …</span></div></div>
 
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="serie_geometrica">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">Ya sabes que converge. Para la suma total de una geométrica se usa “primer término entre uno menos la razón”. Con a = 3 y r = 1/2, ¿qué cuenta hay que hacer?</p>
+      <div class="check" data-kind="item" data-id="E1pred" data-tema="serie_geometrica" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Primer paso: identificar la serie. ¿Cuál es el primer término <em>a</em> y cuál la razón <em>r</em>?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">3 dividido entre (1 − 1/2), o sea 3 entre 1/2</button>
-          <button class="opt" data-ok="0">3 multiplicado por (1 − 1/2)</button>
-          <button class="opt" data-ok="0">3 dividido entre (1 + 1/2)</button>
+          <button class="opt" data-ok="1">a = 1 y r = <sup>1</sup>⁄<sub>2</sub>, porque cada término es la mitad del anterior</button>
+          <button class="opt" data-ok="0">a = <sup>1</sup>⁄<sub>2</sub> y r = 1, porque el primer sumando visible es <sup>1</sup>⁄<sub>2</sub></button>
+          <button class="opt" data-ok="0">a = 1 y r = 2, porque el denominador se duplica</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La fórmula es a entre (1 − r). Con r = 1/2, el denominador es 1 − 1/2 = 1/2, no 1 + 1/2.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>El primer término es 1. Para pasar de un término al siguiente multiplicas por <sup>1</sup>⁄<sub>2</sub> (no divides el resultado): esa es la razón.</p></div>
       </div>
+      <div class="estep"><div class="oprow">Identifico a y r</div><p>Divido un término entre el anterior para leer la razón, celda por celda:</p><p class="calc"><span class="rw">r</span> (<sup>1</sup>⁄<sub>2</sub>)÷1=<b><sup>1</sup>⁄<sub>2</sub></b> <span class="sep">•</span> (<sup>1</sup>⁄<sub>4</sub>)÷(<sup>1</sup>⁄<sub>2</sub>)=<b><sup>1</sup>⁄<sub>2</sub></b> <span class="sep">•</span> a=<b>1</b></p></div>
 
-      <div class="estep"><div class="oprow">Aplico la fórmula</div><p>Divido 3 entre 1/2. Dividir entre una fracción es multiplicar por su recíproco: 3 × 2 = 6.</p><div class="fx"><div class="sys"><span class="eq">S = a / (1 − r) = 3 / (1 − 1/2) = 3 / (1/2) = 6</span></div></div></div>
-      <p class="idea" style="font-size:17px">La suma de infinitos términos da un número <strong>finito</strong>: <strong>6</strong>. Las sumas parciales 3, 4.5, 5.25, 5.625… se acercan a 6 sin pasarse. Eso es converger.</p>
+      <div class="check" data-kind="item" data-id="E2pred" data-tema="serie_geometrica" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Antes de sumar, hay que verificar que <strong>converge</strong>. ¿Qué condición reviso?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Que el primer término sea menor que 1</button>
+          <button class="opt" data-ok="1">Que | r | &lt; 1; aquí | <sup>1</sup>⁄<sub>2</sub> | = <sup>1</sup>⁄<sub>2</sub> &lt; 1, así que converge</button>
+          <button class="opt" data-ok="0">Que haya infinitos términos, y siempre los hay</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La geométrica converge exactamente cuando | r | &lt; 1. El tamaño del primer término no decide nada; lo que importa es que los sumandos se encojan.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Reviso si converge</div><p>Comparo el valor absoluto de la razón con 1:</p><p class="calc"><span class="rw">| r |</span> |<sup>1</sup>⁄<sub>2</sub>|=<b><sup>1</sup>⁄<sub>2</sub></b> <span class="sep">•</span> <sup>1</sup>⁄<sub>2</sub>&lt;1 → <b>converge</b></p></div>
+
+      <div class="check" data-kind="item" data-id="E3pred" data-tema="serie_geometrica" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">La fórmula es <em>a</em> entre (1 − r). Con a = 1 y r = <sup>1</sup>⁄<sub>2</sub>, ¿qué denominador queda?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">1 + <sup>1</sup>⁄<sub>2</sub> = <sup>3</sup>⁄<sub>2</sub></button>
+          <button class="opt" data-ok="1">1 − <sup>1</sup>⁄<sub>2</sub> = <sup>1</sup>⁄<sub>2</sub></button>
+          <button class="opt" data-ok="0">1 · <sup>1</sup>⁄<sub>2</sub> = <sup>1</sup>⁄<sub>2</sub></button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>En la fórmula el denominador es 1 <strong>menos</strong> r, no 1 más r ni el producto. Con r = <sup>1</sup>⁄<sub>2</sub> da 1 − <sup>1</sup>⁄<sub>2</sub> = <sup>1</sup>⁄<sub>2</sub>.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Armo el denominador</div><p>Calculo 1 − r antes de dividir:</p><p class="calc"><span class="rw">1−r</span> 1−<sup>1</sup>⁄<sub>2</sub>=<b><sup>1</sup>⁄<sub>2</sub></b></p></div>
+
+      <div class="estep"><div class="oprow">Aplico la fórmula</div><p>Divido a entre (1 − r). Dividir entre <sup>1</sup>⁄<sub>2</sub> es multiplicar por su recíproco, 2:</p><p class="calc"><span class="rw">S</span> <sup>a</sup>⁄<sub>(1−r)</sub>=<sup>1</sup>⁄<sub>(1/2)</sub> <span class="sep">•</span> 1×2=<b>2</b></p><div class="fx"><div class="sys"><span class="eq">S = <sup>1</sup>⁄<sub>(1 − 1/2)</sub> = <sup>1</sup>⁄<sub>(1/2)</sub> = 2</span></div></div></div>
+
+      <p class="idea" style="font-size:17px">Infinitos sumandos, total <strong>finito</strong>: las subidas suman <strong>2 metros</strong>. Las sumas parciales 1, 1.5, 1.75, 1.875… se acercan a 2 sin pasarse. Ese es todo el método: identificar a y r, verificar | r | &lt; 1, y aplicar <em>a</em> entre (1 − r).</p>
+      <p class="fx-note">Con esto ya puedes cerrar la pelota completa del inicio: sube 2 m en total, y si sumas también las bajadas sale una distancia recorrida finita. Hazlo en papel para comprobar que el método ya es tuyo.</p>
+    </section>
+
+    <h2 class="modhead">Sube el tamaño · cuando no es geométrica</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">La geométrica casi salió de un tiro porque la razón era constante. Cuando la razón <strong>cambia</strong> con <em>n</em> (hay factoriales o potencias mezcladas), se usa el <strong>criterio de la razón</strong>, en <strong>dos fases</strong>:</p>
+      <ul class="fases">
+        <li><strong>Fase 1 — arma y simplifica:</strong> escribes el cociente a<sub>n+1</sub>/a<sub>n</sub> y cancelas lo que se repite.</li>
+        <li><strong>Fase 2 — toma el límite y decide:</strong> ese cociente tiende a un número L. Si L &lt; 1 converge, si L &gt; 1 diverge, si L = 1 el criterio no dice nada.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Probemos la serie de término general a<sub>n</sub> = <sup>n</sup>⁄<sub>2<sup>n</sup></sub> (una <em>n</em> arriba, una potencia de 2 abajo).</p>
+      <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = <sup>n</sup>⁄<sub>2<sup>n</sup></sub></span></div></div>
+
+      <div class="check" data-kind="item" data-id="T1pred" data-tema="criterio_razon" data-level="juntos">
+        <div class="qtag">Te toca · decide la fase</div>
+        <p class="q">Empieza la <strong>Fase 1</strong>. Para armar a<sub>n+1</sub>/a<sub>n</sub> escribes el término n+1 sobre el término n. ¿Cómo queda antes de simplificar?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1"><sup>(n+1)</sup>⁄<sub>2<sup>n+1</sup></sub> · <sup>2<sup>n</sup></sup>⁄<sub>n</sub>, o sea el término n+1 por el recíproco del término n</button>
+          <button class="opt" data-ok="0"><sup>(n+1)</sup>⁄<sub>n</sub> · <sup>2<sup>n+1</sup></sup>⁄<sub>2<sup>n</sup></sub>, dejando las potencias sin invertir</button>
+          <button class="opt" data-ok="0">(n+1) − n, restando los términos en vez de dividir</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Dividir a<sub>n+1</sub> entre a<sub>n</sub> es multiplicar a<sub>n+1</sub> por el <strong>recíproco</strong> de a<sub>n</sub>: <sup>(n+1)</sup>⁄<sub>2<sup>n+1</sup></sub> por <sup>2<sup>n</sup></sup>⁄<sub>n</sub>. El criterio divide términos, nunca los resta.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fase 1 · armo el cociente</div><p>Multiplico el término n+1 por el recíproco del término n, agrupando números con números y potencias con potencias:</p><p class="calc"><span class="rw">a<sub>n+1</sub>/a<sub>n</sub></span> <sup>(n+1)</sup>⁄<sub>n</sub> <span class="sep">•</span> <sup>2<sup>n</sup></sup>⁄<sub>2<sup>n+1</sup></sub></p></div>
+      <div class="estep"><div class="oprow">Fase 1 · simplifico las potencias</div><p>La potencia se cancela sola: 2<sup>n</sup> entre 2<sup>n+1</sup> baja un factor 2. Junto el 2 con la <em>n</em> de abajo:</p><p class="calc"><span class="rw">2</span> <sup>2<sup>n</sup></sup>⁄<sub>2<sup>n+1</sup></sub>=<b><sup>1</sup>⁄<sub>2</sub></b> <span class="sep">•</span> resultado=<b><sup>(n+1)</sup>⁄<sub>2n</sub></b></p><div class="fx"><div class="sys"><span class="eq">a<sub>n+1</sub> / a<sub>n</sub> = <sup>(n + 1)</sup>⁄<sub>2n</sub></span></div></div></div>
+
+      <div class="check" data-kind="item" data-id="T2pred" data-tema="criterio_razon" data-level="juntos">
+        <div class="qtag">Te toca · decide la fase</div>
+        <p class="q">Fase 2: le tomas el límite a <sup>(n+1)</sup>⁄<sub>2n</sub> cuando <em>n</em> crece. ¿Cuánto da y qué concluyes?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Da 1, así que el criterio no concluye</button>
+          <button class="opt" data-ok="1">Da <sup>1</sup>⁄<sub>2</sub>, y como <sup>1</sup>⁄<sub>2</sub> &lt; 1 la serie converge</button>
+          <button class="opt" data-ok="0">Da 2, y como 2 &gt; 1 la serie diverge</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Arriba y abajo el grado es 1; manda <sup>n</sup>⁄<sub>2n</sub> = <sup>1</sup>⁄<sub>2</sub>. Como L = <sup>1</sup>⁄<sub>2</sub> &lt; 1, la serie converge.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fase 2 · tomo el límite y decido</div><p>Manda el cociente de los términos de mayor grado, y comparo L con 1:</p><p class="calc"><span class="rw">L</span> lím <sup>(n+1)</sup>⁄<sub>2n</sub>=<sup>n</sup>⁄<sub>2n</sub>=<b><sup>1</sup>⁄<sub>2</sub></b> <span class="sep">•</span> <sup>1</sup>⁄<sub>2</sub>&lt;1 → <b>converge</b></p></div>
+      <p class="idea" style="font-size:17px">Mismo espíritu que la geométrica —mirar la razón— solo que ahora la razón depende de <em>n</em>, así que hay que <strong>tomarle el límite</strong>. Este criterio brilla con factoriales y potencias porque se cancelan solos al dividir.</p>
+    </section>
+
+    <section class="sec">
+      <h3>Un filtro rápido antes de todo</h3>
+      <p class="idea">Antes de cualquier criterio fino, un vistazo de un segundo: si los términos a<sub>n</sub> <strong>no</strong> tienden a 0, la serie <strong>diverge</strong> sí o sí. Es una condición <strong>necesaria</strong>, no suficiente: que a<sub>n</sub> → 0 no garantiza convergencia (la armónica ∑ <sup>1</sup>⁄<sub>n</sub> tiene términos que se van a 0 y aun así diverge), pero si a<sub>n</sub> no llega a 0, ni te molestes.</p>
+      <div class="fx"><div class="sys"><span class="eq">si a<sub>n</sub> ↛ 0  →  la serie diverge</span></div></div>
+      <div class="check" data-kind="item" data-id="NTHchk" data-tema="termino_nesimo" data-level="juntos">
+        <div class="qtag">Te toca · analiza</div>
+        <p class="q">¿Cuál de estas series se descarta <strong>de un vistazo</strong>, sin criterios finos?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">∑ <sup>n</sup>⁄<sub>(n + 1)</sub>: sus términos tienden a 1, no a 0, así que diverge</button>
+          <button class="opt" data-ok="0">∑ <sup>1</sup>⁄<sub>n</sub><sup>2</sup>: sus términos tienden a 0</button>
+          <button class="opt" data-ok="0">∑ <sup>1</sup>⁄<sub>n</sub>: sus términos tienden a 0</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p><sup>n</sup>⁄<sub>(n+1)</sub> → 1, no a 0, así que la serie diverge de inmediato. En las otras dos los términos sí van a 0, así que este filtro no las descarta (y hay que mirar más fino: una converge y otra no).</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>Comparar con una serie que ya conoces</h3>
+      <p class="idea">A veces basta <strong>comparar</strong>. Si tu serie de términos positivos es <strong>menor</strong>, término a término, que una que sabes que converge, la tuya queda “atrapada” por debajo y también converge. Y al revés: si es <strong>mayor</strong> que una que diverge, también diverge. Las referencias de memoria:</p>
+      <div class="fx"><div class="sys"><span class="eq">∑ <sup>1</sup>⁄<sub>n</sub><sup>2</sup>  converge  (p = 2 &gt; 1)</span><span class="eq">∑ <sup>1</sup>⁄<sub>n</sub>   diverge  (la armónica)</span></div></div>
+      <p class="idea">En general, la <strong>p-serie</strong> ∑ <sup>1</sup>⁄<sub>n</sub><sup>p</sup> converge si p &gt; 1 y diverge si p ≤ 1. ¿Y si los signos <strong>alternan</strong> (+, −, +, −…)? Ahí entra <strong>Leibniz</strong>: una alternada converge si sus términos, en valor absoluto, decrecen y tienden a 0. Si además converge al volver todos positivos, es <strong>absolutamente</strong> convergente; si solo converge por la alternancia, es <strong>condicionalmente</strong> convergente.</p>
+      <div class="check" data-kind="recall" data-fid="F2_comparacion" data-tema="comparacion">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Cuál de estas dos series de referencia CONVERGE?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">La armónica, de término “uno entre n”</button>
+          <button class="opt" data-ok="1">La de término “uno entre n cuadrada”</button>
+          <button class="opt" data-ok="0">Las dos convergen igual</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La p-serie converge cuando el exponente p es mayor que 1. Con p = 2 converge; la armónica (p = 1) diverge, aunque sus términos también tiendan a 0.</p></div>
+      </div>
+    </section>
+
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Veamos la comparación en acción. ¿Converge la serie de término <sup>1</sup>⁄<sub>(n</sub><sup>2</sup><sub> + 1)</sub>? La idea: acotarla por arriba con una referencia conocida. Paso a paso.</p>
+      <div class="estep"><div class="oprow">Escribo la serie</div><p>Todos sus términos son positivos, así que la comparación aplica.</p><div class="fx"><div class="sys"><span class="eq">∑ <sup>1</sup>⁄<sub>(n</sub><sup>2</sup><sub> + 1)</sub></span></div></div></div>
+      <div class="estep"><div class="oprow">Comparo término a término</div><p>El denominador n<sup>2</sup> + 1 es mayor que n<sup>2</sup>; denominador más grande significa fracción más chica:</p><p class="calc"><span class="rw">comparo</span> n<sup>2</sup>+1&gt;n<sup>2</sup> → <sup>1</sup>⁄<sub>(n</sub><sup>2</sup><sub>+1)</sub> &lt; <b><sup>1</sup>⁄<sub>n</sub><sup>2</sup></b></p></div>
+      <div class="estep"><div class="oprow">Concluyo</div><p>La de arriba, ∑ <sup>1</sup>⁄<sub>n</sub><sup>2</sup>, converge (p = 2 &gt; 1). Como la mía queda atrapada por debajo, también converge:</p><p class="calc"><span class="rw">→</span> ∑ <sup>1</sup>⁄<sub>n</sub><sup>2</sup> converge <span class="sep">•</span> mía &lt; esa → <b>converge</b></p></div>
+      <p class="idea" style="font-size:17px">La clave es <strong>elegir bien la referencia</strong>: menor que una que converge → converge; mayor que una que diverge → diverge.</p>
     </section>
 
     <section class="sec">
       <h3>Míralo: las sumas parciales se pegan al límite</h3>
-      <p class="idea">Cada barra es una <strong>suma parcial</strong> S<sub>n</sub> de la serie de arriba (a = 3, r = 1/2). Fíjate cómo se van acercando a la línea del límite —el 6— sin nunca rebasarla. Toca cada caso:</p>
+      <p class="idea">Cada barra es una <strong>suma parcial</strong> S<sub>n</sub> de una geométrica con a = 3. Fíjate cómo, según la razón, se pegan a un techo o se disparan. Toca cada caso:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
-          <button class="viz-tab" data-case="converge">Converge (r = 1/2)</button>
+          <button class="viz-tab" data-case="converge">Converge (r = <sup>1</sup>⁄<sub>2</sub>)</button>
           <button class="viz-tab" data-case="justo">Al borde (r = 1)</button>
           <button class="viz-tab" data-case="diverge">Diverge (r = 2)</button>
         </div>
@@ -247,50 +405,10 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Cuando la serie no es geométrica, el <strong>criterio de la razón</strong> decide. Miras el cociente de un término entre el anterior y ves a qué tiende. Probemos la serie cuyo término general es “n entre dos a la n”.</p>
-      <div class="estep"><div class="oprow">Armo el cociente</div><p>Escribo el término n+1 sobre el término n. Se acomoda: (n+1)/n multiplicado por 2ⁿ/2ⁿ⁺¹.</p><div class="fx"><div class="sys"><span class="eq">a<sub>n+1</sub> / a<sub>n</sub> = (n + 1) / (2n)</span></div></div></div>
-      <div class="estep"><div class="oprow">Tomo el límite</div><p>Cuando n crece, (n+1)/(2n) manda por los términos de mayor grado: n/(2n) = 1/2.</p><div class="fx"><div class="sys"><span class="eq">L = lím (n + 1)/(2n) = 1/2</span></div></div></div>
-      <div class="estep"><div class="oprow">Decido con L</div><p>La regla: si L &lt; 1 la serie converge, si L &gt; 1 diverge, si L = 1 el criterio no dice nada. Aquí L = 1/2 &lt; 1.</p><div class="fx"><div class="sys"><span class="eq">L = 1/2 &lt; 1&nbsp;&nbsp;→&nbsp;&nbsp;la serie converge</span></div></div></div>
-      <p class="idea" style="font-size:17px">Este criterio brilla cuando hay <strong>factoriales</strong> o <strong>potencias</strong>, porque se cancelan solitos al dividir un término entre el anterior.</p>
-    </section>
-
-    <section class="sec">
-      <h3>Un filtro rápido: el término n-ésimo</h3>
-      <p class="idea">Antes de cualquier criterio fino, un vistazo: si los términos aₙ <strong>no</strong> tienden a cero, la serie <strong>diverge</strong> sí o sí. Es una condición <strong>necesaria</strong>, no suficiente: que aₙ → 0 no garantiza convergencia (la armónica Σ 1/n tiene términos que se van a cero y aun así diverge), pero si aₙ no llega a cero, ni te molestes: no puede converger.</p>
-      <div class="fx"><div class="sys"><span class="eq">si a<sub>n</sub> ↛ 0&nbsp;&nbsp;→&nbsp;&nbsp;la serie diverge</span></div></div>
-    </section>
-
-    <section class="sec">
-      <h3>Comparar con una serie que ya conoces</h3>
-      <p class="idea">A veces basta <strong>comparar</strong>. Si tu serie de términos positivos es <strong>menor</strong>, término a término, que una que sabes que converge, la tuya también converge (queda “atrapada” por debajo). Las dos series de referencia que hay que tener en la memoria:</p>
-      <div class="fx"><div class="sys"><span class="eq">Σ 1/n²  converge&nbsp;&nbsp;(p = 2 &gt; 1)</span><span class="eq">Σ 1/n   diverge&nbsp;&nbsp;(la armónica)</span></div></div>
-      <p class="idea">Ejemplo: la serie de término “uno entre n cuadrada más uno” es más chica que “uno entre n cuadrada”. Como esa converge, la nuestra también.</p>
-      <p class="idea">¿Y si los signos <strong>alternan</strong> (+, −, +, −…)? Ahí entra el <strong>criterio de Leibniz</strong>: una serie alternada converge si sus términos, en valor absoluto, decrecen y tienden a cero. Además, si converge incluso al volver todos los términos positivos, se dice <strong>absolutamente convergente</strong>; si solo converge por la alternancia (pero su versión positiva diverge), es <strong>condicionalmente convergente</strong>. Ejemplo clásico: Σ (−1)ⁿ⁺¹/n converge, pero la armónica Σ 1/n no.</p>
-      <div class="check" data-kind="recall" data-fid="F2_comparacion" data-tema="comparacion">
-        <div class="qtag">Te toca · recuerda</div>
-        <p class="q">¿Cuál de estas dos series de referencia CONVERGE?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">La de término “uno entre n cuadrada”</button>
-          <button class="opt" data-ok="0">La armónica, de término “uno entre n”</button>
-          <button class="opt" data-ok="0">Las dos convergen igual</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La p-serie converge cuando el exponente p es mayor que 1. Con p = 2 converge; la armónica (p = 1) diverge, aunque sus términos también tiendan a cero.</p></div>
-      </div>
-    </section>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Veamos la comparación en acción. Quiero saber si converge la serie de término general “uno entre n cuadrada más uno”. La idea: acotarla por arriba con una serie de referencia que ya conozco. Voy paso a paso.</p>
-      <div class="estep"><div class="oprow">Escribo la serie</div><p>Todos sus términos son positivos, así que la comparación aplica.</p><div class="fx"><div class="sys"><span class="eq">Σ 1 / (n² + 1)</span></div></div></div>
-      <div class="estep"><div class="oprow">Comparo término a término</div><p>El denominador n² + 1 es mayor que n², así que cada término es más chico que el de la p-serie con p = 2.</p><div class="fx"><div class="sys"><span class="eq">1 / (n² + 1)  &lt;  1 / n²&nbsp;&nbsp;(para todo n ≥ 1)</span></div></div></div>
-      <div class="estep"><div class="oprow">Concluyo</div><p>La serie de arriba, Σ 1/n², converge (p = 2 &gt; 1). Como la mía queda atrapada por debajo, también converge.</p><div class="fx"><div class="sys"><span class="eq">Σ 1/n²  converge&nbsp;&nbsp;→&nbsp;&nbsp;Σ 1/(n² + 1)  converge</span></div></div></div>
-      <p class="idea" style="font-size:17px">La clave es <strong>elegir bien la referencia</strong>: si tu serie es <strong>menor</strong> que una que converge, converge; si es <strong>mayor</strong> que una que diverge (como la armónica), diverge.</p>
-    </section>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Última pieza: una <strong>serie de potencias</strong> es una suma infinita con una variable <em>x</em> dentro, con potencias crecientes. La reina es la <strong>geométrica en x</strong>, que vale mientras <em>x</em> se quede en su radio (aquí, entre −1 y 1):</p>
-      <div class="fx"><div class="sys"><span class="eq">1 + x + x² + x³ + … = 1/(1 − x),&nbsp;&nbsp;para | x | &lt; 1</span></div></div>
+      <p class="idea" style="font-size:17px">Última pieza: una <strong>serie de potencias</strong> mete una variable <em>x</em> dentro, con potencias crecientes. La reina es la <strong>geométrica en x</strong>, válida mientras <em>x</em> se quede en su radio (entre −1 y 1):</p>
+      <div class="fx"><div class="sys"><span class="eq">1 + x + x<sup>2</sup> + x<sup>3</sup> + … = <sup>1</sup>⁄<sub>(1 − x)</sub>,  para | x | &lt; 1</span></div></div>
       <p class="idea" style="font-size:17px">El <strong>polinomio de Taylor</strong> es la idea inversa: aproximar una función con una serie de potencias, quedándote con los primeros términos. Para <em>e</em><sup>x</sup> alrededor de 0, el coeficiente de cada potencia es “uno entre el factorial”:</p>
-      <div class="estep"><div class="oprow">Taylor de eˣ en 0</div><p>Cada término es xⁿ dividido entre n factorial. Los primeros cuatro:</p><div class="fx"><div class="sys"><span class="eq">eˣ ≈ 1 + x + x²/2 + x³/6</span></div></div></div>
+      <div class="estep"><div class="oprow">Taylor de e<sup>x</sup> en 0</div><p>Cada término es x<sup>n</sup> dividido entre n factorial. Calculo los factoriales celda por celda:</p><p class="calc"><span class="rw">n!</span> 0!=<b>1</b> <span class="sep">•</span> 1!=<b>1</b> <span class="sep">•</span> 2!=<b>2</b> <span class="sep">•</span> 3!=<b>6</b></p><div class="fx"><div class="sys"><span class="eq">e<sup>x</sup> ≈ 1 + x + <sup>x</sup><sup>2</sup>⁄<sub>2</sub> + <sup>x</sup><sup>3</sup>⁄<sub>6</sub></span></div></div></div>
       <p class="idea" style="font-size:17px">Con más términos, mejor aproximas. La serie <strong>completa</strong> (infinitos términos) es exactamente <em>e</em><sup>x</sup>. Cerca de x = 0, con pocos términos ya pega muy bien.</p>
     </section>
 
@@ -303,122 +421,164 @@
         <p class="pstatement">¿A qué número tiende esta sucesión cuando n crece sin parar?</p>
         <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = (5n − 2) / (2n + 7)</span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">A 5/2</button>
           <button class="opt" data-ok="0">A 0</button>
+          <button class="opt" data-ok="1">A <sup>5</sup>⁄<sub>2</sub></button>
           <button class="opt" data-ok="0">A infinito</button>
         </div>
         <div class="aux"><details><summary>Pista</summary><p>Arriba y abajo el grado es 1. Fíjate solo en los coeficientes de <em>n</em>: 5 arriba, 2 abajo. El resto se vuelve despreciable.</p></details></div>
         <div class="why"><span class="lbl">Por qué</span><p>Como los grados empatan, el límite es el cociente de coeficientes de <em>n</em>: 5 entre 2.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="serie_geometrica" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Esta serie geométrica tiene primer término 1 y razón 2/3. ¿Cuánto suma?</p>
-        <div class="fx"><div class="sys"><span class="eq">1 + 2/3 + 4/9 + 8/27 + …</span></div></div>
+      <div class="pitem" data-kind="item" data-id="P2" data-tema="limite_sucesion" data-level="guiado">
+        <span class="lvl guiado">Guiado</span>
+        <p class="pstatement">Ojo con los grados. ¿Hacia dónde va esta sucesión, donde arriba el grado es 1 y abajo es 2?</p>
+        <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = (3n + 4) / (n<sup>2</sup> + 1)</span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">3, porque es 1 entre (1 − 2/3)</button>
-          <button class="opt" data-ok="0">2/3, la propia razón</button>
+          <button class="opt" data-ok="1">A 0: abajo crece más rápido que arriba</button>
+          <button class="opt" data-ok="0">A 3: el cociente de los primeros coeficientes</button>
+          <button class="opt" data-ok="0">A infinito: el numerador nunca se detiene</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Cuando el grado de abajo es mayor que el de arriba, el denominador gana la carrera. ¿Qué le pasa a una fracción cuyo denominador se dispara?</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>El grado de abajo (2) supera al de arriba (1): el denominador crece mucho más rápido, así que la fracción se aplasta hacia 0. Solo cuando los grados <strong>empatan</strong> el límite es el cociente de coeficientes.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P3" data-tema="serie_geometrica" data-level="juntos">
+        <span class="lvl juntos">Juntos</span>
+        <p class="pstatement">Esta serie geométrica tiene primer término 4 y razón <sup>1</sup>⁄<sub>3</sub>. ¿Cuánto suma?</p>
+        <div class="fx"><div class="sys"><span class="eq">4 + <sup>4</sup>⁄<sub>3</sub> + <sup>4</sup>⁄<sub>9</sub> + <sup>4</sup>⁄<sub>27</sub> + …</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="0"><sup>4</sup>⁄<sub>3</sub>, la propia razón por el primer término</button>
+          <button class="opt" data-ok="1">6, porque es 4 entre (1 − <sup>1</sup>⁄<sub>3</sub>) = 4 entre <sup>2</sup>⁄<sub>3</sub></button>
           <button class="opt" data-ok="0">No suma: diverge</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Como | 2/3 | &lt; 1 converge. Suma = 1 entre (1 − 2/3) = 1 entre 1/3 = 3.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>1 − <sup>1</sup>⁄<sub>3</sub> = <sup>2</sup>⁄<sub>3</sub>. Dividir 4 entre <sup>2</sup>⁄<sub>3</sub> es multiplicar 4 por <sup>3</sup>⁄<sub>2</sub>.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Como | <sup>1</sup>⁄<sub>3</sub> | &lt; 1 converge. Suma = 4 entre (1 − <sup>1</sup>⁄<sub>3</sub>) = 4 entre <sup>2</sup>⁄<sub>3</sub> = 4 · <sup>3</sup>⁄<sub>2</sub> = 6.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="serie_geometrica" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P4" data-tema="serie_geometrica" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">¿Qué pasa con esta serie geométrica, de primer término 2 y razón 3?</p>
-        <div class="fx"><div class="sys"><span class="eq">2 + 6 + 18 + 54 + …</span></div></div>
+        <p class="pstatement">¿Qué pasa con esta serie geométrica, de primer término 5 y razón <sup>4</sup>⁄<sub>3</sub>?</p>
+        <div class="fx"><div class="sys"><span class="eq">5 + <sup>20</sup>⁄<sub>3</sub> + <sup>80</sup>⁄<sub>9</sub> + …</span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">Diverge: la razón 3 no cumple | r | &lt; 1</button>
-          <button class="opt" data-ok="0">Suma 2 entre (1 − 3) = −1</button>
-          <button class="opt" data-ok="0">Suma 1, como toda geométrica</button>
+          <button class="opt" data-ok="0">Suma 5 entre (1 − <sup>4</sup>⁄<sub>3</sub>) = −15</button>
+          <button class="opt" data-ok="1">Diverge: la razón <sup>4</sup>⁄<sub>3</sub> no cumple | r | &lt; 1</button>
+          <button class="opt" data-ok="0">Suma 5, como toda geométrica</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La fórmula solo aplica si | r | &lt; 1. Con r = 3 los términos crecen sin freno: la serie diverge y no hay suma finita.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>La fórmula solo aplica si | r | &lt; 1. Con r = <sup>4</sup>⁄<sub>3</sub> &gt; 1 los términos crecen: la serie diverge y no hay suma finita. Aplicar la fórmula igual da un “−15” <strong>sin sentido</strong>: es la trampa clásica.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="criterio_razon" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P5" data-tema="termino_nesimo" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Sin criterios finos, de un vistazo: ¿qué puedes afirmar de esta serie?</p>
+        <div class="fx"><div class="sys"><span class="eq">∑ <sup>(2n + 3)</sup>⁄<sub>(n + 1)</sub></span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Diverge: los términos tienden a 2, no a 0</button>
+          <button class="opt" data-ok="0">Converge: los términos son positivos y acotados</button>
+          <button class="opt" data-ok="0">Converge a 2, que es el límite del término general</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Primero calcula el límite del término general (grados iguales). Si ese límite no es 0, la serie no tiene ninguna chance.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>(2n+3)/(n+1) → 2, no a 0. Por el filtro del término n-ésimo, la serie diverge. Cuidado: el límite del <strong>término</strong> no es la suma de la <strong>serie</strong> —de hecho, aquí no hay suma.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P6" data-tema="criterio_razon" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Armemos el criterio de la razón para la serie de término general aₙ = n/3ⁿ. El primer paso es el cociente aₙ₊₁/aₙ. ¿Cuál queda tras simplificar 3ⁿ/3ⁿ⁺¹?</p>
-        <div class="fx"><div class="sys"><span class="eq">a<sub>n+1</sub> / a<sub>n</sub> = (n + 1)/n · 3ⁿ/3ⁿ⁺¹</span></div></div>
+        <p class="pstatement">Criterio de la razón para a<sub>n</sub> = <sup>n</sup>⁄<sub>3<sup>n</sup></sub>. Tras armar a<sub>n+1</sub>/a<sub>n</sub> y cancelar 3<sup>n</sup>/3<sup>n+1</sup>, ¿qué cociente queda?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">(n + 1) / (3n)</button>
-          <button class="opt" data-ok="0">3(n + 1) / n</button>
-          <button class="opt" data-ok="0">(n + 1) / n</button>
+          <button class="opt" data-ok="0"><sup>3(n + 1)</sup>⁄<sub>n</sub></button>
+          <button class="opt" data-ok="1"><sup>(n + 1)</sup>⁄<sub>3n</sub></button>
+          <button class="opt" data-ok="0"><sup>(n + 1)</sup>⁄<sub>n</sub></button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>3ⁿ dividido entre 3ⁿ⁺¹ es 1/3. Multiplícalo por (n+1)/n y agrupa el 3 con la n de abajo.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>3ⁿ/3ⁿ⁺¹ = 1/3, así que (n+1)/n · 1/3 = (n+1)/(3n). Ese cociente ya está listo para tomarle el límite.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>3<sup>n</sup> dividido entre 3<sup>n+1</sup> es <sup>1</sup>⁄<sub>3</sub>. Multiplícalo por <sup>(n+1)</sup>⁄<sub>n</sub> y junta el 3 con la n de abajo.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>3<sup>n</sup>/3<sup>n+1</sup> = <sup>1</sup>⁄<sub>3</sub>, así que <sup>(n+1)</sup>⁄<sub>n</sub> · <sup>1</sup>⁄<sub>3</sub> = <sup>(n+1)</sup>⁄<sub>3n</sub>. Ese cociente ya está listo para el límite.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="criterio_razon" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P7" data-tema="criterio_razon" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Sigues con la serie de arriba: el cociente quedó (n + 1)/(3n). Toma su límite cuando n crece y decide qué hace la serie.</p>
+        <p class="pstatement">Sigues con la serie de arriba: el cociente quedó <sup>(n + 1)</sup>⁄<sub>3n</sub>. Toma su límite y decide qué hace la serie.</p>
         <div class="opts">
-          <button class="opt" data-ok="1">L = 1/3 &lt; 1: converge</button>
+          <button class="opt" data-ok="1">L = <sup>1</sup>⁄<sub>3</sub> &lt; 1: converge</button>
           <button class="opt" data-ok="0">L = 3 &gt; 1: diverge</button>
           <button class="opt" data-ok="0">L = 1: el criterio no dice nada</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Por los términos de mayor grado, (n+1)/(3n) tiende a n/(3n) = 1/3. Como L = 1/3 &lt; 1, la serie converge.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Por los términos de mayor grado, <sup>(n+1)</sup>⁄<sub>3n</sub> → <sup>n</sup>⁄<sub>3n</sub> = <sup>1</sup>⁄<sub>3</sub>. Como L = <sup>1</sup>⁄<sub>3</sub> &lt; 1, converge.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5b" data-tema="criterio_razon" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P8" data-tema="criterio_razon" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Ahora tú solo, de principio a fin: aplica el criterio de la razón a esta serie con factorial. Arma el cociente aₙ₊₁/aₙ, tómale el límite y decide.</p>
-        <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = 2ⁿ / n!</span></div></div>
+        <p class="pstatement">Tú solo, de principio a fin: aplica el criterio de la razón a esta serie con factorial. Arma el cociente, tómale el límite y decide.</p>
+        <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = <sup>3<sup>n</sup></sup>⁄<sub>n!</sub></span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">El cociente es 2/(n + 1), su límite es 0 &lt; 1: converge</button>
-          <button class="opt" data-ok="0">El cociente es 2(n + 1), su límite es infinito: diverge</button>
-          <button class="opt" data-ok="0">El cociente es 2, su límite es 2 &gt; 1: diverge</button>
+          <button class="opt" data-ok="0">El cociente es 3(n + 1), su límite es infinito: diverge</button>
+          <button class="opt" data-ok="0">El cociente es 3, su límite es 3 &gt; 1: diverge</button>
+          <button class="opt" data-ok="1">El cociente es <sup>3</sup>⁄<sub>(n + 1)</sub>, su límite es 0 &lt; 1: converge</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Al dividir 2ⁿ⁺¹/2ⁿ = 2, y n!/(n+1)! = 1/(n+1). Multiplica: 2/(n+1). Cuando n crece, eso tiende a 0.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>aₙ₊₁/aₙ = (2ⁿ⁺¹/(n+1)!) · (n!/2ⁿ) = 2/(n + 1). El límite cuando n → ∞ es 0, y 0 &lt; 1: la serie converge. Con factoriales el criterio de la razón es el rey porque se cancelan solos.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>3<sup>n+1</sup>/3<sup>n</sup> = 3, y n!/(n+1)! = <sup>1</sup>⁄<sub>(n+1)</sub>. Multiplica: <sup>3</sup>⁄<sub>(n+1)</sub>. Cuando n crece, eso tiende a 0.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>a<sub>n+1</sub>/a<sub>n</sub> = <sup>3<sup>n+1</sup></sup>⁄<sub>(n+1)!</sub> · <sup>n!</sup>⁄<sub>3<sup>n</sup></sub> = <sup>3</sup>⁄<sub>(n+1)</sub>. El límite es 0 &lt; 1: converge. Con factoriales el criterio de la razón es el rey porque se cancelan solos.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5c" data-tema="comparacion" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P9" data-tema="comparacion" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">Comparemos esta serie de términos positivos con una referencia. ¿Con cuál la acotas por arriba para probar que converge?</p>
-        <div class="fx"><div class="sys"><span class="eq">Σ 1 / (n³ + 2)</span></div></div>
+        <div class="fx"><div class="sys"><span class="eq">∑ <sup>1</sup>⁄<sub>(n</sub><sup>3</sup><sub> + 2)</sub></span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">Con Σ 1/n³: es mayor término a término y converge (p = 3 &gt; 1)</button>
-          <button class="opt" data-ok="0">Con la armónica Σ 1/n: pero esa diverge, no sirve para acotar por arriba</button>
-          <button class="opt" data-ok="0">Con Σ n³: crece, así que no acota nada</button>
+          <button class="opt" data-ok="1">Con ∑ <sup>1</sup>⁄<sub>n</sub><sup>3</sup>: es mayor término a término y converge (p = 3 &gt; 1)</button>
+          <button class="opt" data-ok="0">Con la armónica ∑ <sup>1</sup>⁄<sub>n</sub>: pero esa diverge, no sirve para acotar por arriba</button>
+          <button class="opt" data-ok="0">Con ∑ n<sup>3</sup>: crece, así que no acota nada</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>n³ + 2 es mayor que n³, así que 1/(n³+2) es menor que 1/n³. Busca una referencia que converja y quede por encima.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Como n³ + 2 &gt; n³, cada término cumple 1/(n³+2) &lt; 1/n³. La p-serie con p = 3 converge, y tu serie queda atrapada por debajo: también converge.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>n<sup>3</sup> + 2 es mayor que n<sup>3</sup>, así que <sup>1</sup>⁄<sub>(n</sub><sup>3</sup><sub>+2)</sub> es menor que <sup>1</sup>⁄<sub>n</sub><sup>3</sup>. Busca una referencia que converja y quede por encima.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Como n<sup>3</sup> + 2 &gt; n<sup>3</sup>, cada término cumple <sup>1</sup>⁄<sub>(n</sub><sup>3</sup><sub>+2)</sub> &lt; <sup>1</sup>⁄<sub>n</sub><sup>3</sup>. La p-serie con p = 3 converge, y tu serie queda atrapada por debajo: converge.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P5d" data-tema="comparacion" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P10" data-tema="comparacion" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Tú solo: decide si esta serie de términos positivos converge o diverge por comparación con una referencia conocida.</p>
-        <div class="fx"><div class="sys"><span class="eq">Σ 1 / (2n − 1)</span></div></div>
+        <p class="pstatement">Tú solo: decide si esta serie de términos positivos converge o diverge, por comparación con una referencia conocida.</p>
+        <div class="fx"><div class="sys"><span class="eq">∑ <sup>1</sup>⁄<sub>(2n − 1)</sub></span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">Diverge: cada término es mayor que 1/(2n), y Σ 1/(2n) = (1/2)·Σ 1/n diverge</button>
-          <button class="opt" data-ok="0">Converge: se parece a Σ 1/n², que converge</button>
-          <button class="opt" data-ok="0">Converge: sus términos tienden a cero, y eso basta</button>
+          <button class="opt" data-ok="0">Converge: se parece a ∑ <sup>1</sup>⁄<sub>n</sub><sup>2</sup>, que converge</button>
+          <button class="opt" data-ok="1">Diverge: cada término es mayor que <sup>1</sup>⁄<sub>2n</sub>, y ∑ <sup>1</sup>⁄<sub>2n</sub> = <sup>1</sup>⁄<sub>2</sub>·∑ <sup>1</sup>⁄<sub>n</sub> diverge</button>
+          <button class="opt" data-ok="0">Converge: sus términos tienden a 0, y eso basta</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>2n − 1 &lt; 2n, así que 1/(2n − 1) &gt; 1/(2n). La serie Σ 1/(2n) es la armónica multiplicada por 1/2: diverge. Tu serie queda por <strong>encima</strong> de una que diverge, así que también diverge. Que los términos tiendan a cero no basta.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>2n − 1 &lt; 2n, así que <sup>1</sup>⁄<sub>(2n−1)</sub> &gt; <sup>1</sup>⁄<sub>2n</sub>. ¿Qué serie de referencia se esconde en ∑ <sup>1</sup>⁄<sub>2n</sub>?</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>2n − 1 &lt; 2n, así que <sup>1</sup>⁄<sub>(2n−1)</sub> &gt; <sup>1</sup>⁄<sub>2n</sub>. La serie ∑ <sup>1</sup>⁄<sub>2n</sub> es la armónica por <sup>1</sup>⁄<sub>2</sub>: diverge. Tu serie queda por <strong>encima</strong> de una que diverge, así que también diverge. Que los términos tiendan a 0 no basta.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P6" data-tema="taylor" data-level="juntos">
+      <div class="pitem" data-kind="item" data-id="P11" data-tema="comparacion" data-level="solo">
+        <span class="lvl solo">Solo</span>
+        <p class="pstatement">Serie <strong>alternada</strong>: los signos van +, −, +, −… ¿Qué puedes afirmar?</p>
+        <div class="fx"><div class="sys"><span class="eq">∑ (−1)<sup>n+1</sup> · <sup>1</sup>⁄<sub>n</sub> = 1 − <sup>1</sup>⁄<sub>2</sub> + <sup>1</sup>⁄<sub>3</sub> − …</span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">Converge por Leibniz (términos decrecen a 0), pero solo condicionalmente: al volverla positiva es la armónica, que diverge</button>
+          <button class="opt" data-ok="0">Diverge, porque su versión positiva es la armónica y diverge</button>
+          <button class="opt" data-ok="0">Converge absolutamente, porque cada término tiende a 0</button>
+        </div>
+        <div class="aux"><details><summary>Pista</summary><p>Leibniz mira la serie alternada tal cual; “absoluta” mira la serie con todos los términos positivos. Aquí esas dos dan resultados distintos.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p><sup>1</sup>⁄<sub>n</sub> decrece a 0, así que por Leibniz la alternada converge. Pero su versión positiva ∑ <sup>1</sup>⁄<sub>n</sub> (la armónica) diverge, así que la convergencia es <strong>condicional</strong>, no absoluta.</p></div>
+      </div>
+
+      <div class="pitem" data-kind="item" data-id="P12" data-tema="taylor" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Construyamos un término de Taylor de eˣ en 0: el coeficiente de xⁿ es 1/n!. ¿Cuál es el término que acompaña a x³?</p>
-        <div class="fx"><div class="sys"><span class="eq">término de xⁿ = xⁿ / n!&nbsp;&nbsp;→&nbsp;&nbsp;3! = 6</span></div></div>
+        <p class="pstatement">Construyamos un término de Taylor de e<sup>x</sup> en 0: el coeficiente de x<sup>n</sup> es <sup>1</sup>⁄<sub>n!</sub>. ¿Cuál es el término que acompaña a x<sup>4</sup>?</p>
+        <div class="fx"><div class="sys"><span class="eq">término de x<sup>n</sup> = <sup>x</sup><sup>n</sup>⁄<sub>n!</sub>  →  4! = 24</span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">x³/6</button>
-          <button class="opt" data-ok="0">x³/3</button>
-          <button class="opt" data-ok="0">x³</button>
+          <button class="opt" data-ok="0"><sup>x</sup><sup>4</sup>⁄<sub>4</sub></button>
+          <button class="opt" data-ok="1"><sup>x</sup><sup>4</sup>⁄<sub>24</sub></button>
+          <button class="opt" data-ok="0">x<sup>4</sup></button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>3! significa 3 · 2 · 1. Divide x³ entre ese número.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>3! = 3 · 2 · 1 = 6, así que el término de x³ es x³/6. Igual salen 1/2 para x² (2! = 2) y 1 para x y para la constante.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>4! significa 4 · 3 · 2 · 1. Divide x<sup>4</sup> entre ese número.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>4! = 4 · 3 · 2 · 1 = 24, así que el término de x<sup>4</sup> es <sup>x</sup><sup>4</sup>⁄<sub>24</sub>. Igual salen <sup>1</sup>⁄<sub>2</sub> para x<sup>2</sup> (2!) y <sup>1</sup>⁄<sub>6</sub> para x<sup>3</sup> (3!).</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P7" data-tema="taylor" data-level="solo">
+      <div class="pitem" data-kind="item" data-id="P13" data-tema="serie_potencias" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">El polinomio de Taylor de eˣ alrededor de 0 tiene coeficientes “uno entre el factorial”. ¿Cuáles son sus primeros cuatro términos?</p>
+        <p class="pstatement">La geométrica en x vale <sup>1</sup>⁄<sub>(1 − x)</sub> para | x | &lt; 1. Usándola, ¿cuánto suma esta serie numérica?</p>
+        <div class="fx"><div class="sys"><span class="eq">1 + <sup>1</sup>⁄<sub>4</sub> + <sup>1</sup>⁄<sub>16</sub> + <sup>1</sup>⁄<sub>64</sub> + …  (x = <sup>1</sup>⁄<sub>4</sub>)</span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">1 + x + x²/2 + x³/6</button>
-          <button class="opt" data-ok="0">1 + x + x² + x³</button>
-          <button class="opt" data-ok="0">x + x²/2 + x³/3 + x⁴/4</button>
+          <button class="opt" data-ok="1"><sup>4</sup>⁄<sub>3</sub>, porque es <sup>1</sup>⁄<sub>(1 − 1/4)</sub> = <sup>1</sup>⁄<sub>(3/4)</sub></button>
+          <button class="opt" data-ok="0"><sup>3</sup>⁄<sub>4</sub>, que es 1 − <sup>1</sup>⁄<sub>4</sub></button>
+          <button class="opt" data-ok="0">No suma: hay infinitos términos</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El coeficiente de xⁿ es 1/n!: para n = 0,1,2,3 son 1, 1, 1/2, 1/6. La tercera opción es en realidad la serie de −ln(1 − x); la de ln(1 + x) alternaría signos.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>Es la geométrica en x con x = <sup>1</sup>⁄<sub>4</sub> (cumple | x | &lt; 1). Aplica <sup>1</sup>⁄<sub>(1 − x)</sub> y dividir entre <sup>3</sup>⁄<sub>4</sub> es multiplicar por <sup>4</sup>⁄<sub>3</sub>.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con x = <sup>1</sup>⁄<sub>4</sub>, la suma es <sup>1</sup>⁄<sub>(1 − 1/4)</sub> = <sup>1</sup>⁄<sub>(3/4)</sub> = <sup>4</sup>⁄<sub>3</sub>. El <sup>3</sup>⁄<sub>4</sub> es solo el denominador, no la suma.</p></div>
       </div>
     </section>
 
@@ -426,8 +586,8 @@
       <div class="qtag">Te toca · recuerda</div>
       <p class="q">En el criterio de la razón, ¿qué valor del límite L deja el resultado SIN decidir?</p>
       <div class="opts">
-        <button class="opt" data-ok="1">L = 1: el criterio no concluye y hay que usar otro método</button>
         <button class="opt" data-ok="0">L = 0: significa que diverge</button>
+        <button class="opt" data-ok="1">L = 1: el criterio no concluye y hay que usar otro método</button>
         <button class="opt" data-ok="0">L &lt; 1: no se puede afirmar nada</button>
       </div>
       <div class="why"><span class="lbl">Por qué</span><p>L &lt; 1 converge y L &gt; 1 diverge. Justo en <strong>L = 1</strong> el criterio queda mudo: ahí se recurre a comparación u otro criterio.</p></div>
@@ -437,14 +597,14 @@
       <h3>Para memorizar</h3>
       <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
       <ul>
-        <li><span class="ck">✓</span> Límite de sucesión (cociente de polinomios): manda el cociente de los términos de mayor grado.</li>
-        <li><span class="ck">✓</span> Término n-ésimo: si aₙ ↛ 0, la serie diverge (necesaria, no suficiente).</li>
-        <li><span class="ck">✓</span> Serie geométrica: converge si | r | &lt; 1, y su suma es a / (1 − r).</li>
+        <li><span class="ck">✓</span> Límite de sucesión (cociente de polinomios): manda el cociente de los términos de mayor grado; si abajo gana el grado, el límite es 0.</li>
+        <li><span class="ck">✓</span> Término n-ésimo: si a<sub>n</sub> ↛ 0, la serie diverge (necesaria, no suficiente).</li>
+        <li><span class="ck">✓</span> Serie geométrica: converge si | r | &lt; 1, y su suma es <sup>a</sup>⁄<sub>(1 − r)</sub>.</li>
         <li><span class="ck">✓</span> Criterio de la razón: L &lt; 1 converge, L &gt; 1 diverge, L = 1 no concluye.</li>
-        <li><span class="ck">✓</span> Comparación: p-serie Σ 1/nᵖ converge si p &gt; 1; la armónica Σ 1/n diverge.</li>
-        <li><span class="ck">✓</span> Alternadas (Leibniz): convergen si los términos decrecen a cero; distingue absoluta vs condicional.</li>
-        <li><span class="ck">✓</span> Serie de potencias reina: 1 + x + x² + … = 1/(1 − x) para | x | &lt; 1.</li>
-        <li><span class="ck">✓</span> Taylor de eˣ en 0: coeficiente de xⁿ es 1/n! → 1 + x + x²/2 + x³/6 + …</li>
+        <li><span class="ck">✓</span> Comparación: p-serie ∑ <sup>1</sup>⁄<sub>n</sub><sup>p</sup> converge si p &gt; 1; la armónica ∑ <sup>1</sup>⁄<sub>n</sub> diverge.</li>
+        <li><span class="ck">✓</span> Alternadas (Leibniz): convergen si los términos decrecen a 0; distingue absoluta vs condicional.</li>
+        <li><span class="ck">✓</span> Serie de potencias reina: 1 + x + x<sup>2</sup> + … = <sup>1</sup>⁄<sub>(1 − x)</sub> para | x | &lt; 1.</li>
+        <li><span class="ck">✓</span> Taylor de e<sup>x</sup> en 0: coeficiente de x<sup>n</sup> es <sup>1</sup>⁄<sub>n!</sub> → 1 + x + <sup>x</sup><sup>2</sup>⁄<sub>2</sub> + <sup>x</sup><sup>3</sup>⁄<sub>6</sub> + …</li>
       </ul>
     </section>
 
@@ -455,6 +615,10 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs">
+      <a class="next" href="C2_espacio-Rn.html"><span class="sp">Siguiente →</span><span class="ti">U2 · El espacio Rⁿ</span></a>
+    </nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 1</p></footer>
 
@@ -478,7 +642,9 @@ function mat(rows){
 }
 function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
 // (Sin matrices aumentadas en esta lección: el motor mat()/set() se conserva
-//  intacto por si una lección futura de esta unidad lo necesita.)
+//  intacto por si una lección futura de esta unidad lo necesita. Aquí las
+//  matemáticas se renderizan con .sys/.eq y <sub>/<sup>, así que no hay
+//  llamadas set(): cero ids de matriz, cero set() pendientes.)
 
 // ===== visual: las sumas parciales de una geométrica (a=3) =====
 // Dibuja S_n = 3·(1 − r^n)/(1 − r) como barras y marca el límite 3/(1−r).
@@ -532,7 +698,7 @@ document.querySelectorAll('.viz-tab').forEach(function(b){
 // ===== instrumentación =====
 var session = {
   fecha:new Date().toISOString().slice(0,10),
-  materia:"calculo_multivariado", unidad:"U1_sucesiones_series", leccion:"C1_sucesiones-series",
+  materia:"calculo", unidad:"U1_sucesiones_series", leccion:"C1_sucesiones-series",
   duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
 };
 var t0ms = Date.now();

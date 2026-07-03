@@ -49,6 +49,13 @@
 
   .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
   .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
   .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
@@ -132,9 +139,23 @@
   .nota{font-size:15px;color:var(--muted);margin-top:8px}
   .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
   .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
 <body>
@@ -155,7 +176,7 @@
       <ol>
         <li><span class="n">1</span> Reconocer cuándo una ecuación define una función implícita</li>
         <li><span class="n">2</span> Aplicar el teorema de la función implícita</li>
-        <li><span class="n">3</span> Derivar una función implícita, con dos y con tres variables</li>
+        <li><span class="n">3</span> Derivar implícitamente, con dos y con tres variables</li>
         <li><span class="n">4</span> Usar la fórmula de la derivada de la inversa</li>
         <li><span class="n">5</span> Armar la matriz jacobiana de una transformación</li>
         <li><span class="n">6</span> Leer qué dice el determinante jacobiano</li>
@@ -165,19 +186,35 @@
 
   <main>
 
+    <h2 class="modhead">Empecemos por un problema</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">Una gota de agua descansa sobre la <strong>circunferencia x² + y² = 25</strong>, justo en el punto <strong>(3, 4)</strong>. Si la resbalas un poquito, ¿hacia dónde y con qué inclinación se va? Es decir: ¿cuál es la <strong>pendiente</strong> de la curva ahí?</p>
+      <div class="fx"><div class="sys"><span class="eq">x² + y² = 25</span></div></div>
+      <p class="idea" style="font-size:17px">El problema: la ecuación mezcla la x y la y en un solo renglón, sin despejar “y igual a algo”. Podrías despejar y = √(25 − x²) y derivar… pero eso se pone feo rapidísimo, y con tres variables ya ni se puede. Necesitamos sacar la pendiente <strong>sin despejar nada</strong>. Ese es el método de la <strong>derivación implícita</strong>, y al final de esta guía vas a sacar esa pendiente tú sola.</p>
+    </section>
+
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>Una ecuación que esconde una función</h3>
-      <p class="idea">A veces la relación entre dos variables no viene despejada como “y igual a algo”, sino atada en una sola ecuación. Aun así, cerca de un punto, esa ecuación puede <strong>definir a y como función de x</strong> sin que la veamos despejada. A eso se le llama <strong>función implícita</strong>. Por ejemplo, la circunferencia de radio 5:</p>
-      <div class="fx"><div class="sys"><span class="eq">x² + y² = 25</span></div></div>
-      <p class="idea">No es una función (a cada x le tocan dos valores de y), pero <strong>alrededor del punto (3, 4)</strong> sí describe un trocito de curva que es función. La pregunta clave: ¿cuánto vale la pendiente ahí, sin despejar y?</p>
+      <h3>1 · Una ecuación que esconde una función</h3>
+      <p class="idea">Cuando la relación entre dos variables no viene despejada sino atada en una sola ecuación, cerca de un punto esa ecuación puede <strong>definir a y como función de x</strong> aunque no la veamos despejada. A eso se le llama <strong>función implícita</strong>. La circunferencia x² + y² = 25 no es una función entera (a cada x le tocan dos y), pero <strong>alrededor de (3, 4)</strong> sí es un trocito de curva que es función.</p>
+      <p class="fx-note">La palabra clave es <strong>cerca del punto</strong>: no toda la curva, solo un pedacito alrededor de donde estás parada.</p>
+      <div class="check" data-kind="item" data-id="IDEA1" data-tema="funcion_implicita" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿Por qué la circunferencia completa NO es una función de x, aunque cerca de (3, 4) sí?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Porque a una misma x (como x = 3) le corresponden dos valores de y (4 y −4)</button>
+          <button class="opt" data-ok="0">Porque la ecuación tiene un signo igual en vez de una flecha</button>
+          <button class="opt" data-ok="0">Porque el radio es 5 y no un número entero cómodo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Una función asigna <strong>un solo</strong> valor de y a cada x. La circunferencia entera falla eso (arriba y abajo), pero si te quedas en el trocito de arriba, cerca de (3, 4), ahí sí hay un único y por cada x.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>El teorema de la función implícita</h3>
-      <p class="idea">Partimos de una ecuación escrita como “todo igual a cero”, es decir <strong>F(x, y) = 0</strong>. El teorema dice: si en un punto se cumple que la derivada parcial de F respecto a y <strong>no es cero</strong>, entonces cerca de ahí y sí es función de x, y su derivada sale de una fórmula fija:</p>
-      <div class="fx"><div class="sys"><span class="eq">dy/dx = − Fx / Fy</span></div><p class="fx-note">Fx es la parcial respecto a x; Fy la parcial respecto a y. La condición Fy ≠ 0 es la que garantiza que se pueda despejar.</p></div>
+      <h3>2 · El teorema de la función implícita</h3>
+      <p class="idea">Reescribimos la ecuación como “todo igual a cero”, es decir <strong>F(x, y) = 0</strong>. El teorema dice: si en un punto la parcial de F respecto a y <strong>no es cero</strong>, entonces cerca de ahí y sí es función de x, y su derivada sale de una fórmula fija:</p>
+      <div class="fx"><div class="sys"><span class="eq">dy/dx = − F<sub>x</sub> / F<sub>y</sub></span></div><p class="fx-note">F<sub>x</sub> es la parcial respecto a x; F<sub>y</sub> la parcial respecto a y. La condición F<sub>y</sub> ≠ 0 es la que garantiza que se pueda despejar.</p></div>
       <div class="check" data-kind="recall" data-fid="F1_condicion_TFI" data-tema="teorema_funcion_implicita">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué condición pide el teorema para asegurar que y es función de x cerca del punto?</p>
@@ -186,18 +223,44 @@
           <button class="opt" data-ok="1">Que la parcial respecto a y sea distinta de cero</button>
           <button class="opt" data-ok="0">Que ambas parciales sean cero a la vez</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Fy aparece en el <strong>denominador</strong> de la fórmula. Si fuera cero, la división no existe y no se puede despejar y: por eso la condición es Fy ≠ 0.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>F<sub>y</sub> aparece en el <strong>denominador</strong> de la fórmula. Si fuera cero, la división no existe y no se puede despejar y: por eso la condición es F<sub>y</sub> ≠ 0.</p></div>
       </div>
     </section>
 
     <section class="sec">
-      <h3>El mismo teorema con tres variables</h3>
-      <p class="idea">La misma idea sube un piso. Ahora una sola ecuación <strong>F(x, y, z) = 0</strong> puede <strong>definir a z como función de x y de y</strong> (una superficie que, cerca de un punto, es la gráfica de z(x, y)). La condición gemela es <strong>Fz ≠ 0</strong>, y en vez de una derivada salen <strong>dos parciales</strong>, cada una con la misma receta “−parcial de arriba entre Fz”:</p>
-      <div class="fx"><div class="sys"><span class="eq">∂z/∂x = − Fx / Fz</span><span class="eq">∂z/∂y = − Fy / Fz</span></div><p class="fx-note">Fz es la parcial respecto a z y va siempre en el denominador; por eso hace falta Fz ≠ 0. Es exactamente el caso de dos variables, pero derivando una vez respecto a x y otra respecto a y.</p></div>
+      <h3>3 · El mismo teorema con tres variables</h3>
+      <p class="idea">La misma idea sube un piso. Una sola ecuación <strong>F(x, y, z) = 0</strong> puede <strong>definir a z como función de x y de y</strong> (una superficie que, cerca de un punto, es la gráfica de z(x, y)). La condición gemela es <strong>F<sub>z</sub> ≠ 0</strong>, y en vez de una derivada salen <strong>dos parciales</strong>, cada una con la misma receta “−parcial de arriba entre F<sub>z</sub>”:</p>
+      <div class="fx"><div class="sys"><span class="eq">∂z/∂x = − F<sub>x</sub> / F<sub>z</sub></span><span class="eq">∂z/∂y = − F<sub>y</sub> / F<sub>z</sub></span></div><p class="fx-note">F<sub>z</sub> va siempre en el denominador; por eso hace falta F<sub>z</sub> ≠ 0. Es el caso de dos variables, pero derivando una vez respecto a x y otra respecto a y.</p></div>
+      <div class="check" data-kind="item" data-id="IDEA3" data-tema="derivacion_implicita_3var" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Con F(x, y, z) = 0, ¿cuál de estas parciales va SIEMPRE en el denominador de ambas fórmulas?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">F<sub>z</sub>, la parcial respecto a la variable que estás definiendo (z)</button>
+          <button class="opt" data-ok="0">F<sub>x</sub>, la parcial respecto a la primera variable</button>
+          <button class="opt" data-ok="0">La suma F<sub>x</sub> + F<sub>y</sub></button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La variable que despejas (z) manda: su parcial F<sub>z</sub> es el denominador de las dos fórmulas, igual que F<sub>y</sub> lo era en el caso de dos variables. Por eso la condición es F<sub>z</sub> ≠ 0.</p></div>
+      </div>
     </section>
 
     <section class="sec">
-      <h3>Míralo: la derivada es la pendiente de la tangente</h3>
+      <h3>4 · La inversa: una idea gemela</h3>
+      <p class="idea">Cuando una función f tiene inversa, la pendiente de la inversa en un punto es el <strong>recíproco</strong> de la pendiente de f en el punto correspondiente. La regla es corta y hay que saberla de memoria:</p>
+      <div class="fx"><div class="sys"><span class="eq">(f⁻¹)′(b) = 1 / f′(a),  con b = f(a)</span></div><p class="fx-note">Ojo con dónde se evalúa: f′ se calcula en a (el de entrada), no en b. Y hace falta f′(a) ≠ 0.</p></div>
+      <div class="check" data-kind="recall" data-fid="F3_derivada_inversa" data-tema="funcion_inversa">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">En la fórmula de la derivada de la inversa, ¿dónde se evalúa f′?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">En a, el punto de entrada, donde f(a) = b</button>
+          <button class="opt" data-ok="0">En b, el mismo punto donde evalúas la inversa</button>
+          <button class="opt" data-ok="0">En cero, siempre</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La regla es (f⁻¹)′(b) = 1/f′(a) con b = f(a). El error típico es evaluar f′ en b; hay que evaluarla en <strong>a</strong>, el valor de entrada.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>5 · Míralo: la derivada es la pendiente de la tangente</h3>
       <p class="idea">La derivada implícita no es un truco abstracto: es la <strong>pendiente de la recta tangente</strong> a la curva en ese punto. Toca cada punto de la circunferencia y observa cómo cambia la tangente:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
@@ -211,64 +274,133 @@
       </div>
     </section>
 
-    <h2 class="modhead">Yo lo hago</h2>
+    <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Derivemos y respecto a x en la circunferencia <strong>x² + y² = 25</strong> en el punto (3, 4). Hay dos caminos que dan lo mismo; muestro el directo, derivando término a término y recordando que y depende de x.</p>
-      <div class="estep"><div class="oprow">Derivo los dos lados</div><p>La derivada de x² es 2x. La de y² es 2y·y′, por la regla de la cadena (y es función de x). La de 25 es 0.</p><div class="fx" id="d1"></div></div>
+      <p class="idea" style="font-size:17px">Resolvamos el problema del inicio: la pendiente de <strong>x² + y² = 25</strong> en <strong>(3, 4)</strong>, sin despejar. En cada paso <strong>tú eliges la operación</strong> y yo la aplico.</p>
+      <div class="fx"><div class="sys"><span class="eq">x² + y² = 25</span></div></div>
 
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="derivacion_implicita">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">Tenemos “2x + 2y·y′ = 0”. Para dejar y′ sola, ¿cuál es el siguiente paso natural?</p>
+      <div class="check" data-kind="item" data-id="E1pred" data-tema="derivacion_implicita" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Vamos a derivar los dos lados respecto a x. Recuerda que y depende de x. ¿En qué se convierte el término <strong>y²</strong>?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Pasar 2x al otro lado y dividir todo entre 2y</button>
-          <button class="opt" data-ok="0">Multiplicar todo por 2y</button>
-          <button class="opt" data-ok="0">Restar y′ en ambos lados</button>
+          <button class="opt" data-ok="1">2y·y′, porque baja el 2 y hay que multiplicar por la derivada interna y′ (regla de la cadena)</button>
+          <button class="opt" data-ok="0">2y, sin nada más</button>
+          <button class="opt" data-ok="0">2y², porque el exponente se conserva</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>y′ está multiplicada por 2y. Para aislarla, mando 2x a la derecha y divido entre 2y: queda y′ = −2x / 2y = −x/y.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>y no es una constante: es función de x. Al derivar y² como potencia baja el 2 (queda 2y) y la cadena obliga a multiplicar por la derivada de adentro, y′. Sin ese y′ se pierde toda la información implícita.</p></div>
       </div>
+      <div class="estep"><div class="oprow">Derivo los dos lados</div><p>Derivo término a término respecto a x. La derivada de x² es 2x; la de y² es 2y·y′; la de 25 es 0:</p><p class="calc"><span class="rw">d/dx</span> (x²)′=<b>2x</b> <span class="sep">•</span> (y²)′=<b>2y·y′</b> <span class="sep">•</span> (25)′=<b>0</b></p><div class="fx" id="d1"></div></div>
 
-      <div class="estep"><div class="oprow">Despejo y′</div><p>Aíslo el término con y′ y divido. Los doses se cancelan.</p><div class="fx" id="d2"></div></div>
-      <div class="estep"><div class="oprow">Evalúo en (3, 4)</div><p>Sustituyo x = 3, y = 4 en la fórmula.</p><div class="fx" id="d3"></div></div>
-      <p class="idea" style="font-size:17px">La pendiente en (3, 4) es <strong>y′ = −3/4</strong>. Fíjate que sale igual con la fórmula del teorema: Fx = 2x, Fy = 2y, así que −Fx/Fy = −2x/2y = −x/y. Los dos caminos coinciden.</p>
+      <div class="check" data-kind="item" data-id="E2pred" data-tema="derivacion_implicita" data-level="guiado">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Tenemos “2x + 2y·y′ = 0”. Para dejar y′ sola, ¿cuál es el siguiente movimiento?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Paso 2x al otro lado y divido todo entre 2y</button>
+          <button class="opt" data-ok="0">Multiplico todo por 2y</button>
+          <button class="opt" data-ok="0">Resto y′ en ambos lados</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>y′ está multiplicada por 2y. Para aislarla mando 2x a la derecha y divido entre 2y: queda y′ = −2x / 2y.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Despejo y′</div><p>Mando 2x a la derecha y divido entre 2y. Los doses se cancelan:</p><p class="calc"><span class="rw">y′</span> =−2x÷2y=<b>−x/y</b></p><div class="fx" id="d2"></div></div>
+
+      <div class="estep"><div class="oprow">Evalúo en (3, 4)</div><p>Sustituyo x = 3, y = 4 en y′ = −x/y:</p><p class="calc"><span class="rw">y′</span> =−(3)÷(4)=<b>−3/4</b></p><div class="fx" id="d3"></div></div>
+
+      <p class="idea" style="font-size:17px">La pendiente en (3, 4) es <strong>y′ = −3/4</strong>. Baja suave hacia la derecha, tal como se veía en el dibujo. Y sale igual con la fórmula del teorema: F<sub>x</sub> = 2x, F<sub>y</sub> = 2y, así que −F<sub>x</sub>/F<sub>y</sub> = −x/y. Los dos caminos coinciden.</p>
     </section>
 
+    <h2 class="modhead">Sube el tamaño · cuando hay un producto</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora uno con un <strong>producto</strong>, que es lo que de verdad cae en examen. Tomemos <strong>x² + xy + y² = 7</strong> en el punto (1, 2). El término xy obliga a usar la regla del producto.</p>
-      <div class="estep"><div class="oprow">Derivo término a término</div><p>x² da 2x. El producto xy da (1·y + x·y′) = y + x·y′. y² da 2y·y′. El 7 da 0.</p><div class="fx" id="q1"></div></div>
-      <div class="estep"><div class="oprow">Agrupo los términos con y′</div><p>Junto todo lo que tiene y′ de un lado y lo demás del otro.</p><div class="fx" id="q2"></div></div>
-      <div class="estep"><div class="oprow">Despejo y′</div><p>Factorizo y′ y divido entre lo que lo acompaña.</p><div class="fx" id="q3"></div></div>
-      <div class="estep"><div class="oprow">Evalúo en (1, 2)</div><p>Sustituyo x = 1, y = 2.</p><div class="fx" id="q4"></div></div>
+      <p class="idea" style="font-size:17px">El salto: ahora un término <strong>mezcla x con y</strong>, y eso pide la <strong>regla del producto</strong>. Tomemos <strong>x² + xy + y² = 7</strong> en (1, 2). Lo hacemos en pasos separados, uno por escalón.</p>
+      <ul class="fases">
+        <li><strong>Fase 1 — derivar:</strong> término a término, con producto y cadena donde toque.</li>
+        <li><strong>Fase 2 — despejar:</strong> agrupar lo que tiene y′, factorizarlo y dividir.</li>
+      </ul>
+      <div class="fx"><div class="sys"><span class="eq">x² + xy + y² = 7</span></div></div>
+
+      <div class="check" data-kind="item" data-id="E3pred" data-tema="derivacion_implicita" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">El término clave es <strong>xy</strong>. ¿En qué se convierte al derivar respecto a x?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">y + x·y′, por la regla del producto (deriva x deja y, más x deriva y)</button>
+          <button class="opt" data-ok="0">y′, porque es un producto de dos variables</button>
+          <button class="opt" data-ok="0">x·y′, solo el segundo pedazo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Regla del producto sobre x·y: (x)′·y + x·(y)′ = 1·y + x·y′ = y + x·y′. El primer pedazo suele olvidarse.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fase 1 · Derivo término a término</div><p>x² da 2x. El producto xy da y + x·y′. y² da 2y·y′. El 7 da 0:</p><p class="calc"><span class="rw">d/dx</span> x²→<b>2x</b> <span class="sep">•</span> xy→<b>y+x·y′</b> <span class="sep">•</span> y²→<b>2y·y′</b></p><div class="fx" id="q1"></div></div>
+
+      <div class="estep"><div class="oprow">Fase 2 · Agrupo los términos con y′</div><p>Mando lo que NO tiene y′ a la derecha y dejo a la izquierda solo lo que sí lo tiene:</p><p class="calc"><span class="rw">y′</span> junta:x·y′+2y·y′=<b>(x+2y)·y′</b> <span class="sep">•</span> derecha:<b>−(2x+y)</b></p><div class="fx" id="q2"></div></div>
+
+      <div class="check" data-kind="item" data-id="E4pred" data-tema="derivacion_implicita" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Ya tienes “(x + 2y)·y′ = −(2x + y)”. ¿Cómo dejas y′ completamente sola?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Divido ambos lados entre (x + 2y), el factor que acompaña a y′</button>
+          <button class="opt" data-ok="0">Multiplico ambos lados por (x + 2y)</button>
+          <button class="opt" data-ok="0">Resto (x + 2y) en ambos lados</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>y′ está multiplicada por (x + 2y). Dividir entre ese factor —no multiplicar— es lo que la deja sola.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Fase 2 · Despejo y′</div><p>Divido entre (x + 2y):</p><p class="calc"><span class="rw">y′</span> =−(2x+y)÷(x+2y)</p><div class="fx" id="q3"></div></div>
+
+      <div class="estep"><div class="oprow">Evalúo en (1, 2)</div><p>Sustituyo x = 1, y = 2:</p><p class="calc"><span class="rw">y′</span> arriba:2·1+2=<b>4</b> <span class="sep">•</span> abajo:1+2·2=<b>5</b> <span class="sep">•</span> =<b>−4/5</b></p><div class="fx" id="q4"></div></div>
+
       <p class="idea" style="font-size:17px">Resultado: <strong>y′ = −4/5</strong> en (1, 2). Misma receta que la circunferencia; solo cambió que un término pidió la regla del producto.</p>
     </section>
 
+    <h2 class="modhead">Sube el tamaño · tres variables</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora el caso de <strong>tres variables</strong>. La esfera <strong>x² + y² + z² = 9</strong> define z como función de (x, y) cerca del punto (1, 2, 2). Busquemos las dos parciales de z ahí.</p>
-      <div class="estep"><div class="oprow">Escribo F y sus parciales</div><p>Con F = x² + y² + z² − 9: Fx = 2x, Fy = 2y, Fz = 2z. En (1, 2, 2), Fz = 4 ≠ 0, así que el teorema aplica.</p><div class="fx" id="s1"></div></div>
-      <div class="estep"><div class="oprow">Aplico la fórmula para z respecto a x</div><p>Uso la receta “−parcial de arriba entre Fz” para x y evalúo en el punto.</p><div class="fx" id="s2"></div></div>
-      <div class="estep"><div class="oprow">Y ahora z respecto a y</div><p>Repito la receta, ahora con Fy arriba, y evalúo en el mismo punto.</p><div class="fx" id="s3"></div></div>
-      <p class="idea" style="font-size:17px">Las parciales en (1, 2, 2) son <strong>∂z/∂x = −1/2</strong> y <strong>∂z/∂y = −1</strong>. Misma receta “−arriba/abajo”, solo que Fz manda y se hace dos veces.</p>
+      <p class="idea" style="font-size:17px">Otro salto: ahora <strong>tres variables</strong>. La esfera <strong>x² + y² + z² = 9</strong> define z como función de (x, y) cerca de (1, 2, 2). Aquí salen <strong>dos</strong> parciales, y F<sub>z</sub> manda en el denominador.</p>
+      <div class="fx"><div class="sys"><span class="eq">x² + y² + z² = 9</span></div></div>
+
+      <div class="check" data-kind="item" data-id="E5pred" data-tema="derivacion_implicita_3var" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">Escribimos F = x² + y² + z² − 9. Antes de aplicar la fórmula, ¿qué hay que confirmar en el punto (1, 2, 2)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Que F<sub>z</sub> ≠ 0 ahí: F<sub>z</sub> = 2z = 4 ≠ 0, así que el teorema aplica</button>
+          <button class="opt" data-ok="0">Que F<sub>x</sub> = 0 en el punto</button>
+          <button class="opt" data-ok="0">Que las tres parciales sumen cero</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>F<sub>z</sub> va en el denominador de las dos fórmulas. La condición del teorema es F<sub>z</sub> ≠ 0; en (1, 2, 2), F<sub>z</sub> = 2·2 = 4, distinto de cero, así que sí podemos.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Escribo F y sus parciales</div><p>Con F = x² + y² + z² − 9, cada parcial es la potencia derivada:</p><p class="calc"><span class="rw">F</span> F<sub>x</sub>=<b>2x</b> <span class="sep">•</span> F<sub>y</sub>=<b>2y</b> <span class="sep">•</span> F<sub>z</sub>=<b>2z</b></p><div class="fx" id="s1"></div></div>
+
+      <div class="estep"><div class="oprow">z respecto a x</div><p>Uso ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub> y evalúo en (1, 2, 2):</p><p class="calc"><span class="rw">∂z/∂x</span> =−2x÷2z=−x/z=−1÷2=<b>−1/2</b></p><div class="fx" id="s2"></div></div>
+
+      <div class="estep"><div class="oprow">z respecto a y</div><p>Repito con F<sub>y</sub> arriba, mismo punto:</p><p class="calc"><span class="rw">∂z/∂y</span> =−2y÷2z=−y/z=−2÷2=<b>−1</b></p><div class="fx" id="s3"></div></div>
+
+      <p class="idea" style="font-size:17px">Las parciales en (1, 2, 2) son <strong>∂z/∂x = −1/2</strong> y <strong>∂z/∂y = −1</strong>. Misma receta “−arriba/abajo”, solo que F<sub>z</sub> manda y se hace dos veces.</p>
     </section>
 
-    <section class="sec">
-      <h3>La función inversa: una idea gemela</h3>
-      <p class="idea">Cuando una función f tiene inversa, la pendiente de la inversa en un punto es el <strong>recíproco</strong> de la pendiente de f en el punto correspondiente. La regla es corta y hay que saberla de memoria:</p>
-      <div class="fx"><div class="sys"><span class="eq">(f⁻¹)′(b) = 1 / f′(a),   con b = f(a)</span></div><p class="fx-note">Ojo con dónde se evalúa: f′ se calcula en a (el de entrada), no en b. Y hace falta f′(a) ≠ 0.</p></div>
-    </section>
-
+    <h2 class="modhead">Sube el tamaño · la inversa y el jacobiano</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Sea <strong>f(x) = x³</strong>. Queremos la derivada de su inversa en <strong>b = 8</strong>. No hace falta despejar la inversa: basta la fórmula.</p>
-      <div class="estep"><div class="oprow">Encuentro el punto a</div><p>Busco a tal que f(a) = 8. Como 2³ = 8, entonces a = 2.</p><div class="fx" id="i1"></div></div>
-      <div class="estep"><div class="oprow">Derivo f y evalúo en a</div><p>Saco f′ y la evalúo en a (el de entrada), no en b.</p><div class="fx" id="i2"></div></div>
-      <div class="estep"><div class="oprow">Aplico la fórmula</div><p>La derivada de la inversa en 8 es el recíproco.</p><div class="fx" id="i3"></div></div>
+      <p class="idea" style="font-size:17px">Primero la <strong>inversa escalar</strong>. Sea <strong>f(x) = x³</strong>; queremos la derivada de su inversa en <strong>b = 8</strong>. No hace falta despejar la inversa: basta la fórmula (f⁻¹)′(b) = 1/f′(a).</p>
+
+      <div class="check" data-kind="item" data-id="E6pred" data-tema="funcion_inversa" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">La fórmula pide f′ evaluada en <strong>a</strong>, no en b. ¿Cuál es ese a?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El a tal que f(a) = 8; como 2³ = 8, es a = 2</button>
+          <button class="opt" data-ok="0">a = 8, el mismo punto donde evalúo la inversa</button>
+          <button class="opt" data-ok="0">a = 0, porque siempre se arranca en cero</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>b = 8 es la salida; a es la entrada que produce esa salida. Como f(a) = a³ = 8, entonces a = 2. Confundir a con b es el error más común aquí.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Encuentro el punto a</div><p>Busco a tal que f(a) = 8, es decir a³ = 8:</p><p class="calc"><span class="rw">a</span> a³=8→a=<b>2</b></p><div class="fx" id="i1"></div></div>
+
+      <div class="estep"><div class="oprow">Derivo f y evalúo en a</div><p>f′(x) = 3x², evaluada en a = 2 (no en b):</p><p class="calc"><span class="rw">f′</span> 3x²→3·(2²)=3·4=<b>12</b></p><div class="fx" id="i2"></div></div>
+
+      <div class="estep"><div class="oprow">Aplico la fórmula</div><p>La derivada de la inversa en 8 es el recíproco de f′(2):</p><p class="calc"><span class="rw">(f⁻¹)′(8)</span> =1÷12=<b>1/12</b></p><div class="fx" id="i3"></div></div>
+
       <p class="idea" style="font-size:17px">La derivada de la inversa en 8 es <strong>1/12</strong>. Misma lógica que la implícita: no despejamos la fórmula rara, evaluamos con la regla.</p>
     </section>
 
     <section class="sec">
       <h3>El jacobiano: la versión matricial</h3>
-      <p class="idea">Cuando hay <strong>varias variables de entrada y varias de salida</strong> (una transformación), la “derivada” ya no es un número: es una <strong>matriz de todas las parciales</strong>, llamada <strong>matriz jacobiana</strong>. Para una transformación que manda (x, y) a (u, v):</p>
+      <p class="idea">Cuando hay <strong>varias variables de entrada y varias de salida</strong> (una transformación), la “derivada” ya no es un número: es una <strong>matriz de todas las parciales</strong>, la <strong>matriz jacobiana</strong>. Para una transformación que manda (x, y) a (u, v):</p>
       <div class="fx" id="jacGen"></div>
-      <p class="idea">Su <strong>determinante</strong> —el jacobiano— mide cuánto estira o encoge áreas la transformación cerca del punto. La regla clave, gemela de Fy ≠ 0: si el <strong>determinante jacobiano no es cero</strong> en un punto, la transformación tiene inversa local ahí.</p>
+      <p class="idea">Su <strong>determinante</strong> —el jacobiano— mide cuánto estira o encoge áreas la transformación cerca del punto. La regla clave, gemela de F<sub>y</sub> ≠ 0: si el <strong>determinante jacobiano no es cero</strong> en un punto, la transformación tiene inversa local ahí.</p>
       <div class="check" data-kind="recall" data-fid="F2_jacobiano_no_cero" data-tema="jacobiano">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué garantiza que una transformación tenga inversa cerca de un punto?</p>
@@ -277,23 +409,38 @@
           <button class="opt" data-ok="0">Que la matriz jacobiana sea cuadrada</button>
           <button class="opt" data-ok="0">Que todas las parciales valgan 1</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Es el mismo espíritu que Fy ≠ 0 en el caso implícito: si el determinante es cero, la transformación “aplasta” áreas y no se puede invertir localmente.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Es el mismo espíritu que F<sub>y</sub> ≠ 0 en el caso implícito: si el determinante es cero, la transformación “aplasta” áreas y no se puede invertir localmente.</p></div>
       </div>
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Armemos el jacobiano de la transformación <strong>u = x² − y²</strong>, <strong>v = 2xy</strong>, y calculemos su determinante en el punto (2, 1). Solo son cuatro parciales colocadas en su lugar.</p>
-      <div class="estep"><div class="oprow">Parciales de u</div><p>u respecto a x es 2x; u respecto a y es −2y.</p><div class="fx" id="j1"></div></div>
-      <div class="estep"><div class="oprow">Parciales de v</div><p>v respecto a x es 2y; v respecto a y es 2x. Ya tengo la matriz completa.</p><div class="fx" id="j2"></div></div>
-      <div class="estep"><div class="oprow">Determinante (diagonal menos antidiagonal)</div><p>Multiplico la diagonal y le resto la antidiagonal.</p><div class="fx" id="j3"></div></div>
-      <div class="estep"><div class="oprow">Evalúo en (2, 1)</div><p>4·4 + 4·1 = 16 + 4.</p><div class="fx" id="j4"></div></div>
+      <p class="idea" style="font-size:17px">Armemos el jacobiano de <strong>u = x² − y²</strong>, <strong>v = 2xy</strong>, y saquemos su determinante en (2, 1). Un escalón por parcial, luego el determinante.</p>
+
+      <div class="check" data-kind="item" data-id="E7pred" data-tema="jacobiano" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">La primera fila del jacobiano son las parciales de u. Con u = x² − y², ¿cuáles son (∂u/∂x, ∂u/∂y)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(2x, −2y): derivo x² dejando y fija, luego −y² dejando x fija</button>
+          <button class="opt" data-ok="0">(2x, 2y): las dos con signo más</button>
+          <button class="opt" data-ok="0">(x², −y²): sin derivar, tal cual</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>∂u/∂x deja y como constante: (x²)′ = 2x, (−y²)′ = 0 → 2x. ∂u/∂y deja x fija: (x²)′ = 0, (−y²)′ = −2y → −2y. El signo menos del −y² se conserva.</p></div>
+      </div>
+      <div class="estep"><div class="oprow">Parciales de u</div><p>u = x² − y²: derivo respecto a x y respecto a y:</p><p class="calc"><span class="rw">u</span> ∂u/∂x=<b>2x</b> <span class="sep">•</span> ∂u/∂y=<b>−2y</b></p><div class="fx" id="j1"></div></div>
+
+      <div class="estep"><div class="oprow">Parciales de v</div><p>v = 2xy: respecto a x queda 2y; respecto a y queda 2x. Matriz completa:</p><p class="calc"><span class="rw">v</span> ∂v/∂x=<b>2y</b> <span class="sep">•</span> ∂v/∂y=<b>2x</b></p><div class="fx" id="j2"></div></div>
+
+      <div class="estep"><div class="oprow">Determinante · diagonal menos antidiagonal</div><p>Multiplico la diagonal principal y le resto la antidiagonal:</p><p class="calc"><span class="rw">det</span> (2x)(2x)−(−2y)(2y)=<b>4x²+4y²</b></p><div class="fx" id="j3"></div></div>
+
+      <div class="estep"><div class="oprow">Evalúo en (2, 1)</div><p>Sustituyo x = 2, y = 1:</p><p class="calc"><span class="rw">det</span> 4·(2²)+4·(1²)=16+4=<b>20</b></p><div class="fx" id="j4"></div></div>
+
       <p class="idea" style="font-size:17px">El jacobiano vale <strong>20</strong> en (2, 1). Como no es cero, ahí la transformación es invertible: cerca de ese punto se puede recuperar (x, y) a partir de (u, v).</p>
     </section>
 
     <section class="sec">
       <h3>El teorema de la función inversa (versión matricial)</h3>
-      <p class="idea">La regla escalar (f⁻¹)′(b) = 1/f′(a) tiene su gemela con varias variables: el <strong>teorema de la función inversa</strong>. Dice que una transformación es <strong>localmente invertible</strong> alrededor de un punto cuando su <strong>determinante jacobiano no es cero</strong> ahí. Y donde el número f′(a) se volvía su recíproco 1/f′(a), ahora la matriz jacobiana se vuelve su <strong>matriz inversa</strong>:</p>
-      <div class="fx"><div class="sys"><span class="eq">escalar:  (f⁻¹)′(b) = 1 / f′(a)</span><span class="eq">matricial:  J(inversa) = [ J ]⁻¹</span></div><p class="fx-note">“Localmente invertible” quiere decir que solo cerca de ese punto la transformación se puede deshacer. El recíproco 1/f′(a) es el caso de una variable; con varias, dividir se vuelve invertir la matriz J.</p></div>
+      <p class="idea">La regla escalar (f⁻¹)′(b) = 1/f′(a) tiene su gemela con varias variables. Una transformación es <strong>localmente invertible</strong> alrededor de un punto cuando su <strong>determinante jacobiano no es cero</strong> ahí. Y donde el número f′(a) se volvía su recíproco 1/f′(a), ahora la matriz jacobiana se vuelve su <strong>matriz inversa</strong>:</p>
+      <div class="fx"><div class="sys"><span class="eq">escalar:  (f⁻¹)′(b) = 1 / f′(a)</span><span class="eq">matricial:  J(inversa) = [ J ]⁻¹</span></div><p class="fx-note">“Localmente invertible” = solo cerca de ese punto la transformación se puede deshacer. El recíproco 1/f′(a) es el caso de una variable; con varias, dividir se vuelve invertir la matriz J.</p></div>
       <div class="check" data-kind="recall" data-fid="F4_teorema_funcion_inversa" data-tema="funcion_inversa">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">Según el teorema de la función inversa, ¿en qué se convierte la matriz jacobiana al derivar la inversa?</p>
@@ -326,20 +473,20 @@
       <div class="pitem" data-kind="item" data-id="P2" data-tema="derivacion_implicita" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">Hagamos el despeje completo. Deriva la ecuación de abajo respecto a x, agrupa los términos con y′, despéjala y evalúa en el punto (2, 1). ¿Cuánto vale y′ ahí?</p>
-        <div class="fx"><div class="sys"><span class="eq">x² + xy = 6,   en (2, 1)</span></div></div>
+        <div class="fx"><div class="sys"><span class="eq">x² + xy = 6,  en (2, 1)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">−5/2</button>
           <button class="opt" data-ok="0">−2/5</button>
           <button class="opt" data-ok="0">5/2</button>
         </div>
         <div class="aux"><details><summary>Pista</summary><p>Derivando: 2x + (y + x·y′) = 0. Agrupa: x·y′ = −(2x + y), así que y′ = −(2x + y)/x. Ahora mete x = 2, y = 1.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Derivo: 2x + y + x·y′ = 0. Despejo: y′ = −(2x + y)/x. En (2, 1): −(4 + 1)/2 = −5/2.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Derivo: 2x + y + x·y′ = 0. Despejo: y′ = −(2x + y)/x. En (2, 1): −(4 + 1)/2 = −5/2. El error −2/5 invierte la fracción; +5/2 pierde el signo.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P2b" data-tema="derivacion_implicita" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">Ahora tú sola, de principio a fin: deriva la ecuación de abajo respecto a x, agrupa los términos con y′, despeja y′ y evalúa en el punto (1, 2). ¿Cuánto vale y′ ahí?</p>
-        <div class="fx"><div class="sys"><span class="eq">x³ + y³ = 9,   en (1, 2)</span></div></div>
+        <div class="fx"><div class="sys"><span class="eq">x³ + y³ = 9,  en (1, 2)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">−1/4</button>
           <button class="opt" data-ok="0">−1/2</button>
@@ -350,70 +497,70 @@
 
       <div class="pitem" data-kind="item" data-id="P2c" data-tema="derivacion_implicita_3var" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Ahora tres variables: la ecuación de abajo define z como función de (x, y). Con la receta ∂z/∂x = −Fx/Fz, agrupamos los pasos: F = x² + y² + z² − 6, así que Fx = 2x y Fz = 2z. ¿Cuánto vale ∂z/∂x en el punto (1, 1, 2)?</p>
-        <div class="fx"><div class="sys"><span class="eq">x² + y² + z² = 6,   en (1, 1, 2)</span></div></div>
+        <p class="pstatement">Ahora tres variables: la ecuación de abajo define z como función de (x, y). Con la receta ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub>, ya tenemos F<sub>x</sub> = 2x y F<sub>z</sub> = 2z. ¿Cuánto vale ∂z/∂x en el punto (1, 1, 2)?</p>
+        <div class="fx"><div class="sys"><span class="eq">x² + y² + z² = 6,  en (1, 1, 2)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">−1/2</button>
           <button class="opt" data-ok="0">−2</button>
           <button class="opt" data-ok="0">1/2</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Fz va en el denominador: ∂z/∂x = −Fx/Fz = −2x/2z = −x/z. Ahora mete x = 1, z = 2.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Fx = 2x, Fz = 2z, así que ∂z/∂x = −2x/2z = −x/z. En (1, 1, 2): −1/2. El error −2 invierte la fracción; +1/2 pierde el signo.</p></div>
+        <div class="aux"><details><summary>Pista</summary><p>F<sub>z</sub> va en el denominador: ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub> = −2x/2z = −x/z. Ahora mete x = 1, z = 2.</p></details></div>
+        <div class="why"><span class="lbl">Por qué</span><p>F<sub>x</sub> = 2x, F<sub>z</sub> = 2z, así que ∂z/∂x = −2x/2z = −x/z. En (1, 1, 2): −1/2. El error −2 invierte la fracción; +1/2 pierde el signo.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P2d" data-tema="derivacion_implicita_3var" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Tú sola con tres variables: la ecuación de abajo define z como función de (x, y). Calcula ∂z/∂y con la receta −Fy/Fz y evalúa en el punto (1, 2, 3). ¿Cuánto vale ahí?</p>
-        <div class="fx"><div class="sys"><span class="eq">x² + y² + z² = 14,   en (1, 2, 3)</span></div></div>
+        <p class="pstatement">Tú sola con tres variables: la ecuación de abajo define z como función de (x, y). Calcula ∂z/∂y con la receta −F<sub>y</sub>/F<sub>z</sub> y evalúa en el punto (1, 2, 3). ¿Cuánto vale ahí?</p>
+        <div class="fx"><div class="sys"><span class="eq">x² + y² + z² = 14,  en (1, 2, 3)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">−2/3</button>
           <button class="opt" data-ok="0">−3/2</button>
           <button class="opt" data-ok="0">2/3</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Fy = 2y, Fz = 2z, así que ∂z/∂y = −2y/2z = −y/z. En (1, 2, 3): −2/3. El error −3/2 invierte la fracción; +2/3 pierde el signo.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>F<sub>y</sub> = 2y, F<sub>z</sub> = 2z, así que ∂z/∂y = −2y/2z = −y/z. En (1, 2, 3): −2/3. El error −3/2 invierte la fracción; +2/3 pierde el signo.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P3" data-tema="teorema_funcion_implicita" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Ahora por la fórmula del teorema: dy/dx = −Fx/Fy. ¿Cuánto vale en el punto (3, 4)?</p>
+        <p class="pstatement">Ahora por la fórmula del teorema: dy/dx = −F<sub>x</sub>/F<sub>y</sub>. ¿Cuánto vale en el punto (3, 4)?</p>
         <div class="fx"><div class="sys"><span class="eq">F(x, y) = x² + y² − 25</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">−3/4</button>
           <button class="opt" data-ok="0">−4/3</button>
           <button class="opt" data-ok="0">3/4</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Fx = 2x y Fy = 2y, así que −Fx/Fy = −2x/2y = −x/y. En (3, 4) es −3/4.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>F<sub>x</sub> = 2x y F<sub>y</sub> = 2y, así que −F<sub>x</sub>/F<sub>y</sub> = −2x/2y = −x/y. En (3, 4) es −3/4. El error −4/3 invierte la fracción.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P4" data-tema="funcion_inversa" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
         <p class="pstatement">Vamos con la inversa por la fórmula (f⁻¹)′(b) = 1/f′(a). Ya sabemos que f(1) = 2, así que a = 1 y b = 2. ¿Cuánto vale la derivada de la inversa en b = 2?</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x) = x³ + x,   f(1) = 2</span></div></div>
+        <div class="fx"><div class="sys"><span class="eq">f(x) = x³ + x,  f(1) = 2</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">1/4</button>
           <button class="opt" data-ok="0">4</button>
           <button class="opt" data-ok="0">1/2</button>
         </div>
         <div class="aux"><details><summary>Pista</summary><p>f′ se evalúa en a = 1, no en b = 2. Calcula f′(x) y mete x = 1; luego toma el recíproco.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>f′(x) = 3x² + 1, entonces f′(1) = 4. Se evalúa en a = 1 (no en b). La derivada de la inversa en 2 es 1/f′(1) = 1/4.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>f′(x) = 3x² + 1, entonces f′(1) = 4. Se evalúa en a = 1 (no en b). La derivada de la inversa en 2 es 1/f′(1) = 1/4. La trampa 4 olvida tomar el recíproco.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P5" data-tema="funcion_inversa" data-level="solo">
         <span class="lvl solo">Solo</span>
         <p class="pstatement">Sea f(x) = x² + 3x. Se sabe que f(1) = 4. ¿Cuánto vale la derivada de la inversa en 4?</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x) = x² + 3x,   f(1) = 4</span></div></div>
+        <div class="fx"><div class="sys"><span class="eq">f(x) = x² + 3x,  f(1) = 4</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">1/5</button>
           <button class="opt" data-ok="0">5</button>
           <button class="opt" data-ok="0">1/4</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>f′(x) = 2x + 3, entonces f′(1) = 5. Se evalúa en a = 1. La derivada de la inversa en 4 es 1/f′(1) = 1/5.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>f′(x) = 2x + 3, entonces f′(1) = 5. Se evalúa en a = 1. La derivada de la inversa en 4 es 1/f′(1) = 1/5. La trampa 5 olvida el recíproco; 1/4 evalúa mal.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P5b" data-tema="jacobiano" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Ahora arma tú la matriz jacobiana. Para la transformación de abajo, la fila de u son sus parciales (∂u/∂x, ∂u/∂y) y la de v las suyas. Ya calculamos ∂u/∂x = 2x y ∂u/∂y = 1. ¿Cuál es la fila de v, es decir (∂v/∂x, ∂v/∂y)?</p>
-        <div class="fx"><div class="sys"><span class="eq">u = x² + y,   v = xy</span></div></div>
+        <p class="pstatement">Ahora arma tú la matriz jacobiana. La fila de u son sus parciales (∂u/∂x, ∂u/∂y) y la de v las suyas. Ya calculamos ∂u/∂x = 2x y ∂u/∂y = 1. ¿Cuál es la fila de v, es decir (∂v/∂x, ∂v/∂y)?</p>
+        <div class="fx"><div class="sys"><span class="eq">u = x² + y,  v = xy</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">(y, x)</button>
           <button class="opt" data-ok="0">(x, y)</button>
@@ -425,7 +572,7 @@
 
       <div class="pitem" data-kind="item" data-id="P6" data-tema="jacobiano" data-level="guiado">
         <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Antes de calcular, practiquemos la regla del determinante 2×2: diagonal menos antidiagonal. ¿Cuánto vale el determinante de esta matriz?</p>
+        <p class="pstatement">Antes de calcular un jacobiano real, practiquemos la regla del determinante 2×2: diagonal menos antidiagonal. ¿Cuánto vale el determinante de esta matriz?</p>
         <div class="fx" id="p6"></div>
         <div class="opts">
           <button class="opt" data-ok="1">13</button>
@@ -433,7 +580,7 @@
           <button class="opt" data-ok="0">−13</button>
         </div>
         <div class="aux"><details><summary>Pista</summary><p>Multiplica la diagonal principal (arriba-izquierda por abajo-derecha) y réstale el producto de la antidiagonal.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Diagonal menos antidiagonal: (5)(3) − (2)(1) = 15 − 2 = 13. La trampa (17) sale de sumar los productos en vez de restarlos.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Diagonal menos antidiagonal: (5)(3) − (2)(1) = 15 − 2 = 13. La trampa 17 sale de sumar los productos en vez de restarlos.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P7" data-tema="jacobiano" data-level="solo">
@@ -445,13 +592,13 @@
           <button class="opt" data-ok="0">7</button>
           <button class="opt" data-ok="0">−10</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Determinante 2×2 = diagonal menos antidiagonal: (4)(3) − (1)(2) = 12 − 2 = 10. La trampa (7) sale de sumar en vez de multiplicar.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Determinante 2×2 = diagonal menos antidiagonal: (4)(3) − (1)(2) = 12 − 2 = 10. La trampa 7 sale de sumar en vez de multiplicar.</p></div>
       </div>
 
       <div class="pitem" data-kind="item" data-id="P5c" data-tema="jacobiano" data-level="solo">
         <span class="lvl solo">Solo</span>
-        <p class="pstatement">Tú sola, de principio a fin: para la transformación de abajo, calcula las cuatro parciales, arma la matriz jacobiana y saca su determinante (∂u/∂x·∂v/∂y − ∂u/∂y·∂v/∂x). ¿Cuánto vale el determinante en el punto (1, 2)?</p>
-        <div class="fx"><div class="sys"><span class="eq">u = x² + y,   v = y² − x,   en (1, 2)</span></div></div>
+        <p class="pstatement">Tú sola, de principio a fin: para la transformación de abajo, calcula las cuatro parciales, arma la matriz jacobiana y saca su determinante (∂u/∂x·∂v/∂y − ∂u/∂y·∂v/∂x). ¿Cuánto vale en el punto (1, 2)?</p>
+        <div class="fx"><div class="sys"><span class="eq">u = x² + y,  v = y² − x,  en (1, 2)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">9</button>
           <button class="opt" data-ok="0">7</button>
@@ -472,27 +619,28 @@
       </div>
     </section>
 
-    <div class="check" data-kind="recall" data-fid="F3_derivada_inversa" data-tema="funcion_inversa">
+    <div class="check" data-kind="recall" data-fid="F5_inconsistente_signo" data-tema="derivacion_implicita">
       <div class="qtag">Te toca · recuerda</div>
-      <p class="q">En la fórmula de la derivada de la inversa, ¿dónde se evalúa f′?</p>
+      <p class="q">Al derivar implícitamente, ¿cuál es el error que más cuesta caro?</p>
       <div class="opts">
-        <button class="opt" data-ok="1">En a, el punto de entrada, donde f(a) = b</button>
-        <button class="opt" data-ok="0">En b, el mismo punto donde evalúas la inversa</button>
-        <button class="opt" data-ok="0">En cero, siempre</button>
+        <button class="opt" data-ok="1">Olvidar el y′ al derivar un término con y (la regla de la cadena)</button>
+        <button class="opt" data-ok="0">Escribir el signo igual en vez de una flecha</button>
+        <button class="opt" data-ok="0">Derivar primero la x y luego la y por separado</button>
       </div>
-      <div class="why"><span class="lbl">Por qué</span><p>La regla es (f⁻¹)′(b) = 1/f′(a) con b = f(a). El error típico es evaluar f′ en b; hay que evaluarla en a.</p></div>
+      <div class="why"><span class="lbl">Por qué</span><p>Como y depende de x, cada término con y arrastra un y′ por la cadena. Si lo olvidas, el despeje sale con la fórmula equivocada. Es el descuido número uno del tema.</p></div>
     </div>
 
     <section class="chuleta">
       <h3>Para memorizar</h3>
       <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
       <ul>
-        <li><span class="ck">✓</span> Función implícita: F(x, y) = 0 define y como función de x cerca de un punto si Fy ≠ 0.</li>
-        <li><span class="ck">✓</span> Derivada implícita: dy/dx = −Fx/Fy. También sale derivando la ecuación y recordando que y′ acompaña a cada y.</li>
+        <li><span class="ck">✓</span> Función implícita: F(x, y) = 0 define y como función de x cerca de un punto si F<sub>y</sub> ≠ 0.</li>
+        <li><span class="ck">✓</span> Derivada implícita: dy/dx = −F<sub>x</sub>/F<sub>y</sub>. También sale derivando la ecuación y recordando que y′ acompaña a cada y.</li>
         <li><span class="ck">✓</span> No olvides el y′ (regla de la cadena) al derivar cualquier potencia de y.</li>
+        <li><span class="ck">✓</span> Tres variables: ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub> y ∂z/∂y = −F<sub>y</sub>/F<sub>z</sub>, con F<sub>z</sub> ≠ 0.</li>
         <li><span class="ck">✓</span> Derivada de la inversa: (f⁻¹)′(b) = 1/f′(a), con b = f(a) y f′(a) ≠ 0. f′ se evalúa en a.</li>
         <li><span class="ck">✓</span> Jacobiano: matriz de todas las parciales. Su determinante mide el cambio de área.</li>
-        <li><span class="ck">✓</span> Determinante jacobiano ≠ 0 → hay inversa local. Es el gemelo de Fy ≠ 0.</li>
+        <li><span class="ck">✓</span> Determinante jacobiano ≠ 0 → hay inversa local. Es el gemelo de F<sub>y</sub> ≠ 0.</li>
       </ul>
     </section>
 
@@ -503,6 +651,11 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="C5_optimizacion.html"><span class="sp">← Anterior</span><span class="ti">U5 · Optimización</span></a>
+      <a class="next" href="C7_integracion.html"><span class="sp">Siguiente →</span><span class="ti">U7 · Integración múltiple</span></a>
+    </nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 6</p></footer>
 
@@ -526,10 +679,8 @@ function mat(rows){
 }
 function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
 
-// Matriz jacobiana general (2x2, sin barra: 3ª "columna" es el cierre visual — usamos mat con separador)
-// Para matrices SIN aumentar (jacobiano) reusamos mat tratando la última col como parte del cuerpo:
+// matriz 2x2 pura, sin barra separadora (para jacobianos)
 function matrix2(rows){
-  // matriz 2x2 pura, sin barra separadora
   var gtc='auto auto';
   var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
   for(var r=0;r<rows.length;r++){
@@ -541,7 +692,7 @@ function matrix2(rows){
 }
 function setM(id,rows){ var el=document.getElementById(id); if(el) el.innerHTML=matrix2(rows); }
 
-// ===== derivación implícita: circunferencia =====
+// ===== derivación implícita: circunferencia (co-producido) =====
 document.getElementById('d1').innerHTML='<div class="sys"><span class="eq">2x + 2y·y′ = 0</span></div>';
 document.getElementById('d2').innerHTML='<div class="sys"><span class="eq">y′ = −2x / 2y = −x / y</span></div>';
 document.getElementById('d3').innerHTML='<div class="sys"><span class="eq">y′ = −(3) / (4) = −3/4</span></div>';
@@ -551,7 +702,7 @@ document.getElementById('q2').innerHTML='<div class="sys"><span class="eq">(x + 
 document.getElementById('q3').innerHTML='<div class="sys"><span class="eq">y′ = −(2x + y) / (x + 2y)</span></div>';
 document.getElementById('q4').innerHTML='<div class="sys"><span class="eq">y′ = −(2 + 2) / (1 + 4) = −4/5</span></div>';
 // ===== implícita 3 variables: esfera =====
-document.getElementById('s1').innerHTML='<div class="sys"><span class="eq">F = x² + y² + z² − 9</span><span class="eq">Fx = 2x,  Fy = 2y,  Fz = 2z</span></div>';
+document.getElementById('s1').innerHTML='<div class="sys"><span class="eq">F = x² + y² + z² − 9</span><span class="eq">F<sub>x</sub> = 2x,  F<sub>y</sub> = 2y,  F<sub>z</sub> = 2z</span></div>';
 document.getElementById('s2').innerHTML='<div class="sys"><span class="eq">∂z/∂x = −2x/2z = −x/z = −1/2</span></div>';
 document.getElementById('s3').innerHTML='<div class="sys"><span class="eq">∂z/∂y = −2y/2z = −y/z = −2/2 = −1</span></div>';
 // ===== función inversa =====
@@ -611,7 +762,7 @@ document.querySelectorAll('.viz-tab').forEach(function(b){
 // ===== instrumentación =====
 var session = {
   fecha:new Date().toISOString().slice(0,10),
-  materia:"calculo_multivariado", unidad:"U6_funcion_implicita_inversa", leccion:"C6_funcion-implicita-inversa",
+  materia:"calculo", unidad:"U6_funcion_implicita_inversa", leccion:"C6_funcion-implicita-inversa",
   duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
 };
 var t0ms = Date.now();
