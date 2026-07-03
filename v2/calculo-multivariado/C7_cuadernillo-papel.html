@@ -139,6 +139,25 @@
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
   .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  .autotest{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow);grid-template-columns:minmax(0,1fr);min-width:0}
+  .autotest .intro{margin:0;font-size:16px;color:var(--slate)}
+  .autotest .qcard{border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;display:grid;gap:10px;background:#fcfbf9;grid-template-columns:minmax(0,1fr);min-width:0}
+  .autotest .qcard.correct{border-color:var(--green);background:#f3faf5}
+  .autotest .qcard.incorrect{border-color:#e9b8c6;background:#fdf2f5}
+  .autotest .qn{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .autotest .q{margin:0;font-weight:700;font-size:17px;overflow-wrap:anywhere}
+  .autotest .opts{display:grid;gap:9px;min-width:0}
+  .autotest .opt{font:inherit;text-align:left;font-weight:600;font-size:16px;padding:11px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;min-width:0;overflow-wrap:anywhere}
+  .autotest .opt:hover{border-color:var(--orange)}
+  .autotest .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .autotest .opt.wrong{border-color:#d6336c;background:#fdecf1;color:#a01243}
+  .autotest .opt:disabled{cursor:default}
+  .autotest .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:10px 13px;font-size:15px;overflow-wrap:anywhere}
+  .autotest .why.show{display:block}
+  .autotest .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .autotest .why .lbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;color:var(--green-deep);margin-bottom:2px}
+  .autotest .why.miss .lbl{color:var(--deep)}
+  .autotest .why p{margin:0}
 </style>
 </head>
 <body>
@@ -472,6 +491,78 @@
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
 
+    <h2 class="modhead">Resuélvelo tú — opción múltiple</h2>
+    <section class="autotest">
+      <p class="intro">Aquí <strong>no hay solución a la vista</strong>. Resuélvelo en papel, elige, y solo entonces verás si acertaste. Las opciones se <strong>barajan</strong> cada vez: no memorices posiciones, razona.</p>
+
+      <div class="qcard" data-tema="doble">
+        <div class="qn">Ejercicio 1</div>
+        <p class="q">La integral doble ∫₀¹∫₀¹ 1 dx dy vale…</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">1</button>
+          <button class="opt" data-ok="0">2</button>
+          <button class="opt" data-ok="0">0</button>
+          <button class="opt" data-ok="0">1/2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Es el área del cuadrado unitario: 1·1 = 1.</p></div>
+      </div>
+      <div class="qcard" data-tema="fubini">
+        <div class="qn">Ejercicio 2</div>
+        <p class="q">Sobre un rectángulo, el teorema de Fubini permite…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">solo dx dy</button>
+          <button class="opt" data-ok="1">integrar en cualquier orden</button>
+          <button class="opt" data-ok="0">solo dy dx</button>
+          <button class="opt" data-ok="0">no integrar</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>En un rectángulo puedes integrar primero en x o primero en y: el resultado es el mismo.</p></div>
+      </div>
+      <div class="qcard" data-tema="polares">
+        <div class="qn">Ejercicio 3</div>
+        <p class="q">Al cambiar a coordenadas polares, el diferencial de área dA es…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">dr dθ</button>
+          <button class="opt" data-ok="0">r² dr dθ</button>
+          <button class="opt" data-ok="1">r dr dθ</button>
+          <button class="opt" data-ok="0">dθ dr</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El jacobiano de polares es r, así que dA = r dr dθ.</p></div>
+      </div>
+      <div class="qcard" data-tema="doble">
+        <div class="qn">Ejercicio 4</div>
+        <p class="q">La integral ∫₀²∫₀³ 1 dy dx vale…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">5</button>
+          <button class="opt" data-ok="0">9</button>
+          <button class="opt" data-ok="0">1</button>
+          <button class="opt" data-ok="1">6</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Es el área del rectángulo 2 × 3 = 6.</p></div>
+      </div>
+      <div class="qcard" data-tema="iterada">
+        <div class="qn">Ejercicio 5</div>
+        <p class="q">La integral ∫₀¹∫₀² x dx dy vale…</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">2</button>
+          <button class="opt" data-ok="0">4</button>
+          <button class="opt" data-ok="0">1</button>
+          <button class="opt" data-ok="0">3</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Interior: ∫₀² x dx = 2. Exterior: ∫₀¹ 2 dy = 2.</p></div>
+      </div>
+      <div class="qcard" data-tema="triple">
+        <div class="qn">Ejercicio 6</div>
+        <p class="q">La integral triple ∫∫∫ 1 dV sobre una región da…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">el área</button>
+          <button class="opt" data-ok="1">el volumen de la región</button>
+          <button class="opt" data-ok="0">la masa siempre</button>
+          <button class="opt" data-ok="0">0</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Integrar la constante 1 sobre un sólido da su volumen.</p></div>
+      </div>
+    </section>
+
     <nav class="nav-lecs"><a class="prev" href="C7_teoria-formal.html"><span class="sp">← Teoría</span><span class="ti">Repasar fórmulas</span></a><a class="next" href="C7_evaluacion.html"><span class="sp">Siguiente →</span><span class="ti">Evaluación · demuéstralo</span></a></nav>
 
     <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Cálculo Multivariado · Unidad 7 — Integración múltiple</p></footer>
@@ -599,6 +690,27 @@ document.getElementById('gen').onclick=function(){
   document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
   document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
 };
+</script>
+<script>
+/* autotest: opción múltiple con opciones BARAJADAS (posición aleatoria) + revelar al elegir */
+(function(){
+  document.querySelectorAll('.autotest .qcard').forEach(function(card){
+    var opts=card.querySelector('.opts');
+    if(opts){ var a=Array.prototype.slice.call(opts.children);
+      for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+      a.forEach(function(e){ opts.appendChild(e); }); }
+    var done=false, why=card.querySelector('.why');
+    card.querySelectorAll('.opt').forEach(function(b){
+      b.onclick=function(){
+        if(done) return; done=true;
+        card.querySelectorAll('.opt').forEach(function(x){ x.disabled=true; if(x.getAttribute('data-ok')==="1") x.classList.add('right'); });
+        if(b.getAttribute('data-ok')!=="1"){ b.classList.add('wrong'); if(why) why.classList.add('miss'); }
+        if(why) why.classList.add('show');
+        card.classList.add(b.getAttribute('data-ok')==="1"?'correct':'incorrect');
+      };
+    });
+  });
+})();
 </script>
 </body>
 </html>

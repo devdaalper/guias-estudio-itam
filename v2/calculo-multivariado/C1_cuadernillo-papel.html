@@ -141,6 +141,25 @@
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
   .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  .autotest{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow);grid-template-columns:minmax(0,1fr);min-width:0}
+  .autotest .intro{margin:0;font-size:16px;color:var(--slate)}
+  .autotest .qcard{border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;display:grid;gap:10px;background:#fcfbf9;grid-template-columns:minmax(0,1fr);min-width:0}
+  .autotest .qcard.correct{border-color:var(--green);background:#f3faf5}
+  .autotest .qcard.incorrect{border-color:#e9b8c6;background:#fdf2f5}
+  .autotest .qn{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .autotest .q{margin:0;font-weight:700;font-size:17px;overflow-wrap:anywhere}
+  .autotest .opts{display:grid;gap:9px;min-width:0}
+  .autotest .opt{font:inherit;text-align:left;font-weight:600;font-size:16px;padding:11px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;min-width:0;overflow-wrap:anywhere}
+  .autotest .opt:hover{border-color:var(--orange)}
+  .autotest .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .autotest .opt.wrong{border-color:#d6336c;background:#fdecf1;color:#a01243}
+  .autotest .opt:disabled{cursor:default}
+  .autotest .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:10px 13px;font-size:15px;overflow-wrap:anywhere}
+  .autotest .why.show{display:block}
+  .autotest .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .autotest .why .lbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;color:var(--green-deep);margin-bottom:2px}
+  .autotest .why.miss .lbl{color:var(--deep)}
+  .autotest .why p{margin:0}
 </style>
 </head>
 <body>
@@ -474,6 +493,78 @@
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
 
+    <h2 class="modhead">Resuélvelo tú — opción múltiple</h2>
+    <section class="autotest">
+      <p class="intro">Aquí <strong>no hay solución a la vista</strong>. Resuélvelo en papel, elige, y solo entonces verás si acertaste. Las opciones se <strong>barajan</strong> cada vez: no memorices posiciones, razona.</p>
+
+      <div class="qcard" data-tema="limite">
+        <div class="qn">Ejercicio 1</div>
+        <p class="q">El límite cuando n → ∞ de (2n + 1)/(n + 3) es…</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">2</button>
+          <button class="opt" data-ok="0">1</button>
+          <button class="opt" data-ok="0">1/3</button>
+          <button class="opt" data-ok="0">∞</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Manda el cociente de los coeficientes de mayor grado: 2n/n = 2.</p></div>
+      </div>
+      <div class="qcard" data-tema="geometrica">
+        <div class="qn">Ejercicio 2</div>
+        <p class="q">La serie 1 + 1/2 + 1/4 + 1/8 + … suma…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">1</button>
+          <button class="opt" data-ok="1">2</button>
+          <button class="opt" data-ok="0">∞</button>
+          <button class="opt" data-ok="0">3/2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Geométrica con a = 1, r = 1/2: suma = a/(1 − r) = 1/(1/2) = 2.</p></div>
+      </div>
+      <div class="qcard" data-tema="convergencia">
+        <div class="qn">Ejercicio 3</div>
+        <p class="q">La serie geométrica ∑ rⁿ converge si…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">r &gt; 0</button>
+          <button class="opt" data-ok="0">r &lt; 1</button>
+          <button class="opt" data-ok="1">|r| &lt; 1</button>
+          <button class="opt" data-ok="0">|r| &gt; 1</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Converge exactamente cuando el valor absoluto de la razón es menor que 1.</p></div>
+      </div>
+      <div class="qcard" data-tema="termino">
+        <div class="qn">Ejercicio 4</div>
+        <p class="q">Si el término general aₙ no tiende a 0, la serie ∑ aₙ…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">converge</button>
+          <button class="opt" data-ok="0">converge a 0</button>
+          <button class="opt" data-ok="0">no se puede saber</button>
+          <button class="opt" data-ok="1">diverge</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Criterio del término n-ésimo: si aₙ ↛ 0, la serie diverge.</p></div>
+      </div>
+      <div class="qcard" data-tema="pserie">
+        <div class="qn">Ejercicio 5</div>
+        <p class="q">La serie ∑ 1/n² …</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">converge</button>
+          <button class="opt" data-ok="0">diverge</button>
+          <button class="opt" data-ok="0">suma 1</button>
+          <button class="opt" data-ok="0">oscila</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Es una p-serie con p = 2 &gt; 1, así que converge.</p></div>
+      </div>
+      <div class="qcard" data-tema="armonica">
+        <div class="qn">Ejercicio 6</div>
+        <p class="q">La serie armónica ∑ 1/n …</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">converge</button>
+          <button class="opt" data-ok="1">diverge</button>
+          <button class="opt" data-ok="0">suma 1</button>
+          <button class="opt" data-ok="0">converge a e</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La armónica es el caso p = 1 y diverge, aunque sus términos tiendan a 0.</p></div>
+      </div>
+    </section>
+
     <nav class="nav-lecs"><a class="prev" href="C1_teoria-formal.html"><span class="sp">← Teoría</span><span class="ti">Repasar fórmulas</span></a><a class="next" href="C1_evaluacion.html"><span class="sp">Siguiente →</span><span class="ti">Evaluación · demuéstralo</span></a></nav>
 
     <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Cálculo Multivariado · Unidad 1 — Sucesiones y series</p></footer>
@@ -582,6 +673,27 @@ document.getElementById('gen').onclick=function(){
   document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
   document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
 };
+</script>
+<script>
+/* autotest: opción múltiple con opciones BARAJADAS (posición aleatoria) + revelar al elegir */
+(function(){
+  document.querySelectorAll('.autotest .qcard').forEach(function(card){
+    var opts=card.querySelector('.opts');
+    if(opts){ var a=Array.prototype.slice.call(opts.children);
+      for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+      a.forEach(function(e){ opts.appendChild(e); }); }
+    var done=false, why=card.querySelector('.why');
+    card.querySelectorAll('.opt').forEach(function(b){
+      b.onclick=function(){
+        if(done) return; done=true;
+        card.querySelectorAll('.opt').forEach(function(x){ x.disabled=true; if(x.getAttribute('data-ok')==="1") x.classList.add('right'); });
+        if(b.getAttribute('data-ok')!=="1"){ b.classList.add('wrong'); if(why) why.classList.add('miss'); }
+        if(why) why.classList.add('show');
+        card.classList.add(b.getAttribute('data-ok')==="1"?'correct':'incorrect');
+      };
+    });
+  });
+})();
 </script>
 </body>
 </html>

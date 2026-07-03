@@ -149,6 +149,25 @@
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
   .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  .autotest{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow);grid-template-columns:minmax(0,1fr);min-width:0}
+  .autotest .intro{margin:0;font-size:16px;color:var(--slate)}
+  .autotest .qcard{border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;display:grid;gap:10px;background:#fcfbf9;grid-template-columns:minmax(0,1fr);min-width:0}
+  .autotest .qcard.correct{border-color:var(--green);background:#f3faf5}
+  .autotest .qcard.incorrect{border-color:#e9b8c6;background:#fdf2f5}
+  .autotest .qn{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .autotest .q{margin:0;font-weight:700;font-size:17px;overflow-wrap:anywhere}
+  .autotest .opts{display:grid;gap:9px;min-width:0}
+  .autotest .opt{font:inherit;text-align:left;font-weight:600;font-size:16px;padding:11px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;min-width:0;overflow-wrap:anywhere}
+  .autotest .opt:hover{border-color:var(--orange)}
+  .autotest .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .autotest .opt.wrong{border-color:#d6336c;background:#fdecf1;color:#a01243}
+  .autotest .opt:disabled{cursor:default}
+  .autotest .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:10px 13px;font-size:15px;overflow-wrap:anywhere}
+  .autotest .why.show{display:block}
+  .autotest .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .autotest .why .lbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;color:var(--green-deep);margin-bottom:2px}
+  .autotest .why.miss .lbl{color:var(--deep)}
+  .autotest .why p{margin:0}
 </style>
 </head>
 <body>
@@ -442,6 +461,78 @@
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
 
+    <h2 class="modhead">Resuélvelo tú — opción múltiple</h2>
+    <section class="autotest">
+      <p class="intro">Aquí <strong>no hay solución a la vista</strong>. Resuélvelo en papel, elige, y solo entonces verás si acertaste. Las opciones se <strong>barajan</strong> cada vez: no memorices posiciones, razona.</p>
+
+      <div class="qcard" data-tema="critico">
+        <div class="qn">Ejercicio 1</div>
+        <p class="q">Un punto crítico de f(x, y) cumple…</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">f<sub>x</sub> = 0 y f<sub>y</sub> = 0</button>
+          <button class="opt" data-ok="0">f = 0</button>
+          <button class="opt" data-ok="0">f<sub>x</sub> = f<sub>y</sub></button>
+          <button class="opt" data-ok="0">el gradiente es (1, 1)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>En un punto crítico ambas parciales se anulan: el gradiente es (0, 0).</p></div>
+      </div>
+      <div class="qcard" data-tema="hessiana">
+        <div class="qn">Ejercicio 2</div>
+        <p class="q">Con D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)² &gt; 0 y f<sub>xx</sub> &gt; 0, el punto crítico es un…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">máximo</button>
+          <button class="opt" data-ok="1">mínimo</button>
+          <button class="opt" data-ok="0">punto silla</button>
+          <button class="opt" data-ok="0">no decide</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>D &gt; 0 con f<sub>xx</sub> &gt; 0 (cóncava hacia arriba) → mínimo local.</p></div>
+      </div>
+      <div class="qcard" data-tema="silla">
+        <div class="qn">Ejercicio 3</div>
+        <p class="q">Si D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)² &lt; 0, el punto crítico es un…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">mínimo</button>
+          <button class="opt" data-ok="0">máximo</button>
+          <button class="opt" data-ok="1">punto silla</button>
+          <button class="opt" data-ok="0">degenerado</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>D &lt; 0 siempre indica punto silla.</p></div>
+      </div>
+      <div class="qcard" data-tema="maximo">
+        <div class="qn">Ejercicio 4</div>
+        <p class="q">Con D &gt; 0 y f<sub>xx</sub> &lt; 0, el punto crítico es un…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">mínimo</button>
+          <button class="opt" data-ok="0">punto silla</button>
+          <button class="opt" data-ok="0">no decide</button>
+          <button class="opt" data-ok="1">máximo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>D &gt; 0 con f<sub>xx</sub> &lt; 0 (cóncava hacia abajo) → máximo local.</p></div>
+      </div>
+      <div class="qcard" data-tema="lagrange">
+        <div class="qn">Ejercicio 5</div>
+        <p class="q">Para optimizar f sujeto a la restricción g = c, se resuelve…</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">∇f = λ∇g</button>
+          <button class="opt" data-ok="0">∇f = 0</button>
+          <button class="opt" data-ok="0">f = g</button>
+          <button class="opt" data-ok="0">∇f = ∇g</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Multiplicadores de Lagrange: en el óptimo los gradientes son paralelos, ∇f = λ∇g.</p></div>
+      </div>
+      <div class="qcard" data-tema="critico">
+        <div class="qn">Ejercicio 6</div>
+        <p class="q">El punto crítico de f(x, y) = x² + y² es…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">(1, 1)</button>
+          <button class="opt" data-ok="1">(0, 0)</button>
+          <button class="opt" data-ok="0">no tiene</button>
+          <button class="opt" data-ok="0">(2, 2)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>f<sub>x</sub> = 2x = 0 y f<sub>y</sub> = 2y = 0 dan x = 0, y = 0.</p></div>
+      </div>
+    </section>
+
     <nav class="nav-lecs"><a class="prev" href="C5_teoria-formal.html"><span class="sp">← Teoría</span><span class="ti">Repasar fórmulas</span></a><a class="next" href="C5_evaluacion.html"><span class="sp">Siguiente →</span><span class="ti">Evaluación · demuéstralo</span></a></nav>
 
     <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Cálculo Multivariado · Unidad 5 — Optimización</p></footer>
@@ -630,6 +721,27 @@ document.getElementById('gen').onclick=function(){
   document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
   document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
 };
+</script>
+<script>
+/* autotest: opción múltiple con opciones BARAJADAS (posición aleatoria) + revelar al elegir */
+(function(){
+  document.querySelectorAll('.autotest .qcard').forEach(function(card){
+    var opts=card.querySelector('.opts');
+    if(opts){ var a=Array.prototype.slice.call(opts.children);
+      for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+      a.forEach(function(e){ opts.appendChild(e); }); }
+    var done=false, why=card.querySelector('.why');
+    card.querySelectorAll('.opt').forEach(function(b){
+      b.onclick=function(){
+        if(done) return; done=true;
+        card.querySelectorAll('.opt').forEach(function(x){ x.disabled=true; if(x.getAttribute('data-ok')==="1") x.classList.add('right'); });
+        if(b.getAttribute('data-ok')!=="1"){ b.classList.add('wrong'); if(why) why.classList.add('miss'); }
+        if(why) why.classList.add('show');
+        card.classList.add(b.getAttribute('data-ok')==="1"?'correct':'incorrect');
+      };
+    });
+  });
+})();
 </script>
 </body>
 </html>
