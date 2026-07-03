@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U5 — Evaluación: Optimización</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:64ch;margin:.2em 0 0}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:12px 18px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .sys{display:grid;gap:6px;font-size:20px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:20px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:28px}
+  .mrow>span{text-align:right;min-width:22px}
+  .msep{justify-self:center;width:0;height:22px;border-left:2px solid var(--ink);min-width:0}
+
+  .block{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
+  .block .phead h3{margin:0;font-size:19px}
+  .block .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
+
+  .qcard{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff}
+  .qcard.correct{border-color:var(--green);background:#f3faf5}
+  .qcard.incorrect{border-color:#e9b8c6;background:#fdf2f5}
+  .qhead{display:flex;align-items:center;gap:10px}
+  .qnum{flex:0 0 auto;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:15px;border:2px solid var(--ink);background:#fff}
+  .blk{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .blk.teoria{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .blk.practica{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .blk.repaso{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .q{margin:0;font-weight:700;font-size:17px}
+
+  .opts{display:grid;gap:10px}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s;min-width:0}
+  .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
+  .opt.sel{border-color:var(--navy);background:#eef1fb}
+  .opt:disabled{cursor:default}
+  .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .opt .mtx{font-size:18px}
+
+  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .why.show{display:block}
+  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .why.miss>.lbl{color:var(--deep)}
+  .why p{margin:0}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:14px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  .btn.dim{opacity:.45;filter:grayscale(.35)}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .notanswered{color:#a01243;font-weight:700;font-size:15px;margin:8px 0 0;min-height:1em}
+
+  .result{border-top:2px solid var(--line);margin-top:16px;padding-top:16px;display:none}
+  .result.show{display:block}
+  .verdict{font-size:24px;font-weight:800;letter-spacing:-.02em;margin:0}
+  .verdict.pass{color:var(--green-deep)}
+  .verdict.fail{color:var(--deep)}
+  .scorebar{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+  .scorechip{border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;font-weight:700;background:#fcfbf9}
+  .scorechip b{font-size:20px}
+  .scorechip.ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .scorechip.no{border-color:#e9b8c6;background:#fdf2f5;color:#a01243}
+  .repasa{border:1.5px solid #f0d6b8;background:var(--cream);border-radius:12px;padding:12px 15px;margin-top:8px;font-size:16px}
+  .repasa a{color:var(--deep);font-weight:800}
+  .advance{margin-top:8px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+
+  /*hardening-360*/
+  main,.block,.qcard,.opts,.cierre,.result{grid-template-columns:minmax(0,1fr);min-width:0}
+  .fx,.sys,.mtx,.opt,.qcard{max-width:100%;min-width:0}
+  .q,.why,.repasa{overflow-wrap:anywhere}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .nav-lecs a{flex:1;min-width:0;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Evaluación</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 5 · Evaluación</p>
+    <h1>¿Ya <mark>dominas</mark> la optimización?</h1>
+    <p class="lead">Esta prueba decide si estás lista para el siguiente tema. Dos bloques: <strong>teoría</strong> (¿recuerdas las reglas del criterio y de Lagrange?) y <strong>práctica</strong> (¿sabes analizar un punto crítico de principio a fin?). Contesta todo y pulsa <em>Calificar</em>. Necesitas <strong>80% en cada bloque</strong>. Todo a mano, sin calculadora. Las opciones se barajan cada vez.</p>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Bloque 1 · Teoría</h2>
+    <section class="block" data-bloque-sec="teoria">
+      <div class="phead"><h3>¿Recuerdas las reglas?</h3><p class="sub">Una respuesta por pregunta. No se revela hasta calificar.</p></div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="puntos_criticos" data-id="T1">
+        <div class="qhead"><span class="qnum">1</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">¿Qué condición define un punto crítico de f(x, y)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Que la función valga cero ahí: f(x, y) = 0</button>
+          <button class="opt" data-ok="1">Que ∂f/∂x y ∂f/∂y valgan cero ahí, las dos a la vez</button>
+          <button class="opt" data-ok="0">Que solo ∂f/∂x valga cero, sin importar ∂f/∂y</button>
+          <button class="opt" data-ok="0">Que el determinante de la hessiana valga cero</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El punto crítico es terreno llano: pendiente cero en <strong>ambas</strong> direcciones, o sea ∇f = 0. Que f valga cero no dice nada de la pendiente, y con una sola parcial en cero el terreno todavía sube por la otra.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="hessiana" data-id="T2">
+        <div class="qhead"><span class="qnum">2</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">¿Qué guarda la matriz hessiana de una función de dos variables?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Las cuatro segundas derivadas f<sub>xx</sub>, f<sub>xy</sub>, f<sub>yx</sub>, f<sub>yy</sub>, y es simétrica</button>
+          <button class="opt" data-ok="0">Las dos primeras derivadas f<sub>x</sub> y f<sub>y</sub></button>
+          <button class="opt" data-ok="0">Los valores de f en cuatro puntos cercanos al crítico</button>
+          <button class="opt" data-ok="0">Las coordenadas de todos los puntos críticos</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La hessiana es la tabla 2×2 de <strong>segundas</strong> derivadas: la diagonal lleva f<sub>xx</sub> y f<sub>yy</sub> (curvatura en cada eje) y fuera van las cruzadas. Por Clairaut f<sub>xy</sub> = f<sub>yx</sub>, así que es simétrica.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="criterio_segunda_derivada" data-id="T3">
+        <div class="qhead"><span class="qnum">3</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">Al evaluar en un punto crítico sale D &lt; 0. ¿Qué es ese punto?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Un mínimo, si además f<sub>xx</sub> &gt; 0</button>
+          <button class="opt" data-ok="0">Un máximo, si además f<sub>xx</sub> &lt; 0</button>
+          <button class="opt" data-ok="1">Un punto silla, sin importar el signo de f<sub>xx</sub></button>
+          <button class="opt" data-ok="0">Indeterminado: el criterio no decide</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con D &lt; 0 el veredicto es <strong>punto silla</strong>, directo: el terreno sube por una dirección y baja por la otra, así que no puede ser cima ni hoyo. El signo de f<sub>xx</sub> solo desempata cuando D &gt; 0.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="clasificacion" data-id="T4">
+        <div class="qhead"><span class="qnum">4</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">En un punto crítico sale D &gt; 0 y f<sub>xx</sub> &lt; 0. ¿Qué es?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Un mínimo local</button>
+          <button class="opt" data-ok="0">Un punto silla</button>
+          <button class="opt" data-ok="1">Un máximo local</button>
+          <button class="opt" data-ok="0">El criterio no decide</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con D &gt; 0 es cima o hoyo; el signo de f<sub>xx</sub> desempata. Negativo = el terreno se curva hacia abajo = <strong>máximo</strong>. El error clásico es leer f<sub>xx</sub> &gt; 0 como máximo: es al revés, f<sub>xx</sub> &gt; 0 da mínimo.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="teoria" data-tema="lagrange" data-id="T5">
+        <div class="qhead"><span class="qnum">5</span><span class="blk teoria">Teoría</span></div>
+        <p class="q">¿Cuál es la idea central del método de multiplicadores de Lagrange?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Igualar la función a cero y despejar</button>
+          <button class="opt" data-ok="0">Que el determinante de la hessiana valga cero en el óptimo</button>
+          <button class="opt" data-ok="1">En el óptimo con restricción, ∇f es un múltiplo de ∇g: ∇f = λ∇g</button>
+          <button class="opt" data-ok="0">Ignorar la restricción y optimizar la función libre</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>En el punto óptimo las curvas de nivel de f son tangentes a la restricción, así que sus gradientes quedan alineados: ∇f = λ∇g. Ese λ es el multiplicador. Olvidar la restricción es el error que anula el método.</p></div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Bloque 2 · Práctica</h2>
+    <section class="block" data-bloque-sec="practica">
+      <div class="phead"><h3>¿Sabes resolver?</h3><p class="sub">Problemas nuevos. Razónalos a mano antes de elegir.</p></div>
+
+      <div class="qcard" data-bloque="practica" data-tema="puntos_criticos" data-id="P1">
+        <div class="qhead"><span class="qnum">6</span><span class="blk practica">Práctica</span></div>
+        <p class="q">¿Cuál es el único punto crítico de esta función?</p>
+        <div class="fx" id="p1f"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">(−1, 2)</button>
+          <button class="opt" data-ok="1">(1, −2)</button>
+          <button class="opt" data-ok="0">(2, −4)</button>
+          <button class="opt" data-ok="0">(1, 2)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>f<sub>x</sub> = 2x − 2 = 0 → x = 1; f<sub>y</sub> = 2y + 4 = 0 → y = −2. El signo se despeja con cuidado: +4 pasa restando. Único punto llano: (1, −2).</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="criterio_segunda_derivada" data-id="P2">
+        <div class="qhead"><span class="qnum">7</span><span class="blk practica">Práctica</span></div>
+        <p class="q">En un punto crítico las segundas derivadas dan esta hessiana. Calcula D y clasifica.</p>
+        <div class="fx" id="p2m"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">D = (2)(2) − 3<sup>2</sup> = 13 &gt; 0 y f<sub>xx</sub> &gt; 0 → mínimo</button>
+          <button class="opt" data-ok="1">D = (2)(2) − 3<sup>2</sup> = −5 &lt; 0 → punto silla</button>
+          <button class="opt" data-ok="0">D = (2)(2) − 3<sup>2</sup> = −5, pero f<sub>xx</sub> &gt; 0 → mínimo</button>
+          <button class="opt" data-ok="0">D = (2)(2) + 3<sup>2</sup> = 13 &gt; 0 → máximo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup> = (2)(2) − 3<sup>2</sup> = 4 − 9 = −5 &lt; 0. Se <strong>resta</strong> el cuadrado de la cruzada, no se suma. Con D negativo el veredicto es punto silla, sin mirar f<sub>xx</sub>.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="clasificacion" data-id="P3">
+        <div class="qhead"><span class="qnum">8</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Esta función tiene dos puntos críticos, en x = 2 y en x = −2 (con y = 0). Con D = 12x, ¿qué es el punto en x = 2?</p>
+        <div class="fx" id="p3f"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">Punto silla, porque D = 12(2) = 24 &lt; 0</button>
+          <button class="opt" data-ok="1">Mínimo, porque D = 12(2) = 24 &gt; 0 y f<sub>xx</sub> = 6(2) = 12 &gt; 0</button>
+          <button class="opt" data-ok="0">Máximo, porque D = 24 &gt; 0 y f<sub>xx</sub> &gt; 0</button>
+          <button class="opt" data-ok="0">El criterio no decide en x = 2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>En x = 2: D = 12(2) = 24 &gt; 0, así que es cima o hoyo. f<sub>xx</sub> = 6x = 6(2) = 12 &gt; 0 (curva hacia arriba) ⇒ <strong>mínimo</strong>. En x = −2 daría D = −24 &lt; 0 → silla, pero aquí preguntamos por x = 2.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="lagrange" data-id="P4">
+        <div class="qhead"><span class="qnum">9</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Maximiza el producto x·y sujeto a x + 3y = 12. Con los datos de abajo, ¿cuánto valen x e y en el óptimo?</p>
+        <div class="fx" id="p4f"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">x = 3, y = 3 (producto 9)</button>
+          <button class="opt" data-ok="0">x = 12, y = 0 (producto 0)</button>
+          <button class="opt" data-ok="1">x = 6, y = 2 (producto máximo 12)</button>
+          <button class="opt" data-ok="0">x = 2, y = 6 (producto 12)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>∇f = (y, x), ∇g = (1, 3). Igualando ∇f = λ∇g: y = λ, x = 3λ, así que x = 3y. En x + 3y = 12: 3y + 3y = 6y = 12 → y = 2, x = 6. Los coeficientes distintos hacen que x e y <strong>no</strong> salgan iguales.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="lagrange" data-id="P5">
+        <div class="qhead"><span class="qnum">10</span><span class="blk practica">Práctica</span></div>
+        <p class="q">Halla el punto de la recta 2x + y = 10 más cercano al origen, minimizando f = x<sup>2</sup> + y<sup>2</sup>. Con los datos de abajo, ¿cuál es ese punto?</p>
+        <div class="fx" id="p5f"></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">(4, 2)</button>
+          <button class="opt" data-ok="0">(2, 4)</button>
+          <button class="opt" data-ok="0">(5, 0)</button>
+          <button class="opt" data-ok="0">(0, 10)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>∇f = (2x, 2y), ∇g = (2, 1). Igualando: 2x = 2λ → x = λ, y 2y = λ, así que x = 2y. En 2x + y = 10: 4y + y = 5y = 10 → y = 2, x = 4. El punto es (4, 2). Verifica: 2(4) + 2 = 10 ✓.</p></div>
+      </div>
+
+      <div class="qcard" data-bloque="practica" data-tema="criterio_inconcluso" data-id="P6">
+        <div class="qhead"><span class="qnum">11</span><span class="blk practica">Práctica</span></div>
+        <p class="q">En un punto crítico las segundas derivadas dan esta hessiana. ¿Qué puedes concluir?</p>
+        <div class="fx" id="p6m"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">D = 4 &gt; 0 y f<sub>xx</sub> &lt; 0 → máximo</button>
+          <button class="opt" data-ok="1">D = (−4)(−1) − 2<sup>2</sup> = 0 → el criterio no decide</button>
+          <button class="opt" data-ok="0">D = −4 &lt; 0 → punto silla</button>
+          <button class="opt" data-ok="0">D = 8 &gt; 0 y f<sub>xx</sub> &lt; 0 → máximo</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup> = (−4)(−1) − 2<sup>2</sup> = 4 − 4 = 0. La cruzada al cuadrado cancela exactamente a la diagonal. Con <strong>D = 0 el criterio no decide</strong>: hay que analizar por otro medio.</p></div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Bloque 3 · Repaso · Diferenciación</h2>
+    <section class="block" data-bloque-sec="repaso">
+      <div class="phead"><h3>Un paso atrás, del tema anterior</h3><p class="sub">De aquí salen los puntos críticos: no cuenta para el 80%, pero conviene tenerlo firme.</p></div>
+
+      <div class="qcard" data-bloque="repaso" data-tema="gradiente" data-id="R1">
+        <div class="qhead"><span class="qnum">12</span><span class="blk repaso">Repaso</span></div>
+        <p class="q">Para la función de abajo, ¿cuál es el gradiente ∇f evaluado en el punto (2, 1)?</p>
+        <div class="fx" id="r1f"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">∇f(2, 1) = (2, 3)</button>
+          <button class="opt" data-ok="1">∇f(2, 1) = (4, 7)</button>
+          <button class="opt" data-ok="0">∇f(2, 1) = (4, 4)</button>
+          <button class="opt" data-ok="0">∇f(2, 1) = (2xy, x<sup>2</sup> + 3y<sup>2</sup>)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>∇f = (∂f/∂x, ∂f/∂y) = (2xy, x<sup>2</sup> + 3y<sup>2</sup>). En (2, 1): la primera vale 2·2·1 = 4 y la segunda 2<sup>2</sup> + 3·1<sup>2</sup> = 4 + 3 = 7. El gradiente se <strong>evalúa</strong> en el punto: es un vector de números, no una fórmula.</p></div>
+      </div>
+    </section>
+
+    <section class="cierre">
+      <h3>Termina y califícate</h3>
+      <p class="nota">Se califican teoría y práctica por separado. 80% en cada uno (teoría ≥ 4/5, práctica ≥ 5/6) = tema dominado. El repaso no gatea el avance.</p>
+      <p id="naWarn" class="notanswered"></p>
+      <button class="btn" id="calificar">Calificar</button>
+      <div class="result" id="result"></div>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="C5_cuadernillo-papel.html"><span class="sp">← Cuadernillo</span><span class="ti">Volver a practicar</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Evaluación · Cálculo Multivariado · Unidad 5 · Optimización</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+function mat(rows){
+  var coeffs = rows[0].length - 1;
+  var gtc = 'repeat('+coeffs+',auto) 16px auto';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
+
+// matriz cuadrada SIN barra aumentada (hessianas) — mismo motor de corchetes
+function matSq(rows){
+  var n=rows[0].length;
+  var gtc='repeat('+n+',auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<n;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setSq(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=matSq(rows); }
+
+// pila de expresiones/ecuaciones dentro de un .fx (helper para apilar sin romper el motor)
+function fx(id, lines){ var el=document.getElementById(id); if(el) el.innerHTML='<div class="sys">'+lines.map(function(e){return '<span class="eq">'+e+'</span>';}).join('')+'</div>'; }
+
+// ---- enunciados: funciones y datos ----
+fx('p1f',["f(x, y) = x<sup>2</sup> + y<sup>2</sup> − 2x + 4y"]);
+setSq('p2m',[["2","3"],["3","2"]]);
+fx('p3f',["f(x, y) = x<sup>3</sup> − 12x + y<sup>2</sup>"]);
+fx('p4f',["maximizar  f = x · y","sujeto a  g:  x + 3y = 12","∇f = (y, x),  ∇g = (1, 3)"]);
+fx('p5f',["minimizar  f = x<sup>2</sup> + y<sup>2</sup>","sujeto a  g:  2x + y = 10","∇f = (2x, 2y),  ∇g = (2, 1)"]);
+setSq('p6m',[["−4","2"],["2","−1"]]);
+fx('r1f',["f(x, y) = x<sup>2</sup>·y + y<sup>3</sup>"]);
+
+// ===== barajar las opciones al cargar (mata el sesgo de posición; cambia cada intento) =====
+document.querySelectorAll('.qcard .opts').forEach(function(opts){
+  var arr = Array.prototype.slice.call(opts.children);
+  for(var i=arr.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=arr[i]; arr[i]=arr[j]; arr[j]=t; }
+  arr.forEach(function(el){ opts.appendChild(el); });
+});
+
+// ===== selección tipo examen (una por pregunta, sin revelar) =====
+var selections = {};
+document.querySelectorAll('.qcard').forEach(function(card){
+  var qid = card.getAttribute('data-id');
+  card.querySelectorAll('.opt').forEach(function(b){
+    b.onclick = function(){
+      if(card.classList.contains('graded')) return;
+      card.querySelectorAll('.opt').forEach(function(x){ x.classList.remove('sel'); });
+      b.classList.add('sel');
+      selections[qid] = b;
+    };
+  });
+});
+
+// ===== calificación =====
+var t0ms = Date.now();
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo", unidad:"U5_optimizacion", leccion:"C5_evaluacion", tipo:"evaluacion",
+  teoria:null, practica:null, aprobado:null, fallados:[], por_tema:{}, duracion_min:0, resumen_legible:""
+};
+
+document.getElementById('calificar').onclick = function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.qcard'));
+  var na = document.getElementById('naWarn');
+  var faltan = cards.filter(function(c){ return !selections[c.getAttribute('data-id')]; });
+  if(faltan.length){
+    na.textContent = 'Te faltan '+faltan.length+' pregunta(s) por contestar.';
+    faltan[0].scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  na.textContent='';
+  var tally = { teoria:{ok:0,tot:0}, practica:{ok:0,tot:0}, repaso:{ok:0,tot:0} };
+  var fallados = [], porTema = {};
+  cards.forEach(function(card){
+    card.classList.add('graded');
+    var qid=card.getAttribute('data-id'), blk=card.getAttribute('data-bloque'), tema=card.getAttribute('data-tema');
+    var sel=selections[qid], correct = sel.getAttribute('data-ok')==="1";
+    tally[blk].tot++; if(correct) tally[blk].ok++;
+    porTema[tema] = porTema[tema] || {ok:0,tot:0}; porTema[tema].tot++; if(correct) porTema[tema].ok++;
+    card.querySelectorAll('.opt').forEach(function(b){ b.disabled=true; if(b.getAttribute('data-ok')==="1") b.classList.add('right'); });
+    if(!correct){ sel.classList.add('wrong'); fallados.push(qid); }
+    card.classList.add(correct?'correct':'incorrect');
+    var why=card.querySelector('.why'); if(why){ why.classList.add('show'); if(!correct) why.classList.add('miss'); }
+  });
+
+  var tPct = Math.round(100*tally.teoria.ok/tally.teoria.tot);
+  var pPct = Math.round(100*tally.practica.ok/tally.practica.tot);
+  var rPct = tally.repaso.tot ? Math.round(100*tally.repaso.ok/tally.repaso.tot) : null;
+  var pass = tPct>=80 && pPct>=80; // el repaso NO gatea: solo teoría y práctica
+
+  session.teoria = {correctas:tally.teoria.ok, total:tally.teoria.tot, pct:tPct};
+  session.practica = {correctas:tally.practica.ok, total:tally.practica.tot, pct:pPct};
+  if(tally.repaso.tot) session.repaso = {correctas:tally.repaso.ok, total:tally.repaso.tot, pct:rPct};
+  session.aprobado = pass; session.fallados = fallados; session.por_tema = porTema;
+  session.duracion_min = Math.max(1, Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible = "Evaluación U5 (optimización): teoría "+tally.teoria.ok+"/"+tally.teoria.tot+" ("+tPct+"%), práctica "+tally.practica.ok+"/"+tally.practica.tot+" ("+pPct+"%). "+(pass?"APROBADO — listo para U6.":"NO aprobado.")+(fallados.length?" Falló: "+fallados.join(", ")+".":"");
+
+  var NEXT_URL="C6_funcion-implicita-inversa.html", NEXT_TI="U6 · Función implícita e inversa";
+  function chip(lbl,ok,tot,pct){ return '<div class="scorechip '+(pct>=80?'ok':'no')+'">'+lbl+' <b>'+ok+'/'+tot+'</b> · '+pct+'%</div>'; }
+  var bar = '<div class="scorebar">'+chip('Teoría',tally.teoria.ok,tally.teoria.tot,tPct)+chip('Práctica',tally.practica.ok,tally.practica.tot,pPct)+(rPct!==null?chip('Repaso',tally.repaso.ok,tally.repaso.tot,rPct):'')+'</div>';
+  var html='';
+  if(pass){
+    html += '<p class="verdict pass">Dominado ✓</p>';
+    html += '<p>Aprobaste teoría y práctica. Estás lista para el siguiente tema.</p>'+bar;
+    html += '<div class="advance"><a class="btn" href="'+NEXT_URL+'">Avanza al siguiente tema →<br><small style="font-weight:600;font-size:14px">'+NEXT_TI+'</small></a><button class="btn ghost" id="dl">Descargar reporte</button></div>';
+  } else {
+    html += '<p class="verdict fail">Aún no lo dominas</p>';
+    html += '<p>Repasa lo que falló antes de avanzar. Al reintentar, las opciones se rebarajan.</p>'+bar;
+    html += '<div class="repasa"><strong>Repasa esta unidad:</strong> <a href="C5_optimizacion.html">Guía</a> · <a href="C5_teoria-formal.html">Teoría</a> · <a href="C5_cuadernillo-papel.html">Cuadernillo</a></div>';
+    html += '<div class="advance"><button class="btn" id="retry">Reintentar</button><a class="btn dim" href="'+NEXT_URL+'">Avanzar de todos modos →</a><button class="btn ghost" id="dl">Descargar reporte</button></div>';
+  }
+  var res=document.getElementById('result'); res.innerHTML=html; res.classList.add('show');
+  var retry=document.getElementById('retry'); if(retry) retry.onclick=function(){ location.reload(); };
+  document.getElementById('dl').onclick=function(){
+    var nombre=session.fecha+"_calculo_U5_evaluacion.json";
+    var url=URL.createObjectURL(new Blob([JSON.stringify(session,null,2)],{type:"application/json"}));
+    var a=document.createElement('a'); a.href=url; a.download=nombre; a.click();
+  };
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+};
+</script>
+</body>
+</html>

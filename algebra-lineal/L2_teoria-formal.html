@@ -126,6 +126,12 @@
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
   .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .nav-lecs a{flex:1;min-width:0;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
 </style>
 </head>
 <body>
@@ -564,6 +570,8 @@
       <div id="reporte"></div>
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
+
+    <nav class="nav-lecs"><a class="prev" href="L2_vectores-subespacios.html"><span class="sp">← Guía</span><span class="ti">Entender el tema</span></a><a class="next" href="L2_cuadernillo-papel.html"><span class="sp">Siguiente →</span><span class="ti">Cuadernillo · practica</span></a></nav>
 
     <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 2 · Teoría formal</p></footer>
 
