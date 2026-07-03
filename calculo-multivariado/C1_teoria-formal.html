@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U1 — Teoría formal (sucesiones y series)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  /* tarjeta de teoría: etiqueta tipo Definición / Teorema */
+  .card{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:0;display:grid;box-shadow:var(--shadow);overflow:hidden}
+  .card .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 20px;border-bottom:2px solid var(--ink)}
+  .card .head .badge{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:999px;padding:4px 12px;border:2px solid}
+  .card .head .badge.def{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .card .head .badge.teo{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .card .head .badge.cor{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .card .head h3{margin:0;font-size:clamp(17px,2vw,20px);letter-spacing:-.02em}
+  .card .body{padding:18px 20px;display:grid;gap:13px}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .stmt{display:grid;gap:7px;font-size:clamp(17px,1.9vw,19px);line-height:1.55}
+  .stmt .eq{white-space:normal;font-variant-numeric:tabular-nums}
+  .stmt .lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:2px}
+  .cond{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
+  .cond li{display:flex;gap:10px;align-items:flex-start;font-size:clamp(16px,1.8vw,18px)}
+  .cond li .k{flex:0 0 auto;width:24px;height:24px;border-radius:7px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  .porque{border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .porque .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .porque p{margin:0;line-height:1.55}
+
+  /* recall drill: enuncia de memoria → revela → autorreporta */
+  .drill{display:grid;gap:11px;padding:16px 18px;border:1.5px dashed var(--navy);border-radius:12px;background:#eef1fb}
+  .drill .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .drill .qtag::before{content:"⟲ "}
+  .drill .q{margin:0;font-weight:700;font-size:17px}
+  .drill .revealbtn{font:inherit;font-weight:800;font-size:16px;padding:11px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer;justify-self:start;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
+  .drill .revealbtn:hover{transform:translate(-1px,-1px)}
+  .drill .answer{display:none;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:13px 16px}
+  .drill .answer.show{display:block}
+  .drill .answer .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:5px}
+  .drill .answer .stmt{font-size:17px}
+  .selfrep{display:none;gap:9px;flex-wrap:wrap}
+  .selfrep.show{display:flex}
+  .selfrep .srtag{flex:0 0 100%;font-size:13px;font-weight:700;color:var(--slate);margin-bottom:-2px}
+  .selfrep button{flex:1;min-width:120px;font:inherit;font-weight:700;font-size:15px;padding:11px 12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .selfrep button:hover{transform:translateY(-1px)}
+  .selfrep button.pick-mem{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .selfrep button.pick-pista{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .selfrep button.pick-falla{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .selfrep.locked button{opacity:.45;cursor:default}
+  .selfrep.locked button.sel{opacity:1}
+  .drill.answered{border-style:solid;border-color:var(--green)}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.mem{background:var(--green-tint);color:var(--green-deep)}
+  .pill.pista{background:var(--cream);color:var(--deep)}
+  .pill.falla{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin formulario</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 1 · Teoría formal</p>
+    <h1>Sucesiones y <mark>series</mark> para memorizar</h1>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <div class="learn">
+      <h2>Vas a poder enunciar de memoria</h2>
+      <ol>
+        <li><span class="n">1</span> Límite de una sucesión y convergencia</li>
+        <li><span class="n">2</span> Serie, suma parcial y suma de la serie</li>
+        <li><span class="n">3</span> Criterio del término n-ésimo</li>
+        <li><span class="n">4</span> Serie geométrica: convergencia y suma</li>
+        <li><span class="n">5</span> Criterio de la razón (L &lt; 1 / &gt; 1 / = 1)</li>
+        <li><span class="n">6</span> p-serie y serie armónica</li>
+        <li><span class="n">7</span> Criterio de comparación directa</li>
+        <li><span class="n">8</span> Alternadas: Leibniz, absoluta y condicional</li>
+        <li><span class="n">9</span> Serie geométrica en x (serie de potencias)</li>
+        <li><span class="n">10</span> Polinomio de Taylor de e<sup>x</sup></li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <p class="idea" style="margin-top:4px">
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+    </p>
+
+    <h2 class="modhead">Sucesión: límite y convergencia</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Sucesión, límite y convergencia</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Una <strong>sucesión</strong> es una función de los enteros positivos en R: asigna a cada n = 1, 2, 3, … un término a<sub>n</sub>. Se escribe (a<sub>n</sub>) o a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>, …</span>
+            <span class="eq">La sucesión <strong>converge</strong> al número L, y se escribe lím<sub>n→∞</sub> a<sub>n</sub> = L, si sus términos se acercan a L tanto como se quiera para toda n suficientemente grande. Si no existe tal L (finito), la sucesión <strong>diverge</strong>.</span>
+            <span class="eq"><strong>Regla práctica</strong> (cociente de polinomios): el límite lo decide el cociente de los términos de mayor grado de arriba y de abajo. Si los grados empatan, el límite es el cociente de sus coeficientes; si el grado de abajo es mayor, el límite es 0; si el de arriba es mayor, diverge (→ ∞).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Cuando n es enorme, el término de mayor grado domina y el resto se vuelve despreciable. Por eso lím (2n + 1)/(n + 3) = 2/1 = 2: arriba y abajo el grado es 1, y manda el cociente de coeficientes de n.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F1_def_limite_sucesion" data-tema="limite_sucesion">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define «sucesión» y qué significa que converja a L. Da la regla práctica del cociente de polinomios (grados iguales, abajo gana, arriba gana).</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Sucesión = término a<sub>n</sub> por cada n = 1, 2, 3, … Converge a L si a<sub>n</sub> → L cuando n → ∞. Cociente de polinomios: grados iguales → cociente de coeficientes; abajo mayor → 0; arriba mayor → diverge.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Serie, suma parcial y suma de la serie</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Dada una sucesión (a<sub>n</sub>), la <strong>serie</strong> ∑ a<sub>n</sub> es el resultado de sumar todos sus términos. La <strong>suma parcial</strong> S<sub>n</sub> es el total hasta el término n:</span>
+            <span class="eq">S<sub>n</sub> = a<sub>1</sub> + a<sub>2</sub> + … + a<sub>n</sub>.</span>
+            <span class="eq">La serie <strong>converge</strong> si la sucesión de sumas parciales (S<sub>n</sub>) tiene límite finito S; ese S es la <strong>suma de la serie</strong>. Si (S<sub>n</sub>) no converge, la serie <strong>diverge</strong>.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La convergencia de una serie es, por definición, la convergencia de sus sumas parciales, no de sus términos. Por eso la sucesión y la serie son cosas distintas: la sucesión 1/n → 0, pero la serie ∑ 1/n (la armónica) diverge.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F2_def_serie_suma_parcial" data-tema="serie">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Qué es la suma parcial S<sub>n</sub>? ¿Cuándo converge una serie y qué es su suma? Di la diferencia entre sucesión y serie.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">S<sub>n</sub> = a<sub>1</sub> + … + a<sub>n</sub>. La serie ∑ a<sub>n</sub> converge si S<sub>n</sub> → S finito (S = suma de la serie). Sucesión = lista de términos; serie = suma de esa lista.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Criterios de convergencia</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Criterio del término n-ésimo (condición necesaria)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Si la serie ∑ a<sub>n</sub> <strong>converge</strong>, entonces lím<sub>n→∞</sub> a<sub>n</sub> = 0. En contrapositiva (la versión útil): si a<sub>n</sub> <strong>no</strong> tiende a 0, la serie <strong>diverge</strong>.</span>
+            <span class="eq">Es una condición <strong>necesaria pero no suficiente</strong>: que a<sub>n</sub> → 0 <strong>no</strong> garantiza convergencia.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Sirve como filtro de un vistazo: si los términos no se apagan, la suma no puede estabilizarse y diverge. Pero el recíproco falla: la armónica ∑ 1/n tiene términos que van a 0 y aun así diverge. Por eso «→ 0» descarta, pero no confirma.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F3_teo_termino_nesimo" data-tema="termino_nesimo">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia el criterio del término n-ésimo. ¿Por qué es necesario pero no suficiente? Da el contraejemplo.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Si ∑ a<sub>n</sub> converge ⇒ a<sub>n</sub> → 0. Útil como contrapositiva: si a<sub>n</sub> ↛ 0 ⇒ diverge. No suficiente: la armónica ∑ 1/n tiene 1/n → 0 y aun así diverge.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Serie geométrica</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">La <strong>serie geométrica</strong> de primer término a y razón r es a + a·r + a·r<sup>2</sup> + a·r<sup>3</sup> + …</span>
+            <span class="eq"><strong>Converge</strong> si y solo si | r | &lt; 1, y en ese caso su suma es</span>
+            <span class="eq">a + a·r + a·r<sup>2</sup> + … = <sup>a</sup>⁄<sub>(1 − r)</sub>.</span>
+            <span class="eq">Si | r | ≥ 1, <strong>diverge</strong> (con a ≠ 0).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Con | r | &lt; 1 los términos se encogen y la suma parcial S<sub>n</sub> = a(1 − r<sup>n</sup>)/(1 − r) tiende a a/(1 − r) porque r<sup>n</sup> → 0. El denominador es 1 <strong>menos</strong> r, no 1 más r. Cuidado: aplicar la fórmula con | r | ≥ 1 da un número «sin sentido» (trampa clásica).</p></div>
+        <div class="drill" data-kind="recall" data-fid="F4_teo_serie_geometrica" data-tema="serie_geometrica">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia la serie geométrica: cuándo converge y cuál es su suma. No olvides la condición sobre r.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">a + a·r + a·r<sup>2</sup> + … converge ⇔ | r | &lt; 1, y entonces suma <sup>a</sup>⁄<sub>(1 − r)</sub>. Si | r | ≥ 1 diverge. Denominador = 1 menos r.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Criterio de la razón (D'Alembert)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Para una serie de términos positivos ∑ a<sub>n</sub>, sea L = lím<sub>n→∞</sub> <sup>a<sub>n+1</sub></sup>⁄<sub>a<sub>n</sub></sub>. Entonces:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span>Si L &lt; 1, la serie <strong>converge</strong>.</span></li>
+              <li><span class="k">2</span><span>Si L &gt; 1 (o L = ∞), la serie <strong>diverge</strong>.</span></li>
+              <li><span class="k">3</span><span>Si L = 1, el criterio <strong>no concluye</strong> (hay que usar otro método).</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>El cociente a<sub>n+1</sub>/a<sub>n</sub> mide la «razón local» entre términos consecutivos: si a la larga es menor que 1, la serie se comporta como una geométrica que encoge, y converge. Brilla con <strong>factoriales y potencias</strong> porque se cancelan solos al dividir. En L = 1 el criterio queda mudo: ni encoge ni crece con firmeza.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F5_teo_criterio_razon" data-tema="criterio_razon">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia el criterio de la razón: qué cociente calculas, cuál es L y qué decides en cada caso (L &lt; 1, &gt; 1, = 1).</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">L = lím <sup>a<sub>n+1</sub></sup>⁄<sub>a<sub>n</sub></sub>. L &lt; 1 → converge; L &gt; 1 (o ∞) → diverge; L = 1 → no concluye. Ideal con factoriales y potencias.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Series de referencia y comparación</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>p-serie y serie armónica</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">La <strong>p-serie</strong> ∑ <sup>1</sup>⁄<sub>n<sup>p</sup></sub> <strong>converge</strong> si p &gt; 1 y <strong>diverge</strong> si p ≤ 1.</span>
+            <span class="eq">Casos de memoria: la <strong>serie armónica</strong> ∑ <sup>1</sup>⁄<sub>n</sub> (p = 1) <strong>diverge</strong>; ∑ <sup>1</sup>⁄<sub>n<sup>2</sup></sub> (p = 2) <strong>converge</strong>.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La frontera está justo en p = 1: exponentes mayores que 1 hacen que los términos decrezcan lo bastante rápido como para sumar finito; en p = 1 el decrecimiento es demasiado lento y la suma se escapa. La armónica es el ejemplo canónico de serie que diverge aunque 1/n → 0.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F6_teo_p_serie" data-tema="p_serie">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Da el criterio de la p-serie (para qué p converge y para cuáles diverge) y los dos casos de referencia: armónica y ∑ 1/n².</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">∑ <sup>1</sup>⁄<sub>n<sup>p</sup></sub> converge ⇔ p &gt; 1; diverge si p ≤ 1. Armónica ∑ <sup>1</sup>⁄<sub>n</sub> (p = 1) diverge; ∑ <sup>1</sup>⁄<sub>n<sup>2</sup></sub> (p = 2) converge.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Criterio de comparación directa</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Sean ∑ a<sub>n</sub> y ∑ b<sub>n</sub> de <strong>términos positivos</strong> con 0 ≤ a<sub>n</sub> ≤ b<sub>n</sub> para toda n (desde algún punto). Entonces:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span>Si la <strong>mayor</strong> ∑ b<sub>n</sub> <strong>converge</strong>, la menor ∑ a<sub>n</sub> también converge.</span></li>
+              <li><span class="k">2</span><span>Si la <strong>menor</strong> ∑ a<sub>n</sub> <strong>diverge</strong>, la mayor ∑ b<sub>n</sub> también diverge.</span></li>
+            </ul>
+            <span class="eq">En una frase: menor que una que converge → converge; mayor que una que diverge → diverge.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Si tus términos quedan «atrapados» por debajo de una serie que suma finito, tu suma también es finita; si quedan por encima de una que se dispara, la tuya se dispara con ella. La clave del método es <strong>elegir bien la referencia</strong> (típicamente una geométrica o una p-serie). No sirve al revés: ser menor que una que diverge no dice nada.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F7_teo_comparacion" data-tema="comparacion">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia el criterio de comparación directa (con 0 ≤ a<sub>n</sub> ≤ b<sub>n</sub>): las dos conclusiones válidas. Resúmelo en una frase.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Con 0 ≤ a<sub>n</sub> ≤ b<sub>n</sub>: si ∑ b<sub>n</sub> (la mayor) converge ⇒ ∑ a<sub>n</sub> converge; si ∑ a<sub>n</sub> (la menor) diverge ⇒ ∑ b<sub>n</sub> diverge. Menor que una que converge → converge; mayor que una que diverge → diverge.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Series alternadas: Leibniz, absoluta y condicional</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq"><strong>Criterio de Leibniz.</strong> Una serie <strong>alternada</strong> ∑ (−1)<sup>n+1</sup> b<sub>n</sub> (con b<sub>n</sub> &gt; 0) <strong>converge</strong> si sus términos b<sub>n</sub>: (i) son <strong>decrecientes</strong> y (ii) tienden a 0.</span>
+            <span class="eq"><strong>Convergencia absoluta.</strong> ∑ a<sub>n</sub> converge <strong>absolutamente</strong> si ∑ | a<sub>n</sub> | converge. La convergencia absoluta implica convergencia.</span>
+            <span class="eq"><strong>Condicional.</strong> Si ∑ a<sub>n</sub> converge pero ∑ | a<sub>n</sub> | diverge, la convergencia es <strong>condicional</strong>.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>En una alternada los términos que decrecen a 0 se van cancelando de a pares, y la suma parcial oscila cada vez menos hacia un límite. El ejemplo clave es ∑ (−1)<sup>n+1</sup>/n: converge por Leibniz, pero al volverla positiva es la armónica (diverge), así que su convergencia es <strong>condicional</strong>, no absoluta.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F8_teo_alternadas_leibniz" data-tema="alternadas">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia el criterio de Leibniz (dos condiciones) y distingue convergencia absoluta de condicional. Da el ejemplo condicional.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Leibniz: ∑ (−1)<sup>n+1</sup> b<sub>n</sub> converge si b<sub>n</sub> decrece y b<sub>n</sub> → 0. Absoluta ⇔ ∑ | a<sub>n</sub> | converge (⇒ converge). Condicional = converge pero ∑ | a<sub>n</sub> | diverge. Ejemplo: ∑ (−1)<sup>n+1</sup>/n.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Series de potencias y Taylor</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Método</span><h3>Serie geométrica en x (serie de potencias)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Una <strong>serie de potencias</strong> centrada en 0 es ∑ c<sub>n</sub> x<sup>n</sup> = c<sub>0</sub> + c<sub>1</sub>x + c<sub>2</sub>x<sup>2</sup> + … La más importante es la <strong>geométrica en x</strong>:</span>
+            <span class="eq">1 + x + x<sup>2</sup> + x<sup>3</sup> + … = <sup>1</sup>⁄<sub>(1 − x)</sub>,  válida para | x | &lt; 1.</span>
+            <span class="eq">El conjunto de x donde converge es su <strong>radio de convergencia</strong>; aquí es el intervalo (−1, 1).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Es la serie geométrica de razón r = x: converge exactamente cuando | x | &lt; 1, y su suma a/(1 − r) con a = 1 da 1/(1 − x). Sirve como molde: sustituyendo x por otra expresión (por ejemplo, evaluando en x = 1/4) se suman muchas series numéricas de un golpe.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F9_metodo_geometrica_en_x" data-tema="serie_potencias">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Escribe la serie geométrica en x y su suma, con el rango de x donde vale. ¿Cuál es su radio de convergencia?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">1 + x + x<sup>2</sup> + x<sup>3</sup> + … = <sup>1</sup>⁄<sub>(1 − x)</sub> para | x | &lt; 1. Converge en el intervalo (−1, 1); ese es su radio de convergencia.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Método</span><h3>Polinomio de Taylor de e<sup>x</sup> en 0</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">El <strong>polinomio de Taylor</strong> aproxima una función con una serie de potencias, quedándose con los primeros términos. Para <strong>e<sup>x</sup> alrededor de 0</strong>, el coeficiente de x<sup>n</sup> es <sup>1</sup>⁄<sub>n!</sub>:</span>
+            <span class="eq">e<sup>x</sup> ≈ 1 + x + <sup>x<sup>2</sup></sup>⁄<sub>2!</sub> + <sup>x<sup>3</sup></sup>⁄<sub>3!</sub> + … + <sup>x<sup>n</sup></sup>⁄<sub>n!</sub></span>
+            <span class="eq">Con infinitos términos, la serie es <strong>exactamente</strong> e<sup>x</sup>. Recuerda 0! = 1, 1! = 1, 2! = 2, 3! = 6, 4! = 24.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Cada derivada de e<sup>x</sup> en 0 vale 1, y el coeficiente de Taylor de x<sup>n</sup> es (n-ésima derivada en 0)/n! = 1/n!. Cuantos más términos tomes, mejor aproximas; cerca de x = 0 pocos términos ya pegan muy bien. El factorial en el denominador es lo que hace que la serie converja para todo x.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F10_metodo_taylor_ex" data-tema="taylor">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Escribe el polinomio de Taylor de e<sup>x</sup> en 0: ¿cuál es el coeficiente de x<sup>n</sup> y cuáles son los primeros términos?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Coeficiente de x<sup>n</sup> = <sup>1</sup>⁄<sub>n!</sub>. e<sup>x</sup> ≈ 1 + x + <sup>x<sup>2</sup></sup>⁄<sub>2</sub> + <sup>x<sup>3</sup></sup>⁄<sub>6</sub> + <sup>x<sup>4</sup></sup>⁄<sub>24</sub> + … La serie completa es exactamente e<sup>x</sup>.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chuleta">
+      <h3>La ficha de memoria</h3>
+      <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
+      <ul>
+        <li><span class="ck">✓</span> Sucesión: converge a L si a<sub>n</sub> → L. Cociente de polinomios: grados iguales → cociente de coeficientes; abajo mayor → 0; arriba mayor → diverge.</li>
+        <li><span class="ck">✓</span> Serie ∑ a<sub>n</sub>: converge ⇔ sus sumas parciales S<sub>n</sub> = a<sub>1</sub> + … + a<sub>n</sub> tienen límite finito S (la suma).</li>
+        <li><span class="ck">✓</span> Término n-ésimo: si a<sub>n</sub> ↛ 0 ⇒ diverge. Necesaria, no suficiente (armónica: 1/n → 0 y diverge).</li>
+        <li><span class="ck">✓</span> Geométrica: converge ⇔ | r | &lt; 1, y suma <sup>a</sup>⁄<sub>(1 − r)</sub>. Con | r | ≥ 1 diverge.</li>
+        <li><span class="ck">✓</span> Razón: L = lím <sup>a<sub>n+1</sub></sup>⁄<sub>a<sub>n</sub></sub>. L &lt; 1 converge · L &gt; 1 diverge · L = 1 no concluye.</li>
+        <li><span class="ck">✓</span> p-serie ∑ <sup>1</sup>⁄<sub>n<sup>p</sup></sub>: converge ⇔ p &gt; 1. Armónica (p = 1) diverge; ∑ 1/n<sup>2</sup> converge.</li>
+        <li><span class="ck">✓</span> Comparación (0 ≤ a<sub>n</sub> ≤ b<sub>n</sub>): menor que una que converge → converge; mayor que una que diverge → diverge.</li>
+        <li><span class="ck">✓</span> Leibniz: alternada con b<sub>n</sub> decreciente y b<sub>n</sub> → 0 converge. Absoluta ⇔ ∑ | a<sub>n</sub> | converge; si no, condicional.</li>
+        <li><span class="ck">✓</span> Geométrica en x: 1 + x + x<sup>2</sup> + … = <sup>1</sup>⁄<sub>(1 − x)</sub> para | x | &lt; 1 (radio: −1 &lt; x &lt; 1).</li>
+        <li><span class="ck">✓</span> Taylor de e<sup>x</sup> en 0: coeficiente de x<sup>n</sup> = <sup>1</sup>⁄<sub>n!</sub> → 1 + x + <sup>x<sup>2</sup></sup>⁄<sub>2</sub> + <sup>x<sup>3</sup></sup>⁄<sub>6</sub> + …</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue con el recall?</h3>
+      <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y criterios de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs">
+      <a class="next" href="C1_sucesiones-series.html"><span class="sp">Volver a →</span><span class="ti">U1 · Sucesiones y series (guía)</span></a>
+    </nav>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 1 · Teoría formal</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+// ===== instrumentación (session / reporte / recall) =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo", unidad:"U1_sucesiones_series", leccion:"C1_teoria-formal",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_REC = document.querySelectorAll('[data-kind="recall"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.formulas.length+"/"+TOT_REC+" recalls"; }
+
+// cada drill: revelar → autorreporte (de_memoria / con_pista / falla) → session.formulas
+document.querySelectorAll('.drill[data-kind="recall"]').forEach(function(block){
+  var reveal = block.querySelector('.revealbtn');
+  var answer = block.querySelector('.answer');
+  var selfrep = block.querySelector('.selfrep');
+  var done = false;
+  if(reveal){
+    reveal.onclick = function(){
+      if(answer) answer.classList.add('show');
+      if(selfrep) selfrep.classList.add('show');
+      reveal.style.display = 'none';
+    };
+  }
+  block.querySelectorAll('.selfrep button').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      done = true;
+      var rep = b.getAttribute('data-rep');
+      b.classList.add('sel');
+      if(rep==="de_memoria") b.classList.add('pick-mem');
+      else if(rep==="con_pista") b.classList.add('pick-pista');
+      else b.classList.add('pick-falla');
+      selfrep.classList.add('locked');
+      block.classList.add('answered');
+      session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:rep });
+      updateCont();
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var mem=session.formulas.filter(function(f){return f.recall==="de_memoria";}).length;
+  var pista=session.formulas.filter(function(f){return f.recall==="con_pista";}).length;
+  var falla=session.formulas.filter(function(f){return f.recall==="falla";}).length;
+  var fallidas=session.formulas.filter(function(f){return f.recall==="falla";}).map(function(f){return f.id;});
+  var s="Recall de teoría formal U1 (cálculo): "+session.formulas.length+"/"+TOT_REC+" enunciados. ";
+  s+="De memoria: "+mem+" · con pista: "+pista+" · falla: "+falla+". ";
+  s+= fallidas.length? ("Falló en: "+fallidas.join(", ")+". ") : "Sin fallas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_calculo_U1_teoria-formal.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){
+    var cls = f.recall==="de_memoria" ? "mem" : (f.recall==="con_pista" ? "pista" : "falla");
+    return '<span class="pill '+cls+'">'+f.id+": "+f.recall+'</span>';
+  }).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.formulas.length+'/'+TOT_REC+'</strong> recalls · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Enunciados: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>

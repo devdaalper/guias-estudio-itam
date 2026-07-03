@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U1 — Cuadernillo de papel (Sucesiones y series)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
+  .fases li{font-size:17px;line-height:1.5}
+  .fases em{font-style:normal;color:var(--deep);font-weight:700}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+
+  /* ===== cuadernillo de papel ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora · en papel</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 1 · Cuadernillo</p>
+    <h1>Sucesiones y series, <mark>resueltas a mano</mark></h1>
+    <p class="lead">Aquí no se elige opción: se resuelve completo, en papel, como en el parcial. Cada problema trae su enunciado, tu espacio para trabajarlo y la solución paso a paso para cotejar. El criterio es de memoria, y toda cuenta va celda por celda. Toma lápiz y hoja antes de abrir cada respuesta.</p>
+    <div class="learn">
+      <h2>Lo que vas a entrenar</h2>
+      <ol>
+        <li><span class="n">1</span> Límite de una sucesión por término dominante</li>
+        <li><span class="n">2</span> Filtro del término n-ésimo</li>
+        <li><span class="n">3</span> Sumar una serie geométrica</li>
+        <li><span class="n">4</span> Criterio de la razón con potencias y factoriales</li>
+        <li><span class="n">5</span> Comparación y p-series</li>
+        <li><span class="n">6</span> Alternadas y polinomio de Taylor</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este cuadernillo</h2>
+    <section class="sec">
+      <h3>La regla de oro: papel primero</h3>
+      <p class="idea">Los tres primeros son <strong>resueltos-guía</strong>: léelos completos para fijar el método. El resto es <strong>producción</strong>: resuélvelos tú de principio a fin en una hoja <strong>antes</strong> de abrir la solución. Al terminar cada uno, dime cómo te fue con los tres botones. Eso arma tu reporte para el tutor sin escaneos ni fotos.</p>
+      <p class="idea">Recuerda el mapa del tema: para una <strong>sucesión</strong> busco su <strong>límite</strong> (manda el término de mayor grado). Para una <strong>serie</strong>, primero el <strong>filtro n-ésimo</strong> (si a<sub>n</sub> ↛ 0, diverge), luego el criterio adecuado: <strong>geométrica</strong> (suma <sup>a</sup>⁄<sub>(1 − r)</sub> si | r | &lt; 1), <strong>razón</strong> (L &lt; 1 converge), <strong>comparación</strong> con una p-serie, o <strong>Leibniz</strong> para alternadas.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago — resueltos-guía</h2>
+
+    <!-- ============ RESUELTO-GUÍA 1 : geométrica con primer término distinto de 1 ============ -->
+    <section class="prob" data-kind="prob" data-id="RG1" data-tema="serie_geometrica" data-level="resuelto">
+      <div class="phead"><span class="pnum">1</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Suma de una serie geométrica</p>
+      <p class="pstatement">Suma la serie <strong>6 + 2 + <sup>2</sup>⁄<sub>3</sub> + <sup>2</sup>⁄<sub>9</sub> + …</strong> Identifica el primer término y la razón, verifica que converge y aplica la fórmula.</p>
+      <div class="fx"><div class="sys"><span class="eq">6 + 2 + <sup>2</sup>⁄<sub>3</sub> + <sup>2</sup>⁄<sub>9</sub> + …</span></div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Identifico a y r</div><p>El primer término es <strong>a</strong>. Para la razón, divido un término entre el anterior, celda por celda:</p><p class="calc"><span class="rw">a</span> primer sumando=<b>6</b> <span class="sep">•</span> <span class="rw">r</span> 2÷6=<b><sup>1</sup>⁄<sub>3</sub></b> <span class="sep">•</span> (<sup>2</sup>⁄<sub>3</sub>)÷2=<b><sup>1</sup>⁄<sub>3</sub></b></p></div>
+          <div class="estep"><div class="oprow">Verifico convergencia</div><p>La geométrica solo suma si | r | &lt; 1. Comparo:</p><p class="calc"><span class="rw">| r |</span> |<sup>1</sup>⁄<sub>3</sub>|=<b><sup>1</sup>⁄<sub>3</sub></b> <span class="sep">•</span> <sup>1</sup>⁄<sub>3</sub>&lt;1 → <b>converge</b></p></div>
+          <div class="estep"><div class="oprow">Armo el denominador 1 − r</div><p>Antes de dividir, calculo 1 menos la razón:</p><p class="calc"><span class="rw">1−r</span> 1−<sup>1</sup>⁄<sub>3</sub>=<sup>3</sup>⁄<sub>3</sub>−<sup>1</sup>⁄<sub>3</sub>=<b><sup>2</sup>⁄<sub>3</sub></b></p></div>
+          <div class="estep"><div class="oprow">Aplico la fórmula</div><p>Divido a entre (1 − r). Dividir entre <sup>2</sup>⁄<sub>3</sub> es multiplicar por su recíproco, <sup>3</sup>⁄<sub>2</sub>:</p><p class="calc"><span class="rw">S</span> <sup>6</sup>⁄<sub>(2/3)</sub>=6×<sup>3</sup>⁄<sub>2</sub> <span class="sep">•</span> <sup>18</sup>⁄<sub>2</sub>=<b>9</b></p><div class="fx"><div class="sys"><span class="eq">S = <sup>6</sup>⁄<sub>(1 − 1/3)</sub> = <sup>6</sup>⁄<sub>(2/3)</sub> = 9</span></div></div></div>
+          <p class="verdict"><strong>La serie suma 9.</strong> Verifico con las primeras sumas parciales: 6, 8, 8.67, 8.89… se acercan a 9 sin pasarse. Como | r | = <sup>1</sup>⁄<sub>3</sub> &lt; 1, la fórmula tiene derecho a aplicarse.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (aunque sea de muestra, márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 2 : criterio de la razón con factorial ============ -->
+    <section class="prob" data-kind="prob" data-id="RG2" data-tema="criterio_razon" data-level="resuelto">
+      <div class="phead"><span class="pnum">2</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Criterio de la razón con un factorial</p>
+      <p class="pstatement">Decide si converge la serie de término general <strong>a<sub>n</sub> = <sup>2<sup>n</sup></sup>⁄<sub>n!</sub></strong>. Arma el cociente a<sub>n+1</sub>/a<sub>n</sub>, simplifica y toma el límite.</p>
+      <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = <sup>2<sup>n</sup></sup>⁄<sub>n!</sub></span></div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Fase 1 · armo el cociente</div><p>Escribo el término n+1 sobre el término n, que es multiplicar a<sub>n+1</sub> por el recíproco de a<sub>n</sub>:</p><p class="calc"><span class="rw">a<sub>n+1</sub>/a<sub>n</sub></span> <sup>2<sup>n+1</sup></sup>⁄<sub>(n+1)!</sub> <span class="sep">•</span> <sup>n!</sup>⁄<sub>2<sup>n</sup></sub></p></div>
+          <div class="estep"><div class="oprow">Fase 1 · simplifico las potencias</div><p>La potencia baja un factor: 2<sup>n+1</sup> entre 2<sup>n</sup> deja un 2:</p><p class="calc"><span class="rw">2</span> <sup>2<sup>n+1</sup></sup>⁄<sub>2<sup>n</sup></sub>=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Fase 1 · simplifico el factorial</div><p>(n+1)! es (n+1)·n!, así que n! entre (n+1)! deja <sup>1</sup>⁄<sub>(n+1)</sub>. Junto ambos resultados:</p><p class="calc"><span class="rw">n!/(n+1)!</span> =<b><sup>1</sup>⁄<sub>(n+1)</sub></b> <span class="sep">•</span> junto: 2·<sup>1</sup>⁄<sub>(n+1)</sub>=<b><sup>2</sup>⁄<sub>(n+1)</sub></b></p><div class="fx"><div class="sys"><span class="eq">a<sub>n+1</sub> / a<sub>n</sub> = <sup>2</sup>⁄<sub>(n + 1)</sub></span></div></div></div>
+          <div class="estep"><div class="oprow">Fase 2 · tomo el límite y decido</div><p>Cuando n crece, el denominador se dispara y la fracción se aplasta:</p><p class="calc"><span class="rw">L</span> lím <sup>2</sup>⁄<sub>(n+1)</sub>=<b>0</b> <span class="sep">•</span> 0&lt;1 → <b>converge</b></p></div>
+          <p class="verdict"><strong>Converge</strong> (L = 0 &lt; 1). Con factoriales el criterio de la razón es el rey: (n+1)! se traga a n! y deja un denominador que crece, así que L da 0. La misma serie completa vale <em>e</em><sup>2</sup>, pero aquí solo se pedía decidir convergencia.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 3 : polinomio de Taylor evaluado ============ -->
+    <section class="prob" data-kind="prob" data-id="RG3" data-tema="taylor" data-level="resuelto">
+      <div class="phead"><span class="pnum">3</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Polinomio de Taylor de e<sup>x</sup> para aproximar</p>
+      <p class="pstatement">Usa el polinomio de Taylor de <strong>e<sup>x</sup></strong> en 0 hasta el término de grado 3 para aproximar <strong>e<sup>0.5</sup></strong>. Construye los coeficientes con los factoriales y evalúa en x = <sup>1</sup>⁄<sub>2</sub>.</p>
+      <div class="fx"><div class="sys"><span class="eq">e<sup>x</sup> ≈ 1 + x + <sup>x<sup>2</sup></sup>⁄<sub>2</sub> + <sup>x<sup>3</sup></sup>⁄<sub>6</sub></span></div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Armo los coeficientes</div><p>El coeficiente de x<sup>n</sup> es <sup>1</sup>⁄<sub>n!</sub>. Calculo los factoriales celda por celda:</p><p class="calc"><span class="rw">n!</span> 0!=<b>1</b> <span class="sep">•</span> 1!=<b>1</b> <span class="sep">•</span> 2!=<b>2</b> <span class="sep">•</span> 3!=<b>6</b></p></div>
+          <div class="estep"><div class="oprow">Evalúo las potencias en x = 1/2</div><p>Sustituyo x = <sup>1</sup>⁄<sub>2</sub> en cada potencia, una a la vez:</p><p class="calc"><span class="rw">x<sup>2</sup></span> (<sup>1</sup>⁄<sub>2</sub>)<sup>2</sup>=<b><sup>1</sup>⁄<sub>4</sub></b> <span class="sep">•</span> <span class="rw">x<sup>3</sup></span> (<sup>1</sup>⁄<sub>2</sub>)<sup>3</sup>=<b><sup>1</sup>⁄<sub>8</sub></b></p></div>
+          <div class="estep"><div class="oprow">Formo cada término</div><p>Divido cada potencia entre su factorial:</p><p class="calc"><span class="rw">t<sub>2</sub></span> (<sup>1</sup>⁄<sub>4</sub>)÷2=<b><sup>1</sup>⁄<sub>8</sub></b> <span class="sep">•</span> <span class="rw">t<sub>3</sub></span> (<sup>1</sup>⁄<sub>8</sub>)÷6=<b><sup>1</sup>⁄<sub>48</sub></b></p></div>
+          <div class="estep"><div class="oprow">Sumo los cuatro términos</div><p>Uso denominador común 48 para sumar sin calculadora:</p><p class="calc"><span class="rw">S</span> 1+<sup>1</sup>⁄<sub>2</sub>+<sup>1</sup>⁄<sub>8</sub>+<sup>1</sup>⁄<sub>48</sub>=<sup>48</sup>⁄<sub>48</sub>+<sup>24</sup>⁄<sub>48</sub>+<sup>6</sup>⁄<sub>48</sub>+<sup>1</sup>⁄<sub>48</sub>=<b><sup>79</sup>⁄<sub>48</sub></b></p><div class="fx"><div class="sys"><span class="eq">e<sup>0.5</sup> ≈ <sup>79</sup>⁄<sub>48</sub> ≈ 1.6458</span></div></div></div>
+          <p class="verdict"><strong>e<sup>0.5</sup> ≈ <sup>79</sup>⁄<sub>48</sub> ≈ 1.646.</strong> El valor real es 1.6487, así que con solo cuatro términos ya pegamos a dos decimales. Cerca de x = 0 la serie de Taylor aproxima muy rápido; con más términos, más precisión.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Tu turno — producción</h2>
+
+    <!-- ============ P4 GUIADO : límite de sucesión, grados iguales ============ -->
+    <section class="prob" data-kind="prob" data-id="P4" data-tema="limite_sucesion" data-level="guiado">
+      <div class="phead"><span class="pnum">4</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Límite de una sucesión</p>
+      <p class="pstatement">Calcula el límite de la sucesión cuando n crece sin freno, y di si <strong>converge o diverge</strong>. <em>Pista: compara los grados de arriba y de abajo.</em></p>
+      <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = (4n<sup>2</sup> − n) / (2n<sup>2</sup> + 5)</span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Comparo los grados</div><p>Miro el mayor grado arriba y abajo:</p><p class="calc"><span class="rw">grados</span> arriba=<b>2</b> <span class="sep">•</span> abajo=<b>2</b> <span class="sep">•</span> empatan</p></div>
+          <div class="estep"><div class="oprow">Tomo el cociente de coeficientes</div><p>Con grados iguales, el límite es el cociente de los coeficientes de n<sup>2</sup>. Lo demás se vuelve despreciable:</p><p class="calc"><span class="rw">L</span> <sup>4</sup>⁄<sub>2</sub>=<b>2</b></p><div class="fx"><div class="sys"><span class="eq">lím (4n<sup>2</sup> − n)/(2n<sup>2</sup> + 5) = <sup>4</sup>⁄<sub>2</sub> = 2</span></div></div></div>
+          <p class="verdict"><strong>Converge a 2.</strong> Los términos suben pero se frenan cerca de 2. El “−n” de arriba y el “+5” de abajo pierden peso frente a los n<sup>2</sup> cuando n es enorme.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P5 GUIADO : límite de sucesión, abajo gana ============ -->
+    <section class="prob" data-kind="prob" data-id="P5" data-tema="limite_sucesion" data-level="guiado">
+      <div class="phead"><span class="pnum">5</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Cuando el denominador gana la carrera</p>
+      <p class="pstatement">Ojo con los grados: aquí no empatan. Calcula el límite y di a qué valor tiende la sucesión. <em>Pista: ¿quién crece más rápido, arriba o abajo?</em></p>
+      <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = (2n + 7) / (n<sup>2</sup> − 3)</span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Comparo los grados</div><p>El mayor grado de abajo supera al de arriba:</p><p class="calc"><span class="rw">grados</span> arriba=<b>1</b> <span class="sep">•</span> abajo=<b>2</b> <span class="sep">•</span> abajo gana</p></div>
+          <div class="estep"><div class="oprow">Decido el límite</div><p>Cuando abajo tiene mayor grado, el denominador se dispara y la fracción se aplasta hacia 0:</p><p class="calc"><span class="rw">L</span> denominador crece más → <b>0</b></p><div class="fx"><div class="sys"><span class="eq">lím (2n + 7)/(n<sup>2</sup> − 3) = 0</span></div></div></div>
+          <p class="verdict"><strong>Converge a 0.</strong> No es el cociente de coeficientes (2÷1 = 2 sería el error clásico): esa regla vale solo cuando los grados <strong>empatan</strong>. Aquí abajo gana, así que el límite es 0.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P6 GUIADO : filtro del término n-ésimo ============ -->
+    <section class="prob" data-kind="prob" data-id="P6" data-tema="termino_nesimo" data-level="guiado">
+      <div class="phead"><span class="pnum">6</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Descártala de un vistazo</p>
+      <p class="pstatement">Antes de cualquier criterio fino, aplica el <strong>filtro del término n-ésimo</strong> a esta serie. Decide qué hace y <strong>señala por qué</strong>. <em>Pista: primero calcula a qué tiende el término general.</em></p>
+      <div class="fx"><div class="sys"><span class="eq">∑ <sup>(3n<sup>2</sup> + 1)</sup>⁄<sub>(n<sup>2</sup> + 4)</sub></span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Límite del término general</div><p>Grados iguales (2 arriba, 2 abajo): cociente de coeficientes:</p><p class="calc"><span class="rw">lím a<sub>n</sub></span> <sup>3</sup>⁄<sub>1</sub>=<b>3</b></p></div>
+          <div class="estep"><div class="oprow">Aplico el filtro</div><p>El filtro dice: si a<sub>n</sub> no tiende a 0, la serie diverge. Comparo el límite con 0:</p><p class="calc"><span class="rw">a<sub>n</sub></span> →3, no a 0 → <b>diverge</b></p></div>
+          <p class="verdict warn"><strong>Diverge</strong> por el filtro del término n-ésimo. Como a<sub>n</sub> → 3 ≠ 0, los sumandos ni siquiera se encogen, así que la suma crece sin freno. Cuidado: el límite del <strong>término</strong> (3) no es la suma de la <strong>serie</strong> —aquí no hay suma.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P7 JUNTOS : geométrica que suma ============ -->
+    <section class="prob" data-kind="prob" data-id="P7" data-tema="serie_geometrica" data-level="juntos">
+      <div class="phead"><span class="pnum">7</span><span class="lvl guiado">Juntos</span></div>
+      <p class="ptitle">Suma una geométrica desde la sigma</p>
+      <p class="pstatement">La serie viene escrita con sigma. <strong>Escribe sus primeros términos</strong>, identifica a y r, y suma. <em>Pista: sustituye n = 1, 2, 3 para ver el primer término y la razón.</em></p>
+      <div class="fx"><div class="sys"><span class="eq">∑ 5 · (<sup>2</sup>⁄<sub>5</sub>)<sup>n</sup>,  desde n = 1</span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Escribo los primeros términos</div><p>Sustituyo n = 1, 2, 3, celda por celda:</p><p class="calc"><span class="rw">n=1</span> 5·<sup>2</sup>⁄<sub>5</sub>=<b>2</b> <span class="sep">•</span> <span class="rw">n=2</span> 5·<sup>4</sup>⁄<sub>25</sub>=<b><sup>4</sup>⁄<sub>5</sub></b> <span class="sep">•</span> <span class="rw">n=3</span> =<b><sup>8</sup>⁄<sub>25</sub></b></p></div>
+          <div class="estep"><div class="oprow">Identifico a y r</div><p>El primer término (n = 1) es a; la razón es lo que multiplica de un término al siguiente:</p><p class="calc"><span class="rw">a</span> =<b>2</b> <span class="sep">•</span> <span class="rw">r</span> (<sup>4</sup>⁄<sub>5</sub>)÷2=<b><sup>2</sup>⁄<sub>5</sub></b> <span class="sep">•</span> <sup>2</sup>⁄<sub>5</sub>&lt;1 → converge</p></div>
+          <div class="estep"><div class="oprow">Aplico la fórmula</div><p>Armo 1 − r y divido:</p><p class="calc"><span class="rw">1−r</span> 1−<sup>2</sup>⁄<sub>5</sub>=<b><sup>3</sup>⁄<sub>5</sub></b> <span class="sep">•</span> <span class="rw">S</span> <sup>2</sup>⁄<sub>(3/5)</sub>=2·<sup>5</sup>⁄<sub>3</sub>=<b><sup>10</sup>⁄<sub>3</sub></b></p><div class="fx"><div class="sys"><span class="eq">S = <sup>2</sup>⁄<sub>(1 − 2/5)</sub> = <sup>2</sup>⁄<sub>(3/5)</sub> = <sup>10</sup>⁄<sub>3</sub></span></div></div></div>
+          <p class="verdict"><strong>La serie suma <sup>10</sup>⁄<sub>3</sub>.</strong> El detalle fino: como la sigma arranca en n = 1 (no en n = 0), el primer término es 2, no 5. Por eso conviene siempre escribir los primeros términos antes de nombrar a.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P8 JUNTOS : decimal periódico como geométrica ============ -->
+    <section class="prob" data-kind="prob" data-id="P8" data-tema="serie_geometrica" data-level="juntos">
+      <div class="phead"><span class="pnum">8</span><span class="lvl guiado">Juntos</span></div>
+      <p class="ptitle">Un decimal infinito es una serie</p>
+      <p class="pstatement">Escribe <strong>0.7777…</strong> como una serie geométrica y súmala para expresar el decimal como fracción. <em>Pista: cada 7 es diez veces más chico que el anterior.</em></p>
+      <div class="fx"><div class="sys"><span class="eq">0.777… = <sup>7</sup>⁄<sub>10</sub> + <sup>7</sup>⁄<sub>100</sub> + <sup>7</sup>⁄<sub>1000</sub> + …</span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Identifico a y r</div><p>El primer término es <sup>7</sup>⁄<sub>10</sub>; cada siguiente es diez veces más chico:</p><p class="calc"><span class="rw">a</span> =<b><sup>7</sup>⁄<sub>10</sub></b> <span class="sep">•</span> <span class="rw">r</span> (<sup>7</sup>⁄<sub>100</sub>)÷(<sup>7</sup>⁄<sub>10</sub>)=<b><sup>1</sup>⁄<sub>10</sub></b> <span class="sep">•</span> <sup>1</sup>⁄<sub>10</sub>&lt;1 → converge</p></div>
+          <div class="estep"><div class="oprow">Armo el denominador</div><p>Calculo 1 − r:</p><p class="calc"><span class="rw">1−r</span> 1−<sup>1</sup>⁄<sub>10</sub>=<b><sup>9</sup>⁄<sub>10</sub></b></p></div>
+          <div class="estep"><div class="oprow">Aplico la fórmula</div><p>Divido a entre (1 − r). Los diez del numerador y del denominador se cancelan:</p><p class="calc"><span class="rw">S</span> <sup>(7/10)</sup>⁄<sub>(9/10)</sub>=<sup>7</sup>⁄<sub>10</sub>·<sup>10</sup>⁄<sub>9</sub>=<b><sup>7</sup>⁄<sub>9</sub></b></p><div class="fx"><div class="sys"><span class="eq">0.777… = <sup>(7/10)</sup>⁄<sub>(1 − 1/10)</sub> = <sup>7</sup>⁄<sub>9</sub></span></div></div></div>
+          <p class="verdict"><strong>0.777… = <sup>7</sup>⁄<sub>9</sub>.</strong> Compruebo dividiendo: 7 ÷ 9 = 0.777… ✓. Cualquier decimal periódico es, por dentro, una serie geométrica: por eso siempre se puede escribir como fracción.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P9 SOLO : geométrica que diverge (trampa) ============ -->
+    <section class="prob" data-kind="prob" data-id="P9" data-tema="serie_geometrica" data-level="solo">
+      <div class="phead"><span class="pnum">9</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">¿Puedes aplicar la fórmula?</p>
+      <p class="pstatement">Alguien suma esta serie con la fórmula y obtiene un número negativo. <strong>Decide si la serie converge o diverge</strong>, y explica por qué la fórmula <strong>no</strong> se puede usar aquí.</p>
+      <div class="fx"><div class="sys"><span class="eq">3 + <sup>15</sup>⁄<sub>4</sub> + <sup>75</sup>⁄<sub>16</sub> + …</span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Identifico a y r</div><p>Divido el segundo término entre el primero:</p><p class="calc"><span class="rw">a</span> =<b>3</b> <span class="sep">•</span> <span class="rw">r</span> (<sup>15</sup>⁄<sub>4</sub>)÷3=<sup>15</sup>⁄<sub>12</sub>=<b><sup>5</sup>⁄<sub>4</sub></b></p></div>
+          <div class="estep"><div class="oprow">Verifico convergencia</div><p>Comparo el valor absoluto de la razón con 1:</p><p class="calc"><span class="rw">| r |</span> <sup>5</sup>⁄<sub>4</sub>=1.25 <span class="sep">•</span> 1.25&gt;1 → <b>diverge</b></p></div>
+          <div class="estep"><div class="oprow">Muestro la trampa</div><p>Si aun así metes r = <sup>5</sup>⁄<sub>4</sub> en la fórmula sale un absurdo:</p><p class="calc"><span class="rw">1−r</span> 1−<sup>5</sup>⁄<sub>4</sub>=<b>−<sup>1</sup>⁄<sub>4</sub></b> <span class="sep">•</span> <sup>3</sup>⁄<sub>(−1/4)</sub>=<b>−12</b></p></div>
+          <p class="verdict warn"><strong>Diverge:</strong> | r | = <sup>5</sup>⁄<sub>4</sub> &gt; 1, los términos crecen. El “−12” que da la fórmula <strong>no tiene sentido</strong>: una suma de números positivos jamás es negativa. La fórmula <sup>a</sup>⁄<sub>(1 − r)</sub> solo tiene validez cuando | r | &lt; 1.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P10 SOLO : criterio de la razón, potencia pura ============ -->
+    <section class="prob" data-kind="prob" data-id="P10" data-tema="criterio_razon" data-level="solo">
+      <div class="phead"><span class="pnum">10</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Criterio de la razón, de principio a fin</p>
+      <p class="pstatement">Aplica el criterio de la razón a la serie de término general <strong>a<sub>n</sub> = <sup>n<sup>2</sup></sup>⁄<sub>2<sup>n</sup></sub></strong>. Arma el cociente, simplifica, toma el límite y decide.</p>
+      <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = <sup>n<sup>2</sup></sup>⁄<sub>2<sup>n</sup></sub></span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Fase 1 · armo el cociente</div><p>Término n+1 por el recíproco del término n:</p><p class="calc"><span class="rw">a<sub>n+1</sub>/a<sub>n</sub></span> <sup>(n+1)<sup>2</sup></sup>⁄<sub>2<sup>n+1</sup></sub> <span class="sep">•</span> <sup>2<sup>n</sup></sup>⁄<sub>n<sup>2</sup></sub></p></div>
+          <div class="estep"><div class="oprow">Fase 1 · simplifico la potencia</div><p>2<sup>n</sup> entre 2<sup>n+1</sup> deja <sup>1</sup>⁄<sub>2</sub>. Junto con el cociente de cuadrados:</p><p class="calc"><span class="rw">2</span> <sup>2<sup>n</sup></sup>⁄<sub>2<sup>n+1</sup></sub>=<b><sup>1</sup>⁄<sub>2</sub></b> <span class="sep">•</span> resultado=<b><sup>(n+1)<sup>2</sup></sup>⁄<sub>2n<sup>2</sup></sub></b></p></div>
+          <div class="estep"><div class="oprow">Fase 2 · tomo el límite</div><p>Arriba y abajo el grado es 2; manda el cociente de coeficientes de n<sup>2</sup> (1 arriba, 2 abajo):</p><p class="calc"><span class="rw">L</span> lím <sup>(n+1)<sup>2</sup></sup>⁄<sub>2n<sup>2</sup></sub>=<sup>1</sup>⁄<sub>2</sub> <span class="sep">•</span> <sup>1</sup>⁄<sub>2</sub>&lt;1 → <b>converge</b></p></div>
+          <p class="verdict"><strong>Converge</strong> (L = <sup>1</sup>⁄<sub>2</sub> &lt; 1). El “+1” del (n+1)<sup>2</sup> no cambia el límite: con grados iguales manda el coeficiente de n<sup>2</sup>. La potencia 2<sup>n</sup> le gana al crecimiento del n<sup>2</sup>, por eso la serie suma un total finito.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P11 SOLO : razón con L=1 (no concluye) ============ -->
+    <section class="prob" data-kind="prob" data-id="P11" data-tema="criterio_razon" data-level="solo">
+      <div class="phead"><span class="pnum">11</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Cuando el criterio se queda mudo</p>
+      <p class="pstatement">Aplica el criterio de la razón a la p-serie <strong>a<sub>n</sub> = <sup>1</sup>⁄<sub>n<sup>2</sup></sub></strong>. Mira qué da L y <strong>explica qué debes hacer entonces</strong>.</p>
+      <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = <sup>1</sup>⁄<sub>n<sup>2</sup></sub></span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Fase 1 · armo el cociente</div><p>Término n+1 por el recíproco del término n:</p><p class="calc"><span class="rw">a<sub>n+1</sub>/a<sub>n</sub></span> <sup>1</sup>⁄<sub>(n+1)<sup>2</sup></sub> <span class="sep">•</span> <sup>n<sup>2</sup></sup>⁄<sub>1</sub>=<b><sup>n<sup>2</sup></sup>⁄<sub>(n+1)<sup>2</sup></sub></b></p></div>
+          <div class="estep"><div class="oprow">Fase 2 · tomo el límite</div><p>Grados iguales (2 arriba, 2 abajo), coeficientes 1 y 1:</p><p class="calc"><span class="rw">L</span> lím <sup>n<sup>2</sup></sup>⁄<sub>(n+1)<sup>2</sup></sub>=<sup>1</sup>⁄<sub>1</sub>=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Decido con otro criterio</div><p>L = 1 no concluye. Recurro a la comparación (es una p-serie):</p><p class="calc"><span class="rw">p</span> exponente=<b>2</b> <span class="sep">•</span> 2&gt;1 → <b>converge</b></p></div>
+          <p class="verdict warn"><strong>El criterio de la razón NO concluye</strong> (L = 1). Ahí queda mudo y hay que cambiar de herramienta: como es la p-serie con p = 2 &gt; 1, por comparación <strong>converge</strong>. Moraleja: L = 1 nunca es una respuesta, es una señal de “usa otro método”.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P12 SOLO : comparación (converge) ============ -->
+    <section class="prob" data-kind="prob" data-id="P12" data-tema="comparacion" data-level="solo">
+      <div class="phead"><span class="pnum">12</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Comparación con una p-serie</p>
+      <p class="pstatement">Decide si converge esta serie de términos positivos <strong>comparándola con una referencia conocida</strong>. Di con cuál la acotas y por qué basta.</p>
+      <div class="fx"><div class="sys"><span class="eq">∑ <sup>1</sup>⁄<sub>(2n<sup>2</sup> + 3)</sub></span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Elijo la referencia</div><p>Todos los términos son positivos. Busco una p-serie que quede por encima:</p><p class="calc"><span class="rw">ref</span> ∑ <sup>1</sup>⁄<sub>n<sup>2</sup></sub>, p=2&gt;1 → <b>converge</b></p></div>
+          <div class="estep"><div class="oprow">Comparo término a término</div><p>El denominador 2n<sup>2</sup> + 3 es mayor que n<sup>2</sup>; denominador más grande, fracción más chica:</p><p class="calc"><span class="rw">comparo</span> 2n<sup>2</sup>+3&gt;n<sup>2</sup> → <sup>1</sup>⁄<sub>(2n<sup>2</sup>+3)</sub> &lt; <b><sup>1</sup>⁄<sub>n<sup>2</sup></sub></b></p></div>
+          <div class="estep"><div class="oprow">Concluyo</div><p>Mi serie queda atrapada por debajo de una que converge:</p><p class="calc"><span class="rw">→</span> mía &lt; ∑ <sup>1</sup>⁄<sub>n<sup>2</sup></sub> (converge) → <b>converge</b></p></div>
+          <p class="verdict"><strong>Converge</strong> por comparación. La regla: si tu serie positiva es <strong>menor</strong> que una que converge, queda atrapada por debajo y también converge. La p-serie ∑ <sup>1</sup>⁄<sub>n<sup>2</sup></sub> (p = 2 &gt; 1) es la referencia natural aquí.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P13 SOLO : comparación (diverge) ============ -->
+    <section class="prob" data-kind="prob" data-id="P13" data-tema="comparacion" data-level="solo">
+      <div class="phead"><span class="pnum">13</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Cuidado: los términos van a 0 y aun así…</p>
+      <p class="pstatement">Los términos de esta serie tienden a 0, así que el filtro n-ésimo no la descarta. <strong>Decide si converge o diverge por comparación</strong> y justifica. <em>Pista: compárala con la armónica.</em></p>
+      <div class="fx"><div class="sys"><span class="eq">∑ <sup>1</sup>⁄<sub>(n + 4)</sub></span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Descarto el filtro rápido</div><p>El término general tiende a 0, así que el filtro n-ésimo no dice nada:</p><p class="calc"><span class="rw">lím</span> <sup>1</sup>⁄<sub>(n+4)</sub>=<b>0</b> <span class="sep">•</span> filtro no decide</p></div>
+          <div class="estep"><div class="oprow">Comparo con la armónica</div><p>La referencia que diverge es ∑ <sup>1</sup>⁄<sub>n</sub>. Para n grande, sumar 4 abajo casi no cambia el tamaño; comparo con <sup>1</sup>⁄<sub>2n</sub>, que es menor:</p><p class="calc"><span class="rw">comparo</span> n+4&lt;2n (para n&gt;4) → <sup>1</sup>⁄<sub>(n+4)</sub> &gt; <b><sup>1</sup>⁄<sub>2n</sub></b></p></div>
+          <div class="estep"><div class="oprow">Concluyo</div><p>∑ <sup>1</sup>⁄<sub>2n</sub> es la armónica por <sup>1</sup>⁄<sub>2</sub>, que diverge. Mi serie queda por encima:</p><p class="calc"><span class="rw">→</span> mía &gt; <sup>1</sup>⁄<sub>2</sub>·∑ <sup>1</sup>⁄<sub>n</sub> (diverge) → <b>diverge</b></p></div>
+          <p class="verdict warn"><strong>Diverge</strong> por comparación. Que a<sub>n</sub> → 0 <strong>no basta</strong> para converger: la armónica es el contraejemplo eterno. Al quedar por encima de una serie que diverge, la nuestra también diverge.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P14 SOLO : alternada, absoluta vs condicional ============ -->
+    <section class="prob" data-kind="prob" data-id="P14" data-tema="alternada" data-level="solo">
+      <div class="phead"><span class="pnum">14</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Alternada: ¿absoluta o condicional?</p>
+      <p class="pstatement">Analiza esta serie alternada. <strong>Decide si converge por Leibniz</strong> y luego si la convergencia es <strong>absoluta o condicional</strong>. Justifica cada decisión.</p>
+      <div class="fx"><div class="sys"><span class="eq">∑ (−1)<sup>n+1</sup> · <sup>1</sup>⁄<sub>n<sup>2</sup></sub> = 1 − <sup>1</sup>⁄<sub>4</sub> + <sup>1</sup>⁄<sub>9</sub> − …</span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Reviso Leibniz</div><p>Los términos en valor absoluto deben decrecer y tender a 0:</p><p class="calc"><span class="rw">|a<sub>n</sub>|</span> <sup>1</sup>⁄<sub>n<sup>2</sup></sub> decrece <span class="sep">•</span> lím <sup>1</sup>⁄<sub>n<sup>2</sup></sub>=<b>0</b> → <b>converge</b></p></div>
+          <div class="estep"><div class="oprow">Reviso convergencia absoluta</div><p>Vuelvo todos los términos positivos y miro esa serie:</p><p class="calc"><span class="rw">∑|a<sub>n</sub>|</span> ∑ <sup>1</sup>⁄<sub>n<sup>2</sup></sub>, p=2&gt;1 → <b>converge</b></p></div>
+          <p class="verdict"><strong>Converge absolutamente.</strong> Por Leibniz la alternada converge (términos decrecen a 0), y como la versión positiva ∑ <sup>1</sup>⁄<sub>n<sup>2</sup></sub> también converge (p = 2), la convergencia es <strong>absoluta</strong>. Contrasta con la alternada de <sup>1</sup>⁄<sub>n</sub>, que converge solo <strong>condicionalmente</strong> porque su versión positiva es la armónica.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P15 SOLO : serie de potencias, geométrica en x ============ -->
+    <section class="prob" data-kind="prob" data-id="P15" data-tema="serie_potencias" data-level="solo">
+      <div class="phead"><span class="pnum">15</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Geométrica en x, evaluada</p>
+      <p class="pstatement">La geométrica en x vale <sup>1</sup>⁄<sub>(1 − x)</sub> para | x | &lt; 1. Usándola, <strong>suma esta serie numérica</strong> reconociendo el valor de x, y verifica que estás dentro del radio.</p>
+      <div class="fx"><div class="sys"><span class="eq">1 − <sup>2</sup>⁄<sub>3</sub> + <sup>4</sup>⁄<sub>9</sub> − <sup>8</sup>⁄<sub>27</sub> + …</span></div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Reconozco x</div><p>Los signos alternan y cada término multiplica por lo mismo: leo la razón como x. Divido el segundo entre el primero:</p><p class="calc"><span class="rw">x</span> (−<sup>2</sup>⁄<sub>3</sub>)÷1=<b>−<sup>2</sup>⁄<sub>3</sub></b> <span class="sep">•</span> (<sup>4</sup>⁄<sub>9</sub>)÷(−<sup>2</sup>⁄<sub>3</sub>)=<b>−<sup>2</sup>⁄<sub>3</sub></b></p></div>
+          <div class="estep"><div class="oprow">Verifico el radio</div><p>Debo tener | x | &lt; 1:</p><p class="calc"><span class="rw">| x |</span> |−<sup>2</sup>⁄<sub>3</sub>|=<sup>2</sup>⁄<sub>3</sub> <span class="sep">•</span> <sup>2</sup>⁄<sub>3</sub>&lt;1 → <b>válido</b></p></div>
+          <div class="estep"><div class="oprow">Aplico la fórmula</div><p>1 − x con x negativo se vuelve una suma, y divido:</p><p class="calc"><span class="rw">1−x</span> 1−(−<sup>2</sup>⁄<sub>3</sub>)=1+<sup>2</sup>⁄<sub>3</sub>=<b><sup>5</sup>⁄<sub>3</sub></b> <span class="sep">•</span> <span class="rw">S</span> <sup>1</sup>⁄<sub>(5/3)</sub>=<b><sup>3</sup>⁄<sub>5</sub></b></p><div class="fx"><div class="sys"><span class="eq">S = <sup>1</sup>⁄<sub>(1 − (−2/3))</sub> = <sup>1</sup>⁄<sub>(5/3)</sub> = <sup>3</sup>⁄<sub>5</sub></span></div></div></div>
+          <p class="verdict"><strong>La serie suma <sup>3</sup>⁄<sub>5</sub>.</strong> El truco es leer x = −<sup>2</sup>⁄<sub>3</sub> (la alternancia viene del signo de x, no de un (−1)<sup>n</sup> aparte). Ojo con el doble signo: 1 − (−<sup>2</sup>⁄<sub>3</sub>) se vuelve 1 + <sup>2</sup>⁄<sub>3</sub>, el error más común aquí.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Errores típicos que cuestan puntos</h3>
+      <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Cociente de coeficientes cuando los grados NO empatan.</strong> Esa regla vale solo con grados iguales; si abajo tiene mayor grado, el límite es 0, no el cociente.</li>
+        <li><span class="ck">✗</span> <strong>Aplicar la fórmula geométrica con | r | ≥ 1.</strong> Da un número (a veces negativo) sin sentido: primero verifica | r | &lt; 1, si no, diverge.</li>
+        <li><span class="ck">✗</span> <strong>Confundir el límite del término con la suma de la serie.</strong> Si a<sub>n</sub> → L ≠ 0, la serie diverge; L no es la suma.</li>
+        <li><span class="ck">✗</span> <strong>Creer que a<sub>n</sub> → 0 basta para converger.</strong> La armónica ∑ <sup>1</sup>⁄<sub>n</sub> tiene términos que van a 0 y diverge. Es condición necesaria, no suficiente.</li>
+        <li><span class="ck">✗</span> <strong>Concluir con L = 1 en el criterio de la razón.</strong> Ahí el criterio no dice nada: cambia a comparación u otro método.</li>
+        <li><span class="ck">✗</span> <strong>Comparar en el sentido equivocado.</strong> Menor que una que converge → converge; mayor que una que diverge → diverge. Al revés no concluye.</li>
+        <li><span class="ck">✗</span> <strong>Confundir absoluta con condicional.</strong> Absoluta = converge la versión positiva; condicional = converge solo por la alternancia (Leibniz).</li>
+        <li><span class="ck">✗</span> <strong>Olvidar el radio de una serie de potencias.</strong> <sup>1</sup>⁄<sub>(1 − x)</sub> solo vale con | x | &lt; 1; fuera de ahí no hay suma.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre de sesión</h3>
+      <p class="nota">Qué tan segura te sientes resolviendo Unidad 1 completa en papel. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs">
+      <a class="next" href="C1_sucesiones-series.html"><span class="sp">Repasar la guía →</span><span class="ti">U1 · Sucesiones y series</span></a>
+    </nav>
+
+    <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Cálculo Multivariado · Unidad 1 — Sucesiones y series</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   (motor del cuadernillo: reportes por problema, no opciones)
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo", unidad:"U1_sucesiones_series", leccion:"C1_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_calculo_U1_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

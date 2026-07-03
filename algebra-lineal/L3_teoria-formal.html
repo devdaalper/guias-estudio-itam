@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U3 — Teoría formal (definiciones y teoremas)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  /* tarjeta de teoría: etiqueta tipo Definición / Teorema */
+  .card{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:0;display:grid;box-shadow:var(--shadow);overflow:hidden}
+  .card .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 20px;border-bottom:2px solid var(--ink)}
+  .card .head .badge{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:999px;padding:4px 12px;border:2px solid}
+  .card .head .badge.def{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .card .head .badge.teo{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .card .head .badge.cor{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .card .head h3{margin:0;font-size:clamp(17px,2vw,20px);letter-spacing:-.02em}
+  .card .body{padding:18px 20px;display:grid;gap:13px}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .stmt{display:grid;gap:7px;font-size:clamp(17px,1.9vw,19px);line-height:1.55}
+  .stmt .eq{white-space:normal;font-variant-numeric:tabular-nums}
+  .stmt .lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:2px}
+  .cond{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
+  .cond li{display:flex;gap:10px;align-items:flex-start;font-size:clamp(16px,1.8vw,18px)}
+  .cond li .k{flex:0 0 auto;width:24px;height:24px;border-radius:7px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  .porque{border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .porque .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .porque p{margin:0;line-height:1.55}
+
+  /* recall drill: enuncia de memoria → revela → autorreporta */
+  .drill{display:grid;gap:11px;padding:16px 18px;border:1.5px dashed var(--navy);border-radius:12px;background:#eef1fb}
+  .drill .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .drill .qtag::before{content:"⟲ "}
+  .drill .q{margin:0;font-weight:700;font-size:17px}
+  .drill .revealbtn{font:inherit;font-weight:800;font-size:16px;padding:11px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer;justify-self:start;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
+  .drill .revealbtn:hover{transform:translate(-1px,-1px)}
+  .drill .answer{display:none;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:13px 16px}
+  .drill .answer.show{display:block}
+  .drill .answer .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:5px}
+  .drill .answer .stmt{font-size:17px}
+  .selfrep{display:none;gap:9px;flex-wrap:wrap}
+  .selfrep.show{display:flex}
+  .selfrep .srtag{flex:0 0 100%;font-size:13px;font-weight:700;color:var(--slate);margin-bottom:-2px}
+  .selfrep button{flex:1;min-width:120px;font:inherit;font-weight:700;font-size:15px;padding:11px 12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .selfrep button:hover{transform:translateY(-1px)}
+  .selfrep button.pick-mem{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .selfrep button.pick-pista{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .selfrep button.pick-falla{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .selfrep.locked button{opacity:.45;cursor:default}
+  .selfrep.locked button.sel{opacity:1}
+  .drill.answered{border-style:solid;border-color:var(--green)}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.mem{background:var(--green-tint);color:var(--green-deep)}
+  .pill.pista{background:var(--cream);color:var(--deep)}
+  .pill.falla{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin formulario</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 3 · Teoría formal</p>
+    <h1>Transformaciones <mark>lineales</mark> para memorizar</h1>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <div class="learn">
+      <h2>Vas a poder enunciar de memoria</h2>
+      <ol>
+        <li><span class="n">1</span> Definición de transformación lineal</li>
+        <li><span class="n">2</span> T(0) = 0 y el filtro rápido</li>
+        <li><span class="n">3</span> Matriz canónica de T</li>
+        <li><span class="n">4</span> Núcleo, imagen, nulidad y rango</li>
+        <li><span class="n">5</span> Cómo hallar una base de cada uno</li>
+        <li><span class="n">6</span> Teorema de rango-nulidad</li>
+        <li><span class="n">7</span> Inyectiva / suprayectiva / biyectiva</li>
+        <li><span class="n">8</span> Reglas de dimensión y composición</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <p class="idea" style="margin-top:4px">
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+    </p>
+
+    <h2 class="modhead">Qué es una transformación lineal</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Transformación lineal</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Sean V y W espacios vectoriales sobre R. Una función T: V → W es una <strong>transformación lineal</strong> si para todo par de vectores u, v ∈ V y todo escalar c ∈ R cumple las dos condiciones:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span><strong>Aditividad</strong>: T(u + v) = T(u) + T(v).</span></li>
+              <li><span class="k">2</span><span><strong>Homogeneidad</strong>: T(c·u) = c·T(u).</span></li>
+            </ul>
+            <span class="eq">Equivalen a una sola: T(c·u + d·v) = c·T(u) + d·T(v) para todo c, d ∈ R.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>«Lineal» significa que T <strong>respeta las dos operaciones del espacio</strong>: da lo mismo sumar o escalar antes que después de aplicar T. En cada coordenada solo caben combinaciones de las variables por constantes: nada de x², xy, |x|, ni sumar un número fijo. Las dos condiciones juntas se resumen en que T preserva combinaciones lineales.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F1_def_transformacion_lineal" data-tema="definicion">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define transformación lineal T: V → W con sus dos condiciones exactas. Dilo antes de revelar.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">T: V → W es lineal si (1) T(u + v) = T(u) + T(v) y (2) T(c·u) = c·T(u), para todo u, v ∈ V y todo c ∈ R. En una sola: T(c·u + d·v) = c·T(u) + d·T(v).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Propiedad</span><h3>El cero va al cero (filtro rápido)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Si T: V → W es lineal, entonces <strong>T(0<sub>V</sub>) = 0<sub>W</sub></strong>: el vector cero del dominio va al vector cero del codominio.</span>
+            <span class="eq">Contrarrecíproco (filtro): si una función <strong>no</strong> manda el cero al cero, <strong>no</strong> es lineal, y se descarta sin calcular nada más.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Sale de la homogeneidad con c = 0: T(0) = T(0·u) = 0·T(u) = 0. Es una condición <strong>necesaria pero no suficiente</strong>: que el cero quede quieto no garantiza linealidad, pero que se mueva sí la descarta. Por eso una regla como T(x, y) = (x + 1, y) muere al instante: manda (0, 0) a (1, 0).</p></div>
+        <div class="drill" data-kind="recall" data-fid="F2_prop_cero_al_cero" data-tema="definicion">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia qué le pasa al vector cero bajo una T lineal y cómo se usa como filtro. ¿Es condición suficiente?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">T lineal ⇒ T(0) = 0 (sale de c = 0). Si una función mueve el cero, no es lineal (filtro). Pero es necesaria, no suficiente: que fije el cero no basta para ser lineal.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">La matriz canónica</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Toda T lineal es una matriz (matriz canónica)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Toda transformación lineal T: Rⁿ → Rᵐ se escribe como <strong>T(x) = A·x</strong> para una única matriz A de tamaño m×n, la <strong>matriz canónica</strong> (o estándar) de T. Sus columnas son las imágenes de la base canónica:</span>
+            <span class="eq">A = [ T(e₁) | T(e₂) | … | T(e<sub>n</sub>) ],</span>
+            <span class="eq">donde e<sub>j</sub> es el vector de la base canónica con un 1 en la posición j y ceros en el resto. La imagen de e<sub>j</sub> es la columna j de A.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Cualquier x = x₁·e₁ + … + x<sub>n</sub>·e<sub>n</sub>. Por linealidad, T(x) = x₁·T(e₁) + … + x<sub>n</sub>·T(e<sub>n</sub>), que es exactamente A·x con esas columnas. La matriz es <strong>m×n</strong>: m renglones (dimensión del codominio) por n columnas (dimensión del dominio). Multiplicar por A reproduce toda la transformación de un golpe.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F3_teo_matriz_canonica" data-tema="matriz_canonica">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Cómo se construye la matriz canónica de T: Rⁿ → Rᵐ y qué tamaño tiene? Di qué es cada columna.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">A = [ T(e₁) | … | T(e<sub>n</sub>) ]: cada columna j es la imagen del j-ésimo vector canónico. Es m×n (m = dim del codominio, n = dim del dominio) y cumple T(x) = A·x.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Núcleo e imagen</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Núcleo (kernel) y nulidad</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">El <strong>núcleo</strong> de T: V → W es el conjunto de vectores del dominio que van al cero:</span>
+            <span class="eq">ker(T) = { v ∈ V : T(v) = 0 }.</span>
+            <span class="eq">Es un <strong>subespacio</strong> de V. Su dimensión es la <strong>nulidad</strong>: nulidad(T) = dim ker(T).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Con la matriz A, ker(T) es el conjunto de soluciones de A·x = 0 (sistema homogéneo): por eso siempre contiene al menos el cero. Se calcula reduciendo A: las columnas <strong>sin pivote</strong> son las variables libres; cada una aporta un vector director del núcleo, así que la nulidad = número de columnas sin pivote.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F4_def_nucleo_nulidad" data-tema="nucleo">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define ker(T) y nulidad. ¿Con qué sistema se calcula y cómo se lee la nulidad al reducir?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">ker(T) = { v : T(v) = 0 }, subespacio del dominio. Nulidad = dim ker(T). Se halla resolviendo A·x = 0; la nulidad = nº de columnas SIN pivote (variables libres).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Imagen (rango como subespacio) y rango</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">La <strong>imagen</strong> de T: V → W es el conjunto de vectores del codominio que sí se alcanzan:</span>
+            <span class="eq">Im(T) = { T(v) : v ∈ V } = { w ∈ W : w = T(v) para algún v }.</span>
+            <span class="eq">Es un <strong>subespacio</strong> de W, generado por las columnas de A. Su dimensión es el <strong>rango</strong>: rango(T) = dim Im(T).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Como T(x) = A·x recorre todas las combinaciones de las columnas de A, la imagen es el <strong>espacio columna</strong> de A. El rango es el número de pivotes al reducir. <strong>Trampa clásica de examen</strong>: una base de la imagen son las columnas <strong>originales</strong> de A donde cayeron los pivotes, NO las columnas de la matriz ya reducida (reducir cambia las columnas).</p></div>
+        <div class="drill" data-kind="recall" data-fid="F5_def_imagen_rango" data-tema="imagen">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define Im(T) y rango. ¿De qué matriz es el espacio columna y cuál es la trampa al dar su base?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Im(T) = { T(v) : v ∈ V }, subespacio del codominio = espacio columna de A. Rango = dim Im(T) = nº de pivotes. Base = columnas ORIGINALES con pivote (no las reducidas).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Método</span><h3>Hallar bases del núcleo y de la imagen</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Para T con matriz A, se reduce A a su forma escalonada reducida y se lee:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span><strong>Rango</strong> = número de pivotes. Una <strong>base de Im(T)</strong> son las columnas de A <strong>original</strong> que quedaron con pivote.</span></li>
+              <li><span class="k">2</span><span><strong>Nulidad</strong> = número de columnas sin pivote. Para una <strong>base de ker(T)</strong>, cada variable libre se pone como parámetro (z = t, …), se despejan las básicas y se agrupan los vectores director.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Los pivotes separan las columnas en dos grupos que no se mezclan: <strong>con pivote</strong> → alimentan la imagen (rango); <strong>sin pivote</strong> → variables libres → alimentan el núcleo (nulidad). Escribir el núcleo como t·w₁ + s·w₂ + … expone directamente sus vectores director, que forman su base.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F6_metodo_bases_ker_im" data-tema="nucleo">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Describe cómo, a partir de la matriz reducida, obtienes una base de la imagen y una base del núcleo.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Reduce A. Imagen: columnas ORIGINALES con pivote (rango = nº pivotes). Núcleo: pon las columnas sin pivote como parámetros libres, despeja las básicas y junta los vectores director (nulidad = nº columnas sin pivote).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">El teorema central</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Teorema de rango-nulidad (de la dimensión)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Sea T: V → W lineal con V de dimensión finita n. Entonces</span>
+            <span class="eq"><strong>rango(T) + nulidad(T) = dim V = n</strong>,</span>
+            <span class="eq">es decir, dim Im(T) + dim ker(T) = número de columnas de A (la dimensión del <strong>dominio</strong>).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Al reducir A, <strong>cada</strong> columna del dominio cae en exactamente un grupo: o tiene pivote (cuenta para el rango) o no lo tiene (cuenta para la nulidad). Ninguna cae en los dos ni se queda fuera, así que los dos conteos <strong>suman</strong> el total de columnas = dim del dominio. Ojo: el total es la dimensión del <strong>dominio</strong>, no del codominio. Si conoces dos de los tres números, el tercero sale solo.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F7_teo_rango_nulidad" data-tema="rango_nulidad">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia el teorema de rango-nulidad con precisión. ¿La suma da la dimensión del dominio o del codominio?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Para T: V → W con dim V = n: rango(T) + nulidad(T) = dim V = n = número de columnas. La suma da la dimensión del DOMINIO, nunca la del codominio.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Clasificar: inyectiva, suprayectiva, biyectiva</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Criterio de inyectividad (nulidad 0)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">T: V → W lineal es <strong>inyectiva</strong> (uno a uno) si y solo si su núcleo es trivial:</span>
+            <span class="eq"><strong>T inyectiva ⇔ ker(T) = { 0 } ⇔ nulidad(T) = 0</strong>.</span>
+            <span class="eq">Equivalente por rango-nulidad: rango(T) = dim V (todas las columnas son pivote).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Como T es lineal, T(u) = T(v) ⇔ T(u − v) = 0 ⇔ u − v ∈ ker(T). Si el único elemento del núcleo es el 0, entonces u = v: es inyectiva. Basta con que <strong>algo distinto del cero</strong> vaya al cero para que pierda la inyectividad. Por eso el criterio se reduce a mirar la nulidad.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F8_teo_inyectiva" data-tema="clasificacion">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Da el criterio de inyectividad en términos del núcleo y de la nulidad. ¿Por qué basta con el núcleo?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">T inyectiva ⇔ ker(T) = { 0 } ⇔ nulidad = 0. Porque T(u) = T(v) ⇔ u − v ∈ ker(T); si el núcleo es solo el cero, u = v.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Criterio de suprayectividad y biyectividad</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">T: V → W lineal es <strong>suprayectiva</strong> (sobre) si su imagen llena todo el codominio:</span>
+            <span class="eq"><strong>T suprayectiva ⇔ Im(T) = W ⇔ rango(T) = dim W</strong> (dimensión del codominio).</span>
+            <span class="eq">T es <strong>biyectiva</strong> (isomorfismo) ⇔ es inyectiva y suprayectiva a la vez ⇔ nulidad = 0 y rango = dim W.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La imagen es un subespacio de W; llenarlo por completo equivale a que su dimensión (el rango) iguale a dim W. Cuidado: rango se compara con la dimensión del <strong>codominio</strong> (renglones de A), mientras la inyectividad se compara con la del dominio (columnas). La biyectividad exige ambas, y solo es posible si dim V = dim W.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F9_teo_suprayectiva_biyectiva" data-tema="clasificacion">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia los criterios de suprayectividad y de biyectividad con rango, imagen y dimensión del codominio.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Suprayectiva ⇔ Im(T) = W ⇔ rango = dim W (codominio). Biyectiva ⇔ inyectiva y suprayectiva ⇔ nulidad = 0 y rango = dim W (requiere dim V = dim W).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge cor">Corolario</span><h3>Reglas de dimensión (cotas rápidas)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Para T: V → W lineal, comparando dim V (dominio) con dim W (codominio):</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span>Si <strong>dim V &gt; dim W</strong>, T <strong>nunca</strong> es inyectiva (nulidad ≥ dim V − dim W &gt; 0).</span></li>
+              <li><span class="k">2</span><span>Si <strong>dim V &lt; dim W</strong>, T <strong>nunca</strong> es suprayectiva (rango ≤ dim V &lt; dim W).</span></li>
+              <li><span class="k">3</span><span>T puede ser <strong>biyectiva</strong> solo si <strong>dim V = dim W</strong>.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Salen directo de rango-nulidad. El rango nunca supera el número de columnas (dim V) ni el de renglones (dim W). Si el dominio es más grande que el codominio, sobran columnas que se aplastan al cero (no inyectiva); si es más chico, no hay suficientes columnas para cubrir el destino (no suprayectiva). Estas cotas descartan casos <strong>sin calcular la matriz</strong>.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F10_cor_reglas_dimension" data-tema="clasificacion">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia las tres reglas de dimensión que descartan inyectiva / suprayectiva / biyectiva sin calcular.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">dim V &gt; dim W → nunca inyectiva. dim V &lt; dim W → nunca suprayectiva. Biyectiva solo si dim V = dim W. (El rango no supera ni columnas ni renglones.)</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Composición e inversa</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Matriz de la composición y de la inversa</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Si S y T son lineales con matrices canónicas A y B, la <strong>composición</strong> S ∘ T (aplicar T y luego S) también es lineal, y su matriz es el <strong>producto</strong>:</span>
+            <span class="eq">matriz(S ∘ T) = A·B   (en ese orden: la del segundo aplicado por la izquierda).</span>
+            <span class="eq">T: Rⁿ → Rⁿ es <strong>invertible</strong> ⇔ es biyectiva ⇔ su matriz A es invertible (det A ≠ 0); entonces la matriz de T⁻¹ es A⁻¹.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>(S ∘ T)(x) = S(T(x)) = S(B·x) = A·(B·x) = (A·B)·x, así que la matriz es A·B. El orden importa porque el producto de matrices no conmuta. La inversa existe solo cuando T es biyectiva, y eso obliga a que A sea cuadrada y de determinante distinto de cero.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F11_teo_composicion_inversa" data-tema="composicion">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Cuál es la matriz de S ∘ T y en qué orden? ¿Cuándo es invertible T y cuál es la matriz de T⁻¹?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">matriz(S ∘ T) = A·B (S con matriz A, T con B; se aplica primero T). T es invertible ⇔ biyectiva ⇔ A invertible (det A ≠ 0); matriz de T⁻¹ = A⁻¹.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chuleta">
+      <h3>La ficha de memoria</h3>
+      <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
+      <ul>
+        <li><span class="ck">✓</span> Lineal ⇔ T(u + v) = T(u) + T(v) y T(c·u) = c·T(u). En una: T(c·u + d·v) = c·T(u) + d·T(v).</li>
+        <li><span class="ck">✓</span> T lineal ⇒ T(0) = 0. Si mueve el cero, no es lineal (necesaria, no suficiente).</li>
+        <li><span class="ck">✓</span> Matriz canónica: A = [ T(e₁) | … | T(e<sub>n</sub>) ], tamaño m×n. T(x) = A·x.</li>
+        <li><span class="ck">✓</span> Núcleo ker(T) = { v : T(v) = 0 } (subespacio del dominio). Nulidad = dim ker = columnas sin pivote.</li>
+        <li><span class="ck">✓</span> Imagen Im(T) = espacio columna de A. Rango = dim Im = nº de pivotes. Base = columnas ORIGINALES con pivote.</li>
+        <li><span class="ck">✓</span> Rango-nulidad: rango + nulidad = dim del dominio (nº de columnas). No del codominio.</li>
+        <li><span class="ck">✓</span> Inyectiva ⇔ ker = { 0 } ⇔ nulidad 0. Suprayectiva ⇔ rango = dim del codominio.</li>
+        <li><span class="ck">✓</span> Biyectiva ⇔ ambas ⇔ nulidad 0 y rango = dim W; requiere dim V = dim W.</li>
+        <li><span class="ck">✓</span> dim V &gt; dim W ⇒ no inyectiva · dim V &lt; dim W ⇒ no suprayectiva.</li>
+        <li><span class="ck">✓</span> matriz(S ∘ T) = A·B. Invertible ⇔ biyectiva ⇔ det A ≠ 0; matriz de T⁻¹ = A⁻¹.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue con el recall?</h3>
+      <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="L3_transformaciones-lineales.html"><span class="sp">← Volver</span><span class="ti">U3 · Guía completa</span></a>
+      <a class="next" href="L4_algebra-matricial.html"><span class="sp">Siguiente →</span><span class="ti">U4 · Álgebra matricial</span></a>
+    </nav>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 3 · Teoría formal</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+// ===== instrumentación (session / reporte / recall) =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U3_transformaciones", leccion:"L3_teoria-formal",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_REC = document.querySelectorAll('[data-kind="recall"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.formulas.length+"/"+TOT_REC+" recalls"; }
+
+// cada drill: revelar → autorreporte (de_memoria / con_pista / falla) → session.formulas
+document.querySelectorAll('.drill[data-kind="recall"]').forEach(function(block){
+  var reveal = block.querySelector('.revealbtn');
+  var answer = block.querySelector('.answer');
+  var selfrep = block.querySelector('.selfrep');
+  var done = false;
+  if(reveal){
+    reveal.onclick = function(){
+      if(answer) answer.classList.add('show');
+      if(selfrep) selfrep.classList.add('show');
+      reveal.style.display = 'none';
+    };
+  }
+  block.querySelectorAll('.selfrep button').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      done = true;
+      var rep = b.getAttribute('data-rep');
+      b.classList.add('sel');
+      if(rep==="de_memoria") b.classList.add('pick-mem');
+      else if(rep==="con_pista") b.classList.add('pick-pista');
+      else b.classList.add('pick-falla');
+      selfrep.classList.add('locked');
+      block.classList.add('answered');
+      session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:rep });
+      updateCont();
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var mem=session.formulas.filter(function(f){return f.recall==="de_memoria";}).length;
+  var pista=session.formulas.filter(function(f){return f.recall==="con_pista";}).length;
+  var falla=session.formulas.filter(function(f){return f.recall==="falla";}).length;
+  var fallidas=session.formulas.filter(function(f){return f.recall==="falla";}).map(function(f){return f.id;});
+  var s="Recall de teoría formal U3: "+session.formulas.length+"/"+TOT_REC+" enunciados. ";
+  s+="De memoria: "+mem+" · con pista: "+pista+" · falla: "+falla+". ";
+  s+= fallidas.length? ("Falló en: "+fallidas.join(", ")+". ") : "Sin fallas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U3_teoria-formal.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){
+    var cls = f.recall==="de_memoria" ? "mem" : (f.recall==="con_pista" ? "pista" : "falla");
+    return '<span class="pill '+cls+'">'+f.id+": "+f.recall+'</span>';
+  }).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.formulas.length+'/'+TOT_REC+'</strong> recalls · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Enunciados: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>

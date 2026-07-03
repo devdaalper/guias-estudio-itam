@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U3 — Cuadernillo de papel (Transformaciones lineales)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .vecs{display:flex;gap:22px;flex-wrap:wrap;font-size:21px;font-variant-numeric:tabular-nums;align-items:center}
+  .colvec{display:inline-flex;align-items:center;gap:6px}
+  .colvec .lab{font-weight:700;color:var(--navy);font-size:17px}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+
+  /* ===== cuadernillo de papel ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora · en papel</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 3 · Cuadernillo</p>
+    <h1>Transformaciones lineales, <mark>resueltas en una hoja</mark></h1>
+    <p class="lead">Aquí no se elige opción: se resuelve completo, a mano, como en el parcial. Cada problema trae su enunciado, tu espacio para trabajarlo en papel y la solución paso a paso para cotejar. Toma lápiz y hoja antes de abrir cada respuesta.</p>
+    <div class="learn">
+      <h2>Lo que vas a entrenar</h2>
+      <ol>
+        <li><span class="n">1</span> Verificar linealidad con la definición</li>
+        <li><span class="n">2</span> Armar la matriz canónica de T</li>
+        <li><span class="n">3</span> Hallar núcleo e imagen desde la RREF</li>
+        <li><span class="n">4</span> Calcular rango y nulidad</li>
+        <li><span class="n">5</span> Aplicar el teorema de rango-nulidad</li>
+        <li><span class="n">6</span> Clasificar: inyectiva, suprayectiva, biyectiva</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este cuadernillo</h2>
+    <section class="sec">
+      <h3>La regla de oro: papel primero</h3>
+      <p class="idea">Los dos primeros son <strong>resueltos-guía</strong>: léelos completos para fijar el método. El resto es <strong>producción</strong>: resuélvelos tú de principio a fin en una hoja <strong>antes</strong> de abrir la solución. Al terminar cada uno, dime cómo te fue con los tres botones. Eso arma tu reporte para el tutor sin escaneos ni fotos.</p>
+      <p class="idea">El plan de ataque del tema: para <strong>linealidad</strong>, verifico la suma T(u+v)=T(u)+T(v) y el escalado T(c·u)=c·T(u) (filtro rápido: si mueve el cero, no es lineal). Para <strong>núcleo e imagen</strong>, armo la matriz de T (columnas = T de la base canónica), la reduzco por Gauss-Jordan y leo: columnas <strong>sin pivote</strong> → variables libres → núcleo (su cantidad = <strong>nulidad</strong>); columnas <strong>originales con pivote</strong> → base de la imagen (su cantidad = <strong>rango</strong>). Al final clasifico: <strong>inyectiva</strong> ⇔ nulidad 0, <strong>suprayectiva</strong> ⇔ rango = dimensión del codominio, <strong>biyectiva</strong> = ambas.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago — resueltos-guía</h2>
+
+    <!-- ============ RESUELTO-GUÍA 1 : linealidad + matriz canónica ============ -->
+    <section class="prob" data-kind="prob" data-id="RG1" data-tema="linealidad_matriz_canonica" data-level="resuelto">
+      <div class="phead"><span class="pnum">1</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Prueba que es lineal y saca su matriz canónica</p>
+      <p class="pstatement">Dada la regla <strong>T(x, y) = (3x − y, 2x + y)</strong>, verifica que respeta la suma y el escalado, y luego escribe su <strong>matriz canónica</strong>.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y) = (3x − y, 2x + y)</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Filtro del cero</div><p>Antes de nada, meto el vector cero: T(0, 0) = (3·0 − 0, 2·0 + 0) = <strong>(0, 0)</strong>. El cero se queda quieto, así que no queda descartada de entrada. Sigo con la definición.</p></div>
+          <div class="estep"><div class="oprow">Prueba de la suma</div><p>Tomo u = (1, 2) y v = (2, 3). Comparo sumar antes contra sumar después, entrada por entrada:</p>
+            <p class="calc"><span class="rw">u+v</span> (1+2, 2+3)=<b>(3, 5)</b> <span class="sep">•</span> T(3, 5)=(3·3−5, 2·3+5)=<b>(4, 11)</b></p>
+            <p class="calc"><span class="rw">T(u)</span> (3·1−2, 2·1+2)=<b>(1, 4)</b> <span class="sep">•</span> <span class="rw">T(v)</span> (3·2−3, 2·2+3)=<b>(3, 7)</b> <span class="sep">•</span> suma=<b>(4, 11)</b></p>
+            <p>Los dos caminos dan (4, 11). La suma se respeta.</p></div>
+          <div class="estep"><div class="oprow">Prueba del escalado</div><p>Tomo c = 4 y u = (1, 2). Comparo escalar antes contra escalar después:</p>
+            <p class="calc"><span class="rw">c·u</span> (4·1, 4·2)=<b>(4, 8)</b> <span class="sep">•</span> T(4, 8)=(3·4−8, 2·4+8)=<b>(4, 16)</b></p>
+            <p class="calc"><span class="rw">4·T(u)</span> T(1,2)=(1, 4) <span class="sep">•</span> 4·(1, 4)=<b>(4, 16)</b></p>
+            <p>Otra vez coinciden: (4, 16). Se respetan las dos condiciones, así que <strong>T sí es lineal</strong>.</p></div>
+          <div class="estep"><div class="oprow">Matriz canónica</div><p>Aplico T a la base canónica; cada imagen es una columna, en orden:</p>
+            <p class="calc"><span class="rw">T(1,0)</span> (3·1−0, 2·1+0)=<b>(3, 2)</b> <span class="sep">•</span> <span class="rw">T(0,1)</span> (3·0−1, 2·0+1)=<b>(−1, 1)</b></p>
+            <div class="fx" id="rg1a"></div></div>
+          <p class="verdict">T es <strong>lineal</strong> y su matriz canónica es la de arriba. Multiplicar cualquier vector (x, y) por ella reproduce (3x − y, 2x + y) de un solo golpe.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (aunque sea de muestra, márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 2 : núcleo, imagen, rango-nulidad 3->2 ============ -->
+    <section class="prob" data-kind="prob" data-id="RG2" data-tema="nucleo_imagen_3x2" data-level="resuelto">
+      <div class="phead"><span class="pnum">2</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Núcleo, imagen, rango y nulidad</p>
+      <p class="pstatement">Para <strong>T(x, y, z) = (x + 2y + 3z, 2x + 5y + 4z)</strong>, arma la matriz de T, redúcela por Gauss-Jordan y da el <strong>núcleo</strong>, la <strong>imagen</strong>, el <strong>rango</strong> y la <strong>nulidad</strong>. Clasifícala al final.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y, z) = (x + 2y + 3z, 2x + 5y + 4z)</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz de T</div><p>Las columnas son T de la base canónica: T(1,0,0) = (1, 2), T(0,1,0) = (2, 5), T(0,0,1) = (3, 4). Las apilo como columnas:</p><div class="fx" id="rg2a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>Hago cero la primera entrada del renglón 2 = [2, 5, 4] usando el pivote de arriba [1, 2, 3]:</p><p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 5−2·2=<b>1</b> <span class="sep">•</span> 4−2·3=<b>−2</b></p><div class="fx" id="rg2b"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>El renglón 2 ya es pivote limpio [0, 1, −2]. Limpio el 2 de arriba en la segunda columna sin tocar la primera:</p><p class="calc"><span class="rw">R1</span> 1−2·0=<b>1</b> <span class="sep">•</span> 2−2·1=<b>0</b> <span class="sep">•</span> 3−2·(−2)=<b>7</b></p><div class="fx" id="rg2c"></div></div>
+          <div class="estep"><p>Ya está en RREF. Hay <strong>2 pivotes</strong> (columnas 1 y 2) ⇒ <strong>rango 2</strong>. La tercera columna no tiene pivote ⇒ z es <strong>libre</strong>. Leo el sistema reducido: x + 7z = 0 y y − 2z = 0. Hago z = t y despejo:</p>
+            <div class="fx"><div class="sys"><span class="eq">x = −7t,   y = 2t,   z = t</span><span class="eq">núcleo = t·(−7, 2, 1)</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Compruebo el núcleo</div><p>Meto (−7, 2, 1) en la regla ORIGINAL; debe dar (0, 0):</p><p class="calc"><span class="rw">R1</span> −7+2·2+3·1=−7+4+3=<b>0</b> <span class="sep">•</span> <span class="rw">R2</span> 2·(−7)+5·2+4·1=−14+10+4=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Imagen</div><p>Los pivotes cayeron en las columnas 1 y 2. La base de la imagen son las columnas <strong>1 y 2 de la matriz ORIGINAL</strong> (no las de la reducida): { (1, 2), (2, 5) }. Como son 2 vectores independientes en un codominio de dimensión 2, la imagen llena todo.</p></div>
+          <p class="verdict"><strong>Núcleo</strong> = recta t·(−7, 2, 1) ⇒ <strong>nulidad 1</strong>. <strong>Imagen</strong> = todo el codominio, base { (1, 2), (2, 5) } ⇒ <strong>rango 2</strong>. Comprobación: rango + nulidad = 2 + 1 = 3 = nº de columnas ✓. Clasificación: rango 2 = dimensión del codominio ⇒ <strong>suprayectiva</strong>; nulidad 1 &gt; 0 ⇒ <strong>no inyectiva</strong> ⇒ no biyectiva.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Tu turno — producción</h2>
+
+    <!-- ============ P3 GUIADO : matriz canónica completa ============ -->
+    <section class="prob" data-kind="prob" data-id="P3" data-tema="matriz_canonica" data-level="guiado">
+      <div class="phead"><span class="pnum">3</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Arma la matriz canónica entera</p>
+      <p class="pstatement">Escribe la <strong>matriz canónica</strong> de <strong>T(x, y) = (4x + y, x − 3y)</strong>. <em>Pista: aplica T a (1, 0) para la primera columna y a (0, 1) para la segunda.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y) = (4x + y, x − 3y)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Primera columna: T(1, 0)</div><p>Sustituyo x = 1, y = 0 en cada entrada:</p><p class="calc"><span class="rw">e1</span> 4·1+0=<b>4</b> <span class="sep">•</span> 1−3·0=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Segunda columna: T(0, 1)</div><p>Sustituyo x = 0, y = 1:</p><p class="calc"><span class="rw">e2</span> 4·0+1=<b>1</b> <span class="sep">•</span> 0−3·1=<b>−3</b></p><div class="fx" id="p3a"></div></div>
+          <p class="verdict">La matriz canónica es la de arriba. Sus columnas son (4, 1) y (1, −3), en ese orden. Verifica multiplicando (1, 1): (4+1, 1−3) = (5, −2), que coincide con T(1, 1) = (4+1, 1−3).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P4 GUIADO : filtro del cero / descartar ============ -->
+    <section class="prob" data-kind="prob" data-id="P4" data-tema="definicion" data-level="guiado">
+      <div class="phead"><span class="pnum">4</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">¿Cuál se descarta sin calcular?</p>
+      <p class="pstatement">De estas tres reglas, decide cuál <strong>no puede ser lineal</strong> usando solo el <strong>filtro del cero</strong>, y explica por qué las otras dos sí lo pasan (aunque no las pruebes completas). <em>El filtro no basta para confirmar linealidad, pero sí para descartar.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">A: T(x, y) = (x − y, 2y)</span>
+        <span class="eq">B: T(x, y) = (x + 4, y)</span>
+        <span class="eq">C: T(x, y) = (0, 3x)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>Meto (0, 0) en cada regla y miro si vuelve al cero:</p>
+            <p class="calc"><span class="rw">A</span> (0−0, 2·0)=<b>(0, 0)</b> <span class="sep">•</span> <span class="rw">B</span> (0+4, 0)=<b>(4, 0)</b> <span class="sep">•</span> <span class="rw">C</span> (0, 3·0)=<b>(0, 0)</b></p></div>
+          <p class="verdict warn"><strong>B queda descartada</strong>: al meter (0, 0) sale (4, 0), es decir <strong>mueve el cero</strong>. El "+4" fijo es un desplazamiento, y ninguna transformación lineal desplaza. A y C dejan el cero quieto y solo combinan las variables por constantes, así que pasan el filtro (y de hecho sí son lineales).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P5 SOLO : verificar linealidad de un shear ============ -->
+    <section class="prob" data-kind="prob" data-id="P5" data-tema="definicion" data-level="solo">
+      <div class="phead"><span class="pnum">5</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Verifica linealidad con números concretos</p>
+      <p class="pstatement">Comprueba que <strong>T(x, y) = (x + 2y, y)</strong> respeta la <strong>suma</strong> y el <strong>escalado</strong> usando u = (2, 1), v = (1, 3) y c = 3. Muestra los dos caminos en cada caso.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y) = (x + 2y, y)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Prueba de la suma</div><p>Con u = (2, 1) y v = (1, 3):</p>
+            <p class="calc"><span class="rw">u+v</span> (2+1, 1+3)=<b>(3, 4)</b> <span class="sep">•</span> T(3, 4)=(3+2·4, 4)=<b>(11, 4)</b></p>
+            <p class="calc"><span class="rw">T(u)</span> (2+2·1, 1)=<b>(4, 1)</b> <span class="sep">•</span> <span class="rw">T(v)</span> (1+2·3, 3)=<b>(7, 3)</b> <span class="sep">•</span> suma=<b>(11, 4)</b></p>
+            <p>Coinciden en (11, 4).</p></div>
+          <div class="estep"><div class="oprow">Prueba del escalado</div><p>Con c = 3 y u = (2, 1):</p>
+            <p class="calc"><span class="rw">c·u</span> (3·2, 3·1)=<b>(6, 3)</b> <span class="sep">•</span> T(6, 3)=(6+2·3, 3)=<b>(12, 3)</b></p>
+            <p class="calc"><span class="rw">3·T(u)</span> T(2,1)=(4, 1) <span class="sep">•</span> 3·(4, 1)=<b>(12, 3)</b></p>
+            <p>Coinciden en (12, 3).</p></div>
+          <p class="verdict">Las dos condiciones se cumplen ⇒ <strong>T es lineal</strong>. Es un "corte" (shear): desliza cada punto horizontalmente según su altura. Su matriz canónica sería (1, 0) y (2, 1) como columnas.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P6 SOLO : núcleo 2x3 -> recta paramétrica ============ -->
+    <section class="prob" data-kind="prob" data-id="P6" data-tema="nucleo_parametrico" data-level="solo">
+      <div class="phead"><span class="pnum">6</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Halla el núcleo por reducción</p>
+      <p class="pstatement">Para <strong>T(x, y, z) = (x + y − z, x + 2y + z)</strong>, arma la matriz, redúcela y escribe el <strong>núcleo</strong> en forma paramétrica. Di cuánto valen el rango y la nulidad.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y, z) = (x + y − z, x + 2y + z)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz de T</div><p>Columnas = T(1,0,0) = (1, 1), T(0,1,0) = (1, 2), T(0,0,1) = (−1, 1):</p><div class="fx" id="p6a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − R1</div><p>Al renglón 2 = [1, 2, 1] le resto el renglón 1 = [1, 1, −1]:</p><p class="calc"><span class="rw">R2</span> 1−1=<b>0</b> <span class="sep">•</span> 2−1=<b>1</b> <span class="sep">•</span> 1−(−1)=<b>2</b></p><div class="fx" id="p6b"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − R2</div><p>Limpio el 1 de arriba en la segunda columna usando el renglón 2 = [0, 1, 2]:</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> −1−2=<b>−3</b></p><div class="fx" id="p6c"></div></div>
+          <div class="estep"><p>RREF con 2 pivotes (columnas 1 y 2), tercera libre. Sistema reducido: x − 3z = 0 y y + 2z = 0. Con z = t:</p>
+            <div class="fx"><div class="sys"><span class="eq">x = 3t,   y = −2t,   z = t</span><span class="eq">núcleo = t·(3, −2, 1)</span></div></div>
+          </div>
+          <p class="verdict"><strong>Rango 2, nulidad 1.</strong> Núcleo = recta t·(3, −2, 1). Compruebo en la original con (3, −2, 1): R1 = 3 + (−2) − 1 = 0 y R2 = 3 + 2·(−2) + 1 = 0 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P7 SOLO : núcleo 3x3 con nulidad 1 ============ -->
+    <section class="prob" data-kind="prob" data-id="P7" data-tema="nucleo_3x3" data-level="solo">
+      <div class="phead"><span class="pnum">7</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Núcleo de un 3×3</p>
+      <p class="pstatement">Para <strong>T(x, y, z) = (x + y + 2z, y + z, x + 2y + 3z)</strong>, reduce la matriz y da el <strong>núcleo</strong>, el rango y la nulidad. <em>Anticipa: el tercer renglón, ¿aporta algo nuevo?</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y, z) = (x + y + 2z, y + z, x + 2y + 3z)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz de T</div><p>Columnas = T(1,0,0) = (1, 0, 1), T(0,1,0) = (1, 1, 2), T(0,0,1) = (2, 1, 3):</p><div class="fx" id="p7a"></div></div>
+          <div class="estep"><div class="oprow">R3 → R3 − R1</div><p>Al renglón 3 = [1, 2, 3] le resto el renglón 1 = [1, 1, 2]:</p><p class="calc"><span class="rw">R3</span> 1−1=<b>0</b> <span class="sep">•</span> 2−1=<b>1</b> <span class="sep">•</span> 3−2=<b>1</b></p><div class="fx" id="p7b"></div></div>
+          <div class="estep"><div class="oprow">R3 → R3 − R2</div><p>Ahora R3 = [0, 1, 1] menos R2 = [0, 1, 1] se anula por completo (0 = 0): ese renglón no aportaba nada nuevo.</p><p class="calc"><span class="rw">R3</span> 0−0=<b>0</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 1−1=<b>0</b></p><div class="fx" id="p7c"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − R2</div><p>Limpio el 1 de arriba en la segunda columna con R2 = [0, 1, 1]:</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 2−1=<b>1</b></p><div class="fx" id="p7d"></div></div>
+          <div class="estep"><p>RREF: 2 pivotes (columnas 1 y 2), tercera libre. Sistema: x + z = 0 y y + z = 0. Con z = t:</p>
+            <div class="fx"><div class="sys"><span class="eq">x = −t,   y = −t,   z = t</span><span class="eq">núcleo = t·(−1, −1, 1)</span></div></div>
+          </div>
+          <p class="verdict"><strong>Rango 2, nulidad 1.</strong> Núcleo = recta t·(−1, −1, 1). Comprobación: rango + nulidad = 2 + 1 = 3 = nº de columnas ✓. En la original con (−1, −1, 1): R1 = −1 −1 +2 = 0, R2 = −1 +1 = 0, R3 = −1 −2 +3 = 0 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P8 SOLO : base de la imagen (trampa columnas originales) ============ -->
+    <section class="prob" data-kind="prob" data-id="P8" data-tema="imagen" data-level="solo">
+      <div class="phead"><span class="pnum">8</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Base de la imagen sin caer en la trampa</p>
+      <p class="pstatement">La matriz de T (columnas = T de la base) es la de abajo. Al reducirla, los pivotes caen en las <strong>columnas 1 y 3</strong>. Escribe una <strong>base correcta de la imagen</strong> y su dimensión. <em>Ojo: la trampa clásica es tomar columnas de la matriz reducida.</em></p>
+      <div class="fx" id="p8mat"></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><p>La matriz original tiene columnas (1, 2, 1), (2, 4, 2) y (1, 1, 0). Reduciendo, la columna 2 es el doble de la columna 1: no da pivote. Los pivotes quedan en las <strong>columnas 1 y 3</strong>, así que el rango es 2.</p></div>
+          <div class="estep"><div class="oprow">Regla clave</div><p>La base de la imagen son las columnas <strong>de la matriz ORIGINAL</strong> donde cayeron los pivotes, no las de la reducida (reducir cambia las columnas). Aquí, columnas 1 y 3:</p>
+            <div class="fx"><div class="sys"><span class="eq">base de la imagen = { (1, 2, 1),  (1, 1, 0) }</span><span class="eq">dim de la imagen = rango = 2</span></div></div>
+          </div>
+          <p class="verdict"><strong>Base de la imagen = { (1, 2, 1), (1, 1, 0) }, dimensión 2.</strong> La columna 2 no entra porque es combinación de la 1 (su doble). Como el codominio tiene dimensión 3 y el rango es 2, la imagen es un plano dentro del espacio, no lo llena todo.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P9 SOLO : rango-nulidad numérico ============ -->
+    <section class="prob" data-kind="prob" data-id="P9" data-tema="rango_nulidad" data-level="solo">
+      <div class="phead"><span class="pnum">9</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Usa el teorema sin calcular la matriz</p>
+      <p class="pstatement">Una transformación T sale de un espacio de <strong>dimensión 6</strong> hacia un codominio de dimensión 4, y su <strong>imagen tiene dimensión 4</strong>. Sin hacer cuentas de matrices, di cuánto vale la <strong>nulidad</strong> y clasifícala.</p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Rango-nulidad</div><p>El teorema dice rango + nulidad = número de columnas = dimensión del <strong>dominio</strong> = 6. La dimensión de la imagen es el rango, aquí 4:</p><p class="calc"><span class="rw">nulidad</span> 6 − 4=<b>2</b></p></div>
+          <p class="verdict"><strong>Nulidad = 2.</strong> Clasificación: rango 4 = dimensión del codominio ⇒ <strong>suprayectiva</strong>; nulidad 2 &gt; 0 ⇒ <strong>no inyectiva</strong> ⇒ no biyectiva. Regla de bolsillo: como el dominio (6) es más grande que el codominio (4), nunca podría ser inyectiva.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P10 SOLO : clasificación 3->3 biyectiva ============ -->
+    <section class="prob" data-kind="prob" data-id="P10" data-tema="clasificacion" data-level="solo">
+      <div class="phead"><span class="pnum">10</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Clasifica reduciendo</p>
+      <p class="pstatement">Para <strong>T(x, y, z) = (x + z, y + z, 2x + y)</strong>, reduce la matriz, halla rango y nulidad, y clasifícala (inyectiva / suprayectiva / biyectiva). El dominio y el codominio tienen dimensión 3.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y, z) = (x + z, y + z, 2x + y)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz de T</div><p>Columnas = T(1,0,0) = (1, 0, 2), T(0,1,0) = (0, 1, 1), T(0,0,1) = (1, 1, 0):</p><div class="fx" id="p10a"></div></div>
+          <div class="estep"><div class="oprow">R3 → R3 − 2·R1</div><p>Al renglón 3 = [2, 1, 0] le resto 2 veces el renglón 1 = [1, 0, 1]:</p><p class="calc"><span class="rw">R3</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·0=<b>1</b> <span class="sep">•</span> 0−2·1=<b>−2</b></p><div class="fx" id="p10b"></div></div>
+          <div class="estep"><div class="oprow">R3 → R3 − R2</div><p>Ahora R3 = [0, 1, −2] menos R2 = [0, 1, 1]:</p><p class="calc"><span class="rw">R3</span> 0−0=<b>0</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> −2−1=<b>−3</b></p><div class="fx" id="p10c"></div></div>
+          <div class="estep"><div class="oprow">R3 → R3 ÷ (−3)</div><p>Normalizo el pivote de la tercera columna a 1:</p><p class="calc"><span class="rw">R3</span> 0 <span class="sep">•</span> 0 <span class="sep">•</span> −3÷(−3)=<b>1</b></p><div class="fx" id="p10d"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − R3 · luego R2 → R2 − R3</div><p>Limpio la tercera columna arriba, un renglón a la vez. R1 = [1, 0, 1] − [0, 0, 1] = [1, 0, 0]; R2 = [0, 1, 1] − [0, 0, 1] = [0, 1, 0]:</p><p class="calc"><span class="rw">R1</span> 1−0 <span class="sep">•</span> 0−0 <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> <span class="rw">R2</span> 1−1=<b>0</b></p><div class="fx" id="p10e"></div></div>
+          <p class="verdict"><strong>Rango 3, nulidad 0.</strong> La RREF es la identidad: 3 pivotes. Como nulidad 0 ⇒ <strong>inyectiva</strong>; rango 3 = dimensión del codominio ⇒ <strong>suprayectiva</strong>. Las dos juntas ⇒ <strong>biyectiva</strong>. Solo el vector cero va al núcleo.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P11 SOLO : clasificación por dimensiones (3->2 nunca inyectiva) ============ -->
+    <section class="prob" data-kind="prob" data-id="P11" data-tema="clasificacion" data-level="solo">
+      <div class="phead"><span class="pnum">11</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Decide qué es posible por las dimensiones</p>
+      <p class="pstatement">Una transformación va de un espacio de <strong>dimensión 4</strong> a uno de <strong>dimensión 2</strong>. Sin conocer su matriz, decide: ¿puede ser inyectiva? ¿puede ser suprayectiva? Justifica con rango y nulidad.</p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Techo del rango</div><p>El rango no puede pasar del número de columnas (4) ni del número de renglones (2). El menor manda: aquí el rango es a lo más <strong>2</strong>.</p></div>
+          <div class="estep"><div class="oprow">Inyectividad</div><p>Con rango a lo más 2, la nulidad = 4 − rango es al menos 4 − 2 = <strong>2 &gt; 0</strong>. Siempre hay más que el cero en el núcleo, así que <strong>nunca es inyectiva</strong>.</p></div>
+          <div class="estep"><div class="oprow">Suprayectividad</div><p>El codominio tiene dimensión 2. Si el rango llega a 2 (posible), la imagen llena el codominio ⇒ <strong>sí puede ser suprayectiva</strong>.</p></div>
+          <p class="verdict warn"><strong>Nunca inyectiva</strong> (el dominio es más grande que el codominio). <strong>Sí puede ser suprayectiva</strong>, cuando el rango alcanza 2. Nunca biyectiva, porque falla siempre la inyectividad.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P12 SOLO : clasificación 2->4 (nunca suprayectiva) ============ -->
+    <section class="prob" data-kind="prob" data-id="P12" data-tema="clasificacion" data-level="solo">
+      <div class="phead"><span class="pnum">12</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">El caso espejo: subir de dimensión</p>
+      <p class="pstatement">Ahora T va de <strong>dimensión 2</strong> a <strong>dimensión 4</strong>, y resulta ser <strong>inyectiva</strong>. Di cuánto valen su rango y su nulidad, y explica por qué <strong>no puede ser suprayectiva</strong>.</p>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">De inyectiva a los números</div><p>Inyectiva ⇔ nulidad 0. Por rango-nulidad con 2 columnas: rango = 2 − nulidad = 2 − 0 = <strong>2</strong>.</p><p class="calc"><span class="rw">rango</span> 2 − 0=<b>2</b> <span class="sep">•</span> <span class="rw">nulidad</span>=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Suprayectividad</div><p>Suprayectiva pediría rango = dimensión del codominio = 4. Pero el rango es 2, y solo hay 2 columnas: jamás llega a 4.</p></div>
+          <p class="verdict"><strong>Rango 2, nulidad 0.</strong> Es <strong>inyectiva</strong> pero <strong>no suprayectiva</strong>: su imagen es un plano de dimensión 2 dentro de un espacio de dimensión 4. Regla de bolsillo: si el dominio es más chico que el codominio, nunca es suprayectiva.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P13 SOLO : núcleo + imagen completo 3x3 rango 2 ============ -->
+    <section class="prob" data-kind="prob" data-id="P13" data-tema="nucleo_imagen_3x3" data-level="solo">
+      <div class="phead"><span class="pnum">13</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Núcleo, imagen y clasificación, todo junto</p>
+      <p class="pstatement">Para <strong>T(x, y, z) = (x + 2y + 3z, 2x + 3y + 4z, 3x + 4y + 5z)</strong>, reduce la matriz y entrega: núcleo en forma paramétrica, base de la imagen, rango, nulidad y clasificación. Dominio y codominio de dimensión 3.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y, z) = (x + 2y + 3z, 2x + 3y + 4z, 3x + 4y + 5z)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz de T</div><p>Columnas = T(1,0,0) = (1, 2, 3), T(0,1,0) = (2, 3, 4), T(0,0,1) = (3, 4, 5):</p><div class="fx" id="p13a"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 − 2·R1 · luego R3 → R3 − 3·R1</div><p>Hago ceros bajo el primer pivote, un renglón a la vez. R2 = [2, 3, 4] − 2·[1, 2, 3]; R3 = [3, 4, 5] − 3·[1, 2, 3]:</p><p class="calc"><span class="rw">R2</span> 2−2=<b>0</b> <span class="sep">•</span> 3−4=<b>−1</b> <span class="sep">•</span> 4−6=<b>−2</b></p><p class="calc"><span class="rw">R3</span> 3−3=<b>0</b> <span class="sep">•</span> 4−6=<b>−2</b> <span class="sep">•</span> 5−9=<b>−4</b></p><div class="fx" id="p13b"></div></div>
+          <div class="estep"><div class="oprow">R2 → R2 ÷ (−1)</div><p>Normalizo el pivote de la segunda columna:</p><p class="calc"><span class="rw">R2</span> 0 <span class="sep">•</span> −1÷(−1)=<b>1</b> <span class="sep">•</span> −2÷(−1)=<b>2</b></p><div class="fx" id="p13c"></div></div>
+          <div class="estep"><div class="oprow">R3 → R3 + 2·R2</div><p>Elimino el −2 del renglón 3 en la segunda columna con R2 = [0, 1, 2]:</p><p class="calc"><span class="rw">R3</span> 0+0=<b>0</b> <span class="sep">•</span> −2+2·1=<b>0</b> <span class="sep">•</span> −4+2·2=<b>0</b></p><div class="fx" id="p13d"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>Limpio el 2 de arriba en la segunda columna:</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 2−2·1=<b>0</b> <span class="sep">•</span> 3−2·2=<b>−1</b></p><div class="fx" id="p13e"></div></div>
+          <div class="estep"><p>RREF con 2 pivotes (columnas 1 y 2), tercera libre. Sistema: x − z = 0 y y + 2z = 0. Con z = t:</p>
+            <div class="fx"><div class="sys"><span class="eq">x = t,   y = −2t,   z = t</span><span class="eq">núcleo = t·(1, −2, 1)</span></div></div>
+          </div>
+          <p class="verdict"><strong>Rango 2, nulidad 1.</strong> Núcleo = recta t·(1, −2, 1). Base de la imagen = columnas 1 y 2 ORIGINALES = { (1, 2, 3), (2, 3, 4) }, un plano de dimensión 2. Clasificación: nulidad 1 &gt; 0 ⇒ no inyectiva; rango 2 &lt; 3 = dimensión del codominio ⇒ no suprayectiva. <strong>Ni inyectiva ni suprayectiva.</strong> Comprobación en la original con (1, −2, 1): R1 = 1 −4 +3 = 0 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P14 SOLO : matriz de una rotación/reflexión + clasificar ============ -->
+    <section class="prob" data-kind="prob" data-id="P14" data-tema="matriz_geometrica" data-level="solo">
+      <div class="phead"><span class="pnum">14</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Una transformación geométrica</p>
+      <p class="pstatement">La regla <strong>T(x, y) = (−y, x)</strong> gira cada punto del plano 90° en sentido antihorario. Escribe su <strong>matriz canónica</strong>, calcula rango y nulidad, y decide si es <strong>biyectiva</strong>.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y) = (−y, x)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Matriz canónica</div><p>Aplico T a la base canónica:</p><p class="calc"><span class="rw">T(1,0)</span> (−0, 1)=<b>(0, 1)</b> <span class="sep">•</span> <span class="rw">T(0,1)</span> (−1, 0)=<b>(−1, 0)</b></p><div class="fx" id="p14a"></div></div>
+          <div class="estep"><div class="oprow">R1 ↔ R2</div><p>Intercambio renglones para poner el 1 arriba a la izquierda como primer pivote:</p><div class="fx" id="p14b"></div></div>
+          <div class="estep"><div class="oprow">R1 → R1 ÷ (−1) · luego R2 → R2 ÷ (−1)</div><p>Normalizo cada pivote a 1. R1 = [−1, 0] ÷ (−1) = [1, 0]; R2 = [0, 1] ya está:</p><p class="calc"><span class="rw">R1</span> −1÷(−1)=<b>1</b> <span class="sep">•</span> 0=<b>0</b></p><div class="fx" id="p14c"></div></div>
+          <p class="verdict"><strong>Rango 2, nulidad 0.</strong> La RREF es la identidad: 2 pivotes, ninguna columna libre. Nulidad 0 ⇒ <strong>inyectiva</strong>; rango 2 = dimensión del codominio ⇒ <strong>suprayectiva</strong>. Es <strong>biyectiva</strong>. Tiene sentido: girar 90° no aplasta nada al cero y cubre todo el plano; se puede deshacer girando 90° al otro lado.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Errores típicos que cuestan puntos</h3>
+      <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Confiar solo en el filtro del cero.</strong> Que T(0) = 0 no confirma linealidad; solo descarta. Para afirmar que es lineal, verifica suma y escalado.</li>
+        <li><span class="ck">✗</span> <strong>Base de la imagen con columnas de la reducida.</strong> Reducir cambia las columnas. La base de la imagen son las columnas ORIGINALES en las posiciones de pivote.</li>
+        <li><span class="ck">✗</span> <strong>Confundir rango con nulidad.</strong> Rango = columnas CON pivote (dimensión de la imagen). Nulidad = columnas SIN pivote (dimensión del núcleo).</li>
+        <li><span class="ck">✗</span> <strong>Sumar rango + nulidad al codominio.</strong> El teorema dice rango + nulidad = número de columnas = dimensión del DOMINIO, no del destino.</li>
+        <li><span class="ck">✗</span> <strong>Dar un punto como núcleo cuando hay variable libre.</strong> Si una columna no tiene pivote, el núcleo es paramétrico (t·vector), no un solo punto.</li>
+        <li><span class="ck">✗</span> <strong>Cruzar inyectiva y suprayectiva.</strong> Inyectiva ⇔ nulidad 0. Suprayectiva ⇔ rango = dimensión del codominio. No se confunden.</li>
+        <li><span class="ck">✗</span> <strong>Olvidar el atajo de dimensiones.</strong> Dominio más grande que el codominio ⇒ nunca inyectiva; más chico ⇒ nunca suprayectiva.</li>
+        <li><span class="ck">✗</span> <strong>No verificar el núcleo en la regla original.</strong> Sustituye tu vector del núcleo en T; debe dar el cero. Atrapa errores de signo al instante.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre de sesión</h3>
+      <p class="nota">Qué tan segura te sientes resolviendo Unidad 3 completa en papel. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="L3_transformaciones-lineales.html"><span class="sp">← Volver</span><span class="ti">U3 · Guía del tema</span></a>
+      <a class="next" href="../index.html"><span class="sp">Siguiente →</span><span class="ti">Menú de lecciones</span></a>
+    </nav>
+
+    <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Álgebra Lineal · Unidad 3 — Transformaciones lineales</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- render de matrices aumentadas ---------- */
+function mat(rows, augmented){
+  var cols = rows[0].length;
+  var coeffs = augmented ? cols-1 : cols;
+  var gtc = augmented ? ('repeat('+coeffs+',auto) 16px auto') : ('repeat('+coeffs+',auto)');
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    if(augmented){ cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>'; }
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setM(id, rows, aug){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows, !!aug); }
+
+/* ===== RG1 : matriz canónica de T(x,y)=(3x−y, 2x+y) ===== */
+setM('rg1a',[["3","−1"],["2","1"]]);
+
+/* ===== RG2 : T(x,y,z)=(x+2y+3z, 2x+5y+4z) -> núcleo t·(−7,2,1) ===== */
+setM('rg2a',[["1","2","3"],["2","5","4"]]);
+setM('rg2b',[["1","2","3"],["0","1","−2"]]);
+setM('rg2c',[["1","0","7"],["0","1","−2"]]);
+
+/* ===== P3 : matriz canónica de T(x,y)=(4x+y, x−3y) ===== */
+setM('p3a',[["4","1"],["1","−3"]]);
+
+/* ===== P6 : T(x,y,z)=(x+y−z, x+2y+z) -> núcleo t·(3,−2,1) ===== */
+setM('p6a',[["1","1","−1"],["1","2","1"]]);
+setM('p6b',[["1","1","−1"],["0","1","2"]]);
+setM('p6c',[["1","0","−3"],["0","1","2"]]);
+
+/* ===== P7 : T(x,y,z)=(x+y+2z, y+z, x+2y+3z) -> núcleo t·(−1,−1,1) ===== */
+setM('p7a',[["1","1","2"],["0","1","1"],["1","2","3"]]);
+setM('p7b',[["1","1","2"],["0","1","1"],["0","1","1"]]);
+setM('p7c',[["1","1","2"],["0","1","1"],["0","0","0"]]);
+setM('p7d',[["1","0","1"],["0","1","1"],["0","0","0"]]);
+
+/* ===== P8 : matriz con columna 2 = 2·columna 1, pivotes en 1 y 3 ===== */
+setM('p8mat',[["1","2","1"],["2","4","1"],["1","2","0"]]);
+
+/* ===== P10 : T(x,y,z)=(x+z, y+z, 2x+y) -> identidad (biyectiva) ===== */
+setM('p10a',[["1","0","1"],["0","1","1"],["2","1","0"]]);
+setM('p10b',[["1","0","1"],["0","1","1"],["0","1","−2"]]);
+setM('p10c',[["1","0","1"],["0","1","1"],["0","0","−3"]]);
+setM('p10d',[["1","0","1"],["0","1","1"],["0","0","1"]]);
+setM('p10e',[["1","0","0"],["0","1","0"],["0","0","1"]]);
+
+/* ===== P13 : T(x,y,z)=(x+2y+3z, 2x+3y+4z, 3x+4y+5z) -> núcleo t·(1,−2,1) ===== */
+setM('p13a',[["1","2","3"],["2","3","4"],["3","4","5"]]);
+setM('p13b',[["1","2","3"],["0","−1","−2"],["0","−2","−4"]]);
+setM('p13c',[["1","2","3"],["0","1","2"],["0","−2","−4"]]);
+setM('p13d',[["1","2","3"],["0","1","2"],["0","0","0"]]);
+setM('p13e',[["1","0","−1"],["0","1","2"],["0","0","0"]]);
+
+/* ===== P14 : T(x,y)=(−y, x) rotación 90° -> identidad (biyectiva) ===== */
+setM('p14a',[["0","−1"],["1","0"]]);
+setM('p14b',[["1","0"],["0","−1"]]);
+setM('p14c',[["1","0"],["0","1"]]);
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U3_transformaciones", leccion:"L3_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U3_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>
