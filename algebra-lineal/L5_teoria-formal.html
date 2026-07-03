@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U5 — Teoría formal (definiciones y teoremas)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  /* tarjeta de teoría: etiqueta tipo Definición / Teorema */
+  .card{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:0;display:grid;box-shadow:var(--shadow);overflow:hidden}
+  .card .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 20px;border-bottom:2px solid var(--ink)}
+  .card .head .badge{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:999px;padding:4px 12px;border:2px solid}
+  .card .head .badge.def{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .card .head .badge.teo{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .card .head .badge.cor{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .card .head h3{margin:0;font-size:clamp(17px,2vw,20px);letter-spacing:-.02em}
+  .card .body{padding:18px 20px;display:grid;gap:13px}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .stmt{display:grid;gap:7px;font-size:clamp(17px,1.9vw,19px);line-height:1.55}
+  .stmt .eq{white-space:normal;font-variant-numeric:tabular-nums}
+  .stmt .lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:2px}
+  .cond{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
+  .cond li{display:flex;gap:10px;align-items:flex-start;font-size:clamp(16px,1.8vw,18px)}
+  .cond li .k{flex:0 0 auto;width:24px;height:24px;border-radius:7px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  .porque{border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .porque .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .porque p{margin:0;line-height:1.55}
+
+  /* recall drill: enuncia de memoria → revela → autorreporta */
+  .drill{display:grid;gap:11px;padding:16px 18px;border:1.5px dashed var(--navy);border-radius:12px;background:#eef1fb}
+  .drill .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .drill .qtag::before{content:"⟲ "}
+  .drill .q{margin:0;font-weight:700;font-size:17px}
+  .drill .revealbtn{font:inherit;font-weight:800;font-size:16px;padding:11px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer;justify-self:start;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
+  .drill .revealbtn:hover{transform:translate(-1px,-1px)}
+  .drill .answer{display:none;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:13px 16px}
+  .drill .answer.show{display:block}
+  .drill .answer .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:5px}
+  .drill .answer .stmt{font-size:17px}
+  .selfrep{display:none;gap:9px;flex-wrap:wrap}
+  .selfrep.show{display:flex}
+  .selfrep .srtag{flex:0 0 100%;font-size:13px;font-weight:700;color:var(--slate);margin-bottom:-2px}
+  .selfrep button{flex:1;min-width:120px;font:inherit;font-weight:700;font-size:15px;padding:11px 12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .selfrep button:hover{transform:translateY(-1px)}
+  .selfrep button.pick-mem{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .selfrep button.pick-pista{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .selfrep button.pick-falla{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .selfrep.locked button{opacity:.45;cursor:default}
+  .selfrep.locked button.sel{opacity:1}
+  .drill.answered{border-style:solid;border-color:var(--green)}
+
+  /* matrices dentro de tarjetas */
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:20px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:28px}
+  .mrow>span{text-align:right;min-width:22px}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.mem{background:var(--green-tint);color:var(--green-deep)}
+  .pill.pista{background:var(--cream);color:var(--deep)}
+  .pill.falla{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin formulario</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 5 · Teoría formal</p>
+    <h1>Determinantes, cofactores y <mark>Cramer</mark> para memorizar</h1>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <div class="learn">
+      <h2>Vas a poder enunciar de memoria</h2>
+      <ol>
+        <li><span class="n">1</span> Determinante y en qué existe</li>
+        <li><span class="n">2</span> Fórmula del determinante 2×2</li>
+        <li><span class="n">3</span> Menor, cofactor y tablero de signos</li>
+        <li><span class="n">4</span> Expansión de Laplace por cofactores</li>
+        <li><span class="n">5</span> Propiedades del determinante</li>
+        <li><span class="n">6</span> Determinante de matriz triangular</li>
+        <li><span class="n">7</span> Criterio de invertibilidad (det ≠ 0)</li>
+        <li><span class="n">8</span> Regla de Cramer</li>
+        <li><span class="n">9</span> Inversa por adjunta</li>
+        <li><span class="n">10</span> El determinante como área/volumen</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <p class="idea" style="margin-top:4px">
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+    </p>
+
+    <h2 class="modhead">Qué es el determinante</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Determinante de una matriz cuadrada</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">El <strong>determinante</strong> es una función que a cada matriz <strong>cuadrada</strong> A de tamaño n×n le asigna un único número real, denotado det(A) o |A|.</span>
+            <span class="eq">Solo está definido para matrices cuadradas: si A es m×n con m ≠ n, det(A) <strong>no existe</strong>.</span>
+            <span class="eq">Se escribe con <strong>barras verticales</strong> |A|, no con corchetes (que denotan la matriz misma).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Ese número codifica de un tiro tres cosas: si A es invertible, si el sistema A·x = b tiene solución única, y cuánto «estira o encoge» el espacio (área/volumen con signo). La restricción a cuadradas no es un capricho: la expansión por cofactores necesita el mismo número de renglones que de columnas.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F1_def_determinante" data-tema="determinante_definicion">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Qué es el determinante, a qué matrices se les asigna y cómo se denota? Dilo antes de revelar.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Función que a cada matriz <strong>cuadrada</strong> n×n le asigna un número real det(A) = |A|. Solo existe si es cuadrada; se escribe con barras verticales.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Determinante de una 2×2</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Para una matriz 2×2 con renglones (a, b) y (c, d):</span>
+          </div>
+          <div class="fx" id="def2x2" style="margin-top:8px;padding:10px 14px;border:0;background:transparent"></div>
+          <div class="stmt">
+            <span class="eq">det = a·d − b·c: producto de la <strong>diagonal principal</strong> (↘) menos producto de la <strong>antidiagonal</strong> (↗). El signo del medio es un menos, nunca un más.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Es el caso base de toda la teoría: el 3×3 y superiores se reducen a sumar 2×2. El error típico es escribir a·b − c·d (mezclar entradas del mismo renglón) o poner un + en medio. Repite la regla como «diagonal menos antidiagonal».</p></div>
+        <div class="drill" data-kind="recall" data-fid="F2_det_2x2" data-tema="determinante_2x2">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Escribe la fórmula del determinante de una 2×2 con renglones (a, b) y (c, d).</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">det = a·d − b·c (diagonal principal menos antidiagonal). El signo del medio es un menos.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Menores, cofactores y expansión</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Menor y cofactor de una entrada</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">El <strong>menor</strong> M<sub>ij</sub> de la entrada a<sub>ij</sub> es el determinante de la submatriz que queda al <strong>tapar</strong> el renglón i y la columna j.</span>
+            <span class="eq">El <strong>cofactor</strong> es ese menor con signo: C<sub>ij</sub> = (−1)<sup>i+j</sup>·M<sub>ij</sub>.</span>
+            <span class="eq">El signo (−1)<sup>i+j</sup> forma el <strong>tablero de ajedrez</strong> + − + / − + − / + − +, que depende solo de la <strong>posición</strong>, no del número.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>El menor «reduce» el tamaño en uno; el signo alterna para que las cancelaciones den un valor bien definido, invariante del renglón que elijas. Truco: la casilla (1,1) siempre es +, y de ahí alternas. Nunca amarres el signo al valor de la entrada.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F3_def_menor_cofactor" data-tema="cofactores">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define menor M<sub>ij</sub> y cofactor C<sub>ij</sub>. ¿De qué depende el signo y qué tablero forma?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">M<sub>ij</sub> = det de tapar renglón i y columna j. C<sub>ij</sub> = (−1)<sup>i+j</sup>·M<sub>ij</sub>. El signo depende de la posición: tablero + − + / − + − / + − +.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Expansión de Laplace por cofactores</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">El determinante de una matriz n×n se obtiene eligiendo <strong>un renglón (o una columna)</strong> cualquiera y sumando cada entrada por su cofactor. Desarrollando por el renglón i:</span>
+            <span class="eq">det(A) = a<sub>i1</sub>·C<sub>i1</sub> + a<sub>i2</sub>·C<sub>i2</sub> + … + a<sub>in</sub>·C<sub>in</sub>.</span>
+            <span class="eq">El resultado es el <strong>mismo</strong> sin importar qué renglón o columna se elija.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Como el valor no depende de la fila elegida, conviene desarrollar por el renglón o columna con <strong>más ceros</strong>: cada entrada 0 anula su término (0 × cofactor = 0) y te ahorra calcular ese menor. Un 3×3 con dos ceros en una línea colapsa a un solo 2×2.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F4_teo_laplace" data-tema="cofactores">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia la expansión por cofactores (Laplace) y la regla práctica para elegir el renglón o columna.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">det(A) = Σ a<sub>ij</sub>·C<sub>ij</sub> sobre un renglón (o columna) fijo; mismo resultado sea cual sea. Se desarrolla por la línea con más ceros para ahorrar menores.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Propiedades que ahorran cuentas</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Determinante de una matriz triangular</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Si A es <strong>triangular</strong> (todos los ceros de un mismo lado de la diagonal principal), su determinante es el <strong>producto de las entradas de la diagonal</strong>:</span>
+            <span class="eq">det(A) = a<sub>11</sub>·a<sub>22</sub>·…·a<sub>nn</sub>.</span>
+            <span class="eq">En particular, det(I) = 1, y si algún elemento de la diagonal es 0, el determinante es 0.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Desarrollando por cofactores por la columna (o renglón) del lado de los ceros, en cada paso solo sobrevive la entrada diagonal; el resto se anula. Ojo: en el 2×2 se <strong>resta</strong> la antidiagonal, pero en una triangular la antidiagonal ya es cero, así que solo queda <strong>multiplicar</strong> la diagonal.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F5_teo_triangular" data-tema="propiedades">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Cuál es el determinante de una matriz triangular? ¿Cuánto vale det(I)?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Triangular ⇒ det = producto de la diagonal: a<sub>11</sub>·a<sub>22</sub>·…·a<sub>nn</sub>. det(I) = 1. Un cero en la diagonal ⇒ det = 0.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Cuándo el determinante es cero</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">El determinante vale <strong>0</strong> en cualquiera de estos casos:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span>La matriz tiene un <strong>renglón (o columna) de ceros</strong>.</span></li>
+              <li><span class="k">2</span><span>Dos renglones (o columnas) son <strong>iguales</strong>.</span></li>
+              <li><span class="k">3</span><span>Dos renglones (o columnas) son <strong>proporcionales</strong> (uno múltiplo del otro).</span></li>
+              <li><span class="k">4</span><span>Un renglón es <strong>combinación lineal</strong> de los demás (renglones linealmente dependientes).</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Todos estos casos significan que los renglones son <strong>linealmente dependientes</strong>: geométricamente, los vectores no encierran área/volumen (se aplanan), así que el «volumen con signo» es cero. Detectar esto de vista evita la cuenta completa: si dos renglones son proporcionales, ya sabes que det = 0.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F6_teo_det_cero" data-tema="propiedades">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Lista los casos en que det = 0 de vista. ¿Qué tienen en común?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">det = 0 si hay: renglón/columna de ceros · dos renglones iguales · dos proporcionales · un renglón combinación de los otros. Todo es dependencia lineal (no encierran volumen).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Efecto de las operaciones de renglón</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Al aplicar operaciones elementales, el determinante cambia así:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span><strong>Intercambiar</strong> dos renglones (o columnas) <strong>cambia el signo</strong>: det → −det.</span></li>
+              <li><span class="k">2</span><span><strong>Multiplicar</strong> un renglón por un escalar c multiplica el determinante por c: det → c·det.</span></li>
+              <li><span class="k">3</span><span><strong>Sumar</strong> a un renglón un múltiplo de otro <strong>no cambia</strong> el determinante.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La operación 3 es la útil: permite crear ceros sin alterar el valor, ideal para llevar la matriz a triangular y leer el determinante como producto de la diagonal. Cuidado con la 2 al «sacar factor común»: si factorizas c de un renglón, el determinante queda multiplicado por c (o dividido, según cómo lo escribas).</p></div>
+        <div class="drill" data-kind="recall" data-fid="F7_teo_operaciones" data-tema="propiedades">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Cómo cambia el determinante al intercambiar renglones, escalar un renglón por c, y sumar un múltiplo de otro?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Intercambio ⇒ det → −det. Escalar renglón por c ⇒ det → c·det. Sumar múltiplo de otro renglón ⇒ det no cambia.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Producto, transpuesta y potencias</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Para matrices cuadradas del mismo tamaño:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span><strong>Producto:</strong> det(A·B) = det(A)·det(B).</span></li>
+              <li><span class="k">2</span><span><strong>Transpuesta:</strong> det(A<sup>T</sup>) = det(A).</span></li>
+              <li><span class="k">3</span><span><strong>Inversa:</strong> det(A<sup>−1</sup>) = 1 ÷ det(A) (si A es invertible).</span></li>
+              <li><span class="k">4</span><span><strong>Escalar toda la matriz:</strong> det(c·A) = c<sup>n</sup>·det(A), con A de tamaño n×n.</span></li>
+            </ul>
+            <span class="eq">Cuidado: en general det(A + B) ≠ det(A) + det(B). El determinante <strong>no</strong> es lineal en la matriz.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>det(A<sup>T</sup>) = det(A) es lo que justifica poder desarrollar por columnas igual que por renglones. La regla c<sup>n</sup> viene de que escalar toda la matriz por c es escalar sus n renglones, y cada uno aporta un factor c. El error clásico es «repartir» el determinante sobre una suma: no se puede.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F8_teo_producto_transpuesta" data-tema="propiedades">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia det(A·B), det(A<sup>T</sup>), det(A<sup>−1</sup>) y det(c·A). ¿Vale det(A + B) = det(A) + det(B)?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">det(AB) = det(A)·det(B) · det(A<sup>T</sup>) = det(A) · det(A<sup>−1</sup>) = 1÷det(A) · det(cA) = c<sup>n</sup>·det(A). NO: det(A+B) ≠ det(A)+det(B) en general.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Invertibilidad y solución de sistemas</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Criterio de invertibilidad</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Una matriz cuadrada A es <strong>invertible</strong> si y solo si <strong>det(A) ≠ 0</strong>.</span>
+            <span class="eq">De forma equivalente: A es invertible ⇔ det(A) ≠ 0 ⇔ el sistema homogéneo A·x = 0 tiene <strong>solo</strong> la solución trivial ⇔ los renglones (y columnas) de A son <strong>linealmente independientes</strong> ⇔ rango(A) = n.</span>
+            <span class="eq">Cuando A es invertible, el sistema A·x = b tiene <strong>solución única</strong> para todo b.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Este es el puente entre determinantes y todo lo anterior del curso. det(A) = 0 significa renglones dependientes: la matriz «colapsa» dimensión y no se puede deshacer (no hay inversa). Un det negativo está perfecto: la matriz sí se invierte (el signo solo indica que invierte la orientación).</p></div>
+        <div class="drill" data-kind="recall" data-fid="F9_teo_invertibilidad" data-tema="invertibilidad">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Da el criterio de invertibilidad con el determinante y tres condiciones equivalentes.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">A invertible ⇔ det(A) ≠ 0 ⇔ A·x = 0 solo tiene la trivial ⇔ renglones linealmente independientes ⇔ rango = n. Entonces A·x = b tiene solución única.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Regla de Cramer</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Sea A·x = b un sistema de n ecuaciones con n incógnitas y <strong>det(A) ≠ 0</strong>. Entonces la solución única es</span>
+            <span class="eq">x<sub>i</sub> = det(A<sub>i</sub>) ÷ det(A),  para i = 1, …, n,</span>
+            <span class="eq">donde A<sub>i</sub> es la matriz A con su <strong>columna i reemplazada por el vector b</strong> de términos independientes.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Cramer da cada incógnita como cociente de determinantes, sin reducir la matriz. Requisito duro: <strong>det(A) ≠ 0</strong> (si es 0 no hay solución única y la regla no aplica). Reemplazas <strong>la columna de la incógnita que buscas</strong>, no un renglón; ese es el error frecuente.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F10_teo_cramer" data-tema="regla_de_cramer">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia la regla de Cramer: fórmula de x<sub>i</sub>, qué es A<sub>i</sub> y qué condición se necesita.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Si det(A) ≠ 0: x<sub>i</sub> = det(A<sub>i</sub>) ÷ det(A), con A<sub>i</sub> = A con su columna i reemplazada por b. Sin det(A) ≠ 0 no aplica.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Método</span><h3>Inversa por matriz adjunta</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Si det(A) ≠ 0, la inversa es</span>
+            <span class="eq">A<sup>−1</sup> = (1 ÷ det(A)) · adj(A),</span>
+            <span class="eq">donde la <strong>adjunta</strong> adj(A) es la <strong>transpuesta de la matriz de cofactores</strong> (adj(A) = C<sup>T</sup>, con C<sub>ij</sub> = cofactor de a<sub>ij</sub>).</span>
+            <span class="eq">Caso 2×2 (memorizar): para renglones (a, b) y (c, d), se <strong>intercambian a y d</strong> y se <strong>cambia el signo</strong> de b y c:</span>
+          </div>
+          <div class="fx" id="adj2x2" style="margin-top:8px;padding:10px 14px;border:0;background:transparent"></div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>En 2×2 es rapidísimo: intercambia la diagonal principal, niega la otra, divide entre el determinante. En 3×3 la adjunta pide 9 cofactores + transponer, así que casi siempre conviene invertir por Gauss-Jordan; la fórmula por adjunta es teórica y útil en 2×2. El factor 1÷det exige otra vez det(A) ≠ 0.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F11_metodo_adjunta" data-tema="adjunta_inversa">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Escribe A<sup>−1</sup> por adjunta y qué es adj(A). ¿Cuál es el truco de la adjunta en 2×2?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">A<sup>−1</sup> = (1 ÷ det(A))·adj(A); adj(A) = transpuesta de la matriz de cofactores. En 2×2: intercambia la diagonal principal y cambia el signo de la otra, luego divide entre det.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Significado geométrico</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>El determinante como área y volumen</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">En una matriz 2×2, el <strong>valor absoluto</strong> del determinante es el <strong>área</strong> del paralelogramo generado por sus dos renglones (vistos como vectores). En 3×3, |det| es el <strong>volumen</strong> del paralelepípedo de sus tres renglones.</span>
+            <span class="eq">El <strong>signo</strong> indica la <strong>orientación</strong>: positivo conserva la orientación, negativo la invierte.</span>
+            <span class="eq">det = 0 ⇔ los vectores son <strong>dependientes</strong> (coplanares o colineales): el paralelogramo/paralelepípedo se aplana y no encierra área/volumen.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Esta lectura amarra todo: «det = 0 ⇒ no invertible» es lo mismo que «los vectores se aplanan, pierden dimensión». Por eso det mide cuánto una transformación lineal escala áreas/volúmenes. Para el terreno del ejemplo, lados (3, 1) y (1, 2): área = |3·2 − 1·1| = 5.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F12_teo_geometria" data-tema="determinante_geometria">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Qué mide |det| en 2×2 y en 3×3? ¿Qué indica el signo y qué significa det = 0 geométricamente?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">|det| = área del paralelogramo (2×2) o volumen del paralelepípedo (3×3) de los renglones. El signo da la orientación. det = 0 ⇒ vectores dependientes: se aplanan, sin área/volumen.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chuleta">
+      <h3>La ficha de memoria</h3>
+      <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
+      <ul>
+        <li><span class="ck">✓</span> Determinante: número real |A| solo para matrices <strong>cuadradas</strong> n×n.</li>
+        <li><span class="ck">✓</span> 2×2: det = a·d − b·c (diagonal principal menos antidiagonal).</li>
+        <li><span class="ck">✓</span> Cofactor: C<sub>ij</sub> = (−1)<sup>i+j</sup>·M<sub>ij</sub>; M<sub>ij</sub> = det al tapar renglón i y columna j. Tablero + − + / − + − / + − +.</li>
+        <li><span class="ck">✓</span> Laplace: det(A) = Σ a<sub>ij</sub>·C<sub>ij</sub> por un renglón o columna; desarrolla por donde haya más ceros.</li>
+        <li><span class="ck">✓</span> Triangular ⇒ det = producto de la diagonal. det(I) = 1.</li>
+        <li><span class="ck">✓</span> det = 0 si: renglón/columna de ceros · dos iguales · dos proporcionales · dependencia lineal.</li>
+        <li><span class="ck">✓</span> Operaciones: intercambio ⇒ −det · escalar por c ⇒ c·det · sumar múltiplo de otro renglón ⇒ det igual.</li>
+        <li><span class="ck">✓</span> det(AB) = det(A)·det(B) · det(A<sup>T</sup>) = det(A) · det(A<sup>−1</sup>) = 1÷det(A) · det(cA) = c<sup>n</sup>·det(A).</li>
+        <li><span class="ck">✓</span> Invertible ⇔ det ≠ 0 ⇔ renglones independientes ⇔ rango = n ⇔ A·x = b con solución única.</li>
+        <li><span class="ck">✓</span> Cramer (det ≠ 0): x<sub>i</sub> = det(A<sub>i</sub>) ÷ det(A); A<sub>i</sub> = columna i reemplazada por b.</li>
+        <li><span class="ck">✓</span> Inversa: A<sup>−1</sup> = (1 ÷ det(A))·adj(A); adj = transpuesta de cofactores. 2×2: intercambia diagonal, niega la otra.</li>
+        <li><span class="ck">✓</span> |det| = área (2×2) / volumen (3×3); signo = orientación; det = 0 ⇒ vectores dependientes (se aplanan).</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue con el recall?</h3>
+      <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="L5_determinantes.html"><span class="sp">← Guía</span><span class="ti">U5 · Determinantes (entender)</span></a>
+      <a class="next" href="../index.html"><span class="sp">Menú →</span><span class="ti">Todas las lecciones</span></a>
+    </nav>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 5 · Teoría formal</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+// ===== render de matrices cuadradas (sin barra aumentada) =====
+function sq(rows){
+  var n = rows[0].length;
+  var gtc = 'repeat('+n+',auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<n;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setsq(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=sq(rows); }
+
+// matrices ilustrativas de las tarjetas
+setsq('def2x2',[["a","b"],["c","d"]]);            // 2x2 genérica
+setsq('adj2x2',[["d","−b"],["−c","a"]]);          // adjunta 2x2
+
+// ===== instrumentación (session / reporte / recall) =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U5_determinantes", leccion:"L5_teoria-formal",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_REC = document.querySelectorAll('[data-kind="recall"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.formulas.length+"/"+TOT_REC+" recalls"; }
+
+// cada drill: revelar → autorreporte (de_memoria / con_pista / falla) → session.formulas
+document.querySelectorAll('.drill[data-kind="recall"]').forEach(function(block){
+  var reveal = block.querySelector('.revealbtn');
+  var answer = block.querySelector('.answer');
+  var selfrep = block.querySelector('.selfrep');
+  var done = false;
+  if(reveal){
+    reveal.onclick = function(){
+      if(answer) answer.classList.add('show');
+      if(selfrep) selfrep.classList.add('show');
+      reveal.style.display = 'none';
+    };
+  }
+  block.querySelectorAll('.selfrep button').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      done = true;
+      var rep = b.getAttribute('data-rep');
+      b.classList.add('sel');
+      if(rep==="de_memoria") b.classList.add('pick-mem');
+      else if(rep==="con_pista") b.classList.add('pick-pista');
+      else b.classList.add('pick-falla');
+      selfrep.classList.add('locked');
+      block.classList.add('answered');
+      session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:rep });
+      updateCont();
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var mem=session.formulas.filter(function(f){return f.recall==="de_memoria";}).length;
+  var pista=session.formulas.filter(function(f){return f.recall==="con_pista";}).length;
+  var falla=session.formulas.filter(function(f){return f.recall==="falla";}).length;
+  var fallidas=session.formulas.filter(function(f){return f.recall==="falla";}).map(function(f){return f.id;});
+  var s="Recall de teoría formal U5: "+session.formulas.length+"/"+TOT_REC+" enunciados. ";
+  s+="De memoria: "+mem+" · con pista: "+pista+" · falla: "+falla+". ";
+  s+= fallidas.length? ("Falló en: "+fallidas.join(", ")+". ") : "Sin fallas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U5_teoria-formal.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){
+    var cls = f.recall==="de_memoria" ? "mem" : (f.recall==="con_pista" ? "pista" : "falla");
+    return '<span class="pill '+cls+'">'+f.id+": "+f.recall+'</span>';
+  }).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.formulas.length+'/'+TOT_REC+'</strong> recalls · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Enunciados: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>

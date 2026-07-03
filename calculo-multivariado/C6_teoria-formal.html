@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U6 — Teoría formal (jacobiano y teoremas)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  /* tarjeta de teoría: etiqueta tipo Definición / Teorema */
+  .card{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:0;display:grid;box-shadow:var(--shadow);overflow:hidden}
+  .card .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 20px;border-bottom:2px solid var(--ink)}
+  .card .head .badge{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:999px;padding:4px 12px;border:2px solid}
+  .card .head .badge.def{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .card .head .badge.teo{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .card .head .badge.cor{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .card .head h3{margin:0;font-size:clamp(17px,2vw,20px);letter-spacing:-.02em}
+  .card .body{padding:18px 20px;display:grid;gap:13px}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .stmt{display:grid;gap:7px;font-size:clamp(17px,1.9vw,19px);line-height:1.55}
+  .stmt .eq{white-space:normal;font-variant-numeric:tabular-nums}
+  .stmt .lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:2px}
+  .cond{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
+  .cond li{display:flex;gap:10px;align-items:flex-start;font-size:clamp(16px,1.8vw,18px)}
+  .cond li .k{flex:0 0 auto;width:24px;height:24px;border-radius:7px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+
+  .porque{border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .porque .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .porque p{margin:0;line-height:1.55}
+
+  /* recall drill: enuncia de memoria → revela → autorreporta */
+  .drill{display:grid;gap:11px;padding:16px 18px;border:1.5px dashed var(--navy);border-radius:12px;background:#eef1fb}
+  .drill .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .drill .qtag::before{content:"⟲ "}
+  .drill .q{margin:0;font-weight:700;font-size:17px}
+  .drill .revealbtn{font:inherit;font-weight:800;font-size:16px;padding:11px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer;justify-self:start;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
+  .drill .revealbtn:hover{transform:translate(-1px,-1px)}
+  .drill .answer{display:none;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:13px 16px}
+  .drill .answer.show{display:block}
+  .drill .answer .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:5px}
+  .drill .answer .stmt{font-size:17px}
+  .selfrep{display:none;gap:9px;flex-wrap:wrap}
+  .selfrep.show{display:flex}
+  .selfrep .srtag{flex:0 0 100%;font-size:13px;font-weight:700;color:var(--slate);margin-bottom:-2px}
+  .selfrep button{flex:1;min-width:120px;font:inherit;font-weight:700;font-size:15px;padding:11px 12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .selfrep button:hover{transform:translateY(-1px)}
+  .selfrep button.pick-mem{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .selfrep button.pick-pista{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .selfrep button.pick-falla{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .selfrep.locked button{opacity:.45;cursor:default}
+  .selfrep.locked button.sel{opacity:1}
+  .drill.answered{border-style:solid;border-color:var(--green)}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.mem{background:var(--green-tint);color:var(--green-deep)}
+  .pill.pista{background:var(--cream);color:var(--deep)}
+  .pill.falla{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin formulario</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 6 · Teoría formal</p>
+    <h1>Función <mark>implícita</mark> e inversa para memorizar</h1>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen —hipótesis y conclusión completas—, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <div class="learn">
+      <h2>Vas a poder enunciar de memoria</h2>
+      <ol>
+        <li><span class="n">1</span> Función implícita y la ecuación F = 0</li>
+        <li><span class="n">2</span> Matriz jacobiana de una transformación</li>
+        <li><span class="n">3</span> Determinante jacobiano y qué mide</li>
+        <li><span class="n">4</span> Teorema de la función implícita (2 variables)</li>
+        <li><span class="n">5</span> Teorema de la función implícita (3 variables)</li>
+        <li><span class="n">6</span> Teorema de la función inversa (escalar)</li>
+        <li><span class="n">7</span> Teorema de la función inversa (matricial)</li>
+        <li><span class="n">8</span> Derivada de la inversa y regla de la cadena</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <p class="idea" style="margin-top:4px">
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir, con sus <strong>hipótesis</strong> y su <strong>conclusión</strong>. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+    </p>
+
+    <h2 class="modhead">Función implícita: la ecuación F = 0</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Función implícita y forma F = 0</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Una ecuación en dos variables, escrita como <strong>F(x, y) = 0</strong>, <strong>define implícitamente a y como función de x</strong> cerca de un punto (a, b) si en un entorno de (a, b) la ecuación determina un único y = f(x) para cada x, con F(a, b) = 0.</span>
+            <span class="eq">La función queda <strong>implícita</strong> (atada dentro de la ecuación), no despejada. Nada garantiza que sea función <strong>en toda</strong> la curva: solo <strong>localmente</strong>, en un pedacito alrededor del punto.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La circunferencia x² + y² = 25 no es función de x (a x = 3 le tocan y = 4 y y = −4), pero alrededor de (3, 4) sí es un trocito que es función. Por eso todo el capítulo es <strong>local</strong>: cerca del punto, no en toda la curva.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F1_def_funcion_implicita" data-tema="funcion_implicita">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define «F(x, y) = 0 define implícitamente a y como función de x cerca de (a, b)». Recalca la palabra «localmente».</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">F(a, b) = 0 y, en un entorno de (a, b), la ecuación fija un único y = f(x) por cada x. La función es implícita (no despejada) y solo local: un pedacito de la curva, no toda.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">La matriz jacobiana</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Matriz jacobiana de una transformación</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Para una transformación T que manda (x, y) a (u, v), con u = u(x, y) y v = v(x, y), la <strong>matriz jacobiana</strong> J es la matriz de <strong>todas las parciales de primer orden</strong>: fila i = parciales de la i-ésima salida, columna j = derivada respecto a la j-ésima entrada.</span>
+          </div>
+          <div class="mtx-wrap" id="jacDef"></div>
+          <p class="fx-note">Fila de u = (∂u/∂x, ∂u/∂y); fila de v = (∂v/∂x, ∂v/∂y). Con m salidas y n entradas es de tamaño m×n; es cuadrada cuando m = n.</p>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Con varias entradas y varias salidas la «derivada» ya no es un número: es la matriz que reúne <strong>cómo cada salida responde a cada entrada</strong>. Es la mejor aproximación lineal de T cerca del punto, igual que f′(a) lo era en una variable.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F2_def_matriz_jacobiana" data-tema="jacobiano">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Qué es la matriz jacobiana de T: (x, y) → (u, v)? Di qué va en cada fila y en cada columna, y su tamaño.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Matriz de todas las parciales de primer orden. Fila i = parciales de la salida i; columna j = derivada respecto a la entrada j. Filas (∂u/∂x, ∂u/∂y) y (∂v/∂x, ∂v/∂y). Tamaño m×n (cuadrada si m = n).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Determinante jacobiano</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">El <strong>determinante jacobiano</strong> es el determinante de la matriz jacobiana (definido solo cuando J es <strong>cuadrada</strong>). Para el caso 2×2:</span>
+            <span class="eq">det J = (∂u/∂x)(∂v/∂y) − (∂u/∂y)(∂v/∂x)   (diagonal menos antidiagonal).</span>
+            <span class="eq">Se denota también ∂(u, v) / ∂(x, y). Mide el <strong>factor de cambio de área</strong> (o de volumen) que la transformación aplica cerca del punto.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>El determinante de la aproximación lineal J es cuánto estira o encoge áreas la transformación cerca del punto. Su signo dice si conserva o invierte la orientación. Por eso aparece como factor en el cambio de variable de las integrales múltiples (dx dy → |det J| du dv).</p></div>
+        <div class="drill" data-kind="recall" data-fid="F3_def_determinante_jacobiano" data-tema="jacobiano">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define el determinante jacobiano 2×2 (fórmula diagonal menos antidiagonal) y di qué mide geométricamente.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">det J = (∂u/∂x)(∂v/∂y) − (∂u/∂y)(∂v/∂x). Es el factor de cambio de área que la transformación aplica cerca del punto; el signo indica si conserva o invierte la orientación.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Teorema de la función implícita</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Función implícita (dos variables)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal · hipótesis</span>
+            <span class="eq">Sea F(x, y) de clase C¹ cerca de (a, b), con:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span>F(a, b) = 0 (el punto está sobre la curva), y</span></li>
+              <li><span class="k">2</span><span>F<sub>y</sub>(a, b) ≠ 0 (la parcial respecto a y no se anula ahí).</span></li>
+            </ul>
+            <span class="lbl">Conclusión</span>
+            <span class="eq">Entonces cerca de (a, b) la ecuación F(x, y) = 0 <strong>define a y como función de x</strong>, y = f(x), derivable, con</span>
+            <span class="eq">dy/dx = − F<sub>x</sub> / F<sub>y</sub>.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La hipótesis clave es F<sub>y</sub> ≠ 0: es la que aparece en el <strong>denominador</strong> de la fórmula. Si F<sub>y</sub> fuera 0, la división no existe y no se puede despejar y. La fórmula sale de derivar F(x, f(x)) = 0 con la regla de la cadena: F<sub>x</sub> + F<sub>y</sub>·y′ = 0.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F4_teo_implicita_2var" data-tema="teorema_funcion_implicita">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia el teorema de la función implícita en 2 variables: las dos hipótesis, la conclusión y la fórmula dy/dx.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Si F es C¹, F(a, b) = 0 y F<sub>y</sub>(a, b) ≠ 0, entonces cerca de (a, b) la ecuación define y = f(x) derivable, con dy/dx = −F<sub>x</sub>/F<sub>y</sub>. La condición F<sub>y</sub> ≠ 0 es la del denominador.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Función implícita (tres variables)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal · hipótesis</span>
+            <span class="eq">Sea F(x, y, z) de clase C¹ cerca de (a, b, c), con F(a, b, c) = 0 y <strong>F<sub>z</sub>(a, b, c) ≠ 0</strong>.</span>
+            <span class="lbl">Conclusión</span>
+            <span class="eq">Entonces cerca del punto la ecuación F(x, y, z) = 0 <strong>define a z como función de (x, y)</strong>, z = g(x, y), con parciales</span>
+            <span class="eq">∂z/∂x = − F<sub>x</sub> / F<sub>z</sub>,   ∂z/∂y = − F<sub>y</sub> / F<sub>z</sub>.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Es el mismo teorema un piso arriba: la variable que despejas (z) manda, y su parcial F<sub>z</sub> va en el denominador de <strong>ambas</strong> fórmulas —por eso la hipótesis es F<sub>z</sub> ≠ 0—. Salen dos parciales porque ahora hay dos entradas (x y y), pero cada una sigue la misma receta «−parcial de arriba entre F<sub>z</sub>».</p></div>
+        <div class="drill" data-kind="recall" data-fid="F5_teo_implicita_3var" data-tema="derivacion_implicita_3var">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia el teorema con F(x, y, z) = 0: hipótesis (cuál parcial ≠ 0), qué queda como función y las dos parciales.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Si F es C¹, F(a, b, c) = 0 y F<sub>z</sub> ≠ 0, cerca del punto z = g(x, y) con ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub> y ∂z/∂y = −F<sub>y</sub>/F<sub>z</sub>. F<sub>z</sub> manda el denominador de las dos.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Método</span><h3>Derivación implícita por la regla de la cadena</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Para hallar dy/dx sin despejar: se <strong>deriva la ecuación completa respecto a x</strong> recordando que y = y(x). Cada término con y arrastra un factor y′ (regla de la cadena):</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span>Una potencia de y, como yⁿ, deriva a n·y<sup>n−1</sup>·y′ (nunca olvidar el y′).</span></li>
+              <li><span class="k">2</span><span>Un producto xy deriva a y + x·y′ (regla del producto).</span></li>
+              <li><span class="k">3</span><span>Luego se agrupan los términos con y′, se factoriza y se divide para despejar y′.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>El error número uno del tema es <strong>olvidar el y′</strong> al derivar un término con y. Como y depende de x, cada aparición de y arrastra su derivada interna; sin ese y′ el despeje sale con la fórmula equivocada. Este método da lo mismo que dy/dx = −F<sub>x</sub>/F<sub>y</sub>: son dos caminos al mismo resultado.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F6_metodo_derivacion_implicita" data-tema="derivacion_implicita">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Describe cómo se deriva implícitamente y cuál es el error que más cuesta caro al hacerlo.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Derivar la ecuación respecto a x recordando que y = y(x): cada término con y arrastra y′ (cadena); producto xy → y + x·y′. Luego agrupar los y′, factorizar y dividir. Error caro: olvidar el y′.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Teorema de la función inversa</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Función inversa (escalar) y su derivada</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal · hipótesis</span>
+            <span class="eq">Sea f derivable con f′ continua cerca de a, y sea b = f(a). Si <strong>f′(a) ≠ 0</strong>, entonces f tiene <strong>inversa local</strong> f⁻¹ derivable cerca de b, con</span>
+            <span class="eq">(f⁻¹)′(b) = 1 / f′(a),   con b = f(a).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La pendiente de la inversa es el <strong>recíproco</strong> de la pendiente de f. Cuidado con <strong>dónde se evalúa</strong>: f′ se calcula en <strong>a</strong> (el de entrada, con f(a) = b), no en b. El error típico es evaluar f′ en b. La condición f′(a) ≠ 0 evita dividir entre cero.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F7_teo_inversa_escalar" data-tema="funcion_inversa">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia la derivada de la inversa escalar: fórmula, dónde se evalúa f′ y la condición sobre f′(a).</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Si f′(a) ≠ 0 y b = f(a): (f⁻¹)′(b) = 1/f′(a). f′ se evalúa en a (la entrada), no en b. Sin f′(a) ≠ 0 se dividiría entre cero.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Función inversa (versión matricial)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal · hipótesis</span>
+            <span class="eq">Sea T una transformación de clase C¹ cerca de un punto, con matriz jacobiana J ahí. Si el <strong>determinante jacobiano no se anula</strong> (det J ≠ 0), entonces T es <strong>localmente invertible</strong> alrededor del punto, su inversa es C¹, y su jacobiana es la <strong>matriz inversa</strong>:</span>
+            <span class="eq">J(T⁻¹) = J⁻¹   (evaluada en el punto imagen).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Es la contraparte de (f⁻¹)′(b) = 1/f′(a): donde el número f′(a) se volvía su recíproco 1/f′(a), la matriz J se vuelve su <strong>inversa</strong> J⁻¹. Y donde antes hacía falta f′(a) ≠ 0, ahora hace falta <strong>det J ≠ 0</strong> —la misma condición que garantiza que J tenga inversa—. Si det J = 0, la transformación aplasta áreas y no se puede deshacer.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F8_teo_inversa_matricial" data-tema="funcion_inversa">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia el teorema de la función inversa matricial: qué condición pide, qué garantiza y en qué se convierte J.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Si T es C¹ y det J ≠ 0 en el punto, T es localmente invertible con inversa C¹, y su jacobiana es J⁻¹. Es el gemelo de 1/f′(a): el recíproco se vuelve inversa de matriz; det J ≠ 0 reemplaza a f′(a) ≠ 0.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge cor">Corolario</span><h3>Jacobiano ≠ 0 ⇔ inversa local</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">En un punto donde T es C¹: <strong>det J ≠ 0 ⇒ hay inversa local</strong> ahí; <strong>det J = 0 ⇒ el teorema no garantiza inversa local</strong> (la transformación puede no ser invertible cerca del punto).</span>
+            <span class="eq">Es la lectura práctica: para decidir invertibilidad local, se calcula det J y se mira si es cero o no.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Es el mismo espíritu que F<sub>y</sub> ≠ 0 en el caso implícito. El determinante es el factor de área: si vale 0, la transformación colapsa un pedazo del plano (aplasta áreas) y no hay forma de recuperar la entrada a partir de la salida. Ojo: el teorema da una condición <em>suficiente</em>; det J = 0 no prueba por sí solo que no exista inversa, solo que el teorema no la asegura.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F9_cor_jacobiano_inversa" data-tema="jacobiano">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Di qué se concluye si el determinante jacobiano es distinto de cero, y qué pasa si vale cero.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">det J ≠ 0 ⇒ hay inversa local en ese punto. det J = 0 ⇒ el teorema no la garantiza (la transformación aplasta áreas). Es la lectura práctica de la invertibilidad local, gemela de F<sub>y</sub> ≠ 0.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chuleta">
+      <h3>La ficha de memoria</h3>
+      <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, con hipótesis y conclusión.</p>
+      <ul>
+        <li><span class="ck">✓</span> Función implícita: F(x, y) = 0 fija y = f(x) solo <strong>cerca</strong> del punto (a, b), no en toda la curva.</li>
+        <li><span class="ck">✓</span> Jacobiana de (x, y) → (u, v): filas (∂u/∂x, ∂u/∂y) y (∂v/∂x, ∂v/∂y). Fila = salida, columna = entrada.</li>
+        <li><span class="ck">✓</span> Determinante jacobiano 2×2 = (∂u/∂x)(∂v/∂y) − (∂u/∂y)(∂v/∂x). Mide el cambio de área.</li>
+        <li><span class="ck">✓</span> TFI (2 var): F C¹, F(a, b) = 0, F<sub>y</sub> ≠ 0 ⇒ y = f(x) con dy/dx = −F<sub>x</sub>/F<sub>y</sub>.</li>
+        <li><span class="ck">✓</span> TFI (3 var): F<sub>z</sub> ≠ 0 ⇒ z = g(x, y) con ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub>, ∂z/∂y = −F<sub>y</sub>/F<sub>z</sub>.</li>
+        <li><span class="ck">✓</span> Derivar implícito: cada término con y arrastra y′ (cadena); producto xy → y + x·y′. No olvidar el y′.</li>
+        <li><span class="ck">✓</span> Inversa escalar: f′(a) ≠ 0, b = f(a) ⇒ (f⁻¹)′(b) = 1/f′(a). f′ se evalúa en a, no en b.</li>
+        <li><span class="ck">✓</span> Inversa matricial: det J ≠ 0 ⇒ inversa local; su jacobiana es J⁻¹. Gemelo de 1/f′(a).</li>
+        <li><span class="ck">✓</span> det J ≠ 0 → hay inversa local · det J = 0 → el teorema no la garantiza (aplasta áreas).</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue con el recall?</h3>
+      <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="C6_funcion-implicita-inversa.html"><span class="sp">← Volver</span><span class="ti">U6 · Guía completa</span></a>
+      <a class="next" href="../index.html"><span class="sp">Siguiente →</span><span class="ti">Menú de unidades</span></a>
+    </nav>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 6 · Teoría formal</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+// ===== matriz jacobiana (definición, sin barra) =====
+function matrix2(rows){
+  var gtc='auto auto';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<rows[r].length;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setM(id,rows){ var el=document.getElementById(id); if(el) el.innerHTML=matrix2(rows); }
+setM('jacDef',[["∂u/∂x","∂u/∂y"],["∂v/∂x","∂v/∂y"]]);
+
+// ===== instrumentación (session / reporte / recall) =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo", unidad:"U6_implicita", leccion:"C6_teoria-formal",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_REC = document.querySelectorAll('[data-kind="recall"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.formulas.length+"/"+TOT_REC+" recalls"; }
+
+// cada drill: revelar → autorreporte (de_memoria / con_pista / falla) → session.formulas
+document.querySelectorAll('.drill[data-kind="recall"]').forEach(function(block){
+  var reveal = block.querySelector('.revealbtn');
+  var answer = block.querySelector('.answer');
+  var selfrep = block.querySelector('.selfrep');
+  var done = false;
+  if(reveal){
+    reveal.onclick = function(){
+      if(answer) answer.classList.add('show');
+      if(selfrep) selfrep.classList.add('show');
+      reveal.style.display = 'none';
+    };
+  }
+  block.querySelectorAll('.selfrep button').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      done = true;
+      var rep = b.getAttribute('data-rep');
+      b.classList.add('sel');
+      if(rep==="de_memoria") b.classList.add('pick-mem');
+      else if(rep==="con_pista") b.classList.add('pick-pista');
+      else b.classList.add('pick-falla');
+      selfrep.classList.add('locked');
+      block.classList.add('answered');
+      session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:rep });
+      updateCont();
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var mem=session.formulas.filter(function(f){return f.recall==="de_memoria";}).length;
+  var pista=session.formulas.filter(function(f){return f.recall==="con_pista";}).length;
+  var falla=session.formulas.filter(function(f){return f.recall==="falla";}).length;
+  var fallidas=session.formulas.filter(function(f){return f.recall==="falla";}).map(function(f){return f.id;});
+  var s="Recall de teoría formal U6: "+session.formulas.length+"/"+TOT_REC+" enunciados. ";
+  s+="De memoria: "+mem+" · con pista: "+pista+" · falla: "+falla+". ";
+  s+= fallidas.length? ("Falló en: "+fallidas.join(", ")+". ") : "Sin fallas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_calculo_U6_teoria-formal.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){
+    var cls = f.recall==="de_memoria" ? "mem" : (f.recall==="con_pista" ? "pista" : "falla");
+    return '<span class="pill '+cls+'">'+f.id+": "+f.recall+'</span>';
+  }).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.formulas.length+'/'+TOT_REC+'</strong> recalls · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Enunciados: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>

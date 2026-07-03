@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo Multivariado · U5 — Teoría formal (optimización)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  /* tarjeta de teoría: etiqueta tipo Definición / Teorema */
+  .card{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:0;display:grid;box-shadow:var(--shadow);overflow:hidden}
+  .card .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 20px;border-bottom:2px solid var(--ink)}
+  .card .head .badge{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:999px;padding:4px 12px;border:2px solid}
+  .card .head .badge.def{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .card .head .badge.teo{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .card .head .badge.cor{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .card .head h3{margin:0;font-size:clamp(17px,2vw,20px);letter-spacing:-.02em}
+  .card .body{padding:18px 20px;display:grid;gap:13px}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .stmt{display:grid;gap:7px;font-size:clamp(17px,1.9vw,19px);line-height:1.55}
+  .stmt .eq{white-space:normal;font-variant-numeric:tabular-nums}
+  .stmt .lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:2px}
+  .cond{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
+  .cond li{display:flex;gap:10px;align-items:flex-start;font-size:clamp(16px,1.8vw,18px)}
+  .cond li .k{flex:0 0 auto;width:24px;height:24px;border-radius:7px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+
+  .porque{border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .porque .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
+  .porque p{margin:0;line-height:1.55}
+
+  /* recall drill: enuncia de memoria → revela → autorreporta */
+  .drill{display:grid;gap:11px;padding:16px 18px;border:1.5px dashed var(--navy);border-radius:12px;background:#eef1fb}
+  .drill .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .drill .qtag::before{content:"⟲ "}
+  .drill .q{margin:0;font-weight:700;font-size:17px}
+  .drill .revealbtn{font:inherit;font-weight:800;font-size:16px;padding:11px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer;justify-self:start;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
+  .drill .revealbtn:hover{transform:translate(-1px,-1px)}
+  .drill .answer{display:none;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:13px 16px}
+  .drill .answer.show{display:block}
+  .drill .answer .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:5px}
+  .drill .answer .stmt{font-size:17px}
+  .selfrep{display:none;gap:9px;flex-wrap:wrap}
+  .selfrep.show{display:flex}
+  .selfrep .srtag{flex:0 0 100%;font-size:13px;font-weight:700;color:var(--slate);margin-bottom:-2px}
+  .selfrep button{flex:1;min-width:120px;font:inherit;font-weight:700;font-size:15px;padding:11px 12px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .selfrep button:hover{transform:translateY(-1px)}
+  .selfrep button.pick-mem{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .selfrep button.pick-pista{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .selfrep button.pick-falla{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .selfrep.locked button{opacity:.45;cursor:default}
+  .selfrep.locked button.sel{opacity:1}
+  .drill.answered{border-style:solid;border-color:var(--green)}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.mem{background:var(--green-tint);color:var(--green-deep)}
+  .pill.pista{background:var(--cream);color:var(--deep)}
+  .pill.falla{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin formulario</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Unidad 5 · Teoría formal</p>
+    <h1>Optimización para <mark>memorizar</mark></h1>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <div class="learn">
+      <h2>Vas a poder enunciar de memoria</h2>
+      <ol>
+        <li><span class="n">1</span> Extremo local y punto crítico</li>
+        <li><span class="n">2</span> Teorema de Fermat (condición necesaria)</li>
+        <li><span class="n">3</span> Matriz hessiana y simetría (Clairaut)</li>
+        <li><span class="n">4</span> Determinante D y criterio de 2ª derivada</li>
+        <li><span class="n">5</span> Punto silla y el caso D = 0</li>
+        <li><span class="n">6</span> Criterio general por menores principales</li>
+        <li><span class="n">7</span> Multiplicadores de Lagrange (∇f = λ∇g)</li>
+        <li><span class="n">8</span> Extremos absolutos en un compacto</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <p class="idea" style="margin-top:4px">
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+    </p>
+
+    <h2 class="modhead">Extremos y puntos críticos</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Extremo local (máximo y mínimo)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Sea f : D ⊆ R<sup>n</sup> → R y a ∈ D. La función tiene en a un <strong>máximo local</strong> si existe una bola B(a, r) tal que f(x) ≤ f(a) para todo x ∈ B(a, r) ∩ D.</span>
+            <span class="eq">Tiene en a un <strong>mínimo local</strong> si f(x) ≥ f(a) en esa vecindad. Es <strong>estricto</strong> si la desigualdad es estricta para x ≠ a.</span>
+            <span class="eq">El extremo es <strong>absoluto (global)</strong> si la desigualdad vale en <strong>todo</strong> D, no solo cerca de a.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>«Local» compara a con sus vecinos inmediatos (la bola B(a, r)); «global» compara con todo el dominio. Un mínimo local puede no ser el más bajo del mapa completo: solo es el fondo de <em>su</em> hoyo. Por eso hallar candidatos locales no basta para el óptimo absoluto.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F1_def_extremo_local" data-tema="extremos">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define máximo local y mínimo local con la bola B(a, r). ¿Qué cambia para que sea absoluto?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Máximo local en a: existe B(a, r) con f(x) ≤ f(a) ahí. Mínimo local: f(x) ≥ f(a). Absoluto: la desigualdad vale en todo D, no solo en la vecindad.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Punto crítico</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Un punto a ∈ D es <strong>punto crítico</strong> de f si el gradiente se anula ahí o no existe. Si f es diferenciable:</span>
+            <span class="eq">∇f(a) = 0,   es decir   ∂f/∂x<sub>1</sub>(a) = … = ∂f/∂x<sub>n</sub>(a) = 0.</span>
+            <span class="eq">En dos variables: f<sub>x</sub>(a, b) = 0 <strong>y</strong> f<sub>y</sub>(a, b) = 0 a la vez.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>En un extremo interior el terreno queda <strong>llano</strong>: la pendiente es cero en toda dirección, y eso es exactamente ∇f = 0. Resolver ese sistema da los <em>candidatos</em>; luego el criterio de segundas derivadas decide cuáles son extremos y cuáles no.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F2_def_punto_critico" data-tema="puntos_criticos">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Cuándo a es punto crítico de f? Escríbelo con ∇f y en su versión de dos variables.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Punto crítico ⇔ ∇f(a) = 0 (o no existe). Diferenciable: todas las parciales cero. En 2 variables: f<sub>x</sub> = 0 y f<sub>y</sub> = 0 simultáneamente.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Fermat: condición necesaria de extremo interior</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Si f tiene un <strong>extremo local</strong> en un punto <strong>interior</strong> a de su dominio y f es diferenciable en a, entonces</span>
+            <span class="eq">∇f(a) = 0.</span>
+            <span class="eq">Es decir: todo extremo interior donde f es diferenciable es un punto crítico.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La implicación va en <strong>una sola dirección</strong>: extremo ⇒ punto crítico, <em>no</em> al revés. Un punto crítico puede ser máximo, mínimo o silla. Por eso ∇f = 0 solo filtra candidatos: hace falta un criterio extra (la hessiana) para clasificar. Y ojo con «interior»: en la frontera un extremo puede tener ∇f ≠ 0.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F3_teo_fermat" data-tema="puntos_criticos">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia la condición necesaria de Fermat. ¿Por qué es solo necesaria y no suficiente? ¿Qué exige la palabra «interior»?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Extremo local interior + f diferenciable ⇒ ∇f(a) = 0. Necesaria, no suficiente: un crítico puede ser silla. En la frontera puede haber extremo con ∇f ≠ 0.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">La matriz hessiana</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Matriz hessiana</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Si f : R<sup>n</sup> → R es de clase C<sup>2</sup>, su <strong>matriz hessiana</strong> en a es la matriz n×n de segundas derivadas parciales:</span>
+          </div>
+          <div id="hessN"></div>
+          <div class="stmt">
+            <span class="eq">En dos variables es la 2×2 de f<sub>xx</sub>, f<sub>xy</sub>, f<sub>yx</sub>, f<sub>yy</sub>:</span>
+          </div>
+          <div id="hess2"></div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Así como la primera derivada mide pendiente, la hessiana mide <strong>curvatura</strong>: cómo se dobla la superficie en cada dirección. La diagonal recoge la curvatura en cada eje (f<sub>xx</sub>, f<sub>yy</sub>) y fuera van las cruzadas. Es el objeto que decide máximo / mínimo / silla.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F4_def_hessiana" data-tema="hessiana">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Escribe la hessiana de una f de dos variables. ¿Qué mide y qué va en cada casilla?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div id="hess2b"></div>
+            <div class="stmt"><span class="eq">Mide curvatura (segundas derivadas). Diagonal: f<sub>xx</sub>, f<sub>yy</sub> (curvatura por eje); fuera: cruzadas f<sub>xy</sub>, f<sub>yx</sub>.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Clairaut: la hessiana es simétrica</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq"><strong>Teorema de Clairaut (Schwarz).</strong> Si las parciales cruzadas f<sub>xy</sub> y f<sub>yx</sub> existen y son <strong>continuas</strong> en una vecindad de a, entonces coinciden:</span>
+            <span class="eq">f<sub>xy</sub>(a) = f<sub>yx</sub>(a).</span>
+            <span class="eq">En general, para f ∈ C<sup>2</sup> el orden de derivación no importa, y por eso la hessiana es una matriz <strong>simétrica</strong>: H = H<sup>T</sup>.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Que Hf sea simétrica no es un detalle: garantiza que sus valores propios son <strong>reales</strong>, y por eso tiene sentido hablar de que la curvatura sea «positiva» o «negativa». La hipótesis clave es la <strong>continuidad</strong> de las cruzadas; sin ella pueden diferir (hay contraejemplos famosos).</p></div>
+        <div class="drill" data-kind="recall" data-fid="F5_teo_clairaut" data-tema="hessiana">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia Clairaut: hipótesis y conclusión. ¿Qué propiedad de la hessiana implica?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Si f<sub>xy</sub>, f<sub>yx</sub> son continuas en una vecindad de a, entonces f<sub>xy</sub>(a) = f<sub>yx</sub>(a). Consecuencia: la hessiana es simétrica (H = H<sup>T</sup>).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Criterio de la segunda derivada (2 variables)</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Determinante hessiano D</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Para f de dos variables, el <strong>determinante hessiano</strong> (o discriminante) en un punto crítico (a, b) es:</span>
+            <span class="eq">D = f<sub>xx</sub> · f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup>,</span>
+            <span class="eq">siempre <strong>evaluado en el punto crítico</strong>. Es exactamente el determinante de la matriz hessiana en (a, b).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Como f<sub>xy</sub> = f<sub>yx</sub> (Clairaut), det(H) = f<sub>xx</sub>f<sub>yy</sub> − f<sub>xy</sub>f<sub>yx</sub> = f<sub>xx</sub>f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup>. El signo de D coincide con el signo del producto de los valores propios: por eso un solo número codifica si la curvatura «cierra» (cima/hoyo) o «se abre» (silla). Error típico: usar la hessiana genérica sin sustituir el punto crítico.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F6_def_determinante_D" data-tema="criterio_segunda_derivada">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Escribe la fórmula del determinante hessiano D y di dónde se debe evaluar.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup> = det(H), evaluado en el punto crítico. Sale de la simetría f<sub>xy</sub> = f<sub>yx</sub>.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Criterio de la segunda derivada</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Sea (a, b) un punto crítico de f ∈ C<sup>2</sup> y D = f<sub>xx</sub>f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup> evaluado ahí. Entonces:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span>D &gt; 0 <strong>y</strong> f<sub>xx</sub> &gt; 0 ⇒ <strong>mínimo</strong> local.</span></li>
+              <li><span class="k">2</span><span>D &gt; 0 <strong>y</strong> f<sub>xx</sub> &lt; 0 ⇒ <strong>máximo</strong> local.</span></li>
+              <li><span class="k">3</span><span>D &lt; 0 ⇒ <strong>punto silla</strong> (no es extremo).</span></li>
+              <li><span class="k">4</span><span>D = 0 ⇒ el criterio <strong>no decide</strong>.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Con D &gt; 0 las dos curvaturas tienen el <strong>mismo signo</strong> (el punto cierra en un óvalo): f<sub>xx</sub> desempata el sentido. Con D &lt; 0 tienen signos <strong>opuestos</strong>: sube por una dirección y baja por otra, eso es una silla. Nota: cuando D &gt; 0, el signo de f<sub>yy</sub> coincide con el de f<sub>xx</sub>, así que puedes usar cualquiera de los dos para desempatar.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F7_teo_criterio_2da" data-tema="criterio_segunda_derivada">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia los cuatro casos del criterio de la segunda derivada (signos de D y de f<sub>xx</sub>).</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">D &gt; 0, f<sub>xx</sub> &gt; 0 → mínimo · D &gt; 0, f<sub>xx</sub> &lt; 0 → máximo · D &lt; 0 → punto silla · D = 0 → no decide.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Definición</span><h3>Punto silla y el caso inconcluso D = 0</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Un <strong>punto silla</strong> es un punto crítico que <strong>no es extremo</strong>: en toda vecindad hay puntos con f mayor y puntos con f menor que f(a). Aparece cuando D &lt; 0.</span>
+            <span class="eq">Cuando <strong>D = 0</strong> el criterio no distingue: el punto puede ser mínimo, máximo, silla o ninguno. Hay que analizar por otro medio (curvas de nivel, restricciones a rectas, valores cercanos).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>El ejemplo canónico de silla es f = x<sup>2</sup> − y<sup>2</sup> en el origen: sube en x, baja en y. Y para D = 0, comparar f(x, 0) = x<sup>4</sup> con f(0, y) = −y<sup>4</sup> muestra que el signo puede depender de la dirección: el criterio de 2º orden es «ciego» ahí porque la curvatura de 2º orden se anula.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F8_def_silla_Dcero" data-tema="clasificacion">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Define punto silla. ¿Qué significa que D = 0 y qué se hace en ese caso?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Silla: crítico que no es extremo (cerca hay f mayores y menores); pasa con D &lt; 0. D = 0: el criterio no decide; se analiza por otro camino (niveles, direcciones, valores cercanos).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Criterio general por menores principales</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Clasificación por definición de la hessiana (n variables)</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Sea a un punto crítico de f ∈ C<sup>2</sup> y H = Hf(a) la hessiana ahí. Según su carácter:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span>H <strong>definida positiva</strong> ⇒ mínimo local.</span></li>
+              <li><span class="k">2</span><span>H <strong>definida negativa</strong> ⇒ máximo local.</span></li>
+              <li><span class="k">3</span><span>H <strong>indefinida</strong> (valores propios de signos distintos) ⇒ punto silla.</span></li>
+              <li><span class="k">4</span><span>H semidefinida (algún valor propio 0) ⇒ el criterio no decide.</span></li>
+            </ul>
+            <span class="eq"><strong>Criterio de Sylvester</strong> (menores principales líderes Δ<sub>1</sub>, …, Δ<sub>n</sub>): H es definida positiva ⇔ <strong>todos</strong> los Δ<sub>k</sub> &gt; 0; es definida negativa ⇔ los signos <strong>alternan</strong> empezando en negativo (Δ<sub>1</sub> &lt; 0, Δ<sub>2</sub> &gt; 0, Δ<sub>3</sub> &lt; 0, …).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>En dos variables esto se reduce al criterio D: Δ<sub>1</sub> = f<sub>xx</sub> y Δ<sub>2</sub> = det(H) = D. «Ambos positivos» (f<sub>xx</sub> &gt; 0, D &gt; 0) = definida positiva = mínimo; «alternan» (f<sub>xx</sub> &lt; 0, D &gt; 0) = definida negativa = máximo. El criterio de 2 variables es este teorema en el caso n = 2.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F9_teo_sylvester" data-tema="menores_principales">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Relaciona mínimo/máximo/silla con hessiana definida positiva/negativa/indefinida. ¿Qué dice Sylvester sobre los menores principales líderes?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Definida positiva → mínimo · definida negativa → máximo · indefinida → silla · semidefinida → no decide. Sylvester: todos los Δ<sub>k</sub> &gt; 0 ⇔ def. positiva; signos que alternan desde Δ<sub>1</sub> &lt; 0 ⇔ def. negativa.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Multiplicadores de Lagrange</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Lagrange con una restricción</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Para optimizar f(x) sujeto a la restricción g(x) = 0, con f, g de clase C<sup>1</sup>: si a es un extremo de f sobre la restricción y <strong>∇g(a) ≠ 0</strong>, entonces existe un escalar λ (el <strong>multiplicador</strong>) tal que</span>
+            <span class="eq">∇f(a) = λ · ∇g(a).</span>
+            <span class="eq">Los candidatos salen del sistema  ∇f = λ∇g  junto con  g(x) = 0.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>En el óptimo la curva de nivel de f es <strong>tangente</strong> a la restricción; dos curvas tangentes tienen gradientes <strong>paralelos</strong>, y «paralelo» es justo ∇f = λ∇g. La hipótesis ∇g ≠ 0 (regularidad) evita puntos donde la restricción degenera. En 2 variables el sistema es 3×3: dos de gradientes y una de restricción.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F10_teo_lagrange" data-tema="lagrange">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia el método de Lagrange con una restricción: la ecuación clave, el sistema completo y la hipótesis sobre ∇g.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Optimizar f sujeto a g = 0: en el óptimo ∇f = λ∇g (con ∇g ≠ 0). Candidatos = solución del sistema ∇f = λ∇g junto con g(x) = 0.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge def">Método</span><h3>Función lagrangiana</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">La condición ∇f = λ∇g se resume en un solo objeto. Se define la <strong>lagrangiana</strong>:</span>
+            <span class="eq">L(x, λ) = f(x) − λ · g(x).</span>
+            <span class="eq">Los candidatos son los puntos donde <strong>∇L = 0</strong>: derivando en x se recupera ∇f = λ∇g, y derivando en λ se recupera la restricción −g(x) = 0.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>La lagrangiana convierte un problema <em>con restricción</em> en uno <em>sin restricción</em>: buscar sus puntos críticos ordinarios. Es lo mismo que ∇f = λ∇g más g = 0, pero empaquetado. Útil para varias restricciones: L = f − λ<sub>1</sub>g<sub>1</sub> − … − λ<sub>m</sub>g<sub>m</sub>, un λ por cada una.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F11_metodo_lagrangiana" data-tema="lagrange">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Escribe la lagrangiana L(x, λ) y explica qué recuperas al igualar ∇L = 0 (parte en x y parte en λ).</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">L(x, λ) = f(x) − λ·g(x). ∇L = 0: derivar en x da ∇f = λ∇g; derivar en λ da g(x) = 0. Convierte el problema con restricción en uno sin restricción.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Extremos absolutos y el λ</h2>
+
+    <section class="card">
+      <div class="head"><span class="badge teo">Teorema</span><h3>Weierstrass y extremos absolutos en un compacto</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq"><strong>Teorema de Weierstrass.</strong> Si f es <strong>continua</strong> sobre un conjunto <strong>compacto</strong> D ⊆ R<sup>n</sup> (cerrado y acotado), entonces f alcanza en D su <strong>máximo</strong> y su <strong>mínimo absolutos</strong>.</span>
+            <span class="eq">Para hallarlos: 1) puntos críticos <strong>interiores</strong> de f; 2) extremos sobre la <strong>frontera</strong> (por Lagrange o parametrizando); 3) se <strong>comparan</strong> los valores de f en todos y el mayor / menor gana.</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>El criterio de 2º orden y Lagrange dan extremos <em>locales</em> o candidatos; para el <strong>absoluto</strong> hay que evaluar f en todos y comparar, porque el máximo global puede estar en la frontera y no ser crítico interior. «Compacto» (cerrado y acotado) es lo que <strong>garantiza</strong> que el máximo y el mínimo existen; sin acotamiento o sin cerrar, pueden no alcanzarse.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F12_teo_weierstrass" data-tema="extremos_absolutos">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">Enuncia Weierstrass (hipótesis + conclusión) y los tres pasos para hallar los extremos absolutos en un compacto.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">f continua en D compacto (cerrado y acotado) ⇒ alcanza máx y mín absolutos. Pasos: (1) críticos interiores, (2) extremos en la frontera (Lagrange / parametrizar), (3) evaluar f en todos y comparar.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><span class="badge cor">Nota</span><h3>Interpretación del multiplicador λ</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Enunciado formal</span>
+            <span class="eq">Si el óptimo con restricción g(x) = c se ve como función del nivel c, con valor óptimo f<sup>*</sup>(c), entonces el multiplicador mide la <strong>sensibilidad</strong> de ese óptimo:</span>
+            <span class="eq">df<sup>*</sup>/dc = λ.</span>
+            <span class="eq">Es decir, λ es cuánto cambia el valor óptimo por cada unidad que se relaja la restricción («precio sombra»).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>λ no es solo un truco algebraico para resolver: tiene significado. En economía es el <strong>precio sombra</strong> del recurso escaso (cuánto vale aflojar el presupuesto una unidad). Por eso su signo y magnitud se interpretan, no solo se descartan.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F13_nota_lambda" data-tema="lagrange">
+          <div class="qtag">Recall · enuncia de memoria</div>
+          <p class="q">¿Qué mide el multiplicador λ respecto al nivel c de la restricción? Da la fórmula y su nombre en economía.</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">λ = df<sup>*</sup>/dc: la tasa de cambio del valor óptimo por unidad de relajación de la restricción. Es el «precio sombra» del recurso.</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chuleta">
+      <h3>La ficha de memoria</h3>
+      <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
+      <ul>
+        <li><span class="ck">✓</span> Máximo local en a: existe B(a, r) con f(x) ≤ f(a); mínimo: f(x) ≥ f(a). Absoluto = en todo D.</li>
+        <li><span class="ck">✓</span> Punto crítico ⇔ ∇f(a) = 0 (todas las parciales cero). En 2 variables: f<sub>x</sub> = 0 y f<sub>y</sub> = 0.</li>
+        <li><span class="ck">✓</span> Fermat: extremo interior + diferenciable ⇒ ∇f = 0. Necesaria, no suficiente (puede ser silla).</li>
+        <li><span class="ck">✓</span> Hessiana = matriz n×n de segundas derivadas; mide curvatura. En 2×2: f<sub>xx</sub>, f<sub>xy</sub>, f<sub>yx</sub>, f<sub>yy</sub>.</li>
+        <li><span class="ck">✓</span> Clairaut: cruzadas continuas ⇒ f<sub>xy</sub> = f<sub>yx</sub>, así que la hessiana es simétrica.</li>
+        <li><span class="ck">✓</span> Determinante: D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup> = det(H), evaluado en el punto crítico.</li>
+        <li><span class="ck">✓</span> D &gt; 0, f<sub>xx</sub> &gt; 0 → mínimo · D &gt; 0, f<sub>xx</sub> &lt; 0 → máximo.</li>
+        <li><span class="ck">✓</span> D &lt; 0 → punto silla · D = 0 → el criterio no decide (analizar por otro medio).</li>
+        <li><span class="ck">✓</span> General: H definida positiva → mín · definida negativa → máx · indefinida → silla. Sylvester por menores líderes.</li>
+        <li><span class="ck">✓</span> Lagrange: optimizar f con g = 0 ⇒ ∇f = λ∇g (con ∇g ≠ 0), más la restricción g = 0.</li>
+        <li><span class="ck">✓</span> Lagrangiana L = f − λg; ∇L = 0 recupera ∇f = λ∇g y g = 0.</li>
+        <li><span class="ck">✓</span> Weierstrass: f continua en compacto ⇒ alcanza máx y mín absolutos. Comparar críticos interiores + frontera.</li>
+        <li><span class="ck">✓</span> λ = df<sup>*</sup>/dc: sensibilidad del óptimo al nivel de la restricción (precio sombra).</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>¿Cómo te fue con el recall?</h3>
+      <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="C5_optimizacion.html"><span class="sp">← Guía completa</span><span class="ti">U5 · Optimización</span></a>
+      <a class="next" href="../index.html"><span class="sp">Menú →</span><span class="ti">Todas las lecciones</span></a>
+    </nav>
+
+    <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 5 · Teoría formal</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+// ===== matrices (corchetes reales, sin barra aumentada) =====
+function matSq(rows){
+  var n=rows[0].length;
+  var gtc='repeat('+n+',auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<n;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setSq(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=matSq(rows); }
+
+// hessianas mostradas en las tarjetas
+setSq('hessN',[
+  ["∂<sup>2</sup>f/∂x<sub>1</sub><sup>2</sup>","···","∂<sup>2</sup>f/∂x<sub>1</sub>∂x<sub>n</sub>"],
+  ["⋮","⋱","⋮"],
+  ["∂<sup>2</sup>f/∂x<sub>n</sub>∂x<sub>1</sub>","···","∂<sup>2</sup>f/∂x<sub>n</sub><sup>2</sup>"]
+]);
+setSq('hess2',[["f<sub>xx</sub>","f<sub>xy</sub>"],["f<sub>yx</sub>","f<sub>yy</sub>"]]);
+setSq('hess2b',[["f<sub>xx</sub>","f<sub>xy</sub>"],["f<sub>yx</sub>","f<sub>yy</sub>"]]);
+
+// ===== instrumentación (session / reporte / recall) =====
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo", unidad:"U5_optimizacion", leccion:"C5_teoria-formal",
+  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT_REC = document.querySelectorAll('[data-kind="recall"]').length;
+function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.formulas.length+"/"+TOT_REC+" recalls"; }
+
+// cada drill: revelar → autorreporte (de_memoria / con_pista / falla) → session.formulas
+document.querySelectorAll('.drill[data-kind="recall"]').forEach(function(block){
+  var reveal = block.querySelector('.revealbtn');
+  var answer = block.querySelector('.answer');
+  var selfrep = block.querySelector('.selfrep');
+  var done = false;
+  if(reveal){
+    reveal.onclick = function(){
+      if(answer) answer.classList.add('show');
+      if(selfrep) selfrep.classList.add('show');
+      reveal.style.display = 'none';
+    };
+  }
+  block.querySelectorAll('.selfrep button').forEach(function(b){
+    b.onclick = function(){
+      if(done) return;
+      done = true;
+      var rep = b.getAttribute('data-rep');
+      b.classList.add('sel');
+      if(rep==="de_memoria") b.classList.add('pick-mem');
+      else if(rep==="con_pista") b.classList.add('pick-pista');
+      else b.classList.add('pick-falla');
+      selfrep.classList.add('locked');
+      block.classList.add('answered');
+      session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:rep });
+      updateCont();
+    };
+  });
+});
+
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+function buildSummary(){
+  var mem=session.formulas.filter(function(f){return f.recall==="de_memoria";}).length;
+  var pista=session.formulas.filter(function(f){return f.recall==="con_pista";}).length;
+  var falla=session.formulas.filter(function(f){return f.recall==="falla";}).length;
+  var fallidas=session.formulas.filter(function(f){return f.recall==="falla";}).map(function(f){return f.id;});
+  var s="Recall de teoría formal U5 (optimización): "+session.formulas.length+"/"+TOT_REC+" enunciados. ";
+  s+="De memoria: "+mem+" · con pista: "+pista+" · falla: "+falla+". ";
+  s+= fallidas.length? ("Falló en: "+fallidas.join(", ")+". ") : "Sin fallas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_calculo_U5_teoria-formal.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var recPills=session.formulas.map(function(f){
+    var cls = f.recall==="de_memoria" ? "mem" : (f.recall==="con_pista" ? "pista" : "falla");
+    return '<span class="pill '+cls+'">'+f.id+": "+f.recall+'</span>';
+  }).join("")||'<span class="nota">— sin recall —</span>';
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.formulas.length+'/'+TOT_REC+'</strong> recalls · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>Enunciados: '+recPills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+updateCont();
+</script>
+</body>
+</html>

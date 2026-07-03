@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Álgebra Lineal · U7 — Cuadernillo de papel (Rⁿ euclídeo y ortogonalidad)</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .vecs{display:flex;gap:22px;flex-wrap:wrap;font-size:21px;font-variant-numeric:tabular-nums;align-items:center}
+  .colvec{display:inline-flex;align-items:center;gap:6px}
+  .colvec .lab{font-weight:700;color:var(--navy);font-size:17px}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+
+  /* ===== cuadernillo de papel ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">Sin calculadora · en papel</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal · Unidad 7 · Cuadernillo</p>
+    <h1>R<sup>n</sup> euclídeo, <mark>resuelto en una hoja</mark></h1>
+    <p class="lead">Aquí no se elige opción: se resuelve completo, a mano, como en el parcial. Cada problema trae su enunciado, su matemática, tu espacio para trabajarlo en papel y la solución paso a paso para cotejar. Producto punto, norma, ángulo, ortogonalidad, proyección y Gram-Schmidt, todo con números limpios. Toma lápiz y hoja antes de abrir cada respuesta.</p>
+    <div class="learn">
+      <h2>Lo que vas a entrenar</h2>
+      <ol>
+        <li><span class="n">1</span> Producto punto y norma a mano</li>
+        <li><span class="n">2</span> Volver unitario un vector</li>
+        <li><span class="n">3</span> Ángulo entre dos vectores</li>
+        <li><span class="n">4</span> Decidir ortogonalidad y despejar un parámetro</li>
+        <li><span class="n">5</span> Proyectar y hallar el resto perpendicular</li>
+        <li><span class="n">6</span> Gram-Schmidt y distancia a una recta</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este cuadernillo</h2>
+    <section class="sec">
+      <h3>La regla de oro: papel primero</h3>
+      <p class="idea">Los dos primeros son <strong>resueltos-guía</strong>: léelos completos para fijar cómo se escribe cada cuenta paso a paso. El resto es <strong>producción</strong>: resuélvelos tú de principio a fin en una hoja <strong>antes</strong> de abrir la solución. Al terminar cada uno, dime cómo te fue con los tres botones. Eso arma tu reporte para el tutor sin fotos ni escaneos.</p>
+      <p class="idea">Las herramientas de la unidad son cinco, y todas salen de un solo número. <strong>Producto punto</strong>: multiplico coordenada con coordenada y sumo. <strong>Norma</strong>: ‖v‖ = √(v · v). <strong>Ángulo</strong>: cos θ = (u · v)/(‖u‖‖v‖). <strong>Ortogonales</strong> ⇔ u · v = 0. <strong>Proyección</strong>: proy<sub>v</sub>(u) = ((u · v)/(v · v))·v, y lo que sobra al restarla es perpendicular a v.</p>
+    </section>
+
+    <h2 class="modhead">Yo lo hago — resueltos-guía</h2>
+
+    <!-- ============ RESUELTO-GUÍA 1 : ángulo entre dos vectores ============ -->
+    <section class="prob" data-kind="prob" data-id="RG1" data-tema="angulo" data-level="resuelto">
+      <div class="phead"><span class="pnum">1</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">El ángulo entre dos vectores, de principio a fin</p>
+      <p class="pstatement">Halla el <strong>ángulo</strong> entre u = (1, √3) y v = (√3, 1). Usa cos θ = (u · v)/(‖u‖‖v‖). Da el ángulo exacto, sin calculadora.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (1, √3)</span>
+        <span class="eq">v = (√3, 1)</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · el producto punto (arriba)</div><p>Multiplico coordenada con coordenada y sumo:</p><p class="calc"><span class="rw">u·v</span> (1)(√3)=<b>√3</b> <span class="sep">•</span> (√3)(1)=<b>√3</b> <span class="sep">•</span> suma=<b>2√3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · las dos normas (abajo)</div><p>Cada norma es la raíz de la suma de cuadrados. Ojo: (√3)<sup>2</sup> = 3.</p><p class="calc"><span class="rw">‖u‖</span> √(1+3)=√4=<b>2</b> <span class="sep">•</span> <span class="rw">‖v‖</span> √(3+1)=√4=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · divide y lee el ángulo</div><p>Divido el producto punto entre las dos normas:</p><p class="calc"><span class="rw">cos θ</span> 2√3÷(2·2)=2√3÷4=<b>√3/2</b> <span class="sep">•</span> θ=<b>30°</b></p></div>
+          <p class="verdict">El ángulo es <strong>30°</strong>, porque cos 30° = √3/2. Truco de memoria: los cosenos limpios son cos 0°=1, cos 30°=√3/2, cos 45°=1/√2, cos 60°=1/2, cos 90°=0. Nunca dibujé nada; solo apliqué la fórmula en orden: arriba, abajo, divide.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (aunque sea de muestra, márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ RESUELTO-GUÍA 2 : proyección + resto perpendicular ============ -->
+    <section class="prob" data-kind="prob" data-id="RG2" data-tema="proyeccion" data-level="resuelto">
+      <div class="phead"><span class="pnum">2</span><span class="lvl resuelto">Resuelto-guía</span></div>
+      <p class="ptitle">Proyección y su resto perpendicular</p>
+      <p class="pstatement">Proyecta u = (4, 2) sobre v = (3, 1) con proy<sub>v</sub>(u) = ((u · v)/(v · v))·v. Luego halla el <strong>resto perpendicular</strong> u − proy y comprueba que es ortogonal a v.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (4, 2)</span>
+        <span class="eq">v = (3, 1)</span>
+      </div></div>
+      <p class="paper">✍ Sígueme paso a paso; este es de muestra.</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · los dos productos punto</div><p>Arriba u · v; abajo v consigo mismo (v · v), nunca u · u:</p><p class="calc"><span class="rw">u·v</span> (4)(3)+(2)(1)=12+2=<b>14</b> <span class="sep">•</span> <span class="rw">v·v</span> (3)(3)+(1)(1)=9+1=<b>10</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · el factor</div><p>Divido arriba entre abajo; ese número escala a v:</p><p class="calc"><span class="rw">factor</span> 14÷10=<b>7/5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · escala v</div><p>Multiplico cada coordenada de v por el factor 7/5:</p><p class="calc"><span class="rw">proy</span> (7/5)·3=<b>21/5</b> <span class="sep">•</span> (7/5)·1=<b>7/5</b> <span class="sep">•</span> =<b>(21/5, 7/5)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · el resto perpendicular</div><p>Resto = u − proy, coordenada por coordenada:</p><p class="calc"><span class="rw">resto</span> 4−21/5=20/5−21/5=<b>−1/5</b> <span class="sep">•</span> 2−7/5=10/5−7/5=<b>3/5</b> <span class="sep">•</span> =<b>(−1/5, 3/5)</b></p></div>
+          <div class="estep"><div class="oprow">Comprobación · resto ⊥ v</div><p>El producto punto del resto con v debe dar cero:</p><p class="calc"><span class="rw">resto·v</span> (−1/5)(3)+(3/5)(1)=−3/5+3/5=<b>0</b></p></div>
+          <p class="verdict">Proyección = <strong>(21/5, 7/5)</strong> y resto = <strong>(−1/5, 3/5)</strong>. El resto es perpendicular a v (producto punto cero), así que la proyección es el punto de la recta de v <strong>más cercano</strong> a u. Trabajar con fracciones exactas evita redondear: en el parcial vale más 21/5 que 4.2.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Tu turno — producción</h2>
+
+    <!-- ============ P3 GUIADO : producto punto en R3 ============ -->
+    <section class="prob" data-kind="prob" data-id="P3" data-tema="producto_punto" data-level="guiado">
+      <div class="phead"><span class="pnum">3</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Producto punto en R<sup>3</sup> con signos</p>
+      <p class="pstatement">Calcula el producto punto de u = (2, −3, 5) y v = (4, 1, −2). <strong>Cuida los signos</strong>: un solo error de signo cambia todo el resultado.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (2, −3, 5)</span>
+        <span class="eq">v = (4, 1, −2)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · producto de cada coordenada</div><p>Multiplico primera con primera, y así en las tres:</p><p class="calc"><span class="rw">·</span> (2)(4)=<b>8</b> <span class="sep">•</span> (−3)(1)=<b>−3</b> <span class="sep">•</span> (5)(−2)=<b>−10</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · suma los tres</div><p>Sumo respetando cada signo:</p><p class="calc"><span class="rw">u·v</span> 8+(−3)+(−10)=8−3−10=<b>−5</b></p></div>
+          <p class="verdict">u · v = <strong>−5</strong>. Un número, no un vector. Como salió negativo, el ángulo entre u y v es <strong>obtuso</strong> (mayor de 90°): el signo del producto punto ya te dice si el ángulo es agudo (positivo), recto (cero) u obtuso (negativo).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P4 GUIADO : volver unitario un vector ============ -->
+    <section class="prob" data-kind="prob" data-id="P4" data-tema="unitario" data-level="guiado">
+      <div class="phead"><span class="pnum">4</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Vuelve unitario un vector</p>
+      <p class="pstatement">Encuentra el vector <strong>unitario</strong> (norma 1) que apunta en la misma dirección que w = (5, 12). <em>Recuerda: dividir un vector entre su norma no cambia su dirección, solo lo estira o encoge a longitud 1.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">w = (5, 12)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · la norma</div><p>Suma de cuadrados y raíz. El 5-12-13 es una terna que conviene reconocer:</p><p class="calc"><span class="rw">‖w‖</span> √(5<sup>2</sup>+12<sup>2</sup>)=√(25+144)=√169=<b>13</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · divide cada coordenada</div><p>Divido w entre su norma, coordenada por coordenada:</p><p class="calc"><span class="rw">û</span> 5÷13=<b>5/13</b> <span class="sep">•</span> 12÷13=<b>12/13</b> <span class="sep">•</span> =<b>(5/13, 12/13)</b></p></div>
+          <div class="estep"><div class="oprow">Comprobación · norma 1</div><p>Su norma debe dar exactamente 1:</p><p class="calc"><span class="rw">‖û‖</span> √(25/169+144/169)=√(169/169)=√1=<b>1</b></p></div>
+          <p class="verdict">El unitario es <strong>(5/13, 12/13)</strong>. Apunta igual que w pero mide 1. No hace falta racionalizar aquí porque la norma salió entera (13); cuando la raíz no es exacta, se deja como √n en el denominador.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P5 GUIADO : ortogonalidad, despejar parámetro ============ -->
+    <section class="prob" data-kind="prob" data-id="P5" data-tema="ortogonalidad" data-level="guiado">
+      <div class="phead"><span class="pnum">5</span><span class="lvl guiado">Guiado</span></div>
+      <p class="ptitle">Despeja el valor que da perpendicularidad</p>
+      <p class="pstatement">Quieres que a = (k, 2, −1) sea <strong>ortogonal</strong> a b = (3, k, 4). <strong>Encuentra los valores de k</strong> que lo logran. <em>La condición no es una cuenta: es una ecuación en k.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">a = (k, 2, −1)</span>
+        <span class="eq">b = (3, k, 4)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · la condición de ortogonalidad</div><p>Perpendiculares ⇔ producto punto cero. Lo escribo con k dentro:</p><p class="calc"><span class="rw">a·b</span> (k)(3)+(2)(k)+(−1)(4)=<b>3k+2k−4</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · junta términos e iguala a cero</div><p>Sumo los términos con k y lo pongo igual a cero:</p><p class="calc"><span class="rw">=0</span> 5k−4=0 <span class="sep">•</span> 5k=<b>4</b> <span class="sep">•</span> k=<b>4/5</b></p></div>
+          <p class="verdict">El único valor es <strong>k = 4/5</strong>. Solo para ese k los vectores son perpendiculares; para cualquier otro, el producto punto es distinto de cero y forman un ángulo agudo u obtuso. Compruébalo: con k = 4/5, a · b = 3(4/5)+2(4/5)−4 = 12/5+8/5−4 = 20/5−4 = 0 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P6 SOLO : ángulo obtuso en R3 ============ -->
+    <section class="prob" data-kind="prob" data-id="P6" data-tema="angulo" data-level="solo">
+      <div class="phead"><span class="pnum">6</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Un ángulo obtuso, y qué te lo anticipa</p>
+      <p class="pstatement">Halla el ángulo entre u = (1, 0, −1) y v = (0, 1, 1). Antes de dividir, <strong>anticipa por el signo del producto punto</strong> si el ángulo será agudo, recto u obtuso, y luego confírmalo.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (1, 0, −1)</span>
+        <span class="eq">v = (0, 1, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · producto punto (arriba)</div><p>Multiplico y sumo; el signo ya adelanta el tipo de ángulo:</p><p class="calc"><span class="rw">u·v</span> (1)(0)+(0)(1)+(−1)(1)=0+0−1=<b>−1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · las dos normas (abajo)</div><p>Raíz de la suma de cuadrados en cada uno:</p><p class="calc"><span class="rw">‖u‖</span> √(1+0+1)=<b>√2</b> <span class="sep">•</span> <span class="rw">‖v‖</span> √(0+1+1)=<b>√2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · divide y lee el ángulo</div><p>Junto todo. Abajo queda √2·√2 = 2:</p><p class="calc"><span class="rw">cos θ</span> −1÷(√2·√2)=−1÷2=<b>−1/2</b> <span class="sep">•</span> θ=<b>120°</b></p></div>
+          <p class="verdict">El ángulo es <strong>120°</strong>, porque cos 120° = −1/2. Lo anticipado se cumple: el producto punto salió <strong>negativo</strong>, así que el ángulo tenía que ser <strong>obtuso</strong> (mayor de 90°). El coseno −1/2 es el negativo de cos 60° = 1/2, y 120° = 180° − 60°.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P7 SOLO : proyección en R3 con fracciones ============ -->
+    <section class="prob" data-kind="prob" data-id="P7" data-tema="proyeccion" data-level="solo">
+      <div class="phead"><span class="pnum">7</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Proyecta en R<sup>3</sup> (con fracciones)</p>
+      <p class="pstatement">Proyecta u = (1, 2, 2) sobre v = (2, 0, 1). Da la proyección exacta como vector de fracciones y no la redondees.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (1, 2, 2)</span>
+        <span class="eq">v = (2, 0, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · los dos productos punto</div><p>Arriba u · v; abajo v consigo mismo:</p><p class="calc"><span class="rw">u·v</span> (1)(2)+(2)(0)+(2)(1)=2+0+2=<b>4</b> <span class="sep">•</span> <span class="rw">v·v</span> (2)(2)+0+(1)(1)=4+1=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · el factor</div><p>Arriba entre abajo; se queda como fracción:</p><p class="calc"><span class="rw">factor</span> 4÷5=<b>4/5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · escala v</div><p>Multiplico cada coordenada de v = (2, 0, 1) por 4/5:</p><p class="calc"><span class="rw">proy</span> (4/5)·2=<b>8/5</b> <span class="sep">•</span> (4/5)·0=<b>0</b> <span class="sep">•</span> (4/5)·1=<b>4/5</b></p></div>
+          <p class="verdict">La proyección es <strong>(8/5, 0, 4/5)</strong>. Nota que la coordenada del medio quedó 0 porque v tiene 0 ahí: la sombra vive en la dirección de v. Si dudas, comprueba que u − proy = (−3/5, 2, 6/5) da producto punto cero con v: (−3/5)(2)+2(0)+(6/5)(1) = −6/5+6/5 = 0 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P8 SOLO : distancia de un punto a una recta ============ -->
+    <section class="prob" data-kind="prob" data-id="P8" data-tema="distancia_recta" data-level="solo">
+      <div class="phead"><span class="pnum">8</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Distancia de un punto a una recta por el origen</p>
+      <p class="pstatement">Una recta pasa por el origen en la dirección v = (2, 1). El punto p = (1, 3) está fuera de ella. Halla el <strong>punto de la recta más cercano</strong> a p (su proyección) y la <strong>distancia</strong> de p a la recta (la norma del resto perpendicular).</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">recta: dirección v = (2, 1)</span>
+        <span class="eq">punto p = (1, 3)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · los dos productos punto</div><p>Proyecto p sobre v. Arriba p · v; abajo v · v:</p><p class="calc"><span class="rw">p·v</span> (1)(2)+(3)(1)=2+3=<b>5</b> <span class="sep">•</span> <span class="rw">v·v</span> (2)(2)+(1)(1)=4+1=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · el factor y la proyección</div><p>Factor = 5/5 = 1, así que la proyección es v tal cual:</p><p class="calc"><span class="rw">factor</span> 5÷5=<b>1</b> <span class="sep">•</span> <span class="rw">proy</span> 1·(2,1)=<b>(2, 1)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · el resto perpendicular</div><p>Resto = p − proy, coordenada por coordenada:</p><p class="calc"><span class="rw">resto</span> 1−2=<b>−1</b> <span class="sep">•</span> 3−1=<b>2</b> <span class="sep">•</span> =<b>(−1, 2)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · la distancia = norma del resto</div><p>La distancia es qué tan largo es ese resto:</p><p class="calc"><span class="rw">dist</span> √((−1)<sup>2</sup>+2<sup>2</sup>)=√(1+4)=<b>√5</b></p></div>
+          <p class="verdict">El punto más cercano es <strong>(2, 1)</strong> y la distancia de p a la recta es <strong>√5</strong>. Comprueba que el resto es perpendicular a la recta: (−1, 2) · (2, 1) = −2+2 = 0 ✓. La distancia de un punto a una recta <strong>siempre</strong> se mide con este resto perpendicular, nunca de punto a punto cualquiera.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P9 SOLO : Gram-Schmidt completo, 2 vectores ============ -->
+    <section class="prob" data-kind="prob" data-id="P9" data-tema="gram_schmidt" data-level="solo">
+      <div class="phead"><span class="pnum">9</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Gram-Schmidt completo con dos vectores</p>
+      <p class="pstatement">Aplica <strong>Gram-Schmidt</strong> a v<sub>1</sub> = (1, 1) y v<sub>2</sub> = (4, 0): toma u<sub>1</sub> = v<sub>1</sub>, quítale a v<sub>2</sub> su proyección sobre u<sub>1</sub> y da la base ortogonal {u<sub>1</sub>, u<sub>2</sub>}. Comprueba que u<sub>1</sub> · u<sub>2</sub> = 0.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">v<sub>1</sub> = (1, 1)</span>
+        <span class="eq">v<sub>2</sub> = (4, 0)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · el primero se queda</div><p>Tomo u<sub>1</sub> igual a v<sub>1</sub>, sin tocar:</p><p class="calc"><span class="rw">u₁</span> =<b>(1, 1)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · los dos productos punto</div><p>Arriba v<sub>2</sub> con u<sub>1</sub>; abajo u<sub>1</sub> consigo mismo:</p><p class="calc"><span class="rw">v₂·u₁</span> (4)(1)+(0)(1)=<b>4</b> <span class="sep">•</span> <span class="rw">u₁·u₁</span> (1)(1)+(1)(1)=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · el factor y la proyección</div><p>Factor = 4/2 = 2; escala u<sub>1</sub>:</p><p class="calc"><span class="rw">factor</span> 4÷2=<b>2</b> <span class="sep">•</span> <span class="rw">proy</span> 2·(1,1)=<b>(2, 2)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · quita la proyección</div><p>u<sub>2</sub> = v<sub>2</sub> − proy, coordenada por coordenada:</p><p class="calc"><span class="rw">u₂</span> 4−2=<b>2</b> <span class="sep">•</span> 0−2=<b>−2</b> <span class="sep">•</span> =<b>(2, −2)</b></p></div>
+          <div class="estep"><div class="oprow">Comprobación · ortogonales</div><p>Su producto punto tiene que dar cero:</p><p class="calc"><span class="rw">u₁·u₂</span> (1)(2)+(1)(−2)=2−2=<b>0</b></p></div>
+          <p class="verdict">Base ortogonal: <strong>u<sub>1</sub> = (1, 1)</strong> y <strong>u<sub>2</sub> = (2, −2)</strong>, con producto punto cero. Si además divides cada uno entre su norma (√2 y 2√2) obtienes la base <strong>ortonormal</strong> (1/√2, 1/√2) y (1/√2, −1/√2).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P10 SOLO : Gram-Schmidt en R3, primeros dos vectores ============ -->
+    <section class="prob" data-kind="prob" data-id="P10" data-tema="gram_schmidt" data-level="solo">
+      <div class="phead"><span class="pnum">10</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Gram-Schmidt en R<sup>3</sup></p>
+      <p class="pstatement">En R<sup>3</sup>, aplica Gram-Schmidt a v<sub>1</sub> = (1, 1, 0) y v<sub>2</sub> = (1, 0, 1): toma u<sub>1</sub> = v<sub>1</sub>, réstale a v<sub>2</sub> su proyección sobre u<sub>1</sub> y da u<sub>2</sub>. Comprueba que u<sub>1</sub> · u<sub>2</sub> = 0.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">v<sub>1</sub> = (1, 1, 0)</span>
+        <span class="eq">v<sub>2</sub> = (1, 0, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · el primero se queda</div><p>u<sub>1</sub> = v<sub>1</sub> sin cambios:</p><p class="calc"><span class="rw">u₁</span> =<b>(1, 1, 0)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · los dos productos punto</div><p>Arriba v<sub>2</sub> con u<sub>1</sub>; abajo u<sub>1</sub> consigo mismo:</p><p class="calc"><span class="rw">v₂·u₁</span> (1)(1)+(0)(1)+(1)(0)=1+0+0=<b>1</b> <span class="sep">•</span> <span class="rw">u₁·u₁</span> 1+1+0=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · el factor y la proyección</div><p>Factor = 1/2; escala u<sub>1</sub> coordenada por coordenada:</p><p class="calc"><span class="rw">proy</span> (1/2)·1=<b>1/2</b> <span class="sep">•</span> (1/2)·1=<b>1/2</b> <span class="sep">•</span> (1/2)·0=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · quita la proyección</div><p>u<sub>2</sub> = v<sub>2</sub> − proy = (1, 0, 1) − (1/2, 1/2, 0):</p><p class="calc"><span class="rw">u₂</span> 1−1/2=<b>1/2</b> <span class="sep">•</span> 0−1/2=<b>−1/2</b> <span class="sep">•</span> 1−0=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Comprobación · ortogonales</div><p>Producto punto de u<sub>1</sub> con u<sub>2</sub>:</p><p class="calc"><span class="rw">u₁·u₂</span> (1)(1/2)+(1)(−1/2)+(0)(1)=1/2−1/2+0=<b>0</b></p></div>
+          <p class="verdict"><strong>u<sub>2</sub> = (1/2, −1/2, 1)</strong>, ortogonal a u<sub>1</sub>. Truco de limpieza: puedes multiplicar u<sub>2</sub> por 2 sin perder ortogonalidad, y dejarla como <strong>(1, −1, 2)</strong> — es más cómoda para el siguiente paso y sigue siendo perpendicular a (1, 1, 0).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P11 SOLO : desigualdad de Cauchy-Schwarz / decisión ============ -->
+    <section class="prob" data-kind="prob" data-id="P11" data-tema="clasificar_angulo" data-level="solo">
+      <div class="phead"><span class="pnum">11</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Clasifica el ángulo sin hallarlo</p>
+      <p class="pstatement">Tienes tres parejas de vectores. <strong>Sin calcular el ángulo exacto</strong>, decide para cada una si el ángulo es agudo, recto u obtuso mirando solo el signo del producto punto. Justifica.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">A: (3, 1) y (1, −3)</span>
+        <span class="eq">B: (2, 2) y (1, 5)</span>
+        <span class="eq">C: (4, 1) y (−2, 3)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Pareja A</div><p>Solo necesito el signo del producto punto:</p><p class="calc"><span class="rw">A</span> (3)(1)+(1)(−3)=3−3=<b>0</b> <span class="sep">•</span> signo=<b>cero → recto</b></p></div>
+          <div class="estep"><div class="oprow">Pareja B</div><p>Mismo procedimiento:</p><p class="calc"><span class="rw">B</span> (2)(1)+(2)(5)=2+10=<b>12</b> <span class="sep">•</span> signo=<b>+ → agudo</b></p></div>
+          <div class="estep"><div class="oprow">Pareja C</div><p>Y la última:</p><p class="calc"><span class="rw">C</span> (4)(−2)+(1)(3)=−8+3=<b>−5</b> <span class="sep">•</span> signo=<b>− → obtuso</b></p></div>
+          <p class="verdict"><strong>A: recto (90°)</strong> porque el producto punto es cero. <strong>B: agudo</strong> porque es positivo. <strong>C: obtuso</strong> porque es negativo. La regla del signo: como cos θ = (u·v)/(‖u‖‖v‖) y las normas son siempre positivas, el <strong>signo del coseno</strong> —y por tanto el tipo de ángulo— lo decide solo el signo de u · v. No hace falta la fórmula completa para clasificar.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P12 SOLO : construir un vector perpendicular ============ -->
+    <section class="prob" data-kind="prob" data-id="P12" data-tema="ortogonalidad" data-level="solo">
+      <div class="phead"><span class="pnum">12</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">Construye un vector perpendicular a dos a la vez</p>
+      <p class="pstatement">En R<sup>3</sup>, encuentra un vector (x, y, z) no nulo que sea <strong>perpendicular a la vez</strong> a a = (1, 1, 0) y a b = (1, 0, 1). <em>Dos condiciones de producto punto cero forman un sistema; resuélvelo dejando una variable libre.</em></p>
+      <div class="fx"><div class="sys">
+        <span class="eq">a = (1, 1, 0)</span>
+        <span class="eq">b = (1, 0, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · dos condiciones de perpendicularidad</div><p>Cada "perpendicular a" es un producto punto igualado a cero:</p><p class="calc"><span class="rw">·a</span> x+y=<b>0</b> <span class="sep">•</span> <span class="rw">·b</span> x+z=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · despeja en términos de x</div><p>De cada ecuación despejo y, z:</p><p class="calc"><span class="rw">y</span> =−x <span class="sep">•</span> <span class="rw">z</span> =−x</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · elige un valor libre</div><p>x es libre; tomo x = 1 para tener números limpios:</p><p class="calc"><span class="rw">vec</span> x=1 → y=−1 → z=−1 <span class="sep">•</span> =<b>(1, −1, −1)</b></p></div>
+          <div class="estep"><div class="oprow">Comprobación · perpendicular a los dos</div><p>Producto punto con a y con b, ambos cero:</p><p class="calc"><span class="rw">·a</span> 1−1+0=<b>0</b> <span class="sep">•</span> <span class="rw">·b</span> 1+0−1=<b>0</b></p></div>
+          <p class="verdict">Un vector que sirve es <strong>(1, −1, −1)</strong>. No es único: cualquier múltiplo, como (2, −2, −2) o (−1, 1, 1), también es perpendicular a los dos. Ser "perpendicular a un plano" siempre da una <strong>recta</strong> de soluciones (una variable libre), no un punto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P13 SOLO : mínimos cuadrados intuitivo (proyección) ============ -->
+    <section class="prob" data-kind="prob" data-id="P13" data-tema="minimos_cuadrados" data-level="solo">
+      <div class="phead"><span class="pnum">13</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">La mejor aproximación es una proyección</p>
+      <p class="pstatement">Un sistema pide que un múltiplo t·(1, 1, 1) iguale a b = (2, 0, 4), pero no hay t exacto que lo logre. La <strong>mejor aproximación</strong> (mínimos cuadrados) es la proyección de b sobre la dirección (1, 1, 1). Halla ese mejor múltiplo y el vector proyectado.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">dirección a = (1, 1, 1)</span>
+        <span class="eq">datos b = (2, 0, 4)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · los dos productos punto</div><p>Arriba b · a; abajo a · a. El factor será justo el mejor t:</p><p class="calc"><span class="rw">b·a</span> (2)(1)+(0)(1)+(4)(1)=2+0+4=<b>6</b> <span class="sep">•</span> <span class="rw">a·a</span> 1+1+1=<b>3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · el mejor t</div><p>Divido arriba entre abajo:</p><p class="calc"><span class="rw">t</span> 6÷3=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · el vector proyectado</div><p>Escalo a por t = 2:</p><p class="calc"><span class="rw">proy</span> 2·(1,1,1)=<b>(2, 2, 2)</b></p></div>
+          <div class="estep"><div class="oprow">Comprobación · el error es perpendicular</div><p>El residuo b − proy debe ser ortogonal a a (esa es la marca de mínimos cuadrados):</p><p class="calc"><span class="rw">resid</span> (2,0,4)−(2,2,2)=<b>(0, −2, 2)</b> <span class="sep">•</span> ·a: 0−2+2=<b>0</b></p></div>
+          <p class="verdict">El mejor múltiplo es <strong>t = 2</strong> y la mejor aproximación es <strong>(2, 2, 2)</strong>. El residuo (0, −2, 2) es perpendicular a la dirección: eso confirma que ningún otro múltiplo de (1, 1, 1) queda más cerca de b. Mínimos cuadrados = <strong>la misma proyección</strong> de la unidad, usada para aproximar cuando no hay solución exacta.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ P14 SOLO : cierra el problema del dron ============ -->
+    <section class="prob" data-kind="prob" data-id="P14" data-tema="modelado" data-level="solo">
+      <div class="phead"><span class="pnum">14</span><span class="lvl solo">Solo</span></div>
+      <p class="ptitle">El dron y la torre, de una vez</p>
+      <p class="pstatement">Un dron sale del origen en la dirección u = (6, 8). Una torre está en p = (10, 5). <strong>Modela y resuelve</strong>: halla el punto de la trayectoria más cercano a la torre (proyección de p sobre u) y la distancia a la que el dron pasa de ella (norma del resto perpendicular).</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">trayectoria: dirección u = (6, 8)</span>
+        <span class="eq">torre en p = (10, 5)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 1 · los dos productos punto</div><p>Proyecto la torre p sobre la trayectoria u. Arriba p · u; abajo u · u:</p><p class="calc"><span class="rw">p·u</span> (10)(6)+(5)(8)=60+40=<b>100</b> <span class="sep">•</span> <span class="rw">u·u</span> (6)(6)+(8)(8)=36+64=<b>100</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · el factor y el punto cercano</div><p>Factor = 100/100 = 1; escalo u:</p><p class="calc"><span class="rw">factor</span> 100÷100=<b>1</b> <span class="sep">•</span> <span class="rw">cercano</span> 1·(6,8)=<b>(6, 8)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · el resto perpendicular</div><p>Resto = torre − punto cercano = p − proy:</p><p class="calc"><span class="rw">resto</span> 10−6=<b>4</b> <span class="sep">•</span> 5−8=<b>−3</b> <span class="sep">•</span> =<b>(4, −3)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · la distancia</div><p>La distancia es la norma del resto (aquí, otra vez la terna 3-4-5):</p><p class="calc"><span class="rw">dist</span> √(4<sup>2</sup>+(−3)<sup>2</sup>)=√(16+9)=√25=<b>5</b></p></div>
+          <p class="verdict">El punto más cercano de la trayectoria es <strong>(6, 8)</strong> y el dron pasa a <strong>5 unidades</strong> de la torre. Comprueba que el resto es perpendicular a la trayectoria: (4, −3) · (6, 8) = 24 − 24 = 0 ✓. Todo el problema del dron es <strong>una proyección más una norma</strong>: nada de tantear puntos sobre la recta.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Errores típicos que cuestan puntos</h3>
+      <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Dejar el producto punto como vector.</strong> Multiplicar coordenadas sin sumar da un vector; el producto punto es SIEMPRE un solo número.</li>
+        <li><span class="ck">✗</span> <strong>Olvidar la raíz en la norma.</strong> La suma de cuadrados es ‖v‖<sup>2</sup>; la norma es su <em>raíz</em>. Confundirlos infla el resultado.</li>
+        <li><span class="ck">✗</span> <strong>Poner u · u en el denominador de la proyección.</strong> Abajo va SIEMPRE v · v (el vector sobre el que proyectas), no u · u.</li>
+        <li><span class="ck">✗</span> <strong>Escalar el vector equivocado.</strong> El factor multiplica a v (la dirección), no a u. Y escalar es multiplicar cada coordenada, nunca sumar.</li>
+        <li><span class="ck">✗</span> <strong>Redondear fracciones exactas.</strong> 21/5 vale más que 4.2 en un parcial sin calculadora: deja raíces y fracciones tal cual.</li>
+        <li><span class="ck">✗</span> <strong>Sumar en vez de restar en Gram-Schmidt.</strong> El vector ortogonal es v − proyección; sumarla NO da algo perpendicular.</li>
+        <li><span class="ck">✗</span> <strong>Medir la distancia de punto a punto.</strong> La distancia de un punto a una recta es la norma del RESTO perpendicular, no de un segmento cualquiera.</li>
+        <li><span class="ck">✗</span> <strong>No leer el signo del producto punto.</strong> Positivo = agudo, cero = recto, negativo = obtuso. Ese signo clasifica el ángulo sin más cuentas.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre de sesión</h3>
+      <p class="nota">Qué tan segura te sientes resolviendo Unidad 7 completa en papel. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs">
+      <a class="prev" href="L7_espacio-euclideo.html"><span class="sp">← Guía</span><span class="ti">U7 · R<sup>n</sup> euclídeo (teoría)</span></a>
+    </nav>
+
+    <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Álgebra Lineal · Unidad 7 — R<sup>n</sup> euclídeo y ortogonalidad</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U7_espacio_euclideo", leccion:"L7_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U7_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>
