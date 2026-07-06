@@ -124,7 +124,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -154,7 +154,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -188,23 +188,37 @@
 
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Una ciudad y su suburbio se reparten la población. Cada año <strong>el 10% de la ciudad se muda al suburbio</strong> y <strong>el 20% del suburbio regresa a la ciudad</strong>. Hoy hay medio y medio. La pregunta del examen no es cómo queda el año que viene, sino: <strong>¿en qué reparto se estabiliza con los años</strong>, si es que se estabiliza?</p>
+      <p class="idea" style="font-size:17px">Una ciudad y su suburbio se reparten un millón de habitantes. Cada año pasa lo mismo: <strong>el 10% de la gente de la ciudad se muda al suburbio</strong>, y <strong>el 20% de la gente del suburbio regresa a la ciudad</strong>. Hoy están mitad y mitad: 500 mil y 500 mil. La regla del año, escrita con calma:</p>
       <div class="fx"><div class="sys"><span class="eq">Ciudad ← 0.9·Ciudad + 0.2·Suburbio</span><span class="eq">Suburbio ← 0.1·Ciudad + 0.8·Suburbio</span></div></div>
-      <p class="idea" style="font-size:17px">Podrías aplicar la regla año tras año y ver hacia dónde tiende. Pero eso son decenas de multiplicaciones a mano, sin garantía de llegar. Hay un atajo que da la respuesta <strong>de un solo golpe</strong>: encontrar una dirección que la matriz de transición <strong>no cambia</strong>. Ese es el corazón de este tema —<strong>valores y vectores propios</strong>— y para el final de la guía vas a resolver justo este reparto tú sola.</p>
+      <p class="fx-note">La flecha ← se lee "el nuevo valor se calcula así". La ciudad del año próximo junta al 90% que se queda (porque el 10% se fue) más el 20% del suburbio que regresa. El renglón del suburbio cuenta la historia al revés.</p>
+      <p class="idea" style="font-size:17px">Esta regla es una <strong>máquina</strong>, de las que vienes usando: le metes el reparto de este año y te devuelve el del siguiente. Hagámosla girar una vez, con las cuentas a la vista (todo en miles):</p>
+      <p class="calc"><span class="rw">Año 1</span> ciudad: 0.9·500+0.2·500=450+100=<b>550</b> <span class="sep">•</span> suburbio: 0.1·500+0.8·500=50+400=<b>450</b></p>
+      <p class="idea" style="font-size:17px">¿Y el año 2? Todo otra vez: 0.9·550 + 0.2·450 = 495 + 90 = 585 para la ciudad… y así el año 3, y el 10, y el 40. La pregunta del examen no es cómo queda el año que viene, sino: <strong>¿en qué reparto se estabiliza la población con los años</strong>, si es que se estabiliza? Repetir la cuenta cuarenta veces a mano no es un plan. Hay un atajo que da la respuesta <strong>de un solo golpe</strong>, y construirlo es de lo que trata esta guía: encontrar las <strong>direcciones que esta máquina no tuerce</strong>. Al final vas a resolver este reparto tú sola, en unos cuantos renglones.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>1 · Una dirección que la matriz no gira</h3>
-      <p class="idea">Una matriz cuadrada actúa sobre vectores: los mueve, los estira, los gira. Pero casi siempre hay unas pocas direcciones especiales donde la matriz <strong>no gira</strong> al vector: solo lo estira o lo encoge. Un vector en una de esas direcciones es un <strong>vector propio</strong>, y el factor por el que se estira es su <strong>valor propio</strong>. La condición se escribe así:</p>
-      <div class="fx"><div class="sys"><span class="eq">A·v = λ·v</span></div></div>
-      <p class="fx-note">v es el vector propio (no nulo) y λ (lambda) es el valor propio: el número que dice cuánto lo estira.</p>
-      <p class="idea">Comprobar es directo: si multiplicar la matriz por un vector te devuelve <strong>ese mismo vector escalado</strong>, era vector propio. Aquí A por v = (1, 1) devuelve (3, 3):</p>
+      <h3>1 · La máquina que tuerce casi todas las flechas</h3>
+      <p class="idea">Antes de nada, recuerda el papel de una matriz: es una <strong>máquina</strong>. Le metes una flecha del plano —un vector— y te devuelve otra flecha: cada renglón multiplica y suma. Esta es la máquina A con la que vamos a trabajar toda la guía:</p>
       <div class="fx" id="checkIntro"></div>
+      <p class="idea">Metámosle una flecha cualquiera. Por ejemplo (1, 0), la que apunta directo a la derecha. Renglón por renglón:</p>
+      <p class="calc"><span class="rw">A·(1,0)</span> arriba: 2·1+1·0=<b>2</b> <span class="sep">•</span> abajo: 1·1+2·0=<b>1</b> <span class="sep">•</span> sale <b>(2, 1)</b></p>
+      <p class="idea">Entró apuntando a la derecha y salió apuntando en diagonal: la máquina la <strong>torció</strong>. Prueba con (0, 1), la que apunta hacia arriba: arriba 2·0 + 1·1 = 1, abajo 1·0 + 2·1 = 2, sale (1, 2) — torcida también, hacia otro lado. Y así con casi cualquier flecha que le metas: sale <strong>apuntando a otra parte</strong>. Ese es el comportamiento normal de una matriz.</p>
+    </section>
+
+    <section class="sec">
+      <h3>2 · Las flechas que salen derechas</h3>
+      <p class="idea">Ahora mete la flecha (1, 1), la diagonal perfecta. Mismas cuentas:</p>
+      <p class="calc"><span class="rw">A·(1,1)</span> arriba: 2·1+1·1=<b>3</b> <span class="sep">•</span> abajo: 1·1+2·1=<b>3</b> <span class="sep">•</span> sale <b>(3, 3)</b></p>
+      <p class="idea">Mira bien lo que pasó. (3, 3) apunta <strong>exactamente hacia donde apuntaba (1, 1)</strong>: está sobre la misma línea, solo que mide el triple. De hecho, (3, 3) = 3·(1, 1). La máquina <strong>no torció esta flecha</strong>: nada más la estiró, tres veces, sobre su propia dirección. Y esta máquina tiene otra dirección así de dócil: mete (1, −1) y sale 2·1 + 1·(−1) = 1 arriba, 1·1 + 2·(−1) = −1 abajo… es decir (1, −1), <strong>idéntica</strong>: estirada por 1, ni crece ni se encoge.</p>
+      <p class="idea">Esas direcciones son oro, porque sobre ellas la máquina —que en general mueve, mezcla y tuerce— se porta como lo más simple que existe: <strong>multiplicar por un número</strong>. Ahora que ya las viste actuar, sus nombres. A una flecha que la máquina no tuerce se le llama <strong>vector propio</strong>: "propio" porque es DE la máquina —su dirección preferida— y cada matriz tiene las suyas. Al número de veces que la estira se le llama <strong>valor propio</strong>, y se apunta con la letra griega <strong>λ</strong> (se lee "lambda"; es la ele del alfabeto griego, la inicial que la tradición eligió para este número). Aquí, (1, 1) es un vector propio de A con λ = 3, y (1, −1) es otro con λ = 1.</p>
+      <p class="idea">La frase "la máquina devuelve la misma flecha, estirada λ veces" se escribe en símbolos así:</p>
+      <div class="fx"><div class="sys"><span class="eq">A·v = λ·v</span></div></div>
+      <p class="fx-note">A es la máquina, v la flecha (el vector propio; la flecha cero no cuenta, porque sale en cero con cualquier máquina y no delata nada) y λ el estiramiento. Si λ está entre 0 y 1 la flecha se encoge; si es negativo, se voltea al lado contrario — pero siempre sobre su propia línea, sin torcerse.</p>
       <div class="check" data-kind="item" data-id="C1def" data-tema="valor_vector_propio" data-level="guiado">
         <div class="qtag">Te toca · decide</div>
-        <p class="q">Para esa A, el vector v = (1, 1) se transforma en (3, 3). ¿Es vector propio y cuál es su valor propio?</p>
+        <p class="q">Para esta máquina A, el vector v = (1, 1) se transforma en (3, 3). ¿Es vector propio y cuál es su valor propio?</p>
         <div class="opts">
           <button class="opt" data-ok="0">No es vector propio: cambió de (1, 1) a (3, 3)</button>
           <button class="opt" data-ok="1">Sí es vector propio, con valor propio 3, porque (3, 3) es 3 veces (1, 1)</button>
@@ -215,10 +229,14 @@
     </section>
 
     <section class="sec">
-      <h3>2 · Cómo se cazan: el polinomio característico</h3>
-      <p class="idea">¿De dónde salen los valores propios? Reescribimos la condición como <strong>(A − λI)v = 0</strong>. Para que exista un vector <strong>no nulo</strong> que cumpla eso, esa matriz debe ser singular: su <strong>determinante</strong> tiene que valer cero. Esa ecuación es el <strong>polinomio característico</strong>, y sus raíces son los valores propios:</p>
+      <h3>3 · Cómo se cazan: el polinomio característico</h3>
+      <p class="idea">Ya sabes reconocer una flecha especial cuando te la enseñan. Pero en el examen nadie te la regala: te dan la máquina y ya. Probar flechas al azar sería eterno, así que el plan bueno va al revés: <strong>cazar primero el número λ</strong>, y con él en la mano, encontrar sus flechas (eso lo hacemos juntas más abajo).</p>
+      <p class="idea">Parte de la única pista que hay: A·v = λ·v. Pasa todo al mismo lado, como en cualquier ecuación: A·v − λ·v = 0 (ese 0 es la flecha cero, (0, 0)). Dan ganas de factorizar la v… pero hay un detalle: A es una máquina y λ es un número suelto, y no se pueden restar tal cual. El arreglo es una matriz que ya conoces: <strong>I</strong>, la <strong>identidad</strong> — unos en la diagonal, ceros fuera. Es <strong>la máquina que no hace nada</strong>: I·v devuelve la misma v. Por eso λ·v es lo mismo que (λI)·v: "estirar todo λ veces", convertido en máquina. Ahora las dos máquinas sí se restan, y la v se factoriza:</p>
+      <div class="fx"><div class="sys"><span class="eq">A·v − λ·v = 0</span><span class="eq">(A − λI)·v = 0</span></div></div>
+      <p class="idea">Lee la segunda línea como una historia: buscamos una máquina, (A − λI), que <strong>aplaste una flecha no nula hasta el cero</strong>. Y de la Unidad 5 sabes exactamente cuándo una máquina puede aplastar así: cuando su <strong>determinante vale 0</strong>, porque entonces colapsa el plano entero a una recta y hay flechas que caen en el cero. Esa es la condición que caza a λ:</p>
       <div class="fx"><div class="sys"><span class="eq">det(A − λI) = 0</span></div></div>
-      <p class="idea">Para una 2×2 hay un atajo que ahorra cuentas y sirve para verificar. ¿Lo recuerdas?</p>
+      <p class="idea">Al desarrollar ese determinante queda una ecuación normal donde la incógnita es λ: un <strong>polinomio</strong>. Se le llama el <strong>polinomio característico</strong> de la matriz — "característico" porque es su huella digital: cada máquina tiene el suyo, y sus raíces son exactamente sus valores propios.</p>
+      <p class="idea">Para las 2×2 hay además un atajo que vale oro. Primero un nombre corto: la <strong>traza</strong> de una matriz es <strong>la suma de su diagonal</strong> (el "rastro" que dejan sus entradas principales). En toda 2×2 el polinomio característico sale siempre con la misma forma: <strong>λ² − (traza)·λ + (det) = 0</strong>. Y sus dos soluciones cumplen algo comodísimo: <strong>suman la traza y multiplican el determinante</strong>. Es verificación gratis: sacas tus dos λ, sumas, multiplicas y compruebas sin rehacer nada.</p>
       <div class="check" data-kind="recall" data-fid="F1_traza_det" data-tema="polinomio_caracteristico">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">Para una matriz 2×2, ¿qué relación cumplen siempre sus dos valores propios?</p>
@@ -227,15 +245,18 @@
           <button class="opt" data-ok="0">Suman el determinante y multiplican la traza</button>
           <button class="opt" data-ok="0">Ambos son iguales al determinante</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El polinomio de una 2×2 es <strong>λ² − (traza)λ + (det) = 0</strong>. Por Vieta, las raíces suman la traza y multiplican el determinante. Así verificas sin repetir toda la cuenta.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>El polinomio de una 2×2 es <strong>λ² − (traza)λ + (det) = 0</strong>. Si sus raíces son λ₁ y λ₂, factoriza como (λ − λ₁)(λ − λ₂); al expandirlo, el número que acompaña a λ es la suma λ₁ + λ₂ y el término suelto es el producto λ₁·λ₂. Por eso suman la traza y multiplican el determinante: así verificas sin repetir toda la cuenta.</p></div>
       </div>
     </section>
 
     <section class="sec">
-      <h3>3 · La meta: separar el estiramiento del giro</h3>
-      <p class="idea"><strong>Diagonalizar</strong> es reescribir la matriz como <strong>A = P·D·P⁻¹</strong>, donde D es <strong>diagonal</strong> (los valores propios en la diagonal) y P tiene los <strong>vectores propios como columnas</strong>. En la base de los vectores propios, la matriz es pura escala. Así se ve para una 2×2:</p>
+      <h3>4 · Diagonalizar: mirar la máquina desde sus ejes</h3>
+      <p class="idea">Falta la jugada final, la que le da nombre al tema. Una matriz <strong>diagonal</strong> es la que solo tiene números en la diagonal y ceros en todo lo demás. Como máquina, es la más fácil del universo, porque <strong>no mezcla nada</strong>: la que tiene 3 y 1 en la diagonal recibe (x, y) y devuelve (3x, 1y) — el primer número por 3, el segundo por 1, cada quien por su lado. Mete (2, 5): sale 3·2 = 6 y 1·5 = 5, o sea (6, 5). Sin cruces, sin torceduras, sin sorpresas.</p>
+      <p class="idea">Ahora conecta todo. Nuestra máquina A parece complicada: mezcla y tuerce. Pero acabamos de descubrirle dos direcciones donde es simplísima: sobre (1, 1) solo multiplica por 3, y sobre (1, −1) solo multiplica por 1. <strong>Diagonalizar</strong> es cambiar el punto de vista: en lugar de describir la máquina con los ejes de siempre, describirla <strong>usando sus direcciones propias como ejes</strong>. Vista desde ahí, su tabla queda limpia: pura diagonal. De ahí el nombre.</p>
+      <p class="idea">La receta tiene dos cajas con nombre. <strong>P</strong> es la matriz que junta los <strong>vectores propios como columnas</strong>, y <strong>D</strong> (D de diagonal) lleva los <strong>valores propios en la diagonal</strong>, en el mismo orden que sus columnas. P⁻¹ es la inversa de P — la máquina de regreso, la misma idea de la Unidad 5. Con eso, la matriz se reescribe así:</p>
       <div class="fx" id="pdpIntro"></div>
       <p class="fx-note">Columnas de P: los vectores propios (1, 1) y (1, −1). Diagonal de D: los valores propios 3 y 1. Cada eje se estira por su valor propio, sin giros ni mezclas.</p>
+      <p class="idea">Lee <strong>A = P·D·P⁻¹</strong> de derecha a izquierda, como tres pasos sobre una flecha: P⁻¹ la <strong>traduce</strong> al idioma de los ejes propios, D la <strong>estira</strong> (la parte fácil), y P la <strong>regresa</strong> al idioma normal. La máquina complicada era una máquina simple mirada desde los ejes equivocados.</p>
       <div class="check" data-kind="item" data-id="C3meta" data-tema="diagonalizacion" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">En A = P·D·P⁻¹, ¿qué guarda cada matriz?</p>
@@ -251,7 +272,7 @@
     <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Diagonalicemos esta matriz completa. No la mires nada más: en cada paso <strong>tú decides la operación</strong> y yo la aplico.</p>
+      <p class="idea" style="font-size:17px">Diagonalicemos de principio a fin la máquina A que ya conoces, ahora fingiendo que no sabemos nada de ella. No la mires nada más: en cada paso <strong>tú decides la operación</strong> y yo la aplico.</p>
       <div class="estep"><div class="oprow">Matriz A</div><div class="fx" id="d0"></div></div>
 
       <div class="check" data-kind="item" data-id="E1pred" data-tema="polinomio_caracteristico" data-level="guiado">
@@ -328,12 +349,13 @@
       <p class="idea" style="font-size:17px">Listo: <strong>A = P·D·P⁻¹</strong>. Cada columna de P apunta en una dirección propia y D dice cuánto se estira en cada una: por <strong>3</strong> y por <strong>1</strong>. Fíjate en el orden que seguiste: polinomio → valores propios → un vector por valor → armar P y D. Ese es todo el método.</p>
     </section>
 
-    <h2 class="modhead">Sube el tamaño · el caso Markov en dos fases</h2>
+    <h2 class="modhead">Sube el tamaño · la ciudad y el suburbio</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Volvamos al reparto ciudad-suburbio del inicio. El salto no es que la matriz sea más grande, sino que ahora <strong>los números no son enteros</strong> y queremos una sola cosa: el <strong>estado estable</strong>. Se hace en <strong>dos fases</strong>:</p>
+      <p class="idea" style="font-size:17px">Volvamos al problema del inicio, que quedó prometido. Antes, dos nombres que el examen usa. A una regla de mudanzas como esta —porcentajes fijos donde <strong>cada columna suma 1</strong>, porque nadie aparece ni desaparece— se le llama <strong>cadena de Markov</strong>, por Andréi Márkov, el matemático que estudió estos procesos. Su matriz se llama <strong>matriz de transición</strong> (transición = el paso de un año al siguiente) y por costumbre se escribe con la letra P — ojo: es otra P, no la de las columnas de vectores propios. Y al reparto que buscamos, el que ya no cambia de un año al otro, se le llama <strong>estado estable</strong>.</p>
+      <p class="idea" style="font-size:17px">Míralo con tus ojos nuevos: si un reparto ya no cambia, la máquina lo devuelve <strong>idéntico</strong>. Una flecha que sale igual, estirada por 1… ¡el estado estable es un <strong>vector propio con λ = 1</strong>! El salto de esta sección no es que la matriz crezca: es que <strong>los números traen decimales</strong> y solo nos interesa ese vector. Se hace en <strong>dos fases</strong>:</p>
       <ul class="fases">
-        <li><strong>Fase 1 — el valor propio:</strong> toda matriz de Markov tiene siempre a <em>λ = 1</em>; el otro se saca con la traza, sin polinomio.</li>
-        <li><strong>Fase 2 — el vector propio de λ = 1:</strong> resolver (P − I)v = 0 da el reparto de equilibrio.</li>
+        <li><strong>Fase 1 — los valores propios:</strong> en una cadena de Markov, <em>λ = 1</em> viene garantizado (siempre existe un reparto de equilibrio); el otro sale con la traza, sin armar polinomio.</li>
+        <li><strong>Fase 2 — el vector propio de λ = 1:</strong> resolver (P − I)v = 0; ese vector, pasado a proporciones, es el reparto de equilibrio.</li>
       </ul>
       <div class="estep"><div class="oprow">Matriz de transición P</div><p>90% de la ciudad se queda, 10% se va; 20% del suburbio regresa, 80% se queda. Cada columna suma 1:</p><div class="fx" id="m0"></div></div>
 
@@ -366,8 +388,8 @@
     </section>
 
     <section class="sec">
-      <h3>Míralo: las direcciones que no giran</h3>
-      <p class="idea">Un vector propio es una <strong>flecha que la matriz solo estira</strong>, sin cambiar su dirección. Un vector cualquiera sí se gira. Compara los dos casos con la matriz A del ejemplo:</p>
+      <h3>Míralo: las direcciones que la máquina no tuerce</h3>
+      <p class="idea">Un vector propio es una <strong>flecha que la máquina solo estira</strong>, sin cambiarle la dirección. Una flecha cualquiera sí sale torcida. Compara los dos casos con la matriz A de toda la guía:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="propio">Vector propio</button>
@@ -380,7 +402,7 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Un último regalo de la diagonalización: <strong>potencias de una matriz</strong>. Elevar A a la 10 a mano sería brutal, pero con A = P·D·P⁻¹ solo elevas la diagonal, que es trivial:</p>
+      <p class="idea" style="font-size:17px">Un último regalo de la diagonalización: <strong>potencias de una matriz</strong>. A² significa aplicar la máquina dos veces seguidas (A·A), y A¹⁰, diez veces: una pila de multiplicaciones de matrices, brutal a mano. Pero escribe A·A con la receta: P·D·P⁻¹·P·D·P⁻¹. Justo en medio queda P⁻¹·P — la traducción de regreso seguida de la de ida, que juntas <strong>no hacen nada</strong> — y se cancela: sobra P·D²·P⁻¹. Lo mismo pasa a cualquier potencia: lo único que de verdad se eleva es la diagonal, que son números sueltos:</p>
       <div class="fx"><div class="sys"><span class="eq">Aⁿ = P·Dⁿ·P⁻¹</span></div></div>
       <div class="estep"><div class="oprow">A² con la diagonal</div><p>Para la A del ejemplo (valores propios 3 y 1), elevo solo la diagonal de D al cuadrado:</p><p class="calc"><span class="rw">D²</span> 3²=<b>9</b> <span class="sep">•</span> 1²=<b>1</b> <span class="sep">•</span> reconstruyo con P y P⁻¹</p><div class="fx" id="pow2"></div></div>
       <p class="fx-note">Se verifica multiplicando A·A directo: da lo mismo. La diagonalización convierte una potencia de matriz en una potencia de números.</p>

@@ -124,7 +124,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -154,7 +154,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -190,17 +190,55 @@
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">Una tienda vende dos combos. El <strong>combo A lleva 2 cafés y 1 pan</strong>; el <strong>combo B lleva 1 café y 3 panes</strong>. Un café cuesta $30 y un pan $20. Quieres el precio de cada combo, y además saber: si te dan el precio total, ¿puedes <strong>deshacer</strong> la cuenta y recuperar cuántos cafés y panes había?</p>
       <div class="fx" id="prob0"></div>
-      <p class="idea" style="font-size:17px">La tabla de la izquierda son las <strong>recetas</strong>; la de la derecha, los <strong>precios</strong>. Multiplicarlas te da el precio de cada combo en un solo paso. Y ese “deshacer” la cuenta es justo la <strong>matriz inversa</strong>. Para el final de esta guía vas a multiplicar tablas como esta e invertir una tú sola, <strong>sin calculadora</strong>.</p>
+      <p class="idea" style="font-size:17px">La tabla de la izquierda guarda las <strong>recetas</strong> de los combos — un renglón por combo —; la columna de la derecha, los <strong>precios</strong>. En esta guía vas a aprender a operar tablas enteras como si fueran números: a multiplicarlas para sacar los dos precios de un solo golpe, a voltearlas, y a construir la tabla que <strong>deshace</strong> una cuenta. Todo a mano, <strong>sin calculadora</strong>.</p>
     </section>
 
-    <h2 class="modhead">La idea</h2>
+    <h2 class="modhead">La idea · empecemos por lo más simple</h2>
 
     <section class="sec">
-      <h3>1 · Multiplicar es renglón por columna</h3>
-      <p class="idea">El producto de matrices <strong>no</strong> se hace entrada por entrada. Cada número del resultado nace de <strong>un renglón de la izquierda</strong> emparejado con <strong>una columna de la derecha</strong>: se multiplican término a término y se suma todo. La entrada de la fila <em>i</em>, columna <em>j</em> usa el renglón <em>i</em> y la columna <em>j</em>.</p>
+      <h3>1 · Una matriz es una tabla</h3>
+      <p class="idea">Antes de operar nada, ponte de acuerdo con el objeto. Una <strong>matriz</strong> no es más que lo que acabas de ver: una <strong>tabla de números</strong>, ordenada en renglones y columnas. En la tabla de la tienda, cada <strong>renglón</strong> es un combo y cada <strong>columna</strong> es un ingrediente. De hecho ya usaste una en la Unidad 1 sin darle tanta importancia: la matriz aumentada era la tabla donde guardabas los números de un sistema. Ahora la tabla pasa a ser la protagonista.</p>
+      <p class="idea">El <strong>tamaño</strong> de una matriz se dice contando <strong>renglones × columnas, en ese orden</strong>. La tabla de recetas tiene 2 renglones (dos combos) y 2 columnas (café y pan): es de <strong>2×2</strong>. Una tabla de 2 renglones y 3 columnas es de 2×3 — que no es lo mismo que una de 3×2, igual que 2 combos de 3 ingredientes no es lo mismo que 3 combos de 2 ingredientes.</p>
+      <p class="idea">Y cada casilla tiene su dirección, como un asiento de cine: <strong>primero la fila, luego el lugar</strong>. La casilla de la fila 1, columna 2 se abrevia <strong>a<sub>12</sub></strong>: la letra es el nombre de la matriz y los dos numeritos de abajo dicen fila y columna. En la tabla de recetas, a<sub>12</sub> = 1: el pan del combo A.</p>
+      <div class="check" data-kind="item" data-id="TABchk" data-tema="lectura_matriz" data-level="guiado">
+        <div class="qtag">Te toca · lee la tabla</div>
+        <p class="q">En una matriz A, ¿qué número es <strong>a<sub>23</sub></strong>?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El de la fila 2, columna 3: fila primero, columna después</button>
+          <button class="opt" data-ok="0">El de la columna 2, fila 3: columna primero, fila después</button>
+          <button class="opt" data-ok="0">El resultado de multiplicar 2 por 3</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Los numeritos de abajo se leen siempre en el mismo orden: <strong>fila, luego columna</strong>. a<sub>23</sub> vive en el renglón 2, columna 3 — como buscar un asiento: fila 2, lugar 3.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>2 · El costo de un combo: multiplica y suma</h3>
+      <p class="idea">Olvida las matrices un momento y saca el precio del combo A como lo harías en la caja. Lleva 2 cafés de $30 y 1 pan de $20. ¿Qué haces? <strong>Multiplicas cada cantidad por su precio, y sumas todo</strong>:</p>
+      <div class="fx"><div class="sys"><span class="eq">2·30 + 1·20 = 60 + 20 = 80</span></div></div>
+      <p class="idea">El combo A cuesta <strong>$80</strong>. Ahora fíjate de dónde salió cada número: las cantidades (2 y 1) son el <strong>renglón</strong> del combo A en la tabla de recetas, y los precios (30 y 20) son la <strong>columna</strong> de precios. La cuenta completa fue: <strong>un renglón contra una columna — multiplicar en pares y sumar</strong>. Y cada cantidad se emparejó con SU precio: los cafés con el precio del café, los panes con el del pan. Nunca cruzado.</p>
+      <p class="idea">Esa cuenta de caja es el corazón de toda la unidad. Hazla tú con el otro combo:</p>
+      <div class="check" data-kind="item" data-id="COSTchk" data-tema="producto_matrices" data-level="guiado">
+        <div class="qtag">Te toca · saca la cuenta</div>
+        <p class="q">El combo B lleva <strong>1 café</strong> ($30) y <strong>3 panes</strong> ($20). ¿Cuánto cuesta?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">30 + 20 = $50: sumo los precios y ya</button>
+          <button class="opt" data-ok="1">1·30 + 3·20 = 30 + 60 = $90</button>
+          <button class="opt" data-ok="0">1·20 + 3·30 = 20 + 90 = $110</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Renglón del combo B = (1, 3); columna de precios = (30, 20). En pares: el 1 va con el 30 (cafés con precio de café) y el 3 con el 20 (panes con precio de pan). Suma: 30 + 60 = 90. La opción de $110 empareja cruzado — el error clásico — y la de $50 olvida multiplicar por las cantidades.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>3 · Ahora sí: el producto de matrices</h3>
+      <p class="idea">¿Y si la tienda abre una sucursal donde el café y el pan cuestan diferente? Los precios ya no serían una columna, sino <strong>dos</strong>: una por sucursal. Y tú querrías una tabla nueva de costos: en la fila del combo A, lo que cuesta A en cada sucursal; en la del combo B, lo mismo para B. Cada casilla de esa tabla nueva sale de <strong>una cuenta de caja</strong>: el renglón de su combo contra la columna de precios de su sucursal.</p>
+      <p class="idea">A esa operación — hacer todas las cuentas renglón-contra-columna de un jalón y acomodar los resultados en una tabla nueva — se le llama <strong>producto de matrices</strong>, y se escribe <strong>A·B</strong>: A es la tabla de la izquierda (la que pone los renglones), B la de la derecha (la que pone las columnas). La regla, ya con todas sus letras: <strong>la casilla de la fila i, columna j del resultado sale de emparejar el renglón i de A con la columna j de B</strong>, multiplicando en pares y sumando. Por eso se dice que el producto es <strong>renglón por columna</strong>: cada casilla nace de un renglón completo y una columna completa, nunca de una casilla contra otra casilla.</p>
+      <p class="idea">Míralo con dos tablas de puros números, sin tienda. Para la casilla de arriba a la izquierda del resultado — la llamaremos c<sub>11</sub>: fila 1, columna 1 — tomo el renglón 1 de la izquierda, (1, 2, 0), y la columna 1 de la derecha, (2, 0, 4):</p>
       <div class="fx" id="prodA"></div>
       <p class="fx-note">Para la casilla de arriba a la izquierda: primer renglón de la primera contra primera columna de la segunda.</p>
-      <div class="fx"><div class="sys"><span class="eq">(1)(2) + (2)(0) + (0)(4) = 2</span></div></div>
+      <div class="fx"><div class="sys"><span class="eq">1·2 + 2·0 + 0·4 = 2 + 0 + 0 = 2</span></div></div>
+      <p class="idea">Idéntico a la caja: multiplicar en pares, sumar. Y así con cada casilla: c<sub>12</sub> usa el renglón 1 con la columna 2, c<sub>21</sub> el renglón 2 con la columna 1… Siempre <strong>una casilla a la vez</strong>, cada una con su propio renglón y su propia columna.</p>
       <div class="check" data-kind="item" data-id="PRODchk" data-tema="producto_matrices" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">Para la casilla de arriba a la <strong>derecha</strong> del resultado, ¿qué renglón y qué columna emparejas?</p>
@@ -214,8 +252,9 @@
     </section>
 
     <section class="sec">
-      <h3>2 · Cuándo el producto está definido</h3>
-      <p class="idea">No cualesquiera dos matrices se pueden multiplicar. Para hacer renglón por columna, el renglón de la izquierda y la columna de la derecha deben tener <strong>la misma cantidad de números</strong>. En dimensiones: las <strong>de en medio deben coincidir</strong>, y las <strong>de los extremos</strong> dan el tamaño del resultado.</p>
+      <h3>4 · Cuándo el producto está definido</h3>
+      <p class="idea">La cuenta de la caja tiene un requisito escondido. Si el combo lleva 3 ingredientes, la lista de precios debe traer <strong>3 precios</strong> — ni uno más, ni uno menos —, porque cada cantidad se empareja con el suyo. Con matrices es igual: para hacer renglón por columna, el renglón de la izquierda y la columna de la derecha deben tener <strong>la misma cantidad de números</strong>. Si no, no hay forma de emparejar, y el producto no se puede hacer.</p>
+      <p class="idea">¿Cómo checarlo rápido? El renglón de la izquierda tiene tantos números como <strong>columnas</strong> tiene su matriz; la columna de la derecha, tantos como <strong>renglones</strong> tiene la suya. Así que escribe los dos tamaños seguidos — 2×3 por 3×2 — y mira los <strong>números de en medio</strong>: si coinciden, el producto existe; y los <strong>de los extremos</strong> te dicen de qué tamaño queda el resultado.</p>
       <div class="viz">
         <div class="viz-plane fx" id="dimViz"></div>
         <p class="viz-cap" id="dimCap">Una de 2×3 por una de 3×2: los treses de en medio coinciden, así que el producto existe y mide 2×2.</p>
@@ -234,8 +273,11 @@
     </section>
 
     <section class="sec">
-      <h3>3 · El orden importa</h3>
-      <p class="idea">Con números da igual: 3 por 5 es lo mismo que 5 por 3. Con matrices <strong>no</strong>. A veces <em>A por B</em> existe pero <em>B por A</em> ni siquiera está definido; y cuando ambos existen, casi nunca dan lo mismo. Por eso siempre importa quién va primero.</p>
+      <h3>5 · El orden importa</h3>
+      <p class="idea">Con números sueltos, multiplicar es de buenas: 3·5 = 5·3, el orden da igual. Con matrices <strong>no</strong>, y conviene entender por qué antes de memorizarlo. Piensa en vestirte: ponerte calcetines y luego zapatos no es lo mismo que ponerte zapatos y luego calcetines. Cuando cada paso <strong>transforma</strong> lo que recibe, el orden de los pasos cambia el resultado. Y multiplicar por una matriz es eso: una acción completa sobre lo que le des — no un numerito suelto.</p>
+      <p class="idea">En la tienda ya se ve: recetas·precios se puede (2×2 por 2×1, los de en medio son 2 y 2), pero precios·recetas ni siquiera se puede armar: sería 2×1 por 2×2, y en medio quedan un 1 y un 2 que no coinciden. Y aun cuando los dos órdenes existen, casi nunca dan lo mismo. Compruébalo con una sola casilla: toma A = renglón (1, 1) y renglón (0, 1), y B = renglón (1, 0) y renglón (1, 1). Calcula la c<sub>11</sub> de cada orden:</p>
+      <div class="fx"><div class="sys"><span class="eq">A·B: c<sub>11</sub> = 1·1 + 1·1 = 2</span><span class="eq">B·A: c<sub>11</sub> = 1·1 + 0·0 = 1</span></div></div>
+      <p class="idea">Misma pareja de matrices, distinto orden — y ya la primera casilla salió diferente. Por eso, con matrices, siempre se dice <strong>quién va primero</strong>.</p>
       <div class="check" data-kind="recall" data-fid="F1_conmutatividad" data-tema="producto_matrices">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">Con matrices, ¿el orden en que multiplicas importa?</p>
@@ -249,10 +291,13 @@
     </section>
 
     <section class="sec">
-      <h3>4 · La transpuesta: voltear sobre la diagonal</h3>
-      <p class="idea">La <strong>transpuesta</strong> vuelca la matriz sobre su diagonal: el renglón 1 se convierte en la columna 1, el renglón 2 en la columna 2. Una de 2×3 se transpone a una de 3×2 (se intercambian filas y columnas).</p>
+      <h3>6 · La transpuesta: voltear la tabla</h3>
+      <p class="idea">A veces la misma información conviene verla al revés. Tu tabla de la tienda tiene los combos como renglones y los ingredientes como columnas. El proveedor querría la lista <strong>por ingrediente</strong>: el café como un renglón (cuánto pide cada combo), el pan como otro. No es información nueva: es la <strong>misma tabla, volteada</strong> — lo que era renglón pasa a ser columna, en el mismo orden.</p>
+      <p class="idea">Con números se ve de inmediato. El renglón (1, 2, 3) se pone de pie y queda como la primera columna; el (4, 5, 6), como la segunda:</p>
       <div class="fx" id="transEx"></div>
       <p class="fx-note">Cada renglón de la izquierda es una columna a la derecha, en el mismo orden.</p>
+      <p class="idea">A esa tabla volteada se le llama la <strong>transpuesta</strong> de A — "trans-" quiere decir "al otro lado": los renglones pasan al otro lado, a ser columnas — y se escribe <strong>A<sup>T</sup></strong>, con la T de transpuesta. El tamaño se voltea con ella: una de 2×3 se transpone a una de 3×2.</p>
+      <p class="idea">Un detalle que vamos a usar mucho: las casillas donde el número de fila y el de columna coinciden — a<sub>11</sub>, a<sub>22</sub>, a<sub>33</sub>… — forman la <strong>diagonal principal</strong>, la línea que baja desde la esquina de arriba a la izquierda. Al transponer, esas casillas <strong>no se mueven</strong>: la tabla gira sobre esa línea como si fuera una bisagra.</p>
       <div class="check" data-kind="item" data-id="TRchk" data-tema="transpuesta" data-level="guiado">
         <div class="qtag">Te toca · predice</div>
         <p class="q">Si una matriz mide <strong>3×5</strong>, ¿qué tamaño tiene su transpuesta?</p>
@@ -266,10 +311,12 @@
     </section>
 
     <section class="sec">
-      <h3>5 · La identidad: el 1 de las matrices</h3>
-      <p class="idea">La <strong>matriz identidad</strong> tiene unos en la diagonal y ceros afuera. Es el <strong>1 de las matrices</strong>: multiplicar por ella no cambia nada, igual que multiplicar un número por 1. Esta es la identidad de tamaño 3:</p>
+      <h3>7 · La identidad: el 1 de las matrices</h3>
+      <p class="idea">Entre los números hay uno muy especial: el 1. Multiplicar por 1 <strong>no hace nada</strong>: 7·1 = 7, 80·1 = 80. Suena inútil, pero "no hacer nada" es la referencia que necesitas para poder hablar de <strong>deshacer</strong> (eso viene en el siguiente escalón). Pregunta natural: ¿existirá una matriz con ese papel — una que, al multiplicar por ella, deje cualquier tabla igualita?</p>
+      <p class="idea">Existe, y tiene esta pinta: <strong>unos en la diagonal principal, ceros en todo lo demás</strong>. Esta es la de tamaño 3:</p>
       <div class="fx" id="identEx"></div>
       <p class="fx-note">Multiplicar cualquier matriz por la identidad del tamaño correcto la deja igual: A por I es A.</p>
+      <p class="idea">Se llama <strong>matriz identidad</strong> — deja a cada matriz idéntica a como estaba — y se escribe <strong>I</strong>. ¿Por qué funciona? Haz una casilla y lo ves: al emparejar un renglón con una columna de I, el único 1 de esa columna deja pasar un solo número, y los ceros apagan todos los demás. Sale exactamente el número que ya estaba ahí.</p>
       <div class="check" data-kind="item" data-id="IDchk" data-tema="identidad" data-level="guiado">
         <div class="qtag">Te toca · decide</div>
         <p class="q">Multiplicas una matriz A por la identidad de su mismo tamaño. ¿Qué obtienes?</p>
@@ -282,10 +329,29 @@
       </div>
     </section>
 
+    <section class="sec">
+      <h3>8 · La inversa: la tabla que deshace</h3>
+      <p class="idea">Casi todo lo que haces con números se puede <strong>deshacer</strong>. ¿Multiplicaste por 5? Divide entre 5 y regresas a donde estabas: 7 → 35 → 7. Deshacer una acción significa que, al final del viaje de ida y vuelta, quede <strong>como si no hubieras hecho nada</strong>. Y "no hacer nada", en matrices, ya tiene nombre: la identidad.</p>
+      <p class="idea">Eso mismo se busca aquí. La <strong>inversa</strong> de A es la matriz que deshace lo que A hace: al multiplicarlas, los efectos se cancelan y queda la identidad. Se escribe <strong>A<sup>−1</sup></strong> — y ese −1 de arriba viene de los números: 5<sup>−1</sup> es 1/5, el número que multiplica a 5 para dar 1. Aquí es igual, con I en el papel del 1:</p>
+      <div class="fx"><div class="sys"><span class="eq">A·A<sup>−1</sup> = I</span></div></div>
+      <p class="idea">Ojo: <strong>no toda matriz se puede deshacer</strong>. Con números ya conoces al culpable: el 0. Multiplicar por 0 <strong>aplasta</strong>: 7·0 = 0 y 4·0 = 0. Si solo ves el resultado (0), es imposible saber de dónde venías — la información se destruyó, y no existe "dividir entre 0" que la recupere. Hay matrices que aplastan igual, y esas tampoco tienen inversa; más abajo aprenderás a delatarlas.</p>
+      <p class="idea">Esto es justo el "deshacer la cuenta" de la tienda del inicio: si la tabla de recetas convierte "cafés y panes" en precios, su inversa convierte los precios de vuelta en "cafés y panes". Solo falta aprender a <strong>encontrarla</strong> — a eso vamos ya.</p>
+      <div class="check" data-kind="item" data-id="INVchk" data-tema="inversa_concepto" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">¿Qué significa que B sea la <strong>inversa</strong> de A?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Que B es A volteada: los renglones pasan a ser columnas</button>
+          <button class="opt" data-ok="0">Que B tiene los mismos números que A pero con el signo cambiado</button>
+          <button class="opt" data-ok="1">Que B deshace lo que A hace: A·B da la identidad</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Inversa = la que <strong>deshace</strong>: A·B = I, como 5 por 1/5 da 1. Voltear renglones y columnas es la <strong>transpuesta</strong> (otra operación distinta), y cambiar signos no deshace nada.</p></div>
+      </div>
+    </section>
+
     <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Multipliquemos una de 2×3 por una de 3×2. Como los treses de en medio coinciden, el resultado es 2×2. No mires nada más: en cada casilla <strong>tú decides el emparejamiento</strong> y yo hago la cuenta.</p>
+      <p class="idea" style="font-size:17px">Multipliquemos una de 2×3 por una de 3×2 — las mismas dos tablas del escalón 3. Como los treses de en medio coinciden, el resultado es 2×2. En cada casilla <strong>tú decides el emparejamiento</strong> y yo hago la cuenta.</p>
       <div class="estep"><div class="oprow">Las dos matrices</div><div class="fx" id="pe0"></div></div>
 
       <div class="check" data-kind="item" data-id="E1pred" data-tema="producto_matrices" data-level="guiado">
@@ -341,7 +407,7 @@
 
     <h2 class="modhead">Sube el tamaño · invertir por Gauss-Jordan</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora lo que de verdad cae en examen: <strong>invertir una matriz</strong>. La inversa es la matriz que “deshace” a la original —multiplicarlas da la identidad—. El truco es hacerlo en <strong>dos movimientos</strong> conocidos:</p>
+      <p class="idea" style="font-size:17px">Ya sabes <strong>qué</strong> es la inversa: la tabla que deshace, la que cumple A·A<sup>−1</sup> = I. Falta el <strong>cómo encontrarla</strong> — y esto es lo que de verdad cae en examen. El truco es elegante: mientras conviertes A en la identidad con las operaciones de renglón que ya dominas, una copia de la identidad viaja a un lado <strong>grabando el camino de deshacer</strong>… y termina convertida en A<sup>−1</sup>. En la práctica son <strong>dos movimientos</strong>:</p>
       <ul class="fases">
         <li><strong>Pega la identidad:</strong> forma el bloque <em>[A | I]</em>, con A a la izquierda y la identidad a la derecha.</li>
         <li><strong>Reduce hasta la identidad:</strong> con operaciones de renglón, lleva la izquierda a la identidad; lo que quede a la derecha <em>es</em> la inversa.</li>
@@ -381,7 +447,8 @@
 
     <section class="sec">
       <h3>Cuándo existe la inversa</h3>
-      <p class="idea">No toda matriz cuadrada tiene inversa. Al reducir <strong>[A | I]</strong> pasa una de dos cosas: o la izquierda llega a la identidad —y entonces existe— o aparece un <strong>renglón de ceros</strong> en la parte izquierda y ahí se atora: <strong>no hay inversa</strong>. Esa matriz se llama <strong>singular</strong>. Toca cada caso:</p>
+      <p class="idea">¿Recuerdas la matriz que <strong>aplasta</strong>, como multiplicar por 0? Aquí es donde se delata. Al reducir <strong>[A | I]</strong> pasa una de dos cosas. O la izquierda llega a la identidad — y la inversa existe y queda a la derecha —, o en el camino aparece un <strong>renglón de puros ceros</strong> en la parte izquierda. Ese renglón de ceros es la huella del aplastón: una parte de la información se destruyó, ya no hay forma de llegar a la identidad, y la cuenta <strong>no se puede deshacer</strong>: no hay inversa.</p>
+      <p class="idea">A las matrices sin inversa se les llama <strong>singulares</strong> — "singular" en el sentido de rara, defectuosa: no tiene pareja que la deshaga. Toca cada caso:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="existe">Sí existe</button>
@@ -405,7 +472,8 @@
 
     <section class="sec">
       <h3>Matrices con nombre propio</h3>
-      <p class="idea">Algunas matrices aparecen tanto que tienen nombre. Conviene reconocerlas de un vistazo. <strong>Diagonal</strong>: solo la diagonal puede ser distinta de cero. <strong>Simétrica</strong>: es igual a su transpuesta, un espejo sobre la diagonal (la entrada de fila <em>i</em>, columna <em>j</em> coincide con la de fila <em>j</em>, columna <em>i</em>). <strong>Triangular superior</strong>: todo lo de debajo de la diagonal es cero.</p>
+      <p class="idea">Algunas matrices aparecen tanto que se ganaron nombre propio, y conviene reconocerlas de un vistazo. Los tres nombres hablan de la <strong>forma</strong> de la tabla, siempre con la diagonal principal como referencia.</p>
+      <p class="idea"><strong>Diagonal</strong>: solo la diagonal principal puede tener números; todo lo demás es cero. <strong>Simétrica</strong>: la tabla es su propio espejo sobre la diagonal — la casilla a<sub>12</sub> es igual a la a<sub>21</sub>, la a<sub>13</sub> a la a<sub>31</sub>… o dicho corto, es igual a su transpuesta (A<sup>T</sup> = A). <strong>Triangular superior</strong>: los números forman un triángulo en la parte de arriba; debajo de la diagonal, puro cero — justo la "escalera" que te queda a media reducción en Gauss.</p>
       <div class="fx" id="specEx"></div>
       <p class="fx-note">De izquierda a derecha: diagonal, simétrica, triangular superior.</p>
       <div class="check" data-kind="item" data-id="SPECchk" data-tema="matrices_nombradas" data-level="solo">

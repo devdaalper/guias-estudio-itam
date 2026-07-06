@@ -124,7 +124,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -154,7 +154,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -189,18 +189,23 @@
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">En una cafetería, <strong>2 cafés y 3 jugos cuestan $13</strong>. Y <strong>1 café y 2 jugos cuestan $8</strong>. ¿Cuánto cuesta cada uno?</p>
+      <p class="idea" style="font-size:17px">Para no escribir frases completas, abreviemos: llamemos <strong>c</strong> a lo que cuesta un café y <strong>j</strong> a lo que cuesta un jugo. Son números que todavía no conocemos — y a un número desconocido se le llama <strong>incógnita</strong>. Con esas letras, las dos frases del problema quedan así de cortas:</p>
       <div class="fx"><div class="sys"><span class="eq">2c + 3j = 13</span><span class="eq">1c + 2j = 8</span></div></div>
-      <p class="idea" style="font-size:17px">Con dos incógnitas quizá lo tantees. Pero con tres o cuatro, el tanteo se derrumba. Necesitamos un método que <strong>siempre</strong> funcione y que se haga <strong>a mano, sin calculadora</strong>. Ese método es <strong>Gauss-Jordan</strong>: para el final de esta guía vas a resolver justo este problema tú sola.</p>
+      <p class="idea" style="font-size:17px">Lee la primera en voz alta: "dos cafés más tres jugos cuestan trece". Es la misma frase de arriba, en versión corta. Y como las dos deben cumplirse <strong>a la vez</strong> (la cafetería cobra los mismos precios en los dos tickets), al par se le llama un <strong>sistema de ecuaciones</strong>.</p>
+      <p class="idea" style="font-size:17px">Con dos incógnitas quizá lo saques tanteando. Pero con tres o cuatro, el tanteo se derrumba. Necesitamos un método que <strong>siempre</strong> funcione y que se haga <strong>a mano, sin calculadora</strong>. Ese método se llama <strong>Gauss-Jordan</strong> y es el tema de esta guía: para el final vas a resolver justo este problema tú sola.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
       <h3>1 · De ecuaciones a una tabla de números</h3>
-      <p class="idea">Lo primero es soltar las letras y quedarnos con los números ordenados. Un sistema se reescribe como una <strong>matriz aumentada</strong>: los coeficientes a la izquierda, los resultados a la derecha, separados por una barra. El mismo sistema en sus dos formas:</p>
+      <p class="idea">Piensa en cómo anota el mesero los pedidos. No escribe "la mesa cinco quiere dos cafés y tres jugos, y son trece pesos": hace una <strong>tabla</strong>, con una columna para los cafés, otra para los jugos y otra para el total. Las palabras estorban; los números en orden bastan.</p>
+      <p class="idea">Con las ecuaciones haremos exactamente eso: <strong>quitar el ruido</strong> —las letras, los signos de más, el igual— y quedarnos solo con los números, cada uno en su lugar. Mira este sistema y, debajo, su tabla:</p>
       <div class="fx"><div class="sys"><span class="eq">x + 2y = 5</span><span class="eq">3x − y = 1</span></div></div>
       <div class="fx" id="mtxIntro"></div>
-      <p class="idea">Cada renglón es una ecuación; cada columna, una incógnita. Resolver el sistema será <strong>simplificar</strong> esta tabla hasta poder <strong>leer</strong> la respuesta directamente. Antes de seguir, comprueba que la lees bien:</p>
+      <p class="idea">Aprende a leerla, porque vamos a vivir en ella. Cada <strong>renglón</strong> (línea horizontal) es una ecuación: el primero guarda 1, 2 y 5, que es x + 2y = 5 sin adornos. Cada <strong>columna</strong> (línea vertical) es una incógnita: la primera columna (el 1 y el 3) tiene los números que acompañan a x; la segunda (el 2 y el −1), los que acompañan a y. La <strong>barra vertical</strong> hace el papel del signo "=", y a su derecha viven los resultados: 5 y 1.</p>
+      <p class="idea">Dos detalles que atrapan a todo el mundo. Cuando la letra va <strong>sola</strong>, como la x de la primera ecuación, su número es un <strong>1 invisible</strong> — y en la tabla ese 1 sí se escribe. Y cuando la letra lleva signo de <strong>menos</strong>, como −y, su número entra <strong>negativo</strong>: −1.</p>
+      <p class="idea">Ahora los nombres. A una tabla de números como esta se le llama <strong>matriz</strong>. A los números que acompañan a las letras se les llama <strong>coeficientes</strong>. Y como a la tabla de coeficientes le <strong>aumentamos</strong> una columna extra —la de los resultados—, el nombre completo es <strong>matriz aumentada</strong>. El plan de toda la unidad cabe en una frase: resolver el sistema será <strong>simplificar</strong> esta tabla hasta poder <strong>leer</strong> la respuesta directamente. Antes de seguir, comprueba que ya la lees bien:</p>
       <div class="check" data-kind="item" data-id="MAchk" data-tema="matriz_aumentada" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">¿Cuál matriz aumentada corresponde a este sistema?</p>
@@ -215,8 +220,12 @@
     </section>
 
     <section class="sec">
-      <h3>2 · Las 3 operaciones permitidas</h3>
-      <p class="idea">Para simplificar la tabla solo hay <strong>tres movidas válidas</strong>. Ninguna cambia las soluciones porque todas se pueden deshacer. ¿Las recuerdas antes de mirarlas?</p>
+      <h3>2 · Las 3 movidas permitidas</h3>
+      <p class="idea">Queremos transformar la tabla en tablas cada vez más simples <strong>sin cambiar la respuesta</strong> del problema. ¿Qué movidas son legales? La clave está en recordar qué es cada renglón: <strong>una ecuación disfrazada</strong>, un hecho verdadero sobre los precios. Todo lo que puedas hacer con hechos verdaderos sin romperlos, lo puedes hacer con los renglones. Y resulta que hay exactamente tres movidas así.</p>
+      <p class="idea"><strong>Movida 1: intercambiar dos renglones.</strong> Es cambiar el orden en que anotas los pedidos: da igual apuntar primero el de la mesa 1 o el de la mesa 2. La información es la misma.</p>
+      <p class="idea"><strong>Movida 2: multiplicar un renglón por un número (que no sea cero).</strong> Si 1 café y 2 jugos cuestan $8, entonces el doble de ese pedido —2 cafés y 4 jugos— cuesta $16. Mismo hecho, dicho al doble. ¿Y por qué se prohíbe el cero? Porque multiplicar todo por cero deja el renglón en "0 = 0": cierto, pero vacío. Sería <strong>borrar</strong> ese pedido del ticket, y lo borrado no se recupera.</p>
+      <p class="idea"><strong>Movida 3: sumar a un renglón un múltiplo de otro.</strong> Junta dos hechos para fabricar un tercero. Si un pedido cuesta $13 y otro cuesta $8, llevarte los dos juntos cuesta $21 — y las cantidades de café y de jugo también se suman. El hecho nuevo sigue siendo verdadero. Con restas funciona igual, y esta movida es la estrella del método: restando el múltiplo adecuado vas a <strong>fabricar ceros</strong> justo donde los números estorban.</p>
+      <p class="idea">Fíjate en lo que las tres comparten: <strong>se pueden deshacer</strong>. Si intercambiaste, vuelve a intercambiar; si multiplicaste por 2, divide entre 2; si sumaste, resta. Como ningún paso pierde ni inventa información, la tabla cambia de cara pero <strong>sus soluciones son siempre las mismas</strong>. A estas tres movidas se les llama <strong>operaciones elementales de renglón</strong>, y son las únicas herramientas que el método usa. ¿Te quedaron?</p>
       <div class="check" data-kind="recall" data-fid="F1_operaciones_renglon" data-tema="operaciones_elementales">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Cuál de estas SÍ es el conjunto correcto de operaciones de renglón?</p>
@@ -230,10 +239,12 @@
     </section>
 
     <section class="sec">
-      <h3>3 · La meta: la forma reducida</h3>
-      <p class="idea">¿Hasta dónde simplificamos? Hasta la <strong>forma escalonada reducida</strong> (RREF): cada variable con un <strong>1</strong> solo en su columna —un <strong>pivote</strong>— y ceros en el resto. Cuando la matriz llega ahí, la solución se lee sola:</p>
+      <h3>3 · La meta: una tabla que se lee sola</h3>
+      <p class="idea">Ya sabes mover. Falta saber <strong>hacia dónde</strong>. ¿Cuál sería la tabla perfecta, la que ya no necesita ningún trabajo? Una que diga directamente "la primera incógnita vale tanto; la segunda, tanto". Así:</p>
       <div class="fx" id="rrefEx"></div>
-      <p class="fx-note">Se lee directo: la primera variable vale 4, la segunda vale −1.</p>
+      <p class="idea">Léela con lo que ya sabes. El primer renglón dice "1 por la primera incógnita, más 0 por la segunda, igual a 4" — es decir, <strong>x = 4</strong>, sin acompañantes. El segundo dice <strong>y = −1</strong>. Nada que despejar, nada que tantear: <strong>la respuesta se lee sola</strong>. Esa es la meta de todo el método.</p>
+      <p class="idea">Mira la forma de esa tabla ganadora: cada incógnita tiene un <strong>1</strong>, y en el resto de su columna hay puros <strong>ceros</strong>. Ese 1 especial tiene nombre: <strong>pivote</strong>. Se llama así porque es un <strong>punto de apoyo</strong> —como el pie fijo sobre el que gira un jugador de básquet—: apoyada en ese 1, vas a limpiar (hacer cero) todo lo demás de su columna.</p>
+      <p class="idea">Y la tabla completa también tiene nombre: cuando ya no se puede simplificar más, se dice que está en <strong>forma reducida</strong>. El nombre largo del libro es <strong>forma escalonada reducida</strong>, o RREF: "escalonada" porque los pivotes van bajando de izquierda a derecha, como escalones. En cuanto tu tabla llega ahí, terminaste: la solución está escrita después de la barra.</p>
       <div class="check" data-kind="item" data-id="RREFchk" data-tema="forma_reducida" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">¿Cuál de estas matrices YA está en forma reducida?</p>
@@ -249,7 +260,7 @@
     <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Reduzcamos la matriz del sistema x + 2y = 5, 3x − y = 1. No la mires nada más: en cada paso <strong>tú eliges la operación</strong> y yo la aplico.</p>
+      <p class="idea" style="font-size:17px">Ya tienes las tres piezas: la tabla, las tres movidas y la meta. Toca usarlas juntas. Reduzcamos la matriz del sistema del escalón 1 (x + 2y = 5, 3x − y = 1). No la mires nada más: en cada paso <strong>tú eliges la operación</strong> y yo la aplico.</p>
       <div class="fx" id="e0"></div>
 
       <div class="check" data-kind="item" data-id="E1pred" data-tema="gauss_jordan" data-level="guiado">
@@ -325,7 +336,9 @@
 
     <section class="sec">
       <h3>Míralo: cada ecuación es una recta</h3>
-      <p class="idea">Con dos incógnitas, cada ecuación es una <strong>recta</strong> y resolver es ver <strong>dónde se cruzan</strong>. Eso explica los tres resultados posibles. Toca cada caso:</p>
+      <p class="idea">Antes de seguir, una imagen que explica mucho. Toma una sola ecuación con dos incógnitas, por ejemplo x + y = 4. Ella sola tiene <strong>muchísimas</strong> respuestas posibles: x = 1 con y = 3, x = 2 con y = 2, x = 0 con y = 4… incluso x = 1.5 con y = 2.5. Cualquier pareja que sume 4 le sirve.</p>
+      <p class="idea">Si marcas cada pareja como un punto en una cuadrícula (x pasos a la derecha, y pasos hacia arriba), todos esos puntos quedan formados en fila: dibujan una <strong>recta</strong>. Por eso, con dos incógnitas, <strong>cada ecuación es una recta</strong>.</p>
+      <p class="idea">Un sistema trae dos ecuaciones: dos rectas. Resolverlo es encontrar la pareja que cumple <strong>las dos a la vez</strong> — el punto que está en <strong>ambas</strong> rectas, o sea, <strong>donde se cruzan</strong>. Y dos rectas solo pueden hacer tres cosas entre sí. Toca cada caso:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="una">Una solución</button>
@@ -336,18 +349,20 @@
         <div class="viz-legend"><span><i style="background:#F5821F"></i>Ecuación 1</span><span><i style="background:#283891"></i>Ecuación 2</span></div>
         <p class="viz-cap" id="vizCap"></p>
       </div>
+      <p class="idea">La tabla delata cada caso cuando reduces. <strong>Una solución:</strong> cada incógnita consigue su pivote y lees los valores. <strong>Ninguna:</strong> aparece un renglón como "0 0 | 3", que leído dice "0 = 3" — imposible; ninguna pareja puede cumplirlo. <strong>Infinitas:</strong> un renglón se vuelve de <strong>puros ceros</strong> ("0 = 0": cierto, pero no dice nada — era una ecuación repetida) y a alguna incógnita ya no le alcanza pivote. De este último caso nos ocupamos ahora.</p>
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Cuando hay <strong>infinitas</strong> soluciones, no escribes un número: escribes una <strong>fórmula</strong>. Aparece una <strong>variable libre</strong> (una columna sin pivote) que se vuelve un parámetro. Reduzcamos este sistema: x + y + z = 4, 2x + y − z = 5.</p>
+      <p class="idea" style="font-size:17px">Queda una pregunta muy práctica: si las soluciones son <strong>infinitas</strong>, ¿qué escribes en el examen? Una lista infinita no cabe en ninguna hoja. Lo que se entrega es una <strong>fórmula</strong>: una receta que, cada vez que le das un número, te devuelve una solución completa.</p>
+      <p class="idea" style="font-size:17px">Míralo con este sistema: x + y + z = 4, 2x + y − z = 5. Son <strong>tres incógnitas</strong> pero solo <strong>dos ecuaciones</strong>: dos pistas no alcanzan para amarrar tres números, así que va a sobrar libertad. Reduzcamos para verlo:</p>
       <div class="estep"><div class="oprow">Matriz inicial</div><div class="fx" id="f0"></div></div>
       <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>Hago cero la x del renglón 2. R2 = [2, 1, −1, 5] menos 2 veces R1 = [1, 1, 1, 4]:</p><p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·1=<b>−1</b> <span class="sep">•</span> −1−2·1=<b>−3</b> <span class="sep">•</span> 5−2·4=<b>−3</b></p><div class="fx" id="fA"></div></div>
       <div class="estep"><div class="oprow">R2 → R2 · (−1)</div><p>Dejo el pivote de y en 1 multiplicando todo el renglón por −1:</p><p class="calc"><span class="rw">R2</span> 0·(−1)=<b>0</b> <span class="sep">•</span> −1·(−1)=<b>1</b> <span class="sep">•</span> −3·(−1)=<b>3</b> <span class="sep">•</span> −3·(−1)=<b>3</b></p><div class="fx" id="fB"></div></div>
       <div class="estep"><div class="oprow">R1 → R1 − R2</div><p>Limpio la y del renglón 1. R1 = [1, 1, 1, 4] menos R2 = [0, 1, 3, 3]:</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 1−3=<b>−2</b> <span class="sep">•</span> 4−3=<b>1</b></p><div class="fx" id="f1"></div></div>
-      <p class="fx-note">La columna de z se quedó <strong>sin pivote</strong> (no hay un 1 que la mande): por eso z es la variable libre.</p>
-      <p class="idea" style="font-size:17px">Llamamos <strong>z = t</strong> (el parámetro). Despejando cada pivote, la solución general es:</p>
+      <p class="fx-note">Ya está reducida: x y y tienen su pivote… pero la columna de z se quedó <strong>sin pivote</strong>. Ningún renglón dice "z vale tanto": sobre z, la tabla no manda.</p>
+      <p class="idea" style="font-size:17px">Como nadie manda sobre z, <strong>la eliges tú</strong>: z puede valer 0, 1, −5, lo que quieras, y las otras dos se acomodan. Por eso a z se le llama <strong>variable libre</strong> — libre porque tú la escoges. Y para no casarnos con un valor, le ponemos una letra comodín: <strong>z = t</strong>. A esa letra que significa "el valor que tú elijas" se le llama <strong>parámetro</strong>. Despejando cada pivote, la solución general queda:</p>
       <div class="fx"><div class="sys"><span class="eq">x = 1 + 2t</span><span class="eq">y = 3 − 3t</span><span class="eq">z = t</span></div></div>
-      <p class="fx-note">Cada valor de t da una solución distinta: por eso son infinitas, pero todas con la misma forma.</p>
+      <p class="fx-note">Pruébala: con t = 0 sale (1, 3, 0); con t = 1 sale (3, 0, 1). Cada valor de t da una solución distinta — por eso son infinitas, pero todas salen de la misma fórmula.</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>

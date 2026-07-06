@@ -124,7 +124,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -154,7 +154,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -170,12 +170,12 @@
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 7</p>
     <h1>R<sup>n</sup> euclídeo y <mark>ortogonalidad</mark></h1>
-    <p class="lead">El producto punto le da a los vectores longitud, ángulo y perpendicularidad. Con un solo número decides si dos direcciones se cruzan en recto, y proyectas una sobre otra. Todo a mano, con números limpios, sin calculadora.</p>
+    <p class="lead">Hasta ahora las flechas se estiran y se suman; en esta unidad aprenden a medir. Cuánto mide una flecha, qué tan lejos queda un punto de una recta, cuándo dos direcciones se cruzan en esquina perfecta. Todo nace de una sola cuenta nueva, a mano y sin calculadora.</p>
     <div class="learn">
       <h2>Al terminar vas a poder</h2>
       <ol>
-        <li><span class="n">1</span> Calcular el producto punto de dos vectores</li>
-        <li><span class="n">2</span> Medir la norma (longitud) de un vector</li>
+        <li><span class="n">1</span> Medir la norma (longitud) de un vector</li>
+        <li><span class="n">2</span> Calcular el producto punto de dos vectores</li>
         <li><span class="n">3</span> Hallar el ángulo entre dos vectores</li>
         <li><span class="n">4</span> Reconocer cuándo son ortogonales</li>
         <li><span class="n">5</span> Proyectar un vector sobre otro</li>
@@ -188,19 +188,44 @@
 
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Un dron sale del origen y viaja en la dirección u = (3, 4). En el punto p = (7, 1) hay una torre. ¿Cuál es el <strong>punto de la trayectoria del dron más cercano a la torre</strong>, y qué tan lejos pasa de ella?</p>
+      <p class="idea" style="font-size:17px">Un dron despega del origen y vuela en línea recta siguiendo la dirección u = (3, 4): por cada 3 que avanza a la derecha, sube 4. En el punto p = (7, 1) hay una torre. Dos preguntas muy naturales: ¿cuál es el <strong>punto de la trayectoria que queda más cerca de la torre</strong>? ¿Y <strong>a qué distancia</strong> pasa el dron de ella?</p>
       <div class="fx"><div class="sys"><span class="eq">trayectoria del dron: dirección u = (3, 4)</span><span class="eq">torre en p = (7, 1)</span></div></div>
-      <p class="idea" style="font-size:17px">A ojo no se sabe. Podrías tantear puntos sobre la recta y medir distancias, pero eso nunca cierra exacto. Necesitamos una operación que, con puros números, encuentre <strong>la sombra</strong> de la torre sobre la trayectoria y mida la distancia perpendicular. Esa operación es la <strong>proyección</strong>, y todo arranca de un solo número: el <strong>producto punto</strong>. Al final de la guía vas a resolver justo este caso.</p>
+      <p class="idea" style="font-size:17px">A ojo no se puede: podrías marcar puntos sobre la trayectoria y medirles la distancia a la torre uno por uno, pero eso nunca cierra exacto. Fíjate en lo que falta. Con las flechas ya sabes estirar y sumar, pero <strong>nadie ha dicho cómo medir con ellas</strong>: ni largos, ni distancias, ni ángulos. Esta unidad construye justo esas herramientas, una por una y con números chicos. Al final vas a resolver este caso exacto con dos cuentas.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>1 · El producto punto: un solo número que lo desata todo</h3>
-      <p class="idea">A dos vectores del mismo tamaño les asignamos un <strong>número</strong>: multiplicas coordenada con coordenada y sumas. Ese número es el <strong>producto punto</strong>. Con este ejemplo:</p>
-      <div class="fx"><div class="sys"><span class="eq">u = (2, 3, −1)</span><span class="eq">v = (1, −2, 4)</span></div></div>
-      <div class="fx"><div class="sys"><span class="eq">u · v = (2)(1) + (3)(−2) + (−1)(4)</span><span class="eq">u · v = 2 − 6 − 4 = −8</span></div></div>
-      <p class="idea">De este solo número salen la <strong>longitud</strong>, el <strong>ángulo</strong> y la <strong>perpendicularidad</strong>. Todo lo demás de la unidad es leerlo bien. Antes de seguir, comprueba que sabes formarlo:</p>
+      <h3>1 · Cuánto mide una flecha: la norma</h3>
+      <p class="idea">Empieza en un mapa cuadriculado. Caminas <strong>3 cuadras a la derecha y 4 cuadras al frente</strong>: ese paseo es la flecha (3, 4), como las de la Unidad 2. La pregunta nueva es de lo más natural: si en vez de bordear las cuadras caminaras <strong>en diagonal, directo del inicio al final</strong>, ¿cuánto mediría ese atajo?</p>
+      <p class="idea">Mira el dibujo mental: el tramo "3 a la derecha" y el tramo "4 al frente" forman una <strong>esquina de 90 grados</strong>, y el atajo diagonal es el lado inclinado del triángulo. Eso es terreno conocido de secundaria: el <strong>teorema de Pitágoras</strong>. El lado inclinado, elevado al cuadrado, es la suma de los otros dos al cuadrado:</p>
+      <div class="fx"><div class="sys"><span class="eq">3<sup>2</sup> + 4<sup>2</sup> = 9 + 16 = 25</span></div></div>
+      <p class="idea">Cuidado con el 25: <strong>no es el largo</strong>, es el largo <em>al cuadrado</em>. Para volver al largo de verdad hay que deshacer ese cuadrado, y deshacer un cuadrado es sacar <strong>raíz</strong>: √25 = 5. El atajo mide <strong>5 cuadras</strong> — el famoso triángulo 3-4-5. Por eso la raíz de la fórmula no es un adorno: sin ella te quedas con el largo al cuadrado.</p>
+      <p class="idea">La misma receta mide cualquier flecha, tenga 2 o 20 coordenadas: <strong>eleva cada coordenada al cuadrado, suma todo y saca raíz</strong>. Para no escribir "el largo de w" a cada rato se usa una doble barra: <strong>‖w‖</strong>. Es prima de una que ya conoces: |−3| = 3 mide el tamaño de un número; ‖w‖ mide el tamaño de una flecha.</p>
+      <div class="fx"><div class="sys"><span class="eq">‖(3, 4)‖ = √(9 + 16) = √25 = 5</span><span class="eq">‖w‖ = √(w<sub>1</sub><sup>2</sup> + w<sub>2</sub><sup>2</sup> + …)</span></div></div>
+      <p class="idea">Y ahora sí, el nombre formal: a este largo se le llama la <strong>norma</strong> del vector. La palabra viene del latín: la <em>norma</em> era la escuadra del carpintero, su herramienta para medir. La norma de una flecha es, literalmente, su medida.</p>
+      <p class="idea">Dos regalos inmediatos. Uno: a una flecha de norma exactamente 1 se le llama <strong>unitaria</strong> — un paso patrón, de tamaño uno. Cualquier flecha se vuelve unitaria <strong>dividiéndola entre su propia norma</strong>: como (3, 4) mide 5, la flecha (3/5, 4/5) mide exactamente 1 — misma dirección, tamaño patrón. Dos: la <strong>distancia entre dos puntos</strong> es el largo de la flecha que los une, y esa flecha se consigue restando llegada menos salida. De (3, 1) a (6, 5) va la flecha (6 − 3, 5 − 1) = (3, 4)… que ya sabes que mide 5. <strong>Distancia = resta y mide.</strong> Asegura la fórmula del largo:</p>
+      <div class="check" data-kind="recall" data-fid="F1_norma" data-tema="norma">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">¿Cuál expresión da la norma de un vector?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">La raíz cuadrada de la suma de los cuadrados de sus coordenadas</button>
+          <button class="opt" data-ok="0">La suma de sus coordenadas</button>
+          <button class="opt" data-ok="0">La suma de los cuadrados de sus coordenadas, sin raíz</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La norma es la <strong>raíz</strong> de la suma de cuadrados. Sin la raíz te quedas con ‖v‖<sup>2</sup>, el largo al cuadrado: útil más adelante, pero no es el largo. Y sumar las coordenadas sin elevar mezcla pasos a la derecha con pasos al frente, como si fueran lo mismo.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>2 · Multiplicar flecha con flecha: el producto punto</h3>
+      <p class="idea">Para medir el largo usaste las coordenadas de <strong>una</strong> flecha. La herramienta estrella de la unidad compara <strong>dos</strong>, y la cuenta es de primaria: <strong>multiplica coordenada con coordenada, y suma los resultados</strong>. Con u = (2, 3) y v = (4, 1): primera con primera, (2)(4) = 8; segunda con segunda, (3)(1) = 3; y sumas.</p>
+      <div class="fx"><div class="sys"><span class="eq">(2)(4) + (3)(1) = 8 + 3 = 11</span></div></div>
+      <p class="idea">Fíjate en el detalle clave: entran dos flechas y sale <strong>un solo número</strong>, no una flecha. ¿Y qué cuenta ese número? <strong>Qué tanto las dos flechas apuntan hacia el mismo lado.</strong> Es un medidor de acuerdo entre direcciones:</p>
+      <div class="fx"><div class="sys"><span class="eq">positivo → mismo lado</span><span class="eq">cero → esquina perfecta (90°)</span><span class="eq">negativo → lados opuestos</span></div></div>
+      <p class="idea">Camínalo con números chicos. (2, 3) y (4, 1) apuntan las dos hacia arriba y a la derecha: su cuenta dio <strong>11, positivo</strong> — van de acuerdo. (2, 3) y (−2, −3) son la misma flecha volteada: (2)(−2) + (3)(−3) = −4 − 9 = <strong>−13, negativo</strong> — van en contra. Y (2, 3) con (3, −2): (2)(3) + (3)(−2) = 6 − 6 = <strong>0</strong> — ni a favor ni en contra: quedan en esquina perfecta, y de eso vive el siguiente escalón.</p>
+      <p class="idea">En símbolos, la cuenta se escribe poniendo <strong>un punto</strong> entre las dos flechas: <strong>u · v</strong>. Y de ahí el nombre: <strong>producto punto</strong> — "producto" porque multiplicas, "punto" por el símbolo. En algunos libros lo verás como <strong>⟨u, v⟩</strong>, con paréntesis angulares, bajo el nombre de "producto interno": es exactamente la misma cuenta. La receta no cambia con listas más largas: (1, 2, 0) · (3, 0, 5) = 3 + 0 + 0 = 3.</p>
+      <p class="idea">Un regalo más: multiplica una flecha <strong>consigo misma</strong>. (3, 4) · (3, 4) = 9 + 16 = 25… ¡la suma de cuadrados de la norma! Siempre pasa: <strong>v · v = ‖v‖<sup>2</sup></strong>, así que ‖v‖ = √(v · v). El largo y el producto punto son la misma historia. Comprueba que la cuenta ya es tuya:</p>
       <div class="check" data-kind="item" data-id="PPchk" data-tema="producto_punto" data-level="guiado">
         <div class="qtag">Te toca · calcula</div>
         <p class="q">¿Cuánto vale el producto punto de a = (4, −1) y b = (2, 5)?</p>
@@ -214,28 +239,14 @@
     </section>
 
     <section class="sec">
-      <h3>2 · La norma: la longitud de un vector</h3>
-      <p class="idea">La <strong>norma</strong> es qué tan largo es el vector. Sale del producto punto de un vector consigo mismo: sumas los cuadrados de sus coordenadas y sacas raíz. Con un vector limpio:</p>
-      <div class="fx"><div class="sys"><span class="eq">‖w‖ = √(w · w)</span><span class="eq">w = (3, 4)  →  ‖w‖ = √(9 + 16) = √25 = 5</span></div></div>
-      <p class="idea">Un vector de norma <strong>1</strong> se llama <strong>unitario</strong>. Para volver unitario cualquier vector, lo divides entre su norma. ¿Recuerdas la fórmula antes de mirar el resto?</p>
-      <div class="check" data-kind="recall" data-fid="F1_norma" data-tema="norma">
-        <div class="qtag">Te toca · recuerda</div>
-        <p class="q">¿Cuál expresión da la norma de un vector?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">La raíz cuadrada de la suma de los cuadrados de sus coordenadas</button>
-          <button class="opt" data-ok="0">La suma de sus coordenadas</button>
-          <button class="opt" data-ok="0">La suma de los cuadrados de sus coordenadas, sin raíz</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La norma es <strong>√(v · v)</strong>. La suma de cuadrados sin raíz es ‖v‖<sup>2</sup>, útil, pero no es la longitud.</p></div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <h3>3 · Ángulo y ortogonalidad</h3>
-      <p class="idea">El coseno del ángulo entre dos vectores sale del producto punto dividido entre las dos normas. Esta es la fórmula clave:</p>
+      <h3>3 · Ortogonal: la esquina perfecta</h3>
+      <p class="idea">Las paredes de tu cuarto se juntan en una esquina exacta de 90 grados. En la escuela a eso le decías <strong>perpendicular</strong>. En álgebra lineal la palabra oficial es <strong>ortogonal</strong>, que es "perpendicular" en digno griego: <em>orthós</em> = recto, <em>gonía</em> = ángulo. Ángulo recto, esquina perfecta: la misma idea con traje formal. Se escribe <strong>u ⊥ v</strong>, y el símbolo lo dice todo — una raya parada sobre una acostada.</p>
+      <p class="idea">Lo valioso es cómo se detecta. Ya lo viste asomarse en el escalón anterior: cuando dos flechas quedan en esquina perfecta, su producto punto da <strong>exactamente cero</strong> — ni a favor ni en contra, neutralidad total. Y la regla funciona en los dos sentidos:</p>
+      <div class="fx"><div class="sys"><span class="eq">u ⊥ v  ⇔  u · v = 0</span><span class="eq">(2, 3) · (3, −2) = 6 − 6 = 0</span><span class="eq">→ (2, 3) ⊥ (3, −2)</span></div></div>
+      <p class="idea">Esto es oro puro: para saber si dos flechas se cruzan en recto <strong>ya no dibujas ni mides con transportador</strong>. Multiplicas, sumas, y si da cero, son ortogonales. En R<sup>5</sup> o en R<sup>20</sup>, donde no hay dibujo posible, esta es la única manera.</p>
+      <p class="idea">¿Y si no da cero? El producto punto también entrega el <strong>ángulo exacto</strong>. La idea: el "acuerdo" crudo crece cuando las flechas son más largas, así que para quedarte solo con la dirección lo divides entre los dos largos. Lo que queda es el coseno del ángulo (el coseno de la trigonometría de siempre; al ángulo se le suele llamar θ, "theta"):</p>
       <div class="fx"><div class="sys"><span class="eq">cos θ = (u · v) / (‖u‖ · ‖v‖)</span></div></div>
-      <p class="idea">De aquí sale lo más importante de la unidad: si <strong>u · v = 0</strong>, entonces cos θ = 0, o sea θ = 90°. Dos vectores son <strong>ortogonales</strong> (perpendiculares) exactamente cuando su producto punto es cero. Ya no necesitas dibujar nada: <strong>calculas el producto punto y ves si da cero</strong>. Mira el ejemplo:</p>
-      <div class="fx"><div class="sys"><span class="eq">(2, 3) · (3, −2) = 6 − 6 = 0</span><span class="eq">→ son perpendiculares</span></div></div>
+      <p class="idea">Léela como "el acuerdo, dividido entre los tamaños". Y confirma la esquina: si u · v = 0, el coseno vale 0, y el único ángulo entre 0° y 180° con coseno 0 es <strong>90°</strong>. Encuentra la pareja en esquina:</p>
       <div class="check" data-kind="item" data-id="ORTchk" data-tema="ortogonalidad" data-level="guiado">
         <div class="qtag">Te toca · decide</div>
         <p class="q">¿Cuál de estas parejas es ortogonal (perpendicular)?</p>
@@ -292,9 +303,17 @@
       <p class="idea" style="font-size:17px">Listo: el ángulo es <strong>45°</strong>. Nunca dibujé nada; solo apliqué la fórmula con números limpios, y en el orden que tú fuiste marcando: arriba, abajo, divide.</p>
     </section>
 
+    <section class="sec">
+      <h3>La sombra: el punto más cercano</h3>
+      <p class="idea">Imagina el mediodía: el sol cae directo desde arriba y todo lo que está inclinado tira una sombra recta al piso. En el piso hay una línea pintada — la dirección de una flecha v — y, apoyado justo donde empieza la línea, un palo inclinado: la flecha u. El palo tira su sombra <strong>sobre la línea</strong>.</p>
+      <p class="idea">Esa sombra es exactamente la parte de u que <strong>avanza a lo largo de v</strong>: ni un centímetro más, ni uno menos. Tiene nombre: la <strong>proyección</strong> de u sobre v. El nombre es literal — "proyectar" es lanzar hacia adelante, y la luz lanza la flecha contra la línea. Se escribe <strong>proy<sub>v</sub>(u)</strong>: el subíndice dice sobre qué dirección cae la sombra.</p>
+      <p class="idea">¿Por qué importa tanto una sombra? Porque su punta es <strong>el punto de la línea más cercano</strong> a la punta de u. Lo que separa a u de su sombra cae sobre la línea en <strong>ángulo recto</strong>, y hacia una recta no existe camino más corto que el perpendicular. ¿Te suena? Es el problema del dron: el punto de la trayectoria más cercano a la torre es <strong>la sombra de la torre sobre la trayectoria</strong>.</p>
+      <p class="idea">Y lo mejor: la sombra se calcula sin dibujar nada, con puro producto punto y una división. Eso es lo que sigue.</p>
+    </section>
+
     <h2 class="modhead">Sube el tamaño · la proyección en tres pasos</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">La operación estrella de la unidad es <strong>proyectar</strong> un vector sobre otro: la “sombra” de u en la dirección de v. Es más pesada que el ángulo, así que se hace en <strong>tres pasos ordenados</strong>:</p>
+      <p class="idea" style="font-size:17px">Calculemos una sombra con puros números. La cuenta pesa un poco más que la del ángulo, así que va en <strong>tres pasos ordenados</strong>:</p>
       <ul class="fases">
         <li><strong>Paso 1 — los dos productos punto:</strong> arriba <em>u · v</em>, abajo <em>v · v</em>.</li>
         <li><strong>Paso 2 — el factor:</strong> divides <em>arriba entre abajo</em>. Sale un número.</li>
@@ -334,7 +353,7 @@
 
     <section class="sec">
       <h3>Míralo: la proyección y su sombra</h3>
-      <p class="idea">Aquí sí vale un dibujo, porque la palabra “proyección” <strong>es</strong> geométrica. <span style="color:var(--deep);font-weight:700">u</span> se apoya sobre la recta que marca <span style="color:var(--navy);font-weight:700">v</span>; su sombra es <span style="color:var(--ink);font-weight:700">proy<sub>v</sub>(u)</span>, y lo que sobra (la línea punteada) cae en ángulo recto sobre v.</p>
+      <p class="idea">Aquí está la escena del mediodía, dibujada con los números que acabas de calcular. <span style="color:var(--deep);font-weight:700">u</span> es el palo inclinado; la recta de <span style="color:var(--navy);font-weight:700">v</span> es la línea del piso; la sombra es <span style="color:var(--ink);font-weight:700">proy<sub>v</sub>(u)</span>, y lo que sobra (la línea punteada) cae en ángulo recto sobre v.</p>
       <div class="fx" style="padding:10px"><div id="projPlane"></div></div>
       <div class="viz-legend">
         <span><i style="background:#C75D08"></i>u = (2, 4)</span>
@@ -344,8 +363,15 @@
       <p class="fx-note">La punteada mide (−1, 1): toca la recta de v formando un ángulo recto. Por eso la proyección es el punto de la recta <strong>más cercano</strong> a u.</p>
     </section>
 
+    <section class="sec">
+      <h3>Enderezar una base chueca: Gram-Schmidt</h3>
+      <p class="idea">Compara dos hojas de papel: una cuadriculada, con líneas que se cruzan en esquinas perfectas, y una rayada a mano, con líneas chuecas que se cruzan en cualquier ángulo. En las dos puedes ubicar puntos, pero en la cuadriculada todo es más fácil: medir, comparar, leer coordenadas. Con las bases que conociste en la Unidad 2 pasa igual: una base cuyas flechas son <strong>ortogonales entre sí</strong> — todas en esquina perfecta — es muchísimo más cómoda que una base chueca.</p>
+      <p class="idea">¿Y si tu base vino chueca? Se endereza, y la herramienta ya la tienes. La sombra de una flecha sobre otra es la parte que avanza <strong>a lo largo</strong> de ella — es decir, exactamente <strong>lo que las hace chuecas</strong>. Entonces la jugada es: a la segunda flecha <strong>réstale su sombra sobre la primera</strong>. Lo que queda ya no avanza nada en esa dirección: quedó en esquina perfecta con ella.</p>
+      <p class="idea">Ese procedimiento — la primera flecha se queda como está; a cada flecha nueva réstale sus sombras sobre las anteriores — se llama <strong>Gram-Schmidt</strong>, por los apellidos de los dos matemáticos que lo pulieron. No trae fórmulas nuevas: es <strong>proyectar y restar</strong>, una y otra vez, hasta que la base quede como hoja cuadriculada.</p>
+    </section>
+
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Con la proyección lista, aparece <strong>Gram-Schmidt</strong>: cuando quieres una base <strong>ortogonal</strong> a partir de vectores cualesquiera, al segundo le quitas su proyección sobre el primero, y lo que queda ya es perpendicular. Hagámoslo con v<sub>1</sub> = (3, 0) y v<sub>2</sub> = (2, 2).</p>
+      <p class="idea" style="font-size:17px">Enderecemos una base chueca de verdad: v<sub>1</sub> = (3, 0) y v<sub>2</sub> = (2, 2) no están en esquina perfecta — su producto punto es (3)(2) + (0)(2) = 6, no cero. El plan: la primera se queda tal cual, y a la segunda le restamos su sombra sobre la primera.</p>
       <div class="estep"><div class="oprow">Paso 1 · el primero se queda</div><p>Tomo u<sub>1</sub> = v<sub>1</sub> como está:</p><p class="calc"><span class="rw">u₁</span> =<b>(3, 0)</b></p></div>
       <div class="estep"><div class="oprow">Paso 2a · los dos productos punto</div><p>Arriba v₂ con u₁, abajo u₁ consigo mismo:</p><p class="calc"><span class="rw">v₂·u₁</span> (2)(3)+(2)(0)=<b>6</b> <span class="sep">•</span> <span class="rw">u₁·u₁</span> (3)(3)+(0)(0)=<b>9</b></p></div>
       <div class="estep"><div class="oprow">Paso 2b · el factor</div><p>Divido arriba entre abajo:</p><p class="calc"><span class="rw">factor</span> 6÷9=<b>2/3</b></p></div>
@@ -353,7 +379,7 @@
       <div class="estep"><div class="oprow">Paso 3 · quita la proyección</div><p>Lo que sobra es el segundo vector ortogonal:</p><p class="calc"><span class="rw">u₂</span> (2,2)−(2,0)=<b>(0, 2)</b></p></div>
       <p class="idea" style="font-size:17px">Compruebo que ya son perpendiculares; su producto punto da cero:</p>
       <div class="fx"><div class="sys"><span class="eq">u<sub>1</sub> · u<sub>2</sub> = (3)(0) + (0)(2) = 0</span></div></div>
-      <p class="idea" style="font-size:17px">Si además divides cada uno entre su norma, obtienes una base <strong>ortonormal</strong>: (1, 0) y (0, 1).</p>
+      <p class="idea" style="font-size:17px">Si además divides cada uno entre su norma, cada flecha queda unitaria y la base se llama <strong>ortonormal</strong> — <em>orto</em> por las esquinas perfectas, <em>normal</em> porque cada norma vale 1. Aquí: (1, 0) y (0, 1).</p>
       <p class="fx-note">Idea de mínimos cuadrados: cuando un sistema no tiene solución exacta (más ecuaciones que incógnitas), la mejor respuesta posible es <strong>proyectar</strong> el vector de datos sobre lo alcanzable y quedarte con esa sombra. Es la misma proyección de esta unidad, aplicada para aproximar.</p>
     </section>
 

@@ -124,7 +124,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -154,7 +154,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -186,23 +186,45 @@
 
   <main>
 
-    <h2 class="modhead">Empecemos por un problema</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Un editor de imágenes tiene que <strong>estirar</strong> una figura: el ancho se duplica y, además, cada punto se <strong>inclina</strong> un poco hacia arriba según qué tan a la derecha esté. La figura tiene miles de puntos. La regla que se aplica a cada punto (x, y) es la misma:</p>
-      <div class="fx"><div class="sys"><span class="eq">T(x, y) = (2x, x + y)</span></div></div>
-      <p class="idea" style="font-size:17px">Aplicar esto punto por punto sería eterno. Pero si la regla <strong>respeta la suma y el escalado</strong>, ocurre algo mágico: toda la transformación se guarda en <strong>una sola matriz pequeña</strong>, y basta multiplicar. La pregunta del capítulo es cuándo se puede y qué información esconde esa matriz. Al final vas a leer de ella qué se aplasta al cero y qué queda cubierto.</p>
-    </section>
-
-    <h2 class="modhead">La idea</h2>
+    <h2 class="modhead">La idea · empecemos por lo más simple</h2>
 
     <section class="sec">
-      <h3>1 · Respetar la suma y el escalado</h3>
-      <p class="idea">Una <strong>transformación lineal</strong> es una función entre espacios de vectores que no rompe las dos operaciones básicas: sumar vectores y multiplicarlos por un número. Formalmente, para todo par de vectores y todo escalar debe cumplir estas dos igualdades:</p>
+      <h3>1 · Una máquina que mueve todos los puntos</h3>
+      <p class="idea">Antes de cualquier símbolo, una imagen mental. Piensa en una <strong>fotocopiadora</strong> con el botón de "ampliar al doble": metes un dibujo y sale el mismo dibujo, pero al doble de tamaño. Cada punto del dibujo terminó en un lugar nuevo.</p>
+      <p class="idea">Sigamos a un punto concreto. Uno que estaba en <strong>(1, 0)</strong> —1 a la derecha, 0 al frente, como leías las listas en la Unidad 2— aparece en la copia en <strong>(2, 0)</strong>. El que estaba en (0, 3) aparece en (0, 6). El de (2, 1), en (4, 2). ¿Ves la regla escondida? La máquina <strong>duplica cada número</strong> de la lista.</p>
+      <p class="idea">Para no contar la historia completa cada vez, a la máquina le ponemos un nombre corto: <strong>T</strong> (de <em>transformar</em>). Y escribimos <strong>T(1, 0) = (2, 0)</strong>, que se lee: "meto (1, 0) a la máquina T, y sale (2, 0)". La entrada va dentro del paréntesis; la salida, después del igual.</p>
+      <p class="idea">Ahora sí, el nombre formal: a cualquier máquina de este tipo —una regla que <strong>a cada vector de entrada le asigna un vector de salida</strong>— se le llama <strong>transformación</strong>. La fotocopiadora que amplía es una. Un espejo que refleja cada punto es otra. Un tornamesa que gira el plano completo, otra más. En el fondo todas hacen lo mismo: mueven cada punto a un lugar nuevo, siguiendo una regla fija.</p>
+    </section>
+
+    <section class="sec">
+      <h3>2 · Cómo se escribe: T(x, y) y T: R² → R²</h3>
+      <p class="idea">La regla de la fotocopiadora —"duplica cada número"— se escribe en símbolos así: <strong>T(x, y) = (2x, 2y)</strong>. Se lee: "toma el punto (x, y), el que sea, y entrégalo en (2x, 2y)". Usarla es solo <strong>sustituir</strong>: para el punto (3, 5) pongo x = 3, y = 5, y sale T(3, 5) = (6, 10).</p>
+      <p class="idea">Las máquinas también se presentan con una línea como <strong>T: R² → R²</strong>. Nada raro escondido: R² es simplemente <strong>el plano</strong>, la colección de todas las listas de dos números —los vectores de la Unidad 2—. La flecha dice de dónde a dónde trabaja la máquina: entra un vector del plano, sale un vector del plano.</p>
+      <p class="idea">Cada lado de la flecha tiene nombre. Lo de <strong>antes</strong> de la flecha es el <strong>dominio</strong>: el espacio donde viven las entradas. Lo de <strong>después</strong> es el <strong>codominio</strong>: el espacio donde viven las salidas. Así, una máquina T: R³ → R² toma listas de tres números y entrega listas de dos — dominio R³, codominio R². Comprueba que ya lees esta escritura:</p>
+      <div class="check" data-kind="item" data-id="C0_notacion" data-tema="definicion" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Una máquina se presenta así: <strong>T: R³ → R²</strong>. ¿Qué te dice esa línea?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Que la regla de T eleva al cubo la entrada y al cuadrado la salida</button>
+          <button class="opt" data-ok="0">Que a T entran listas de dos números y salen listas de tres</button>
+          <button class="opt" data-ok="1">Que a T entran listas de tres números (dominio R³) y salen listas de dos (codominio R²)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La flecha se lee de izquierda a derecha: antes va el dominio (lo que entra), después el codominio (donde viven las salidas). El 3 y el 2 cuentan cuántos números lleva cada lista; no son potencias.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>3 · Qué la hace "lineal": respeta las dos jugadas</h3>
+      <p class="idea">En la Unidad 2 descubriste que con vectores solo existen <strong>dos jugadas</strong>: estirarlos (multiplicarlos por un peso) y sumarlos. Pues bien: hay máquinas que se llevan bien con esas dos jugadas, y máquinas que no.</p>
+      <p class="idea">Mira la fotocopiadora. La entrada (1, 0) produce la copia (2, 0). Ahora <strong>estira la entrada al doble</strong> antes de meterla: metes (2, 0) y sale (4, 0)… que es <strong>exactamente el doble de la copia original</strong>. Da lo mismo duplicar antes de copiar que copiar y luego duplicar. La máquina <strong>respeta el estiramiento</strong>.</p>
+      <p class="idea">Con la suma pasa igual. Suma las entradas (1, 0) + (0, 3) = (1, 3) y cópiala: sale (2, 6). O copia cada una por separado —(2, 0) y (0, 6)— y suma las copias: también (2, 6). <strong>Los dos caminos llegan al mismo lugar.</strong></p>
+      <p class="idea">No toda máquina es así. Inventa una que "corre todo 1 paso a la derecha": T(x, y) = (x + 1, y). La entrada (1, 0) sale en (2, 0). El doble de la entrada, (2, 0), sale en (3, 0). Pero el doble de la salida original sería (4, 0). <strong>No coincide</strong>: esta máquina no respeta el estiramiento.</p>
+      <p class="idea">Ya puedes con el nombre formal: una <strong>transformación lineal</strong> es una máquina que respeta las dos jugadas. Se llama "lineal" porque se lleva bien con las combinaciones <em>lineales</em> de la Unidad 2 — pesos y sumas. En símbolos, para cualesquiera vectores u, v y cualquier escalar c:</p>
       <div class="fx"><div class="sys"><span class="eq">T(u + v) = T(u) + T(v)</span><span class="eq">T(c·u) = c·T(u)</span></div></div>
-      <p class="idea">En palabras: da lo mismo <strong>operar antes</strong> o <strong>después</strong> de aplicar T. Antes de mirar la definición otra vez, fíjala tú:</p>
+      <p class="idea">Léelas como historias, no como fórmulas. La primera: "sumar y luego transformar da lo mismo que transformar y luego sumar". La segunda: "estirar y luego transformar da lo mismo que transformar y luego estirar". Fíjala tú:</p>
       <div class="check" data-kind="recall" data-fid="F1_definicion_lineal" data-tema="definicion">
         <div class="qtag">Te toca · recuerda</div>
-        <p class="q">¿Qué dos cosas debe respetar una función para ser lineal?</p>
+        <p class="q">¿Qué dos jugadas debe respetar una máquina para ser lineal?</p>
         <div class="opts">
           <button class="opt" data-ok="1">La suma de vectores y la multiplicación por un escalar</button>
           <button class="opt" data-ok="0">La suma de vectores y el producto entre dos vectores</button>
@@ -213,8 +235,10 @@
     </section>
 
     <section class="sec">
-      <h3>2 · El filtro rápido: el cero va al cero</h3>
-      <p class="idea">De la condición del escalado sale un atajo enorme. Si tomas el factor <strong>c = 0</strong>, entonces T(0) = 0·T(u) = 0. Así que <strong>toda</strong> transformación lineal manda el vector cero al vector cero. Cualquier regla que mueva el cero de lugar queda descartada <strong>sin calcular nada</strong>. Además, en cada coordenada solo caben combinaciones de las variables por constantes: nada de cuadrados, valores absolutos, ni sumar un número fijo.</p>
+      <h3>4 · El filtro rápido: el cero va al cero</h3>
+      <p class="idea">De la jugada del estiramiento sale un atajo enorme. En la Unidad 2 viste que peso 0 significa "no usas la receta": 0·u = (0, 0). Y una máquina lineal respeta los estiramientos, incluido ese: T(0·u) = 0·T(u) = (0, 0). Traducción: <strong>toda máquina lineal deja el origen clavado en su sitio</strong>. Tiene sentido con las máquinas que conoces: la fotocopiadora amplía alrededor de una esquina fija, el tornamesa gira alrededor de su centro — ese punto no se mueve.</p>
+      <p class="idea">Eso te regala un <strong>detector instantáneo de impostoras</strong>: mete (0, 0) a la regla. Si no sale (0, 0), no puede ser lineal, y no necesitas calcular nada más. La máquina "corre todo 1 paso a la derecha" cae al instante: T(0, 0) = (1, 0). Movió el cero: descartada.</p>
+      <p class="idea">Ojo: el filtro solo descarta, no aprueba. Otra pista para sospechar: en cada entrada de una regla lineal solo caben <strong>variables multiplicadas por constantes y sumadas entre sí</strong> (como 2x, x + y, 3x − y). Cuadrados, valores absolutos o números fijos sumados delatan a la impostora.</p>
       <div class="check" data-kind="item" data-id="C1_filtro" data-tema="definicion" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">¿Cuál de estas reglas queda descartada de inmediato por el filtro del cero?</p>
@@ -228,8 +252,11 @@
     </section>
 
     <section class="sec">
-      <h3>3 · Toda transformación lineal es una matriz</h3>
-      <p class="idea">El hecho central de todo el tema: cada transformación lineal se puede escribir como <strong>una matriz</strong>, la <strong>matriz canónica</strong>. La receta es sencilla: aplica T a cada vector de la base canónica y esos resultados son las <strong>columnas</strong>, en orden. Para T(x, y) = (x + y, 3x − y):</p>
+      <h3>5 · La ficha técnica: basta con dos preguntas</h3>
+      <p class="idea">Aquí viene el hecho central del tema. Para conocer una máquina lineal por completo <strong>no necesitas probarla con los infinitos puntos del plano</strong>: basta con preguntarle qué hace con dos vectores de prueba. Como la ficha técnica de un electrodoméstico: unos cuantos datos, y ya sabes todo lo que la máquina hace.</p>
+      <p class="idea">¿Por qué funciona? Recuerda la Unidad 2: cualquier vector del plano se arma combinando (1, 0) y (0, 1). Por ejemplo, (3, 5) = 3·(1, 0) + 5·(0, 1) — compruébalo: 3·(1, 0) = (3, 0), 5·(0, 1) = (0, 5), y su suma es (3, 5). A ese par de piezas básicas, (1, 0) y (0, 1), se le llama la <strong>base canónica</strong> del plano.</p>
+      <p class="idea">Y como la máquina <strong>respeta las dos jugadas</strong>, respeta también cualquier combinación de ellas: T(3, 5) = 3·T(1, 0) + 5·T(0, 1). Pruébalo con la fotocopiadora: T(1, 0) = (2, 0) y T(0, 1) = (0, 2), así que T(3, 5) = 3·(2, 0) + 5·(0, 2) = (6, 0) + (0, 10) = (6, 10). Exactamente lo que da la regla directa, duplicar cada número. <strong>Conociendo dos respuestas, las conoces todas.</strong></p>
+      <p class="idea">Esas dos respuestas se guardan, en orden, como <strong>columnas</strong> de una tabla. Esa tabla es la <strong>matriz canónica</strong> de la máquina — su ficha técnica completa ("canónica" porque las preguntas se hacen con la base canónica). Míralo con otra regla, T(x, y) = (x + y, 3x − y):</p>
       <div class="fx"><div class="sys"><span class="eq">T(1, 0) = (1, 3)   → primera columna</span><span class="eq">T(0, 1) = (1, −1)   → segunda columna</span></div></div>
       <div class="fx" id="canonEx"></div>
       <p class="fx-note">Multiplicar cualquier vector por esta matriz reproduce la transformación entera. Toda la información de T cabe aquí.</p>
@@ -245,10 +272,36 @@
       </div>
     </section>
 
+    <section class="sec">
+      <h3>6 · El núcleo: lo que la máquina aplasta al cero</h3>
+      <p class="idea">Cambia de máquina un momento. Imagina la <strong>máquina sombra</strong>: el sol pega desde arriba, y cada punto del plano cae en su sombra sobre el piso (el eje x). Su regla es <strong>T(x, y) = (x, 0)</strong>: conserva el primer número, borra el segundo.</p>
+      <p class="idea">Pregúntale por algunos puntos. T(3, 5) = (3, 0). T(0, 4) = (0, 0). T(0, −7) = (0, 0). ¿Lo notas? <strong>Todo punto de la forma (0, y) cae exactamente en el cero</strong>: el eje vertical completo queda aplastado en un solo punto.</p>
+      <p class="idea">A esa zona —<strong>todo lo que la máquina aplasta hasta el vector cero</strong>— se le llama el <strong>núcleo</strong> de T (en inglés, <em>kernel</em>). Y no es un objeto nuevo: si A es la ficha técnica de T, el núcleo son las soluciones de A·x = 0… que en la Unidad 2 llamabas <strong>espacio nulo</strong>. Mismo objeto, nombre nuevo cuando la matriz viene de una máquina.</p>
+      <p class="idea">¿Para qué mirarlo? Porque mide <strong>cuánta información destruye la máquina</strong>. La fotocopiadora solo aplasta al (0, 0): núcleo mínimo, no pierde nada. La máquina sombra aplasta una recta entera: puntos distintos terminan en el mismo lugar, y después ya no hay forma de distinguirlos.</p>
+    </section>
+
+    <section class="sec">
+      <h3>7 · La imagen: todo lo que la máquina puede producir</h3>
+      <p class="idea">La otra pregunta natural sobre cualquier máquina: <strong>¿qué salidas es capaz de producir?</strong> No una en particular — el catálogo completo.</p>
+      <p class="idea">La máquina sombra solo entrega puntos de la forma (x, 0): sombras sobre el piso. ¿Puede producir (5, 0)? Sí: T(5, 2) = (5, 0). ¿Puede producir (2, 3)? Jamás — ninguna entrada del plano tiene esa sombra. Su catálogo es <strong>solo el eje x</strong>, una recta.</p>
+      <p class="idea">A ese catálogo se le llama la <strong>imagen</strong> de T: todo lo que la máquina sí alcanza a producir. Tampoco es nuevo: las salidas A·x son combinaciones de las columnas de A, así que la imagen es el <strong>generado de las columnas</strong> — el espacio columna de la Unidad 2.</p>
+      <p class="idea">Y los tamaños ya sabes nombrarlos desde la Unidad 2: la dimensión del núcleo es la <strong>nulidad</strong>, y la dimensión de la imagen es el <strong>rango</strong>. Para la máquina sombra: núcleo = una recta (nulidad 1), imagen = una recta (rango 1). Junta las dos ideas con este caso:</p>
+      <div class="check" data-kind="item" data-id="C3_sombra" data-tema="imagen" data-level="guiado">
+        <div class="qtag">Te toca · reconoce</div>
+        <p class="q">Para la máquina sombra T(x, y) = (x, 0), ¿cuál pareja núcleo–imagen es la correcta?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Núcleo = eje x, imagen = eje y: lo aplastado es lo que queda en el piso</button>
+          <button class="opt" data-ok="1">Núcleo = eje y (todo (0, y) cae al cero) e imagen = eje x (toda sombra queda en el piso)</button>
+          <button class="opt" data-ok="0">Núcleo = solo el punto (0, 0), imagen = todo R²: no se pierde información</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Los puntos (0, y) son los únicos que van a (0, 0): el eje vertical entero es el núcleo. Y toda salida tiene la forma (x, 0): el catálogo es el eje x. La opción del núcleo trivial describe una máquina que no aplasta nada — como la fotocopiadora, no como la sombra.</p></div>
+      </div>
+    </section>
+
     <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Volvamos al editor de imágenes: la regla era T(x, y) = (2x, x + y). Vamos a <strong>probar que es lineal</strong> y luego a sacar su matriz. No lo mires nada más: en cada paso <strong>tú decides qué toca</strong> y yo lo ejecuto.</p>
+      <p class="idea" style="font-size:17px">Ahora sí, un problema de verdad, con las herramientas ya en la mano. Un editor de imágenes tiene que <strong>estirar una figura</strong>: el ancho se duplica y cada punto se inclina hacia arriba según qué tan a la derecha esté. La figura tiene miles de puntos, pero la regla que se aplica a cada uno es una sola: <strong>T(x, y) = (2x, x + y)</strong>. Si probamos que es lineal, toda la máquina cabrá en su ficha técnica y bastará una multiplicación. Vamos a <strong>probar que es lineal</strong> y a armar esa ficha. No lo mires nada más: en cada paso <strong>tú decides qué toca</strong> y yo lo ejecuto.</p>
       <div class="fx"><div class="sys"><span class="eq">T(x, y) = (2x, x + y)</span></div></div>
 
       <div class="check" data-kind="item" data-id="E1_decide" data-tema="definicion" data-level="guiado">
@@ -291,7 +344,7 @@
 
     <h2 class="modhead">Sube el tamaño · núcleo e imagen en dos preguntas</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Lo que de verdad cae en examen: dada T, hallar su <strong>núcleo</strong> (qué vectores se aplastan al cero) y su <strong>imagen</strong> (qué queda cubierto). Se resuelve en <strong>dos preguntas ordenadas</strong> sobre la matriz reducida:</p>
+      <p class="idea" style="font-size:17px">Lo que de verdad cae en examen: dada una T concreta, calcular a mano su <strong>núcleo</strong> (lo que la máquina aplasta al cero) y su <strong>imagen</strong> (el catálogo de lo que produce). Ya sabes qué son; el método para encontrarlos son <strong>dos preguntas ordenadas</strong> sobre la matriz reducida:</p>
       <ul class="fases">
         <li><strong>Pregunta 1 — reducir:</strong> arma la matriz de T y llévala a forma reducida por Gauss-Jordan. Las columnas <em>con pivote</em> mandan; las <em>sin pivote</em> son libres.</li>
         <li><strong>Pregunta 2 — leer:</strong> las columnas sin pivote dan el <em>núcleo</em> (su cantidad = nulidad); las columnas originales con pivote dan la <em>imagen</em> (su cantidad = rango).</li>
@@ -350,7 +403,9 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Cerremos con la <strong>clasificación</strong>. Con dos comparaciones basta:</p>
+      <p class="idea" style="font-size:17px">Cierre del tema: ponerle apellido a la máquina. Sobre cualquier máquina caben dos preguntas de calidad. La primera: <strong>¿repite salidas?</strong> La máquina sombra sí: (3, 1) y (3, 8) caen las dos en (3, 0), y viendo la sombra ya no sabes de cuál punto venía. La fotocopiadora jamás: copias iguales solo salen de originales iguales. A la máquina que <strong>nunca repite salidas</strong> se le llama <strong>inyectiva</strong>.</p>
+      <p class="idea" style="font-size:17px">¿Y cómo detectarlo sin probar pares de puntos? Con el núcleo. Si dos entradas distintas dan la misma salida, su diferencia se aplasta al cero — cae en el núcleo. Así que una máquina lineal repite salidas exactamente cuando su núcleo tiene algo más que el (0, 0). Detector: <strong>inyectiva ⇔ nulidad = 0</strong>.</p>
+      <p class="idea" style="font-size:17px">La segunda pregunta: <strong>¿su catálogo llena todo el espacio de llegada?</strong> Si la imagen cubre el codominio completo —ninguna salida posible se queda sin fabricar—, la máquina es <strong>suprayectiva</strong> ("supra" = sobre: produce <em>sobre</em> todo el destino). Detector: <strong>rango = dimensión del codominio</strong>, que es el número de renglones de la matriz. Y si cumple las dos cosas a la vez es <strong>biyectiva</strong>: cada salida viene de exactamente una entrada, sin repetir y sin dejar huecos. En resumen:</p>
       <ul class="fases">
         <li><strong>Inyectiva</strong> ⇔ lo único que va al cero es el cero, o sea <em>nulidad = 0</em>.</li>
         <li><strong>Suprayectiva</strong> ⇔ la imagen llena todo el codominio, o sea <em>rango = número de renglones</em> (dimensión del destino).</li>

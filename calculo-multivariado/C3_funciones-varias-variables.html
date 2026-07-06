@@ -124,7 +124,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -154,7 +154,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -188,33 +188,38 @@
 
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Estás mirando el <strong>mapa de una montaña</strong>. A cada punto del terreno —una pareja de coordenadas (x, y)— le corresponde <strong>una sola</strong> altura. Un modelo sencillo de la loma es:</p>
+      <p class="idea" style="font-size:17px">Estás mirando el <strong>mapa de una montaña</strong>. El papel es plano, pero el terreno no: sobre cada punto del mapa hay <strong>una sola</strong> altura. Para ubicar un punto del mapa bastan dos números —cuánto al este y cuánto al norte—, escritos en pareja: (x, y). Y existe una regla que, al darle el punto, te dice qué tan alto está el terreno justo ahí:</p>
       <div class="fx"><div class="sys"><span class="eq">altura(x, y) = √(9 − x² − y²)</span></div></div>
-      <p class="idea" style="font-size:17px">Tres preguntas caen solas: ¿en qué zona del terreno tiene sentido la fórmula (dónde <strong>no</strong> se rompe)? ¿Qué alturas llega a alcanzar? Y si trazamos las líneas de igual altura —como en un mapa topográfico— ¿qué forma tienen? Todo eso son <strong>dominio</strong>, <strong>imagen</strong> y <strong>curvas de nivel</strong>. Además, en los bordes filosos aparece un problema fino: el de los <strong>límites</strong>. Al final de esta guía respondes justo estas preguntas tú sola.</p>
+      <p class="idea" style="font-size:17px">De esa regla nacen solas tres preguntas: ¿en qué zona del mapa funciona la fórmula sin romperse? ¿Qué alturas llega a alcanzar la montaña? Y si trazas las líneas que unen los puntos de <strong>igual altura</strong> —como las de los mapas de senderismo— ¿qué forma tienen? Cada pregunta tiene su nombre en matemáticas, y en esta guía los vamos a construir uno por uno, sin prisa; al final las respondes tú sola. Además aparecerá un problema más fino —qué le pasa a la altura cuando te <strong>acercas caminando</strong> hacia un punto— que es justo lo que más cae en examen.</p>
     </section>
 
-    <h2 class="modhead">La idea</h2>
+    <h2 class="modhead">La idea · empecemos por lo más simple</h2>
 
     <section class="sec">
-      <h3>1 · Una máquina con dos entradas</h3>
-      <p class="idea">Una <strong>función de dos variables</strong> toma un par de números —un punto del plano— y devuelve <strong>un solo</strong> número. La entrada es una pareja; la salida es una altura. En símbolos:</p>
-      <div class="fx"><div class="sys"><span class="eq">f(x, y) = √(9 − x² − y²)</span></div></div>
-      <p class="idea">El <strong>dominio</strong> es el conjunto de parejas que la función acepta sin romperse; la <strong>imagen</strong> es el conjunto de alturas que llega a producir. Antes de seguir, aclara qué es cada cosa:</p>
-      <div class="check" data-kind="item" data-id="IDchk" data-tema="dominio_imagen" data-level="guiado">
-        <div class="qtag">Te toca · distingue</div>
-        <p class="q">Para f(x, y), ¿en qué conjunto vive el <strong>dominio</strong> y en cuál la <strong>imagen</strong>?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Dominio: parejas (x, y) del plano · Imagen: números sueltos (las alturas de salida)</button>
-          <button class="opt" data-ok="0">Dominio: números sueltos · Imagen: parejas (x, y) del plano</button>
-          <button class="opt" data-ok="0">Los dos viven en el plano: ambos son conjuntos de parejas (x, y)</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La <strong>entrada</strong> es una pareja del plano: ahí vive el dominio. La <strong>salida</strong> es un solo número: la imagen es un conjunto de esas alturas, no de parejas.</p></div>
-      </div>
+      <h3>1 · La máquina que ya conoces: una perilla</h3>
+      <p class="idea">Antes de lo nuevo, recuerda lo viejo. Una función de bachillerato, como f(x) = 2x + 1, es una <strong>máquina con una perilla</strong>: giras la perilla a un número, y la máquina te devuelve <strong>un solo</strong> número. Pones la perilla en 3 y la máquina calcula 2·3 + 1 = 6 + 1 = 7: te entrega un 7. Eso se escribe f(3) = 7 y se lee "efe de tres es igual a siete".</p>
+      <p class="idea">Quédate con las dos piezas: <strong>una entrada</strong> (el número que tú eliges) y <strong>una salida</strong> (el número que la máquina produce). Toda esta guía es exactamente esa idea con un solo cambio: la máquina ahora va a tener <strong>dos perillas</strong>.</p>
     </section>
 
     <section class="sec">
-      <h3>2 · Qué puede prohibir un dominio</h3>
-      <p class="idea">Solo tres cosas rompen una fórmula, exactamente las mismas de una variable: <strong>dividir entre cero</strong>, sacar <strong>raíz par de un negativo</strong> y tomar <strong>logaritmo de algo no positivo</strong>. Todo lo demás está permitido. ¿Lo recuerdas antes de mirarlo?</p>
+      <h3>2 · Una máquina con dos perillas</h3>
+      <p class="idea">Piensa en un horno tostando pan. Ahí giras <strong>dos perillas</strong>: la de <strong>temperatura</strong> y la de <strong>tiempo</strong>. Y del horno sale <strong>un solo resultado</strong>: qué tan dorado queda el pan. Dos entradas, una salida. Además el papel de cada perilla es distinto: 180 grados durante 10 minutos te da un pan dorado; 10 grados durante 180 minutos te da un pan frío. Por eso las dos entradas se escriben <strong>en pareja y en orden</strong>, entre paréntesis: (180, 10) no es lo mismo que (10, 180).</p>
+      <p class="idea">Ahora la versión con números chicos. Toma la regla f(x, y) = x + 2y. Se lee "<strong>efe de equis, ye</strong>": la máquina tiene dos perillas, una llamada x y otra llamada y. Pongo x = 3 y y = 2, y sigo la regla: 3 + 2·2 = 3 + 4 = 7. Eso se escribe f(3, 2) = 7. ¿Y si giro las perillas al revés? f(2, 3) = 2 + 2·3 = 2 + 6 = 8. Salió otra cosa: como en el horno, <strong>el orden de la pareja importa</strong>.</p>
+      <p class="idea">A una máquina así se le llama <strong>función de dos variables</strong>. "Dos variables" significa solo eso: son <strong>dos</strong> las perillas que puedes mover (x y y), aunque la salida sigue siendo <strong>un</strong> número. La regla de la montaña del inicio, altura(x, y), es una de estas máquinas: le das un punto del mapa y te devuelve la altura.</p>
+    </section>
+
+    <section class="sec">
+      <h3>3 · El dibujo: un terreno sobre el mapa</h3>
+      <p class="idea">Con una perilla, la función se dibujaba como una curva. Con dos perillas el dibujo sube de dimensión, y la mejor forma de verlo es la de la montaña. Piensa en todas las parejas (x, y) como los puntos de un <strong>mapa plano</strong> tendido en el piso. Sobre cada punto del mapa, la máquina dicta <strong>una altura</strong>. Si levantas esa altura punto por punto, aparece un <strong>terreno</strong>: lomas, valles, planicies.</p>
+      <p class="idea">Camínalo con la montaña del inicio, altura(x, y) = √(9 − x² − y²). En el centro del mapa, el punto (0, 0): adentro de la raíz queda 9 − 0 − 0 = 9, y √9 = 3. El terreno mide 3 en el centro: es la cima. En el punto (2, 2): 9 − 4 − 4 = 1, y √1 = 1. Ya solo mide 1: vas bajando. En (3, 0): 9 − 9 − 0 = 0, y √0 = 0. Ahí el terreno toca el piso.</p>
+      <p class="idea">A ese terreno se le llama la <strong>gráfica</strong> de la función: el mismo papel que jugaba la curva de f(x), solo que ahora es una <strong>superficie</strong>. Y una buena noticia: casi todo el trabajo de esta guía se hace mirando el mapa plano, sin dibujar nada en 3D.</p>
+    </section>
+
+    <section class="sec">
+      <h3>4 · Perillas prohibidas: el dominio</h3>
+      <p class="idea">Ningún horno acepta cualquier combinación de perillas: hornear −5 minutos no significa nada. A las fórmulas les pasa igual: hay parejas que las <strong>rompen</strong>. Prueba la montaña en el punto (4, 0): adentro de la raíz queda 9 − 16 − 0 = −7. Y √(−7) <strong>no existe</strong>: la raíz busca un número que multiplicado por sí mismo dé −7, pero positivo por positivo da positivo, y negativo por negativo también — nadie da negativo. En (4, 0) la fórmula se rompe: esa pareja está <strong>prohibida</strong>, y sobre ese punto simplemente no hay montaña.</p>
+      <p class="idea">Al conjunto de parejas que la máquina <strong>sí acepta</strong> se le llama el <strong>dominio</strong>. El nombre lo dice: es el territorio que la función <strong>domina</strong> — la zona del mapa donde el terreno de verdad existe. Fuera del dominio no hay nada que calcular.</p>
+      <p class="idea">¿Y cómo encuentro las parejas prohibidas de cualquier fórmula? Buena noticia: solo hay <strong>tres operaciones</strong> capaces de romperse, las mismas tres de bachillerato. Una: <strong>dividir entre cero</strong> — 1⁄0 no existe, repartir entre nadie no significa nada. Dos: <strong>raíz par de un negativo</strong> — lo que acabas de ver con √(−7); a lo que vive adentro de una raíz se le llama el <strong>radicando</strong>, y a un radicando de raíz cuadrada le exiges ser mayor o igual que cero. Tres: <strong>logaritmo de cero o de un negativo</strong> — el logaritmo pregunta "¿a qué exponente elevo la base para llegar a este número?", y ninguna potencia de una base positiva da cero ni da negativo: adentro de un logaritmo va algo estrictamente positivo. Todo lo demás —sumar, restar, multiplicar, elevar al cuadrado— nunca se rompe.</p>
       <div class="check" data-kind="recall" data-fid="F1_restricciones_dominio" data-tema="dominio">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Cuál lista reúne las restricciones que de verdad limitan un dominio?</p>
@@ -228,10 +233,28 @@
     </section>
 
     <section class="sec">
-      <h3>3 · Rebanar la superficie: curvas de nivel</h3>
-      <p class="idea">Fijar la altura en un valor <em>k</em> y preguntar “¿en qué puntos vale eso la función?” da una <strong>curva de nivel</strong>. Es la fórmula igualada a una constante:</p>
+      <h3>5 · Las salidas que sí ocurren: la imagen</h3>
+      <p class="idea">El dominio vigila las <strong>entradas</strong>. La pregunta gemela vigila las <strong>salidas</strong>: de todos los números que existen, ¿cuáles llega a <strong>producir</strong> la máquina? En el horno, por más que muevas las perillas, el dorado del pan va de 0 (crudo) a 10 (carbón): jamás saldrá un dorado de −3. En la montaña ya lo caminaste: la altura más grande fue 3 (la cima, en el centro del mapa) y la más chica fue 0 (donde el terreno toca el piso). Las salidas de esa máquina van de 0 a 3, y nada fuera de eso.</p>
+      <p class="idea">A ese conjunto de salidas alcanzadas se le llama la <strong>imagen</strong> de la función: es lo que la máquina <strong>proyecta</strong> sobre la recta de los números, como un proyector que solo ilumina una franja de la pared. Y ojo con la diferencia, porque en examen la preguntan: el <strong>dominio</strong> está hecho de <strong>parejas</strong> (x, y) — vive en el mapa; la <strong>imagen</strong> está hecha de <strong>números sueltos</strong> — las alturas de salida.</p>
+      <div class="check" data-kind="item" data-id="IDchk" data-tema="dominio_imagen" data-level="guiado">
+        <div class="qtag">Te toca · distingue</div>
+        <p class="q">Para f(x, y), ¿en qué conjunto vive el <strong>dominio</strong> y en cuál la <strong>imagen</strong>?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Dominio: parejas (x, y) del plano · Imagen: números sueltos (las alturas de salida)</button>
+          <button class="opt" data-ok="0">Dominio: números sueltos · Imagen: parejas (x, y) del plano</button>
+          <button class="opt" data-ok="0">Los dos viven en el plano: ambos son conjuntos de parejas (x, y)</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La <strong>entrada</strong> es una pareja del plano: ahí vive el dominio. La <strong>salida</strong> es un solo número: la imagen es un conjunto de esas alturas, no de parejas.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>6 · Las líneas del mapa: curvas de nivel</h3>
+      <p class="idea">¿Has visto un mapa de senderismo, con esas líneas curvas que rodean la montaña? Cada línea une <strong>todos los puntos que están a la misma altura</strong>. Si caminas siguiendo la línea de "200 m", nunca subes ni bajas: rodeas la loma a nivel. Los mapas del clima hacen lo mismo con líneas de igual temperatura o de igual presión. Esa es la gran idea para leer un terreno <strong>sin</strong> dibujarlo en 3D.</p>
+      <p class="idea">Hagamos una de esas líneas con números. Toma la función f(x, y) = x² + y², cuyo terreno es un <strong>tazón</strong>: vale 0 en el centro y sube hacia todos lados. Pregunta concreta: ¿qué puntos del mapa están a <strong>altura 4</strong>? Busco parejas que cumplan x² + y² = 4. El punto (2, 0): 4 + 0 = 4, sí está. El punto (0, 2): 0 + 4 = 4, también. El punto (−2, 0): (−2)² = 4, y 4 + 0 = 4, también. ¿Qué tienen en común? Por Pitágoras, x² + y² es el cuadrado de la <strong>distancia</strong> del punto al centro; pedir x² + y² = 4 es pedir distancia 2. Todos los puntos a distancia 2 del centro forman un <strong>círculo de radio 2</strong>: esa es la línea de altura 4 del tazón.</p>
+      <p class="idea">En general se hace igual: eliges una altura k y juntas todos los puntos donde la función vale exactamente k. En símbolos, es la fórmula igualada a una constante:</p>
       <div class="fx"><div class="sys"><span class="eq">f(x, y) = k</span></div></div>
-      <p class="idea">Es exactamente lo que hace un mapa topográfico: cada línea une los puntos a la misma altura. El nombre paraguas es <strong>conjunto de nivel</strong>: son <strong>curvas de nivel</strong> cuando la función tiene dos variables y <strong>superficies de nivel</strong> cuando tiene tres.</p>
+      <p class="idea">A esa línea se le llama <strong>curva de nivel</strong> — "de nivel" porque todos sus puntos están al mismo nivel, a la misma altura. Si la función tiene <strong>tres</strong> variables ya no salen líneas sino superficies: se llaman <strong>superficies de nivel</strong>. El nombre paraguas para ambos es <strong>conjunto de nivel</strong>.</p>
       <div class="check" data-kind="item" data-id="NIVchk" data-tema="curvas_nivel" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">Para f(x, y) = x² + y², ¿qué es la curva de nivel k = 9?</p>
@@ -244,10 +267,27 @@
       </div>
     </section>
 
+    <section class="sec">
+      <h3>7 · Acercarse por cualquier camino: el límite</h3>
+      <p class="idea">Queda la idea más fina de la unidad. En bachillerato, el <strong>límite</strong> respondía esta pregunta: cuando la entrada se <strong>acerca</strong> a un punto, ¿a qué valor se acerca la salida? Y en la recta solo había <strong>dos</strong> maneras de acercarse a un punto: por la izquierda o por la derecha. Si ambas daban lo mismo, ese valor era el límite.</p>
+      <p class="idea">En el mapa la historia cambia por completo. Hacia un punto puedes caminar <strong>desde cualquier lugar</strong>: desde el norte, desde el este, en diagonal, en espiral, en zigzag… <strong>infinitos caminos</strong>. El límite de la función en ese punto existe solo si la altura se acerca <strong>al mismo valor por todos los caminos</strong>, sin excepción.</p>
+      <p class="idea">De ahí sale una lógica que usarás en cada examen. Para decir que el límite <strong>no</strong> existe basta poquísimo: encontrar <strong>dos</strong> caminos que discrepen. Si llegando por un lado la altura se acerca a 0 y llegando por otro se acerca a ½, no puede haber límite: el límite es <strong>un solo número</strong>, y ningún número vale dos cosas a la vez. Para decir que <strong>sí</strong> existe, en cambio, probar caminos <strong>nunca alcanza</strong>: aunque pruebes veinte y todos den 0, quedan infinitos sin probar, y alguno podría fallar. El sí exige un argumento que cubra <strong>todos los caminos a la vez</strong> — más abajo te enseño el truco que lo logra.</p>
+      <div class="check" data-kind="item" data-id="LIMchk" data-tema="limites" data-level="guiado">
+        <div class="qtag">Te toca · razona</div>
+        <p class="q">Pruebas 5 caminos hacia un punto y por los 5 la altura se acerca a 0. ¿Qué puedes concluir?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Que el límite existe y vale 0: con cinco caminos es suficiente</button>
+          <button class="opt" data-ok="1">Nada seguro todavía: sospechas que vale 0, pero quedan infinitos caminos sin probar; el sí exige un argumento que los cubra todos</button>
+          <button class="opt" data-ok="0">Que el límite no existe, porque ningún camino dio un valor distinto</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Los caminos sueltos solo sirven para el <strong>no</strong>: dos que discrepen tumban el límite. Para el <strong>sí</strong> nunca terminas de probar, porque los caminos son infinitos: la confirmación necesita un argumento general que los cubra todos a la vez.</p></div>
+      </div>
+    </section>
+
     <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Hallemos el <strong>dominio</strong> y la <strong>imagen</strong> de la función de la montaña. No la mires nada más: en cada paso <strong>tú eliges qué hacer</strong> y yo lo aplico.</p>
+      <p class="idea" style="font-size:17px">Ya tienes todas las piezas. Hallemos el <strong>dominio</strong> y la <strong>imagen</strong> de la montaña del inicio — las dos primeras preguntas del problema. No lo mires nada más: en cada paso <strong>tú eliges qué hacer</strong> y yo lo aplico.</p>
       <div class="estep"><div class="oprow">La función</div><div class="fx" id="e0"></div></div>
 
       <div class="check" data-kind="item" data-id="E1pred" data-tema="dominio" data-level="guiado">
@@ -291,10 +331,10 @@
 
     <h2 class="modhead">Sube el tamaño · el límite y sus infinitos caminos</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">El dominio y la imagen casi salen de un tiro. El <strong>límite</strong> es el salto real, y es lo que de verdad cae en examen. En una variable te acercas por izquierda y por derecha —dos caminos. En el plano te puedes acercar por <strong>infinitos caminos</strong>, y el límite solo existe si <strong>todos</strong> dan lo mismo. La estrategia se parte en dos:</p>
+      <p class="idea" style="font-size:17px">El dominio y la imagen casi salen de un tiro. El <strong>límite</strong> es el salto real, y es lo que de verdad cae en examen. Ya conoces la regla del juego del escalón 7: infinitos caminos hacia el punto, y todos deben dar lo mismo. En la práctica, eso se convierte en una estrategia de dos fases:</p>
       <ul class="fases">
         <li><strong>Fase 1 — sospecha:</strong> prueba <em>dos caminos fáciles</em> (ejes, la recta y = x). Si discrepan, ya terminaste: el límite <em>no existe</em>.</li>
-        <li><strong>Fase 2 — confirma:</strong> si todos los caminos coinciden, no basta probar más; hay que <em>demostrar</em> con polares o un sándwich.</li>
+        <li><strong>Fase 2 — confirma:</strong> si los caminos que pruebas coinciden, eso todavía no prueba nada; hay que <em>demostrar</em> con un argumento que cubra todos los caminos a la vez — viene abajo.</li>
       </ul>
       <p class="idea" style="font-size:17px">Empecemos con un caso que <strong>falla</strong>. Estudiemos el límite en el origen de:</p>
       <div class="estep"><div class="oprow">El límite</div><div class="fx" id="t0"></div></div>
@@ -330,7 +370,7 @@
 
     <section class="sec">
       <h3>Míralo: curvas de nivel de x² + y²</h3>
-      <p class="idea">Tomemos <strong>f(x, y) = x² + y²</strong>, un tazón. Su curva de nivel <em>k</em> es <em>x² + y² = k</em>: un <strong>círculo</strong> de radio √k. Sube el valor de <em>k</em> y mira cómo crece el círculo. Toca cada altura:</p>
+      <p class="idea">Volvamos al tazón <strong>f(x, y) = x² + y²</strong>. Su curva de nivel de altura <em>k</em> es <em>x² + y² = k</em>: un <strong>círculo</strong> de radio √k — ya trazaste la de altura 4, con radio 2. Sube el valor de <em>k</em> y mira cómo crece el círculo. Toca cada altura:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="k1">k = 1</button>
@@ -345,7 +385,7 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">No siempre falla. Cuando el límite <strong>sí existe</strong> (Fase 2), el truco estrella es pasar a <strong>coordenadas polares</strong>: x = r·cos θ, y = r·sen θ. Acercarse al origen es hacer r → 0, sin importar el ángulo. Estudiemos:</p>
+      <p class="idea" style="font-size:17px">No siempre falla. Cuando el límite <strong>sí existe</strong> (Fase 2), el argumento que cubre todos los caminos a la vez son las <strong>coordenadas polares</strong>: en lugar de ubicar un punto por (x, y), lo ubicas por r —su <strong>distancia</strong> al origen— y θ —su <strong>ángulo</strong>—, con las traducciones x = r·cos θ, y = r·sen θ. La gracia: acercarse al origen por <strong>cualquier</strong> camino es simplemente hacer r → 0, sin importar cómo cambie el ángulo. Estudiemos:</p>
       <div class="estep"><div class="oprow">El límite</div><div class="fx" id="f0"></div></div>
       <div class="estep"><div class="oprow">Cambio a polares · numerador</div><p>Sustituyo x = r·cos θ, y = r·sen θ en x²y:</p><p class="calc"><span class="rw">num</span> x²<b>=r²cos²θ</b> <span class="sep">•</span> y<b>=r·senθ</b> <span class="sep">•</span> x²y<b>=r³cos²θ·senθ</b></p></div>
       <div class="estep"><div class="oprow">Cambio a polares · denominador</div><p>El patrón x² + y² se vuelve r² (el corazón del truco):</p><p class="calc"><span class="rw">den</span> x²+y²<b>=r²</b></p></div>
@@ -356,7 +396,7 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Un paso más: la <strong>continuidad</strong>. Una función es <strong>continua en un punto</strong> cuando el límite existe ahí <strong>y coincide con el valor</strong> que la función toma en ese punto. Tres cosas: que exista el valor, que exista el límite, y que sean iguales. Usemos la función del ejemplo anterior, definida <strong>a trozos</strong> para cubrir el origen:</p>
+      <p class="idea" style="font-size:17px">Un paso más: la <strong>continuidad</strong>. En el terreno se ve fácil: una función es continua donde su terreno <strong>no tiene hoyos ni saltos</strong> — puedes caminar por encima sin caer en un agujero. La versión precisa, en un punto, pide tres cosas: que exista el <strong>valor</strong> de la función ahí, que exista el <strong>límite</strong> ahí, y que <strong>coincidan</strong>. Usemos la función del ejemplo anterior, definida <strong>a trozos</strong> —una fórmula para casi todo el plano y un valor aparte para el origen— justo para taparle el hueco:</p>
       <div class="estep"><div class="oprow">La función</div><div class="fx" id="c0"></div></div>
       <div class="estep"><div class="oprow">El valor en el punto</div><p>Por la definición a trozos, en el origen la función vale f(0, 0) = 0. Ese valor existe:</p><p class="calc"><span class="rw">valor</span> f(0,0)<b>=0</b> <span class="sep">•</span> existe <b>✓</b></p><div class="fx" id="c1"></div></div>
       <div class="estep"><div class="oprow">El límite en el punto</div><p>Ya lo calculamos con polares: el límite cuando (x, y) → (0, 0) es 0. También existe:</p><p class="calc"><span class="rw">límite</span> lím<b>=0</b> <span class="sep">•</span> existe <b>✓</b></p><div class="fx" id="c2"></div></div>

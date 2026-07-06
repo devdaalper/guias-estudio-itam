@@ -124,7 +124,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -154,7 +154,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -188,16 +188,20 @@
 
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Una gota de agua descansa sobre la <strong>circunferencia x² + y² = 25</strong>, justo en el punto <strong>(3, 4)</strong>. Si la resbalas un poquito, ¿hacia dónde y con qué inclinación se va? Es decir: ¿cuál es la <strong>pendiente</strong> de la curva ahí?</p>
+      <p class="idea" style="font-size:17px">Imagina un aro de alambre circular recargado en una pared, con una <strong>gota de agua</strong> detenida sobre el alambre. Si la gota resbala un poquito, ¿qué tan inclinado está el alambre justo ahí: casi plano, o en bajada fuerte? Eso, en matemáticas, es pedir la <strong>pendiente</strong> de la curva en ese punto.</p>
       <div class="fx"><div class="sys"><span class="eq">x² + y² = 25</span></div></div>
-      <p class="idea" style="font-size:17px">El problema: la ecuación mezcla la x y la y en un solo renglón, sin despejar “y igual a algo”. Podrías despejar y = √(25 − x²) y derivar… pero eso se pone feo rapidísimo, y con tres variables ya ni se puede. Necesitamos sacar la pendiente <strong>sin despejar nada</strong>. Ese es el método de la <strong>derivación implícita</strong>, y al final de esta guía vas a sacar esa pendiente tú sola.</p>
+      <p class="idea" style="font-size:17px">El aro tiene ecuación: la de arriba. Los puntos (x, y) que la cumplen forman una circunferencia de radio 5, y la gota está en <strong>(3, 4)</strong>, que sí es un punto del aro porque 3² + 4² = 9 + 16 = 25.</p>
+      <p class="idea" style="font-size:17px">El estorbo: la ecuación trae la x y la y <strong>amarradas en un solo renglón</strong>; nadie te dio “y igual a algo con x”. Podrías despejar y = √(25 − x²) y derivar… pero eso se pone feo rapidísimo, y con tres variables ya ni se puede. En esta guía vamos a construir la herramienta que saca la pendiente <strong>sin despejar nada</strong> — y al final la pendiente de la gota la vas a calcular tú sola.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
       <h3>1 · Una ecuación que esconde una función</h3>
-      <p class="idea">Cuando la relación entre dos variables no viene despejada sino atada en una sola ecuación, cerca de un punto esa ecuación puede <strong>definir a y como función de x</strong> aunque no la veamos despejada. A eso se le llama <strong>función implícita</strong>. La circunferencia x² + y² = 25 no es una función entera (a cada x le tocan dos y), pero <strong>alrededor de (3, 4)</strong> sí es un trocito de curva que es función.</p>
+      <p class="idea">Primero recordemos qué es una función con la imagen de siempre: una <strong>máquina</strong>. La función y = 2x + 1 es una máquina ya armada: le das una x y te devuelve una y. Le das x = 3 y devuelve y = 2·3 + 1 = 7. La y está <strong>despejada</strong>, solita de un lado del igual. Cuando la máquina viene así, armada y a la vista, se dice que la función está <strong>explícita</strong>: puesta con todas sus letras.</p>
+      <p class="idea">Ahora mira x² + y² = 25. Aquí nadie te entregó la máquina: la x y la y vienen <strong>amarradas en la misma ecuación</strong>, sin despejar. La relación entre ellas existe —la curva se dibuja perfectamente—, pero las instrucciones de y están <strong>guardadas adentro</strong>. Cuando pasa eso se dice que la ecuación define una función <strong>implícita</strong>: escondida dentro de la ecuación, sin estar a la vista.</p>
+      <p class="idea">Pregunta honesta: ¿de verdad hay una función escondida ahí? Cuidado, porque la circunferencia <strong>completa</strong> no lo es. Prueba con x = 3: la ecuación dice 9 + y² = 25, o sea y² = 16… y eso lo cumplen <strong>dos</strong> números: y = 4 y y = −4. Una máquina que a una misma entrada le da dos salidas no es una función.</p>
+      <p class="idea">Pero si te quedas <strong>cerquita de (3, 4)</strong> —solo el arco de arriba—, a cada x le toca un único y. Ahí sí hay máquina escondida. Esa es la letra chica de todo el tema: la función implícita vive <strong>cerca del punto</strong>, no en la curva entera.</p>
       <p class="fx-note">La palabra clave es <strong>cerca del punto</strong>: no toda la curva, solo un pedacito alrededor de donde estás parada.</p>
       <div class="check" data-kind="item" data-id="IDEA1" data-tema="funcion_implicita" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
@@ -212,9 +216,16 @@
     </section>
 
     <section class="sec">
-      <h3>2 · El teorema de la función implícita</h3>
-      <p class="idea">Reescribimos la ecuación como “todo igual a cero”, es decir <strong>F(x, y) = 0</strong>. El teorema dice: si en un punto la parcial de F respecto a y <strong>no es cero</strong>, entonces cerca de ahí y sí es función de x, y su derivada sale de una fórmula fija:</p>
-      <div class="fx"><div class="sys"><span class="eq">dy/dx = − F<sub>x</sub> / F<sub>y</sub></span></div><p class="fx-note">F<sub>x</sub> es la parcial respecto a x; F<sub>y</sub> la parcial respecto a y. La condición F<sub>y</sub> ≠ 0 es la que garantiza que se pueda despejar.</p></div>
+      <h3>2 · La pendiente sin despejar — y el teorema que la garantiza</h3>
+      <p class="idea">Vamos a medir la pendiente sin sacar la máquina de su escondite. Primer paso, uno de pura escritura: pasa todo al mismo lado del igual. x² + y² = 25 se convierte en x² + y² − 25 = 0. Al bloque completo de la izquierda lo bautizamos <strong>F(x, y)</strong>: una expresión que depende de x y de y. Escrito así, “estar en la curva” se dice corto: <strong>F(x, y) = 0</strong>.</p>
+      <p class="idea">Segundo paso, dos abreviaturas para las parciales que ya conoces: <strong>F<sub>x</sub></strong> es la parcial de F respecto a x (derivas mirando solo la x; la y se queda quieta) y <strong>F<sub>y</sub></strong> es la parcial respecto a y. En nuestro ejemplo, F = x² + y² − 25, así que F<sub>x</sub> = 2x y F<sub>y</sub> = 2y.</p>
+      <p class="idea">Ahora la jugada clave, sin magia. Sobre el arco donde sí hay máquina, y depende de x. Mete esa y dentro de F y observa: sobre la curva, F vale <strong>siempre 0</strong>. No “casi cero” ni “a veces cero”: cero parejo, para toda x del arco. Y una cantidad que nunca cambia tiene derivada 0. Así que derivamos F respecto a x e igualamos a 0. La regla de la cadena reparte el trabajo: la parte de x aporta F<sub>x</sub>, y la parte de y aporta F<sub>y</sub>·y′ — ese y′ aparece porque y es función de x y arrastra su propia derivada:</p>
+      <div class="fx"><div class="sys"><span class="eq">F<sub>x</sub> + F<sub>y</sub>·y′ = 0</span></div><p class="fx-note">y′ es la derivada de y respecto a x — también se escribe dy/dx. Es justo la pendiente que buscamos.</p></div>
+      <p class="idea">De ahí, puro despeje de secundaria: pasa F<sub>x</sub> al otro lado (queda F<sub>y</sub>·y′ = −F<sub>x</sub>) y divide entre F<sub>y</sub>:</p>
+      <div class="fx"><div class="sys"><span class="eq">dy/dx = − F<sub>x</sub> / F<sub>y</sub></span></div><p class="fx-note">La pendiente de la curva, sin despejar y. A derivar así —tratando a y como función de x sin despejarla— se le llama <strong>derivación implícita</strong>.</p></div>
+      <p class="idea">Pruébala donde sí puedes verificar. La recta x + 2y = 4 sí se deja despejar: y = 2 − x/2, pendiente −1/2. Ahora por el camino nuevo: F = x + 2y − 4, F<sub>x</sub> = 1, F<sub>y</sub> = 2, y la fórmula da −F<sub>x</sub>/F<sub>y</sub> = −1/2. <strong>Mismo resultado, sin despejar.</strong></p>
+      <p class="idea">Falta la letra chica: la fórmula <strong>divide entre F<sub>y</sub></strong>, y entre cero no se divide. Y no es capricho del álgebra. Mira el punto (5, 0) de la circunferencia, el borde derecho: ahí F<sub>y</sub> = 2y = 2·0 = 0… y justo ahí la tangente es vertical y la curva “da la vuelta”: pegado a ese punto, cada x trae dos y, una arriba y otra abajo. Donde la fórmula falla, la función escondida también desaparece.</p>
+      <p class="idea">Todo esto junto tiene nombre: es el <strong>teorema de la función implícita</strong>. Dice: si en un punto de la curva F<sub>y</sub> ≠ 0, entonces cerca de ese punto y sí es función de x, y su pendiente es dy/dx = −F<sub>x</sub>/F<sub>y</sub>. Es la garantía (sí hay máquina escondida) más la fórmula (su pendiente), en un solo paquete.</p>
       <div class="check" data-kind="recall" data-fid="F1_condicion_TFI" data-tema="teorema_funcion_implicita">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué condición pide el teorema para asegurar que y es función de x cerca del punto?</p>
@@ -229,7 +240,8 @@
 
     <section class="sec">
       <h3>3 · El mismo teorema con tres variables</h3>
-      <p class="idea">La misma idea sube un piso. Una sola ecuación <strong>F(x, y, z) = 0</strong> puede <strong>definir a z como función de x y de y</strong> (una superficie que, cerca de un punto, es la gráfica de z(x, y)). La condición gemela es <strong>F<sub>z</sub> ≠ 0</strong>, y en vez de una derivada salen <strong>dos parciales</strong>, cada una con la misma receta “−parcial de arriba entre F<sub>z</sub>”:</p>
+      <p class="idea">La misma película, un piso arriba. Ahora la ecuación amarra <strong>tres</strong> letras: F(x, y, z) = 0. Sus puntos ya no dibujan una curva sino una <strong>superficie</strong> en el espacio (una cáscara, como la de una esfera). Y cerca de un punto bueno, esa ecuación esconde una máquina con <strong>dos entradas y una salida</strong>: le das (x, y) y te devuelve la altura z que le toca — como un terreno, donde a cada punto del mapa le corresponde una sola altura.</p>
+      <p class="idea">¿Quién manda ahora? En dos variables la que se despejaba era y, y su parcial F<sub>y</sub> era la del denominador, la que no podía ser cero. Aquí la que se despeja es <strong>z</strong>, así que su parcial hereda el puesto: la condición gemela es <strong>F<sub>z</sub> ≠ 0</strong>. Y como la máquina escondida tiene dos entradas, ya no hay una sola pendiente: salen <strong>dos parciales</strong>, una por entrada, las dos con la misma receta “menos la de arriba, entre la del despejado”:</p>
       <div class="fx"><div class="sys"><span class="eq">∂z/∂x = − F<sub>x</sub> / F<sub>z</sub></span><span class="eq">∂z/∂y = − F<sub>y</sub> / F<sub>z</sub></span></div><p class="fx-note">F<sub>z</sub> va siempre en el denominador; por eso hace falta F<sub>z</sub> ≠ 0. Es el caso de dos variables, pero derivando una vez respecto a x y otra respecto a y.</p></div>
       <div class="check" data-kind="item" data-id="IDEA3" data-tema="derivacion_implicita_3var" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
@@ -244,8 +256,11 @@
     </section>
 
     <section class="sec">
-      <h3>4 · La inversa: una idea gemela</h3>
-      <p class="idea">Cuando una función f tiene inversa, la pendiente de la inversa en un punto es el <strong>recíproco</strong> de la pendiente de f en el punto correspondiente. La regla es corta y hay que saberla de memoria:</p>
+      <h3>4 · Deshacer la máquina: la inversa</h3>
+      <p class="idea">Cambio de pregunta, misma familia. Una función es una máquina: entra a, sale b = f(a). A veces necesitas la máquina <strong>en reversa</strong>: conoces la salida y quieres recuperar la entrada. Piensa en la máquina que pasa kilómetros a metros (multiplica por 1000): su reversa toma metros y devuelve kilómetros (divide entre 1000). A esa máquina en reversa se le llama la <strong>inversa</strong> de f, y se escribe <strong>f⁻¹</strong> — ojo: ese −1 arriba no es un exponente, es solo el letrero de “en reversa”.</p>
+      <p class="idea">¿Siempre se puede deshacer? No. Si cerca de a la máquina está <strong>plana</strong> —su derivada f′(a) = 0—, dos entradas vecinas producen casi la misma salida. Parada en esa salida, ¿de cuál entrada veniste? Imposible saberlo: la reversa no existe ahí. En cambio, si <strong>f′(a) ≠ 0</strong> (la máquina sube o baja de verdad en ese punto), cerca de a sí se puede deshacer. ¿Te suena esa condición? Es la gemela de F<sub>y</sub> ≠ 0: otro “distinto de cero” que garantiza que algo se deja despejar.</p>
+      <p class="idea">¿Y qué pendiente tiene la reversa? Míralo con números chicos: f(x) = 3x avanza 3 de salida por cada 1 de entrada — pendiente 3. Su reversa regresa 1 de entrada por cada 3 de salida — pendiente 1/3. Deshacer un estirón de 3 es encoger con 1/3: la pendiente de la inversa es el <strong>recíproco</strong> (uno entre el número) de la pendiente original.</p>
+      <p class="idea">Último detalle, el que a todos les cuesta: <strong>dónde se evalúa cada cosa</strong>. La inversa vive del lado de las salidas, así que su derivada se pregunta en b. Pero la pendiente original se mide del lado de las entradas: f′ va evaluada en a. Todo junto, la regla que hay que saber de memoria:</p>
       <div class="fx"><div class="sys"><span class="eq">(f⁻¹)′(b) = 1 / f′(a),  con b = f(a)</span></div><p class="fx-note">Ojo con dónde se evalúa: f′ se calcula en a (el de entrada), no en b. Y hace falta f′(a) ≠ 0.</p></div>
       <div class="check" data-kind="recall" data-fid="F3_derivada_inversa" data-tema="funcion_inversa">
         <div class="qtag">Te toca · recuerda</div>
@@ -261,7 +276,7 @@
 
     <section class="sec">
       <h3>5 · Míralo: la derivada es la pendiente de la tangente</h3>
-      <p class="idea">La derivada implícita no es un truco abstracto: es la <strong>pendiente de la recta tangente</strong> a la curva en ese punto. Toca cada punto de la circunferencia y observa cómo cambia la tangente:</p>
+      <p class="idea">Regresemos al aro de la gota, ahora con dibujo. La <strong>recta tangente</strong> es la recta que apenas roza la curva en un punto y lleva su misma dirección: la tablita sobre la que patinaría la gota. La derivada implícita que acabamos de construir es exactamente la <strong>pendiente de esa recta</strong>. Toca cada punto de la circunferencia y observa cómo cambia:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="p34">En (3, 4)</button>
@@ -375,7 +390,7 @@
 
     <h2 class="modhead">Sube el tamaño · la inversa y el jacobiano</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Primero la <strong>inversa escalar</strong>. Sea <strong>f(x) = x³</strong>; queremos la derivada de su inversa en <strong>b = 8</strong>. No hace falta despejar la inversa: basta la fórmula (f⁻¹)′(b) = 1/f′(a).</p>
+      <p class="idea" style="font-size:17px">Primero la inversa de una función de un solo número. Sea <strong>f(x) = x³</strong>; queremos la derivada de su inversa en <strong>b = 8</strong>. No hace falta despejar la inversa: basta la fórmula (f⁻¹)′(b) = 1/f′(a).</p>
 
       <div class="check" data-kind="item" data-id="E6pred" data-tema="funcion_inversa" data-level="juntos">
         <div class="qtag">Te toca · decide el paso</div>
@@ -398,9 +413,11 @@
 
     <section class="sec">
       <h3>El jacobiano: la versión matricial</h3>
-      <p class="idea">Cuando hay <strong>varias variables de entrada y varias de salida</strong> (una transformación), la “derivada” ya no es un número: es una <strong>matriz de todas las parciales</strong>, la <strong>matriz jacobiana</strong>. Para una transformación que manda (x, y) a (u, v):</p>
+      <p class="idea">Última subida. Hasta ahora nuestras máquinas entregaban <strong>una sola</strong> salida. Imagina ahora una máquina con dos entradas y <strong>dos salidas</strong>: le das el par (x, y) y te devuelve el par (u, v) — dos resultados a la vez, cada uno con su propia fórmula. A una máquina así se le llama <strong>transformación</strong>, porque transforma cada punto del plano en otro punto.</p>
+      <p class="idea">¿Cuál es “la pendiente” de semejante máquina? Un solo número ya no alcanza: hay que responder <strong>cuatro</strong> preguntas. Si muevo x, ¿cuánto cambia u? (eso es ∂u/∂x). Si muevo y, ¿cuánto cambia u? (∂u/∂y). Y las mismas dos para v. Cuatro parciales, que se acomodan en una tabla de 2×2 — una fila por salida, una columna por entrada:</p>
       <div class="fx" id="jacGen"></div>
-      <p class="idea">Su <strong>determinante</strong> —el jacobiano— mide cuánto estira o encoge áreas la transformación cerca del punto. La regla clave, gemela de F<sub>y</sub> ≠ 0: si el <strong>determinante jacobiano no es cero</strong> en un punto, la transformación tiene inversa local ahí.</p>
+      <p class="idea">A esa tabla se le llama la <strong>matriz jacobiana</strong> (por Jacobi, el matemático que la estudió), y se abrevia <strong>J</strong>. Es la derivada de la transformación: la versión en matriz de la pendiente.</p>
+      <p class="idea">¿Y para qué la queremos? Para saber si la máquina se puede <strong>deshacer</strong>. De álgebra lineal recuerdas que el determinante mide el <strong>factor de área</strong> de una matriz —cuánto estira o encoge— y que det = 0 significa <strong>aplastar</strong> el plano en una línea. Aplícalo a J: si <strong>det(J) = 0</strong> en un punto, la transformación aplasta ahí; entradas distintas caen en la misma salida y la reversa es imposible, igual que con la máquina plana. Si <strong>det(J) ≠ 0</strong>, no aplasta, y cerca de ese punto sí hay reversa — se dice que tiene <strong>inversa local</strong>: funciona cerca del punto, no en todo el plano. A ese determinante se le llama <strong>el jacobiano</strong>, y su “distinto de cero” es el tercer gemelo de la familia: f′(a) ≠ 0, F<sub>y</sub> ≠ 0, det(J) ≠ 0.</p>
       <div class="check" data-kind="recall" data-fid="F2_jacobiano_no_cero" data-tema="jacobiano">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué garantiza que una transformación tenga inversa cerca de un punto?</p>
@@ -439,7 +456,7 @@
 
     <section class="sec">
       <h3>El teorema de la función inversa (versión matricial)</h3>
-      <p class="idea">La regla escalar (f⁻¹)′(b) = 1/f′(a) tiene su gemela con varias variables. Una transformación es <strong>localmente invertible</strong> alrededor de un punto cuando su <strong>determinante jacobiano no es cero</strong> ahí. Y donde el número f′(a) se volvía su recíproco 1/f′(a), ahora la matriz jacobiana se vuelve su <strong>matriz inversa</strong>:</p>
+      <p class="idea">Cerremos el paralelo. En una variable la historia fue: si f′(a) ≠ 0, cerca de a la máquina se deshace, y la pendiente de la reversa es el recíproco 1/f′(a). Con transformaciones la historia se repite palabra por palabra: si <strong>det(J) ≠ 0</strong> en el punto, la transformación es <strong>localmente invertible</strong> (se deshace cerca de ahí). ¿Y la “pendiente” de esa reversa? El recíproco de un número era 1 entre el número; el recíproco de una matriz ya lo conoces de álgebra: su <strong>matriz inversa</strong>. La jacobiana de la reversa es J⁻¹:</p>
       <div class="fx"><div class="sys"><span class="eq">escalar:  (f⁻¹)′(b) = 1 / f′(a)</span><span class="eq">matricial:  J(inversa) = [ J ]⁻¹</span></div><p class="fx-note">“Localmente invertible” = solo cerca de ese punto la transformación se puede deshacer. El recíproco 1/f′(a) es el caso de una variable; con varias, dividir se vuelve invertir la matriz J.</p></div>
       <div class="check" data-kind="recall" data-fid="F4_teorema_funcion_inversa" data-tema="funcion_inversa">
         <div class="qtag">Te toca · recuerda</div>

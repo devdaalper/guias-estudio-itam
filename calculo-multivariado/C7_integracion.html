@@ -124,7 +124,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -154,7 +154,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -188,18 +188,22 @@
 
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Tienes una placa metálica con forma de <strong>triángulo</strong>: sus esquinas están en (0, 0), (1, 0) y (1, 1). Su grosor no es parejo; en cada punto pesa <strong>x + y</strong> gramos por cm². Quieres su <strong>masa total</strong>.</p>
+      <p class="idea" style="font-size:17px">Tienes una placa metálica con forma de <strong>triángulo</strong>: sus esquinas caen en los puntos (0, 0), (1, 0) y (1, 1) de una cuadrícula medida en centímetros. La placa no es pareja: cerca de la esquina (0, 0) es delgadita y casi no pesa; hacia la esquina (1, 1) es más gruesa y pesa más. El dato exacto: parada en el punto (x, y), cada cm² de placa pesa <strong>x + y</strong> gramos. Por ejemplo, en (1, 1) cada cm² pesa 1 + 1 = 2 gramos; en (0.5, 0) pesa apenas 0.5 + 0 = 0.5 gramos. La pregunta: ¿cuánto pesa la placa <strong>completa</strong>?</p>
       <div class="fx"><div class="sys"><span class="eq">masa = suma de (x + y) sobre todo el triángulo</span></div></div>
-      <p class="idea" style="font-size:17px">Con una sola variable integrarías bajo una curva y listo. Pero aquí no hay un intervalo: hay una <strong>región del plano</strong>, y la densidad cambia en dos direcciones a la vez. Necesitas sumar sobre un área. Ese es el trabajo de la <strong>integral doble</strong>: para el final de esta guía vas a calcular justo esta masa tú sola.</p>
+      <p class="idea" style="font-size:17px">Si el peso dependiera de una sola variable, sabrías qué hacer: integrar, como en bachillerato. Pero aquí el peso cambia en <strong>dos direcciones a la vez</strong>, y lo que hay que recorrer no es un intervalo de recta: es una <strong>región del plano</strong>, un pedazo de piso. Hace falta una herramienta que sume sobre un área completa. Esa herramienta es la que vamos a construir desde cero — y al final de la guía vas a calcular justo esta masa tú sola.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>1 · Una integral doble suma sobre un área</h3>
-      <p class="idea">La integral de una variable acumula bajo una curva a lo largo de un intervalo. La <strong>integral doble</strong> acumula sobre una <strong>región del plano</strong> R: divide la región en pedacitos de área dA, evalúa f en cada uno, y suma todo. Se escribe así:</p>
+      <h3>1 · Rellenar el piso con columnitas</h3>
+      <p class="idea">Primero, recuerda en corto qué era integrar con UNA variable. Para el área bajo una curva, cortabas esa área en <strong>rebanaditas</strong> verticales muy delgadas —cada una casi un rectángulo: base chiquita, altura la que marque la curva— y las sumabas todas. Integrar nunca fue otra cosa: <strong>sumar muchos pedacitos</strong>.</p>
+      <p class="idea">Segundo, recuerda la foto de las funciones de dos variables: f(x, y) es un <strong>terreno</strong>. El piso es el plano x-y, y sobre cada punto del piso la función marca una <strong>altura</strong>. La pregunta nueva es: ¿cuánto <strong>volumen</strong> hay entre un pedazo de piso R y el terreno que tiene encima?</p>
+      <p class="idea">La jugada es la misma de bachillerato, en versión piso: cuadricula el pedazo de piso en <strong>baldosas chiquitas</strong> y, sobre cada baldosa, levanta una <strong>columnita</strong> que llegue justo hasta el terreno. El volumen de una columnita es fácil: base por altura. Y el volumen total es la suma de todas las columnitas.</p>
+      <p class="idea">Hazlo con números chicos. Un piso de 2 × 3 metros, partido en 6 baldosas de 1 × 1. Si el terreno mide, sobre cada baldosa, alturas de 1, 1, 2, 2, 3 y 3 metros, el volumen es como 1 + 1 + 2 + 2 + 3 + 3 = <strong>12 m³</strong>. Es aproximado, porque el terreno varía dentro de cada baldosa; con baldosas cada vez más chicas, la cuenta se afina hasta volverse exacta.</p>
+      <p class="idea">Ahora escríbelo en símbolos. A la base de una baldosa diminuta la llamamos <strong>dA</strong> ("d" de diminuto, "A" de área). La altura de la columnita parada en el punto (x, y) es f(x, y), así que cada columnita aporta f(x, y)·dA. Y para decir "suma todas" se usa la S estirada que ya conoces, la de integrar — solo que ahora van <strong>dos</strong>, porque el piso se recorre en dos direcciones:</p>
       <div class="fx" id="ideaDbl"></div>
-      <p class="idea">No es una fórmula nueva de la nada: es la misma idea de "sumar muchos trocitos", solo que ahora el trocito es un cuadrito de área, no un segmento. Antes de seguir, fija qué significan las piezas.</p>
+      <p class="idea">Se lee: "suma f por dA sobre toda la región R". A esta suma de columnitas se le llama <strong>integral doble</strong>. No es una fórmula caída del cielo: es la rebanadita de bachillerato convertida en columnita. Antes de seguir, fija qué significa cada pieza.</p>
       <div class="check" data-kind="item" data-id="C1_dA" data-tema="integral_doble" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">En ∬<sub>R</sub> f(x, y) dA, ¿qué representa el dA?</p>
@@ -213,10 +217,13 @@
     </section>
 
     <section class="sec">
-      <h3>2 · Se calcula como iterada: de adentro hacia afuera</h3>
-      <p class="idea">A mano no sumamos cuadritos uno por uno. El truco es convertir la doble en dos integrales de una variable, <strong>anidadas</strong>. A eso se le llama <strong>integral iterada</strong>: resuelves primero la de adentro y su resultado entra en la de afuera.</p>
+      <h3>2 · Cómo sumar las columnitas: por renglones</h3>
+      <p class="idea">Ya sabes QUÉ es la integral doble. Falta el CÓMO: nadie puede sumar columnitas de una en una, son infinitas. El truco es sumarlas <strong>en orden</strong>, como se recorre un piso cuadriculado: renglón por renglón.</p>
+      <p class="idea">Congela un renglón: párate en una sola altura y del piso, fija, y suma únicamente las columnitas de ese renglón caminando en x. Mientras caminas, y no se mueve — es un número congelado. Esa suma es una integral de <strong>una sola variable</strong>, de las de siempre. Su resultado es "el total del renglón", y depende de cuál renglón tomaste: queda como función de y.</p>
+      <p class="idea">Ahora descongela: suma los totales de todos los renglones recorriendo y. Otra integral de una variable. Resultado: dos integrales de una variable, <strong>una adentro de la otra</strong>, en lugar de una doble imposible de atacar directo:</p>
       <div class="fx" id="ideaIter"></div>
-      <p class="fx-note">La de adentro (dx) se resuelve tratando a y como constante. Su resultado, ya solo función de y, es el integrando de la de afuera.</p>
+      <p class="fx-note">Se resuelve de adentro hacia afuera: primero la de dx (con y congelada), y su resultado —ya solo función de y— es el integrando de la de afuera.</p>
+      <p class="idea">Fíjate también en el orden de los símbolos: <strong>dx dy</strong> se lee de adentro hacia afuera — primero barres en x, luego en y. A esta manera de calcular, integrar una vez y luego otra, se le llama <strong>integral iterada</strong> (iterar = repetir).</p>
       <div class="check" data-kind="recall" data-fid="F1_integral_interna" data-tema="fubini">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">Al resolver la integral de adentro respecto a x, ¿cómo se trata a la otra variable, y?</p>
@@ -230,10 +237,12 @@
     </section>
 
     <section class="sec">
-      <h3>3 · Fubini: sobre un rectángulo, el orden no importa</h3>
-      <p class="idea">El <strong>teorema de Fubini</strong> dice que, sobre un rectángulo y con f continua, da lo mismo integrar primero en x y luego en y, o al revés. Puedes elegir el orden que te convenga:</p>
+      <h3>3 · Renglones o columnas: el total no cambia</h3>
+      <p class="idea">¿Y si en lugar de barrer por renglones barres por columnas — primero recorres y con x congelada, y al final x? Piensa en contar las butacas de un cine con 3 filas de 4 butacas. Fila por fila: 4 + 4 + 4 = 12. Columna por columna: 3 + 3 + 3 + 3 = 12. Cuentas lo mismo en otro orden, y el total ni se entera.</p>
+      <p class="idea">Con las columnitas pasa igual: son las mismas columnitas, solo cambia el orden en que las sumas. Ese hecho tiene nombre —<strong>teorema de Fubini</strong>— y dice: sobre un <strong>rectángulo</strong>, y con f continua, puedes integrar en el orden que te convenga:</p>
       <div class="fx" id="ideaFubini"></div>
-      <p class="idea">Ojo: esto es solo cuando la región es un rectángulo con límites constantes. En cuanto la región tenga bordes curvos, invertir el orden ya cuesta más trabajo (lo verás abajo).</p>
+      <p class="fx-note">Cada límite viaja pegado a su letra: los de x acompañan al dx y los de y al dy, en el orden que sea.</p>
+      <p class="idea">Ojo con la letra chica: esto es directo solo cuando la región es un rectángulo, con los cuatro límites constantes. En cuanto el piso tenga bordes inclinados o curvos, cambiar el orden exige más trabajo (lo verás abajo).</p>
       <div class="check" data-kind="item" data-id="C3_fubini" data-tema="fubini" data-level="guiado">
         <div class="qtag">Te toca · decide</div>
         <p class="q">¿Cuándo puedes intercambiar el orden dx dy ↔ dy dx nada más, sin cambiar los límites?</p>
@@ -247,10 +256,11 @@
     </section>
 
     <section class="sec">
-      <h3>4 · La región manda: tipo I y tipo II</h3>
-      <p class="idea">Cuando la región no es un rectángulo, los límites de <strong>adentro</strong> dejan de ser números: son <strong>funciones</strong> de la otra variable. Hay dos formas de describir la región. En <strong>tipo I</strong>, x va entre constantes por fuera y, para cada x fija, y sube de una curva de abajo a una de arriba:</p>
+      <h3>4 · Cuando el piso no es rectángulo, la región manda</h3>
+      <p class="idea">Vuelve a la placa triangular del inicio: esquinas (0, 0), (1, 0) y (1, 1). Su borde inclinado es la recta y = x. Barre ese piso como en la sección 2, pero por columnas: congela una x y camina en y. ¿Hasta dónde llegas? Depende de dónde estés parada: en x = 0.5, el piso va de y = 0 hasta la diagonal, o sea y = 0.5; en x = 0.9, de y = 0 hasta y = 0.9. Siempre de 0 hasta <strong>x</strong>.</p>
+      <p class="idea">Eso es lo nuevo: cuando la región no es un rectángulo, los límites de <strong>adentro</strong> dejan de ser números fijos — son <strong>funciones</strong> de la variable de afuera, porque el borde del piso cambia según dónde vas parada. Hay dos maneras estándar de describirlo. La primera: x va entre constantes por fuera y, para cada x fija, y sube de una curva de abajo g(x) a una de arriba h(x). A esta forma se le llama <strong>tipo I</strong>:</p>
       <div class="fx" id="ideaTipo1"></div>
-      <p class="idea">En <strong>tipo II</strong> es al revés: y va entre constantes por fuera y, para cada y fija, x cruza de una curva izquierda a una derecha:</p>
+      <p class="idea">La segunda es el barrido al revés: y va entre constantes por fuera y, para cada y fija, x cruza de una curva izquierda p(y) a una derecha q(y). Es el <strong>tipo II</strong>:</p>
       <div class="fx" id="ideaTipo2"></div>
       <p class="fx-note">Regla de oro: los límites de <strong>afuera</strong> son siempre constantes; los de <strong>adentro</strong> pueden depender de la variable de afuera, nunca al revés.</p>
       <div class="check" data-kind="item" data-id="C4_limites" data-tema="region_general" data-level="juntos">
@@ -299,12 +309,12 @@
 
     <h2 class="modhead">Sube el tamaño · invertir el orden</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">El triángulo salió casi de un tiro. El movimiento que más cae en examen es otro: <strong>invertir el orden</strong> de integración. A veces la integral en un orden es imposible y en el otro es fácil. El salto se hace en <strong>dos fases</strong>:</p>
+      <p class="idea" style="font-size:17px">El triángulo salió casi de un tiro. El movimiento que más cae en examen es otro: <strong>invertir el orden</strong> de integración. La idea no tiene misterio: es el mismo piso con las mismas columnitas, solo que lo vuelves a describir barriendo al revés — donde barrías por columnas, ahora por renglones. El total no puede cambiar. ¿Y para qué molestarse? Porque a veces la integral de adentro es imposible en un orden y sale fácil en el otro. El cambio se hace en <strong>dos fases</strong>:</p>
       <ul class="fases">
         <li><strong>Fase 1 — dibuja y despeja:</strong> identifica las curvas frontera y despeja la variable de adentro en términos de la de afuera.</li>
         <li><strong>Fase 2 — reescribe:</strong> pasa de tipo I a tipo II (o al revés) poniendo los nuevos límites. La región es la misma, solo la describes distinto.</li>
       </ul>
-      <p class="idea" style="font-size:17px">Región entre la parábola <strong>y = x²</strong> y la recta <strong>y = x</strong>, dada primero en el orden dy dx.</p>
+      <p class="idea" style="font-size:17px">El piso ahora: la región entre la parábola <strong>y = x²</strong> y la recta <strong>y = x</strong>. Dibújala en tu cabeza: las dos curvas se cruzan en (0, 0) y en (1, 1), y en medio la recta va por encima de la parábola (en x = 0.5, la recta está en 0.5 y la parábola en 0.25). Viene dada primero en el orden dy dx.</p>
       <div class="estep"><div class="oprow">Orden original (dy dx)</div><p>Para cada x entre 0 y 1, y sube de la parábola x² a la recta x.</p><div class="fx" id="t0"></div></div>
 
       <div class="check" data-kind="item" data-id="T1pred" data-tema="cambio_orden" data-level="juntos">
@@ -335,7 +345,7 @@
 
     <section class="sec">
       <h3>Míralo: la iterada barre la región</h3>
-      <p class="idea">Integrar por dentro es sumar a lo largo de una <strong>rebanada</strong>; integrar por fuera es <strong>deslizar</strong> esa rebanada por toda la región. Toca cada caso para ver cómo se acomodan los límites:</p>
+      <p class="idea">Una <strong>rebanada</strong> es un renglón (o una columna) entero de columnitas ya sumado: eso hace la integral de adentro. La de afuera <strong>desliza</strong> esa rebanada por toda la región. Toca cada caso para ver cómo se acomodan los límites (el tercero es un adelanto de la sección que sigue):</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="rect">Rectángulo</button>
@@ -350,8 +360,12 @@
 
     <h2 class="modhead">Sube el tamaño · cambio de variable</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Regiones <strong>redondas</strong> son una pesadilla en x, y (los límites salen con raíces feas). El salto ahora es de <strong>sistema de coordenadas</strong>: pasamos a <strong>polares</strong> (x = r·cos θ, y = r·sen θ). Pero cambiar de variable no es solo sustituir: el elemento de área cambia de tamaño y aparece un factor extra, el <strong>jacobiano</strong>.</p>
+      <p class="idea" style="font-size:17px">Ahora un piso <strong>redondo</strong>: un disco. Intenta describirlo con x, y: los límites salen con raíces feas tipo √(1 − x²) y las integrales se amargan. El problema de fondo es que estamos cortando un piso redondo con una cuadrícula cuadrada. Mejor cortarlo como se corta lo redondo: con <strong>anillos</strong> alrededor del centro y <strong>rayos</strong> que salen del centro, como una diana de dardos.</p>
+      <p class="idea" style="font-size:17px">Ese corte pide nombrar los puntos del piso de otra forma. En vez de "cuánto a la derecha, cuánto arriba" (x, y), ahora dices a qué <strong>distancia del centro</strong> estás (la llamamos r) y hacia qué <strong>dirección</strong>, medida como un ángulo (θ). A ese par de etiquetas se le llama <strong>coordenadas polares</strong>, y la traducción entre los dos idiomas es x = r·cos θ, y = r·sen θ.</p>
+      <p class="idea" style="font-size:17px">Pero hay una trampa, y es el corazón de esta sección: los pedacitos de piso que forman los anillos y rayos <strong>no son todos del mismo tamaño</strong>. Camina sobre el disco: parada cerca del centro, girar un ángulo te mueve poquito; parada en el borde, el mismo giro te hace recorrer un arco mucho más largo. Con números: en un disco de radio 2 metros, la vuelta completa por el borde mide 2π·2 ≈ 12.6 metros; a medio metro del centro, la misma vuelta mide 2π·0.5 ≈ 3.1 metros. Mismo ángulo, cuatro veces más camino.</p>
+      <p class="idea" style="font-size:17px">Por eso un pedacito de anillo a distancia r mide dr de ancho y <strong>r·dθ</strong> de largo — el arco crece con r. Su área es como ancho por largo: r·dr·dθ. Si sumaras dr·dθ a secas, estarías contando parejo pedacitos que no son parejos, y el número saldría mal. Ese factor que corrige el tamaño de los pedacitos al cambiar de coordenadas tiene nombre: se llama <strong>jacobiano</strong> (por el matemático Jacobi). El jacobiano de polares es r:</p>
       <div class="fx" id="polDA"></div>
+      <p class="fx-note">El jacobiano entra siempre con <strong>valor absoluto</strong> — un pedacito de área no puede medir negativo. En polares, r ya es positivo en su rango; por eso no se le ven las barras.</p>
 
       <div class="check" data-kind="item" data-id="J1pred" data-tema="cambio_variable" data-level="guiado">
         <div class="qtag">Te toca · decide el paso</div>
@@ -372,7 +386,8 @@
 
     <h2 class="modhead">Sube el tamaño · triples en 3D</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">En 3D todo se repite con una integral más. Para sólidos con simetría alrededor de un <strong>eje</strong> conviene <strong>cilíndricas</strong> (jacobiano r); para simetría alrededor de un <strong>punto</strong>, <strong>esféricas</strong> (jacobiano ρ²·sen φ). Cada sistema trae su elemento de volumen:</p>
+      <p class="idea" style="font-size:17px">Último salto: el objeto ya no es un piso sino un <strong>sólido</strong>, un cuerpo con volumen — un cubo, una lata, una pelota. La receta se repite tal cual, con una dimensión más: en vez de rellenar un piso con columnitas, rellenas el sólido con <strong>cajitas</strong> diminutas. Cada cajita tiene un volumen chiquito, <strong>dV</strong> ("d" de diminuto, "V" de volumen), y si f es, digamos, la densidad del material, cada cajita aporta f·dV. Sumarlas todas es una <strong>integral triple</strong>: se escribe con tres eses (∭), porque ahora se barre en tres direcciones. Se calcula igual que la doble: de adentro hacia afuera, con las variables de afuera congeladas. En coordenadas normales la cajita es un cubito: dV = dx dy dz.</p>
+      <p class="idea" style="font-size:17px">Y el truco de cambiar de coordenadas también se repite. Para sólidos con simetría alrededor de un <strong>eje</strong> (una lata, un tubo) convienen las <strong>cilíndricas</strong>: son las polares del piso más la altura z de siempre, y su jacobiano es el mismo r de los anillos. Para sólidos con simetría alrededor de un <strong>punto</strong> (una pelota) convienen las <strong>esféricas</strong>: ρ es la distancia al centro (la r de 3D), θ la vuelta de siempre, y φ el ángulo que bajas desde el polo norte. Su jacobiano es <strong>ρ²·sen φ</strong>: el ρ² porque lejos del centro los pedacitos se agrandan en dos direcciones a la vez, y el sen φ porque cerca de los polos las rebanadas se hacen flaquitas. Cada sistema trae su elemento de volumen:</p>
       <div class="fx" id="dV3d"></div>
       <p class="idea" style="font-size:17px">Un vistazo a las <strong>cilíndricas</strong>: el volumen de un cilindro de radio 1 y altura 2 sale de barrer r de 0 a 1, θ toda la vuelta y z de 0 a 2. El factor r es el mismo jacobiano de las polares:</p>
       <div class="fx" id="cilEx"></div>

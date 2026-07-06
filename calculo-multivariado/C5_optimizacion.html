@@ -124,7 +124,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -154,7 +154,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -190,16 +190,26 @@
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">Vas a cercar un <strong>corral rectangular</strong> contra un muro. Tienes <strong>40 metros de malla</strong> para los otros tres lados, y quieres que el corral encierre <strong>la mayor área posible</strong>. ¿De qué medidas lo haces?</p>
       <div class="fx" id="corralF"></div>
-      <p class="idea" style="font-size:17px">Podrías tantear: 5 por 30, 10 por 20, 15 por 10… pero cada intento es a ciegas. Necesitamos un método que encuentre el <strong>punto exacto</strong> donde el área ya no puede crecer más, y que además nos diga si de verdad es un máximo y no otra cosa. Ese método es el <strong>criterio de la segunda derivada</strong> (y su primo <strong>Lagrange</strong>, para cuando hay una restricción como esos 40 metros). Al final de la guía vas a resolver justo este corral tú sola.</p>
+      <p class="idea" style="font-size:17px">Podrías tantear: 5 por 30, 10 por 20, 15 por 10… pero cada intento es a ciegas, y aunque uno te guste nunca sabes si un poquito más allá había otro mejor. Lo que hace falta es un método que encuentre el <strong>punto exacto</strong> donde el área ya no puede crecer más — y que además compruebe que de verdad es el mejor y no un espejismo. En esta guía ese método se construye pieza por pieza, y al final el corral lo resuelves tú sola.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
-      <h3>1 · Un punto crítico es terreno llano</h3>
-      <p class="idea">Piensa en una función de dos variables como una <strong>superficie</strong>: colinas y hoyos. En una cima o en el fondo de un hoyo el terreno está <strong>llano</strong>: no sube ni baja en ninguna dirección. Ahí las dos derivadas parciales valen cero a la vez. Eso es un <strong>punto crítico</strong>: el candidato a máximo o mínimo.</p>
-      <div class="fx"><div class="sys"><span class="eq">∂f/∂x = 0</span><span class="eq">∂f/∂y = 0</span></div></div>
-      <p class="idea">Resolver ese pequeño sistema te da los candidatos. Pero cuidado: un punto llano <strong>no siempre</strong> es cima ni hoyo. Antes de seguir, asegúrate de tener clara la condición:</p>
+      <h3>1 · Qué buscamos: cimas y hoyos del terreno</h3>
+      <p class="idea">Recupera la imagen que ya traes de las unidades pasadas: una función de dos variables es un <strong>terreno</strong>. El piso es el mapa — cada punto del mapa es un par (x, y) — y f(x, y) es la <strong>altura</strong> del terreno sobre ese punto. Donde f vale mucho hay una colina; donde vale poco, un hoyo.</p>
+      <p class="idea">Optimizar es la pregunta del excursionista: <strong>¿dónde está la cima?, ¿dónde está el fondo del hoyo?</strong> El corral del inicio es exactamente eso: su área A = x·y es un terreno (a cada par de medidas le toca una altura: el área que logran) y buscamos su punto más alto.</p>
+      <p class="idea">Solo un acuerdo de vocabulario antes de arrancar. La cima de una colina es el punto más alto <strong>de su zona</strong>: puede existir otra colina más alta lejos. Por eso se le llama <strong>máximo local</strong> — el campeón del barrio, no necesariamente del mundo. Y al fondo de un hoyo, por lo mismo, <strong>mínimo local</strong>. Ahora sí: ¿cómo se encuentran sin recorrer el terreno completo?</p>
+    </section>
+
+    <section class="sec">
+      <h3>2 · La pista: en la cima el terreno queda llano</h3>
+      <p class="idea">Camina ladera arriba hacia una cima: cada paso te sube un poco menos que el anterior. La subida se va agotando y, justo en la cima, se agota del todo: un pasito ahí ya no te sube <strong>ni te baja, hacia ningún lado</strong>. Por un instante el suelo bajo tus pies queda <strong>llano</strong>, horizontal. En el fondo de un hoyo pasa lo mismo, pero con la bajada: también ahí el suelo queda llano.</p>
+      <p class="idea">Y "llano" es algo que ya sabes medir. La parcial f<sub>x</sub> es la pendiente del terreno si avanzas en la dirección de x; f<sub>y</sub>, la pendiente si avanzas en la dirección de y. Suelo llano significa: <strong>las dos pendientes valen cero a la vez</strong>.</p>
+      <p class="idea">Míralo con números chicos. El terreno f(x, y) = x<sup>2</sup> + y<sup>2</sup> es un hoyo perfecto con fondo en el origen. Sus parciales son f<sub>x</sub> = 2x y f<sub>y</sub> = 2y. ¿Dónde valen cero las dos a la vez? Solo con x = 0 y y = 0: el punto (0, 0), exactamente el fondo. La pista funciona, y sin recorrer nada: encontrar el fondo fue <strong>resolver un sistema de dos ecuaciones</strong>:</p>
+      <div class="fx"><div class="sys"><span class="eq">f<sub>x</sub> = 0</span><span class="eq">f<sub>y</sub> = 0</span></div></div>
+      <p class="idea">Dicho con la flecha de la unidad pasada: el gradiente ∇f = (f<sub>x</sub>, f<sub>y</sub>) apuntaba siempre cuesta arriba. En la cima ya no hay cuesta arriba a dónde apuntar, así que <strong>el gradiente se apaga</strong>: ∇f = (0, 0). Es la misma condición, vista como flecha.</p>
+      <p class="idea">A un punto donde pasa esto se le llama <strong>punto crítico</strong>: "crítico" porque ahí puede estar ocurriendo algo importante. Fíjate en la palabra justa: <strong>candidato</strong> a máximo o mínimo, todavía no ganador — en el siguiente escalón verás por qué. Antes, asegúrate de tener clara la condición:</p>
       <div class="check" data-kind="item" data-id="PCchk" data-tema="puntos_criticos" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">¿Cuándo un punto (a, b) es punto crítico de f(x, y)?</p>
@@ -213,10 +223,22 @@
     </section>
 
     <section class="sec">
-      <h3>2 · La matriz hessiana guarda la curvatura</h3>
-      <p class="idea">Para clasificar un punto crítico miramos las <strong>segundas</strong> derivadas: la curvatura. Las ordenamos en una tabla de 2×2 llamada <strong>matriz hessiana</strong>. En la diagonal, cuánto se curva en cada eje; fuera de ella, la derivada cruzada.</p>
+      <h3>3 · La trampa: llano no siempre es cima ni hoyo</h3>
+      <p class="idea">Aquí vive la confusión clásica del tema, así que vamos despacio. Piensa en un <strong>paso de montaña</strong>: el punto por donde una carretera cruza entre dos cumbres (en los mapas lo llaman "puerto"). Un camión que viaja de un valle al otro <strong>sube</strong> hasta el paso y después <strong>baja</strong>: para el camión, ese punto es el <strong>más alto</strong> de su ruta.</p>
+      <p class="idea">Ahora un excursionista que camina de una cumbre a la otra, pasando por el mismo lugar: primero <strong>baja</strong> hasta el paso y luego vuelve a <strong>subir</strong>. Para él, ese mismísimo punto es el <strong>más bajo</strong> de su ruta. Un solo lugar del terreno: cima para quien lo cruza en una dirección, fondo para quien lo cruza en la otra.</p>
+      <p class="idea">¿Y cómo está el suelo justo ahí? <strong>Llano</strong>. En la dirección de la carretera la subida se agota (pendiente cero, como en toda cima); en la dirección entre cumbres la bajada se agota (pendiente cero también, como en todo fondo). Las dos parciales valen cero: es un punto crítico hecho y derecho… y <strong>no es máximo ni mínimo</strong>.</p>
+      <p class="idea">A este tipo de punto se le llama <strong>punto silla</strong>, por la silla de montar, que tiene exactamente esa forma: a lo largo del caballo la silla <strong>sube</strong> (adelante y atrás quedan más altos) y a los lados <strong>baja</strong> (por donde cuelgan las piernas). Sube por un lado, baja por el otro.</p>
+      <p class="idea">Moraleja: resolver f<sub>x</sub> = 0 y f<sub>y</sub> = 0 solo entrega <strong>candidatos</strong>. Cima, hoyo y silla se ven idénticos para la pendiente (cero en los tres). Para distinguirlos hay que medir otra cosa: <strong>hacia dónde se dobla el terreno</strong>. De eso van los dos escalones que siguen.</p>
+    </section>
+
+    <section class="sec">
+      <h3>4 · La curvatura, y la tablita que la guarda</h3>
+      <p class="idea">¿Qué distingue entonces un hoyo de una cima, si en ambos la pendiente es cero? La <strong>forma</strong> del terreno alrededor. El hoyo se dobla <strong>hacia arriba</strong>, como una taza; la cima se dobla <strong>hacia abajo</strong>, como una cúpula. A ese doblez se le llama <strong>curvatura</strong>, y la buena noticia es que también se mide derivando.</p>
+      <p class="idea">La clave: el doblez se nota en cómo <strong>cambia la pendiente</strong>. Cruza un hoyo avanzando en la dirección de x: entras bajando (pendiente negativa), en el fondo la pendiente es cero, sales subiendo (positiva). De negativa a cero a positiva: la pendiente fue <strong>creciendo</strong> todo el camino. Y "cómo cambia algo" es justo una derivada: deriva la pendiente f<sub>x</sub> otra vez respecto a x y obtienes un número que dice si la pendiente crece o cae. Se escribe <strong>f<sub>xx</sub></strong> — la doble x se lee "derivé respecto a x, dos veces". Si f<sub>xx</sub> &gt; 0 la pendiente va creciendo: terreno doblado hacia arriba, taza. Si f<sub>xx</sub> &lt; 0, doblado hacia abajo, cúpula. Y <strong>f<sub>yy</sub></strong> cuenta la misma historia avanzando en la dirección de y.</p>
+      <p class="idea">¿Bastan esas dos? No — y esta es la parte fina. f<sub>xx</sub> y f<sub>yy</sub> solo revisan el doblez <strong>a lo largo de los dos ejes</strong>, pero el terreno puede estar <strong>torcido</strong>, con la subida y la bajada escondidas en <strong>diagonal</strong>, donde ningún eje las ve. El terreno f = x·y es el ejemplo perfecto: sobre el eje x es totalmente plano y sobre el eje y también (f<sub>xx</sub> = 0 y f<sub>yy</sub> = 0)… y aun así es un paso de montaña, solo que girado 45 grados. Esa torsión la mide la derivada <strong>cruzada</strong> f<sub>xy</sub>: derivas respecto a x y el resultado lo derivas respecto a y — es decir, cuánto cambia la pendiente en x cuando te mueves en y. En f = x·y sale f<sub>xy</sub> = 1: la torsión que los ejes no veían, delatada.</p>
+      <p class="idea">Cuatro números describen entonces la forma del terreno cerca de un punto: los dobleces f<sub>xx</sub> y f<sub>yy</sub>, y las cruzadas. Se guardan ordenados en una tablita de 2×2 — dobleces en la diagonal, torsión fuera de ella — que tiene nombre propio: la <strong>matriz hessiana</strong> (por Otto Hesse, el matemático que la volvió famosa):</p>
       <div class="fx" id="hessDef"></div>
-      <p class="fx-note">Por el teorema de Clairaut la parcial cruzada no depende del orden: f<sub>xy</sub> = f<sub>yx</sub>. Por eso la hessiana es simétrica.</p>
+      <p class="fx-note">Un teorema (el de Clairaut) garantiza que el orden de la cruzada no importa: f<sub>xy</sub> = f<sub>yx</sub>, el mismo número. Por eso la tablita es simétrica y en la práctica solo calculas tres derivadas, no cuatro.</p>
       <div class="check" data-kind="recall" data-fid="F1_hessiana" data-tema="hessiana">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué va en las cuatro casillas de la hessiana de una función de dos variables?</p>
@@ -230,9 +252,16 @@
     </section>
 
     <section class="sec">
-      <h3>3 · Un solo número decide: el determinante D</h3>
-      <p class="idea">Todo el veredicto sale de un número: el <strong>determinante de la hessiana</strong>, que llamamos D. Se calcula así y se lee con esta regla, siempre <strong>evaluando en el punto crítico</strong>:</p>
+      <h3>5 · El detector: un número llamado D</h3>
+      <p class="idea">Tienes cuatro números en la tablita y una sola pregunta: ¿cima, hoyo o silla? El paso final los combina en <strong>un único número detector</strong>. La jugada, en palabras: multiplica los dos dobleces de la diagonal, f<sub>xx</sub>·f<sub>yy</sub>. Si los dos ejes se doblan hacia el mismo lado (ambos hacia arriba, o ambos hacia abajo), ese producto sale <strong>positivo</strong>; si se contradicen — un eje sube y el otro baja, puro punto silla —, sale <strong>negativo</strong>.</p>
+      <p class="idea">Pero acabas de ver que los ejes pueden mentir por omisión: la silla girada f = x·y los dejaba en puros ceros. Por eso al producto hay que <strong>cobrarle la torsión</strong>: se le resta (f<sub>xy</sub>)<sup>2</sup>. Una torsión grande puede voltear el veredicto aunque los ejes se vean de acuerdo. El resultado se llama <strong>D</strong> — la inicial de <em>determinante</em>, porque es justo el determinante de la tablita hessiana:</p>
       <div class="fx" id="Ddef"></div>
+      <p class="idea">Léelo caso por caso, con calma:</p>
+      <p class="idea"><strong>D &gt; 0:</strong> los dobleces están de acuerdo y le ganan a la torsión. El punto es de verdad hoyo o cima. ¿Cuál de los dos? Lo desempata el signo de f<sub>xx</sub>: doblado hacia arriba (f<sub>xx</sub> &gt; 0) es taza, o sea <strong>mínimo</strong>; doblado hacia abajo (f<sub>xx</sub> &lt; 0) es cúpula, o sea <strong>máximo</strong>.</p>
+      <p class="idea"><strong>D &lt; 0:</strong> los dobleces se contradicen, o la torsión ganó. Sube por un lado y baja por el otro: <strong>punto silla</strong>, directo, sin necesidad de mirar f<sub>xx</sub>.</p>
+      <p class="idea"><strong>D = 0:</strong> empate exacto. El detector se queda mudo y el punto hay que estudiarlo por otro medio. Es el caso raro, pero cae en examen como pregunta de teoría.</p>
+      <p class="idea">Compruébalo con los dos terrenos que ya conoces. El hoyo f = x<sup>2</sup> + y<sup>2</sup>: f<sub>xx</sub> = 2, f<sub>yy</sub> = 2, f<sub>xy</sub> = 0, así que D = 2·2 − 0<sup>2</sup> = 4 &gt; 0, y con f<sub>xx</sub> = 2 &gt; 0: mínimo, como debía. La silla girada f = x·y: f<sub>xx</sub> = 0, f<sub>yy</sub> = 0, f<sub>xy</sub> = 1, así que D = 0·0 − 1<sup>2</sup> = −1 &lt; 0: punto silla — la torsión la delató.</p>
+      <p class="idea">Dos detalles que valen puntos. Primero: D se calcula <strong>evaluando las segundas derivadas en el punto crítico</strong>; si llevan x o y, cada punto crítico tiene su propio D y su propio veredicto. Segundo: a toda esta lectura se le llama el <strong>criterio de la segunda derivada</strong> — el método que prometimos al inicio. Ya lo tienes completo; compruébalo:</p>
       <div class="check" data-kind="recall" data-fid="F2_criterio_D" data-tema="criterio_segunda_derivada">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">Al evaluar en el punto crítico sale D &gt; 0 y f<sub>xx</sub> &gt; 0. ¿Qué tipo de punto es?</p>
@@ -333,7 +362,7 @@
 
     <section class="sec">
       <h3>Míralo: los tres tipos de punto crítico</h3>
-      <p class="idea">Cerca de un punto crítico, las <strong>curvas de nivel</strong> (las alturas iguales, como en un mapa) delatan qué es. Óvalos anidados = cima o hoyo; líneas cruzadas = silla. Toca cada caso:</p>
+      <p class="idea">Hay una forma de <strong>ver</strong> todo esto desde arriba: con las <strong>curvas de nivel</strong> de la unidad 3 — las líneas que unen los puntos de una misma altura, como en los mapas de montaña. Alrededor de una cima o de un hoyo, las curvas forman <strong>óvalos anidados</strong>: anillos alrededor del punto, como una diana. Alrededor de un punto silla, las curvas <strong>se cruzan en X</strong>: por dos lados se sube y por los otros dos se baja. Toca cada caso y fíjate en el patrón:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="min">Mínimo</button>
@@ -346,10 +375,23 @@
       </div>
     </section>
 
+    <h2 class="modhead">La otra mitad · optimizar sin salirte del sendero</h2>
+
+    <section class="sec">
+      <h3>El punto más alto del sendero</h3>
+      <p class="idea">El corral del inicio esconde algo que el criterio de arriba no cubre. Ahí no puedes elegir cualquier par de medidas: la malla manda, y solo valen las que cumplen 2x + y = 40. Es como buscar el punto más alto de una excursión en la que <strong>no puedes salirte del sendero marcado</strong>. La pregunta cambia: ya no es "¿dónde está la cima de la montaña?" sino "¿cuál es el punto más alto <strong>del sendero</strong>?" — que casi nunca coincide con la cima. A la regla que te encierra en el sendero (aquí, la ecuación de la malla) se le llama <strong>restricción</strong>.</p>
+      <p class="idea">¿Cómo detectar ese punto sin caminar todo el sendero? Míralo desde arriba, sobre el mapa de curvas de nivel que acabas de usar. Mientras el sendero va <strong>cruzando</strong> curvas de nivel, tu altura está cambiando: cruzar hacia una curva más alta es seguir subiendo. Si todavía cruzas curvas, todavía no llegas al punto más alto.</p>
+      <p class="idea">Justo en el punto más alto del sendero ya no puede haber cruce: ahí la curva de nivel y el sendero <strong>se tocan sin cruzarse</strong> — por un instante van <strong>paralelos</strong>, en la misma dirección. Si el sendero cruzara la curva, un pasito más adelante habría terreno más alto… y entonces ese no era el punto más alto.</p>
+      <p class="idea">Ahora tradúcelo a flechas, con lo que sabes de la unidad 4: el gradiente ∇f es <strong>perpendicular</strong> a las curvas de nivel de f. Y el sendero también tiene su flecha: si escribes la restricción como una función g (para la malla, g = 2x + y, y el sendero es "los puntos donde g vale 40"), el sendero es una curva de nivel <strong>de g</strong>, así que ∇g es perpendicular al sendero. En el punto donde curva y sendero van paralelos, sus dos perpendiculares quedan sobre <strong>la misma recta</strong>: una flecha es un <strong>múltiplo</strong> de la otra.</p>
+      <div class="fx"><div class="sys"><span class="eq">∇f = λ·∇g</span><span class="eq">+ la ecuación de la restricción</span></div></div>
+      <p class="idea">Ese múltiplo se escribe con la letra griega <strong>λ</strong> (se lee "lambda") y es solo eso: el número que dice cuántas veces cabe ∇g en ∇f. Puede salir 2, −3, un medio… casi nunca importa su valor: es un ayudante que arma el sistema y luego se retira. Al método se le llama <strong>multiplicadores de Lagrange</strong>, por el matemático que lo inventó; λ es "el multiplicador".</p>
+      <p class="idea">La receta operativa, entonces: ∇f = λ·∇g se separa <strong>componente a componente</strong> — la primera componente de ∇f igual a λ por la primera de ∇g, y lo mismo con la segunda. Eso da dos ecuaciones; la tercera es la propia restricción. Tres ecuaciones, tres incógnitas (x, y, λ), y a resolver.</p>
+    </section>
+
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Falta el otro tipo de problema: optimizar <strong>con una restricción</strong>, justo lo que pide el corral. Ejemplo limpio primero: reparto un total de <strong>10</strong> entre dos números para que su <strong>producto</strong> sea máximo. O sea: maximizar el producto sujeto a que la suma sea 10.</p>
+      <p class="idea" style="font-size:17px">Estrenemos el método con el ejemplo más limpio posible: repartir un total de <strong>10</strong> entre dos números de modo que su <strong>producto</strong> quede lo más grande posible. En el lenguaje nuevo: maximizar f = x·y sin salirse del sendero x + y = 10.</p>
       <div class="fx" id="lagf"></div>
-      <p class="idea" style="font-size:17px">El método de <strong>Lagrange</strong> dice: en el óptimo, el gradiente de la función es un <strong>múltiplo</strong> del gradiente de la restricción. Ese múltiplo es λ (lambda). Se arma un sistema; vamos por partes.</p>
+      <p class="idea" style="font-size:17px">Armo el sistema de tres ecuaciones y lo resolvemos por partes.</p>
       <div class="estep"><div class="oprow">Paso 1 · igualar gradientes</div><p>∇f = (y, x) y ∇g = (1, 1). Igualo componente a componente ∇f = λ∇g:</p><p class="calc"><span class="rw">x</span> y=λ·1=<b>λ</b> <span class="sep">•</span> <span class="rw">y</span> x=λ·1=<b>λ</b></p><div class="fx" id="laga"></div></div>
       <div class="estep"><div class="oprow">Paso 2 · usar la restricción</div><p>De arriba x = y = λ, así que x = y. Meto eso en x + y = 10:</p><p class="calc"><span class="rw">x</span> x+x=10 → 2x=10 → <b>x=5</b> <span class="sep">•</span> <span class="rw">y</span> <b>y=5</b></p><div class="fx" id="lagb"></div></div>
       <p class="idea" style="font-size:17px">Sale <strong>x = 5</strong>, <strong>y = 5</strong>, con producto máximo <strong>25</strong>. Tiene sentido: repartir por igual maximiza el producto. Ese es todo el método de Lagrange.</p>
