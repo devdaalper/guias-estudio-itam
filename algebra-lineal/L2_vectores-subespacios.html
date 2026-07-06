@@ -191,35 +191,41 @@
     <h2 class="modhead">La idea · empecemos por lo más simple</h2>
 
     <section class="sec">
-      <h3>1 · ¿Qué es un vector? Empecemos por la imagen</h3>
-      <p class="idea">Antes de cualquier fórmula, quedémonos con una imagen sencilla. Imagina que estás parada en el centro de una cuadrícula, en el punto (0, 0), al que llamamos el <strong>origen</strong>. Un <strong>vector</strong> es, ni más ni menos, una <strong>instrucción para moverte</strong> desde ahí: te dice cuánto avanzar a lo ancho y cuánto a lo alto.</p>
-      <p class="idea">Tomemos <strong>(1, 3)</strong>. Se lee así: <em>da 1 paso a la derecha y 3 pasos hacia arriba</em>. El primer número siempre es el movimiento horizontal; el segundo, el vertical. Cuando terminas de moverte, quedas en el punto (1, 3), y la flecha que va del origen hasta ahí <strong>es</strong> el vector.</p>
-      <p class="idea">Y ya está —eso es todo un vector en el plano. No hay ningún truco escondido: es un par de números que describen un movimiento, o si lo prefieres, una flecha con una dirección y un largo. Vamos a construir <strong>todo lo demás</strong> —incluida la idea que le da nombre a la unidad— a partir de este único bloque.</p>
+      <h3>1 · Dos números que viajan juntos</h3>
+      <p class="idea">Olvida por un momento la palabra "vector". Empieza con algo de todos los días: una receta de agua de limón que lleva <strong>2 limones y 3 cucharadas de azúcar</strong>. Son dos cantidades que solo tienen sentido <strong>juntas y en orden</strong>: no es lo mismo 2 limones con 3 de azúcar que 3 limones con 2 de azúcar.</p>
+      <p class="idea">Para no escribir tanto, en matemáticas esas dos cantidades se escriben entre paréntesis: <strong>(2, 3)</strong>. Primero los limones, luego el azúcar. El orden es un acuerdo, y no se cambia.</p>
+      <p class="idea">Pues bien: <strong>eso es un vector</strong>. Una lista ordenada de números que describe algo. (2, 3) puede ser tu receta, o "2 partes de rojo y 3 de azul" en una pintura, o "2 pasos a la derecha y 3 al frente" en un mapa. La palabra suena complicada, pero no esconde nada más: <strong>números que viajan juntos, en orden</strong>.</p>
     </section>
 
     <section class="sec">
-      <h3>2 · Estirar o encoger un vector — y qué es un "peso"</h3>
-      <p class="idea">Ahora hazte una pregunta natural: ¿y si quiero moverme <strong>en la misma dirección</strong>, pero llegar más lejos?</p>
-      <p class="idea">Volvamos a (1, 3), que es "1 a la derecha, 3 arriba". Si hago ese mismo movimiento pero <strong>el doble de grande</strong>, avanzo 2 a la derecha y 6 arriba, y llego a (2, 6). Fíjate qué fue lo único que hice: <strong>multiplicar cada número por 2</strong>. Se escribe corto así: 2·(1, 3) = (2, 6).</p>
-      <p class="idea">La flecha nueva apunta <strong>exactamente adonde apuntaba la vieja</strong> —la misma dirección—, solo que ahora mide el doble. Eso es multiplicar un vector por un número: lo <strong>estira</strong> si el número es mayor que 1, lo <strong>encoge</strong> si está entre 0 y 1 (como ½), y lo <strong>voltea</strong> al lado opuesto si es negativo. Nunca cambia la recta sobre la que vive el vector; solo cambia qué tan lejos llegas y hacia qué lado.</p>
-      <p class="idea">A ese número que multiplica lo vamos a llamar el <strong>peso</strong> del vector: dice <strong>cuánto tomas</strong> de él. Un peso de 2 es "toma dos medidas de este"; un peso de ½ es "media medida". Es la misma idea, exacta, de cuántas <strong>medidas de pintura</strong> echas de un bote.</p>
+      <h3>2 · El dibujo: un vector también es una flecha</h3>
+      <p class="idea">Hay una segunda forma de ver esa misma lista, y conviene tener las dos. Si lees (2, 3) como "camina 2 a la derecha y 3 al frente", lo puedes <strong>dibujar</strong>: párate en una esquina de una cuadrícula —a ese punto de partida se le llama <strong>origen</strong>—, camina, y traza una <strong>flecha</strong> desde donde empezaste hasta donde terminaste.</p>
+      <p class="idea">Mismo vector, dos fotos: una <strong>lista de cantidades</strong> (la receta) o una <strong>flecha</strong> (el paseo dibujado). Usaremos la que más ayude en cada momento; las dos cuentan exactamente lo mismo.</p>
     </section>
 
     <section class="sec">
-      <h3>3 · Sumar dos vectores es encadenar movimientos</h3>
-      <p class="idea">Falta una operación más, y también es intuitiva. ¿Qué pasa si hago un movimiento y, <strong>sin regresar al origen</strong>, encadeno otro justo después?</p>
-      <p class="idea">Digamos que primero uso (1, 3) y, desde donde quedé, aplico (2, −1). ¿Dónde termino? Sumo los avances horizontales entre sí y los verticales entre sí: 1 + 2 = 3 a lo ancho, y 3 + (−1) = 2 a lo alto. Termino en (3, 2). Se escribe: (1, 3) + (2, −1) = (3, 2).</p>
-      <p class="idea">La imagen es "punta con cola": pegas el inicio de la segunda flecha al final de la primera, y el resultado es la flecha que va del origen directo al punto donde acabaste. En una frase: <strong>sumar vectores es encadenar movimientos</strong>.</p>
+      <h3>3 · Doblar la receta — y qué significa "peso"</h3>
+      <p class="idea">Tu agua de limón (2, 3) salió buena y quieres hacer <strong>el doble</strong>. ¿Qué haces en la cocina? Doblas cada ingrediente: 4 limones y 6 de azúcar. En símbolos: <strong>2·(2, 3) = (4, 6)</strong>. Multiplicar un vector por un número es solo eso: <strong>hacer la receta más veces, o menos</strong>. El número de afuera multiplica a cada cantidad de adentro.</p>
+      <p class="idea">¿Media receta? ½·(2, 3) = (1, 1.5): un limón y cucharada y media de azúcar. ¿Cero veces? 0·(2, 3) = (0, 0): no preparas nada.</p>
+      <p class="idea">Ese número de afuera va a aparecer tanto que tiene nombre propio: se llama <strong>peso</strong>. No tiene que ver con básculas ni con dinero: el peso de una receta es <strong>cuántas veces la tomas</strong>. Peso 2 = la haces dos veces. Peso ½ = media vez. Peso 0 = no la usas para nada.</p>
+      <p class="idea">Y en el dibujo pasa algo bonito: al multiplicar por 2, la flecha apunta <strong>hacia el mismo lado</strong> pero mide el doble. Con un peso negativo, la flecha se voltea hacia el lado contrario. El peso nunca tuerce la flecha: solo la alarga, la acorta o la voltea.</p>
     </section>
 
     <section class="sec">
-      <h3>4 · Ahora sí: la combinación lineal</h3>
-      <p class="idea">Con esto ya tienes <strong>las dos únicas operaciones</strong> que existen entre vectores: <strong>estirar</strong> (multiplicar por un peso) y <strong>sumar</strong>. Y aquí llega la idea central de toda la unidad, que —fíjate— no es nada nuevo: una <strong>combinación lineal</strong> es simplemente <strong>hacer las dos a la vez</strong>.</p>
-      <p class="idea">Es decir: tomas un poco de cada vector —lo estiras por su peso— y sumas los resultados. Con dos vectores u y v y pesos a y b, se ve así:</p>
-      <div class="fx"><div class="sys"><span class="eq">a · u + b · v</span></div></div>
-      <p class="idea">Nada más. Todo lo que entendiste en los últimos tres pasos vive en esa sola expresión. Un ejemplo concreto: 2·(1, 0) + 3·(0, 1) = (2, 0) + (0, 3) = (2, 3).</p>
-      <p class="idea">Una analogía que ayuda a fijarla: piensa en <strong>mezclar pintura</strong>. Cada bote de color base es un vector (una dirección fija); las <strong>medidas</strong> que echas de cada bote son los pesos; el <strong>tono</strong> que resulta de la mezcla es la combinación lineal. Preguntar "¿puedo lograr cierto tono?" es preguntar "<strong>¿existen pesos que produzcan ese vector?</strong>". Esa pregunta —¿es este vector una combinación de aquellos?— es el corazón de todo lo que sigue en la unidad.</p>
-      <p class="idea">Para cerrar, asegúrate de que "combinar" quedó claro y no se confunde con otras operaciones que <em>no</em> existen aquí:</p>
+      <h3>4 · Juntar dos recetas — sumar vectores</h3>
+      <p class="idea">Segunda jugada de cocina: tienes dos jarras de agua fresca y las viertes en una jarra grande. La primera llevaba (2, 3) —2 limones, 3 de azúcar— y la segunda llevaba (1, 4). ¿Qué lleva la jarra grande? Todo junto: 2 + 1 = 3 limones, y 3 + 4 = 7 de azúcar. En símbolos: <strong>(2, 3) + (1, 4) = (3, 7)</strong>.</p>
+      <p class="idea">Sumar vectores es <strong>juntar</strong>: lo primero con lo primero, lo segundo con lo segundo. Los limones nunca se suman con el azúcar — cada cantidad con la suya.</p>
+      <p class="idea">En el dibujo: caminas la primera flecha y, desde donde quedaste, caminas la segunda. La suma es la flecha directa desde el origen hasta donde acabaste: <strong>el atajo del paseo completo</strong>.</p>
+    </section>
+
+    <section class="sec">
+      <h3>5 · Ahora sí: la combinación lineal</h3>
+      <p class="idea">Ya conoces las <strong>dos únicas jugadas</strong> que existen con vectores: <strong>repetir una receta</strong> (multiplicarla por un peso) y <strong>juntar recetas</strong> (sumarlas). Una <strong>combinación lineal</strong> es simplemente hacer las dos jugadas seguidas: tomas tantas veces la primera receta, tantas veces la segunda, y lo juntas todo.</p>
+      <div class="fx"><div class="sys"><span class="eq">3·(2, 3) + 1·(1, 4) = (6, 9) + (1, 4) = (7, 13)</span></div></div>
+      <p class="idea">Léelo en voz de cocina: <em>"tres aguas de la primera receta y una de la segunda, todo a la jarra grande"</em>. Quedan 7 limones y 13 de azúcar. Ese resultado, (7, 13), es una <strong>combinación lineal</strong> de (2, 3) y (1, 4).</p>
+      <p class="idea">Con letras, para cualquier caso: si u y v son los vectores y a, b son los pesos, la combinación es <strong>a·u + b·v</strong>. Adentro de esa expresión no hay nada más que lo que ya hiciste: pesos por vectores, y sumar.</p>
+      <p class="idea">Y aquí nace la pregunta estrella de toda la unidad, dicha en simple: <em>"quiero que la jarra final quede exactamente en (7, 13) — ¿cuántas veces hago cada receta?"</em>. Es decir: <strong>¿existen pesos a y b que logren a·u + b·v = w?</strong> Aprender a responder eso sin adivinar es a donde vamos.</p>
+      <p class="idea">Antes de seguir, asegúrate de que "combinar" quedó claro y no se confunde con operaciones que <em>no</em> existen aquí:</p>
       <div class="check" data-kind="item" data-id="CLchk" data-tema="combinacion_lineal" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">Con u = (1, 2) y v = (3, 0), ¿cuál de estas SÍ es una combinación lineal de u y v?</p>
@@ -233,8 +239,10 @@
     </section>
 
     <section class="sec">
-      <h3>5 · El generado: todo lo que alcanzas</h3>
-      <p class="idea">El <strong>generado</strong> (span) de un conjunto es <strong>todo</strong> lo que puedes armar con sus combinaciones lineales. Un solo vector no nulo genera una <strong>recta</strong>; dos vectores que apunten en direcciones distintas generan <strong>todo el plano</strong>. Es el "catálogo de tonos" que alcanzas con tus botes. ¿Recuerdas qué genera un solo vector?</p>
+      <h3>6 · El generado: todo lo que puedes preparar</h3>
+      <p class="idea">Sigamos en la cocina. Con tus recetas en mano, una pregunta natural es: <strong>¿qué mezclas puedo lograr en total?</strong> No una en particular — <em>todas</em> las posibles, variando los pesos como quieras. A esa colección completa se le llama el <strong>generado</strong> (en inglés, <em>span</em>) de tus vectores: todo lo que se puede armar combinándolos.</p>
+      <p class="idea">Piénsalo primero con <strong>una sola receta</strong>. Si solo tienes (2, 3), lo único que puedes hacer es prepararla más veces o menos veces: el doble, la mitad, nada… Siempre obtienes <strong>más o menos de lo mismo</strong>. En el dibujo, todas esas flechas caen sobre una <strong>misma recta</strong>: por eso decimos que un solo vector genera una recta.</p>
+      <p class="idea">Con <strong>dos recetas</strong> que apunten en direcciones distintas, la cosa cambia por completo: combinándolas alcanzas <strong>cualquier punto del plano</strong>. Dos direcciones distintas bastan para llegar a todos lados. ¿Quedó? Compruébalo:</p>
       <div class="check" data-kind="recall" data-fid="F1_generado" data-tema="generado">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué es el generado (span) de un solo vector no nulo v en R²?</p>
@@ -248,8 +256,10 @@
     </section>
 
     <section class="sec">
-      <h3>6 · Independencia: ¿alguno sobra?</h3>
-      <p class="idea">Un conjunto es <strong>linealmente independiente</strong> si la única combinación que da el vector cero es la trivial (todos los pesos en cero). Si algún vector es combinación de los otros, <strong>sobra</strong>: el conjunto es <strong>dependiente</strong>. La prueba a mano: arma la matriz con los vectores en <strong>columnas</strong> y reduce. Si hay un <strong>pivote en cada columna</strong>, son independientes.</p>
+      <h3>7 · Independencia: ¿alguna receta sobra?</h3>
+      <p class="idea">Imagina que en tu recetario tienes (2, 3) y también (4, 6). Mira bien la segunda: es <strong>exactamente el doble</strong> de la primera. ¿Te sirve de algo tenerla? No: todo lo que prepares con ella ya lo podías preparar con la primera (usando el doble de peso). La segunda receta <strong>sobra</strong> — no aporta nada nuevo.</p>
+      <p class="idea">Esa es toda la idea. Cuando en un conjunto de vectores <strong>alguno se puede armar combinando los otros</strong>, ese vector sobra, y al conjunto se le llama <strong>dependiente</strong>. Cuando nadie sobra —cada vector aporta una dirección que los demás no pueden lograr— el conjunto es <strong>linealmente independiente</strong>.</p>
+      <p class="idea">¿Y cómo se comprueba a mano, sin adivinar? Con la herramienta que ya dominas de la Unidad 1: pon los vectores como <strong>columnas</strong> de una matriz y <strong>reduce</strong>. Si al final hay un <strong>pivote en cada columna</strong>, nadie sobra: son independientes. Si alguna columna se queda sin pivote, ese vector era combinación de los anteriores.</p>
       <div class="fx" id="indepEx"></div>
       <p class="fx-note">Dos pivotes para dos columnas: estos dos vectores son independientes.</p>
       <div class="check" data-kind="item" data-id="INDchk" data-tema="independencia" data-level="guiado">
@@ -366,10 +376,11 @@
     </section>
 
     <section class="sec">
-      <h3>Subespacio: cerrado bajo suma y escalar</h3>
-      <p class="idea">Un <strong>subespacio</strong> de Rⁿ es un conjunto que (1) <strong>contiene al cero</strong>, (2) al sumar dos de sus vectores el resultado <strong>sigue dentro</strong>, y (3) al multiplicar uno por un escalar <strong>sigue dentro</strong>. Los generados <strong>siempre</strong> son subespacios; una recta o plano que <strong>no pasa por el origen</strong>, no.</p>
+      <h3>Subespacio: un mundo del que no puedes salir</h3>
+      <p class="idea">Vuelve un momento al generado — el catálogo de todo lo que puedes preparar con tus recetas. Tiene una propiedad curiosa: si tomas <strong>dos mezclas del catálogo y las juntas</strong>, el resultado… sigue estando en el catálogo. Y si <strong>doblas</strong> una mezcla del catálogo, también sigue adentro. Por más que operes con cosas de adentro, <strong>nunca te sales</strong>. Es un mundo cerrado.</p>
+      <p class="idea">A los conjuntos con esa propiedad se les llama <strong>subespacios</strong>. La lista de requisitos es corta — tres cosas, y las dos últimas son justo "no poder salirse" con las dos jugadas que conoces:</p>
       <div class="fx"><div class="sys"><span class="eq">0 ∈ S</span><span class="eq">u, v ∈ S  ⇒  u + v ∈ S</span><span class="eq">u ∈ S, c escalar  ⇒  c·u ∈ S</span></div></div>
-      <p class="fx-note">Si falla cualquiera de las tres, no es subespacio. La más rápida de checar: ¿contiene al vector cero?</p>
+      <p class="fx-note">Si falla cualquiera de las tres, no es subespacio. La más rápida de checar: ¿contiene al vector cero? Por eso los generados <strong>siempre</strong> son subespacios (con pesos en 0 obtienes el cero), y una recta que <strong>no</strong> pasa por el origen nunca lo es.</p>
       <div class="check" data-kind="item" data-id="SUBchk" data-tema="subespacio" data-level="juntos">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">¿Cuál de estos conjuntos <strong>sí</strong> es un subespacio de R²?</p>
@@ -383,8 +394,9 @@
     </section>
 
     <section class="sec">
-      <h3>Subespacio afín: el mismo plano, corrido</h3>
-      <p class="idea">Cuando resuelves <strong>A·x = b</strong> con <strong>b ≠ 0</strong> (sistema <strong>no homogéneo</strong>), la solución <strong>no</strong> pasa por el origen: es un <strong>subespacio afín</strong>. Se escribe como <strong>una solución particular más el generado de las soluciones del homogéneo</strong>: x = x<sub>p</sub> + (solución de A·x = 0). Es un subespacio <strong>trasladado</strong> (recta o plano corrido), que por eso <strong>no</strong> es subespacio: le falta el cero.</p>
+      <h3>Subespacio afín: el mismo mundo, pero corrido</h3>
+      <p class="idea">Toma la recta y = 3x, que acabas de ver que sí es subespacio, y ahora su prima <strong>y = 3x + 2</strong>: es <strong>la misma recta, corrida dos unidades hacia arriba</strong>. Al correrla dejó de pasar por el origen — así que ya <strong>no</strong> es subespacio (le falta el cero). Pero tampoco es un conjunto cualquiera: sigue siendo un subespacio en el fondo, solo que <strong>trasladado</strong>. A eso se le llama <strong>subespacio afín</strong>.</p>
+      <p class="idea">¿Dónde aparecen? Al resolver <strong>A·x = b</strong> con <strong>b ≠ 0</strong> (sistema <strong>no homogéneo</strong>): sus soluciones forman justo uno de estos mundos corridos. Y se describe con una suma muy natural: <strong>un punto donde pararte</strong> (una solución particular x<sub>p</sub>) <strong>más las direcciones en las que puedes moverte</strong> (las soluciones del homogéneo A·x = 0):</p>
       <div class="fx"><div class="sys"><span class="eq">A·x = 0  →  homogéneo (pasa por 0): subespacio</span><span class="eq">A·x = b, b ≠ 0  →  no homogéneo: afín</span><span class="eq">x = x<sub>p</sub> + t·v   (particular + homogénea)</span></div></div>
       <p class="fx-note">La <strong>forma paramétrica</strong> es justo esa: fijas las variables libres como parámetros (t, s…) y expresas toda la solución como x<sub>p</sub> más combinaciones de vectores dirección.</p>
       <div class="check" data-kind="recall" data-fid="F3_afin" data-tema="subespacio_afin">
@@ -408,7 +420,8 @@
 
     <section class="sec">
       <h3>Espacio nulo, espacio columna y nulidad</h3>
-      <p class="idea">Toda matriz A trae dos subespacios. El <strong>espacio nulo</strong> (kernel) es el conjunto de soluciones de <strong>A·x = 0</strong>: los vectores que A manda al cero. El <strong>espacio columna</strong> es el <strong>generado de las columnas</strong> de A: todo lo que A puede producir. La <strong>nulidad</strong> es la dimensión del espacio nulo; el <strong>rango</strong>, la del espacio columna.</p>
+      <p class="idea">Cierra la unidad con dos nombres que etiquetan cosas que ya conoces. Piensa en la matriz A como una <strong>máquina</strong>: le metes un vector x y te devuelve otro, A·x. Sobre cualquier máquina hay dos preguntas naturales: <strong>¿qué entradas aplasta hasta el cero?</strong> y <strong>¿qué salidas es capaz de producir?</strong></p>
+      <p class="idea">La primera respuesta es el <strong>espacio nulo</strong> (kernel): todas las soluciones de A·x = 0. La segunda es el <strong>espacio columna</strong>: el generado de las columnas de A — su "catálogo de salidas". Sus tamaños también tienen nombre: la <strong>nulidad</strong> es la dimensión del espacio nulo, y el <strong>rango</strong>, la del espacio columna.</p>
       <div class="fx"><div class="sys"><span class="eq">Nul(A) = { x : A·x = 0 }   (subespacio)</span><span class="eq">Col(A) = generado de las columnas</span><span class="eq">nulidad = variables libres · rango = pivotes</span></div></div>
       <p class="fx-note">Al reducir A: cada <strong>columna con pivote</strong> aporta al rango; cada <strong>columna libre</strong> aporta a la nulidad. Por eso rango + nulidad = número de columnas.</p>
       <div class="check" data-kind="recall" data-fid="F4_nulidad" data-tema="nulidad">
