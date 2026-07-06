@@ -124,7 +124,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -154,7 +154,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -188,20 +188,38 @@
 
   <main>
 
-    <h2 class="modhead">Empecemos por un problema</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Un taller mezcla pintura solo con <strong>dos botes base</strong>. El bote A aporta <strong>(1, 3)</strong> —1 parte de rojo, 3 de azul— y el bote B aporta <strong>(2, −1)</strong>. Puedes usar cuantas medidas quieras de cada uno (incluso fracciones). Un cliente pide un tono que corresponde a <strong>(5, 1)</strong>.</p>
-      <div class="fx"><div class="sys"><span class="eq">a·(1, 3) + b·(2, −1) = (5, 1)</span></div></div>
-      <p class="idea" style="font-size:17px">La pregunta es: ¿ese tono <strong>se puede</strong> con los dos botes, y con cuántas medidas de cada uno? Con dos vectores quizá lo tantees. Pero con tres o cuatro colores base, el tanteo se derrumba. Necesitamos un método que <strong>siempre</strong> funcione y que se haga <strong>a mano, sin calculadora</strong>. La herramienta es la <strong>combinación lineal</strong> convertida en sistema: para el final de esta guía vas a resolver justo este color tú sola.</p>
-    </section>
-
-    <h2 class="modhead">La idea</h2>
+    <h2 class="modhead">La idea · empecemos por lo más simple</h2>
 
     <section class="sec">
-      <h3>1 · Un vector y sus combinaciones</h3>
-      <p class="idea">Un <strong>vector</strong> en Rⁿ es una lista de números: una flecha desde el origen. Con dos vectores puedes armar otros <strong>estirándolos</strong> (multiplicar por un número) y <strong>sumándolos</strong>. Eso es una <strong>combinación lineal</strong>: pesos por vectores, sumados. Los botes de pintura del inicio son exactamente esto.</p>
-      <div class="fx"><div class="sys"><span class="eq">2·(1, 0) + 3·(0, 1) = (2, 3)</span><span class="eq">a·u + b·v = w</span></div></div>
-      <p class="idea">Preguntar si <strong>w es combinación lineal</strong> de u y v es preguntar si existen pesos a, b que la produzcan. Antes de seguir, asegúrate de leer bien lo que es "combinar":</p>
+      <h3>1 · ¿Qué es un vector? Empecemos por la imagen</h3>
+      <p class="idea">Antes de cualquier fórmula, quedémonos con una imagen sencilla. Imagina que estás parada en el centro de una cuadrícula, en el punto (0, 0), al que llamamos el <strong>origen</strong>. Un <strong>vector</strong> es, ni más ni menos, una <strong>instrucción para moverte</strong> desde ahí: te dice cuánto avanzar a lo ancho y cuánto a lo alto.</p>
+      <p class="idea">Tomemos <strong>(1, 3)</strong>. Se lee así: <em>da 1 paso a la derecha y 3 pasos hacia arriba</em>. El primer número siempre es el movimiento horizontal; el segundo, el vertical. Cuando terminas de moverte, quedas en el punto (1, 3), y la flecha que va del origen hasta ahí <strong>es</strong> el vector.</p>
+      <p class="idea">Y ya está —eso es todo un vector en el plano. No hay ningún truco escondido: es un par de números que describen un movimiento, o si lo prefieres, una flecha con una dirección y un largo. Vamos a construir <strong>todo lo demás</strong> —incluida la idea que le da nombre a la unidad— a partir de este único bloque.</p>
+    </section>
+
+    <section class="sec">
+      <h3>2 · Estirar o encoger un vector — y qué es un "peso"</h3>
+      <p class="idea">Ahora hazte una pregunta natural: ¿y si quiero moverme <strong>en la misma dirección</strong>, pero llegar más lejos?</p>
+      <p class="idea">Volvamos a (1, 3), que es "1 a la derecha, 3 arriba". Si hago ese mismo movimiento pero <strong>el doble de grande</strong>, avanzo 2 a la derecha y 6 arriba, y llego a (2, 6). Fíjate qué fue lo único que hice: <strong>multiplicar cada número por 2</strong>. Se escribe corto así: 2·(1, 3) = (2, 6).</p>
+      <p class="idea">La flecha nueva apunta <strong>exactamente adonde apuntaba la vieja</strong> —la misma dirección—, solo que ahora mide el doble. Eso es multiplicar un vector por un número: lo <strong>estira</strong> si el número es mayor que 1, lo <strong>encoge</strong> si está entre 0 y 1 (como ½), y lo <strong>voltea</strong> al lado opuesto si es negativo. Nunca cambia la recta sobre la que vive el vector; solo cambia qué tan lejos llegas y hacia qué lado.</p>
+      <p class="idea">A ese número que multiplica lo vamos a llamar el <strong>peso</strong> del vector: dice <strong>cuánto tomas</strong> de él. Un peso de 2 es "toma dos medidas de este"; un peso de ½ es "media medida". Es la misma idea, exacta, de cuántas <strong>medidas de pintura</strong> echas de un bote.</p>
+    </section>
+
+    <section class="sec">
+      <h3>3 · Sumar dos vectores es encadenar movimientos</h3>
+      <p class="idea">Falta una operación más, y también es intuitiva. ¿Qué pasa si hago un movimiento y, <strong>sin regresar al origen</strong>, encadeno otro justo después?</p>
+      <p class="idea">Digamos que primero uso (1, 3) y, desde donde quedé, aplico (2, −1). ¿Dónde termino? Sumo los avances horizontales entre sí y los verticales entre sí: 1 + 2 = 3 a lo ancho, y 3 + (−1) = 2 a lo alto. Termino en (3, 2). Se escribe: (1, 3) + (2, −1) = (3, 2).</p>
+      <p class="idea">La imagen es "punta con cola": pegas el inicio de la segunda flecha al final de la primera, y el resultado es la flecha que va del origen directo al punto donde acabaste. En una frase: <strong>sumar vectores es encadenar movimientos</strong>.</p>
+    </section>
+
+    <section class="sec">
+      <h3>4 · Ahora sí: la combinación lineal</h3>
+      <p class="idea">Con esto ya tienes <strong>las dos únicas operaciones</strong> que existen entre vectores: <strong>estirar</strong> (multiplicar por un peso) y <strong>sumar</strong>. Y aquí llega la idea central de toda la unidad, que —fíjate— no es nada nuevo: una <strong>combinación lineal</strong> es simplemente <strong>hacer las dos a la vez</strong>.</p>
+      <p class="idea">Es decir: tomas un poco de cada vector —lo estiras por su peso— y sumas los resultados. Con dos vectores u y v y pesos a y b, se ve así:</p>
+      <div class="fx"><div class="sys"><span class="eq">a · u + b · v</span></div></div>
+      <p class="idea">Nada más. Todo lo que entendiste en los últimos tres pasos vive en esa sola expresión. Un ejemplo concreto: 2·(1, 0) + 3·(0, 1) = (2, 0) + (0, 3) = (2, 3).</p>
+      <p class="idea">Una analogía que ayuda a fijarla: piensa en <strong>mezclar pintura</strong>. Cada bote de color base es un vector (una dirección fija); las <strong>medidas</strong> que echas de cada bote son los pesos; el <strong>tono</strong> que resulta de la mezcla es la combinación lineal. Preguntar "¿puedo lograr cierto tono?" es preguntar "<strong>¿existen pesos que produzcan ese vector?</strong>". Esa pregunta —¿es este vector una combinación de aquellos?— es el corazón de todo lo que sigue en la unidad.</p>
+      <p class="idea">Para cerrar, asegúrate de que "combinar" quedó claro y no se confunde con otras operaciones que <em>no</em> existen aquí:</p>
       <div class="check" data-kind="item" data-id="CLchk" data-tema="combinacion_lineal" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">Con u = (1, 2) y v = (3, 0), ¿cuál de estas SÍ es una combinación lineal de u y v?</p>
@@ -210,12 +228,12 @@
           <button class="opt" data-ok="0">u · v = (1·3, 2·0) = (3, 0), multiplicando entrada por entrada</button>
           <button class="opt" data-ok="0">u<sup>2</sup> + v = (1, 4) + (3, 0) = (4, 4), elevando u al cuadrado</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Combinar es <strong>escalar y sumar</strong>: cada vector se multiplica por un número (peso) y luego se suman. No se multiplican entre sí ni se elevan al cuadrado; esas operaciones no existen aquí.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Combinar es <strong>escalar y sumar</strong>: cada vector se multiplica por su peso y luego se suman. No se multiplican entre sí ni se elevan al cuadrado; esas operaciones no existen aquí.</p></div>
       </div>
     </section>
 
     <section class="sec">
-      <h3>2 · El generado: todo lo que alcanzas</h3>
+      <h3>5 · El generado: todo lo que alcanzas</h3>
       <p class="idea">El <strong>generado</strong> (span) de un conjunto es <strong>todo</strong> lo que puedes armar con sus combinaciones lineales. Un solo vector no nulo genera una <strong>recta</strong>; dos vectores que apunten en direcciones distintas generan <strong>todo el plano</strong>. Es el "catálogo de tonos" que alcanzas con tus botes. ¿Recuerdas qué genera un solo vector?</p>
       <div class="check" data-kind="recall" data-fid="F1_generado" data-tema="generado">
         <div class="qtag">Te toca · recuerda</div>
@@ -230,7 +248,7 @@
     </section>
 
     <section class="sec">
-      <h3>3 · Independencia: ¿alguno sobra?</h3>
+      <h3>6 · Independencia: ¿alguno sobra?</h3>
       <p class="idea">Un conjunto es <strong>linealmente independiente</strong> si la única combinación que da el vector cero es la trivial (todos los pesos en cero). Si algún vector es combinación de los otros, <strong>sobra</strong>: el conjunto es <strong>dependiente</strong>. La prueba a mano: arma la matriz con los vectores en <strong>columnas</strong> y reduce. Si hay un <strong>pivote en cada columna</strong>, son independientes.</p>
       <div class="fx" id="indepEx"></div>
       <p class="fx-note">Dos pivotes para dos columnas: estos dos vectores son independientes.</p>
@@ -249,7 +267,7 @@
     <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Volvamos a la pintura: ¿es <strong>w = (5, 1)</strong> combinación de <strong>u = (1, 3)</strong> y <strong>v = (2, −1)</strong>? Busco pesos a, b con a·u + b·v = w. Pongo u y v en <strong>columnas</strong>, w tras la barra, y reduzco. En cada paso <strong>tú eliges la operación</strong> y yo la aplico.</p>
+      <p class="idea" style="font-size:17px">Aterricemos en un problema concreto, ahora que ya tienes las herramientas. Un taller mezcla pintura con dos botes base: uno aporta la dirección <strong>(1, 3)</strong> y el otro <strong>(2, −1)</strong>; un cliente pide el tono <strong>(5, 1)</strong>. ¿Se puede, y con cuántas medidas de cada uno? Eso es exactamente preguntar: <strong>¿es w = (5, 1) una combinación de u = (1, 3) y v = (2, −1)?</strong> Es decir, busco pesos a, b con a·u + b·v = w. El truco para hacerlo a mano: pongo u y v en <strong>columnas</strong>, w tras la barra, y reduzco. En cada paso <strong>tú eliges la operación</strong> y yo la aplico.</p>
       <div class="fx" id="e0"></div>
       <p class="fx-note">Columna 1 = u = (1, 3); columna 2 = v = (2, −1); tras la barra, w = (5, 1).</p>
 
