@@ -68,7 +68,7 @@
   .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
   .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
   .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--red);font-weight:800;flex:0 0 auto}
+  .chuleta li .ck{color:var(--red);font-weight:800;position:absolute;left:0;top:1px}
 
   /* ===== cuadernillo de papel ===== */
   .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
@@ -137,7 +137,7 @@
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
   .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
   .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
   .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
   .nav-lecs a{flex:1;min-width:0;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
@@ -145,6 +145,25 @@
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
   .nav-lecs .ti{font-size:16px;font-weight:700}
+  .autotest{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow);grid-template-columns:minmax(0,1fr);min-width:0}
+  .autotest .intro{margin:0;font-size:16px;color:var(--slate)}
+  .autotest .qcard{border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;display:grid;gap:10px;background:#fcfbf9;grid-template-columns:minmax(0,1fr);min-width:0}
+  .autotest .qcard.correct{border-color:var(--green);background:#f3faf5}
+  .autotest .qcard.incorrect{border-color:#e9b8c6;background:#fdf2f5}
+  .autotest .qn{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .autotest .q{margin:0;font-weight:700;font-size:17px;overflow-wrap:anywhere}
+  .autotest .opts{display:grid;gap:9px;min-width:0}
+  .autotest .opt{font:inherit;text-align:left;font-weight:600;font-size:16px;padding:11px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;min-width:0;overflow-wrap:anywhere}
+  .autotest .opt:hover{border-color:var(--orange)}
+  .autotest .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .autotest .opt.wrong{border-color:#d6336c;background:#fdecf1;color:#a01243}
+  .autotest .opt:disabled{cursor:default}
+  .autotest .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:10px 13px;font-size:15px;overflow-wrap:anywhere}
+  .autotest .why.show{display:block}
+  .autotest .why.miss{border-color:#f0d6b8;background:#fdf3ea}
+  .autotest .why .lbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;color:var(--green-deep);margin-bottom:2px}
+  .autotest .why.miss .lbl{color:var(--deep)}
+  .autotest .why p{margin:0}
 </style>
 </head>
 <div class="wrap">
@@ -451,6 +470,83 @@
       <button class="btn" id="gen">Generar reporte para el tutor</button>
     </section>
 
+    <h2 class="modhead">Resuélvelo tú — opción múltiple</h2>
+    <section class="autotest">
+      <p class="intro">Aquí <strong>no hay solución a la vista</strong>. Resuélvelo en papel, elige tu respuesta, y solo entonces verás si acertaste. Las opciones se <strong>barajan</strong> cada vez: no memorices posiciones, razona.</p>
+
+      <div class="qcard" data-tema="lectura_solucion">
+        <div class="qn">Ejercicio 1</div>
+        <p class="q">El sistema 2x + y = 8, x − y = 1 tiene por solución:</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">x = 3, y = 2</button>
+          <button class="opt" data-ok="0">x = 2, y = 3</button>
+          <button class="opt" data-ok="0">x = 1, y = 6</button>
+          <button class="opt" data-ok="0">x = 3, y = −2</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Suma las dos ecuaciones: 3x = 9 → x = 3; luego 3 − y = 1 → y = 2. Comprueba: 2(3) + 2 = 8 ✓.</p></div>
+      </div>
+
+      <div class="qcard" data-tema="gauss_jordan">
+        <div class="qn">Ejercicio 2</div>
+        <p class="q">Con R1 = [1, 3, 5] y R2 = [2, 7, 11], aplicas R2 → R2 − 2·R1. ¿Cómo queda el renglón 2?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">0, 1, −1</button>
+          <button class="opt" data-ok="1">0, 1, 1</button>
+          <button class="opt" data-ok="0">0, −1, 1</button>
+          <button class="opt" data-ok="0">4, 13, 21</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Celda por celda: 2 − 2·1 = 0, 7 − 2·3 = 1, 11 − 2·5 = 1.</p></div>
+      </div>
+
+      <div class="qcard" data-tema="consistencia">
+        <div class="qn">Ejercicio 3</div>
+        <p class="q">Al reducir un sistema aparece el renglón que dice “0 = 5” (ceros a la izquierda, un 5 a la derecha). Entonces el sistema…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">tiene solución única</button>
+          <button class="opt" data-ok="0">tiene infinitas soluciones</button>
+          <button class="opt" data-ok="1">no tiene solución</button>
+          <button class="opt" data-ok="0">tiene exactamente dos soluciones</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Ese renglón afirma “0 = 5”, un imposible: el sistema es inconsistente.</p></div>
+      </div>
+
+      <div class="qcard" data-tema="variable_libre">
+        <div class="qn">Ejercicio 4</div>
+        <p class="q">Un sistema de 3 incógnitas se reduce y una columna de variable queda sin pivote. El sistema tiene…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">solución única</button>
+          <button class="opt" data-ok="1">infinitas soluciones</button>
+          <button class="opt" data-ok="0">ninguna solución</button>
+          <button class="opt" data-ok="0">una sola variable</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Una columna sin pivote es una variable libre → se vuelve parámetro → infinitas soluciones.</p></div>
+      </div>
+
+      <div class="qcard" data-tema="modelado">
+        <div class="qn">Ejercicio 5</div>
+        <p class="q">3 lápices y 1 pluma cuestan $17; 1 lápiz y 1 pluma cuestan $9. ¿Cuánto cuesta un lápiz?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">$5</button>
+          <button class="opt" data-ok="1">$4</button>
+          <button class="opt" data-ok="0">$3</button>
+          <button class="opt" data-ok="0">$6</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Resta las ecuaciones: (3l + p) − (l + p) = 17 − 9 → 2l = 8 → l = 4.</p></div>
+      </div>
+
+      <div class="qcard" data-tema="clasificacion">
+        <div class="qn">Ejercicio 6</div>
+        <p class="q">El sistema x + y = 5, 2x + 2y = 10 tiene…</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">solución única</button>
+          <button class="opt" data-ok="0">ninguna solución</button>
+          <button class="opt" data-ok="1">infinitas soluciones</button>
+          <button class="opt" data-ok="0">solución solo si x = y</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>La segunda ecuación es el doble de la primera: son la misma recta → infinitas soluciones.</p></div>
+      </div>
+    </section>
+
     <nav class="nav-lecs"><a class="prev" href="L1_teoria-formal.html"><span class="sp">← Teoría</span><span class="ti">Repasar fórmulas</span></a><a class="next" href="L1_evaluacion.html"><span class="sp">Siguiente →</span><span class="ti">Evaluación · demuéstralo</span></a></nav>
 
     <footer><p>aprueba<b>.net</b> · Cuadernillo de papel · Álgebra Lineal · Unidad 1 — Sistemas y Gauss-Jordan</p></footer>
@@ -647,6 +743,27 @@ document.getElementById('gen').onclick=function(){
   document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
   document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
 };
+</script>
+<script>
+/* autotest: opción múltiple con opciones BARAJADAS (posición aleatoria) + revelar al elegir */
+(function(){
+  document.querySelectorAll('.autotest .qcard').forEach(function(card){
+    var opts=card.querySelector('.opts');
+    if(opts){ var a=Array.prototype.slice.call(opts.children);
+      for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+      a.forEach(function(e){ opts.appendChild(e); }); }
+    var done=false, why=card.querySelector('.why');
+    card.querySelectorAll('.opt').forEach(function(b){
+      b.onclick=function(){
+        if(done) return; done=true;
+        card.querySelectorAll('.opt').forEach(function(x){ x.disabled=true; if(x.getAttribute('data-ok')==="1") x.classList.add('right'); });
+        if(b.getAttribute('data-ok')!=="1"){ b.classList.add('wrong'); if(why) why.classList.add('miss'); }
+        if(why) why.classList.add('show');
+        card.classList.add(b.getAttribute('data-ok')==="1"?'correct':'incorrect');
+      };
+    });
+  });
+})();
 </script>
 </body>
 </html>
