@@ -149,6 +149,12 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*aire-matematico*/
+  .sec{gap:16px}
+  .idea{line-height:1.72}
+  .fx{margin:4px 0;justify-self:center}
+  .fases{gap:9px;margin:2px 0}
+  .ejemplo{gap:16px}
   /*hardening-360*/
   main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
@@ -192,39 +198,77 @@
 
     <section class="sec">
       <h3>1 · Dos números que viajan juntos</h3>
-      <p class="idea">Olvida por un momento la palabra "vector". Empieza con algo de todos los días: una receta de agua de limón que lleva <strong>2 limones y 3 cucharadas de azúcar</strong>. Son dos cantidades que solo tienen sentido <strong>juntas y en orden</strong>: no es lo mismo 2 limones con 3 de azúcar que 3 limones con 2 de azúcar.</p>
-      <p class="idea">Para no escribir tanto, en matemáticas esas dos cantidades se escriben entre paréntesis: <strong>(2, 3)</strong>. Primero los limones, luego el azúcar. El orden es un acuerdo, y no se cambia.</p>
-      <p class="idea">Pues bien: <strong>eso es un vector</strong>. Una lista ordenada de números que describe algo. (2, 3) puede ser tu receta, o "2 partes de rojo y 3 de azul" en una pintura, o "2 pasos a la derecha y 3 al frente" en un mapa. La palabra suena complicada, pero no esconde nada más: <strong>números que viajan juntos, en orden</strong>.</p>
+      <p class="idea">Olvida por un momento la palabra "vector". Empieza con algo de todos los días: una receta de agua de limón que lleva <strong>2 limones y 3 cucharadas de azúcar</strong>.</p>
+      <p class="idea">Son dos cantidades que solo tienen sentido <strong>juntas y en orden</strong>: no es lo mismo 2 limones con 3 de azúcar que 3 limones con 2 de azúcar.</p>
+      <p class="idea">Para no escribir tanto, en matemáticas esas dos cantidades se escriben entre paréntesis:</p>
+      <div class="fx"><div class="sys"><span class="eq">(2, 3)</span></div></div>
+      <p class="idea">Primero los limones, luego el azúcar. El orden es un acuerdo, y no se cambia.</p>
+      <p class="idea">Pues bien: <strong>eso es un vector</strong> — una lista ordenada de números que describe algo. La misma lista (2, 3) puede ser:</p>
+      <ul class="fases">
+        <li>tu receta de agua de limón,</li>
+        <li>"2 partes de rojo y 3 de azul" en una pintura,</li>
+        <li>"2 pasos a la derecha y 3 al frente" en un mapa.</li>
+      </ul>
+      <p class="idea">La palabra suena complicada, pero no esconde nada más: <strong>números que viajan juntos, en orden</strong>.</p>
     </section>
 
     <section class="sec">
       <h3>2 · El dibujo: un vector también es una flecha</h3>
-      <p class="idea">Hay una segunda forma de ver esa misma lista, y conviene tener las dos. Si lees (2, 3) como "camina 2 a la derecha y 3 al frente", lo puedes <strong>dibujar</strong>: párate en una esquina de una cuadrícula —a ese punto de partida se le llama <strong>origen</strong>—, camina, y traza una <strong>flecha</strong> desde donde empezaste hasta donde terminaste.</p>
-      <p class="idea">Mismo vector, dos fotos: una <strong>lista de cantidades</strong> (la receta) o una <strong>flecha</strong> (el paseo dibujado). Usaremos la que más ayude en cada momento; las dos cuentan exactamente lo mismo.</p>
+      <p class="idea">Hay una segunda forma de ver esa misma lista, y conviene tener las dos.</p>
+      <p class="idea">Lee (2, 3) como "camina 2 a la derecha y 3 al frente". Ahora lo puedes <strong>dibujar</strong>: párate en una esquina de una cuadrícula —a ese punto de partida se le llama <strong>origen</strong>—, camina, y traza una <strong>flecha</strong> desde donde empezaste hasta donde terminaste.</p>
+      <p class="idea">Mismo vector, dos fotos:</p>
+      <ul class="fases">
+        <li>una <strong>lista de cantidades</strong> (la receta),</li>
+        <li>o una <strong>flecha</strong> (el paseo dibujado).</li>
+      </ul>
+      <p class="idea">Usaremos la que más ayude en cada momento; las dos cuentan exactamente lo mismo.</p>
     </section>
 
     <section class="sec">
       <h3>3 · Doblar la receta — y qué significa "peso"</h3>
-      <p class="idea">Tu agua de limón (2, 3) salió buena y quieres hacer <strong>el doble</strong>. ¿Qué haces en la cocina? Doblas cada ingrediente: 4 limones y 6 de azúcar. En símbolos: <strong>2·(2, 3) = (4, 6)</strong>. Multiplicar un vector por un número es solo eso: <strong>hacer la receta más veces, o menos</strong>. El número de afuera multiplica a cada cantidad de adentro.</p>
-      <p class="idea">¿Media receta? ½·(2, 3) = (1, 1.5): un limón y cucharada y media de azúcar. ¿Cero veces? 0·(2, 3) = (0, 0): no preparas nada.</p>
-      <p class="idea">Ese número de afuera va a aparecer tanto que tiene nombre propio: se llama <strong>peso</strong>. No tiene que ver con básculas ni con dinero: el peso de una receta es <strong>cuántas veces la tomas</strong>. Peso 2 = la haces dos veces. Peso ½ = media vez. Peso 0 = no la usas para nada.</p>
-      <p class="idea">Y en el dibujo pasa algo bonito: al multiplicar por 2, la flecha apunta <strong>hacia el mismo lado</strong> pero mide el doble. Con un peso negativo, la flecha se voltea hacia el lado contrario. El peso nunca tuerce la flecha: solo la alarga, la acorta o la voltea.</p>
+      <p class="idea">Tu agua de limón (2, 3) salió buena y quieres hacer <strong>el doble</strong>. ¿Qué haces en la cocina? Doblas cada ingrediente: 4 limones y 6 de azúcar.</p>
+      <p class="idea">En símbolos:</p>
+      <div class="fx"><div class="sys"><span class="eq">2·(2, 3) = (4, 6)</span></div></div>
+      <p class="idea">Multiplicar un vector por un número es solo eso: <strong>hacer la receta más veces, o menos</strong>. El número de afuera multiplica a cada cantidad de adentro.</p>
+      <p class="idea">¿Media receta? ¿Cero veces?</p>
+      <div class="fx"><div class="sys"><span class="eq">½·(2, 3) = (1, 1.5)</span><span class="eq">0·(2, 3) = (0, 0)</span></div></div>
+      <p class="idea">Un limón y cucharada y media; o nada de nada.</p>
+      <p class="idea">Ese número de afuera va a aparecer tanto que tiene nombre propio: se llama <strong>peso</strong>. No tiene que ver con básculas ni con dinero: el peso de una receta es <strong>cuántas veces la tomas</strong>.</p>
+      <ul class="fases">
+        <li>Peso 2 = la haces dos veces.</li>
+        <li>Peso ½ = media vez.</li>
+        <li>Peso 0 = no la usas para nada.</li>
+      </ul>
+      <p class="idea">Y en el dibujo pasa algo bonito: al multiplicar por 2, la flecha apunta <strong>hacia el mismo lado</strong> pero mide el doble. Con un peso negativo, se voltea hacia el lado contrario.</p>
+      <p class="idea">El peso nunca tuerce la flecha: solo la <strong>alarga</strong>, la <strong>acorta</strong> o la <strong>voltea</strong>.</p>
     </section>
 
     <section class="sec">
       <h3>4 · Juntar dos recetas — sumar vectores</h3>
-      <p class="idea">Segunda jugada de cocina: tienes dos jarras de agua fresca y las viertes en una jarra grande. La primera llevaba (2, 3) —2 limones, 3 de azúcar— y la segunda llevaba (1, 4). ¿Qué lleva la jarra grande? Todo junto: 2 + 1 = 3 limones, y 3 + 4 = 7 de azúcar. En símbolos: <strong>(2, 3) + (1, 4) = (3, 7)</strong>.</p>
+      <p class="idea">Segunda jugada de cocina: tienes dos jarras de agua fresca y las viertes en una jarra grande. La primera llevaba (2, 3) —2 limones, 3 de azúcar— y la segunda llevaba (1, 4).</p>
+      <p class="idea">¿Qué lleva la jarra grande? Todo junto:</p>
+      <div class="fx"><div class="sys"><span class="eq">limones: 2 + 1 = 3</span><span class="eq">azúcar: 3 + 4 = 7</span><span class="eq">(2, 3) + (1, 4) = (3, 7)</span></div></div>
       <p class="idea">Sumar vectores es <strong>juntar</strong>: lo primero con lo primero, lo segundo con lo segundo. Los limones nunca se suman con el azúcar — cada cantidad con la suya.</p>
       <p class="idea">En el dibujo: caminas la primera flecha y, desde donde quedaste, caminas la segunda. La suma es la flecha directa desde el origen hasta donde acabaste: <strong>el atajo del paseo completo</strong>.</p>
     </section>
 
     <section class="sec">
       <h3>5 · Ahora sí: la combinación lineal</h3>
-      <p class="idea">Ya conoces las <strong>dos únicas jugadas</strong> que existen con vectores: <strong>repetir una receta</strong> (multiplicarla por un peso) y <strong>juntar recetas</strong> (sumarlas). Una <strong>combinación lineal</strong> es simplemente hacer las dos jugadas seguidas: tomas tantas veces la primera receta, tantas veces la segunda, y lo juntas todo.</p>
-      <div class="fx"><div class="sys"><span class="eq">3·(2, 3) + 1·(1, 4) = (6, 9) + (1, 4) = (7, 13)</span></div></div>
-      <p class="idea">Léelo en voz de cocina: <em>"tres aguas de la primera receta y una de la segunda, todo a la jarra grande"</em>. Quedan 7 limones y 13 de azúcar. Ese resultado, (7, 13), es una <strong>combinación lineal</strong> de (2, 3) y (1, 4).</p>
-      <p class="idea">Con letras, para cualquier caso: si u y v son los vectores y a, b son los pesos, la combinación es <strong>a·u + b·v</strong>. Adentro de esa expresión no hay nada más que lo que ya hiciste: pesos por vectores, y sumar.</p>
-      <p class="idea">Y aquí nace la pregunta estrella de toda la unidad, dicha en simple: <em>"quiero que la jarra final quede exactamente en (7, 13) — ¿cuántas veces hago cada receta?"</em>. Es decir: <strong>¿existen pesos a y b que logren a·u + b·v = w?</strong> Aprender a responder eso sin adivinar es a donde vamos.</p>
+      <p class="idea">Ya conoces las <strong>dos únicas jugadas</strong> que existen con vectores:</p>
+      <ul class="fases">
+        <li><strong>repetir una receta</strong> (multiplicarla por un peso),</li>
+        <li><strong>juntar recetas</strong> (sumarlas).</li>
+      </ul>
+      <p class="idea">Una <strong>combinación lineal</strong> es simplemente hacer las dos jugadas seguidas: tomas tantas veces la primera receta, tantas veces la segunda, y lo juntas todo.</p>
+      <div class="fx"><div class="sys"><span class="eq">3·(2, 3) + 1·(1, 4)</span><span class="eq">= (6, 9) + (1, 4)</span><span class="eq">= (7, 13)</span></div></div>
+      <p class="idea">Léelo en voz de cocina: <em>"tres aguas de la primera receta y una de la segunda, todo a la jarra grande"</em>. Quedan 7 limones y 13 de azúcar.</p>
+      <p class="idea">Ese resultado, (7, 13), es una <strong>combinación lineal</strong> de (2, 3) y (1, 4).</p>
+      <p class="idea">Con letras, para cualquier caso: si u y v son los vectores y a, b son los pesos, la combinación es:</p>
+      <div class="fx"><div class="sys"><span class="eq">a·u + b·v</span></div></div>
+      <p class="idea">Adentro de esa expresión no hay nada más que lo que ya hiciste: pesos por vectores, y sumar.</p>
+      <p class="idea">Y aquí nace la pregunta estrella de toda la unidad, dicha en simple: <em>"quiero que la jarra final quede exactamente en (7, 13) — ¿cuántas veces hago cada receta?"</em>. Es decir:</p>
+      <div class="fx"><div class="sys"><span class="eq">¿existen pesos a, b con a·u + b·v = w?</span></div></div>
+      <p class="idea">Aprender a responder eso sin adivinar es a donde vamos.</p>
       <p class="idea">Antes de seguir, asegúrate de que "combinar" quedó claro y no se confunde con operaciones que <em>no</em> existen aquí:</p>
       <div class="check" data-kind="item" data-id="CLchk" data-tema="combinacion_lineal" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
@@ -240,9 +284,13 @@
 
     <section class="sec">
       <h3>6 · El generado: todo lo que puedes preparar</h3>
-      <p class="idea">Sigamos en la cocina. Con tus recetas en mano, una pregunta natural es: <strong>¿qué mezclas puedo lograr en total?</strong> No una en particular — <em>todas</em> las posibles, variando los pesos como quieras. A esa colección completa se le llama el <strong>generado</strong> (en inglés, <em>span</em>) de tus vectores: todo lo que se puede armar combinándolos.</p>
-      <p class="idea">Piénsalo primero con <strong>una sola receta</strong>. Si solo tienes (2, 3), lo único que puedes hacer es prepararla más veces o menos veces: el doble, la mitad, nada… Siempre obtienes <strong>más o menos de lo mismo</strong>. En el dibujo, todas esas flechas caen sobre una <strong>misma recta</strong>: por eso decimos que un solo vector genera una recta.</p>
-      <p class="idea">Con <strong>dos recetas</strong> que apunten en direcciones distintas, la cosa cambia por completo: combinándolas alcanzas <strong>cualquier punto del plano</strong>. Dos direcciones distintas bastan para llegar a todos lados. ¿Quedó? Compruébalo:</p>
+      <p class="idea">Sigamos en la cocina. Con tus recetas en mano, una pregunta natural es: <strong>¿qué mezclas puedo lograr en total?</strong></p>
+      <p class="idea">No una en particular — <em>todas</em> las posibles, variando los pesos como quieras. A esa colección completa se le llama el <strong>generado</strong> (en inglés, <em>span</em>) de tus vectores: todo lo que se puede armar combinándolos.</p>
+      <p class="idea">Piénsalo primero con <strong>una sola receta</strong>. Si solo tienes (2, 3), lo único que puedes hacer es prepararla más veces o menos veces:</p>
+      <div class="fx"><div class="sys"><span class="eq">2·(2, 3) = (4, 6)</span><span class="eq">½·(2, 3) = (1, 1.5)</span><span class="eq">0·(2, 3) = (0, 0)</span></div></div>
+      <p class="idea">Siempre obtienes <strong>más o menos de lo mismo</strong>. En el dibujo, todas esas flechas caen sobre una <strong>misma recta</strong>: por eso decimos que un solo vector genera una recta.</p>
+      <p class="idea">Con <strong>dos recetas</strong> que apunten en direcciones distintas, la cosa cambia por completo: combinándolas alcanzas <strong>cualquier punto del plano</strong>. Dos direcciones distintas bastan para llegar a todos lados.</p>
+      <p class="idea">¿Quedó? Compruébalo:</p>
       <div class="check" data-kind="recall" data-fid="F1_generado" data-tema="generado">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué es el generado (span) de un solo vector no nulo v en R²?</p>
@@ -257,9 +305,20 @@
 
     <section class="sec">
       <h3>7 · Independencia: ¿alguna receta sobra?</h3>
-      <p class="idea">Imagina que en tu recetario tienes (2, 3) y también (4, 6). Mira bien la segunda: es <strong>exactamente el doble</strong> de la primera. ¿Te sirve de algo tenerla? No: todo lo que prepares con ella ya lo podías preparar con la primera (usando el doble de peso). La segunda receta <strong>sobra</strong> — no aporta nada nuevo.</p>
-      <p class="idea">Esa es toda la idea. Cuando en un conjunto de vectores <strong>alguno se puede armar combinando los otros</strong>, ese vector sobra, y al conjunto se le llama <strong>dependiente</strong>. Cuando nadie sobra —cada vector aporta una dirección que los demás no pueden lograr— el conjunto es <strong>linealmente independiente</strong>.</p>
-      <p class="idea">¿Y cómo se comprueba a mano, sin adivinar? Con la herramienta que ya dominas de la Unidad 1: pon los vectores como <strong>columnas</strong> de una matriz y <strong>reduce</strong>. Si al final hay un <strong>pivote en cada columna</strong>, nadie sobra: son independientes. Si alguna columna se queda sin pivote, ese vector era combinación de los anteriores.</p>
+      <p class="idea">Imagina que en tu recetario tienes (2, 3) y también (4, 6). Mira bien la segunda:</p>
+      <div class="fx"><div class="sys"><span class="eq">(4, 6) = 2·(2, 3)</span></div></div>
+      <p class="idea">Es <strong>exactamente el doble</strong> de la primera. ¿Te sirve de algo tenerla? No: todo lo que prepares con ella ya lo podías preparar con la primera, usando el doble de peso.</p>
+      <p class="idea">La segunda receta <strong>sobra</strong> — no aporta nada nuevo.</p>
+      <p class="idea">Esa es toda la idea:</p>
+      <ul class="fases">
+        <li>Si <strong>alguno se puede armar combinando los otros</strong>, ese vector sobra → el conjunto es <strong>dependiente</strong>.</li>
+        <li>Si nadie sobra —cada vector aporta una dirección que los demás no logran— → <strong>linealmente independiente</strong>.</li>
+      </ul>
+      <p class="idea">¿Y cómo se comprueba a mano, sin adivinar? Con la herramienta que ya dominas de la Unidad 1: pon los vectores como <strong>columnas</strong> de una matriz y <strong>reduce</strong>.</p>
+      <ul class="fases">
+        <li><strong>Pivote en cada columna</strong> → nadie sobra: independientes.</li>
+        <li><strong>Alguna columna sin pivote</strong> → ese vector era combinación de los anteriores: dependientes.</li>
+      </ul>
       <div class="fx" id="indepEx"></div>
       <p class="fx-note">Dos pivotes para dos columnas: estos dos vectores son independientes.</p>
       <div class="check" data-kind="item" data-id="INDchk" data-tema="independencia" data-level="guiado">
