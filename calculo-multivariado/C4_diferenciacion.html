@@ -149,6 +149,12 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*aire-matematico*/
+  .sec{gap:16px}
+  .idea{line-height:1.72}
+  .fx{margin:4px 0;justify-self:center}
+  .fases{gap:9px;margin:2px 0}
+  .ejemplo{gap:16px}
   /*hardening-360*/
   main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
@@ -188,24 +194,58 @@
 
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Estás parada en medio de una <strong>ladera</strong>. Es el terreno de la unidad pasada: una función a la que le das tu posición — cuánto llevas caminado al este (x) y cuánto al norte (y) — y te devuelve la <strong>altura</strong> en ese lugar:</p>
+      <p class="idea" style="font-size:17px">Estás parada en medio de una <strong>ladera</strong>. Es el terreno de la unidad pasada.</p>
+      <p class="idea" style="font-size:17px">Una función a la que le das tu posición — cuánto llevas caminado al este (x) y cuánto al norte (y) — y te devuelve la <strong>altura</strong> en ese lugar:</p>
       <div class="fx"><div class="sys"><span class="eq">h(x, y) = x<sup>2</sup> + y<sup>2</sup></span></div></div>
-      <p class="idea" style="font-size:17px">Si estás en el punto <strong>(3, 4)</strong>, tu altura es 3<sup>2</sup> + 4<sup>2</sup> = 9 + 16 = <strong>25 metros</strong>. Hasta ahí, nada nuevo.</p>
-      <p class="idea" style="font-size:17px">Lo nuevo son las preguntas: <strong>¿hacia dónde subo más rápido?</strong> y <strong>¿qué tan empinado está por donde voy?</strong> Recuerda qué era la derivada en bachillerato: un número que dice <strong>qué tan rápido cambia</strong> algo — la pendiente. Un solo número bastaba porque solo había un camino: adelante o atrás. En una ladera no: desde donde estás parada salen <strong>infinitas direcciones</strong>, y cada una tiene su propia pendiente. Una sola derivada ya no alcanza.</p>
-      <p class="idea" style="font-size:17px">En esta guía vamos a reconstruir la derivada para terrenos, pieza por pieza, hasta armar una <strong>flecha</strong> que responde las dos preguntas de golpe. Al final, la ladera la contestas tú sola.</p>
+      <p class="idea" style="font-size:17px">Si estás en el punto <strong>(3, 4)</strong>, tu altura es:</p>
+      <div class="fx"><div class="sys"><span class="eq">h(3, 4) = 3<sup>2</sup> + 4<sup>2</sup></span><span class="eq">= 9 + 16</span><span class="eq">= 25</span></div></div>
+      <p class="idea" style="font-size:17px"><strong>25 metros</strong>. Hasta ahí, nada nuevo.</p>
+      <p class="idea" style="font-size:17px">Lo nuevo son las preguntas:</p>
+      <ul class="fases">
+        <li><strong>¿hacia dónde subo más rápido?</strong></li>
+        <li><strong>¿qué tan empinado está por donde voy?</strong></li>
+      </ul>
+      <p class="idea" style="font-size:17px">Recuerda qué era la derivada en bachillerato: un número que dice <strong>qué tan rápido cambia</strong> algo — la pendiente.</p>
+      <p class="idea" style="font-size:17px">Un solo número bastaba porque solo había un camino: adelante o atrás.</p>
+      <p class="idea" style="font-size:17px">En una ladera no: desde donde estás parada salen <strong>infinitas direcciones</strong>, y cada una tiene su propia pendiente. Una sola derivada ya no alcanza.</p>
+      <p class="idea" style="font-size:17px">En esta guía vamos a reconstruir la derivada para terrenos, pieza por pieza, hasta armar una <strong>flecha</strong> que responde las dos preguntas de golpe.</p>
+      <p class="idea" style="font-size:17px">Al final, la ladera la contestas tú sola.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
       <h3>1 · Derivar mirando en una sola dirección</h3>
-      <p class="idea">Si no puedes medir todas las direcciones a la vez, empieza por la jugada más simple: <strong>elige una y congela la otra</strong>. Parada en la ladera, pregunta solo esto: <em>«si camino derechito al este, sin desviarme ni un paso al norte, ¿qué tan empinado está?»</em>.</p>
-      <p class="idea">Hazlo con números en la ladera h(x, y) = x<sup>2</sup> + y<sup>2</sup>, parada en (3, 4). Caminar solo al este significa que tu y se queda <strong>clavada en 4</strong>: no cambia. Entonces y<sup>2</sup> vale 16 durante todo el camino, y la altura que vas sintiendo es h = x<sup>2</sup> + 16. Mírala bien: quedó una función de <strong>una sola variable</strong>, de las de bachillerato. Y esas ya sabes derivarlas: la derivada de x<sup>2</sup> + 16 es 2x — el 16 es constante y desaparece. En x = 3, la pendiente hacia el este es 2·3 = <strong>6</strong>.</p>
-      <p class="idea">Ese es todo el truco, y vale siempre: <strong>trata la otra letra como si fuera un número</strong>. Al derivar «hacia el este» (respecto a x), la y es un número fijo: lo que sea puro número desaparece al derivar, y lo que multiplica a la x se queda multiplicando, como cualquier constante.</p>
-      <p class="idea">Esta derivada de una sola dirección tiene símbolo propio: <strong>∂</strong>, una d estilizada que se lee <strong>«parcial»</strong>. Escribir ∂h/∂x se lee «la parcial de h respecto a x», y significa exactamente lo que acabas de hacer: derivar caminando por x con la y congelada. Y ∂h/∂y es lo contrario: caminar al norte con la x congelada. A este objeto se le llama <strong>derivada parcial</strong> — «parcial» porque no mide todo el cambio del terreno, solo la <strong>parte</strong> que se ve en una dirección.</p>
+      <p class="idea">Si no puedes medir todas las direcciones a la vez, empieza por la jugada más simple: <strong>elige una y congela la otra</strong>.</p>
+      <p class="idea">Parada en la ladera, pregunta solo esto: <em>«si camino derechito al este, sin desviarme ni un paso al norte, ¿qué tan empinado está?»</em>.</p>
+      <p class="idea">Hazlo con números en la ladera h(x, y) = x<sup>2</sup> + y<sup>2</sup>, parada en (3, 4).</p>
+      <p class="idea">Caminar solo al este significa que tu y se queda <strong>clavada en 4</strong>: no cambia.</p>
+      <p class="idea">Entonces y<sup>2</sup> vale 16 durante todo el camino, y la altura que vas sintiendo es:</p>
+      <div class="fx"><div class="sys"><span class="eq">h = x<sup>2</sup> + 16</span></div></div>
+      <p class="idea">Mírala bien: quedó una función de <strong>una sola variable</strong>, de las de bachillerato. Y esas ya sabes derivarlas.</p>
+      <p class="idea">La derivada de x<sup>2</sup> + 16 es 2x — el 16 es constante y desaparece.</p>
+      <p class="idea">En x = 3, la pendiente hacia el este es:</p>
+      <div class="fx"><div class="sys"><span class="eq">2·3 = <strong>6</strong></span></div></div>
+      <p class="idea">Seis metros de subida por cada paso al este.</p>
+      <p class="idea">Ese es todo el truco, y vale siempre: <strong>trata la otra letra como si fuera un número</strong>.</p>
+      <p class="idea">Al derivar «hacia el este» (respecto a x), la y es un número fijo:</p>
+      <ul class="fases">
+        <li>lo que sea puro número <em>desaparece</em> al derivar,</li>
+        <li>lo que multiplica a la x <em>se queda multiplicando</em>, como cualquier constante.</li>
+      </ul>
+      <p class="idea">Esta derivada de una sola dirección tiene símbolo propio: <strong>∂</strong>, una d estilizada que se lee <strong>«parcial»</strong>.</p>
+      <ul class="fases">
+        <li><em>∂h/∂x</em> se lee «la parcial de h respecto a x»: derivar caminando por x, con la y congelada — lo que acabas de hacer.</li>
+        <li><em>∂h/∂y</em> es lo contrario: caminar al norte, con la x congelada.</li>
+      </ul>
+      <p class="idea">A este objeto se le llama <strong>derivada parcial</strong> — «parcial» porque no mide todo el cambio del terreno, solo la <strong>parte</strong> que se ve en una dirección.</p>
       <p class="idea">Va un ejemplo con más carne, término por término:</p>
       <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> y + 3y<sup>2</sup></span><span class="eq">∂f/∂x = 2xy</span></div></div>
-      <p class="fx-note">Derivamos respecto a x, con la y congelada. En x<sup>2</sup> y, la y es un número que multiplica (si valiera 4, x<sup>2</sup>·4 derivaría a 2x·4): queda 2x·y. Y 3y<sup>2</sup> no tiene ninguna x — para quien camina al este es puro número — así que su derivada es 0 y desaparece.</p>
+      <p class="idea">Derivamos respecto a x, con la y congelada:</p>
+      <ul class="fases">
+        <li>En x<sup>2</sup> y, la y es un número que multiplica (si valiera 4, x<sup>2</sup>·4 derivaría a 2x·4): queda 2x·y.</li>
+        <li>Y 3y<sup>2</sup> no tiene ninguna x — para quien camina al este es puro número — así que su derivada es 0 y desaparece.</li>
+      </ul>
       <div class="check" data-kind="item" data-id="PARchk" data-tema="derivadas_parciales" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">Para la misma f(x, y) = x<sup>2</sup> y + 3y<sup>2</sup>, ¿cuál es la parcial respecto a <strong>y</strong>?</p>
@@ -220,10 +260,26 @@
 
     <section class="sec">
       <h3>2 · Juntar las parciales: el gradiente</h3>
-      <p class="idea">Ya sabes medir la pendiente al este y la pendiente al norte. Son dos números, dos respuestas sueltas. La jugada ahora es <strong>guardarlas juntas y en orden</strong>: (pendiente al este, pendiente al norte). Y dos números en orden dibujan una <strong>flecha</strong> en el mapa: camina tanto al este, tanto al norte.</p>
-      <p class="idea">Esa flecha esconde algo enorme. Toma la f de arriba, parada en el punto (2, 1). La pendiente al este es 2xy = 2·2·1 = <strong>4</strong>, y la pendiente al norte — la parcial que tú calculaste en el check — es x<sup>2</sup> + 6y = 4 + 6 = <strong>10</strong>. ¿Hacia dónde caminar para subir lo más rápido posible? Al norte se gana más que al este (10 contra 4), así que el mejor rumbo se <strong>carga hacia el norte</strong>… pero no del todo: desviarse un poco al este también suma, porque el este también sube. El rumbo perfecto mezcla las dos direcciones <strong>en proporción a lo que cada una gana</strong>: 4 de este por cada 10 de norte. ¿Y qué flecha camina exactamente 4 al este por cada 10 al norte? La flecha (4, 10) — justo la que armamos con las dos parciales.</p>
-      <p class="idea">Ese es el hecho estrella, y no es casualidad: la flecha de las parciales <strong>apunta cuesta arriba</strong>, hacia donde el terreno sube más rápido, y su <strong>largo</strong> dice qué tan empinada es esa subida máxima. Se escribe con el símbolo <strong>∇</strong> — un triángulo invertido llamado <strong>«nabla»</strong> — y al objeto completo se le llama <strong>gradiente</strong>: ∇f se lee «el gradiente de f».</p>
-      <div class="fx"><div class="sys"><span class="eq">∇f = ( ∂f/∂x , ∂f/∂y ) = ( 2xy , x<sup>2</sup> + 6y )</span><span class="eq">∇f(2, 1) = ( 4 , 10 )</span></div></div>
+      <p class="idea">Ya sabes medir la pendiente al este y la pendiente al norte. Son dos números, dos respuestas sueltas.</p>
+      <p class="idea">La jugada ahora es <strong>guardarlas juntas y en orden</strong>: (pendiente al este, pendiente al norte).</p>
+      <p class="idea">Y dos números en orden dibujan una <strong>flecha</strong> en el mapa: camina tanto al este, tanto al norte.</p>
+      <p class="idea">Esa flecha esconde algo enorme. Toma la f de arriba, parada en el punto (2, 1).</p>
+      <p class="idea">La pendiente al este:</p>
+      <div class="fx"><div class="sys"><span class="eq">2xy = 2·2·1</span><span class="eq">= <strong>4</strong></span></div></div>
+      <p class="idea">Y la pendiente al norte — la parcial que tú calculaste en el check:</p>
+      <div class="fx"><div class="sys"><span class="eq">x<sup>2</sup> + 6y = 4 + 6</span><span class="eq">= <strong>10</strong></span></div></div>
+      <p class="idea">¿Hacia dónde caminar para subir lo más rápido posible?</p>
+      <p class="idea">Al norte se gana más que al este (10 contra 4), así que el mejor rumbo se <strong>carga hacia el norte</strong>…</p>
+      <p class="idea">…pero no del todo: desviarse un poco al este también suma, porque el este también sube.</p>
+      <p class="idea">El rumbo perfecto mezcla las dos direcciones <strong>en proporción a lo que cada una gana</strong>: 4 de este por cada 10 de norte.</p>
+      <p class="idea">¿Y qué flecha camina exactamente 4 al este por cada 10 al norte? La flecha (4, 10) — justo la que armamos con las dos parciales.</p>
+      <p class="idea">Ese es el hecho estrella, y no es casualidad. La flecha de las parciales:</p>
+      <ul class="fases">
+        <li><strong>apunta cuesta arriba</strong>, hacia donde el terreno sube más rápido,</li>
+        <li>y su <strong>largo</strong> dice qué tan empinada es esa subida máxima.</li>
+      </ul>
+      <p class="idea">Se escribe con el símbolo <strong>∇</strong> — un triángulo invertido llamado <strong>«nabla»</strong> — y al objeto completo se le llama <strong>gradiente</strong>: ∇f se lee «el gradiente de f».</p>
+      <div class="fx"><div class="sys"><span class="eq">∇f = ( ∂f/∂x , ∂f/∂y )</span><span class="eq">= ( 2xy , x<sup>2</sup> + 6y )</span><span class="eq">∇f(2, 1) = ( 4 , 10 )</span></div></div>
       <p class="fx-note">Primero armas la fórmula con las dos parciales; luego metes el punto. El gradiente se <strong>evalúa</strong>: en cada lugar de la ladera la flecha es distinta.</p>
       <div class="check" data-kind="recall" data-fid="F1_gradiente" data-tema="gradiente">
         <div class="qtag">Te toca · recuerda</div>
@@ -239,9 +295,27 @@
 
     <section class="sec">
       <h3>3 · El plano tangente: la tabla que se recarga en el terreno</h3>
-      <p class="idea">Ahora una herramienta para <strong>aproximar</strong>. En bachillerato, la recta tangente era la recta que mejor se pega a una curva en un punto: muy cerquita de ahí, curva y recta casi no se distinguen. En un terreno pasa lo mismo, pero con una <strong>tabla plana</strong>: recárgala en el punto donde estás, inclinada exactamente como la ladera ahí, y muy cerca del punto la tabla y el terreno casi coinciden.</p>
-      <p class="idea">¿A qué altura queda la tabla cuando te mueves un poco? Cuéntalo con pasos. Supón que la tabla se apoya donde el terreno mide <strong>10</strong> de altura, y que ahí la pendiente al este es <strong>3</strong> y la pendiente al norte es <strong>2</strong>. Das 2 pasos al este y 1 al norte, caminando sobre la tabla: empiezas en 10, el este te regala 3 por paso (3·2 = 6) y el norte 2 por paso (2·1 = 2). Altura de la tabla: 10 + 6 + 2 = <strong>18</strong>.</p>
-      <p class="idea">La fórmula dice exactamente eso, con letras. Los «pasos» son cuánto te alejas del punto de apoyo (x<sub>0</sub>, y<sub>0</sub>): al este llevas (x − x<sub>0</sub>) y al norte (y − y<sub>0</sub>). A esta tabla se le llama el <strong>plano tangente</strong>:</p>
+      <p class="idea">Ahora una herramienta para <strong>aproximar</strong>.</p>
+      <p class="idea">En bachillerato, la recta tangente era la recta que mejor se pega a una curva en un punto: muy cerquita de ahí, curva y recta casi no se distinguen.</p>
+      <p class="idea">En un terreno pasa lo mismo, pero con una <strong>tabla plana</strong>: recárgala en el punto donde estás, inclinada exactamente como la ladera ahí.</p>
+      <p class="idea">Y muy cerca del punto, la tabla y el terreno casi coinciden.</p>
+      <p class="idea">¿A qué altura queda la tabla cuando te mueves un poco? Cuéntalo con pasos.</p>
+      <p class="idea">Supón que la tabla se apoya donde el terreno mide <strong>10</strong> de altura, y que ahí:</p>
+      <ul class="fases">
+        <li>la pendiente al este es <strong>3</strong>,</li>
+        <li>la pendiente al norte es <strong>2</strong>.</li>
+      </ul>
+      <p class="idea">Das 2 pasos al este y 1 al norte, caminando sobre la tabla. Empiezas en 10:</p>
+      <ul class="fases">
+        <li>el este te regala 3 por paso: 3·2 = <strong>6</strong>,</li>
+        <li>el norte te regala 2 por paso: 2·1 = <strong>2</strong>.</li>
+      </ul>
+      <p class="idea">Altura de la tabla:</p>
+      <div class="fx"><div class="sys"><span class="eq">10 + 6 + 2 = <strong>18</strong></span></div></div>
+      <p class="idea">La altura donde se apoya, más lo que ganas por cada camino.</p>
+      <p class="idea">La fórmula dice exactamente eso, con letras.</p>
+      <p class="idea">Los «pasos» son cuánto te alejas del punto de apoyo (x<sub>0</sub>, y<sub>0</sub>): al este llevas (x − x<sub>0</sub>) y al norte (y − y<sub>0</sub>).</p>
+      <p class="idea">A esta tabla se le llama el <strong>plano tangente</strong>:</p>
       <div class="fx"><div class="sys"><span class="eq">z = f(x<sub>0</sub>, y<sub>0</sub>) + ∂f/∂x·(x − x<sub>0</sub>) + ∂f/∂y·(y − y<sub>0</sub>)</span></div></div>
       <p class="fx-note">Tres piezas: la altura donde se apoya, más cada pendiente multiplicada por sus pasos. Sin la altura, la tabla flota en el aire; sin las pendientes por sus pasos, no se inclina como el terreno.</p>
       <div class="check" data-kind="item" data-id="PLNchk" data-tema="plano_tangente" data-level="guiado">
@@ -259,7 +333,8 @@
     <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Construyamos una de estas tablas con todas sus piezas: el <strong>plano tangente</strong> a la superficie z = x<sup>2</sup> + y<sup>2</sup> en el punto donde x = 1, y = 2. No lo mires nada más: en cada paso <strong>tú decides</strong> qué toca y yo hago la cuenta.</p>
+      <p class="idea" style="font-size:17px">Construyamos una de estas tablas con todas sus piezas: el <strong>plano tangente</strong> a la superficie z = x<sup>2</sup> + y<sup>2</sup> en el punto donde x = 1, y = 2.</p>
+      <p class="idea" style="font-size:17px">No lo mires nada más: en cada paso <strong>tú decides</strong> qué toca y yo hago la cuenta.</p>
       <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> + y<sup>2</sup>,   punto (1, 2)</span></div></div>
 
       <div class="check" data-kind="item" data-id="E1pred" data-tema="plano_tangente" data-level="guiado">
@@ -300,27 +375,42 @@
       </div>
       <div class="estep"><div class="oprow">Paso 4 · armar el plano</div><p>Coloco altura, pendiente en x por (x − 1), pendiente en y por (y − 2):</p><p class="calc"><span class="rw">z</span> altura=<b>5</b> <span class="sep">•</span> +2(x−1) <span class="sep">•</span> +4(y−2)</p><div class="fx"><div class="sys"><span class="eq">z = 5 + 2(x − 1) + 4(y − 2)</span></div></div></div>
 
-      <p class="idea" style="font-size:17px">Ese plano <strong>toca</strong> la superficie en (1, 2, 5) y comparte sus pendientes ahí. Fíjate en el orden: <strong>altura</strong>, luego <strong>cada pendiente</strong>, luego <strong>ensamblar</strong>. Nada salió por arte de magia.</p>
+      <p class="idea" style="font-size:17px">Ese plano <strong>toca</strong> la superficie en (1, 2, 5) y comparte sus pendientes ahí.</p>
+      <p class="idea" style="font-size:17px">Fíjate en el orden: <strong>altura</strong>, luego <strong>cada pendiente</strong>, luego <strong>ensamblar</strong>. Nada salió por arte de magia.</p>
     </section>
 
     <section class="sec">
       <h3>Cambios que se encadenan</h3>
-      <p class="idea">Falta un tipo de pregunta que cae siempre. Hasta ahora tú decidías cada movimiento; ahora imagina que <strong>caminas sobre la ladera mientras el reloj corre</strong>. El tiempo no cambia tu altura directamente: el tiempo cambia <strong>tu posición</strong>, y tu posición cambia tu altura. El cambio viaja <strong>en cadena</strong>: el reloj empuja a x y a y, y ellas empujan a f.</p>
-      <p class="idea">Cuenta una caminata con números. Cada minuto avanzas <strong>2 pasos al este</strong>, y cada paso al este te sube <strong>3 metros</strong>: por el camino del este ganas 3·2 = <strong>6 metros por minuto</strong>. Al mismo tiempo avanzas <strong>1 paso al norte</strong> por minuto, y cada paso al norte sube <strong>4 metros</strong>: por el camino del norte ganas 4·1 = <strong>4</strong>. ¿Cuánto subes en total por minuto? Los dos movimientos ocurren a la vez, así que sus aportes <strong>se suman</strong>: 6 + 4 = <strong>10 metros por minuto</strong>.</p>
-      <p class="idea">Mira lo que hiciste en cada camino: (cuánto sube por paso) · (cuántos pasos por minuto). Lo primero es una parcial de f; lo segundo es la derivada de la posición respecto al tiempo. Como x(t) y y(t) dependen de una sola variable — el tiempo —, su derivada se escribe con la d normal de bachillerato: dx/dt y dy/dt. Todo junto:</p>
+      <p class="idea">Falta un tipo de pregunta que cae siempre. Hasta ahora tú decidías cada movimiento; ahora imagina que <strong>caminas sobre la ladera mientras el reloj corre</strong>.</p>
+      <p class="idea">El tiempo no cambia tu altura directamente: el tiempo cambia <strong>tu posición</strong>, y tu posición cambia tu altura.</p>
+      <p class="idea">El cambio viaja <strong>en cadena</strong>: el reloj empuja a x y a y, y ellas empujan a f.</p>
+      <p class="idea">Cuenta una caminata con números:</p>
+      <ul class="fases">
+        <li>Cada minuto avanzas <strong>2 pasos al este</strong>, y cada paso al este te sube <strong>3 metros</strong>: por el camino del este ganas 3·2 = <strong>6 metros por minuto</strong>.</li>
+        <li>Al mismo tiempo avanzas <strong>1 paso al norte</strong> por minuto, y cada paso al norte sube <strong>4 metros</strong>: por el camino del norte ganas 4·1 = <strong>4</strong>.</li>
+      </ul>
+      <p class="idea">¿Cuánto subes en total por minuto? Los dos movimientos ocurren a la vez, así que sus aportes <strong>se suman</strong>:</p>
+      <div class="fx"><div class="sys"><span class="eq">6 + 4 = <strong>10</strong></span></div></div>
+      <p class="idea"><strong>10 metros por minuto.</strong></p>
+      <p class="idea">Mira lo que hiciste en cada camino: (cuánto sube por paso) · (cuántos pasos por minuto).</p>
+      <p class="idea">Lo primero es una parcial de f; lo segundo es la derivada de la posición respecto al tiempo.</p>
+      <p class="idea">Como x(t) y y(t) dependen de una sola variable — el tiempo —, su derivada se escribe con la d normal de bachillerato: dx/dt y dy/dt. Todo junto:</p>
       <div class="fx"><div class="sys"><span class="eq">df/dt = (∂f/∂x)(dx/dt) + (∂f/∂y)(dy/dt)</span></div></div>
       <p class="fx-note">Camino del este más camino del norte. Cada sumando es «pendiente en esa dirección por velocidad en esa dirección».</p>
-      <p class="idea">A esta fórmula se le llama la <strong>regla de la cadena</strong>, por la cadena de cambios: el tiempo empuja la posición y la posición empuja la altura. Con el nombre en mano, vamos a ejecutarla completa.</p>
+      <p class="idea">A esta fórmula se le llama la <strong>regla de la cadena</strong>, por la cadena de cambios: el tiempo empuja la posición y la posición empuja la altura.</p>
+      <p class="idea">Con el nombre en mano, vamos a ejecutarla completa.</p>
     </section>
 
     <h2 class="modhead">Sube el tamaño · la regla de la cadena en dos fases</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">La cadena en acción, tal como cae en examen: te dan f(x, y), te dicen cómo x e y dependen del <strong>tiempo t</strong>, y piden df/dt <strong>sin sustituir todo primero</strong>. Se hace en dos fases:</p>
+      <p class="idea" style="font-size:17px">La cadena en acción, tal como cae en examen: te dan f(x, y), te dicen cómo x e y dependen del <strong>tiempo t</strong>, y piden df/dt <strong>sin sustituir todo primero</strong>.</p>
+      <p class="idea" style="font-size:17px">Se hace en dos fases:</p>
       <ul class="fases">
         <li><strong>Fase 1 — las piezas:</strong> junta las dos parciales de f y las derivadas de cada variable respecto a t.</li>
         <li><strong>Fase 2 — suma los caminos:</strong> cada variable es un camino por el que t llega a f; se suman sus contribuciones.</li>
       </ul>
-      <p class="idea" style="font-size:17px">Sistema: f(x, y) = x<sup>2</sup> + y<sup>2</sup>, con x = t, y = t<sup>2</sup>.</p>
+      <p class="idea" style="font-size:17px">El sistema:</p>
+      <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> + y<sup>2</sup></span><span class="eq">x = t,  y = t<sup>2</sup></span></div></div>
 
       <div class="estep"><div class="oprow">Fase 1 · parciales de f</div><p>Las dos parciales de siempre: por x congelo y, por y congelo x.</p><p class="calc"><span class="rw">∂f/∂x</span>=<b>2x</b> <span class="sep">•</span> <span class="rw">∂f/∂y</span>=<b>2y</b></p></div>
       <div class="estep"><div class="oprow">Fase 1 · derivadas en t</div><p>Ahora cómo cambia cada variable con el tiempo: derivo x = t y y = t<sup>2</sup> respecto a t.</p><p class="calc"><span class="rw">dx/dt</span> deriva t=<b>1</b> <span class="sep">•</span> <span class="rw">dy/dt</span> deriva t<sup>2</sup>=<b>2t</b></p></div>
@@ -339,14 +429,32 @@
       <div class="estep"><div class="oprow">Fase 2 · armar la suma</div><p>Coloco cada parcial por su derivada en t, camino por camino:</p><p class="calc"><span class="rw">camino x</span> (2x)(1)=<b>2x</b> <span class="sep">•</span> <span class="rw">camino y</span> (2y)(2t)=<b>4yt</b></p><div class="fx"><div class="sys"><span class="eq">df/dt = 2x + 4yt</span></div></div></div>
       <div class="estep"><div class="oprow">Fase 2 · dejar todo en t</div><p>Sustituyo x = t y y = t<sup>2</sup> para que quede solo en términos de t:</p><p class="calc"><span class="rw">2x</span> x=t: <b>2t</b> <span class="sep">•</span> <span class="rw">4yt</span> y=t<sup>2</sup>: 4·t<sup>2</sup>·t=<b>4t<sup>3</sup></b></p><div class="fx"><div class="sys"><span class="eq">df/dt = 2t + 4t<sup>3</sup></span></div></div></div>
 
-      <p class="idea" style="font-size:17px">Verificación: si sustituyes primero, f = t<sup>2</sup> + t<sup>4</sup>, y su derivada es <strong>2t + 4t<sup>3</sup></strong>. Coincide. En t = 1 ambas dan <strong>6</strong>. La cadena te ahorra la sustitución cuando f es complicada.</p>
+      <p class="idea" style="font-size:17px">Verificación: si sustituyes primero y derivas como en bachillerato,</p>
+      <div class="fx"><div class="sys"><span class="eq">f = t<sup>2</sup> + t<sup>4</sup></span><span class="eq">df/dt = <strong>2t + 4t<sup>3</sup></strong></span></div></div>
+      <p class="idea" style="font-size:17px">Coincide. En t = 1 ambas dan <strong>6</strong>.</p>
+      <p class="idea" style="font-size:17px">La cadena te ahorra la sustitución cuando f es complicada.</p>
     </section>
 
     <section class="sec">
       <h3>Míralo: el gradiente es perpendicular a la curva de nivel</h3>
-      <p class="idea">Recupera el mapa de la unidad pasada: las <strong>curvas de nivel</strong>, las líneas que unen los puntos del terreno que están a la <strong>misma altura</strong>. Caminar a lo largo de una curva de nivel es caminar <strong>en plano</strong>: ni subes ni bajas, pendiente cero.</p>
-      <p class="idea">Eso obliga al gradiente a algo muy visual. Cualquier rumbo se puede repartir en dos partes: una <strong>a lo largo</strong> de la curva de nivel y otra <strong>cruzándola</strong>. La parte a lo largo no gana altura — está desperdiciada. Así que el rumbo que sube más rápido no desperdicia nada: <strong>cruza la curva en ángulo recto</strong>. Por eso el gradiente sale siempre <strong>perpendicular</strong> a la curva de nivel que pasa por tu punto, apuntando cuesta arriba.</p>
-      <p class="idea">¿Y los demás rumbos? Cada uno tiene su propia pendiente: la máxima en el rumbo del gradiente, cero a lo largo de la curva, y algo intermedio en el resto. Esa pendiente que sientes al caminar en <strong>un rumbo que tú eliges</strong> tiene nombre: la <strong>derivada direccional</strong> — la derivada en tu dirección. Enseguida la calculamos; primero tócala en el mapa:</p>
+      <p class="idea">Recupera el mapa de la unidad pasada: las <strong>curvas de nivel</strong>, las líneas que unen los puntos del terreno que están a la <strong>misma altura</strong>.</p>
+      <p class="idea">Caminar a lo largo de una curva de nivel es caminar <strong>en plano</strong>: ni subes ni bajas, pendiente cero.</p>
+      <p class="idea">Eso obliga al gradiente a algo muy visual. Cualquier rumbo se puede repartir en dos partes:</p>
+      <ul class="fases">
+        <li>una <strong>a lo largo</strong> de la curva de nivel,</li>
+        <li>y otra <strong>cruzándola</strong>.</li>
+      </ul>
+      <p class="idea">La parte a lo largo no gana altura — está desperdiciada.</p>
+      <p class="idea">Así que el rumbo que sube más rápido no desperdicia nada: <strong>cruza la curva en ángulo recto</strong>.</p>
+      <p class="idea">Por eso el gradiente sale siempre <strong>perpendicular</strong> a la curva de nivel que pasa por tu punto, apuntando cuesta arriba.</p>
+      <p class="idea">¿Y los demás rumbos? Cada uno tiene su propia pendiente:</p>
+      <ul class="fases">
+        <li>la <strong>máxima</strong> en el rumbo del gradiente,</li>
+        <li><strong>cero</strong> a lo largo de la curva,</li>
+        <li>y algo intermedio en el resto.</li>
+      </ul>
+      <p class="idea">Esa pendiente que sientes al caminar en <strong>un rumbo que tú eliges</strong> tiene nombre: la <strong>derivada direccional</strong> — la derivada en tu dirección.</p>
+      <p class="idea">Enseguida la calculamos; primero tócala en el mapa:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="grad">El gradiente</button>
@@ -360,7 +468,14 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Cerramos calculando una <strong>derivada direccional</strong> de verdad: la ladera del inicio, f = x<sup>2</sup> + y<sup>2</sup>, parada en (3, 4), caminando hacia la dirección (3, 4). La receta tiene tres pasos: el gradiente en el punto, el rumbo vuelto <strong>unitario</strong> — un paso de tamaño exactamente 1, para que la pendiente dependa solo de hacia dónde vas y no de qué tan largo des el paso — y el <strong>producto punto</strong> entre ambos: multiplicar coordenada con coordenada y sumar. Paso a paso.</p>
+      <p class="idea" style="font-size:17px">Cerramos calculando una <strong>derivada direccional</strong> de verdad: la ladera del inicio, f = x<sup>2</sup> + y<sup>2</sup>, parada en (3, 4), caminando hacia la dirección (3, 4).</p>
+      <p class="idea" style="font-size:17px">La receta tiene tres pasos:</p>
+      <ul class="fases">
+        <li>el <strong>gradiente</strong> en el punto,</li>
+        <li>el rumbo vuelto <strong>unitario</strong> — un paso de tamaño exactamente 1, para que la pendiente dependa solo de hacia dónde vas y no de qué tan largo des el paso —,</li>
+        <li>y el <strong>producto punto</strong> entre ambos: multiplicar coordenada con coordenada y sumar.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Paso a paso.</p>
       <div class="estep"><div class="oprow">Paso 1 · gradiente en el punto</div><p>Armo el gradiente y lo evalúo en (3, 4):</p><p class="calc"><span class="rw">∇f</span>=(2x, 2y) <span class="sep">•</span> en (3,4): (2·3, 2·4)=<b>(6, 8)</b></p></div>
 
       <div class="check" data-kind="item" data-id="D2pred" data-tema="derivada_direccional" data-level="juntos">
@@ -376,13 +491,26 @@
       <div class="estep"><div class="oprow">Paso 2 · dirección unitaria</div><p>La dirección (3, 4) mide 5 (porque 3<sup>2</sup> + 4<sup>2</sup> = 25, y √25 = 5). Divido entre 5:</p><p class="calc"><span class="rw">|(3,4)|</span> √(9+16)=√25=<b>5</b> <span class="sep">•</span> <span class="rw">u</span>=(3/5, 4/5)</p></div>
       <div class="estep"><div class="oprow">Paso 3 · producto punto</div><p>La derivada direccional es ∇f punto u: multiplico componente a componente y sumo.</p><p class="calc"><span class="rw">D<sub>u</sub>f</span> 6·(3/5)=18/5 <span class="sep">•</span> 8·(4/5)=32/5 <span class="sep">•</span> 18/5+32/5=50/5=<b>10</b></p></div>
 
-      <p class="idea" style="font-size:17px">Como elegí justo la dirección del gradiente, salió el <strong>máximo</strong> posible: <strong>10</strong>, que es la longitud de ∇f(3, 4). En cualquier otra dirección saldría menos. Esa es la respuesta a la ladera: subes más rápido hacia (6, 8), con pendiente 10.</p>
+      <p class="idea" style="font-size:17px">Como elegí justo la dirección del gradiente, salió el <strong>máximo</strong> posible: <strong>10</strong>, que es la longitud de ∇f(3, 4). En cualquier otra dirección saldría menos.</p>
+      <p class="idea" style="font-size:17px">Esa es la respuesta a la ladera: subes más rápido hacia (6, 8), con pendiente 10.</p>
     </section>
 
     <section class="sec">
       <h3>Dos detalles finos antes de practicar</h3>
-      <p class="idea"><strong>Derivar dos veces.</strong> Una parcial es una función como cualquier otra, así que se puede volver a derivar. Con f = x<sup>2</sup>y: la parcial respecto a x es 2xy; deriva ese resultado otra vez respecto a x (la y sigue congelada) y queda 2y. Eso se escribe ∂<sup>2</sup>f/∂x<sup>2</sup> — el 2 arriba avisa que derivaste dos veces — y se llama <strong>segunda parcial</strong>. También puedes cambiar de letra a media ruta: primero por x y luego por y, o al revés. A esas se les llama <strong>parciales cruzadas</strong>, y en las funciones normales del curso pasa algo cómodo: <strong>el orden no importa</strong>, por los dos caminos llega el mismo resultado.</p>
-      <p class="idea"><strong>La promesa de la tabla.</strong> Que existan las dos parciales solo garantiza dos direcciones bien medidas: este y norte. Cuando eso pasa, decimos que f es <strong>derivable</strong> en el punto. Pero la tabla del plano tangente promete más: pegarse al terreno en <strong>todas</strong> las direcciones a la vez. Cuando esa promesa sí se cumple, decimos que f es <strong>diferenciable</strong> — una condición más fuerte. Hay terrenos con las dos pendientes bien definidas donde la tabla aun así no se recarga bien: imagina un pliegue del terreno justo entre el este y el norte. Dos direcciones sanas no garantizan las infinitas restantes.</p>
+      <p class="idea"><strong>Derivar dos veces.</strong> Una parcial es una función como cualquier otra, así que se puede volver a derivar.</p>
+      <p class="idea">Con f = x<sup>2</sup>y, la parcial respecto a x es:</p>
+      <div class="fx"><div class="sys"><span class="eq">∂f/∂x = 2xy</span></div></div>
+      <p class="idea">Deriva ese resultado otra vez respecto a x (la y sigue congelada) y queda 2y.</p>
+      <p class="idea">Eso se escribe ∂<sup>2</sup>f/∂x<sup>2</sup> — el 2 arriba avisa que derivaste dos veces — y se llama <strong>segunda parcial</strong>:</p>
+      <div class="fx"><div class="sys"><span class="eq">∂<sup>2</sup>f/∂x<sup>2</sup> = 2y</span></div></div>
+      <p class="idea">También puedes cambiar de letra a media ruta: primero por x y luego por y, o al revés. A esas se les llama <strong>parciales cruzadas</strong>.</p>
+      <p class="idea">En las funciones normales del curso pasa algo cómodo: <strong>el orden no importa</strong>, por los dos caminos llega el mismo resultado.</p>
+      <p class="idea"><strong>La promesa de la tabla.</strong> Que existan las dos parciales solo garantiza dos direcciones bien medidas: este y norte.</p>
+      <p class="idea">Cuando eso pasa, decimos que f es <strong>derivable</strong> en el punto.</p>
+      <p class="idea">Pero la tabla del plano tangente promete más: pegarse al terreno en <strong>todas</strong> las direcciones a la vez.</p>
+      <p class="idea">Cuando esa promesa sí se cumple, decimos que f es <strong>diferenciable</strong> — una condición más fuerte.</p>
+      <p class="idea">Hay terrenos con las dos pendientes bien definidas donde la tabla aun así no se recarga bien: imagina un pliegue del terreno justo entre el este y el norte.</p>
+      <p class="idea">Dos direcciones sanas no garantizan las infinitas restantes.</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>
@@ -492,7 +620,8 @@
 
       <div class="pitem" data-kind="item" data-id="P9" data-tema="derivada_direccional" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Calcula la derivada direccional de la función de abajo en el punto (1, 1), en la dirección que apunta hacia (3, 4). Recuerda: gradiente, normalizar la dirección, producto punto.</p>
+        <p class="pstatement">Calcula la derivada direccional de la función de abajo en el punto (1, 1), en la dirección que apunta hacia (3, 4).</p>
+        <p class="pstatement">Recuerda: gradiente, normalizar la dirección, producto punto.</p>
         <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> + y,   punto (1, 1),   dirección (3, 4)</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">2</button>

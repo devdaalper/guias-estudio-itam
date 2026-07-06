@@ -151,6 +151,12 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*aire-matematico*/
+  .sec{gap:16px}
+  .idea{line-height:1.72}
+  .fx{margin:4px 0;justify-self:center}
+  .fases{gap:9px;margin:2px 0}
+  .ejemplo{gap:16px}
   /*hardening-360*/
   main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
@@ -190,28 +196,60 @@
 
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Tu familia tiene un terreno que no es un rectángulo: es un romboide, un cuadrilátero "inclinado", como un rectángulo al que empujaron una esquina. Parada en una esquina, un lado del terreno se aleja <strong>3 metros al este y 1 al norte</strong>; el otro lado se aleja <strong>1 metro al este y 2 al norte</strong>. La pregunta de toda la vida: ¿cuántos metros cuadrados encierra?</p>
+      <p class="idea" style="font-size:17px">Tu familia tiene un terreno que no es un rectángulo: es un romboide, un cuadrilátero "inclinado", como un rectángulo al que empujaron una esquina.</p>
+      <p class="idea" style="font-size:17px">Parada en una esquina, un lado del terreno se aleja <strong>3 metros al este y 1 al norte</strong>; el otro lado se aleja <strong>1 metro al este y 2 al norte</strong>:</p>
       <div class="fx"><div class="sys"><span class="eq">lado A → (3, 1)</span><span class="eq">lado B → (1, 2)</span></div></div>
-      <p class="idea" style="font-size:17px">Podrías dibujarlo en papel cuadriculado y contar cuadritos, pero con lados chuecos siempre quedan pedazos a medias y el conteo nunca cierra exacto. Resulta que existe una cuenta cortita con esos cuatro números que da el área exacta de un tiro — y ese mismo número, ya lo verás, responde preguntas mucho más grandes del curso. Se llama <strong>determinante</strong>, y al final de esta guía vas a sacar esta área tú sola, sin contar un solo cuadrito.</p>
+      <p class="idea" style="font-size:17px">La pregunta de toda la vida: ¿cuántos metros cuadrados encierra?</p>
+      <p class="idea" style="font-size:17px">Podrías dibujarlo en papel cuadriculado y contar cuadritos. Pero con lados chuecos siempre quedan pedazos a medias y el conteo nunca cierra exacto.</p>
+      <p class="idea" style="font-size:17px">Resulta que existe una cuenta cortita con esos cuatro números que da el área exacta de un tiro.</p>
+      <p class="idea" style="font-size:17px">Y ese mismo número, ya lo verás, responde preguntas mucho más grandes del curso.</p>
+      <p class="idea" style="font-size:17px">Se llama <strong>determinante</strong>, y al final de esta guía vas a sacar esta área tú sola, sin contar un solo cuadrito.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
       <h3>1 · Una máquina que deforma dibujos</h3>
-      <p class="idea">Antes de conocer el número nuevo, recuerda qué <strong>hace</strong> una matriz. En unidades pasadas viste que una matriz multiplica vectores: le das una flecha y te devuelve otra flecha. Ahora míralo con otros ojos: si le hace eso a <strong>todas</strong> las flechas del plano a la vez, entonces una matriz es una <strong>máquina que transforma el plano entero</strong> — como una app de editar fotos: le metes un dibujo y te lo devuelve estirado, inclinado o volteado.</p>
-      <p class="idea">Un ejemplo con números chicos. Toma la máquina de renglones (2, 0) y (0, 3). Métele la flecha (1, 0): el producto que ya sabes hacer da 2·1 + 0·0 = 2 y 0·1 + 3·0 = 0, o sea que sale la flecha (2, 0). Métele ahora (0, 1): sale 2·0 + 0·1 = 0 y 0·0 + 3·1 = 3, la flecha (0, 3).</p>
-      <p class="idea">Traducción: esta máquina <strong>estira el plano al doble a lo ancho y al triple a lo alto</strong>. Cada matriz cuadrada es una máquina así, cada una con su propia manera de deformar. Quédate con esta imagen: nos acompaña toda la unidad.</p>
+      <p class="idea">Antes de conocer el número nuevo, recuerda qué <strong>hace</strong> una matriz.</p>
+      <p class="idea">En unidades pasadas viste que una matriz multiplica vectores: le das una flecha y te devuelve otra flecha.</p>
+      <p class="idea">Ahora míralo con otros ojos: si le hace eso a <strong>todas</strong> las flechas del plano a la vez, entonces una matriz es una <strong>máquina que transforma el plano entero</strong>.</p>
+      <p class="idea">Como una app de editar fotos: le metes un dibujo y te lo devuelve estirado, inclinado o volteado.</p>
+      <p class="idea">Un ejemplo con números chicos. Toma la máquina de renglones (2, 0) y (0, 3), y métele la flecha (1, 0). El producto que ya sabes hacer da:</p>
+      <div class="fx"><div class="sys"><span class="eq">2·1 + 0·0 = 2</span><span class="eq">0·1 + 3·0 = 0</span></div></div>
+      <p class="idea">Sale la flecha (2, 0). Métele ahora (0, 1):</p>
+      <div class="fx"><div class="sys"><span class="eq">2·0 + 0·1 = 0</span><span class="eq">0·0 + 3·1 = 3</span></div></div>
+      <p class="idea">Sale la flecha (0, 3).</p>
+      <p class="idea">Traducción: esta máquina <strong>estira el plano al doble a lo ancho y al triple a lo alto</strong>.</p>
+      <p class="idea">Cada matriz cuadrada es una máquina así, cada una con su propia manera de deformar. Quédate con esta imagen: nos acompaña toda la unidad.</p>
     </section>
 
     <section class="sec">
       <h3>2 · El cuadradito testigo: un solo número resume la máquina</h3>
-      <p class="idea">¿Cómo medimos qué tanto deforma una máquina? Con un testigo. Dibuja en el plano un <strong>cuadradito de 1 × 1</strong> — área 1, el más humilde posible —, mételo a la máquina y mira con qué área sale.</p>
-      <p class="idea">Con la máquina de arriba (doble a lo ancho, triple a lo alto) el cuadradito sale convertido en un rectángulo de 2 × 3: <strong>área 6</strong>. Y aquí está lo valioso: le pasa lo mismo a <strong>cualquier</strong> figura que metas. Un dibujo de área 10 sale con área 60; uno de área ½ sale con área 3. Toda la máquina, con todo lo que hace, queda resumida en un solo dato: <strong>multiplica las áreas por 6</strong>.</p>
-      <p class="idea">Ese número — el factor por el que la máquina agranda o achica las áreas — tiene nombre: es el <strong>determinante</strong> de la matriz. Se llama así porque <strong>determina</strong> el destino de la máquina: cuánto deforma, si se puede deshacer, si un sistema tiene una sola solución. Todo eso lo va a decidir este número, y lo vas a ver en esta misma guía.</p>
-      <p class="idea">Hay dos formas de escribirlo, y las dos se leen igual, "determinante de A": la abreviatura <strong>det(A)</strong>, o el nombre de la matriz entre <strong>barras verticales</strong>, |A| — barras rectas, no los corchetes de siempre:</p>
-      <div class="fx"><div class="sys"><span class="eq">A = la máquina (una matriz cuadrada)</span><span class="eq">det(A) = |A| = su factor de área</span></div></div>
-      <p class="idea">Una condición antes de seguir: esto <strong>solo funciona con matrices cuadradas</strong> (mismo número de renglones que de columnas). Tiene sentido: para comparar el área que entra con el área que sale, la máquina tiene que devolver el dibujo al mismo plano de donde lo tomó, sin cambiarle el número de direcciones. Comprueba que quedó claro:</p>
+      <p class="idea">¿Cómo medimos qué tanto deforma una máquina? Con un testigo.</p>
+      <p class="idea">Dibuja en el plano un <strong>cuadradito de 1 × 1</strong> — área 1, el más humilde posible —, mételo a la máquina y mira con qué área sale.</p>
+      <p class="idea">Con la máquina de arriba (doble a lo ancho, triple a lo alto) el cuadradito sale convertido en un rectángulo de 2 × 3:</p>
+      <div class="fx"><div class="sys"><span class="eq">área nueva = 2·3 = 6</span></div></div>
+      <p class="idea">Y aquí está lo valioso: le pasa lo mismo a <strong>cualquier</strong> figura que metas.</p>
+      <ul class="fases">
+        <li>Un dibujo de área 10 sale con área 60.</li>
+        <li>Uno de área ½ sale con área 3.</li>
+      </ul>
+      <p class="idea">Toda la máquina, con todo lo que hace, queda resumida en un solo dato: <strong>multiplica las áreas por 6</strong>.</p>
+      <p class="idea">Ese número — el factor por el que la máquina agranda o achica las áreas — tiene nombre: es el <strong>determinante</strong> de la matriz.</p>
+      <p class="idea">Se llama así porque <strong>determina</strong> el destino de la máquina:</p>
+      <ul class="fases">
+        <li>cuánto deforma,</li>
+        <li>si se puede deshacer,</li>
+        <li>si un sistema tiene una sola solución.</li>
+      </ul>
+      <p class="idea">Todo eso lo va a decidir este número, y lo vas a ver en esta misma guía.</p>
+      <p class="idea">Hay dos formas de escribirlo, y las dos se leen igual: "determinante de A".</p>
+      <p class="idea">Una es la abreviatura <strong>det(A)</strong>. La otra es el nombre de la matriz entre <strong>barras verticales</strong>, |A| — barras rectas, no los corchetes de siempre:</p>
+      <div class="fx"><div class="sys"><span class="eq">A = la máquina</span><span class="eq">(una matriz cuadrada)</span><span class="eq">det(A) = |A|</span><span class="eq">= su factor de área</span></div></div>
+      <p class="idea">Una condición antes de seguir: esto <strong>solo funciona con matrices cuadradas</strong> (mismo número de renglones que de columnas).</p>
+      <p class="idea">Tiene sentido: para comparar el área que entra con el área que sale, la máquina tiene que devolver el dibujo al mismo plano de donde lo tomó.</p>
+      <p class="idea">Sin cambiarle el número de direcciones.</p>
+      <p class="idea">Comprueba que quedó claro:</p>
       <div class="check" data-kind="item" data-id="CUADchk" data-tema="determinante_definicion" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">¿A cuál de estas matrices SÍ se le puede calcular determinante?</p>
@@ -226,22 +264,55 @@
 
     <section class="sec">
       <h3>3 · El signo: máquinas espejo</h3>
-      <p class="idea">El determinante puede salir <strong>negativo</strong>, y no es ningún error. Piensa en las selfies: a veces la cámara te muestra la foto <strong>volteada</strong>, como si te vieras en un espejo — es la misma cara, con izquierda y derecha intercambiadas. Hay máquinas que le hacen eso al plano: además de estirarlo, lo voltean.</p>
-      <p class="idea">El número lo cuenta todo junto. Un determinante de <strong>−6</strong> se lee en dos partes: el 6 dice "las áreas se multiplican por 6", y el signo menos avisa "el dibujo salió volteado, en versión espejo". El tamaño del cambio nunca es negativo; el signo solo trae la noticia del volteo. Por eso un determinante negativo es perfectamente normal.</p>
+      <p class="idea">El determinante puede salir <strong>negativo</strong>, y no es ningún error.</p>
+      <p class="idea">Piensa en las selfies: a veces la cámara te muestra la foto <strong>volteada</strong>, como si te vieras en un espejo.</p>
+      <p class="idea">Es la misma cara, con izquierda y derecha intercambiadas.</p>
+      <p class="idea">Hay máquinas que le hacen eso al plano: además de estirarlo, lo voltean.</p>
+      <p class="idea">El número lo cuenta todo junto. Un determinante de <strong>−6</strong> se lee en dos partes:</p>
+      <ul class="fases">
+        <li>el <em>6</em> dice "las áreas se multiplican por 6",</li>
+        <li>el <em>signo menos</em> avisa "el dibujo salió volteado, en versión espejo".</li>
+      </ul>
+      <p class="idea">El tamaño del cambio nunca es negativo; el signo solo trae la noticia del volteo. Por eso un determinante negativo es perfectamente normal.</p>
     </section>
 
     <section class="sec">
       <h3>4 · El cero: la máquina que aplasta y no se puede deshacer</h3>
-      <p class="idea">Queda el caso más importante del curso: <strong>determinante igual a cero</strong>. Significa que el cuadradito testigo salió con <strong>área cero</strong>. ¿Qué figura tiene área cero? Una <strong>línea</strong>: la máquina aplastó el cuadradito hasta dejarlo hecho una raya, como cuando encoges una foto de alto hasta que su altura llega a cero y queda una pura franja.</p>
-      <p class="idea">¿Y por qué es tan grave? Porque una máquina que aplasta <strong>no se puede deshacer</strong>. Muchos puntos distintos del dibujo original cayeron encima del mismo punto de la raya; mirando solo el resultado, ya nadie puede saber de dónde venía cada uno. La información se perdió, y no existe máquina que "des-aplaste".</p>
-      <p class="idea">Ponle nombre a eso de deshacer: cuando una máquina A sí se puede deshacer, a la máquina que la deshace se le llama la <strong>inversa</strong> de A — aplicas A, aplicas su inversa, y todo el plano vuelve a su lugar. Acabas de descubrir la regla estrella de la unidad: <strong>si det(A) = 0, A no tiene inversa; si det(A) ≠ 0, sí la tiene</strong>. Un solo número lo decide, sin intentar invertir nada.</p>
+      <p class="idea">Queda el caso más importante del curso: <strong>determinante igual a cero</strong>. Significa que el cuadradito testigo salió con <strong>área cero</strong>.</p>
+      <p class="idea">¿Qué figura tiene área cero? Una <strong>línea</strong>: la máquina aplastó el cuadradito hasta dejarlo hecho una raya.</p>
+      <p class="idea">Como cuando encoges una foto de alto hasta que su altura llega a cero y queda una pura franja.</p>
+      <p class="idea">¿Y por qué es tan grave? Porque una máquina que aplasta <strong>no se puede deshacer</strong>.</p>
+      <p class="idea">Muchos puntos distintos del dibujo original cayeron encima del mismo punto de la raya; mirando solo el resultado, ya nadie puede saber de dónde venía cada uno.</p>
+      <p class="idea">La información se perdió, y no existe máquina que "des-aplaste".</p>
+      <p class="idea">Ponle nombre a eso de deshacer: cuando una máquina A sí se puede deshacer, a la máquina que la deshace se le llama la <strong>inversa</strong> de A.</p>
+      <p class="idea">Aplicas A, aplicas su inversa, y todo el plano vuelve a su lugar.</p>
+      <p class="idea">Acabas de descubrir la regla estrella de la unidad:</p>
+      <div class="fx"><div class="sys"><span class="eq">det(A) = 0 → sin inversa</span><span class="eq">det(A) ≠ 0 → sí hay inversa</span></div></div>
+      <p class="idea">Un solo número lo decide, sin intentar invertir nada.</p>
     </section>
 
     <section class="sec">
       <h3>5 · La 2×2: de dónde sale la cruz</h3>
-      <p class="idea">Hora de aprender a calcularlo. Vuelve a la máquina amiga de renglones (2, 0) y (0, 3): estira al doble y al triple, y su factor de área fue 2·3 = <strong>6</strong>. Fíjate dónde viven ese 2 y ese 3 dentro de la matriz: en la <strong>diagonal principal</strong>, la que baja de la esquina de arriba a la izquierda hasta la de abajo a la derecha (↘). Cuando los otros dos números son 0, el determinante es solo eso: <strong>el producto de la diagonal</strong>.</p>
-      <p class="idea">Ahora una máquina con los cuatro números ocupados: renglones (2, 1) y (1, 3). Los números de la diagonal siguen haciendo su trabajo de estirar: 2·3 = 6. Pero los otros dos — el 1 y el 1 de la <strong>otra</strong> diagonal (↗) — <strong>inclinan</strong> el cuadradito: ya no sale un rectángulo derecho, sale un cuadrilátero recargado, y al recargarse pierde un poco de área. ¿Cuánta pierde? Exactamente el producto de esos dos números: 1·1 = 1. Área final: 6 − 1 = <strong>5</strong>.</p>
-      <p class="idea">Esa es toda la receta del 2×2, y por eso se dibuja como una <strong>cruz</strong>: multiplicas las dos esquinas de una diagonal, multiplicas las dos esquinas de la otra, y restas la segunda a la primera. (Si la resta sale negativa, ya sabes leerla: es el aviso de espejo del escalón 3.) Con letras, para renglones (a, b) y (c, d):</p>
+      <p class="idea">Hora de aprender a calcularlo. Vuelve a la máquina amiga de renglones (2, 0) y (0, 3): estira al doble y al triple, y su factor de área fue:</p>
+      <div class="fx"><div class="sys"><span class="eq">2·3 = 6</span></div></div>
+      <p class="idea">Fíjate dónde viven ese 2 y ese 3 dentro de la matriz: en la <strong>diagonal principal</strong>, la que baja de la esquina de arriba a la izquierda hasta la de abajo a la derecha (↘).</p>
+      <p class="idea">Cuando los otros dos números son 0, el determinante es solo eso: <strong>el producto de la diagonal</strong>.</p>
+      <p class="idea">Ahora una máquina con los cuatro números ocupados: renglones (2, 1) y (1, 3).</p>
+      <p class="idea">Los números de la diagonal siguen haciendo su trabajo de estirar:</p>
+      <div class="fx"><div class="sys"><span class="eq">2·3 = 6</span></div></div>
+      <p class="idea">Pero los otros dos — el 1 y el 1 de la <strong>otra</strong> diagonal (↗) — <strong>inclinan</strong> el cuadradito: ya no sale un rectángulo derecho, sale un cuadrilátero recargado.</p>
+      <p class="idea">Al recargarse pierde un poco de área. ¿Cuánta pierde? Exactamente el producto de esos dos números:</p>
+      <div class="fx"><div class="sys"><span class="eq">1·1 = 1</span></div></div>
+      <p class="idea">Área final:</p>
+      <div class="fx"><div class="sys"><span class="eq">6 − 1 = 5</span></div></div>
+      <p class="idea">Esa es toda la receta del 2×2, y por eso se dibuja como una <strong>cruz</strong>:</p>
+      <ul class="fases">
+        <li>multiplicas las dos esquinas de una diagonal,</li>
+        <li>multiplicas las dos esquinas de la otra,</li>
+        <li>y restas la segunda a la primera.</li>
+      </ul>
+      <p class="idea">(Si la resta sale negativa, ya sabes leerla: es el aviso de espejo del escalón 3.)</p>
+      <p class="idea">Con letras, para renglones (a, b) y (c, d):</p>
       <div class="fx" id="def2x2"></div>
       <p class="fx-note">Diagonal principal (↘) menos la antidiagonal (↗): a·d − b·c. La antidiagonal se llama así porque cruza en el sentido contrario.</p>
       <div class="check" data-kind="recall" data-fid="F1_det_2x2" data-tema="determinante_2x2">
@@ -258,13 +329,37 @@
 
     <section class="sec">
       <h3>6 · El 3×3: desarmarlo en piezas 2×2</h3>
-      <p class="idea">Para una <strong>3×3</strong> nadie encontró una cruz que funcione. La estrategia es otra, y es muy de la vida diaria: cuando algo es demasiado grande para manejarlo entero, <strong>lo desarmas en piezas chicas que ya dominas</strong>. Un mueble se arma tabla por tabla; el 3×3 se desarma en determinantes 2×2 — y esos ya los sabes hacer con la cruz.</p>
-      <p class="idea">La pieza básica se fabrica así: elige una entrada de la matriz y <strong>tapa con un dedo su renglón y su columna</strong> completos. Los cuatro números que quedan a la vista forman una matriz 2×2. Al determinante de esa 2×2 se le llama el <strong>menor</strong> de la entrada — se llama así, literalmente, porque es un determinante más chico (menor) que el original.</p>
-      <p class="idea">A cada pieza le toca además un <strong>signo</strong>, + o −, que depende solo de la <strong>posición</strong> de la entrada en la matriz, nunca de su valor. El patrón es un tablero de ajedrez que arranca con + en la esquina de arriba a la izquierda:</p>
+      <p class="idea">Para una <strong>3×3</strong> nadie encontró una cruz que funcione.</p>
+      <p class="idea">La estrategia es otra, y es muy de la vida diaria: cuando algo es demasiado grande para manejarlo entero, <strong>lo desarmas en piezas chicas que ya dominas</strong>.</p>
+      <p class="idea">Un mueble se arma tabla por tabla; el 3×3 se desarma en determinantes 2×2 — y esos ya los sabes hacer con la cruz.</p>
+      <p class="idea">La pieza básica se fabrica así: elige una entrada de la matriz y <strong>tapa con un dedo su renglón y su columna</strong> completos.</p>
+      <p class="idea">Los cuatro números que quedan a la vista forman una matriz 2×2.</p>
+      <p class="idea">Al determinante de esa 2×2 se le llama el <strong>menor</strong> de la entrada — se llama así, literalmente, porque es un determinante más chico (menor) que el original.</p>
+      <p class="idea">A cada pieza le toca además un <strong>signo</strong>, + o −, que depende solo de la <strong>posición</strong> de la entrada en la matriz, nunca de su valor.</p>
+      <p class="idea">El patrón es un tablero de ajedrez que arranca con + en la esquina de arriba a la izquierda:</p>
       <div class="fx" id="signos"></div>
-      <p class="idea">¿Por qué alterna? Acuérdate del escalón 3: voltear el orden de las cosas voltea el espejo. Cada casilla que te alejas de la esquina — un paso a la derecha o un paso hacia abajo — desacomoda una vez los renglones y columnas que sobreviven al tapado, y cada desacomodo voltea el signo una vez. Un paso: −. Dos pasos: se voltea dos veces y regresa a +. Así se teje el tablero completo. Regla rápida para no memorizar dibujos: suma el número de renglón y el de columna de la entrada; <strong>si da par, va +; si da impar, va −</strong>. La esquina (1,1) suma 2, par: +.</p>
-      <p class="idea">Al menor ya con su signo puesto se le llama el <strong>cofactor</strong> de la entrada — el "co-" es de compañero: es el factor que acompaña a esa entrada en la cuenta final. Y la cuenta final es esta: eliges un renglón (o una columna) de la matriz, y <strong>sumas entrada × su cofactor</strong>, entrada por entrada de ese renglón. Tres entradas, tres términos, y listo: ese total es el determinante de la 3×3.</p>
-      <p class="idea">Un último detalle, y es el que te va a ahorrar la mitad del trabajo: si una entrada vale <strong>0</strong>, su término completo vale 0 × (su cofactor) = 0 — ni siquiera necesitas calcular ese menor. Por eso, antes de desarmar, siempre se escanea la matriz buscando ceros. Con eso ya puedes tomar la decisión inteligente:</p>
+      <p class="idea">¿Por qué alterna? Acuérdate del escalón 3: voltear el orden de las cosas voltea el espejo.</p>
+      <p class="idea">Aléjate de la esquina una casilla: un paso a la derecha, o un paso hacia abajo.</p>
+      <p class="idea">Cada paso desacomoda una vez los renglones y columnas que sobreviven al tapado.</p>
+      <p class="idea">Y cada desacomodo voltea el signo una vez.</p>
+      <ul class="fases">
+        <li>Un paso: <em>−</em>.</li>
+        <li>Dos pasos: se voltea dos veces y regresa a <em>+</em>.</li>
+      </ul>
+      <p class="idea">Así se teje el tablero completo.</p>
+      <p class="idea">Regla rápida para no memorizar dibujos: suma el número de renglón y el de columna de la entrada.</p>
+      <ul class="fases">
+        <li><strong>Si da par, va +.</strong></li>
+        <li><strong>Si da impar, va −.</strong></li>
+      </ul>
+      <p class="idea">La esquina (1,1) suma 2, par: +.</p>
+      <p class="idea">Al menor ya con su signo puesto se le llama el <strong>cofactor</strong> de la entrada — el "co-" es de compañero: es el factor que acompaña a esa entrada en la cuenta final.</p>
+      <p class="idea">Y la cuenta final es esta: eliges un renglón (o una columna) de la matriz, y <strong>sumas entrada × su cofactor</strong>, entrada por entrada de ese renglón.</p>
+      <p class="idea">Tres entradas, tres términos, y listo: ese total es el determinante de la 3×3.</p>
+      <p class="idea">Un último detalle, y es el que te va a ahorrar la mitad del trabajo: si una entrada vale <strong>0</strong>, su término completo vale:</p>
+      <div class="fx"><div class="sys"><span class="eq">0 × (su cofactor) = 0</span></div></div>
+      <p class="idea">Ni siquiera necesitas calcular ese menor. Por eso, antes de desarmar, siempre se escanea la matriz buscando ceros.</p>
+      <p class="idea">Con eso ya puedes tomar la decisión inteligente:</p>
       <div class="check" data-kind="item" data-id="ELIGchk" data-tema="cofactores" data-level="guiado">
         <div class="qtag">Te toca · decide</div>
         <p class="q">Para gastar la menor cantidad de cuentas, ¿por cuál renglón o columna conviene desarrollar una 3×3?</p>
@@ -280,7 +375,8 @@
     <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Calculemos el determinante de esta 2×2. No la mires nada más: en cada paso <strong>tú decides la operación</strong> y yo la aplico.</p>
+      <p class="idea" style="font-size:17px">Calculemos el determinante de esta 2×2.</p>
+      <p class="idea" style="font-size:17px">No la mires nada más: en cada paso <strong>tú decides la operación</strong> y yo la aplico.</p>
       <div class="fx" id="e2m"></div>
 
       <div class="check" data-kind="item" data-id="E1dec" data-tema="determinante_2x2" data-level="guiado">
@@ -308,12 +404,14 @@
       <div class="estep"><div class="oprow">Antidiagonal ↗</div><p>Multiplico las esquinas 1 y 2, y ese producto lo restaré:</p><p class="calc"><span class="rw">↗</span> 1·2=<b>2</b></p></div>
 
       <div class="estep"><div class="oprow">Junto la cruz</div><p>Diagonal principal menos antidiagonal:</p><p class="calc"><span class="rw">det</span> 12−2=<b>10</b></p></div>
-      <p class="idea" style="font-size:17px">Determinante = <strong>10</strong>. Como no dio cero, esta matriz <strong>sí</strong> se puede invertir. Fíjate en el orden: producto de una diagonal, producto de la otra, y restas. Eso es todo el 2×2.</p>
+      <p class="idea" style="font-size:17px">Determinante = <strong>10</strong>. Como no dio cero, esta matriz <strong>sí</strong> se puede invertir.</p>
+      <p class="idea" style="font-size:17px">Fíjate en el orden: producto de una diagonal, producto de la otra, y restas. Eso es todo el 2×2.</p>
     </section>
 
     <h2 class="modhead">Sube el tamaño · el 3×3 por cofactores</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">El 2×2 salió de un tiro. El <strong>3×3</strong> tiene demasiado para una cruz, así que lo partimos: se convierte en <strong>una suma de 2×2 con signos</strong>. El salto se ordena en tres pasos:</p>
+      <p class="idea" style="font-size:17px">El 2×2 salió de un tiro. El <strong>3×3</strong> tiene demasiado para una cruz, así que lo partimos: se convierte en <strong>una suma de 2×2 con signos</strong>.</p>
+      <p class="idea" style="font-size:17px">El salto se ordena en tres pasos:</p>
       <ul class="fases">
         <li><strong>Elige</strong> el renglón o columna con más ceros (menos cuentas).</li>
         <li><strong>Por cada entrada:</strong> tapa su renglón y su columna, saca el 2×2 que sobra (su menor) y ponle el signo del tablero.</li>
@@ -357,20 +455,25 @@
         <div class="why"><span class="lbl">Por qué</span><p>El tablero solo depende de la <strong>posición</strong>, no del número. La casilla (2,2) es un +, así que el término se suma tal cual.</p></div>
       </div>
       <div class="estep"><div class="oprow">Sumo el único término vivo</div><p>Entrada 1 × su menor 5 × signo +:</p><p class="calc"><span class="rw">det</span> 0 + 1·(+5) + 0 = <b>5</b></p></div>
-      <p class="idea" style="font-size:17px">Determinante = <strong>5</strong>. Mismo método que el 2×2, solo que primero eliges por dónde y usas el tablero de signos. Desarrollar por la columna con dos ceros convirtió un 3×3 en <strong>un solo</strong> 2×2.</p>
+      <p class="idea" style="font-size:17px">Determinante = <strong>5</strong>. Mismo método que el 2×2, solo que primero eliges por dónde y usas el tablero de signos.</p>
+      <p class="idea" style="font-size:17px">Desarrollar por la columna con dos ceros convirtió un 3×3 en <strong>un solo</strong> 2×2.</p>
     </section>
 
     <section class="sec">
       <h3>Propiedades que te ahorran cuentas</h3>
-      <p class="idea">Ya sabes calcular. Ahora aprende a <strong>no</strong> calcular cuando no hace falta: hay matrices que confiesan su determinante con solo mirarlas. Cada atajo de esta lista es la historia de la máquina contada en corto:</p>
-      <ul style="margin:0;padding-left:1.2em;display:grid;gap:8px">
+      <p class="idea">Ya sabes calcular. Ahora aprende a <strong>no</strong> calcular cuando no hace falta: hay matrices que confiesan su determinante con solo mirarlas.</p>
+      <p class="idea">Cada atajo de esta lista es la historia de la máquina contada en corto:</p>
+      <ul class="fases">
         <li><strong>Matriz triangular</strong> — así se llama cuando los ceros llenan todo el triángulo que queda debajo (o arriba) de la diagonal; el nombre viene de ese triángulo de ceros. Su determinante es el <strong>producto de la diagonal</strong>. Nada más.</li>
         <li><strong>Un renglón (o columna) de puros ceros</strong> → determinante 0. La razón la tienes del escalón 6: desarrolla por ese renglón y cada término es 0 × cofactor = 0.</li>
         <li><strong>Dos renglones (o columnas) iguales o proporcionales</strong> → determinante 0. Dos direcciones repetidas no abren área: la máquina aplasta el plano, y ya sabes lo que significa aplastar.</li>
         <li><strong>Intercambiar dos renglones</strong> voltea el espejo: el determinante queda del <strong>mismo tamaño pero con el signo cambiado</strong>.</li>
-        <li><strong>Máquinas en serie:</strong> si el dibujo pasa primero por la máquina B y luego por la máquina A, los factores de área se multiplican: una que agranda ×2 seguida de una que agranda ×3 agranda ×6. En símbolos: det(AB) = det(A)·det(B).</li>
+        <li><strong>Máquinas en serie:</strong> si el dibujo pasa primero por la máquina B y luego por la máquina A, los factores de área se multiplican: una que agranda ×2 seguida de una que agranda ×3 agranda ×6. En símbolos:</li>
       </ul>
-      <p class="idea">El atajo de la triangular en acción: esta matriz tiene puros ceros debajo de la diagonal. Si la desarmaras por la primera columna, solo sobreviviría el término de la diagonal — y eso mismo se repite en cada pieza. Al final queda solo 2·3·1, sin cruces ni tablero:</p>
+      <div class="fx"><div class="sys"><span class="eq">det(AB) = det(A)·det(B)</span></div></div>
+      <p class="idea">El atajo de la triangular en acción: esta matriz tiene puros ceros debajo de la diagonal.</p>
+      <p class="idea">Si la desarmaras por la primera columna, solo sobreviviría el término de la diagonal — y eso mismo se repite en cada pieza.</p>
+      <p class="idea">Al final queda solo 2·3·1, sin cruces ni tablero:</p>
       <div class="fx" id="triang"></div>
       <p class="fx-note">Determinante = 2·3·1 = 6. Los números de arriba de la diagonal no cuentan para nada.</p>
       <div class="check" data-kind="recall" data-fid="F2_triangular" data-tema="propiedades">
@@ -387,7 +490,12 @@
 
     <section class="sec">
       <h3>Míralo: el determinante 2×2 es un área</h3>
-      <p class="idea">Todo lo que llevas construido se puede ver en un solo dibujo. Los dos <strong>renglones</strong> de una 2×2 son dos flechas, y el cuadradito testigo, al pasar por la máquina, se convierte exactamente en el <strong>paralelogramo</strong> que esas dos flechas encierran — el cuadrilátero recargado del escalón 5. El determinante es su <strong>área</strong> (con el signo avisando del volteo). Y si las dos flechas apuntan en la misma dirección, no encierran nada: área 0, la máquina que aplasta. Toca cada caso:</p>
+      <p class="idea">Todo lo que llevas construido se puede ver en un solo dibujo.</p>
+      <p class="idea">Los dos <strong>renglones</strong> de una 2×2 son dos flechas.</p>
+      <p class="idea">Y el cuadradito testigo, al pasar por la máquina, se convierte exactamente en el <strong>paralelogramo</strong> que esas dos flechas encierran.</p>
+      <p class="idea">Es el cuadrilátero recargado del escalón 5.</p>
+      <p class="idea">El determinante es su <strong>área</strong> (con el signo avisando del volteo).</p>
+      <p class="idea">Y si las dos flechas apuntan en la misma dirección, no encierran nada: área 0, la máquina que aplasta. Toca cada caso:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="area">Área = 5</button>
@@ -401,7 +509,12 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">El determinante también <strong>resuelve sistemas</strong>, y el porqué ya lo tienes: un sistema tiene solución única exactamente cuando la máquina de sus coeficientes no aplasta, es decir, cuando su determinante no es cero. Hace unos 300 años el matemático suizo Gabriel Cramer publicó la receta que aprovecha esto — por él se llama la <strong>regla de Cramer</strong> — y dice que cada incógnita se obtiene <strong>dividiendo dos determinantes</strong>. Fíjate que por eso mismo exige det ≠ 0: el determinante del sistema es el divisor, y entre cero no se divide. Vamos paso a paso con este sistema:</p>
+      <p class="idea" style="font-size:17px">El determinante también <strong>resuelve sistemas</strong>, y el porqué ya lo tienes.</p>
+      <p class="idea" style="font-size:17px">Un sistema tiene solución única exactamente cuando la máquina de sus coeficientes no aplasta, es decir, cuando su determinante no es cero.</p>
+      <p class="idea" style="font-size:17px">Hace unos 300 años el matemático suizo Gabriel Cramer publicó la receta que aprovecha esto — por él se llama la <strong>regla de Cramer</strong>.</p>
+      <p class="idea" style="font-size:17px">La receta dice que cada incógnita se obtiene <strong>dividiendo dos determinantes</strong>.</p>
+      <p class="idea" style="font-size:17px">Fíjate que por eso mismo exige det ≠ 0: el determinante del sistema es el divisor, y entre cero no se divide.</p>
+      <p class="idea" style="font-size:17px">Vamos paso a paso con este sistema:</p>
       <div class="fx"><div class="sys"><span class="eq">2x + y = 5</span><span class="eq">x + 3y = 10</span></div></div>
       <div class="estep"><div class="oprow">Determinante del sistema</div><p>Es el de la matriz de coeficientes. Con la cruz:</p><p class="calc"><span class="rw">det</span> 2·3−1·1=<b>5</b></p><div class="fx" id="cr0"></div></div>
       <div class="estep"><div class="oprow">Para x: reemplazo la columna de x por los resultados</div><p>Cambio la columna 2 y 1 por 5 y 10, y saco su determinante. Luego divido entre 5:</p><p class="calc"><span class="rw">det<sub>x</sub></span> 5·3−1·10=<b>5</b> <span class="sep">•</span> <span class="rw">x</span> 5÷5=<b>1</b></p><div class="fx" id="cr1"></div></div>
@@ -410,12 +523,24 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Cierre del círculo. En el escalón 4 viste que si det ≠ 0 la máquina se puede deshacer, y que la máquina que la deshace se llama su <strong>inversa</strong>. Pues el determinante no solo avisa que existe: también ayuda a <strong>construirla</strong>. La receta usa una acompañante de A llamada su <strong>adjunta</strong> — "adjunta" significa "que va junto a": es la compañera de A, armada reacomodando sus propios números. En 2×2 se arma en dos movimientos: <strong>intercambias los dos números de la diagonal principal, y a los otros dos les cambias el signo</strong>. Con ella, la inversa es <strong>(1 ÷ determinante) × adjunta</strong>. Invirtamos esta, paso a paso:</p>
+      <p class="idea" style="font-size:17px">Cierre del círculo. En el escalón 4 viste que si det ≠ 0 la máquina se puede deshacer, y que la máquina que la deshace se llama su <strong>inversa</strong>.</p>
+      <p class="idea" style="font-size:17px">Pues el determinante no solo avisa que existe: también ayuda a <strong>construirla</strong>.</p>
+      <p class="idea" style="font-size:17px">La receta usa una acompañante de A llamada su <strong>adjunta</strong> — "adjunta" significa "que va junto a".</p>
+      <p class="idea" style="font-size:17px">Es la compañera de A, armada reacomodando sus propios números.</p>
+      <p class="idea" style="font-size:17px">En 2×2 se arma en dos movimientos:</p>
+      <ul class="fases">
+        <li><strong>intercambias los dos números de la diagonal principal</strong>,</li>
+        <li><strong>y a los otros dos les cambias el signo</strong>.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Con ella, la inversa es:</p>
+      <div class="fx"><div class="sys"><span class="eq">(1 ÷ determinante) × adjunta</span></div></div>
+      <p class="idea" style="font-size:17px">Invirtamos esta, paso a paso:</p>
       <div class="estep"><div class="oprow">La matriz</div><div class="fx" id="in0"></div></div>
       <div class="estep"><div class="oprow">Determinante</div><p>Con la cruz, y compruebo que no sea cero:</p><p class="calc"><span class="rw">det</span> 4·2−3·2=<b>2</b></p></div>
       <div class="estep"><div class="oprow">Adjunta</div><p>Intercambio 4 y 2 (diagonal principal) y cambio el signo de 3 y de 2 (la otra diagonal):</p><div class="fx" id="in1"></div></div>
       <div class="estep"><div class="oprow">Divido la adjunta entre el determinante</div><p>Multiplico cada entrada por 1/2:</p><p class="calc"><span class="rw">1/det</span> 2÷2=<b>1</b> <span class="sep">•</span> −3÷2=<b>−3/2</b> <span class="sep">•</span> −2÷2=<b>−1</b> <span class="sep">•</span> 4÷2=<b>2</b></p><div class="fx" id="in2"></div></div>
-      <p class="idea" style="font-size:17px">Esa es la inversa. En esta unidad la <strong>inversa por adjunta la trabajamos en 2×2</strong>. (En 3×3 se puede, pero conviene invertir por Gauss-Jordan, de otra unidad.)</p>
+      <p class="idea" style="font-size:17px">Esa es la inversa. En esta unidad la <strong>inversa por adjunta la trabajamos en 2×2</strong>.</p>
+      <p class="idea" style="font-size:17px">(En 3×3 se puede, pero conviene invertir por Gauss-Jordan, de otra unidad.)</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>
@@ -501,7 +626,8 @@
 
       <div class="pitem" data-kind="item" data-id="P7" data-tema="regla_de_cramer" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Resuelve este sistema por Cramer y da el valor de <strong>x</strong>. Primero el determinante del sistema; luego el de arriba con la columna de x reemplazada por los resultados.</p>
+        <p class="pstatement">Resuelve este sistema por Cramer y da el valor de <strong>x</strong>.</p>
+        <p class="pstatement">Primero el determinante del sistema; luego el de arriba con la columna de x reemplazada por los resultados.</p>
         <div class="fx"><div class="sys"><span class="eq">3x + y = 9</span><span class="eq">x + 2y = 8</span></div></div>
         <div class="fx" id="p7sys"></div>
         <div class="fx" id="p7x"></div>

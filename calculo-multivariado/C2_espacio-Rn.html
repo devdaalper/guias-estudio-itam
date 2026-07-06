@@ -149,6 +149,12 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*aire-matematico*/
+  .sec{gap:16px}
+  .idea{line-height:1.72}
+  .fx{margin:4px 0;justify-self:center}
+  .fases{gap:9px;margin:2px 0}
+  .ejemplo{gap:16px}
   /*hardening-360*/
   main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
   .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
@@ -189,19 +195,58 @@
 
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Imagina el plano de un parque cuadriculado. Dos drones despegan del mismo cruce: uno vuela hasta la marca <strong>(1, 0)</strong> —una unidad al este— y el otro hasta la marca <strong>(1, 1)</strong> —una al este y una al norte—. Primera pregunta: ¿qué <strong>ángulo</strong> se abre entre sus dos trayectorias? Segunda: un tercer dron viaja de la marca <strong>(1, 2)</strong> a la marca <strong>(4, 6)</strong>; ¿qué <strong>distancia</strong> recorre en línea recta?</p>
+      <p class="idea" style="font-size:17px">Imagina el plano de un parque cuadriculado. Dos drones despegan del mismo cruce.</p>
+      <p class="idea" style="font-size:17px">Uno vuela hasta la marca <strong>(1, 0)</strong> —una unidad al este—. El otro, hasta la marca <strong>(1, 1)</strong> —una al este y una al norte—.</p>
       <div class="fx"><div class="sys"><span class="eq">u = (1, 0)</span><span class="eq">v = (1, 1)</span></div></div>
-      <p class="idea" style="font-size:17px">Con una regla y un transportador lo medirías… si tuvieras el dibujo perfecto. Pero en el examen no hay dibujo ni calculadora, y cuando un problema trae más de tres datos por punto, ni siquiera existe dibujo posible. Así que vamos a armar, pieza por pieza, un método que responde las dos preguntas con puras sumas, multiplicaciones y una raíz. Para el final de esta guía, estas dos preguntas las resuelves tú sola.</p>
+      <ul class="fases">
+        <li><strong>Primera pregunta:</strong> ¿qué <strong>ángulo</strong> se abre entre sus dos trayectorias?</li>
+        <li><strong>Segunda:</strong> un tercer dron viaja de la marca <strong>(1, 2)</strong> a la marca <strong>(4, 6)</strong>. ¿Qué <strong>distancia</strong> recorre en línea recta?</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Con una regla y un transportador lo medirías… si tuvieras el dibujo perfecto.</p>
+      <p class="idea" style="font-size:17px">Pero en el examen no hay dibujo ni calculadora. Y cuando un problema trae más de tres datos por punto, ni siquiera existe dibujo posible.</p>
+      <p class="idea" style="font-size:17px">Así que vamos a armar, pieza por pieza, un método que responde las dos preguntas con puras sumas, multiplicaciones y una raíz.</p>
+      <p class="idea" style="font-size:17px">Para el final de esta guía, estas dos preguntas las resuelves tú sola.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
       <h3>1 · Una lista de números que describe algo</h3>
-      <p class="idea">Olvida por un momento los drones y mira un anuncio de casas. Cada casa viene con su <strong>ficha</strong>: precio, tamaño, habitaciones, baños. Cuatro números que solo tienen sentido <strong>juntos y en orden</strong>. Para no escribir tanto, se anotan entre paréntesis con un orden acordado: <strong>(950, 120, 3, 2)</strong> — 950 mil de precio, 120 metros cuadrados, 3 habitaciones, 2 baños. Si revuelves el orden, la ficha miente.</p>
-      <p class="idea">El mapa de la ciudad funciona igual, con listas de dos datos: "3 al este y 4 al norte" es la lista <strong>(3, 4)</strong>. Esa lista marca un <strong>lugar</strong> del mapa, pero también la puedes leer como un <strong>viaje</strong>: partes del cruce donde todo empieza —el (0, 0), que llamaremos <strong>origen</strong>—, caminas 3 al este y 4 al norte, y trazas la flecha del paseo completo. Lugar y flecha son dos fotos de la misma lista. A cada dato de la lista se le llama <strong>componente</strong> (o coordenada), y a las listas les pondremos nombres cortos: u, v, w.</p>
-      <p class="idea">Ahora el nombre del club. Todas las listas de 2 números reales forman el conjunto <strong>R²</strong> (se lee "erre dos"); las de 3, <strong>R³</strong>; las de n datos, <strong>Rⁿ</strong>. La R es por los números <em>reales</em> (los de siempre) y el numerito cuenta los datos de cada lista. ¿Y el misterio de "más de 3 dimensiones"? No hay tal: la casa de la ficha es un punto de <strong>R⁴</strong>, no porque viva en un universo de cuatro dimensiones, sino porque su ficha trae 4 datos. Nadie dibuja R⁴ — y no hace falta: se trabaja con las listas. Cada lista de Rⁿ es a la vez un <strong>punto</strong> (una ubicación) y un <strong>vector</strong> (la flecha para llegar a ella).</p>
-      <p class="idea">Con las listas solo hay dos jugadas. <strong>Sumar</strong>: la compra del lunes fue (2, 3) —2 kg de limones, 3 de azúcar— y la del martes fue (1, 4); en la semana llevas (2 + 1, 3 + 4) = <strong>(3, 7)</strong>. Cada componente con la suya: los limones jamás se suman con el azúcar. <strong>Escalar</strong>: doblar el pedido del martes es 2·(1, 4) = <strong>(2, 8)</strong> — el número de afuera multiplica a cada componente. Se llama "escalar" porque agranda o encoge la lista a escala, sin revolver sus datos.</p>
+      <p class="idea">Olvida por un momento los drones y mira un anuncio de casas. Cada casa viene con su <strong>ficha</strong>: precio, tamaño, habitaciones, baños.</p>
+      <p class="idea">Cuatro números que solo tienen sentido <strong>juntos y en orden</strong>.</p>
+      <p class="idea">Para no escribir tanto, se anotan entre paréntesis con un orden acordado:</p>
+      <div class="fx"><div class="sys"><span class="eq">(950, 120, 3, 2)</span></div></div>
+      <ul class="fases">
+        <li><strong>950</strong> — 950 mil de precio,</li>
+        <li><strong>120</strong> — 120 metros cuadrados,</li>
+        <li><strong>3</strong> — 3 habitaciones,</li>
+        <li><strong>2</strong> — 2 baños.</li>
+      </ul>
+      <p class="idea">Si revuelves el orden, la ficha miente.</p>
+      <p class="idea">El mapa de la ciudad funciona igual, con listas de dos datos: "3 al este y 4 al norte" es la lista <strong>(3, 4)</strong>.</p>
+      <p class="idea">Esa lista marca un <strong>lugar</strong> del mapa. Pero también la puedes leer como un <strong>viaje</strong>.</p>
+      <p class="idea">Partes del cruce donde todo empieza —el (0, 0), que llamaremos <strong>origen</strong>—, caminas 3 al este y 4 al norte, y trazas la flecha del paseo completo.</p>
+      <p class="idea">Lugar y flecha son dos fotos de la misma lista.</p>
+      <p class="idea">A cada dato de la lista se le llama <strong>componente</strong> (o coordenada). A las listas les pondremos nombres cortos: u, v, w.</p>
+      <p class="idea">Ahora el nombre del club.</p>
+      <ul class="fases">
+        <li>Todas las listas de 2 números reales forman el conjunto <strong>R²</strong> (se lee "erre dos").</li>
+        <li>Las de 3 forman <strong>R³</strong>.</li>
+        <li>Las de n datos, <strong>Rⁿ</strong>.</li>
+      </ul>
+      <p class="idea">La R es por los números <em>reales</em> (los de siempre) y el numerito cuenta los datos de cada lista.</p>
+      <p class="idea">¿Y el misterio de "más de 3 dimensiones"? No hay tal.</p>
+      <p class="idea">La casa de la ficha es un punto de <strong>R⁴</strong> — no porque viva en un universo de cuatro dimensiones, sino porque su ficha trae 4 datos.</p>
+      <p class="idea">Nadie dibuja R⁴ — y no hace falta: se trabaja con las listas.</p>
+      <p class="idea">Cada lista de Rⁿ es a la vez un <strong>punto</strong> (una ubicación) y un <strong>vector</strong> (la flecha para llegar a ella).</p>
+      <p class="idea">Con las listas solo hay dos jugadas.</p>
+      <p class="idea"><strong>Sumar</strong>: la compra del lunes fue (2, 3) —2 kg de limones, 3 de azúcar— y la del martes fue (1, 4). En la semana llevas:</p>
+      <div class="fx"><div class="sys"><span class="eq">(2 + 1, 3 + 4) = (3, 7)</span></div></div>
+      <p class="idea">Cada componente con la suya: los limones jamás se suman con el azúcar.</p>
+      <p class="idea"><strong>Escalar</strong>: doblar el pedido del martes es:</p>
+      <div class="fx"><div class="sys"><span class="eq">2·(1, 4) = (2, 8)</span></div></div>
+      <p class="idea">El número de afuera multiplica a cada componente. Se llama "escalar" porque agranda o encoge la lista a escala, sin revolver sus datos.</p>
+      <p class="idea">Las mismas dos jugadas, ahora con listas de tres datos:</p>
       <div class="fx"><div class="sys"><span class="eq">(3, −1, 2) + (2, 4, 1) = (5, 3, 3)</span><span class="eq">2·(3, −1, 2) = (6, −2, 4)</span></div></div>
       <div class="check" data-kind="item" data-id="I1_operar" data-tema="operaciones_vectores" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
@@ -217,11 +262,29 @@
 
     <section class="sec">
       <h3>2 · Qué tan lejos: la regla de siempre</h3>
-      <p class="idea">De vuelta al mapa. El mercado queda en (3, 4). Caminando por las calles recorres 3 al este y luego 4 al norte: 7 en total. Pero un dron vuela <strong>en línea recta</strong>. ¿Cuánto mide ese vuelo? Es el Pitágoras de secundaria: el paseo forma un triángulo rectángulo de lados 3 y 4, y el vuelo directo es la hipotenusa: 3<sup>2</sup> + 4<sup>2</sup> = 9 + 16 = 25, y √25 = <strong>5</strong>. El famoso triángulo 3-4-5, caminado en el mapa.</p>
-      <p class="idea">Lo valioso es que la receta <strong>no cambia</strong> aunque la lista crezca: elevas cada componente al cuadrado, sumas todo y sacas raíz. Con 2 datos es Pitágoras; con 5 datos, exactamente la misma cuenta. Al largo de la flecha de v se le escribe <strong>|v|</strong> — la lista entre barras (en algunos libros la verás con barra doble, ‖v‖; es lo mismo).</p>
-      <div class="fx"><div class="sys"><span class="eq">|(3, 4)| = √(3<sup>2</sup> + 4<sup>2</sup>) = √25 = 5</span><span class="eq">|(a, b, c)| = √(a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup>)</span></div></div>
-      <p class="idea">Ese largo tiene nombre: la <strong>norma</strong> de v — es la regla oficial (la "norma") para medir el tamaño de un vector. Como la flecha sale del origen, la norma es la distancia del punto al origen.</p>
-      <p class="idea">¿Y la distancia entre <strong>dos</strong> puntos cualesquiera? Primero averiguas qué viaje lleva de uno al otro —la <strong>resta</strong> de las listas, componente a componente— y a ese viaje le mides el largo con la misma regla. De tu casa (1, 2) al cine (7, 10): el viaje es (7 − 1, 10 − 2) = (6, 8), y su norma es √(36 + 64) = √100 = <strong>10</strong>. En símbolos: <strong>distancia entre u y v = |u − v|</strong>. Ciérralo de memoria:</p>
+      <p class="idea">De vuelta al mapa. El mercado queda en (3, 4).</p>
+      <p class="idea">Caminando por las calles recorres 3 al este y luego 4 al norte: 7 en total. Pero un dron vuela <strong>en línea recta</strong>. ¿Cuánto mide ese vuelo?</p>
+      <p class="idea">Es el Pitágoras de secundaria: el paseo forma un triángulo rectángulo de lados 3 y 4, y el vuelo directo es la hipotenusa.</p>
+      <div class="fx"><div class="sys"><span class="eq">3<sup>2</sup> + 4<sup>2</sup> = 9 + 16</span><span class="eq">= 25</span><span class="eq">√25 = <strong>5</strong></span></div></div>
+      <p class="idea">El famoso triángulo 3-4-5, caminado en el mapa.</p>
+      <p class="idea">Lo valioso es que la receta <strong>no cambia</strong> aunque la lista crezca: elevas cada componente al cuadrado, sumas todo y sacas raíz.</p>
+      <p class="idea">Con 2 datos es Pitágoras; con 5 datos, exactamente la misma cuenta.</p>
+      <p class="idea">Al largo de la flecha de v se le escribe <strong>|v|</strong> — la lista entre barras (en algunos libros la verás con barra doble, ‖v‖; es lo mismo).</p>
+      <p class="idea">El vuelo del mercado, escrito con ese símbolo:</p>
+      <div class="fx"><div class="sys"><span class="eq">|(3, 4)| = √(3<sup>2</sup> + 4<sup>2</sup>)</span><span class="eq">= √25</span><span class="eq">= 5</span></div></div>
+      <p class="idea">Y la misma receta con letras, para tres datos:</p>
+      <div class="fx"><div class="sys"><span class="eq">|(a, b, c)| = √(a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup>)</span></div></div>
+      <p class="idea">Ese largo tiene nombre: la <strong>norma</strong> de v — es la regla oficial (la "norma") para medir el tamaño de un vector.</p>
+      <p class="idea">Como la flecha sale del origen, la norma es la distancia del punto al origen.</p>
+      <p class="idea">¿Y la distancia entre <strong>dos</strong> puntos cualesquiera?</p>
+      <p class="idea">Primero averiguas qué viaje lleva de uno al otro: la <strong>resta</strong> de las listas, componente a componente. Y a ese viaje le mides el largo con la misma regla.</p>
+      <p class="idea">De tu casa (1, 2) al cine (7, 10), el viaje es:</p>
+      <div class="fx"><div class="sys"><span class="eq">(7 − 1, 10 − 2) = (6, 8)</span></div></div>
+      <p class="idea">Y su norma es:</p>
+      <div class="fx"><div class="sys"><span class="eq">√(36 + 64) = √100</span><span class="eq">= <strong>10</strong></span></div></div>
+      <p class="idea">En símbolos:</p>
+      <div class="fx"><div class="sys"><span class="eq">distancia entre u y v = |u − v|</span></div></div>
+      <p class="idea">Ciérralo de memoria:</p>
       <div class="check" data-kind="recall" data-fid="F1_norma" data-tema="norma">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Cómo se calcula la norma de un vector v = (a, b, c) en R³?</p>
@@ -236,10 +299,27 @@
 
     <section class="sec">
       <h3>3 · La cuenta del súper — y el ángulo escondido</h3>
-      <p class="idea">Otra escena diaria. Tu lista de compras es (2, 3): 2 kg de limones y 3 de azúcar. La lista de precios del puesto es (30, 20): el kilo de limón a 30, el de azúcar a 20. ¿El total? Emparejas dato con dato, multiplicas y sumas: 2·30 + 3·20 = 60 + 60 = <strong>120</strong> pesos. Esa cuenta —emparejar, multiplicar, sumar— es tan útil que tiene símbolo propio: un punto entre las listas, (2, 3)·(30, 20) = 120. Por ese puntito se le llama <strong>producto punto</strong>. Y fíjate en el detalle clave: entran dos listas, pero sale <strong>un número solito</strong>, no una lista.</p>
-      <p class="idea">Ahora la sorpresa geométrica, la razón de que aparezca en todo el curso: cuando las dos listas son flechas, esa misma cuenta detecta <strong>qué tanto apuntan hacia el mismo lado</strong>. El hecho clave (sale de la ley de los cosenos; hoy solo lo usamos) es <strong>u·v = |u| |v| cos θ</strong>, donde θ —la letra griega theta— es el ángulo entre las flechas. Léelo así: producto punto = largo por largo por el coseno del ángulo que abren.</p>
-      <p class="idea">De ahí sale gratis la regla de oro: si u·v da <strong>cero</strong> (y ninguna de las dos es la lista de puros ceros, cuya flecha no mide nada), el único culpable posible es cos θ = 0, o sea θ = 90°: las flechas son <strong>perpendiculares</strong>. Su otro nombre, el que usan los libros, es <strong>ortogonales</strong>.</p>
-      <div class="fx"><div class="sys"><span class="eq">(3, −1, 2)·(2, 4, 1) = 6 − 4 + 2 = 4</span><span class="eq">(2, 1)·(1, −2) = 2 − 2 = 0</span></div></div>
+      <p class="idea">Otra escena diaria. Tu lista de compras es (2, 3): 2 kg de limones y 3 de azúcar.</p>
+      <p class="idea">La lista de precios del puesto es (30, 20): el kilo de limón a 30, el de azúcar a 20.</p>
+      <p class="idea">¿El total? Emparejas dato con dato, multiplicas y sumas:</p>
+      <div class="fx"><div class="sys"><span class="eq">2·30 + 3·20 = 60 + 60</span><span class="eq">= 120 pesos</span></div></div>
+      <p class="idea">Esa cuenta —emparejar, multiplicar, sumar— es tan útil que tiene símbolo propio: un punto entre las listas.</p>
+      <div class="fx"><div class="sys"><span class="eq">(2, 3)·(30, 20) = 120</span></div></div>
+      <p class="idea">Por ese puntito se le llama <strong>producto punto</strong>.</p>
+      <p class="idea">Y fíjate en el detalle clave: entran dos listas, pero sale <strong>un número solito</strong>, no una lista.</p>
+      <p class="idea">Ahora la sorpresa geométrica, la razón de que aparezca en todo el curso.</p>
+      <p class="idea">Cuando las dos listas son flechas, esa misma cuenta detecta <strong>qué tanto apuntan hacia el mismo lado</strong>.</p>
+      <p class="idea">El hecho clave (sale de la ley de los cosenos; hoy solo lo usamos) es:</p>
+      <div class="fx"><div class="sys"><span class="eq">u·v = |u| |v| cos θ</span></div></div>
+      <p class="idea">La θ —la letra griega theta— es el ángulo entre las flechas.</p>
+      <p class="idea">Léelo así: producto punto = largo por largo por el coseno del ángulo que abren.</p>
+      <p class="idea">De ahí sale gratis la regla de oro.</p>
+      <p class="idea">Si u·v da <strong>cero</strong> (y ninguna de las dos es la lista de puros ceros, cuya flecha no mide nada), el único culpable posible es cos θ = 0.</p>
+      <p class="idea">O sea θ = 90°: las flechas son <strong>perpendiculares</strong>. Su otro nombre, el que usan los libros, es <strong>ortogonales</strong>.</p>
+      <p class="idea">Dos cuentas para verlo:</p>
+      <div class="fx"><div class="sys"><span class="eq">(3, −1, 2)·(2, 4, 1)</span><span class="eq">= 6 − 4 + 2</span><span class="eq">= 4</span></div></div>
+      <div class="fx"><div class="sys"><span class="eq">(2, 1)·(1, −2)</span><span class="eq">= 2 − 2</span><span class="eq">= 0</span></div></div>
+      <p class="idea">La segunda dio cero: esas dos flechas son perpendiculares.</p>
       <div class="check" data-kind="item" data-id="I2_dot" data-tema="producto_punto" data-level="guiado">
         <div class="qtag">Te toca · decide</div>
         <p class="q">El producto punto de (2, 1)·(1, −2) dio 0. ¿Qué te dice ese cero?</p>
@@ -254,10 +334,24 @@
 
     <section class="sec">
       <h3>4 · Un tope que siempre se cumple</h3>
-      <p class="idea">Despeja el coseno de la fórmula anterior: cos θ = (u·v) ÷ (|u|·|v|). Y aquí entra algo que ya sabes de bachillerato: un coseno <strong>jamás</strong> se sale del rango de −1 a 1. Si esa división siempre queda entre −1 y 1, el número de arriba nunca puede superar en tamaño al de abajo. Escrito con valor absoluto (el tamaño del número, sin signo): <strong>|u·v| ≤ |u|·|v|</strong>. El producto punto tiene tope, y el tope es el producto de las normas.</p>
-      <p class="idea">Míralo con números. Toma u = (1, 2) y v = (2, 4). Producto punto: 1·2 + 2·4 = 2 + 8 = 10. Normas: |u| = √(1 + 4) = √5 y |v| = √(4 + 16) = √20 = 2√5, así que |u|·|v| = √5 · 2√5 = 2·5 = 10. Empate exacto — y no es casualidad: v = 2·u, las flechas apuntan hacia el mismo lado (θ = 0°, cos θ = 1). La <strong>igualdad</strong> se alcanza solo cuando un vector es múltiplo del otro: cuando son <strong>paralelos</strong>.</p>
-      <p class="idea">Este tope se llama la <strong>desigualdad de Cauchy-Schwarz</strong>, por los apellidos de los dos matemáticos que la probaron. Es la garantía de que el cos θ que calculas con la división de arriba sea un coseno de verdad: sin ella podría salirte un "coseno" de 1.3, y ningún ángulo existiría.</p>
+      <p class="idea">Despeja el coseno de la fórmula anterior:</p>
+      <div class="fx"><div class="sys"><span class="eq">cos θ = (u·v) ÷ (|u|·|v|)</span></div></div>
+      <p class="idea">Y aquí entra algo que ya sabes de bachillerato: un coseno <strong>jamás</strong> se sale del rango de −1 a 1.</p>
+      <p class="idea">Si esa división siempre queda entre −1 y 1, el número de arriba nunca puede superar en tamaño al de abajo.</p>
+      <p class="idea">Escrito con valor absoluto (el tamaño del número, sin signo):</p>
       <div class="fx"><div class="sys"><span class="eq">| u·v |  ≤  | u | · | v |</span></div></div>
+      <p class="idea">El producto punto tiene tope, y el tope es el producto de las normas.</p>
+      <p class="idea">Míralo con números. Toma u = (1, 2) y v = (2, 4). El producto punto:</p>
+      <div class="fx"><div class="sys"><span class="eq">1·2 + 2·4 = 2 + 8</span><span class="eq">= 10</span></div></div>
+      <p class="idea">Las normas, una por una:</p>
+      <div class="fx"><div class="sys"><span class="eq">|u| = √(1 + 4)</span><span class="eq">= √5</span></div></div>
+      <div class="fx"><div class="sys"><span class="eq">|v| = √(4 + 16)</span><span class="eq">= √20</span><span class="eq">= 2√5</span></div></div>
+      <p class="idea">Así que su producto es:</p>
+      <div class="fx"><div class="sys"><span class="eq">|u|·|v| = √5 · 2√5</span><span class="eq">= 2·5</span><span class="eq">= 10</span></div></div>
+      <p class="idea">Empate exacto — y no es casualidad: v = 2·u, las flechas apuntan hacia el mismo lado (θ = 0°, cos θ = 1).</p>
+      <p class="idea">La <strong>igualdad</strong> se alcanza solo cuando un vector es múltiplo del otro: cuando son <strong>paralelos</strong>.</p>
+      <p class="idea">Este tope se llama la <strong>desigualdad de Cauchy-Schwarz</strong>, por los apellidos de los dos matemáticos que la probaron.</p>
+      <p class="idea">Es la garantía de que el cos θ que calculas con la división de arriba sea un coseno de verdad: sin ella podría salirte un "coseno" de 1.3, y ningún ángulo existiría.</p>
       <div class="check" data-kind="recall" data-fid="F2_cauchy_schwarz" data-tema="cauchy_schwarz">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué afirma la desigualdad de Cauchy-Schwarz?</p>
@@ -273,7 +367,13 @@
     <h2 class="modhead">Yo lo hago · contigo</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Resolvamos el <strong>ángulo</strong> del problema del inicio: u = (1, 0) y v = (1, 1). No lo mires nada más: en cada paso <strong>tú eliges la operación</strong> y yo la aplico. El plan tiene tres piezas: las dos normas, el producto punto, y al final el coseno.</p>
+      <p class="idea" style="font-size:17px">Resolvamos el <strong>ángulo</strong> del problema del inicio: u = (1, 0) y v = (1, 1).</p>
+      <p class="idea" style="font-size:17px">No lo mires nada más: en cada paso <strong>tú eliges la operación</strong> y yo la aplico. El plan tiene tres piezas:</p>
+      <ul class="fases">
+        <li>las dos normas,</li>
+        <li>el producto punto,</li>
+        <li>y al final el coseno.</li>
+      </ul>
 
       <div class="check" data-kind="item" data-id="E1_paso" data-tema="norma" data-level="guiado">
         <div class="qtag">Te toca · decide el paso</div>
@@ -312,12 +412,15 @@
       <div class="estep"><div class="oprow">Paso 3 · el coseno</div><p>Sustituyo los tres números en el despeje:</p><p class="calc"><span class="rw">cos θ</span> 1÷(1·√2)=<b>1⁄√2</b></p></div>
 
       <div class="estep"><div class="oprow">Paso 4 · el ángulo</div><p>El coseno 1⁄√2 es el de un ángulo conocido de memoria:</p><p class="calc"><span class="rw">θ</span> cos θ = 1⁄√2 → θ = <b>45°</b></p></div>
-      <p class="idea" style="font-size:17px">El producto punto dio positivo y el ángulo salió agudo: <strong>45°</strong>. Fíjate en el orden que seguiste: normas, producto punto, coseno, ángulo. Ese es todo el método. Si el producto punto hubiera dado cero, el ángulo sería recto.</p>
+      <p class="idea" style="font-size:17px">El producto punto dio positivo y el ángulo salió agudo: <strong>45°</strong>.</p>
+      <p class="idea" style="font-size:17px">Fíjate en el orden que seguiste: normas, producto punto, coseno, ángulo. Ese es todo el método.</p>
+      <p class="idea" style="font-size:17px">Si el producto punto hubiera dado cero, el ángulo sería recto.</p>
     </section>
 
     <h2 class="modhead">Sube el tamaño · la distancia en dos partes</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">La segunda pregunta del inicio era una <strong>distancia</strong>: del punto P = (1, 2) al punto Q = (4, 6). El truco es que una distancia no es un objeto nuevo: es solo la <strong>norma de la diferencia</strong>. Así que se parte en <strong>dos etapas</strong>:</p>
+      <p class="idea" style="font-size:17px">La segunda pregunta del inicio era una <strong>distancia</strong>: del punto P = (1, 2) al punto Q = (4, 6).</p>
+      <p class="idea" style="font-size:17px">El truco es que una distancia no es un objeto nuevo: es solo la <strong>norma de la diferencia</strong>. Así que se parte en <strong>dos etapas</strong>:</p>
       <ul class="fases">
         <li><strong>Etapa 1 — resta:</strong> arma el vector diferencia Q − P, <em>componente a componente</em>.</li>
         <li><strong>Etapa 2 — norma:</strong> a ese vector le sacas la norma, y esa es la distancia.</li>
@@ -336,13 +439,21 @@
       <div class="estep"><div class="oprow">Etapa 1 · Q − P</div><p>Resto cada coordenada de Q menos la de P:</p><p class="calc"><span class="rw">Q−P</span> 4−1=<b>3</b> <span class="sep">•</span> 6−2=<b>4</b> <span class="sep">•</span> = <b>(3, 4)</b></p></div>
 
       <div class="estep"><div class="oprow">Etapa 2 · norma de (3, 4)</div><p>A la diferencia le saco la norma: raíz de la suma de cuadrados:</p><p class="calc"><span class="rw">d</span> 3<sup>2</sup>=<b>9</b> <span class="sep">•</span> 4<sup>2</sup>=<b>16</b> <span class="sep">•</span> √(9+16)=√25=<b>5</b></p></div>
-      <p class="idea" style="font-size:17px">La distancia entre (1, 2) y (4, 6) es <strong>5</strong>. Mismo método de siempre, solo que primero <strong>restas</strong> y luego <strong>normas</strong>. Con esto ya cerraste las dos preguntas del dron.</p>
+      <p class="idea" style="font-size:17px">La distancia entre (1, 2) y (4, 6) es <strong>5</strong>.</p>
+      <p class="idea" style="font-size:17px">Mismo método de siempre, solo que primero <strong>restas</strong> y luego <strong>normas</strong>. Con esto ya cerraste las dos preguntas del dron.</p>
     </section>
 
     <h2 class="modhead">Otros casos que reaparecen</h2>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Hay dos maneras de decir dónde queda un lugar del mapa. La de siempre: "1 al oeste y 1 al norte", la lista (−1, 1). Y la del dedo que apunta: "está hacia allá, a tanta distancia" — un <strong>ángulo</strong> θ que dice hacia dónde (medido desde el eje x) y un <strong>radio</strong> r que dice qué tan lejos (la norma del punto: su distancia al origen). A esa segunda forma se le llama <strong>coordenadas polares</strong>, y vuelve en todo el curso. Convirtamos el punto (−1, 1) a polares, por partes.</p>
+      <p class="idea" style="font-size:17px">Hay dos maneras de decir dónde queda un lugar del mapa.</p>
+      <ul class="fases">
+        <li>La de siempre: "1 al oeste y 1 al norte", la lista (−1, 1).</li>
+        <li>Y la del dedo que apunta: "está hacia allá, a tanta distancia".</li>
+      </ul>
+      <p class="idea" style="font-size:17px">En la segunda, un <strong>ángulo</strong> θ dice hacia dónde (medido desde el eje x), y un <strong>radio</strong> r dice qué tan lejos (la norma del punto: su distancia al origen).</p>
+      <p class="idea" style="font-size:17px">A esa segunda forma se le llama <strong>coordenadas polares</strong>, y vuelve en todo el curso.</p>
+      <p class="idea" style="font-size:17px">Convirtamos el punto (−1, 1) a polares, por partes.</p>
       <div class="estep"><div class="oprow">Parte 1 · el radio</div><p>El radio es la norma del punto: raíz de la suma de cuadrados:</p><p class="calc"><span class="rw">r</span> (−1)<sup>2</sup>=<b>1</b> <span class="sep">•</span> 1<sup>2</sup>=<b>1</b> <span class="sep">•</span> √(1+1)=<b>√2</b></p></div>
       <div class="check" data-kind="item" data-id="E5_paso" data-tema="polares" data-level="juntos">
         <div class="qtag">Te toca · decide la parte</div>
@@ -355,13 +466,26 @@
         <div class="why"><span class="lbl">Por qué</span><p>x negativo y y positivo es arriba a la izquierda: el segundo cuadrante. Ahí el ángulo medido desde el eje +x va entre 90° y 180°. El cuadrante es lo que decide el ángulo; no basta la calculadora.</p></div>
       </div>
       <div class="estep"><div class="oprow">Parte 2 · el ángulo</div><p>El punto (−1, 1) tiene x negativo y y positivo: cae en el <strong>segundo cuadrante</strong>. Ahí el ángulo es:</p><p class="calc"><span class="rw">θ</span> segundo cuadrante → <b>135°</b> (o 3π⁄4)</p></div>
-      <p class="idea" style="font-size:17px">Listo: (−1, 1) en polares es <strong>r = √2, θ = 135°</strong>. Para volver a cartesianas se usan x = r·cos θ, y = r·sen θ. El <strong>cuadrante</strong> decide el ángulo: cuídalo siempre.</p>
+      <p class="idea" style="font-size:17px">Listo: (−1, 1) en polares es <strong>r = √2, θ = 135°</strong>.</p>
+      <p class="idea" style="font-size:17px">Para volver a cartesianas se usan:</p>
+      <div class="fx"><div class="sys"><span class="eq">x = r·cos θ</span><span class="eq">y = r·sen θ</span></div></div>
+      <p class="idea" style="font-size:17px">El <strong>cuadrante</strong> decide el ángulo: cuídalo siempre.</p>
     </section>
 
     <section class="sec">
       <h3>Rectas y planos: un punto de paso y un rumbo</h3>
-      <p class="idea">¿Cómo describes una calle perfectamente recta? Con dos datos: <strong>un lugar por donde pasa</strong> y <strong>hacia dónde va</strong>. "Pasa por (1, 2) con rumbo (3, −1)": te paras en (1, 2) y avanzas en esa dirección los pasos que quieras — t pasos, donde t puede ser 2, ½ o hasta −1 (reversa). Cada valor de t te deja en un punto de la recta: con t = 1 caes en (1 + 3, 2 − 1) = (4, 1); con t = 2, en (7, 0). Al vector del rumbo se le llama <strong>vector director</strong>, porque dirige la caminata.</p>
-      <p class="idea">Un <strong>plano</strong> en R³ (una losa infinita, como un piso) se describe con otro truco: un punto de paso y un <strong>poste perpendicular</strong> a la losa. A ese vector perpendicular se le llama la <strong>normal</strong> del plano. Estar en el plano significa que tu desplazamiento desde el punto de paso queda perpendicular al poste — producto punto <strong>cero</strong> con la normal. Al desarrollar ese producto punto queda una ecuación como la de abajo.</p>
+      <p class="idea">¿Cómo describes una calle perfectamente recta? Con dos datos: <strong>un lugar por donde pasa</strong> y <strong>hacia dónde va</strong>.</p>
+      <p class="idea">"Pasa por (1, 2) con rumbo (3, −1)": te paras en (1, 2) y avanzas en esa dirección los pasos que quieras — t pasos, donde t puede ser 2, ½ o hasta −1 (reversa).</p>
+      <p class="idea">Cada valor de t te deja en un punto de la recta:</p>
+      <ul class="fases">
+        <li>con t = 1 caes en (1 + 3, 2 − 1) = (4, 1),</li>
+        <li>con t = 2, en (7, 0).</li>
+      </ul>
+      <p class="idea">Al vector del rumbo se le llama <strong>vector director</strong>, porque dirige la caminata.</p>
+      <p class="idea">Un <strong>plano</strong> en R³ (una losa infinita, como un piso) se describe con otro truco: un punto de paso y un <strong>poste perpendicular</strong> a la losa.</p>
+      <p class="idea">A ese vector perpendicular se le llama la <strong>normal</strong> del plano.</p>
+      <p class="idea">Estar en el plano significa que tu desplazamiento desde el punto de paso queda perpendicular al poste — producto punto <strong>cero</strong> con la normal.</p>
+      <p class="idea">Al desarrollar ese producto punto queda una ecuación como la de abajo.</p>
       <div class="fx"><div class="sys"><span class="eq">Recta: (x, y) = (1, 2) + t·(3, −1)</span><span class="eq">Plano: 2x + y − z = 2</span></div></div>
       <p class="fx-note">En el plano, los coeficientes (2, 1, −1) son justo el vector normal: perpendicular a toda la superficie.</p>
       <div class="check" data-kind="item" data-id="I3_recta_plano" data-tema="recta_plano" data-level="guiado">
@@ -378,7 +502,8 @@
 
     <section class="sec">
       <h3>Míralo: un punto, su radio y su ángulo</h3>
-      <p class="idea">Todo lo anterior vive en el plano. Un punto tiene una <strong>norma</strong> (la longitud de su flecha) y un <strong>ángulo</strong> con el eje x: eso son sus coordenadas polares. Toca cada punto y observa cómo cambian r y θ:</p>
+      <p class="idea">Todo lo anterior vive en el plano. Un punto tiene una <strong>norma</strong> (la longitud de su flecha) y un <strong>ángulo</strong> con el eje x: eso son sus coordenadas polares.</p>
+      <p class="idea">Toca cada punto y observa cómo cambian r y θ:</p>
       <div class="viz">
         <div class="viz-tabs" id="vizTabs">
           <button class="viz-tab" data-case="a">Punto (2, 0)</button>
@@ -392,9 +517,25 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Última pieza: el vocabulario para hablar de <strong>regiones</strong> del mapa. Párate en un punto y enciende una señal de wifi con alcance r: le llega a todos los puntos que estén a distancia <strong>menor que r</strong> de ti. Esa zona redonda es tu <strong>burbuja</strong>.</p>
-      <p class="idea" style="font-size:17px">Con números: centro (0, 0) y alcance r = 1. ¿El punto (0.5, 0) recibe señal? Su distancia al centro es 0.5, y 0.5 &lt; 1: sí. ¿Y el punto (1, 0)? Su distancia es exactamente 1… y 1 <strong>no</strong> es menor que 1: queda fuera. La burbuja abarca todo lo de adentro pero <strong>no su propio borde</strong>, porque pedimos distancia <em>estrictamente</em> menor.</p>
-      <p class="idea" style="font-size:17px">A esa burbuja se le llama <strong>bola</strong> de centro c y radio r, y se anota <strong>B(c, r)</strong>: los puntos x con |x − c| &lt; r. En símbolos de conjunto se escribe { (x, y) : x<sup>2</sup> + y<sup>2</sup> &lt; 1 } — léelo "los puntos (x, y) <em>tales que</em>…"; se compara el cuadrado de la distancia con el cuadrado del radio para ahorrarse la raíz. Si el borde queda fuera (signo &lt;), la bola es <strong>abierta</strong>; si decides incluirlo (signo ≤), es <strong>cerrada</strong>. Al borde también se le dice la <strong>frontera</strong>. Todo se juega en un solo carácter.</p>
+      <p class="idea" style="font-size:17px">Última pieza: el vocabulario para hablar de <strong>regiones</strong> del mapa.</p>
+      <p class="idea" style="font-size:17px">Párate en un punto y enciende una señal de wifi con alcance r: le llega a todos los puntos que estén a distancia <strong>menor que r</strong> de ti.</p>
+      <p class="idea" style="font-size:17px">Esa zona redonda es tu <strong>burbuja</strong>.</p>
+      <p class="idea" style="font-size:17px">Con números: centro (0, 0) y alcance r = 1.</p>
+      <ul class="fases">
+        <li>¿El punto (0.5, 0) recibe señal? Su distancia al centro es 0.5, y 0.5 &lt; 1: sí.</li>
+        <li>¿Y el punto (1, 0)? Su distancia es exactamente 1… y 1 <strong>no</strong> es menor que 1: queda fuera.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">La burbuja abarca todo lo de adentro pero <strong>no su propio borde</strong>, porque pedimos distancia <em>estrictamente</em> menor.</p>
+      <p class="idea" style="font-size:17px">A esa burbuja se le llama <strong>bola</strong> de centro c y radio r, y se anota <strong>B(c, r)</strong>: los puntos x con</p>
+      <div class="fx"><div class="sys"><span class="eq">|x − c| &lt; r</span></div></div>
+      <p class="idea" style="font-size:17px">En símbolos de conjunto se escribe:</p>
+      <div class="fx"><div class="sys"><span class="eq">{ (x, y) : x<sup>2</sup> + y<sup>2</sup> &lt; 1 }</span></div></div>
+      <p class="idea" style="font-size:17px">Léelo "los puntos (x, y) <em>tales que</em>…". Se compara el cuadrado de la distancia con el cuadrado del radio para ahorrarse la raíz.</p>
+      <ul class="fases">
+        <li>Si el borde queda fuera (signo &lt;), la bola es <strong>abierta</strong>.</li>
+        <li>Si decides incluirlo (signo ≤), es <strong>cerrada</strong>.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Al borde también se le dice la <strong>frontera</strong>. Todo se juega en un solo carácter.</p>
       <div class="check" data-kind="item" data-id="E6_paso" data-tema="conjuntos" data-level="juntos">
         <div class="qtag">Te toca · predice</div>
         <p class="q">Antes de ver la fórmula: si quiero una bola que <strong>no</strong> incluya su orilla (abierta), ¿qué signo de desigualdad necesito?</p>
@@ -407,8 +548,18 @@
       </div>
       <div class="estep"><div class="oprow">Bola abierta</div><p>La condición usa &lt; estricto: los puntos de la frontera (distancia exactamente r) quedan fuera.</p><div class="fx"><div class="sys"><span class="eq">{ (x, y) : x<sup>2</sup> + y<sup>2</sup> &lt; 1 }</span></div></div></div>
       <div class="estep"><div class="oprow">Bola cerrada</div><p>La condición usa ≤: se agregan los puntos de la frontera.</p><div class="fx"><div class="sys"><span class="eq">{ (x, y) : x<sup>2</sup> + y<sup>2</sup> ≤ 1 }</span></div></div></div>
-      <p class="idea" style="font-size:17px">Ahora la imagen que ordena todo el vocabulario: un <strong>terreno y su cerca</strong>. Parado dentro del terreno, lejos de la cerca, puedes inflar una burbuja tuya —quizá chiquita— que cabe <strong>completa</strong> dentro del terreno: eres un punto <strong>interior</strong>. Parado exactamente sobre la cerca, toda burbuja tuya, por diminuta que sea, pisa terreno y pisa calle a la vez: estás en la <strong>frontera</strong>.</p>
-      <p class="idea" style="font-size:17px">Con eso, las dos palabras clave. Un conjunto es <strong>abierto</strong> si es puro interior: el terreno <em>sin</em> incluir su cerca, donde cada punto tiene su burbuja completa adentro. Es <strong>cerrado</strong> si contiene <em>toda</em> su cerca: no le falta ni un punto de su frontera. Regla rápida para el examen: desigualdad estricta (&lt;) → abierto; con ≤ (frontera incluida) → cerrado. Por eso (1, 0) está en la bola cerrada de radio 1, pero no en la abierta.</p>
+      <p class="idea" style="font-size:17px">Ahora la imagen que ordena todo el vocabulario: un <strong>terreno y su cerca</strong>.</p>
+      <ul class="fases">
+        <li>Parado dentro del terreno, lejos de la cerca, puedes inflar una burbuja tuya —quizá chiquita— que cabe <strong>completa</strong> dentro del terreno: eres un punto <strong>interior</strong>.</li>
+        <li>Parado exactamente sobre la cerca, toda burbuja tuya, por diminuta que sea, pisa terreno y pisa calle a la vez: estás en la <strong>frontera</strong>.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Con eso, las dos palabras clave.</p>
+      <ul class="fases">
+        <li>Un conjunto es <strong>abierto</strong> si es puro interior: el terreno <em>sin</em> incluir su cerca, donde cada punto tiene su burbuja completa adentro.</li>
+        <li>Es <strong>cerrado</strong> si contiene <em>toda</em> su cerca: no le falta ni un punto de su frontera.</li>
+      </ul>
+      <p class="idea" style="font-size:17px">Regla rápida para el examen: desigualdad estricta (&lt;) → abierto; con ≤ (frontera incluida) → cerrado.</p>
+      <p class="idea" style="font-size:17px">Por eso (1, 0) está en la bola cerrada de radio 1, pero no en la abierta.</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>
@@ -517,7 +668,8 @@
 
       <div class="pitem" data-kind="item" data-id="P9" data-tema="polares" data-level="juntos">
         <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Un punto tiene coordenadas polares r = 4, θ = 30°. Sabiendo que cos 30° = √3⁄2 y sen 30° = 1⁄2, ¿cuáles son sus coordenadas cartesianas (x, y)?</p>
+        <p class="pstatement">Un punto tiene coordenadas polares r = 4, θ = 30°. ¿Cuáles son sus coordenadas cartesianas (x, y)? Recuerda que:</p>
+        <div class="fx"><div class="sys"><span class="eq">cos 30° = √3⁄2</span><span class="eq">sen 30° = 1⁄2</span></div></div>
         <div class="opts">
           <button class="opt" data-ok="1">(2√3, 2)</button>
           <button class="opt" data-ok="0">(2, 2√3)</button>
