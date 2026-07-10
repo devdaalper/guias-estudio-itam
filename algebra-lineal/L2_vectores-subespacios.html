@@ -320,11 +320,7 @@
       <div class="fx"><div class="sys"><span class="eq">u = (1, 3)</span><span class="eq">v = (2, −1)</span><span class="eq">w = (5, 1)</span></div></div>
       <p class="idea">Con estos números, la pregunta es: ¿cuántas veces cada receta —qué pesos a y b— dan justo w?</p>
       <div class="fx"><div class="sys"><span class="eq">a·(1, 3) + b·(2, −1) = (5, 1)</span></div></div>
-      <p class="idea">Desármalo con lo que ya hiciste. Primero cada peso entra a su receta (escalón 3):</p>
-      <div class="fx"><div class="sys"><span class="eq">a·(1, 3) = (a, 3a)</span><span class="eq">b·(2, −1) = (2b, −b)</span></div></div>
-      <p class="idea">Ahora se juntan las dos, cada cantidad con la suya (escalón 4):</p>
-      <div class="fx"><div class="sys"><span class="eq">primera: a + 2b</span><span class="eq">segunda: 3a − b</span></div></div>
-      <p class="idea">Y eso tiene que quedar igual a w = (5, 1). Cantidad por cantidad:</p>
+      <p class="idea">Desármalo: escala cada receta —a·(1, 3) = (a, 3a), b·(2, −1) = (2b, −b)— y suma coordenada con coordenada. Igualado a w = (5, 1) queda:</p>
       <div class="fx"><div class="sys"><span class="eq">a + 2b = 5</span><span class="eq">3a − b = 1</span></div></div>
       <p class="idea">Mira lo que apareció: <strong>un sistema de ecuaciones</strong>, idéntico a los de la Unidad 1, con incógnitas a y b.</p>
       <p class="idea">Y ya sabes qué hacer con un sistema: quitarle el ruido y dejarlo como <strong>matriz aumentada</strong>.</p>
@@ -338,29 +334,13 @@
       <p class="idea">Por eso la receta de "pon cada vector como <strong>columna</strong>" no es un truco: es lo que el sistema pide solo.</p>
       <p class="fx-note">Las entradas de cada vector se apilan hacia <strong>abajo</strong> (la de arriba con la de arriba), nunca de lado.</p>
 
-      <p class="idea">Falta ponerle un nombre corto a todo esto, porque lo vas a escribir muchas veces.</p>
-      <p class="idea">A la tabla de coeficientes —las columnas u y v, sin la de resultados— llámala <strong>A</strong>:</p>
+      <p class="idea">A esa tabla de coeficientes (las columnas u y v) la llamamos <strong>A</strong>, y a los pesos buscados, el vector <strong>x = (a, b)</strong>.</p>
       <div class="fx" id="brgA"></div>
-      <p class="idea">A los pesos que buscas, júntalos en un vector y llámalo <strong>x</strong>:</p>
-      <div class="fx"><div class="sys"><span class="eq">x = (a, b)</span></div></div>
-      <p class="idea">Piensa en A como una <strong>máquina</strong>: le metes el vector x de pesos y te devuelve la mezcla que producen.</p>
-      <p class="idea">¿Qué devuelve? Justo las dos cantidades que ya calculaste. A ese resultado se le escribe <strong>A·x</strong>:</p>
+      <p class="idea">Piensa en A como una <strong>máquina</strong>: le metes x y te devuelve la mezcla que producen. A ese resultado se le escribe <strong>A·x</strong>.</p>
       <div class="fx"><div class="sys"><span class="eq">A·x = (a + 2b, 3a − b)</span></div></div>
-      <p class="idea">Léelo despacio: cada renglón de A se empareja con los pesos y se suma.</p>
-      <ul class="fases">
-        <li>El renglón (1, 2) da 1·a + 2·b = a + 2b.</li>
-        <li>El renglón (3, −1) da 3·a − 1·b = 3a − b.</li>
-      </ul>
-      <p class="fx-note">Eso es toda la operación A·x: cada renglón por los pesos, sumando. La misma combinación de siempre, en notación corta.</p>
-      <p class="idea">Pedirle a la máquina que entregue w se escribe así de breve:</p>
-      <div class="fx"><div class="sys"><span class="eq">A·x = w</span></div></div>
-      <p class="idea">Que es exactamente el sistema a + 2b = 5, 3a − b = 1. Nada nuevo: solo un nombre más corto.</p>
-      <p class="idea">Verás dos versiones, según qué haya del lado derecho:</p>
-      <ul class="fases">
-        <li><strong>A·x = w</strong>, con w cualquiera: "¿qué pesos dan esta mezcla?"</li>
-        <li><strong>A·x = 0</strong>, con w el vector cero: "¿qué pesos dan la mezcla vacía (0, 0)?"</li>
-      </ul>
-      <p class="idea">Esta segunda, A·x = 0, es justo la que necesitas para decidir si un vector sobra. La usamos ahora mismo.</p>
+      <p class="fx-note">Cada renglón de A se empareja con los pesos y se suma: la misma combinación de siempre, en corto.</p>
+      <p class="idea">Así, pedir la mezcla w es <strong>A·x = w</strong> (el sistema de arriba); y buscar la mezcla vacía (0, 0) es <strong>A·x = 0</strong>.</p>
+      <p class="idea">Esa segunda, A·x = 0, es la que usarás para decidir si un vector sobra.</p>
     </section>
 
     <section class="sec">
@@ -535,20 +515,16 @@
 
     <section class="sec">
       <h3>Subespacio: un mundo del que no puedes salir</h3>
-      <p class="idea">Vuelve un momento al generado — el catálogo de todo lo que puedes preparar con tus recetas.</p>
-      <p class="idea">Tiene una propiedad curiosa:</p>
+      <p class="idea">Vuelve al generado: todo lo que puedes preparar con tus recetas.</p>
+      <p class="idea">Tiene una gracia: hagas lo que hagas con lo de adentro, <strong>nunca te sales</strong>.</p>
       <ul class="fases">
-        <li>si tomas <strong>dos mezclas del catálogo y las juntas</strong>, el resultado… sigue estando en el catálogo,</li>
-        <li>si <strong>doblas</strong> una mezcla del catálogo, también sigue adentro.</li>
+        <li>Sumas dos mezclas → sigue dentro.</li>
+        <li>Estiras una → sigue dentro.</li>
+        <li>Y el cero siempre está ahí.</li>
       </ul>
-      <p class="idea">Por más que operes con cosas de adentro, <strong>nunca te sales</strong>. Es un mundo cerrado.</p>
-      <p class="idea">A los conjuntos con esa propiedad se les llama <strong>subespacios</strong>.</p>
-      <p class="idea">La lista de requisitos es corta — tres cosas, y las dos últimas son justo "no poder salirse" con las dos jugadas que conoces:</p>
-      <div class="fx"><div class="sys"><span class="eq">0 ∈ S</span><span class="eq">u, v ∈ S  ⇒  u + v ∈ S</span><span class="eq">u ∈ S, c escalar  ⇒  c·u ∈ S</span></div></div>
-      <p class="fx-note">Léelo en palabras: "∈" es <strong>está en</strong>; "⇒" es <strong>entonces</strong>. El primer renglón pide que el cero esté en S. El segundo: si u y v están en S, su suma u + v también. El tercero: si u está en S, cualquier múltiplo c·u también.</p>
-      <p class="fx-note">Si falla cualquiera de las tres, no es subespacio.</p>
-      <p class="idea">La más rápida de checar: ¿contiene al vector cero?</p>
-      <p class="idea">Por eso los generados <strong>siempre</strong> son subespacios (con pesos en 0 obtienes el cero), y una recta que <strong>no</strong> pasa por el origen nunca lo es.</p>
+      <p class="idea">A un conjunto así de cerrado se le llama <strong>subespacio</strong>.</p>
+      <p class="idea">Para reconocerlo, una sola pregunta: <strong>¿pasa por el cero?</strong></p>
+      <p class="idea">Si no pasa por el cero, no es subespacio.</p>
       <div class="check" data-kind="item" data-id="SUBchk" data-tema="subespacio" data-level="juntos">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">¿Cuál de estos conjuntos <strong>sí</strong> es un subespacio de R²?</p>
@@ -563,26 +539,15 @@
 
     <section class="sec">
       <h3>Subespacio afín: el mismo mundo, pero corrido</h3>
-      <p class="idea">Toma la recta y = 3x, que acabas de ver que sí es subespacio. Ahora mira a su prima:</p>
+      <p class="idea">Toma la recta y = 3x (que sí era subespacio). Súbela dos:</p>
       <div class="fx"><div class="sys"><span class="eq">y = 3x + 2</span></div></div>
-      <p class="idea">Es <strong>la misma recta, corrida dos unidades hacia arriba</strong>.</p>
-      <p class="idea">Al correrla dejó de pasar por el origen — así que ya <strong>no</strong> es subespacio (le falta el cero).</p>
-      <p class="idea">Pero tampoco es un conjunto cualquiera: sigue siendo un subespacio en el fondo, solo que <strong>trasladado</strong>. A eso se le llama <strong>subespacio afín</strong>.</p>
-      <p class="idea">¿Dónde aparecen? Al resolver <strong>A·x = b</strong> con <strong>b ≠ 0</strong> (sistema <strong>no homogéneo</strong>): sus soluciones forman justo uno de estos mundos corridos.</p>
-      <p class="idea">¿Por qué esa forma? Vale la pena caminarlo, porque no es magia.</p>
-      <p class="idea">Primero consigue <strong>una</strong> solución cualquiera: un punto donde el sistema ya se cumple. Llámalo x<sub>p</sub> —la "p" es de particular.</p>
-      <p class="idea">Ahora párate en ese punto y pregúntate: ¿hacia dónde puedo <strong>moverme sin salirme</strong>, o sea, llegar a otra solución?</p>
-      <p class="idea">Moverte sin cambiar el resultado es sumar un paso que la máquina A <strong>manda al cero</strong>: un vector v con A·v = 0.</p>
-      <p class="idea">La máquina A tiene una costumbre útil: <strong>reparte las sumas</strong> —lo que le hace a un paso combinado es la suma de lo que le hace a cada parte—. Así, si A·x<sub>p</sub> = b y A·v = 0:</p>
-      <div class="fx"><div class="sys"><span class="eq">A·(x<sub>p</sub> + v) = A·x<sub>p</sub> + A·v</span><span class="eq">= b + 0</span><span class="eq">= b</span></div></div>
-      <p class="idea">Sigues cumpliendo el sistema. Por eso toda solución es <strong>un punto fijo más una dirección que A anula</strong>:</p>
-      <ul class="fases">
-        <li><strong>un punto donde pararte</strong> (la solución particular x<sub>p</sub>),</li>
-        <li>más <strong>las direcciones en las que puedes moverte</strong> (las soluciones de A·x = 0, el sistema <strong>homogéneo</strong> —se llama así porque su lado derecho es 0):</li>
-      </ul>
-      <div class="fx"><div class="sys"><span class="eq">A·x = 0  →  homogéneo (pasa por 0): subespacio</span><span class="eq">A·x = b, b ≠ 0  →  no homogéneo: afín</span><span class="eq">x = x<sub>p</sub> + t·v   (particular + homogénea)</span></div></div>
-      <p class="fx-note">La <strong>forma paramétrica</strong> es justo esa. La letra <strong>t</strong> es un número libre que tú eliges —el <strong>parámetro</strong>—: al variarlo, recorres toda la dirección v.</p>
-      <p class="idea">Fijas las variables libres como parámetros (t, s…) y expresas toda la solución como x<sub>p</sub> más combinaciones de vectores dirección.</p>
+      <p class="idea">Es la misma recta, solo <strong>corrida</strong> hacia arriba.</p>
+      <p class="idea">Ahora ya no toca el origen — así que deja de ser subespacio.</p>
+      <p class="idea">A esa versión corrida se le llama <strong>subespacio afín</strong>.</p>
+      <p class="idea">¿De dónde sale? De resolver <strong>A·x = b</strong> con b distinto de cero.</p>
+      <p class="idea">Su forma es siempre la misma: un <strong>punto de arranque</strong> (la solución particular), más una <strong>dirección</strong> para moverte.</p>
+      <div class="fx"><div class="sys"><span class="eq">x = punto + t·(dirección)</span></div></div>
+      <p class="idea">La <strong>t</strong> es un número libre que tú eliges —el <strong>parámetro</strong>—: al variarlo, recorres toda la dirección.</p>
       <div class="check" data-kind="recall" data-fid="F3_afin" data-tema="subespacio_afin">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">La solución de A·x = b con b ≠ 0, ¿por qué NO es un subespacio?</p>
@@ -591,7 +556,7 @@
           <button class="opt" data-ok="0">Porque tiene infinitas soluciones y un subespacio debe ser finito</button>
           <button class="opt" data-ok="0">Porque b ≠ 0 hace que el sistema no tenga solución</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>x = 0 daría A·0 = 0 ≠ b, así que el cero no está en el conjunto solución. Es el subespacio homogéneo <strong>corrido</strong> por x<sub>p</sub>: un subespacio afín, no un subespacio.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>x = 0 daría A·0 = 0 ≠ b, así que el cero no está en la solución. Es un subespacio <strong>corrido</strong>: afín, no subespacio.</p></div>
       </div>
     </section>
 
@@ -609,25 +574,15 @@
 
     <section class="sec">
       <h3>Espacio nulo, espacio columna y nulidad</h3>
-      <p class="idea">Cierra la unidad con dos nombres que etiquetan cosas que ya conoces.</p>
-      <p class="idea">Recuerda la matriz A como una <strong>máquina</strong> (ya la usaste con los pesos): le metes un vector x y te devuelve otro, A·x.</p>
-      <p class="idea">Sobre cualquier máquina hay dos preguntas naturales:</p>
+      <p class="idea">Cierra la unidad con dos nombres para cosas que ya conoces.</p>
+      <p class="idea">Piensa otra vez en A como una <strong>máquina</strong>: le metes x y devuelve A·x. Dos preguntas naturales:</p>
       <ul class="fases">
-        <li><strong>¿qué entradas aplasta hasta el cero?</strong></li>
-        <li><strong>¿qué salidas es capaz de producir?</strong></li>
+        <li>¿qué entradas <strong>aplasta al cero</strong>? Esas soluciones de A·x = 0 son el <strong>espacio nulo</strong>.</li>
+        <li>¿qué <strong>salidas</strong> puede producir? El generado de sus columnas es el <strong>espacio columna</strong>.</li>
       </ul>
-      <p class="idea">La primera respuesta es el <strong>espacio nulo</strong> (kernel): todas las soluciones de A·x = 0.</p>
-      <p class="idea">La segunda es el <strong>espacio columna</strong>: el generado de las columnas de A — su "catálogo de salidas".</p>
-      <p class="idea">Ojo <strong>dónde vive</strong> cada uno. Cada columna de A tiene tantas entradas como renglones tiene A: por eso el espacio columna vive en R<sup>(nº de renglones)</sup>.</p>
-      <p class="idea">El espacio nulo, en cambio, está hecho de vectores x de pesos —uno por columna—, así que vive en R<sup>(nº de columnas)</sup>.</p>
-      <p class="idea">Sus tamaños también tienen nombre:</p>
-      <ul class="fases">
-        <li>la <strong>nulidad</strong> es la dimensión del espacio nulo,</li>
-        <li>el <strong>rango</strong>, la del espacio columna.</li>
-      </ul>
-      <div class="fx"><div class="sys"><span class="eq">Nul(A) = { x : A·x = 0 }   (subespacio)</span><span class="eq">Col(A) = generado de las columnas</span><span class="eq">nulidad = variables libres · rango = pivotes</span></div></div>
-      <p class="fx-note">Al reducir A: cada <strong>columna con pivote</strong> aporta al rango; cada <strong>columna libre</strong> aporta a la nulidad.</p>
-      <p class="fx-note">Por eso rango + nulidad = número de columnas.</p>
+      <p class="idea">A sus tamaños se les llama <strong>nulidad</strong> (la del nulo) y <strong>rango</strong> (la del columna).</p>
+      <p class="idea">Al reducir A: cada <strong>pivote</strong> suma al rango; cada <strong>columna libre</strong> suma a la nulidad. Por eso rango + nulidad = número de columnas.</p>
+      <p class="fx-note">Dónde viven: el espacio columna en tantas dimensiones como <strong>renglones</strong> tenga A; el nulo, como <strong>columnas</strong>.</p>
       <div class="check" data-kind="recall" data-fid="F4_nulidad" data-tema="nulidad">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">Reduces una matriz A de 5 columnas y encuentras 3 pivotes. ¿Cuánto valen el rango y la nulidad?</p>

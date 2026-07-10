@@ -194,41 +194,34 @@
 
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Imagina un aro de alambre circular recargado en una pared, con una <strong>gota de agua</strong> detenida sobre el alambre.</p>
-      <p class="idea" style="font-size:17px">Si la gota resbala un poquito, ¿qué tan inclinado está el alambre justo ahí: casi plano, o en bajada fuerte?</p>
-      <p class="idea" style="font-size:17px">Eso, en matemáticas, es pedir la <strong>pendiente</strong> de la curva en ese punto: qué tan inclinada está la tablita recta que roza el alambre justo ahí.</p>
+      <p class="idea" style="font-size:17px">Imagina un aro de alambre circular con una <strong>gota de agua</strong> detenida sobre él.</p>
+      <p class="idea" style="font-size:17px">Si la gota resbala un poquito, ¿qué tan inclinado está el alambre ahí? Eso es la <strong>pendiente</strong> de la curva en ese punto.</p>
       <p class="idea" style="font-size:17px">El aro tiene ecuación:</p>
       <div class="fx"><div class="sys"><span class="eq">x² + y² = 25</span></div></div>
-      <p class="idea" style="font-size:17px">Cada punto (x, y) que la cumple está a distancia 5 del centro —porque 5² = 25—, y todos juntos dibujan el aro: una circunferencia de radio 5.</p>
+      <p class="idea" style="font-size:17px">Cada punto (x, y) que la cumple está a distancia 5 del centro: una circunferencia de radio 5.</p>
       <p class="idea" style="font-size:17px">La gota está en <strong>(3, 4)</strong>, que sí es un punto del aro:</p>
       <div class="fx"><div class="sys"><span class="eq">3² + 4²</span><span class="eq">= 9 + 16</span><span class="eq">= 25</span></div></div>
-      <p class="idea" style="font-size:17px">El estorbo: la ecuación trae la x y la y <strong>amarradas en un solo renglón</strong>; nadie te dio “y igual a algo con x”.</p>
-      <p class="idea" style="font-size:17px">Podrías despejar y = √(25 − x²) y derivar… pero eso se pone feo rapidísimo, y con tres variables ya ni se puede.</p>
-      <p class="idea" style="font-size:17px">En esta guía vamos a construir la herramienta que saca la pendiente <strong>sin despejar nada</strong> — y al final la pendiente de la gota la vas a calcular tú sola.</p>
+      <p class="idea" style="font-size:17px">El estorbo: la x y la y vienen <strong>amarradas en un solo renglón</strong>; nadie te dio “y igual a algo con x”. Despejar y = √(25 − x²) se pone feo, y con tres variables ni se puede.</p>
+      <p class="idea" style="font-size:17px">Aquí vamos a sacar la pendiente <strong>sin despejar nada</strong> — y al final la de la gota la calculas tú sola.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
       <h3>1 · Una ecuación que esconde una función</h3>
-      <p class="idea">Primero recordemos qué es una función con la imagen de siempre: una <strong>máquina</strong>.</p>
-      <p class="idea">Esta función es una máquina ya armada: le das una x y te devuelve una y.</p>
+      <p class="idea">Una función es una <strong>máquina</strong> ya armada: le das una x y te devuelve una y.</p>
       <div class="fx"><div class="sys"><span class="eq">y = 2x + 1</span></div></div>
-      <p class="idea">Le das x = 3 y devuelve:</p>
+      <p class="idea">Con x = 3 devuelve:</p>
       <div class="fx"><div class="sys"><span class="eq">y = 2·3 + 1</span><span class="eq">= 7</span></div></div>
-      <p class="idea">La y está <strong>despejada</strong>, solita de un lado del igual. Cuando la máquina viene así, armada y a la vista, se dice que la función está <strong>explícita</strong>: puesta con todas sus letras.</p>
+      <p class="idea">La y está <strong>despejada</strong>, solita de un lado. Así, a la vista, la función es <strong>explícita</strong>.</p>
       <p class="idea">Ahora mira la del aro:</p>
       <div class="fx"><div class="sys"><span class="eq">x² + y² = 25</span></div></div>
-      <p class="idea">Aquí nadie te entregó la máquina: la x y la y vienen <strong>amarradas en la misma ecuación</strong>, sin despejar.</p>
-      <p class="idea">La relación entre ellas existe —la curva se dibuja perfectamente—, pero las instrucciones de y están <strong>guardadas adentro</strong>.</p>
-      <p class="idea">Cuando pasa eso se dice que la ecuación define una función <strong>implícita</strong>: escondida dentro de la ecuación, sin estar a la vista.</p>
-      <p class="idea">Pregunta honesta: ¿de verdad hay una función escondida ahí? Cuidado, porque la circunferencia <strong>completa</strong> no lo es.</p>
-      <p class="idea">Prueba con x = 3. La ecuación dice:</p>
+      <p class="idea">Aquí la x y la y vienen <strong>amarradas</strong>, sin despejar. La relación existe, pero las instrucciones de y están guardadas adentro: se dice que la función es <strong>implícita</strong>.</p>
+      <p class="idea">¿De verdad hay una función escondida ahí? La circunferencia <strong>completa</strong> no lo es. Prueba con x = 3:</p>
       <div class="fx"><div class="sys"><span class="eq">9 + y² = 25</span><span class="eq">y² = 16</span></div></div>
-      <p class="idea">Y eso lo cumplen <strong>dos</strong> números: y = 4 y y = −4. Una máquina que a una misma entrada le da dos salidas no es una función.</p>
-      <p class="idea">Pero si te quedas <strong>cerquita de (3, 4)</strong> —solo el arco de arriba—, a cada x le toca un único y. Ahí sí hay máquina escondida.</p>
-      <p class="idea">Esa es la letra chica de todo el tema: la función implícita vive <strong>cerca del punto</strong>, no en la curva entera.</p>
-      <p class="fx-note">La palabra clave es <strong>cerca del punto</strong>: no toda la curva, solo un pedacito alrededor de donde estás parada.</p>
+      <p class="idea">Eso lo cumplen <strong>dos</strong> números: y = 4 y y = −4. Una máquina que a una entrada le da dos salidas no es función.</p>
+      <p class="idea">Pero cerquita de <strong>(3, 4)</strong> —solo el arco de arriba— a cada x le toca un único y. Ahí sí hay máquina escondida.</p>
+      <p class="idea">Esa es la letra chica del tema: la función implícita vive <strong>cerca del punto</strong>, no en la curva entera.</p>
       <div class="check" data-kind="item" data-id="IDEA1" data-tema="funcion_implicita" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">¿Por qué la circunferencia completa NO es una función de x, aunque cerca de (3, 4) sí?</p>
@@ -243,52 +236,32 @@
 
     <section class="sec">
       <h3>2 · La pendiente sin despejar — y el teorema que la garantiza</h3>
-      <p class="idea">Vamos a medir la pendiente sin sacar la máquina de su escondite.</p>
-      <p class="idea">Primer paso, uno de pura escritura: pasa todo al mismo lado del igual.</p>
-      <div class="fx"><div class="sys"><span class="eq">x² + y² = 25</span><span class="eq">x² + y² − 25 = 0</span></div></div>
-      <p class="idea">Al bloque completo de la izquierda lo bautizamos <strong>F(x, y)</strong>: una expresión que depende de x y de y.</p>
-      <p class="idea">Escrito así, “estar en la curva” se dice corto:</p>
-      <div class="fx"><div class="sys"><span class="eq">F(x, y) = 0</span></div></div>
-      <p class="idea">Segundo paso, dos abreviaturas para las parciales que ya conoces:</p>
+      <p class="idea">Primer paso, pura escritura: pasa todo al mismo lado y llama <strong>F(x, y)</strong> al bloque de la izquierda.</p>
+      <div class="fx"><div class="sys"><span class="eq">x² + y² − 25 = 0</span><span class="eq">F(x, y) = 0</span></div></div>
+      <p class="idea">Así, “estar en la curva” se dice corto: F(x, y) = 0.</p>
+      <p class="idea">Segundo paso, dos parciales que ya conoces:</p>
       <ul class="fases">
-        <li><strong>F<sub>x</sub></strong> es la parcial de F respecto a x: derivas mirando solo la x; la y se queda quieta.</li>
-        <li><strong>F<sub>y</sub></strong> es la parcial de F respecto a y.</li>
+        <li><strong>F<sub>x</sub></strong>: derivas tapando la y (se queda quieta).</li>
+        <li><strong>F<sub>y</sub></strong>: derivas tapando la x.</li>
       </ul>
-      <p class="idea">Veámoslas despacio con nuestro F = x² + y² − 25.</p>
-      <p class="idea">Para F<sub>x</sub> tapo la y —se queda quieta—, así que solo miro x² − 25; su derivada es 2x (la de −25, un número fijo, es 0):</p>
-      <div class="fx"><div class="sys"><span class="eq">tapo y:  x² − 25  →  2x</span></div></div>
-      <p class="idea">Para F<sub>y</sub> al revés: tapo la x, queda y² − 25, y su derivada es 2y.</p>
-      <p class="idea">En nuestro ejemplo, F = x² + y² − 25, así que:</p>
+      <p class="idea">Con F = x² + y² − 25, tapando cada variable:</p>
       <div class="fx"><div class="sys"><span class="eq">F<sub>x</sub> = 2x</span><span class="eq">F<sub>y</sub> = 2y</span></div></div>
-      <p class="idea">Ahora la jugada clave, sin magia. Sobre el arco donde sí hay máquina, y depende de x.</p>
-      <p class="idea">Mete esa y dentro de F y observa: sobre la curva, F vale <strong>siempre 0</strong>. No “casi cero” ni “a veces cero”: cero parejo, para toda x del arco.</p>
-      <p class="idea">Y una cantidad que nunca cambia tiene derivada 0. Así que derivamos F respecto a x e igualamos a 0.</p>
-      <p class="idea">Al derivar respecto a x, cada pedazo de F reacciona a su manera.</p>
-      <p class="idea">El pedazo que ya es de x aporta su parcial <strong>F<sub>x</sub></strong>: exactamente lo que cambia F cuando muevo la x con la y congelada, la misma F<sub>x</sub> de arriba.</p>
-      <p class="idea">El pedazo que es de y no puede quedarse quieto: como y sigue a la x, aporta su parcial <strong>F<sub>y</sub></strong> multiplicada por lo que cambia la y, que es y′.</p>
-      <p class="idea">En nuestro F = x² + y² − 25 se ve directo: el x² aporta 2x, y el y² aporta 2y·y′.</p>
+      <p class="idea">Ahora la jugada clave, sin magia. Sobre el arco, y depende de x, y ahí F vale <strong>siempre 0</strong>.</p>
+      <p class="idea">Algo que nunca cambia tiene derivada 0. Así que derivamos F respecto a x e igualamos a 0.</p>
+      <p class="idea">Cada pedazo aporta lo suyo: el de x aporta <strong>F<sub>x</sub></strong>; el de y aporta <strong>F<sub>y</sub>·y′</strong> —lleva ese y′ porque y sigue a la x—.</p>
       <div class="fx"><div class="sys"><span class="eq">x²  →  2x</span><span class="eq">y²  →  2y·y′</span></div></div>
-      <p class="idea">La regla de la cadena reparte el trabajo: la parte de x aporta F<sub>x</sub>, y la parte de y aporta F<sub>y</sub>·y′ — ese y′ aparece porque y es función de x y arrastra su propia derivada:</p>
-      <div class="fx"><div class="sys"><span class="eq">F<sub>x</sub> + F<sub>y</sub>·y′ = 0</span></div><p class="fx-note">y′ es la derivada de y respecto a x — también se escribe dy/dx. Es justo la pendiente que buscamos.</p></div>
-      <p class="idea">De ahí, puro despeje de secundaria: pasa F<sub>x</sub> al otro lado y divide entre F<sub>y</sub>:</p>
-      <div class="fx"><div class="sys"><span class="eq">F<sub>y</sub>·y′ = −F<sub>x</sub></span><span class="eq">dy/dx = − F<sub>x</sub> / F<sub>y</sub></span></div><p class="fx-note">La pendiente de la curva, sin despejar y. A derivar así —tratando a y como función de x sin despejarla— se le llama <strong>derivación implícita</strong>.</p></div>
-      <p class="idea">Pruébala donde sí puedes verificar. La recta x + 2y = 4 sí se deja despejar:</p>
-      <div class="fx"><div class="sys"><span class="eq">y = 2 − x/2</span></div></div>
-      <p class="idea">Pendiente a la vista: −1/2.</p>
-      <p class="idea">Ahora por el camino nuevo, con F = x + 2y − 4:</p>
-      <div class="fx"><div class="sys"><span class="eq">F<sub>x</sub> = 1,  F<sub>y</sub> = 2</span><span class="eq">−F<sub>x</sub>/F<sub>y</sub> = −1/2</span></div></div>
-      <p class="idea"><strong>Mismo resultado, sin despejar.</strong></p>
-      <p class="idea">Falta la letra chica: la fórmula <strong>divide entre F<sub>y</sub></strong>, y entre cero no se divide. Y no es capricho del álgebra.</p>
-      <p class="idea">Mira el punto (5, 0) de la circunferencia, el borde derecho. Ahí:</p>
-      <div class="fx"><div class="sys"><span class="eq">F<sub>y</sub> = 2y</span><span class="eq">= 2·0</span><span class="eq">= 0</span></div></div>
-      <p class="idea">Y justo ahí la tangente es vertical y la curva “da la vuelta”: pegado a ese punto, cada x trae dos y, una arriba y otra abajo.</p>
-      <p class="idea">Donde la fórmula falla, la función escondida también desaparece.</p>
-      <p class="idea">Todo esto junto tiene nombre: es el <strong>teorema de la función implícita</strong>. Dice: si en un punto de la curva F<sub>y</sub> ≠ 0, entonces cerca de ese punto:</p>
+      <p class="idea">La regla de la cadena reparte el trabajo:</p>
+      <div class="fx"><div class="sys"><span class="eq">F<sub>x</sub> + F<sub>y</sub>·y′ = 0</span></div><p class="fx-note">y′ es la derivada de y respecto a x (también dy/dx): la pendiente que buscamos.</p></div>
+      <p class="idea">Puro despeje: pasa F<sub>x</sub> al otro lado y divide entre F<sub>y</sub>:</p>
+      <div class="fx"><div class="sys"><span class="eq">F<sub>y</sub>·y′ = −F<sub>x</sub></span><span class="eq">dy/dx = − F<sub>x</sub> / F<sub>y</sub></span></div><p class="fx-note">A derivar así —tratando a y como función de x sin despejarla— se le llama <strong>derivación implícita</strong>.</p></div>
+      <p class="idea">Compruébalo donde sí puedes despejar: la recta x + 2y = 4 da y = 2 − x/2, pendiente −1/2. Por la fórmula, con F = x + 2y − 4: F<sub>x</sub> = 1, F<sub>y</sub> = 2, y −F<sub>x</sub>/F<sub>y</sub> = −1/2. <strong>Igual, sin despejar.</strong></p>
+      <p class="idea">Letra chica: la fórmula <strong>divide entre F<sub>y</sub></strong>, y entre cero no se divide.</p>
+      <p class="idea">En (5, 0), el borde derecho, F<sub>y</sub> = 2y = 0: ahí la tangente es vertical y cada x trae dos y. Donde la fórmula falla, la función escondida también desaparece.</p>
+      <p class="idea">Todo junto tiene nombre: el <strong>teorema de la función implícita</strong>. Si en un punto F<sub>y</sub> ≠ 0, entonces cerca de ahí:</p>
       <ul class="fases">
-        <li>y sí es función de x — la garantía: sí hay máquina escondida,</li>
+        <li>y sí es función de x — la garantía,</li>
         <li>y su pendiente es dy/dx = −F<sub>x</sub>/F<sub>y</sub> — la fórmula.</li>
       </ul>
-      <p class="idea">La garantía más la fórmula, en un solo paquete.</p>
       <div class="check" data-kind="recall" data-fid="F1_condicion_TFI" data-tema="teorema_funcion_implicita">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué condición pide el teorema para asegurar que y es función de x cerca del punto?</p>
@@ -305,16 +278,12 @@
       <h3>3 · El mismo teorema con tres variables</h3>
       <p class="idea">La misma película, un piso arriba. Ahora la ecuación amarra <strong>tres</strong> letras:</p>
       <div class="fx"><div class="sys"><span class="eq">F(x, y, z) = 0</span></div></div>
-      <p class="idea">Sus puntos ya no dibujan una curva sino una <strong>superficie</strong> en el espacio (una cáscara, como la de una esfera).</p>
-      <p class="idea">Y cerca de un punto bueno, esa ecuación esconde una máquina con <strong>dos entradas y una salida</strong>: le das (x, y) y te devuelve la altura z que le toca.</p>
-      <p class="idea">Como un terreno: a cada punto del mapa le corresponde una sola altura.</p>
-      <p class="idea">¿Quién manda ahora? En dos variables la que se despejaba era y, y su parcial F<sub>y</sub> era la del denominador, la que no podía ser cero.</p>
-      <p class="idea">Aquí la que se despeja es <strong>z</strong>, así que su parcial hereda el puesto: la condición gemela es <strong>F<sub>z</sub> ≠ 0</strong>.</p>
-      <p class="idea">Y como la máquina escondida tiene dos entradas, ya no hay una sola pendiente: salen <strong>dos parciales</strong>, una por entrada.</p>
-      <p class="idea">Un aviso de notación antes de escribirlas: cuando hay más de una entrada, en vez de la d normal usamos la <strong>d rizada ∂</strong>.</p>
-      <p class="idea">∂z/∂x se lee “derivo z por x y dejo quietas las demás”; es la misma idea de tapar variables, ahora con su propio símbolo.</p>
+      <p class="idea">Sus puntos dibujan una <strong>superficie</strong> (una cáscara, como la de una esfera). Cerca de un punto bueno esconde una máquina de <strong>dos entradas y una salida</strong>: le das (x, y) y te devuelve la altura z, como un terreno.</p>
+      <p class="idea">Ahora la que se despeja es <strong>z</strong>, así que su parcial hereda el puesto de denominador: la condición gemela es <strong>F<sub>z</sub> ≠ 0</strong>.</p>
+      <p class="idea">Como hay dos entradas, salen <strong>dos parciales</strong>, una por entrada.</p>
+      <p class="idea">Aviso de notación: con más de una entrada usamos la <strong>d rizada ∂</strong>. ∂z/∂x se lee “derivo z por x y dejo quietas las demás”.</p>
       <p class="idea">Las dos con la misma receta “menos la de arriba, entre la del despejado”:</p>
-      <div class="fx"><div class="sys"><span class="eq">∂z/∂x = − F<sub>x</sub> / F<sub>z</sub></span><span class="eq">∂z/∂y = − F<sub>y</sub> / F<sub>z</sub></span></div><p class="fx-note">F<sub>z</sub> va siempre en el denominador; por eso hace falta F<sub>z</sub> ≠ 0. Es el caso de dos variables, pero derivando una vez respecto a x y otra respecto a y.</p></div>
+      <div class="fx"><div class="sys"><span class="eq">∂z/∂x = − F<sub>x</sub> / F<sub>z</sub></span><span class="eq">∂z/∂y = − F<sub>y</sub> / F<sub>z</sub></span></div><p class="fx-note">F<sub>z</sub> va siempre en el denominador; por eso hace falta F<sub>z</sub> ≠ 0.</p></div>
       <div class="check" data-kind="item" data-id="IDEA3" data-tema="derivacion_implicita_3var" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">Con F(x, y, z) = 0, ¿cuál de estas parciales va SIEMPRE en el denominador de ambas fórmulas?</p>
@@ -330,24 +299,19 @@
     <section class="sec">
       <h3>4 · Deshacer la máquina: la inversa</h3>
       <p class="idea">Cambio de pregunta, misma familia. Una función es una máquina: entra a, sale b = f(a).</p>
-      <p class="idea">A veces necesitas la máquina <strong>en reversa</strong>: conoces la salida y quieres recuperar la entrada.</p>
-      <p class="idea">Piensa en la máquina que pasa kilómetros a metros (multiplica por 1000): su reversa toma metros y devuelve kilómetros (divide entre 1000).</p>
-      <p class="idea">A esa máquina en reversa se le llama la <strong>inversa</strong> de f, y se escribe <strong>f⁻¹</strong> — ojo: ese −1 arriba no es un exponente, es solo el letrero de “en reversa”.</p>
-      <p class="idea">¿Siempre se puede deshacer? No.</p>
-      <p class="idea">Si cerca de a la máquina está <strong>plana</strong> —su derivada f′(a) = 0—, dos entradas vecinas producen casi la misma salida.</p>
-      <p class="idea">Parada en esa salida, ¿de cuál entrada veniste? Imposible saberlo: la reversa no existe ahí.</p>
-      <p class="idea">En cambio, si <strong>f′(a) ≠ 0</strong> (la máquina sube o baja de verdad en ese punto), cerca de a sí se puede deshacer.</p>
-      <p class="idea">¿Te suena esa condición? Es la gemela de F<sub>y</sub> ≠ 0: otro “distinto de cero” que garantiza que algo se deja despejar.</p>
-      <p class="idea">¿Y qué pendiente tiene la reversa? Míralo con números chicos:</p>
+      <p class="idea">A veces la necesitas <strong>en reversa</strong>: conoces la salida y quieres recuperar la entrada. La máquina que pasa kilómetros a metros (por 1000) tiene por reversa la que pasa metros a kilómetros (entre 1000).</p>
+      <p class="idea">A esa reversa se le llama la <strong>inversa</strong> de f, y se escribe <strong>f⁻¹</strong> — ese −1 no es un exponente, es el letrero de “en reversa”.</p>
+      <p class="idea">¿Siempre se puede deshacer? No. Si cerca de a la máquina está <strong>plana</strong> (f′(a) = 0), dos entradas vecinas dan casi la misma salida, y parada ahí ya no sabes de cuál veniste.</p>
+      <p class="idea">En cambio, si <strong>f′(a) ≠ 0</strong> sí se puede deshacer. Es la gemela de F<sub>y</sub> ≠ 0.</p>
+      <p class="idea">¿Y qué pendiente tiene la reversa? Con números chicos:</p>
       <ul class="fases">
         <li>f(x) = 3x avanza 3 de salida por cada 1 de entrada — pendiente 3.</li>
         <li>Su reversa regresa 1 de entrada por cada 3 de salida — pendiente 1/3.</li>
       </ul>
-      <p class="idea">Deshacer un estirón de 3 es encoger con 1/3: la pendiente de la inversa es el <strong>recíproco</strong> (uno entre el número) de la pendiente original.</p>
-      <p class="idea">Último detalle, el que a todos les cuesta: <strong>dónde se evalúa cada cosa</strong>.</p>
-      <p class="idea">La inversa vive del lado de las salidas, así que su derivada se pregunta en b. Pero la pendiente original se mide del lado de las entradas: f′ va evaluada en a.</p>
-      <p class="idea">Todo junto, la regla que hay que saber de memoria:</p>
-      <div class="fx"><div class="sys"><span class="eq">(f⁻¹)′(b) = 1 / f′(a),  con b = f(a)</span></div><p class="fx-note">Ojo con dónde se evalúa: f′ se calcula en a (el de entrada), no en b. Y hace falta f′(a) ≠ 0.</p></div>
+      <p class="idea">Deshacer un estirón de 3 es encoger con 1/3: la pendiente de la inversa es el <strong>recíproco</strong> de la original.</p>
+      <p class="idea">Un detalle que cuesta: <strong>dónde se evalúa</strong>. La inversa vive del lado de las salidas (se pregunta en b), pero f′ se mide del lado de las entradas: va en <strong>a</strong>.</p>
+      <p class="idea">Todo junto, la regla de memoria:</p>
+      <div class="fx"><div class="sys"><span class="eq">(f⁻¹)′(b) = 1 / f′(a),  con b = f(a)</span></div><p class="fx-note">f′ se calcula en a (el de entrada), no en b. Y hace falta f′(a) ≠ 0.</p></div>
       <div class="check" data-kind="recall" data-fid="F3_derivada_inversa" data-tema="funcion_inversa">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">En la fórmula de la derivada de la inversa, ¿dónde se evalúa f′?</p>
@@ -417,15 +381,10 @@
     <h2 class="modhead">Sube el tamaño · cuando hay un producto</h2>
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">El salto: ahora un término <strong>mezcla x con y</strong>, y eso pide la <strong>regla del producto</strong>.</p>
-      <p class="idea" style="font-size:17px">Refresquémosla en una línea: la <strong>derivada de un producto A·B</strong> es “derivo A y dejo B, más dejo A y derivo B”.</p>
+      <p class="idea" style="font-size:17px">Refresco: la derivada de <strong>A·B</strong> es “derivo A y dejo B, más dejo A y derivo B”.</p>
       <div class="fx"><div class="sys"><span class="eq">(A·B)′ = A′·B + A·B′</span></div></div>
-      <p class="idea" style="font-size:17px">Prueba con números: (x·x)′ debe dar 2x, y la regla lo confirma — 1·x + x·1 = 2x.</p>
-      <p class="idea" style="font-size:17px">Aplicada a <strong>x·y</strong> (con y función de x): derivo x y dejo y (→ y), más dejo x y derivo y (→ x·y′), o sea y + x·y′.</p>
-      <p class="idea" style="font-size:17px">Tomemos <strong>x² + xy + y² = 7</strong> en (1, 2). Lo hacemos en pasos separados, uno por escalón.</p>
-      <ul class="fases">
-        <li><strong>Fase 1 — derivar:</strong> término a término, con producto y cadena donde toque.</li>
-        <li><strong>Fase 2 — despejar:</strong> agrupar lo que tiene y′, factorizarlo y dividir.</li>
-      </ul>
+      <p class="idea" style="font-size:17px">Aplicada a <strong>x·y</strong> (con y función de x): derivo x y dejo y, más dejo x y derivo y, o sea y + x·y′.</p>
+      <p class="idea" style="font-size:17px">Tomemos esta ecuación en (1, 2), en dos fases: derivar y luego despejar.</p>
       <div class="fx"><div class="sys"><span class="eq">x² + xy + y² = 7</span></div></div>
 
       <div class="check" data-kind="item" data-id="E3pred" data-tema="derivacion_implicita" data-level="juntos">
@@ -510,37 +469,30 @@
 
     <section class="sec">
       <h3>El jacobiano: la versión matricial</h3>
-      <p class="idea">Última subida. Hasta ahora nuestras máquinas entregaban <strong>una sola</strong> salida.</p>
-      <p class="idea">Imagina ahora una máquina con dos entradas y <strong>dos salidas</strong>: le das el par (x, y) y te devuelve el par (u, v) — dos resultados a la vez, cada uno con su propia fórmula.</p>
-      <p class="idea">A una máquina así se le llama <strong>transformación</strong>, porque transforma cada punto del plano en otro punto.</p>
-      <p class="idea">¿Cuál es “la pendiente” de semejante máquina? Un solo número ya no alcanza: hay que responder <strong>cuatro</strong> preguntas.</p>
+      <p class="idea">Última subida. Imagina una máquina con dos entradas y <strong>dos salidas</strong>: le das (x, y) y te devuelve (u, v). A eso se le llama <strong>transformación</strong>.</p>
+      <p class="idea">¿Cuál es “la pendiente” de esa máquina? Un número ya no alcanza: hay <strong>cuatro</strong> preguntas.</p>
       <ul class="fases">
-        <li>Si muevo x, ¿cuánto cambia u? — eso es ∂u/∂x.</li>
+        <li>Si muevo x, ¿cuánto cambia u? — ∂u/∂x.</li>
         <li>Si muevo y, ¿cuánto cambia u? — ∂u/∂y.</li>
         <li>Y las mismas dos para v: ∂v/∂x y ∂v/∂y.</li>
       </ul>
-      <p class="idea">Cuatro parciales, que se acomodan en una tabla de 2×2 — una fila por salida, una columna por entrada:</p>
+      <p class="idea">Se acomodan en una tabla 2×2, una fila por salida y una columna por entrada:</p>
       <div class="fx" id="jacGen"></div>
-      <p class="idea">A esa tabla se le llama la <strong>matriz jacobiana</strong> (por Jacobi, el matemático que la estudió), y se abrevia <strong>J</strong>.</p>
-      <p class="idea">Es la derivada de la transformación: la versión en matriz de la pendiente.</p>
-      <p class="idea">¿Y para qué la queremos? Para saber si la máquina se puede <strong>deshacer</strong>.</p>
-      <p class="idea">Para eso necesitamos un solo número que resuma a J. Construyámoslo despacio con una máquina más simple.</p>
-      <p class="idea">Piensa en una máquina que solo <strong>estira</strong> el plano: agarra cada cuadradito y lo agranda.</p>
-      <p class="idea">Si estira al doble de ancho y al triple de alto, un cuadrito de área 1 se vuelve un rectángulo de área 2 · 3:</p>
+      <p class="idea">Es la <strong>matriz jacobiana</strong> (por Jacobi), abreviada <strong>J</strong>: la derivada de la transformación.</p>
+      <p class="idea">¿Para qué? Para saber si la máquina se puede <strong>deshacer</strong>. Necesitamos un número que resuma a J.</p>
+      <p class="idea">Piensa en una máquina que solo <strong>estira</strong> el plano. Si estira al doble de ancho y al triple de alto, un cuadrito de área 1 crece a:</p>
       <div class="fx"><div class="sys"><span class="eq">área nueva = 2 · 3 = 6</span></div></div>
-      <p class="idea">Ese <strong>6</strong> es el <strong>factor de crecimiento del área</strong>: cada pedacito sale 6 veces más grande.</p>
-      <p class="idea">¿Y si la máquina estira a lo ancho pero aplasta lo alto hasta 0? El área nueva es:</p>
+      <p class="idea">Ese <strong>6</strong> es el <strong>factor de área</strong>: cada pedacito sale 6 veces más grande.</p>
+      <p class="idea">¿Y si aplasta lo alto hasta 0?</p>
       <div class="fx"><div class="sys"><span class="eq">área nueva = 2 · 0 = 0</span></div></div>
-      <p class="idea">Factor 0 quiere decir que todo el plano queda espachurrado sobre una sola raya.</p>
-      <p class="idea">Y sobre esa raya, dos puntos que antes estaban separados caen <strong>encima</strong> uno del otro; parada ahí ya no sabes de cuál veniste — la misma trampa que la máquina plana con f′ = 0.</p>
-      <p class="idea">Por eso un factor 0 es la señal de <strong>“no se puede deshacer”</strong>.</p>
-      <p class="idea">De álgebra lineal recuerdas que el determinante mide el <strong>factor de área</strong> de una matriz —cuánto estira o encoge— y que det = 0 significa <strong>aplastar</strong> el plano en una línea.</p>
+      <p class="idea">Factor 0: el plano queda espachurrado sobre una raya, y dos puntos separados caen <strong>encima</strong> uno del otro — la misma trampa que la máquina plana con f′ = 0. Por eso factor 0 = <strong>no se puede deshacer</strong>.</p>
+      <p class="idea">De álgebra lineal, ese factor de área es justo el <strong>determinante</strong>: det = 0 significa aplastar el plano en una línea.</p>
       <p class="idea">Aplícalo a J:</p>
       <ul class="fases">
-        <li>Si <strong>det(J) = 0</strong> en un punto, la transformación aplasta ahí: entradas distintas caen en la misma salida y la reversa es imposible, igual que con la máquina plana.</li>
-        <li>Si <strong>det(J) ≠ 0</strong>, no aplasta, y cerca de ese punto sí hay reversa — se dice que tiene <strong>inversa local</strong>: funciona cerca del punto, no en todo el plano.</li>
+        <li>Si <strong>det(J) = 0</strong>, la transformación aplasta ahí y no se puede revertir.</li>
+        <li>Si <strong>det(J) ≠ 0</strong>, sí hay reversa cerca del punto: tiene <strong>inversa local</strong>.</li>
       </ul>
-      <p class="idea">A ese determinante se le llama <strong>el jacobiano</strong>. Y su “distinto de cero” es el tercer gemelo de la familia:</p>
+      <p class="idea">A ese determinante se le llama <strong>el jacobiano</strong>. Su “distinto de cero” es el tercer gemelo:</p>
       <ul class="fases">
         <li>f′(a) ≠ 0 — la máquina de un número se deshace,</li>
         <li>F<sub>y</sub> ≠ 0 — la y escondida se despeja,</li>
@@ -576,12 +528,10 @@
 
       <div class="estep"><div class="oprow">Parciales de v</div><p>v = 2xy: respecto a x queda 2y; respecto a y queda 2x. Matriz completa:</p><p class="calc"><span class="rw">v</span> ∂v/∂x=<b>2y</b> <span class="sep">•</span> ∂v/∂y=<b>2x</b></p><div class="fx" id="j2"></div></div>
 
-      <p class="idea" style="font-size:17px">Antes del último escalón, recordemos cómo se saca el determinante de una tabla 2×2 y por qué importa.</p>
-      <p class="idea" style="font-size:17px">Ese número es el <strong>factor de área</strong> de la matriz, y se calcula así: <strong>producto de la diagonal menos producto de la antidiagonal</strong>.</p>
+      <p class="idea" style="font-size:17px">Antes del último escalón, la regla del determinante 2×2: <strong>producto de la diagonal menos producto de la antidiagonal</strong>.</p>
       <div class="fx" id="detRule"></div>
-      <p class="idea" style="font-size:17px">Con esa tabla de ejemplo: diagonal 2 · 4 = 8, antidiagonal 1 · 3 = 3, así que el factor de área es 8 − 3 = 5:</p>
+      <p class="idea" style="font-size:17px">Con esa tabla: diagonal 2 · 4 = 8, antidiagonal 1 · 3 = 3, así que:</p>
       <div class="fx"><div class="sys"><span class="eq">det = 2·4 − 1·3</span><span class="eq">= 8 − 3</span><span class="eq">= 5</span></div></div>
-      <p class="idea" style="font-size:17px">Esa misma resta la practicas sola más abajo (P6 y P7); aquí la usamos ya con las parciales de J.</p>
       <div class="estep"><div class="oprow">Determinante · diagonal menos antidiagonal</div><p>Multiplico la diagonal principal y le resto la antidiagonal:</p><p class="calc"><span class="rw">det</span> (2x)(2x)−(−2y)(2y)=<b>4x²+4y²</b></p><div class="fx" id="j3"></div></div>
 
       <div class="estep"><div class="oprow">Evalúo en (2, 1)</div><p>Sustituyo x = 2, y = 1:</p><p class="calc"><span class="rw">det</span> 4·(2²)+4·(1²)=16+4=<b>20</b></p><div class="fx" id="j4"></div></div>
@@ -592,14 +542,11 @@
 
     <section class="sec">
       <h3>El teorema de la función inversa (versión matricial)</h3>
-      <p class="idea">Cerremos el paralelo. En una variable la historia fue: si f′(a) ≠ 0, cerca de a la máquina se deshace, y la pendiente de la reversa es el recíproco 1/f′(a).</p>
-      <p class="idea">Con transformaciones la historia se repite palabra por palabra.</p>
-      <p class="idea">Si <strong>det(J) ≠ 0</strong> en el punto, la transformación es <strong>localmente invertible</strong> (se deshace cerca de ahí).</p>
-      <p class="idea">¿Y la “pendiente” de esa reversa? El recíproco de un número era 1 entre el número; el recíproco de una matriz ya lo conoces de álgebra: su <strong>matriz inversa</strong>.</p>
-      <p class="idea">Esa matriz inversa hace con J lo mismo que f⁻¹ hacía con f: la <strong>deshace</strong>. J estira y mueve el plano; J⁻¹ lo regresa a como estaba.</p>
-      <p class="idea">Por eso solo existe cuando J <strong>no aplasta</strong>: hace falta det(J) ≠ 0, el mismo candado de f′(a) ≠ 0.</p>
-      <p class="idea">La jacobiana de la reversa es J⁻¹:</p>
-      <div class="fx"><div class="sys"><span class="eq">escalar:  (f⁻¹)′(b) = 1 / f′(a)</span><span class="eq">matricial:  J(inversa) = [ J ]⁻¹</span></div><p class="fx-note">“Localmente invertible” = solo cerca de ese punto la transformación se puede deshacer. El recíproco 1/f′(a) es el caso de una variable; con varias, dividir se vuelve invertir la matriz J.</p></div>
+      <p class="idea">Cerremos el paralelo. En una variable: si f′(a) ≠ 0, la máquina se deshace y la pendiente de la reversa es el recíproco 1/f′(a). Con transformaciones se repite igual.</p>
+      <p class="idea">Si <strong>det(J) ≠ 0</strong>, la transformación es <strong>localmente invertible</strong> (se deshace cerca de ahí).</p>
+      <p class="idea">¿Y la “pendiente” de la reversa? El recíproco de un número era 1 entre el número; el recíproco de una matriz es su <strong>matriz inversa</strong> J⁻¹, que deshace lo que J hace.</p>
+      <p class="idea">Solo existe cuando J no aplasta: hace falta det(J) ≠ 0, el mismo candado de f′(a) ≠ 0.</p>
+      <div class="fx"><div class="sys"><span class="eq">escalar:  (f⁻¹)′(b) = 1 / f′(a)</span><span class="eq">matricial:  J(inversa) = [ J ]⁻¹</span></div><p class="fx-note">Con una variable dividimos entre f′(a); con varias, dividir se vuelve invertir la matriz J.</p></div>
       <div class="check" data-kind="recall" data-fid="F4_teorema_funcion_inversa" data-tema="funcion_inversa">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">Según el teorema de la función inversa, ¿en qué se convierte la matriz jacobiana al derivar la inversa?</p>

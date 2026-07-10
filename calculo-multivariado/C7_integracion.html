@@ -200,39 +200,27 @@
       <div class="fx"><div class="sys"><span class="eq">en (1, 1): 1 + 1 = 2</span><span class="eq">en (0.5, 0): 0.5 + 0 = 0.5</span></div></div>
       <p class="idea" style="font-size:17px">La pregunta: ¿cuánto pesa la placa <strong>completa</strong>?</p>
       <div class="fx"><div class="sys"><span class="eq">masa = suma de (x + y)</span><span class="eq">sobre todo el triángulo</span></div></div>
-      <p class="idea" style="font-size:17px">Si el peso dependiera de una sola variable, sabrías qué hacer: integrar, como en bachillerato.</p>
-      <p class="idea" style="font-size:17px">Pero aquí el peso cambia en <strong>dos direcciones a la vez</strong>, y lo que hay que recorrer no es un intervalo de recta: es una <strong>región del plano</strong>, un pedazo de piso.</p>
-      <p class="idea" style="font-size:17px">Hace falta una herramienta que sume sobre un área completa.</p>
-      <p class="idea" style="font-size:17px">Esa herramienta es la que vamos a construir desde cero — y al final de la guía vas a calcular justo esta masa tú sola.</p>
+      <p class="idea" style="font-size:17px">El peso cambia en <strong>dos direcciones a la vez</strong>, y no se recorre un intervalo de recta sino una <strong>región del plano</strong>: no basta con integrar como en bachillerato.</p>
+      <p class="idea" style="font-size:17px">Hace falta una herramienta que sume sobre un área completa. La construimos desde cero, y al final calculas esta masa tú sola.</p>
     </section>
 
     <h2 class="modhead">La idea</h2>
 
     <section class="sec">
       <h3>1 · Rellenar el piso con columnitas</h3>
-      <p class="idea">Primero, recuerda en corto qué era integrar con UNA variable.</p>
-      <p class="idea">Para el área bajo una curva, cortabas esa área en <strong>rebanaditas</strong> verticales muy delgadas y las sumabas todas.</p>
-      <p class="idea">Cada rebanadita era casi un rectángulo: base chiquita, altura la que marque la curva.</p>
+      <p class="idea">Recuerda qué era integrar con UNA variable: cortabas el área bajo una curva en <strong>rebanaditas</strong> y las sumabas todas.</p>
       <p class="idea">Integrar nunca fue otra cosa: <strong>sumar muchos pedacitos</strong>.</p>
-      <p class="idea">Segundo, recuerda la foto de las funciones de dos variables: f(x, y) es un <strong>terreno</strong>. El piso es el plano x-y, y sobre cada punto del piso la función marca una <strong>altura</strong>.</p>
-      <p class="idea">La pregunta nueva es: ¿cuánto <strong>volumen</strong> hay entre un pedazo de piso R y el terreno que tiene encima?</p>
-      <p class="idea">La jugada es la misma de bachillerato, en versión piso: cuadricula el pedazo de piso en <strong>baldosas chiquitas</strong>.</p>
-      <p class="idea">Sobre cada baldosa, levanta una <strong>columnita</strong> que llegue justo hasta el terreno.</p>
-      <p class="idea">El volumen de una columnita es fácil:</p>
-      <div class="fx"><div class="sys"><span class="eq">volumen = base · altura</span></div></div>
-      <p class="idea">Y el volumen total es la suma de todas las columnitas.</p>
-      <p class="idea">Hazlo con números chicos. Un piso de 2 × 3 metros, partido en 6 baldosas de 1 × 1.</p>
-      <p class="idea">Si el terreno mide, sobre cada baldosa, alturas de 1, 1, 2, 2, 3 y 3 metros, el volumen es como:</p>
-      <div class="fx"><div class="sys"><span class="eq">1 + 1 + 2 + 2 + 3 + 3</span><span class="eq">= <strong>12 m³</strong></span></div></div>
-      <p class="idea">Es aproximado, porque el terreno varía dentro de cada baldosa. Con baldosas cada vez más chicas, la cuenta se afina hasta volverse exacta.</p>
-      <p class="idea">Ahora escríbelo en símbolos. A la base de una baldosa diminuta la llamamos <strong>dA</strong> ("d" de diminuto, "A" de área).</p>
-      <p class="idea">La altura de la columnita parada en el punto (x, y) es f(x, y), así que cada columnita aporta:</p>
-      <div class="fx"><div class="sys"><span class="eq">f(x, y)·dA</span></div></div>
-      <p class="idea">Y para decir "suma todas" se usa la S estirada que ya conoces, la de integrar — solo que ahora van <strong>dos</strong>, porque el piso se recorre en dos direcciones:</p>
+      <p class="idea">Ahora la foto de dos variables: f(x, y) es un <strong>terreno</strong>. El piso es el plano x-y y sobre cada punto hay una <strong>altura</strong>.</p>
+      <p class="idea">La pregunta nueva: ¿cuánto <strong>volumen</strong> hay entre un pedazo de piso R y el terreno de encima?</p>
+      <p class="idea">Misma jugada, en versión piso: cuadricula el piso en <strong>baldosas</strong> chiquitas y sobre cada una levanta una <strong>columnita</strong> hasta el terreno.</p>
+      <div class="fx"><div class="sys"><span class="eq">volumen de una columnita = base · altura</span></div></div>
+      <p class="idea">El volumen total es la suma de todas. Con números: un piso de 2 × 3, en 6 baldosas de 1 × 1, con alturas 1, 1, 2, 2, 3 y 3:</p>
+      <div class="fx"><div class="sys"><span class="eq">1 + 1 + 2 + 2 + 3 + 3 = <strong>12 m³</strong></span></div></div>
+      <p class="idea">Es aproximado; con baldosas más chicas se vuelve exacto.</p>
+      <p class="idea">En símbolos: la base diminuta es <strong>dA</strong> y la altura en (x, y) es f(x, y), así que cada columnita aporta f(x, y)·dA.</p>
+      <p class="idea">Para "suma todas" van <strong>dos</strong> S estiradas, porque el piso se recorre en dos direcciones:</p>
       <div class="fx" id="ideaDbl"></div>
-      <p class="idea">Se lee: "suma f por dA sobre toda la región R". A esta suma de columnitas se le llama <strong>integral doble</strong>.</p>
-      <p class="idea">No es una fórmula caída del cielo: es la rebanadita de bachillerato convertida en columnita.</p>
-      <p class="idea">Antes de seguir, fija qué significa cada pieza.</p>
+      <p class="idea">Se lee "suma f por dA sobre toda la región R". Es la <strong>integral doble</strong>: la rebanadita de bachillerato hecha columnita.</p>
       <div class="check" data-kind="item" data-id="C1_dA" data-tema="integral_doble" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">En ∬<sub>R</sub> f(x, y) dA, ¿qué representa el dA?</p>
@@ -247,18 +235,15 @@
 
     <section class="sec">
       <h3>2 · Cómo sumar las columnitas: por renglones</h3>
-      <p class="idea">Ya sabes QUÉ es la integral doble. Falta el CÓMO: nadie puede sumar columnitas de una en una, son infinitas.</p>
-      <p class="idea">El truco es sumarlas <strong>en orden</strong>, como se recorre un piso cuadriculado: renglón por renglón.</p>
-      <p class="idea">Congela un renglón: párate en una sola <strong>y</strong> —un renglón fijo del piso— y suma únicamente las columnitas de ese renglón caminando en x.</p>
-      <p class="idea">Mientras caminas, y no se mueve — es un número congelado. Esa suma es una integral de <strong>una sola variable</strong>, de las de siempre.</p>
-      <p class="idea">Su resultado es "el total del renglón", y depende de cuál renglón tomaste: queda como función de y.</p>
-      <p class="idea">Ahora descongela: suma los totales de todos los renglones recorriendo y. Otra integral de una variable.</p>
-      <p class="idea">Resultado: dos integrales de una variable, <strong>una adentro de la otra</strong>, en lugar de una doble imposible de atacar directo:</p>
+      <p class="idea">Ya sabes QUÉ es. Falta el CÓMO: nadie suma columnitas de una en una, son infinitas.</p>
+      <p class="idea">El truco es sumarlas <strong>en orden</strong>, renglón por renglón. Congela un renglón (una <strong>y</strong> fija) y suma sus columnitas caminando en x.</p>
+      <p class="idea">Con y congelada, esa suma es una integral de <strong>una sola variable</strong>; su total depende del renglón, así que queda en función de y.</p>
+      <p class="idea">Luego suma los totales de todos los renglones recorriendo y: otra integral de una variable.</p>
+      <p class="idea">Quedan dos integrales, <strong>una dentro de la otra</strong>:</p>
       <div class="fx" id="ideaIter"></div>
-      <p class="idea">Lee los numeritos del signo ∫: el de <strong>abajo</strong> es dónde arranca el barrido y el de <strong>arriba</strong> dónde termina. En la de adentro, x va de a hasta b; en la de afuera, y va de c hasta d. (En el piso 2×3 serían x de 0 a 2 y y de 0 a 3.)</p>
-      <p class="fx-note">Se resuelve de adentro hacia afuera: primero la de dx (con y congelada), y su resultado —ya solo función de y— es el <strong>integrando</strong> —lo que va dentro de la S, la función que se está sumando— de la de afuera.</p>
-      <p class="idea">Fíjate también en el orden de los símbolos: <strong>dx dy</strong> se lee de adentro hacia afuera — primero barres en x, luego en y.</p>
-      <p class="idea">A esta manera de calcular, integrar una vez y luego otra, se le llama <strong>integral iterada</strong> (iterar = repetir).</p>
+      <p class="idea">Los numeritos del ∫ marcan dónde arranca (abajo) y termina (arriba) el barrido: adentro x de a a b, afuera y de c a d.</p>
+      <p class="fx-note">Se resuelve de adentro hacia afuera: primero la de dx (con y congelada); su resultado, ya solo en y, es el <strong>integrando</strong> de la de afuera.</p>
+      <p class="idea">A esta forma de calcular se le llama <strong>integral iterada</strong> (iterar = repetir).</p>
       <div class="check" data-kind="recall" data-fid="F1_integral_interna" data-tema="fubini">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">Al resolver la integral de adentro respecto a x, ¿cómo se trata a la otra variable, y?</p>
@@ -273,16 +258,13 @@
 
     <section class="sec">
       <h3>3 · Renglones o columnas: el total no cambia</h3>
-      <p class="idea">¿Y si en lugar de barrer por renglones barres por columnas — primero recorres y con x congelada, y al final x?</p>
-      <p class="idea">Piensa en contar las butacas de un cine con 3 filas de 4 butacas:</p>
+      <p class="idea">¿Y si barres por columnas — primero y con x congelada, y al final x?</p>
+      <p class="idea">Piensa en las butacas de un cine con 3 filas de 4:</p>
       <div class="fx"><div class="sys"><span class="eq">filas: 4 + 4 + 4 = 12</span><span class="eq">columnas: 3 + 3 + 3 + 3 = 12</span></div></div>
-      <p class="idea">Cuentas lo mismo en otro orden, y el total ni se entera.</p>
-      <p class="idea">Con las columnitas pasa igual: son las mismas columnitas, solo cambia el orden en que las sumas.</p>
-      <p class="idea">Ese hecho tiene nombre —<strong>teorema de Fubini</strong>— y dice: sobre un <strong>rectángulo</strong>, y con f continua —su gráfica no da saltos—, puedes integrar en el orden que te convenga:</p>
+      <p class="idea">Cuentas lo mismo en otro orden; el total no cambia. Con las columnitas, igual.</p>
+      <p class="idea">Ese hecho es el <strong>teorema de Fubini</strong>: sobre un <strong>rectángulo</strong> y con f continua (sin saltos), integras en el orden que quieras:</p>
       <div class="fx" id="ideaFubini"></div>
-      <p class="fx-note">Cada límite viaja pegado a su letra: los de x acompañan al dx y los de y al dy, en el orden que sea.</p>
-      <p class="idea">Ojo con la letra chica: esto es directo solo cuando la región es un rectángulo, con los cuatro límites constantes.</p>
-      <p class="idea">En cuanto el piso tenga bordes inclinados o curvos, cambiar el orden exige más trabajo (lo verás abajo).</p>
+      <p class="idea">Ojo: esto es directo solo en un rectángulo, con los cuatro límites constantes. Con bordes inclinados o curvos, invertir cuesta más (lo ves abajo).</p>
       <div class="check" data-kind="item" data-id="C3_fubini" data-tema="fubini" data-level="guiado">
         <div class="qtag">Te toca · decide</div>
         <p class="q">¿Cuándo puedes intercambiar el orden dx dy ↔ dy dx nada más, sin cambiar los límites?</p>
@@ -297,22 +279,17 @@
 
     <section class="sec">
       <h3>4 · Cuando el piso no es rectángulo, la región manda</h3>
-      <p class="idea">Vuelve a la placa triangular del inicio: esquinas (0, 0), (1, 0) y (1, 1). Su borde inclinado es la recta y = x.</p>
-      <p class="idea">¿Por qué y = x? Porque sobre esa diagonal cada punto tiene su y igual a su x: (0.5, 0.5), (1, 1)… la y copia a la x, y eso es exactamente lo que dice la ecuación y = x.</p>
-      <p class="idea">Barre ese piso como en la sección 2, pero por columnas: congela una x y camina en y. ¿Hasta dónde llegas? Depende de dónde estés parada:</p>
+      <p class="idea">Vuelve a la placa triangular: esquinas (0, 0), (1, 0) y (1, 1). Su borde inclinado es la recta y = x (sobre ella cada punto tiene su y igual a su x).</p>
+      <p class="idea">Bárrela por columnas: congela una x y camina en y. ¿Hasta dónde llegas? Depende de dónde estés:</p>
       <ul class="fases">
-        <li>en x = 0.5, el piso va de y = 0 hasta la diagonal, o sea y = 0.5;</li>
+        <li>en x = 0.5, y va de 0 hasta la diagonal, o sea y = 0.5;</li>
         <li>en x = 0.9, de y = 0 hasta y = 0.9.</li>
       </ul>
       <p class="idea">Siempre de 0 hasta <strong>x</strong>.</p>
-      <p class="idea">Eso es lo nuevo: cuando la región no es un rectángulo, los límites de <strong>adentro</strong> dejan de ser números fijos — son <strong>funciones</strong> de la variable de afuera.</p>
-      <p class="idea">La razón: el borde del piso cambia según dónde vas parada.</p>
-      <p class="idea">Hay dos maneras estándar de describirlo.</p>
-      <p class="idea">La primera: x va entre constantes por fuera y, para cada x fija, y sube de una curva de abajo g(x) a una de arriba h(x).</p>
-      <p class="idea">A esta forma se le llama <strong>tipo I</strong>:</p>
+      <p class="idea">Eso es lo nuevo: cuando la región no es un rectángulo, los límites de <strong>adentro</strong> son <strong>funciones</strong> de la variable de afuera, no números fijos.</p>
+      <p class="idea">Hay dos formas de describirlo. <strong>Tipo I</strong>: x entre constantes por fuera; para cada x, y sube de una curva de abajo g(x) a una de arriba h(x):</p>
       <div class="fx" id="ideaTipo1"></div>
-      <p class="idea">La segunda es el barrido al revés: y va entre constantes por fuera y, para cada y fija, x cruza de una curva izquierda p(y) a una derecha q(y).</p>
-      <p class="idea">Es el <strong>tipo II</strong>:</p>
+      <p class="idea"><strong>Tipo II</strong>: al revés — y entre constantes por fuera; para cada y, x cruza de p(y) a q(y):</p>
       <div class="fx" id="ideaTipo2"></div>
       <p class="fx-note">Regla de oro: los límites de <strong>afuera</strong> son siempre constantes; los de <strong>adentro</strong> pueden depender de la variable de afuera, nunca al revés.</p>
       <div class="check" data-kind="item" data-id="C4_limites" data-tema="region_general" data-level="juntos">
@@ -330,37 +307,33 @@
     <h2 class="modhead">Antes de calcular · el motor de la integral</h2>
     <section class="sec">
       <h3>El motor: antiderivar y evaluar entre límites</h3>
-      <p class="idea">En la sección 1 recordaste QUÉ hace una integral de una variable: sumar rebanaditas. Falta el CÓMO se saca el número, porque de aquí en adelante lo vas a usar en cada paso.</p>
-      <p class="idea">Integrar es la operación al revés de derivar.</p>
-      <p class="idea">Derivar era: de una función, sacar su ritmo de cambio. Integrar es el camino de vuelta: te dan el ritmo y buscas de qué función salió.</p>
-      <p class="idea">Así que "integrar x" significa una cosa muy concreta: <strong>buscar una función cuya derivada sea x</strong>.</p>
-      <p class="idea">Para potencias hay una receta corta: <strong>sube el exponente en 1 y divide entre el nuevo exponente</strong>.</p>
-      <p class="idea">La x es x<sup>1</sup>. Subes el exponente (queda x²) y divides entre 2:</p>
+      <p class="idea">Ya sabes QUÉ hace la integral (sumar rebanaditas); falta el CÓMO se saca el número, que usarás en cada paso.</p>
+      <p class="idea">Integrar es el revés de derivar: te dan el ritmo de cambio y buscas de qué función salió.</p>
+      <p class="idea">Así, "integrar x" es <strong>buscar una función cuya derivada sea x</strong>.</p>
+      <p class="idea">Para potencias hay receta: <strong>sube el exponente en 1 y divide entre el nuevo</strong>. La x es x<sup>1</sup> → queda x²/2:</p>
       <div class="fx" id="antiRule"></div>
-      <p class="idea">Compruébalo derivando de vuelta: la derivada de x²/2 es x. Encaja.</p>
-      <p class="idea">A esa función encontrada se le llama <strong>antiderivada</strong> o <strong>primitiva</strong> (primitiva = la función "original" de la que salió la derivada).</p>
-      <p class="idea">Antes de seguir, tres reglas cortas que la doble usa a cada rato:</p>
+      <p class="idea">Compruébalo: la derivada de x²/2 es x. A esa función se le llama <strong>antiderivada</strong> (o primitiva).</p>
+      <p class="idea">Tres reglas que la doble usa a cada rato:</p>
       <ul class="fases">
-        <li>Un <strong>número fijo</strong> se integra multiplicándolo por la variable: la primitiva de c respecto a y es c·y (de vuelta, la derivada de c·y es c).</li>
-        <li>Un <strong>coeficiente al frente</strong> se queda quieto y solo integras la potencia: la primitiva de 3x²/2 es (3/2)·x³/3 = x³/2.</li>
-        <li>Una <strong>suma</strong> se integra término a término: la primitiva de x + y es la primitiva de x más la primitiva de y.</li>
+        <li>Un <strong>número fijo</strong> se integra multiplicándolo por la variable: la primitiva de c respecto a y es c·y.</li>
+        <li>Un <strong>coeficiente al frente</strong> se queda quieto y solo integras la potencia: la primitiva de 3x²/2 es x³/2.</li>
+        <li>Una <strong>suma</strong> se integra término a término: la primitiva de x + y es la de x más la de y.</li>
       </ul>
-      <p class="idea">La primera regla es la que más sorprende: al integrar en y con la x fija, la <strong>x</strong> hace de número fijo, así que su primitiva es <strong>x·y</strong> — no se queda en x sola.</p>
-      <p class="idea">Pero una integral con dos numeritos, como ∫<sub>0</sub><sup>2</sup> x dx, no pide una función: pide un <strong>número</strong>.</p>
-      <p class="idea">Esos dos numeritos son los <strong>límites</strong>: el de abajo es dónde empiezas a barrer y el de arriba dónde terminas.</p>
-      <p class="idea">La receta para el número tiene cuatro pasos:</p>
+      <p class="idea">La primera sorprende: al integrar en y con la x fija, la <strong>x</strong> hace de número fijo, así que su primitiva es <strong>x·y</strong>.</p>
+      <p class="idea">Con dos numeritos, como ∫<sub>0</sub><sup>2</sup> x dx, no pides una función sino un <strong>número</strong>. Esos son los <strong>límites</strong>: abajo empiezas a barrer, arriba terminas.</p>
+      <p class="idea">La receta para el número:</p>
       <ul class="fases">
         <li>halla la antiderivada;</li>
-        <li>evalúala en el límite de <strong>arriba</strong>;</li>
-        <li>evalúala en el límite de <strong>abajo</strong>;</li>
+        <li>evalúala <strong>arriba</strong>;</li>
+        <li>evalúala <strong>abajo</strong>;</li>
         <li>resta: <strong>arriba menos abajo</strong>.</li>
       </ul>
-      <p class="idea">Para no reescribir la antiderivada tres veces, se encierra en un <strong>corchete</strong> con los dos límites pegados. El corchete significa justo eso: evalúa arriba, evalúa abajo, resta.</p>
-      <p class="idea">Con ∫<sub>0</sub><sup>2</sup> x dx, cuya antiderivada es x²/2:</p>
+      <p class="idea">Para no reescribirla, se encierra la antiderivada en un <strong>corchete</strong> con los dos límites: evalúa arriba, evalúa abajo, resta.</p>
+      <p class="idea">Con ∫<sub>0</sub><sup>2</sup> x dx (antiderivada x²/2):</p>
       <p class="calc"><span class="rw">en 2</span> 2²/2 = <b>2</b> <span class="sep">•</span> <span class="rw">en 0</span> 0²/2 = <b>0</b> <span class="sep">•</span> resta = <b>2</b></p>
       <div class="fx" id="antiEval"></div>
-      <p class="idea">Ese corchete <strong>[ … ]<sub>a</sub><sup>b</sup></strong> = "arriba menos abajo" es el motor de toda la guía: cada vez que leas "la primitiva de … evaluada entre a y b", es esta misma cuenta.</p>
-      <p class="idea">Un aviso para lo que viene: cuando haya dos variables, antiderivas en una y tratas la otra como un <strong>número fijo</strong> —igual que en la derivada parcial—, pero el corchete se usa idéntico.</p>
+      <p class="idea">Ese corchete <strong>[ … ]<sub>a</sub><sup>b</sup></strong> = arriba menos abajo es el motor de toda la guía.</p>
+      <p class="idea">Aviso: con dos variables antiderivas en una y tratas la otra como <strong>número fijo</strong>; el corchete se usa idéntico.</p>
       <div class="check" data-kind="item" data-id="C5_bracket" data-tema="antiderivada" data-level="guiado">
         <div class="qtag">Te toca · calcula</div>
         <p class="q">Con la misma receta, ¿cuánto vale ∫<sub>0</sub><sup>3</sup> x dx? (la antiderivada de x es x²/2)</p>
@@ -409,18 +382,15 @@
 
     <h2 class="modhead">Sube el tamaño · invertir el orden</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">El triángulo salió casi de un tiro. El movimiento que más cae en examen es otro: <strong>invertir el orden</strong> de integración.</p>
-      <p class="idea" style="font-size:17px">La idea no tiene misterio: es el mismo piso con las mismas columnitas, solo que lo vuelves a describir barriendo al revés.</p>
-      <p class="idea" style="font-size:17px">Donde barrías por columnas, ahora por renglones. El total no puede cambiar.</p>
-      <p class="idea" style="font-size:17px">¿Y para qué molestarse? Porque a veces la integral de adentro es imposible en un orden y sale fácil en el otro.</p>
-      <p class="idea" style="font-size:17px">El cambio se hace en <strong>dos fases</strong>:</p>
+      <p class="idea" style="font-size:17px">El movimiento que más cae en examen: <strong>invertir el orden</strong> de integración.</p>
+      <p class="idea" style="font-size:17px">No tiene misterio: es el mismo piso y las mismas columnitas, descrito barriendo al revés. El total no cambia.</p>
+      <p class="idea" style="font-size:17px">¿Para qué? Porque a veces la integral de adentro es imposible en un orden y sale fácil en el otro.</p>
+      <p class="idea" style="font-size:17px">Se hace en <strong>dos fases</strong>:</p>
       <ul class="fases">
         <li><strong>Fase 1 — dibuja y despeja:</strong> identifica las curvas frontera y despeja la variable de adentro en términos de la de afuera.</li>
-        <li><strong>Fase 2 — reescribe:</strong> pasa de tipo I a tipo II (o al revés) poniendo los nuevos límites. La región es la misma, solo la describes distinto.</li>
+        <li><strong>Fase 2 — reescribe:</strong> pasa de tipo I a tipo II (o al revés) con los nuevos límites. La región es la misma.</li>
       </ul>
-      <p class="idea" style="font-size:17px">El piso ahora: la región entre la parábola <strong>y = x²</strong> y la recta <strong>y = x</strong>.</p>
-      <p class="idea" style="font-size:17px">Dibújala en tu cabeza: las dos curvas se cruzan en (0, 0) y en (1, 1), y en medio la recta va por encima de la parábola.</p>
-      <p class="idea" style="font-size:17px">Compruébalo en un punto: en x = 0.5, la recta está en 0.5 y la parábola en 0.25.</p>
+      <p class="idea" style="font-size:17px">El piso ahora: la región entre la parábola <strong>y = x²</strong> y la recta <strong>y = x</strong>. Se cruzan en (0, 0) y (1, 1), y en medio la recta va por encima (en x = 0.5: recta 0.5, parábola 0.25).</p>
       <p class="idea" style="font-size:17px">Viene dada primero en el orden dy dx.</p>
       <div class="estep"><div class="oprow">Orden original (dy dx)</div><p>Para cada x entre 0 y 1, y sube de la parábola x² a la recta x.</p><div class="fx" id="t0"></div></div>
 
@@ -469,18 +439,16 @@
 
     <h2 class="modhead">Sube el tamaño · cambio de variable</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora un piso <strong>redondo</strong>: un disco. Intenta describirlo con x, y: los límites salen con raíces feas tipo √(1 − x²) y las integrales se amargan.</p>
-      <p class="idea" style="font-size:17px">El problema de fondo es que estamos cortando un piso redondo con una cuadrícula cuadrada.</p>
-      <p class="idea" style="font-size:17px">Mejor cortarlo como se corta lo redondo: con <strong>anillos</strong> alrededor del centro y <strong>rayos</strong> que salen del centro, como una diana de dardos.</p>
-      <p class="idea" style="font-size:17px">Ese corte pide nombrar los puntos del piso de otra forma. En vez de "cuánto a la derecha, cuánto arriba" (x, y), ahora dices dos cosas:</p>
+      <p class="idea" style="font-size:17px">Ahora un piso <strong>redondo</strong>: un disco. Con x, y los límites salen con raíces feas tipo √(1 − x²) y las integrales se amargan — es cortar lo redondo con cuadrícula cuadrada.</p>
+      <p class="idea" style="font-size:17px">Mejor cortarlo con <strong>anillos</strong> alrededor del centro y <strong>rayos</strong> que salen de él, como una diana.</p>
+      <p class="idea" style="font-size:17px">Ese corte pide nombrar los puntos de otra forma. En vez de (x, y):</p>
       <ul class="fases">
         <li>a qué <strong>distancia del centro</strong> estás (la llamamos r),</li>
         <li>hacia qué <strong>dirección</strong>, medida como un ángulo (θ).</li>
       </ul>
-      <p class="idea" style="font-size:17px">A ese par de etiquetas se le llama <strong>coordenadas polares</strong>.</p>
-      <p class="idea" style="font-size:17px">¿Y de dónde salen el cos θ y el sen θ que traducen entre los dos idiomas? De un triángulo rectángulo, y vale la pena verlo despacio.</p>
-      <p class="idea" style="font-size:17px">Estás en el centro y caminas una distancia r en la dirección del ángulo θ (medido desde el eje horizontal, la derecha). Llegas a un punto del piso.</p>
-      <p class="idea" style="font-size:17px">Ese recorrido arma un triángulo rectángulo: la diagonal que caminaste es la <strong>hipotenusa</strong> y mide r; sus dos catetos son cuánto avanzaste a la derecha (eso es x) y cuánto subiste (eso es y).</p>
+      <p class="idea" style="font-size:17px">A ese par se le llama <strong>coordenadas polares</strong>.</p>
+      <p class="idea" style="font-size:17px">¿De dónde salen el cos θ y el sen θ que traducen entre los dos idiomas? De un triángulo rectángulo.</p>
+      <p class="idea" style="font-size:17px">Caminas una distancia r desde el centro en la dirección θ (desde la horizontal). Ese recorrido arma un triángulo rectángulo: la <strong>hipotenusa</strong> mide r y sus catetos son lo que avanzaste a la derecha (x) y lo que subiste (y).</p>
       <div class="fx"><svg viewBox="0 0 340 178" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triángulo rectángulo: hipotenusa r en ángulo theta, cateto horizontal x = r por cos theta, cateto vertical y = r por sen theta" style="display:block;width:100%;height:auto;max-width:300px;margin:0 auto">
         <line x1="24" y1="150" x2="234" y2="150" stroke="#F5821F" stroke-width="3.5"/>
         <line x1="234" y1="150" x2="234" y2="46" stroke="#283891" stroke-width="3.5"/>
@@ -492,28 +460,23 @@
         <text x="129" y="170" font-size="13" fill="#C75D08" font-weight="700" text-anchor="middle">x = r·cos θ</text>
         <text x="244" y="102" font-size="13" fill="#283891" font-weight="700">y = r·sen θ</text>
       </svg></div>
-      <p class="idea" style="font-size:17px">cos θ y sen θ son dos números que solo dependen del ángulo θ (se leen de tablas o se memorizan). Cada uno es una fracción de ese triángulo: cos θ es el cateto pegado a θ dividido entre r, y sen θ el cateto de enfrente dividido entre r. Como esos catetos son x e y:</p>
+      <p class="idea" style="font-size:17px">cos θ y sen θ dependen solo del ángulo θ (se leen de tablas o se memorizan). Cada uno es una fracción de ese triángulo: el cateto pegado a θ sobre r, y el de enfrente sobre r. Como esos catetos son x e y:</p>
       <div class="fx" id="polTrig"></div>
-      <p class="idea" style="font-size:17px">Despeja x e y multiplicando por la distancia r y tienes la traducción entre los dos idiomas:</p>
+      <p class="idea" style="font-size:17px">Despeja x e y multiplicando por r y tienes la traducción entre los dos idiomas:</p>
       <div class="fx"><div class="sys"><span class="eq">x = r·cos θ</span><span class="eq">y = r·sen θ</span></div></div>
-      <p class="idea" style="font-size:17px">Pero hay una trampa, y es el corazón de esta sección: los pedacitos de piso que forman los anillos y rayos <strong>no son todos del mismo tamaño</strong>.</p>
-      <p class="idea" style="font-size:17px">Camina sobre el disco: parada cerca del centro, girar un ángulo te mueve poquito; parada en el borde, el mismo giro te hace recorrer un arco mucho más largo.</p>
-      <p class="idea" style="font-size:17px">Con números, la vuelta completa en un disco de radio 2 metros:</p>
+      <p class="idea" style="font-size:17px">Pero hay una trampa, y es el corazón de la sección: los pedacitos que forman los anillos y rayos <strong>no son del mismo tamaño</strong>.</p>
+      <p class="idea" style="font-size:17px">Cerca del centro, girar un ángulo te mueve poquito; en el borde, el mismo giro recorre un arco mucho más largo.</p>
+      <p class="idea" style="font-size:17px">Con números, la vuelta completa en un disco de radio 2:</p>
       <div class="fx"><div class="sys"><span class="eq">por el borde: 2π·2 ≈ 12.6 m</span><span class="eq">a medio metro: 2π·0.5 ≈ 3.1 m</span></div></div>
-      <p class="idea" style="font-size:17px">Mismo ángulo, cuatro veces más camino.</p>
-      <p class="idea" style="font-size:17px">¿De dónde sale ese largo? De una fracción de la vuelta.</p>
-      <p class="idea" style="font-size:17px">La vuelta completa es un ángulo de 2π y su contorno (la orilla del anillo a distancia r) mide 2π·r.</p>
-      <p class="idea" style="font-size:17px">Un apunte: aquí los ángulos van en <strong>radianes</strong>. La vuelta entera (360°) es 2π; media vuelta (180°) es π; un cuarto de vuelta (90°) es π/2.</p>
-      <p class="idea" style="font-size:17px">Un giro chiquito dθ es solo una parte de esa vuelta: la fracción dθ/2π. Su arco es esa misma fracción del contorno:</p>
+      <p class="idea" style="font-size:17px">¿De dónde sale ese largo? La vuelta completa es un ángulo de 2π y el contorno del anillo a distancia r mide 2π·r. (En radianes: 360° = 2π, 180° = π, 90° = π/2.)</p>
+      <p class="idea" style="font-size:17px">Un giro chiquito dθ es la fracción dθ/2π de la vuelta, así que su arco es esa fracción del contorno:</p>
       <div class="fx" id="arcoDeriv"></div>
-      <p class="idea" style="font-size:17px">Por eso un pedacito de anillo a distancia r mide dr de ancho y <strong>r·dθ</strong> de largo — el arco crece con r.</p>
-      <p class="idea" style="font-size:17px">Su área es como ancho por largo:</p>
+      <p class="idea" style="font-size:17px">Por eso un pedacito de anillo mide dr de ancho y <strong>r·dθ</strong> de largo — el arco crece con r. Su área es ancho por largo:</p>
       <div class="fx"><div class="sys"><span class="eq">área ≈ dr · (r·dθ)</span><span class="eq">= r·dr·dθ</span></div></div>
-      <p class="idea" style="font-size:17px">Si sumaras dr·dθ a secas, estarías contando parejo pedacitos que no son parejos, y el número saldría mal.</p>
-      <p class="idea" style="font-size:17px">Ese factor que corrige el tamaño de los pedacitos al cambiar de coordenadas tiene nombre: se llama <strong>jacobiano</strong> (por el matemático Jacobi).</p>
-      <p class="idea" style="font-size:17px">El jacobiano de polares es r:</p>
+      <p class="idea" style="font-size:17px">Si sumaras dr·dθ a secas, contarías parejo pedacitos que no lo son, y el número saldría mal.</p>
+      <p class="idea" style="font-size:17px">Ese factor que corrige el tamaño al cambiar de coordenadas se llama <strong>jacobiano</strong> (por el matemático Jacobi). El de polares es r:</p>
       <div class="fx" id="polDA"></div>
-      <p class="fx-note">El jacobiano entra siempre con <strong>valor absoluto</strong> — un pedacito de área no puede medir negativo. En polares, r ya es positivo en su rango; por eso no se le ven las barras.</p>
+      <p class="fx-note">El jacobiano entra siempre con <strong>valor absoluto</strong> — un área no puede ser negativa. En polares r ya es positivo, por eso no se le ven las barras.</p>
 
       <div class="check" data-kind="item" data-id="J1pred" data-tema="cambio_variable" data-level="guiado">
         <div class="qtag">Te toca · decide el paso</div>
@@ -525,49 +488,44 @@
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>En polares los "cuadritos" se estiran conforme te alejas del origen; ese estiramiento es el factor <strong>r</strong>. Sin él, el número sale mal.</p></div>
       </div>
-      <p class="idea" style="font-size:17px">Con eso, el área del disco de radio 1 sale a mano.</p>
-      <p class="idea" style="font-size:17px">La región es 0 ≤ r ≤ 1, 0 ≤ θ ≤ 2π, e integramos el 1 con su factor r.</p>
+      <p class="idea" style="font-size:17px">Con eso, el área del disco de radio 1 sale a mano: región 0 ≤ r ≤ 1, 0 ≤ θ ≤ 2π, integrando el 1 con su factor r.</p>
       <div class="estep"><div class="oprow">Paso 1 · planteo en polares</div><p>El integrando es 1, pero el elemento de área trae el factor r, así que integro r dr dθ.</p><div class="fx" id="f0"></div></div>
       <div class="estep"><div class="oprow">Paso 2 · integro en r</div><p>Trato θ como constante. La primitiva de r es r²/2, evaluada de 0 a 1:</p><p class="calc"><span class="rw">en r=1</span> 1²/2 = <b>1/2</b> <span class="sep">•</span> <span class="rw">en r=0</span> <b>0</b> <span class="sep">•</span> queda <b>1/2</b></p><div class="fx" id="f1"></div></div>
       <div class="estep"><div class="oprow">Paso 3 · integro en θ</div><p>Queda la constante 1/2 por dθ de 0 a 2π: solo multiplica por el largo del intervalo.</p><p class="calc"><span class="rw">θ</span> (1/2)·(2π − 0) = <b>π</b></p><div class="fx" id="f2"></div></div>
-      <p class="idea" style="font-size:17px">Resultado: <strong>π</strong>, el área del disco unitario.</p>
-      <p class="idea" style="font-size:17px">Sin el factor r el número saldría mal; el jacobiano <strong>no es opcional</strong>.</p>
+      <p class="idea" style="font-size:17px">Resultado: <strong>π</strong>, el área del disco unitario. Sin el factor r saldría mal: el jacobiano <strong>no es opcional</strong>.</p>
     </section>
 
     <h2 class="modhead">Sube el tamaño · triples en 3D</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Último salto: el objeto ya no es un piso sino un <strong>sólido</strong>, un cuerpo con volumen — un cubo, una lata, una pelota.</p>
-      <p class="idea" style="font-size:17px">La receta se repite tal cual, con una dimensión más: en vez de rellenar un piso con columnitas, rellenas el sólido con <strong>cajitas</strong> diminutas.</p>
-      <p class="idea" style="font-size:17px">Cada cajita tiene un volumen chiquito, <strong>dV</strong> ("d" de diminuto, "V" de volumen). Si f es, digamos, la densidad del material, cada cajita aporta:</p>
+      <p class="idea" style="font-size:17px">Último salto: el objeto ya no es un piso sino un <strong>sólido</strong> con volumen — un cubo, una lata, una pelota.</p>
+      <p class="idea" style="font-size:17px">La receta se repite con una dimensión más: en vez de columnitas, rellenas el sólido con <strong>cajitas</strong> diminutas.</p>
+      <p class="idea" style="font-size:17px">Cada cajita tiene un volumen <strong>dV</strong>. Si f es la densidad, cada una aporta f·dV.</p>
       <div class="fx"><div class="sys"><span class="eq">f·dV</span></div></div>
-      <p class="idea" style="font-size:17px">Sumarlas todas es una <strong>integral triple</strong>: se escribe con tres eses (∭), porque ahora se barre en tres direcciones.</p>
-      <p class="idea" style="font-size:17px">Se calcula igual que la doble: de adentro hacia afuera, con las variables de afuera congeladas.</p>
+      <p class="idea" style="font-size:17px">Sumarlas es una <strong>integral triple</strong> (tres eses ∭, tres direcciones).</p>
+      <p class="idea" style="font-size:17px">Se calcula igual que la doble: de adentro hacia afuera, con las de afuera congeladas.</p>
       <p class="idea" style="font-size:17px">En coordenadas normales la cajita es un cubito:</p>
       <div class="fx"><div class="sys"><span class="eq">dV = dx dy dz</span></div></div>
       <p class="idea" style="font-size:17px">Y el truco de cambiar de coordenadas también se repite.</p>
-      <p class="idea" style="font-size:17px">Para sólidos con simetría alrededor de un <strong>eje</strong> (una lata, un tubo) convienen las <strong>cilíndricas</strong>: son las polares del piso más la altura z de siempre.</p>
-      <p class="idea" style="font-size:17px">Su jacobiano es el mismo r de los anillos.</p>
-      <p class="idea" style="font-size:17px">Para sólidos con simetría alrededor de un <strong>punto</strong> (una pelota) convienen las <strong>esféricas</strong>. Sus tres etiquetas:</p>
+      <p class="idea" style="font-size:17px">Simetría alrededor de un <strong>eje</strong> (lata, tubo) → <strong>cilíndricas</strong>: las polares del piso más la altura z. Su jacobiano es el mismo r de los anillos.</p>
+      <p class="idea" style="font-size:17px">Simetría alrededor de un <strong>punto</strong> (una pelota) → <strong>esféricas</strong>. Sus tres etiquetas:</p>
       <ul class="fases">
         <li>ρ es la distancia al centro (la r de 3D),</li>
         <li>θ la vuelta de siempre,</li>
         <li>φ el ángulo que bajas desde el polo norte.</li>
       </ul>
-      <p class="idea" style="font-size:17px">Aviso honesto: los dos jacobianos del 3D —la r de cilíndricas y el ρ²·sen φ de esféricas— se llevan al examen <strong>de memoria</strong>. Aquí no los deducimos con cuentas; solo le damos sentido a cada pieza y comprobamos que funcionan.</p>
-      <p class="idea" style="font-size:17px">Su jacobiano es <strong>ρ²·sen φ</strong>, pieza por pieza:</p>
+      <p class="idea" style="font-size:17px">Aviso: los dos jacobianos del 3D —la r de cilíndricas y el ρ²·sen φ de esféricas— van al examen <strong>de memoria</strong>. Aquí solo les damos sentido y comprobamos que funcionan.</p>
+      <p class="idea" style="font-size:17px">El jacobiano esférico es <strong>ρ²·sen φ</strong>, pieza por pieza:</p>
       <ul class="fases">
         <li>el ρ² porque lejos del centro los pedacitos se agrandan en dos direcciones a la vez,</li>
-        <li>el sen φ porque cerca de los polos las rebanadas se hacen flaquitas: en el ecuador (φ = π/2, media bajada) valen ancho completo, sen(π/2) = 1; hacia el polo (φ → 0) se encogen a nada, sen 0 = 0.</li>
+        <li>el sen φ porque cerca de los polos las rebanadas se afinan: en el ecuador (φ = π/2) valen ancho completo, sen(π/2) = 1; hacia el polo (φ → 0) se encogen, sen 0 = 0.</li>
       </ul>
       <p class="idea" style="font-size:17px">Cada sistema trae su elemento de volumen:</p>
       <div class="fx" id="dV3d"></div>
-      <p class="idea" style="font-size:17px">Un vistazo a las <strong>cilíndricas</strong>: el volumen de un cilindro de radio 1 y altura 2 sale de barrer r de 0 a 1, θ toda la vuelta y z de 0 a 2.</p>
-      <p class="idea" style="font-size:17px">El factor r es el mismo jacobiano de las polares:</p>
+      <p class="idea" style="font-size:17px"><strong>Cilíndricas</strong>: el volumen de un cilindro de radio 1 y altura 2 sale de barrer r de 0 a 1, θ toda la vuelta y z de 0 a 2, con el factor r:</p>
       <div class="fx" id="cilEx"></div>
-      <p class="fx-note">Coincide con π·R²·h = π·1²·2 = 2π. Los mismos límites, con una integral en z de más que las polares.</p>
-      <p class="idea" style="font-size:17px">Ahora las <strong>esféricas</strong>, factor por factor: el volumen de la esfera de radio 1. La región:</p>
+      <p class="fx-note">Coincide con π·R²·h = π·1²·2 = 2π.</p>
+      <p class="idea" style="font-size:17px">Ahora las <strong>esféricas</strong>: el volumen de la esfera de radio 1. La región:</p>
       <div class="fx"><div class="sys"><span class="eq">0 ≤ ρ ≤ 1</span><span class="eq">0 ≤ φ ≤ π</span><span class="eq">0 ≤ θ ≤ 2π</span></div></div>
-      <p class="idea" style="font-size:17px">En cada paso decides qué se integra.</p>
       <div class="estep"><div class="oprow">Planteo la triple</div><p>El integrando es solo el jacobiano ρ²·sen φ; como los límites son constantes, los tres factores se separan.</p><div class="fx" id="s0"></div></div>
 
       <div class="check" data-kind="item" data-id="S1pred" data-tema="coordenadas_3d" data-level="juntos">

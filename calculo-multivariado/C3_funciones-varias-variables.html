@@ -459,18 +459,16 @@
 
     <h2 class="modhead">Sube el tamaño · el límite y sus infinitos caminos</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">El dominio y la imagen casi salen de un tiro. El <strong>límite</strong> es el salto real, y es lo que de verdad cae en examen.</p>
-      <p class="idea" style="font-size:17px">Ya conoces la regla del juego del escalón 7: infinitos caminos hacia el punto, y todos deben dar lo mismo.</p>
-      <p class="idea" style="font-size:17px">En la práctica, eso se convierte en una estrategia de dos fases:</p>
+      <p class="idea" style="font-size:17px">El dominio y la imagen salen casi de un tiro. El <strong>límite</strong> es el salto real — y lo que más cae en examen.</p>
+      <p class="idea" style="font-size:17px">La estrategia es de dos fases:</p>
       <ul class="fases">
-        <li><strong>Fase 1 — sospecha:</strong> prueba <em>dos caminos fáciles</em> (ejes, la recta y = x). Si discrepan, ya terminaste: el límite <em>no existe</em>.</li>
-        <li><strong>Fase 2 — confirma:</strong> si los caminos que pruebas coinciden, eso todavía no prueba nada; hay que <em>demostrar</em> con un argumento que cubra todos los caminos a la vez — viene abajo.</li>
+        <li><strong>Fase 1 — sospecha:</strong> prueba dos caminos fáciles (ejes, y = x). Si discrepan, el límite <em>no existe</em>.</li>
+        <li><strong>Fase 2 — confirma:</strong> si coinciden, aún no prueba nada; falta un argumento que cubra todos los caminos — viene abajo.</li>
       </ul>
-      <p class="idea" style="font-size:17px">Empecemos con un caso que <strong>falla</strong>. Estudiemos el límite en el origen de:</p>
+      <p class="idea" style="font-size:17px">Empecemos con un caso que <strong>falla</strong>, en el origen:</p>
       <div class="estep"><div class="oprow">El límite</div><div class="fx" id="t0"></div></div>
-      <p class="idea" style="font-size:17px">Antes de probar, aclaremos qué es un <strong>camino</strong>. Acercarse al origen en línea recta es venir por una recta que liga la y con la x.</p>
-      <p class="idea" style="font-size:17px">El <strong>eje x</strong> es la recta "y siempre vale 0"; la <strong>diagonal</strong> es la recta "y siempre vale lo mismo que x".</p>
-      <p class="idea" style="font-size:17px">Caminar hacia el origen por ese camino es meter esa regla —y = 0, o y = x— dentro de la fórmula y ver a qué valor tiende.</p>
+      <p class="idea" style="font-size:17px">Un <strong>camino</strong> es una recta por la que llegas al origen: el <strong>eje x</strong> es y = 0, la <strong>diagonal</strong> es y = x.</p>
+      <p class="idea" style="font-size:17px">Recorrerlo = meter esa regla en la fórmula y ver a qué tiende.</p>
 
       <div class="check" data-kind="item" data-id="T1pred" data-tema="limites" data-level="juntos">
         <div class="qtag">Te toca · decide el camino</div>
@@ -498,8 +496,7 @@
 
       <div class="estep"><div class="oprow">Comparo</div><p>Un camino da 0 y el otro da ½. No coinciden:</p><p class="calc"><span class="rw">caminos</span> 0<b>≠</b>½ <span class="sep">•</span> el límite <b>no existe</b></p><div class="fx" id="t3"></div></div>
 
-      <p class="idea" style="font-size:17px">Como dos caminos dan valores distintos, <strong>el límite no existe</strong>.</p>
-      <p class="idea" style="font-size:17px">Con encontrar dos caminos que discrepen basta: no hay que probar todos. Esa es la Fase 1.</p>
+      <p class="idea" style="font-size:17px">Dos caminos dan distinto → <strong>el límite no existe</strong>. Basta con eso: no hay que probar todos (Fase 1).</p>
     </section>
 
     <section class="sec">
@@ -521,14 +518,13 @@
 
     <section class="sec">
       <h3>Otra forma de nombrar un punto: distancia y ángulo</h3>
-      <p class="idea">Para el caso que <strong>sí existe</strong> hace falta cubrir todos los caminos de un solo golpe. El truco empieza por nombrar los puntos de otra manera.</p>
-      <p class="idea">Hasta ahora ubicabas un punto con la pareja (x, y): cuánto al este y cuánto al norte.</p>
-      <p class="idea">Hay una segunda forma, igual de válida, con otros dos datos:</p>
+      <p class="idea">Para el caso que <strong>sí existe</strong> necesitas cubrir todos los caminos de un golpe. El truco: nombrar los puntos de otra forma.</p>
+      <p class="idea">Hasta ahora usabas la pareja (x, y). Hay una segunda forma, con otros dos datos:</p>
       <ul class="fases">
-        <li><strong>r</strong> = qué tan <strong>lejos</strong> está el punto del origen; es su <strong>distancia</strong>.</li>
-        <li><strong>θ</strong> = hacia qué <strong>dirección</strong> queda, medida como el <strong>ángulo</strong> que giras desde el este, igual que la aguja de una brújula. (θ es una letra griega; se lee "theta".)</li>
+        <li><strong>r</strong> = qué tan <strong>lejos</strong> está del origen: su <strong>distancia</strong>.</li>
+        <li><strong>θ</strong> = hacia qué <strong>dirección</strong> queda: el <strong>ángulo</strong> desde el este, como una brújula. (Se lee "theta".)</li>
       </ul>
-      <p class="idea">Dibújalo: pon el punto, traza una <strong>flecha</strong> desde el origen hasta él —su largo es r— y marca el ángulo θ que esa flecha abre con el este.</p>
+      <p class="idea">Dibújalo: una <strong>flecha</strong> del origen al punto (su largo es r) y el ángulo θ que abre con el este.</p>
       <div class="fx">
         <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Un punto ubicado por su distancia r al origen y el ángulo θ desde el este, con su triángulo rectángulo de catetos r·cos θ y r·sen θ" style="display:block;width:100%;max-width:300px;height:auto;margin:0 auto">
           <line x1="40" y1="160" x2="286" y2="160" stroke="#181B22" stroke-width="1.5"/>
@@ -549,46 +545,42 @@
           <text x="226" y="116" font-size="13" fill="#1C7A3A">r·sen θ</text>
         </svg>
       </div>
-      <p class="idea">Esa flecha es la hipotenusa de un triángulo rectángulo. Sus dos catetos son: lo que avanzas en horizontal (que es la x del punto) y lo que subes en vertical (que es la y).</p>
-      <p class="idea">Aquí entran el <strong>seno</strong> y el <strong>coseno</strong>. En un triángulo rectángulo, para el ángulo θ, el coseno es el cateto pegado al ángulo dividido por la hipotenusa, y el seno es el cateto de enfrente dividido por la hipotenusa.</p>
-      <p class="idea">El cateto pegado a θ es el horizontal (vale x), el de enfrente es el vertical (vale y), y la hipotenusa es la flecha (vale r):</p>
+      <p class="idea">Esa flecha es la hipotenusa de un triángulo rectángulo. Sus catetos son la x (horizontal) y la y (vertical).</p>
+      <p class="idea">Para el ángulo θ: el <strong>coseno</strong> es cateto pegado ⁄ hipotenusa, el <strong>seno</strong> es cateto de enfrente ⁄ hipotenusa. Aquí el pegado vale x, el de enfrente vale y, la hipotenusa vale r:</p>
       <div class="fx" id="senCosDef"></div>
-      <p class="idea">Despeja la x y la y —multiplica ambos lados por r— y salen las dos traducciones:</p>
+      <p class="idea">Despeja x y y (multiplica por r) y salen las dos traducciones:</p>
       <div class="fx" id="polarConv"></div>
-      <p class="idea">A esta forma de nombrar el punto, (r, θ) con esas dos fórmulas, se le llama <strong>coordenadas polares</strong>.</p>
-      <p class="idea">Guarda un hecho que usaremos enseguida: sin importar el ángulo, el seno y el coseno <strong>nunca se pasan de 1 ni bajan de −1</strong>.</p>
-      <p class="idea">Tiene sentido con el triángulo: un cateto nunca es más largo que la hipotenusa, así que el cociente cateto ⁄ hipotenusa siempre cae entre −1 y 1.</p>
+      <p class="idea">A nombrar el punto así, (r, θ), se le llama <strong>coordenadas polares</strong>.</p>
+      <p class="idea">Un hecho que usaremos enseguida: sen θ y cos θ <strong>nunca se pasan de 1 ni bajan de −1</strong> (un cateto nunca supera a la hipotenusa).</p>
       <div class="fx" id="senCosBound"></div>
-      <p class="idea">Y lo mejor: como r es la distancia al origen, acercarse al origen —por el camino que sea— es simplemente hacer <strong>r → 0</strong>, sin importar cuánto valga el ángulo.</p>
+      <p class="idea">Y lo clave: como r es la distancia al origen, acercarse al origen por <strong>cualquier</strong> camino es hacer <strong>r → 0</strong>.</p>
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">No siempre falla. Cuando el límite <strong>sí existe</strong> (Fase 2), el argumento que cubre todos los caminos a la vez son justamente las <strong>coordenadas polares</strong> que acabamos de construir.</p>
-      <p class="idea" style="font-size:17px">En lugar de ubicar un punto por (x, y), lo ubicas por r —su <strong>distancia</strong> al origen— y θ —su <strong>ángulo</strong>—, con las traducciones:</p>
+      <p class="idea" style="font-size:17px">Cuando el límite <strong>sí existe</strong> (Fase 2), el argumento que cubre todos los caminos son las <strong>polares</strong> que acabamos de construir:</p>
       <div class="fx"><div class="sys"><span class="eq">x = r·cos θ</span><span class="eq">y = r·sen θ</span></div></div>
-      <p class="idea" style="font-size:17px">La gracia: acercarse al origen por <strong>cualquier</strong> camino es simplemente hacer r → 0, sin importar cómo cambie el ángulo.</p>
+      <p class="idea" style="font-size:17px">La gracia: acercarse al origen por <strong>cualquier</strong> camino es hacer r → 0.</p>
       <p class="idea" style="font-size:17px">Estudiemos:</p>
       <div class="estep"><div class="oprow">El límite</div><div class="fx" id="f0"></div></div>
       <div class="estep"><div class="oprow">Cambio a polares · numerador</div><p>Sustituyo x = r·cos θ, y = r·sen θ en x²y:</p><p class="calc"><span class="rw">num</span> x²<b>=r²cos²θ</b> <span class="sep">•</span> y<b>=r·senθ</b> <span class="sep">•</span> x²y<b>=r³cos²θ·senθ</b></p></div>
-      <div class="estep"><div class="oprow">Cambio a polares · denominador</div><p>Este es el corazón del truco. Sustituyo x = r·cos θ y y = r·sen θ en el patrón x² + y² y desarrollo paso a paso:</p><div class="fx" id="denPolar"></div><p>El último salto usa una identidad que conviene memorizar: para <strong>cualquier</strong> ángulo, cos²θ + sen²θ = 1. Es el Pitágoras del triángulo de antes cuando la hipotenusa mide 1, así que el paréntesis se vuelve 1 y solo sobrevive r².</p><p class="calc"><span class="rw">den</span> x²+y²<b>=r²</b></p></div>
+      <div class="estep"><div class="oprow">Cambio a polares · denominador</div><p>El corazón del truco. Sustituyo en x² + y² y desarrollo:</p><div class="fx" id="denPolar"></div><p>El último paso usa la identidad cos²θ + sen²θ = 1 (el Pitágoras con hipotenusa 1): el paréntesis se vuelve 1 y solo sobrevive r².</p><p class="calc"><span class="rw">den</span> x²+y²<b>=r²</b></p></div>
       <div class="estep"><div class="oprow">Divido y simplifico</div><p>Cancelo dos erres arriba con las dos de abajo:</p><p class="calc"><span class="rw">r³÷r²</span> r³⁄r²<b>=r</b> <span class="sep">•</span> queda r·cos²θ·senθ</p><div class="fx" id="f1"></div></div>
-      <p class="idea" style="font-size:17px">Queda <strong>r · cos²θ · sen θ</strong>: una r multiplicada por un <strong>factor de ángulo</strong> (el pedazo cos²θ · sen θ).</p>
-      <p class="idea" style="font-size:17px">Recuerda lo que construimos: sen θ y cos θ nunca se pasan de 1 ni bajan de −1. Multiplicar pedazos así entre sí tampoco se pasa de 1, así que el factor de ángulo cabe entre −1 y 1.</p>
-      <p class="idea" style="font-size:17px">Entonces r por (un factor entre −1 y 1) queda atrapado entre <strong>−r y r</strong>.</p>
-      <p class="idea" style="font-size:17px">Cuando <strong>r → 0</strong>, ese sándwich —de −r a r— lo aplasta a 0, sea cual sea el ángulo.</p>
+      <p class="idea" style="font-size:17px">Queda <strong>r · cos²θ · sen θ</strong>: una r por un factor de ángulo (cos²θ · sen θ).</p>
+      <p class="idea" style="font-size:17px">Ese factor cabe entre −1 y 1 (sen y cos nunca pasan de 1), así que todo queda atrapado entre <strong>−r y r</strong>.</p>
+      <p class="idea" style="font-size:17px">Cuando <strong>r → 0</strong>, ese sándwich lo aplasta a 0, sea cual sea el ángulo.</p>
       <div class="fx"><div class="sys"><span class="eq">límite = 0</span></div></div>
       <p class="fx-note">Como todos los caminos dan 0, el límite existe y vale 0. Polares sirven cuando aparece el patrón x² + y².</p>
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Un paso más: la <strong>continuidad</strong>. En el terreno se ve fácil: una función es continua donde su terreno <strong>no tiene hoyos ni saltos</strong> — puedes caminar por encima sin caer en un agujero.</p>
+      <p class="idea" style="font-size:17px">Un paso más: la <strong>continuidad</strong>. Fácil en el terreno: una función es continua donde <strong>no hay hoyos ni saltos</strong>.</p>
       <p class="idea" style="font-size:17px">La versión precisa, en un punto, pide tres cosas:</p>
       <ul class="fases">
         <li>que exista el <strong>valor</strong> de la función ahí,</li>
         <li>que exista el <strong>límite</strong> ahí,</li>
         <li>y que <strong>coincidan</strong>.</li>
       </ul>
-      <p class="idea" style="font-size:17px">Usemos la función del ejemplo anterior, definida <strong>a trozos</strong>: una fórmula para casi todo el plano y un valor aparte para el origen, puesto justo para taparle el hueco:</p>
+      <p class="idea" style="font-size:17px">Usemos la función del ejemplo anterior, definida <strong>a trozos</strong>: una fórmula para casi todo el plano y un valor aparte en el origen, para taparle el hueco:</p>
       <div class="estep"><div class="oprow">La función</div><div class="fx" id="c0"></div></div>
       <div class="estep"><div class="oprow">El valor en el punto</div><p>Por la definición a trozos, en el origen la función vale f(0, 0) = 0. Ese valor existe:</p><p class="calc"><span class="rw">valor</span> f(0,0)<b>=0</b> <span class="sep">•</span> existe <b>✓</b></p><div class="fx" id="c1"></div></div>
       <div class="estep"><div class="oprow">El límite en el punto</div><p>Ya lo calculamos con polares: el límite cuando (x, y) → (0, 0) es 0. También existe:</p><p class="calc"><span class="rw">límite</span> lím<b>=0</b> <span class="sep">•</span> existe <b>✓</b></p><div class="fx" id="c2"></div></div>

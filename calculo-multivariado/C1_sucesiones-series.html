@@ -194,70 +194,50 @@
 
     <h2 class="modhead">Empecemos por un problema</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Sueltas una pelota desde <strong>2 metros</strong>. En cada rebote sube <strong>la mitad</strong> de lo que subió antes:</p>
+      <p class="idea" style="font-size:17px">Sueltas una pelota desde <strong>2 metros</strong>. En cada rebote sube <strong>la mitad</strong> de lo que subió antes, y así para siempre:</p>
       <div class="fx"><div class="sys"><span class="eq">1 m, 0.5 m, 0.25 m…</span></div></div>
-      <p class="idea" style="font-size:17px">Y así <strong>para siempre</strong>.</p>
-      <p class="idea" style="font-size:17px">La pregunta incómoda: si rebota infinitas veces, ¿recorre una distancia <strong>infinita</strong>?</p>
+      <p class="idea" style="font-size:17px">Si rebota infinitas veces, ¿sube una distancia <strong>infinita</strong>?</p>
       <div class="fx"><div class="sys"><span class="eq">subidas: 1 + <sup>1</sup>⁄<sub>2</sub> + <sup>1</sup>⁄<sub>4</sub> + <sup>1</sup>⁄<sub>8</sub> + …</span></div></div>
-      <p class="idea" style="font-size:17px">Son <strong>infinitos</strong> sumandos, así que la intuición grita “infinito”.</p>
-      <p class="idea" style="font-size:17px">Pero los sumandos se van haciendo pequeñitos, y el total podría <strong>quedarse quieto</strong> en un número.</p>
-      <p class="idea" style="font-size:17px">Sumar de a uno no termina nunca; necesitamos una herramienta que diga, sin sumar a mano, si el total se estabiliza y en qué valor.</p>
-      <p class="idea" style="font-size:17px">Para el final de esta guía vas a cerrar este número tú sola.</p>
+      <p class="idea" style="font-size:17px">Son infinitos sumandos, pero cada vez más chicos: el total podría <strong>quedarse quieto</strong> en un número.</p>
+      <p class="idea" style="font-size:17px">Para el final de la guía cierras ese número tú sola.</p>
     </section>
 
     <h2 class="modhead">La idea · empecemos por lo más simple</h2>
 
     <section class="sec">
       <h3>1 · Una fila infinita, cada número con su lugar</h3>
-      <p class="idea">Deja la pelota un momento y arma esta imagen: una <strong>fila infinita de sobres</strong>, numerados 1, 2, 3, 4… sin final.</p>
-      <p class="idea">Dentro de cada sobre viene escrito <strong>un número</strong>.</p>
-      <p class="idea">Eso es todo el objeto: lo que importa es <strong>qué número trae cada sobre y en qué lugar de la fila está</strong>.</p>
-      <p class="idea">Un ejemplo con números chicos. Supón que la fila obedece esta regla: <em>“cada sobre trae su lugar, dividido entre su lugar más uno”</em>.</p>
+      <p class="idea">Deja la pelota y arma esta imagen: una <strong>fila infinita de sobres</strong>, numerados 1, 2, 3, 4… sin final.</p>
+      <p class="idea">Dentro de cada sobre hay <strong>un número</strong>. Eso es todo: qué número trae cada sobre y en qué lugar está.</p>
+      <p class="idea">Prueba con una regla: <em>“cada sobre trae su lugar, dividido entre su lugar más uno”</em>.</p>
       <ul class="fases">
         <li>El sobre 1 trae 1/(1 + 1) = <sup>1</sup>⁄<sub>2</sub>.</li>
         <li>El sobre 2 trae 2/(2 + 1) = <sup>2</sup>⁄<sub>3</sub>.</li>
         <li>El sobre 3 trae <sup>3</sup>⁄<sub>4</sub>, el sobre 4 trae <sup>4</sup>⁄<sub>5</sub>…</li>
       </ul>
-      <p class="idea">Sin misterio: me das el lugar, la regla me da el número.</p>
-      <p class="idea">Ahora escribamos lo mismo en símbolos. Al <strong>lugar</strong> en la fila lo llamamos <em>n</em> (n = 1, 2, 3…).</p>
-      <p class="idea">Y al número que vive en el lugar <em>n</em> lo escribimos <strong>a<sub>n</sub></strong>.</p>
-      <p class="idea">Esa <em>n</em> chiquita de abajo se llama <strong>subíndice</strong> y no multiplica ni opera nada: solo señala <strong>de qué lugar de la fila hablamos</strong>.</p>
-      <p class="idea">a<sub>1</sub> es lo que trae el sobre 1, a<sub>2</sub> lo del sobre 2, a<sub>100</sub> lo del sobre 100.</p>
-      <p class="idea">Nuestra regla, en símbolos:</p>
+      <p class="idea">Al <strong>lugar</strong> en la fila lo llamamos <em>n</em>; al número que vive en ese lugar, <strong>a<sub>n</sub></strong>.</p>
+      <p class="idea">Esa <em>n</em> chiquita es un <strong>subíndice</strong>: no multiplica nada, solo señala de qué lugar hablamos.</p>
+      <p class="idea">La regla, en símbolos:</p>
       <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = n / (n + 1)</span></div></div>
-      <p class="idea">Dos nombres y cerramos.</p>
-      <p class="idea">Cada número de la fila se llama <strong>término</strong> (así se le dice a cada pieza de una lista o de una suma).</p>
-      <p class="idea">Y la fórmula de la regla es el <strong>término general</strong>: el molde que produce cualquier término con solo sustituir su <em>n</em>.</p>
-      <p class="idea">Y la fila completa también tiene nombre: una lista infinita y ordenada de números es una <strong>sucesión</strong>.</p>
-      <p class="idea">Se llama así porque sus números se van <em>sucediendo</em> uno tras otro, cada uno en su turno.</p>
+      <p class="idea">Cada número de la fila es un <strong>término</strong>; la fórmula que los produce es el <strong>término general</strong>.</p>
+      <p class="idea">Y la fila completa —una lista infinita y ordenada de números— es una <strong>sucesión</strong>.</p>
     </section>
 
     <section class="sec">
       <h3>2 · ¿A qué valor se van pegando? El límite</h3>
-      <p class="idea">Camina la fila de arriba mirando los números como decimales:</p>
+      <p class="idea">Camina esa fila mirando los números como decimales:</p>
       <div class="fx"><div class="sys"><span class="eq"><sup>1</sup>⁄<sub>2</sub> = 0.5</span><span class="eq"><sup>2</sup>⁄<sub>3</sub> ≈ 0.67</span><span class="eq"><sup>3</sup>⁄<sub>4</sub> = 0.75…</span></div></div>
-      <p class="idea">Más adelante:</p>
-      <div class="fx"><div class="sys"><span class="eq">el sobre 9 trae <sup>9</sup>⁄<sub>10</sub> = 0.9</span><span class="eq">el sobre 99 trae <sup>99</sup>⁄<sub>100</sub> = 0.99</span></div></div>
-      <p class="idea">¿Ves el patrón? Los números <strong>suben, pero cada vez menos</strong>, y se van <strong>arrimando a 1</strong> sin tocarlo nunca.</p>
-      <p class="idea">(Arriba siempre va uno menos que abajo, así que la fracción no llega a 1.)</p>
-      <p class="idea">Para decir eso en corto se usan dos símbolos:</p>
-      <ul class="fases">
-        <li>La flecha <strong>→</strong> se lee <em>“tiende a”</em>: se acerca más y más.</li>
-        <li><strong>∞</strong> es el símbolo de <em>infinito</em>; “n → ∞” se lee <em>“cuando n crece sin tope”</em>.</li>
-      </ul>
-      <p class="idea">La frase completa queda:</p>
+      <p class="idea">Más adelante el sobre 9 trae 0.9 y el sobre 99 trae 0.99.</p>
+      <p class="idea">Los números <strong>suben, pero cada vez menos</strong>, y se arriman a 1 sin tocarlo nunca (arriba siempre va uno menos que abajo).</p>
+      <p class="idea">En corto se escribe con → (“tiende a”) y ∞ (infinito):</p>
       <div class="fx"><div class="sys"><span class="eq">cuando n → ∞,  a<sub>n</sub> → 1</span></div></div>
-      <p class="idea">Ese valor al que los términos se pegan tiene nombre: el <strong>límite</strong> de la sucesión.</p>
-      <p class="idea">Se llama así porque funciona como una frontera a la que los números se arriman tanto como quieras, conforme avanzas en la fila.</p>
+      <p class="idea">Ese valor al que los términos se pegan es el <strong>límite</strong> de la sucesión.</p>
       <ul class="fases">
-        <li>Si ese valor existe, la sucesión <strong>converge</strong> (sus términos se dirigen a un mismo punto).</li>
-        <li>Si los términos se disparan sin freno, o nunca se deciden por un valor —como 1, −1, 1, −1…—, la sucesión <strong>diverge</strong>.</li>
+        <li>Si el límite existe, la sucesión <strong>converge</strong>.</li>
+        <li>Si los términos se disparan o nunca se deciden —como 1, −1, 1, −1…—, <strong>diverge</strong>.</li>
       </ul>
-      <p class="idea">Probemos el ojo con otra fila. Su término general es:</p>
+      <p class="idea">Probemos el ojo con otra fila:</p>
       <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = (2n + 1) / (n + 3)</span></div></div>
-      <p class="idea">El primer término es pura sustitución:</p>
-      <div class="fx"><div class="sys"><span class="eq">a<sub>1</sub> = (2·1 + 1)/(1 + 3)</span><span class="eq">= <sup>3</sup>⁄<sub>4</sub></span></div></div>
-      <p class="idea">Sigo con lugares más lejanos:</p>
+      <p class="idea">El primero es pura sustitución: a<sub>1</sub> = (2·1 + 1)/(1 + 3) = <sup>3</sup>⁄<sub>4</sub>. Sigo con lugares lejanos:</p>
       <div class="fx"><div class="sys"><span class="eq">a<sub>1</sub> = <sup>3</sup>⁄<sub>4</sub>,   a<sub>2</sub> = 1</span><span class="eq">a<sub>10</sub> ≈ 1.62,   a<sub>100</sub> ≈ 1.95</span></div></div>
       <div class="check" data-kind="item" data-id="IDEA1chk" data-tema="sucesion" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
@@ -273,38 +253,30 @@
 
     <section class="sec">
       <h3>3 · El truco del término dominante</h3>
-      <p class="idea">¿Hay que tabular sobres cada vez? No. Mira por dentro la fracción (2n + 1)/(n + 3) cuando <em>n</em> ya es enorme.</p>
+      <p class="idea">¿Hay que tabular sobres cada vez? No. Mira la fracción (2n + 1)/(n + 3) cuando <em>n</em> ya es enorme:</p>
       <ul class="fases">
-        <li>Con n = 100: arriba 2·100 + 1 = 201, abajo 100 + 3 = 103.</li>
+        <li>Con n = 100: arriba 201, abajo 103.</li>
         <li>Con n = 1000: arriba 2001, abajo 1003.</li>
       </ul>
-      <p class="idea">¿Notas quién manda? El “+ 1” y el “+ 3” son <strong>migajas</strong> junto a 2000 y 1000: la fracción es casi casi</p>
+      <p class="idea">El “+ 1” y el “+ 3” son <strong>migajas</strong>: la fracción es casi 2n/n = 2. Por eso los términos se pegaban a 2.</p>
       <div class="fx"><div class="sys"><span class="eq"><sup>2n</sup>⁄<sub>n</sub> = 2</span></div></div>
-      <p class="idea">Por eso los términos se pegaban a 2.</p>
-      <p class="idea">Antes de nombrar la regla, dos palabras que vamos a usar.</p>
-      <p class="idea">Un <strong>cociente</strong> es el <strong>resultado de dividir</strong>: el cociente de 6 entre 2 es 3, y una fracción no es más que un cociente escrito con raya.</p>
-      <p class="idea">Un <strong>polinomio</strong> es una suma de potencias de <em>n</em> con números al frente, como 2n + 1, o n<sup>2</sup> + 3n + 5.</p>
-      <p class="idea">Conviene frenar un segundo en esas potencias, porque son las que van a mandar.</p>
-      <p class="idea">El <strong>exponente</strong> es el numerito de arriba y dice cuántas veces se multiplica el número por sí mismo:</p>
-      <div class="fx"><div class="sys"><span class="eq">2<sup>3</sup> = 2·2·2 = 8</span><span class="eq">n<sup>2</sup> = n·n</span></div></div>
-      <p class="idea">Al exponente más alto que aparece se le llama el <strong>grado</strong> del polinomio.</p>
-      <p class="idea">En 2n + 1 el grado es 1 (la <em>n</em> sola lleva exponente 1); en 2n<sup>2</sup> + 5 el grado es 2.</p>
-      <p class="idea">Ese es todo el truco para un cociente de polinomios.</p>
-      <p class="idea">Cuando <em>n</em> crece, arriba y abajo mandan sus <strong>términos de mayor grado</strong> (la potencia más alta de <em>n</em>); el resto se vuelve despreciable.</p>
+      <p class="idea">Dos palabras para nombrar el truco. Un <strong>cociente</strong> es el resultado de dividir (una fracción es un cociente con raya).</p>
+      <p class="idea">Un <strong>polinomio</strong> es una suma de potencias de <em>n</em>, como 2n + 1 o 2n<sup>2</sup> + 5.</p>
+      <p class="idea">Su <strong>grado</strong> es el exponente más alto: en 2n + 1 es 1; en 2n<sup>2</sup> + 5 es 2.</p>
+      <p class="idea">La regla para un cociente de polinomios: cuando <em>n</em> crece, mandan arriba y abajo sus <strong>términos de mayor grado</strong>; el resto es despreciable.</p>
       <ul class="fases">
-        <li>Si los grados <strong>empatan</strong>, el límite es el <strong>cociente de sus coeficientes</strong> — los números que acompañan a esas potencias—.</li>
-        <li>Si el grado de abajo es <strong>mayor</strong>, el denominador gana la carrera y aplasta la fracción: el límite es 0.</li>
+        <li>Si los grados <strong>empatan</strong>, el límite es el cociente de sus <strong>coeficientes</strong> (los números al frente).</li>
+        <li>Si el grado de abajo es <strong>mayor</strong>, el denominador gana y el límite es 0.</li>
       </ul>
-      <p class="idea">Escrito con la abreviatura <em>lím</em> (de “límite”):</p>
+      <p class="idea">Con la abreviatura <em>lím</em>:</p>
       <div class="fx"><div class="sys"><span class="eq">lím (2n + 1)/(n + 3) = <sup>2</sup>⁄<sub>1</sub> = 2</span></div></div>
-      <p class="idea">Ese ejemplo tenía grado 1 arriba y abajo. Subamos uno: ¿y si arriba y abajo aparece un <strong>n<sup>2</sup></strong>?</p>
-      <p class="idea">Probemos 3n<sup>2</sup> / (2n<sup>2</sup> + 5) con números, igual que antes:</p>
+      <p class="idea">Subamos el grado: probemos 3n<sup>2</sup> / (2n<sup>2</sup> + 5).</p>
       <ul class="fases">
-        <li>Con n = 10: arriba 3·100 = 300, abajo 2·100 + 5 = 205, y 300/205 ≈ 1.46.</li>
-        <li>Con n = 100: arriba 30000, abajo 20005, y 30000/20005 ≈ 1.4996.</li>
+        <li>Con n = 10: 300/205 ≈ 1.46.</li>
+        <li>Con n = 100: 30000/20005 ≈ 1.4996.</li>
       </ul>
-      <p class="idea">Se está pegando a <sup>3</sup>⁄<sub>2</sub> = 1.5: mismo truco, mandan los <strong>coeficientes</strong> de n<sup>2</sup> (3 arriba, 2 abajo) y el “+ 5” es migaja.</p>
-      <p class="idea">Con eso en la mano, decídelo tú:</p>
+      <p class="idea">Se pega a <sup>3</sup>⁄<sub>2</sub> = 1.5: mandan los coeficientes de n<sup>2</sup> (3 arriba, 2 abajo) y el “+ 5” es migaja.</p>
+      <p class="idea">Con eso, decídelo tú:</p>
       <div class="check" data-kind="recall" data-fid="F1_limite_sucesion" data-tema="limite_sucesion">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿A qué número tiende la sucesión de término general “tres n cuadrada, entre dos n cuadrada más cinco”?</p>
@@ -319,25 +291,19 @@
 
     <section class="sec">
       <h3>4 · De sucesión a serie: ahora sumamos</h3>
-      <p class="idea">Hasta aquí solo <strong>miramos</strong> los sobres. Ahora viene la jugada de la pelota: <strong>vaciarlos</strong>.</p>
-      <p class="idea">Imagina una alcancía con un <strong>marcador</strong> que muestra el total acumulado.</p>
-      <p class="idea">Vacías el sobre 1 y el marcador se actualiza; vacías el sobre 2 y se vuelve a actualizar; y así, uno tras otro, sin saltarte ninguno.</p>
-      <p class="idea">Hazlo con los sobres de la pelota (1, <sup>1</sup>⁄<sub>2</sub>, <sup>1</sup>⁄<sub>4</sub>, <sup>1</sup>⁄<sub>8</sub>…). El marcador va diciendo:</p>
+      <p class="idea">Hasta aquí solo <strong>mirábamos</strong> los sobres. Ahora la jugada de la pelota: <strong>vaciarlos</strong>.</p>
+      <p class="idea">Imagina una alcancía con un <strong>marcador</strong> del total. Vacías el sobre 1 y se actualiza; vacías el 2 y se actualiza; y así, sin saltarte ninguno.</p>
+      <p class="idea">Con los sobres de la pelota (1, <sup>1</sup>⁄<sub>2</sub>, <sup>1</sup>⁄<sub>4</sub>, <sup>1</sup>⁄<sub>8</sub>…) el marcador va diciendo:</p>
       <div class="fx"><div class="sys"><span class="eq">1</span><span class="eq">1 + 0.5 = 1.5</span><span class="eq">1.5 + 0.25 = 1.75</span><span class="eq">luego 1.875…</span></div></div>
-      <p class="idea">Al total que muestra el marcador después de vaciar <em>n</em> sobres lo escribimos <strong>S<sub>n</sub></strong>: la S de “suma”, con su subíndice diciendo hasta qué sobre vas.</p>
-      <p class="idea">Se le llama <strong>suma parcial</strong> porque es el total <em>de momento</em>, no el final:</p>
+      <p class="idea">Al total tras vaciar <em>n</em> sobres lo llamamos <strong>S<sub>n</sub></strong> (S de suma). Es una <strong>suma parcial</strong>: el total de momento, no el final.</p>
       <div class="fx"><div class="sys"><span class="eq">S<sub>1</sub> = a<sub>1</sub></span><span class="eq">S<sub>2</sub> = a<sub>1</sub> + a<sub>2</sub></span><span class="eq">S<sub>3</sub> = a<sub>1</sub> + a<sub>2</sub> + a<sub>3</sub></span></div></div>
-      <p class="idea">A este proceso completo —tomar una sucesión y sumar sus términos uno tras otro— se le llama una <strong>serie</strong>.</p>
-      <p class="idea">Para escribir “la suma de todos los a<sub>n</sub>” se usa el símbolo <strong>∑</strong>: es sigma, la letra griega que equivale a nuestra S — otra vez, S de “suma”—.</p>
-      <p class="idea">Así, ∑ a<sub>n</sub> se lee “la suma de los a<sub>n</sub>”.</p>
-      <p class="idea">A la sigma le cuelgan dos etiquetas que dicen <strong>desde qué sobre y hasta cuál</strong> sumas:</p>
+      <p class="idea">A tomar una sucesión y sumar sus términos uno tras otro se le llama una <strong>serie</strong>.</p>
+      <p class="idea">Para escribir “la suma de todos los a<sub>n</sub>” se usa <strong>∑</strong> (sigma, la S griega), con dos etiquetas: desde qué sobre y hasta cuál sumas.</p>
       <div class="fx"><div class="sys"><span class="eq">∑<sub>n=1</sub><sup>∞</sup> a<sub>n</sub></span></div></div>
-      <p class="idea">Abajo, <strong>n = 1</strong>: arrancas en el sobre 1. Arriba, <strong>∞</strong>: sigues sin final.</p>
-      <p class="idea">La lees completa: “la suma de los a<sub>n</sub>, desde n = 1 hasta infinito”.</p>
-      <p class="idea">Y las palabras del escalón 2 se reciclan tal cual.</p>
+      <p class="idea">Se lee “la suma de los a<sub>n</sub>, desde n = 1 hasta infinito”.</p>
       <ul class="fases">
-        <li>La serie <strong>converge</strong> si el marcador <strong>se estabiliza</strong>: las sumas parciales se van pegando a un número fijo, que es la <strong>suma de la serie</strong>.</li>
-        <li>Y <strong>diverge</strong> si el marcador se dispara sin freno o nunca se decide por un valor.</li>
+        <li>La serie <strong>converge</strong> si el marcador <strong>se estabiliza</strong> en un número: la <strong>suma de la serie</strong>.</li>
+        <li><strong>Diverge</strong> si se dispara o nunca se decide.</li>
       </ul>
       <div class="check" data-kind="recall" data-fid="F0_sucesion_vs_serie" data-tema="sucesion_vs_serie">
         <div class="qtag">Te toca · recuerda</div>
@@ -355,35 +321,27 @@
       <h3>5 · La serie estrella: la geométrica</h3>
       <p class="idea">Vuelve a los sobres de la pelota:</p>
       <div class="fx"><div class="sys"><span class="eq">1, <sup>1</sup>⁄<sub>2</sub>, <sup>1</sup>⁄<sub>4</sub>, <sup>1</sup>⁄<sub>8</sub>…</span></div></div>
-      <p class="idea">¿Cuál es la regla de esa fila? Muy simple: <strong>cada sobre trae la mitad del anterior</strong>.</p>
-      <p class="idea">Dicho como operación: para pasar de un término al siguiente, <strong>multiplicas siempre por el mismo número</strong> — aquí, por <sup>1</sup>⁄<sub>2</sub>.</p>
-      <p class="idea">Una fila así queda definida por dos datos: el <strong>primer término</strong>, que llamamos <em>a</em>, y ese <strong>multiplicador fijo</strong>, que llamamos <em>r</em>. La fila completa es:</p>
+      <p class="idea">La regla: <strong>cada sobre trae la mitad del anterior</strong>. O sea, para pasar de un término al siguiente <strong>multiplicas siempre por el mismo número</strong> (aquí <sup>1</sup>⁄<sub>2</sub>).</p>
+      <p class="idea">Una fila así queda con dos datos: el <strong>primer término</strong> <em>a</em> y ese multiplicador fijo <em>r</em>:</p>
       <div class="fx"><div class="sys"><span class="eq">a, a·r, a·r<sup>2</sup>, a·r<sup>3</sup>…</span></div></div>
-      <p class="idea">Al número r se le llama la <strong>razón</strong>, porque es exactamente eso: la razón —el cociente— entre un término y el anterior.</p>
-      <p class="idea">Divide cualquier sobre entre el que le precede y siempre obtienes r.</p>
-      <p class="idea">Y a la serie que resulta de sumar esta fila se le llama <strong>geométrica</strong> (nombre heredado de las progresiones geométricas del bachillerato).</p>
-      <p class="idea">¿Cuándo se estabiliza su marcador? Piensa en el tamaño de los sobres.</p>
+      <p class="idea">A <em>r</em> se le llama la <strong>razón</strong> (el cociente entre un término y el anterior). La serie que suma esta fila es la <strong>geométrica</strong>.</p>
+      <p class="idea">¿Cuándo se estabiliza su marcador?</p>
       <ul class="fases">
-        <li>Si r = 3, cada sobre es el <strong>triple</strong> del anterior (1, 3, 9, 27…): el marcador se dispara.</li>
+        <li>Si r = 3, cada sobre es el triple (1, 3, 9, 27…): se dispara.</li>
         <li>Si r = 1, cae siempre lo mismo (2 + 2 + 2 + …): crece sin freno.</li>
       </ul>
-      <p class="idea">La única forma de que el total se quede quieto es que los sobres <strong>se encojan</strong>: que r, en tamaño, sea menor que 1.</p>
-      <p class="idea">Ese “en tamaño” se escribe <strong>| r |</strong> y se lee <em>valor absoluto</em>: el tamaño del número ignorando su signo (por ejemplo, | −<sup>1</sup>⁄<sub>2</sub> | = <sup>1</sup>⁄<sub>2</sub>).</p>
-      <p class="idea">Y aquí viene el regalo: cuando | r | &lt; 1, la suma no solo existe — tiene <strong>fórmula cerrada</strong>.</p>
-      <p class="idea">Es decir, se calcula de un solo golpe, sin vaciar sobres uno a uno.</p>
-      <p class="idea">No te la creas de fe; sale de un truco muy bonito. Llamemos <strong>S</strong> a la suma que buscamos:</p>
+      <p class="idea">Solo se queda quieto si los sobres <strong>se encogen</strong>: si <strong>| r |</strong> (el tamaño de r, sin signo) es menor que 1.</p>
+      <p class="idea">Y cuando | r | &lt; 1 hay premio: la suma tiene <strong>fórmula cerrada</strong>, se calcula de un golpe.</p>
+      <p class="idea">Sale de un truco bonito. Llama <strong>S</strong> a la suma:</p>
       <div class="fx"><div class="sys"><span class="eq">S = a + a·r + a·r<sup>2</sup> + a·r<sup>3</sup> + …</span></div></div>
-      <p class="idea">Multiplica toda la fila por r. Cada sumando se corre un lugar:</p>
+      <p class="idea">Multiplica todo por r (cada sumando se corre un lugar):</p>
       <div class="fx"><div class="sys"><span class="eq">r·S = a·r + a·r<sup>2</sup> + a·r<sup>3</sup> + …</span></div></div>
-      <p class="idea">Compara las dos filas: de <em>a·r</em> en adelante son idénticas.</p>
-      <p class="idea">Réstalas, y toda esa cola infinita se cancela; solo sobrevive la <em>a</em> del principio:</p>
+      <p class="idea">Réstalas: de <em>a·r</em> en adelante son idénticas y se cancelan; solo sobrevive la <em>a</em>:</p>
       <div class="fx"><div class="sys"><span class="eq">S − r·S = a</span></div></div>
-      <p class="idea">A la izquierda, S aparece dos veces; sácala como factor común:</p>
+      <p class="idea">Saca S de factor común y despeja:</p>
       <div class="fx"><div class="sys"><span class="eq">S·(1 − r) = a</span></div></div>
-      <p class="idea">Y despejas S pasando el (1 − r) a dividir:</p>
       <div class="fx"><div class="sys"><span class="eq">a + a·r + a·r<sup>2</sup> + … = <sup>a</sup>⁄<sub>(1 − r)</sub></span><span class="eq">para | r | &lt; 1</span></div></div>
-      <p class="idea">Ahí está el <strong>1 − r</strong>: no es un adorno, es lo que quedó al restar las dos filas.</p>
-      <p class="idea">Esta es la herramienta que resuelve la pelota del inicio: sus rebotes son una geométrica con primer término a = 1 y razón r = <sup>1</sup>⁄<sub>2</sub>.</p>
+      <p class="idea">Ese <strong>1 − r</strong> es justo lo que quedó al restar. Y resuelve la pelota del inicio: sus rebotes son una geométrica con a = 1 y r = <sup>1</sup>⁄<sub>2</sub>.</p>
       <div class="check" data-kind="item" data-id="IDEA4chk" data-tema="serie_geometrica" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">¿Cuál de estas geométricas <strong>converge</strong> (o sea, tiene suma finita)?</p>
@@ -444,43 +402,36 @@
       <p class="idea" style="font-size:17px">Infinitos sumandos, total <strong>finito</strong>: las subidas suman <strong>2 metros</strong>.</p>
       <p class="idea" style="font-size:17px">Las sumas parciales se acercan a 2 sin pasarse:</p>
       <div class="fx"><div class="sys"><span class="eq">1, 1.5, 1.75, 1.875…</span></div></div>
-      <p class="idea" style="font-size:17px">Ese es todo el método:</p>
+      <p class="idea" style="font-size:17px">El método, en tres pasos:</p>
       <ul class="fases">
         <li>identificar a y r,</li>
         <li>verificar | r | &lt; 1,</li>
-        <li>y aplicar <em>a</em> entre (1 − r).</li>
+        <li>aplicar <em>a</em> entre (1 − r).</li>
       </ul>
-      <p class="fx-note">Con esto ya puedes cerrar la pelota completa del inicio: sube 2 m en total, y si sumas también las bajadas sale una distancia recorrida finita. Hazlo en papel para comprobar que el método ya es tuyo.</p>
+      <p class="fx-note">Con esto cierras la pelota del inicio. Hazlo en papel para comprobar que el método ya es tuyo.</p>
     </section>
 
     <h2 class="modhead">Sube el tamaño · cuando no es geométrica</h2>
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">La geométrica salió casi de un tiro porque el cociente entre un sobre y el anterior era <strong>siempre el mismo</strong>.</p>
-      <p class="idea" style="font-size:17px">Pero en muchas series ese cociente <strong>cambia de sobre a sobre</strong>.</p>
-      <p class="idea" style="font-size:17px">Pasa, por ejemplo, cuando el término trae un <strong>factorial</strong> o potencias mezcladas con <em>n</em>.</p>
-      <p class="idea" style="font-size:17px">n! se lee “n factorial” y significa multiplicar todos los enteros del 1 al n:</p>
+      <p class="idea" style="font-size:17px">La geométrica salió fácil porque el cociente entre un sobre y el anterior era <strong>siempre el mismo</strong>.</p>
+      <p class="idea" style="font-size:17px">Pero en muchas series ese cociente <strong>cambia</strong> de sobre a sobre — por ejemplo cuando aparece un <strong>factorial</strong>.</p>
+      <p class="idea" style="font-size:17px">n! (“n factorial”) es multiplicar todos los enteros del 1 al n:</p>
       <div class="fx"><div class="sys"><span class="eq">4! = 4·3·2·1 = 24</span></div></div>
-      <p class="idea" style="font-size:17px">Antes de seguir, dos hechos que hacen casi toda la magia: cómo se <strong>cancelan</strong> los factoriales y las potencias al dividir.</p>
-      <p class="idea" style="font-size:17px">Primero los factoriales. Escribe 5! y 4! completos, uno debajo del otro:</p>
-      <div class="fx"><div class="sys"><span class="eq">5! = 5·4·3·2·1 = 120</span><span class="eq">4! = 4·3·2·1 = 24</span></div></div>
-      <p class="idea" style="font-size:17px">Fíjate: 5! es solo 4! con un <strong>5</strong> pegado adelante. O sea 5! = 5·4!, y con números 5·24 = 120.</p>
-      <p class="idea" style="font-size:17px">En general, el factorial siguiente es el de ahora multiplicado por su número:</p>
+      <p class="idea" style="font-size:17px">Dos hechos hacen casi toda la magia: cómo se <strong>cancelan</strong> factoriales y potencias al dividir.</p>
+      <p class="idea" style="font-size:17px">Factoriales: 5! es solo 4! con un <strong>5</strong> pegado adelante, así que 5! = 5·4!. En general:</p>
       <div class="fx"><div class="sys"><span class="eq">(n + 1)! = (n + 1)·n!</span></div></div>
-      <p class="idea" style="font-size:17px">Por eso, al dividir un factorial entre el siguiente, casi todo se borra y queda un solo número abajo:</p>
-      <div class="fx"><div class="sys"><span class="eq"><sup>4!</sup>⁄<sub>5!</sub> = <sup>24</sup>⁄<sub>120</sub> = <sup>1</sup>⁄<sub>5</sub></span><span class="eq"><sup>n!</sup>⁄<sub>(n + 1)!</sub> = <sup>1</sup>⁄<sub>(n + 1)</sub></span></div></div>
-      <p class="idea" style="font-size:17px">Con las potencias pasa lo mismo. 2<sup>3</sup> es 2·2·2; la siguiente, 2<sup>4</sup>, es solo <strong>un 2 más</strong>:</p>
-      <div class="fx"><div class="sys"><span class="eq">2<sup>3</sup> = 2·2·2 = 8</span><span class="eq">2<sup>4</sup> = 2·2·2·2 = 16</span></div></div>
-      <p class="idea" style="font-size:17px">Así que al dividir 2<sup>3</sup> entre 2<sup>4</sup> se borran tres doses y sobra un 2 abajo:</p>
-      <div class="fx"><div class="sys"><span class="eq"><sup>2<sup>3</sup></sup>⁄<sub>2<sup>4</sup></sub> = <sup>8</sup>⁄<sub>16</sub> = <sup>1</sup>⁄<sub>2</sub></span><span class="eq"><sup>2<sup>n</sup></sup>⁄<sub>2<sup>n+1</sup></sub> = <sup>1</sup>⁄<sub>2</sub></span></div></div>
-      <p class="idea" style="font-size:17px">Guarda esos dos resultados: son justo lo que se va a cancelar en el criterio que sigue.</p>
-      <p class="idea" style="font-size:17px">El atajo para no sumar infinito: mirar <strong>a qué valor tiende ese cociente</strong>.</p>
-      <p class="idea" style="font-size:17px">Si a la larga cada sobre resulta ser, digamos, la mitad del anterior, la serie termina portándose como una geométrica de razón <sup>1</sup>⁄<sub>2</sub>… y esas ya sabes que convergen.</p>
-      <p class="idea" style="font-size:17px">A esta regla de decisión se le llama el <strong>criterio de la razón</strong> (criterio = regla para decidir; de la razón = porque vigila el cociente entre términos vecinos). Va en <strong>dos fases</strong>:</p>
+      <p class="idea" style="font-size:17px">Por eso, al dividir un factorial entre el siguiente casi todo se borra:</p>
+      <div class="fx"><div class="sys"><span class="eq"><sup>n!</sup>⁄<sub>(n + 1)!</sub> = <sup>1</sup>⁄<sub>(n + 1)</sub></span></div></div>
+      <p class="idea" style="font-size:17px">Potencias: igual. 2<sup>4</sup> es 2<sup>3</sup> con un 2 más, así que al dividir sobra un 2 abajo:</p>
+      <div class="fx"><div class="sys"><span class="eq"><sup>2<sup>n</sup></sup>⁄<sub>2<sup>n+1</sup></sub> = <sup>1</sup>⁄<sub>2</sub></span></div></div>
+      <p class="idea" style="font-size:17px">Guarda esos dos resultados: son justo lo que se cancela en el criterio que sigue.</p>
+      <p class="idea" style="font-size:17px">El atajo para no sumar infinito: mirar <strong>a qué valor tiende el cociente</strong> a<sub>n+1</sub>/a<sub>n</sub>. Si a la larga cada sobre es la mitad del anterior, la serie se porta como una geométrica de razón <sup>1</sup>⁄<sub>2</sub>… y esas convergen.</p>
+      <p class="idea" style="font-size:17px">A esta regla se le llama el <strong>criterio de la razón</strong>, en <strong>dos fases</strong>:</p>
       <ul class="fases">
-        <li><strong>Fase 1 — arma y simplifica:</strong> escribes el cociente a<sub>n+1</sub>/a<sub>n</sub> (el término siguiente entre el término actual) y cancelas lo que se repite.</li>
-        <li><strong>Fase 2 — toma el límite y decide:</strong> ese cociente tiende a un número L. Si L &lt; 1 converge, si L &gt; 1 diverge, si L = 1 el criterio no dice nada.</li>
+        <li><strong>Fase 1 — arma y simplifica:</strong> escribes a<sub>n+1</sub>/a<sub>n</sub> y cancelas lo que se repite.</li>
+        <li><strong>Fase 2 — toma el límite y decide:</strong> ese cociente tiende a un número L. Si L &lt; 1 converge, si L &gt; 1 diverge, si L = 1 no dice nada.</li>
       </ul>
-      <p class="idea" style="font-size:17px">Probemos la serie de término general a<sub>n</sub> = <sup>n</sup>⁄<sub>2<sup>n</sup></sub> (una <em>n</em> arriba, una potencia de 2 abajo).</p>
+      <p class="idea" style="font-size:17px">Probemos con a<sub>n</sub> = <sup>n</sup>⁄<sub>2<sup>n</sup></sub>:</p>
       <div class="fx"><div class="sys"><span class="eq">a<sub>n</sub> = <sup>n</sup>⁄<sub>2<sup>n</sup></sub></span></div></div>
 
       <div class="check" data-kind="item" data-id="T1pred" data-tema="criterio_razon" data-level="juntos">
@@ -507,19 +458,17 @@
         <div class="why"><span class="lbl">Por qué</span><p>Arriba y abajo el grado es 1; manda <sup>n</sup>⁄<sub>2n</sub> = <sup>1</sup>⁄<sub>2</sub>. Como L = <sup>1</sup>⁄<sub>2</sub> &lt; 1, la serie converge.</p></div>
       </div>
       <div class="estep"><div class="oprow">Fase 2 · tomo el límite y decido</div><p>Manda el cociente de los términos de mayor grado, y comparo L con 1:</p><p class="calc"><span class="rw">L</span> lím <sup>(n+1)</sup>⁄<sub>2n</sub>=<sup>n</sup>⁄<sub>2n</sub>=<b><sup>1</sup>⁄<sub>2</sub></b> <span class="sep">•</span> <sup>1</sup>⁄<sub>2</sub>&lt;1 → <b>converge</b></p></div>
-      <p class="idea" style="font-size:17px">Mismo espíritu que la geométrica —mirar la razón— solo que ahora la razón depende de <em>n</em>, así que hay que <strong>tomarle el límite</strong>.</p>
-      <p class="idea" style="font-size:17px">Este criterio brilla con factoriales y potencias porque se cancelan solos al dividir.</p>
+      <p class="idea" style="font-size:17px">Mismo espíritu que la geométrica —mirar la razón— solo que ahora depende de <em>n</em>, así que hay que <strong>tomarle el límite</strong>.</p>
+      <p class="idea" style="font-size:17px">Con factoriales y potencias este criterio es el rey, porque se cancelan solos.</p>
     </section>
 
     <section class="sec">
       <h3>Un filtro rápido antes de todo</h3>
       <p class="idea">Antes de cualquier criterio fino, un vistazo de sentido común.</p>
-      <p class="idea">Si cada sobre que vacías trae, digamos, al menos 1 peso, el marcador sube al menos 1 peso con cada sobre: <strong>jamás</strong> va a estabilizarse.</p>
-      <p class="idea">Para que el total tenga alguna chance de quedarse quieto, los sobres tienen que hacerse <strong>pequeñitos</strong>: los términos deben tender a 0.</p>
-      <p class="idea">Eso da un filtro de un segundo: si los términos a<sub>n</sub> <strong>no</strong> tienden a 0, la serie <strong>diverge</strong>, sí o sí, sin mirar nada más.</p>
-      <p class="idea">Eso sí, cuidado con la dirección: es un <strong>requisito de entrada, no una garantía</strong>.</p>
-      <p class="idea">Que los sobres se encojan no asegura que el total se estabilice —hay filas que se pegan a 0 y aun así su marcador crece sin freno; en la siguiente sección conoces una—.</p>
-      <p class="idea">Pero si no se encogen, ni te molestes: diverge. (La flecha tachada ↛ se lee “no tiende a”.)</p>
+      <p class="idea">Si cada sobre trae al menos 1 peso, el marcador sube al menos 1 peso cada vez: <strong>jamás</strong> se estabiliza.</p>
+      <p class="idea">Para tener alguna chance, los sobres deben hacerse <strong>pequeñitos</strong>: los términos deben tender a 0.</p>
+      <p class="idea">Filtro de un segundo: si a<sub>n</sub> <strong>no</strong> tiende a 0 (se escribe a<sub>n</sub> ↛ 0), la serie <strong>diverge</strong>, sin mirar nada más.</p>
+      <p class="idea">Ojo con la dirección: es un requisito de entrada, <strong>no</strong> una garantía. Que los sobres se encojan no asegura que el total se estabilice (ya verás una fila que se pega a 0 y aun así diverge).</p>
       <div class="fx"><div class="sys"><span class="eq">si a<sub>n</sub> ↛ 0  →  la serie diverge</span></div></div>
       <div class="check" data-kind="item" data-id="NTHchk" data-tema="termino_nesimo" data-level="juntos">
         <div class="qtag">Te toca · analiza</div>
@@ -535,39 +484,26 @@
 
     <section class="sec">
       <h3>Comparar con una serie que ya conoces</h3>
-      <p class="idea">A veces ni siquiera hace falta calcular: basta <strong>comparar</strong>.</p>
-      <p class="idea">Imagina que una amiga vacía su propia fila de sobres junto a ti, y que <strong>cada sobre tuyo trae menos que el suyo</strong> (todos con cantidades positivas).</p>
-      <p class="idea">Entonces tu marcador va siempre <strong>por debajo</strong> del suyo.</p>
-      <p class="idea">Si el total de ella se estabiliza en, digamos, 10, el tuyo jamás puede rebasar 10: queda <strong>atrapado bajo ese techo</strong>, y también se estabiliza.</p>
-      <p class="idea">Y al revés: si cada sobre tuyo trae <strong>más</strong> que el de ella y el marcador de ella se dispara, el tuyo se dispara con más razón.</p>
+      <p class="idea">A veces ni hace falta calcular: basta <strong>comparar</strong>.</p>
+      <p class="idea">Imagina que una amiga vacía su fila junto a ti y que <strong>cada sobre tuyo trae menos que el suyo</strong> (todo positivo). Tu marcador va siempre por debajo del suyo.</p>
+      <p class="idea">Si el total de ella se estabiliza en 10, el tuyo queda <strong>atrapado bajo ese techo</strong> y también se estabiliza. Y al revés: si el tuyo trae más y el de ella se dispara, el tuyo también.</p>
       <p class="idea">Ese es el <strong>criterio de comparación</strong>:</p>
       <ul class="fases">
         <li>menor que una que converge → converges;</li>
         <li>mayor que una que diverge → diverges.</li>
       </ul>
-      <p class="idea">Solo vale con términos positivos (con negativos el marcador puede bajar y el argumento del techo se rompe).</p>
-      <p class="idea">Para usarlo necesitas <strong>series de referencia</strong> que conozcas de memoria. Estas son las dos clásicas:</p>
+      <p class="idea">Solo vale con términos positivos.</p>
+      <p class="idea">Para usarlo necesitas <strong>series de referencia</strong> de memoria. Las dos clásicas:</p>
       <div class="fx"><div class="sys"><span class="eq">∑ <sup>1</sup>⁄<sub>n</sub><sup>2</sup>  converge  (p = 2 &gt; 1)</span><span class="eq">∑ <sup>1</sup>⁄<sub>n</sub>   diverge  (la armónica)</span></div></div>
-      <p class="idea">Míralas de cerca. La primera suma:</p>
-      <div class="fx"><div class="sys"><span class="eq">1 + <sup>1</sup>⁄<sub>4</sub> + <sup>1</sup>⁄<sub>9</sub> + <sup>1</sup>⁄<sub>16</sub> + …</span></div></div>
-      <p class="idea">Sus sobres se encogen rapidísimo y el marcador se estabiliza (de hecho nunca alcanza el 2).</p>
-      <p class="idea">La segunda suma:</p>
-      <div class="fx"><div class="sys"><span class="eq">1 + <sup>1</sup>⁄<sub>2</sub> + <sup>1</sup>⁄<sub>3</sub> + <sup>1</sup>⁄<sub>4</sub> + …</span></div></div>
-      <p class="idea">La llaman <strong>armónica</strong>, por los armónicos de una cuerda de música, donde aparecen esas mismas fracciones.</p>
-      <p class="idea">Sus sobres también se encogen… pero <strong>demasiado despacio</strong>.</p>
-      <p class="idea">El marcador avanza lentísimo y aun así rebasa, tarde o temprano, cualquier número que le pongas enfrente. Diverge.</p>
-      <p class="idea">Es la fila prometida: términos que se pegan a 0 no garantizan nada.</p>
-      <p class="idea">Las dos son de la misma familia: series de la forma ∑ <sup>1</sup>⁄<sub>n</sub><sup>p</sup>, llamadas <strong>p-series</strong> (la <em>p</em> es el exponente de abajo).</p>
-      <p class="idea">La regla de memoria:</p>
+      <p class="idea">La primera, 1 + <sup>1</sup>⁄<sub>4</sub> + <sup>1</sup>⁄<sub>9</sub> + <sup>1</sup>⁄<sub>16</sub> + …, encoge rápido y su marcador se estabiliza.</p>
+      <p class="idea">La segunda, 1 + <sup>1</sup>⁄<sub>2</sub> + <sup>1</sup>⁄<sub>3</sub> + <sup>1</sup>⁄<sub>4</sub> + …, se llama <strong>armónica</strong>. Sus sobres se encogen, pero <strong>demasiado despacio</strong>: el marcador avanza lentísimo y aun así rebasa cualquier número. Diverge.</p>
+      <p class="idea">Es la fila prometida: términos que se pegan a 0 <strong>no</strong> garantizan nada.</p>
+      <p class="idea">Las dos son de la familia ∑ <sup>1</sup>⁄<sub>n</sub><sup>p</sup>, las <strong>p-series</strong> (p es el exponente de abajo). La regla de memoria:</p>
       <ul class="fases">
         <li>convergen si p &gt; 1,</li>
         <li>divergen si p ≤ 1.</li>
       </ul>
-      <p class="idea">La frontera exacta es p = 1: la armónica.</p>
-      <p class="idea">¿Por qué justo en 1 cambia todo? Depende de qué tan rápido se encogen los sobres.</p>
-      <p class="idea">Con p apenas mayor que 1 —digamos <sup>1</sup>⁄<sub>n</sub><sup>1.5</sup>— los sobres se encogen lo bastante rápido y el marcador se estabiliza.</p>
-      <p class="idea">Con p = 1 (la armónica) o más lento, se encogen <strong>demasiado despacio</strong> y el marcador nunca frena.</p>
-      <p class="idea">Por eso 1 es la línea divisoria: apenas la cruzas por arriba, converge; en 1 o por debajo, diverge.</p>
+      <p class="idea">La frontera es p = 1, la armónica: apenas la cruzas por arriba converge; en 1 o por debajo, diverge.</p>
       <div class="check" data-kind="recall" data-fid="F2_comparacion" data-tema="comparacion">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Cuál de estas dos series de referencia CONVERGE?</p>
@@ -582,28 +518,23 @@
 
     <section class="sec">
       <h3>Cuando los signos alternan</h3>
-      <p class="idea"><strong>Tema extra:</strong> no está en la lista de objetivos de arriba, pero suele caer en el examen, así que vale la pena verlo.</p>
-      <p class="idea">Queda un caso especial: sobres que van alternando <strong>ingreso y gasto</strong> — el primero suma, el segundo resta, el tercero suma… (+, −, +, −).</p>
-      <p class="idea">A estas series se les llama <strong>alternadas</strong>. Su marcador ya no solo sube: sube, baja, sube, baja.</p>
-      <p class="idea">Y si cada paso es <strong>más chico que el anterior</strong> y los pasos se pegan a 0, el vaivén se va cerrando sobre un valor, como un columpio que se frena.</p>
-      <p class="idea">Ese es el <strong>criterio de Leibniz</strong> (apellido del matemático que lo probó): una alternada converge si sus términos, en valor absoluto, decrecen y tienden a 0.</p>
-      <p class="idea">Último par de etiquetas, construidas sobre lo que ya tienes. Toma una serie que converge y <strong>quítale los signos</strong> (vuelve positivos todos sus términos).</p>
+      <p class="idea"><strong>Tema extra:</strong> no está en los objetivos, pero suele caer en el examen.</p>
+      <p class="idea">Queda un caso: sobres que alternan <strong>ingreso y gasto</strong> (+, −, +, −). Se llaman series <strong>alternadas</strong>: el marcador sube, baja, sube, baja.</p>
+      <p class="idea">Si cada paso es <strong>más chico que el anterior</strong> y los pasos se pegan a 0, el vaivén se cierra sobre un valor, como un columpio que se frena. Ese es el <strong>criterio de Leibniz</strong>.</p>
+      <p class="idea">Último par de etiquetas: toma una serie que converge y <strong>quítale los signos</strong> (vuelve todo positivo).</p>
       <ul class="fases">
-        <li>Si así también converge, la original es <strong>absolutamente convergente</strong>: converge por puro tamaño de sus sobres, sin ayuda de nadie.</li>
-        <li>Si al quitarle los signos diverge, la original solo convergía gracias al vaivén: es <strong>condicionalmente convergente</strong> — converge “con la condición” de que los signos alternen—.</li>
+        <li>Si así también converge, es <strong>absolutamente convergente</strong>.</li>
+        <li>Si al quitar los signos diverge, solo convergía por el vaivén: es <strong>condicionalmente convergente</strong>.</li>
       </ul>
       <p class="idea">El ejemplo estrella:</p>
       <div class="fx"><div class="sys"><span class="eq">1 − <sup>1</sup>⁄<sub>2</sub> + <sup>1</sup>⁄<sub>3</sub> − <sup>1</sup>⁄<sub>4</sub> + …</span></div></div>
-      <p class="idea">Con los signos alternando, sus pasos decrecen y se pegan a 0: por Leibniz, <strong>converge</strong>.</p>
-      <p class="idea">Ahora quítale los signos (vuélvela toda positiva):</p>
-      <div class="fx"><div class="sys"><span class="eq">1 + <sup>1</sup>⁄<sub>2</sub> + <sup>1</sup>⁄<sub>3</sub> + <sup>1</sup>⁄<sub>4</sub> + …</span></div></div>
-      <p class="idea">Es la <strong>armónica</strong>, que ya vimos que diverge.</p>
-      <p class="idea">Convergía solo gracias al vaivén de los signos: por eso es <strong>condicional</strong>, no absoluta.</p>
+      <p class="idea">Con signos alternando, sus pasos decrecen a 0: por Leibniz, <strong>converge</strong>.</p>
+      <p class="idea">Pero al volverla positiva es la <strong>armónica</strong>, que diverge. Así que su convergencia es <strong>condicional</strong>, no absoluta.</p>
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Veamos la comparación en acción. ¿Converge la serie de término <sup>1</sup>⁄<sub>(n</sub><sup>2</sup><sub> + 1)</sub>?</p>
-      <p class="idea" style="font-size:17px">La jugada: encontrar una referencia conocida que quede por <strong>encima</strong> de ella término a término, para dejarla atrapada bajo un techo. Paso a paso.</p>
+      <p class="idea" style="font-size:17px">La comparación en acción. ¿Converge la serie de término <sup>1</sup>⁄<sub>(n</sub><sup>2</sup><sub> + 1)</sub>?</p>
+      <p class="idea" style="font-size:17px">La jugada: hallar una referencia conocida que quede <strong>encima</strong> término a término, para atraparla bajo un techo.</p>
       <div class="estep"><div class="oprow">Escribo la serie</div><p>Todos sus términos son positivos, así que la comparación aplica.</p><div class="fx"><div class="sys"><span class="eq">∑ <sup>1</sup>⁄<sub>(n</sub><sup>2</sup><sub> + 1)</sub></span></div></div></div>
       <div class="estep"><div class="oprow">Comparo término a término</div><p>El denominador n<sup>2</sup> + 1 es mayor que n<sup>2</sup>; denominador más grande significa fracción más chica:</p><p class="calc"><span class="rw">comparo</span> n<sup>2</sup>+1&gt;n<sup>2</sup> → <sup>1</sup>⁄<sub>(n</sub><sup>2</sup><sub>+1)</sub> &lt; <b><sup>1</sup>⁄<sub>n</sub><sup>2</sup></b></p></div>
       <div class="estep"><div class="oprow">Concluyo</div><p>La de arriba, ∑ <sup>1</sup>⁄<sub>n</sub><sup>2</sup>, converge (p = 2 &gt; 1). Como la mía queda atrapada por debajo, también converge:</p><p class="calc"><span class="rw">→</span> ∑ <sup>1</sup>⁄<sub>n</sub><sup>2</sup> converge <span class="sep">•</span> mía &lt; esa → <b>converge</b></p></div>
@@ -631,36 +562,20 @@
     </section>
 
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Última pieza. En la geométrica, la razón era un número fijo. Ahora haz algo atrevido: pon en su lugar una <strong>letra</strong>, x.</p>
-      <p class="idea" style="font-size:17px">La fila queda:</p>
+      <p class="idea" style="font-size:17px">Última pieza. En la geométrica la razón era un número fijo. Ahora pon en su lugar una <strong>letra</strong>, x:</p>
       <div class="fx"><div class="sys"><span class="eq">1, x, x<sup>2</sup>, x<sup>3</sup>…</span></div></div>
-      <p class="idea" style="font-size:17px">Sigue siendo geométrica, con primer término a = 1 y razón r = x.</p>
-      <p class="idea" style="font-size:17px">Así que su suma sigue saliendo de la fórmula cerrada, siempre que la razón cumpla su condición de tamaño: | x | &lt; 1.</p>
+      <p class="idea" style="font-size:17px">Sigue siendo geométrica (a = 1, r = x), así que su suma sale de la fórmula cerrada, siempre que | x | &lt; 1:</p>
       <div class="fx"><div class="sys"><span class="eq">1 + x + x<sup>2</sup> + x<sup>3</sup> + … = <sup>1</sup>⁄<sub>(1 − x)</sub></span><span class="eq">para | x | &lt; 1</span></div></div>
-      <p class="idea" style="font-size:17px">Lee lo que acaba de pasar: para cada x que metas (x = <sup>1</sup>⁄<sub>2</sub>, x = 0.3…) obtienes una serie numérica con su propia suma.</p>
-      <p class="idea" style="font-size:17px">La serie se volvió una <strong>máquina</strong>: le das una x, te devuelve un número. Eso es una función.</p>
+      <p class="idea" style="font-size:17px">Para cada x que metas, obtienes un número: la serie se volvió una <strong>máquina</strong>, una función.</p>
       <p class="idea" style="font-size:17px">A una serie cuyos términos son potencias de x se le llama <strong>serie de potencias</strong>.</p>
-      <p class="idea" style="font-size:17px">A la zona de valores de x donde la suma funciona —aquí, todos los x entre −1 y 1— se le llama el <strong>intervalo de convergencia</strong>.</p>
-      <p class="idea" style="font-size:17px">Y al <strong>número</strong> que mide la mitad de ese intervalo —la distancia del centro 0 a cada extremo, aquí <strong>1</strong>— se le llama el <strong>radio de convergencia</strong>.</p>
-      <p class="idea" style="font-size:17px">Ojo con esto: el radio es un <strong>número</strong> (aquí 1), no la zona. Es como el radio de un círculo alrededor del 0: dice hasta qué distancia aguanta la garantía.</p>
-      <p class="idea" style="font-size:17px">El <strong>polinomio de Taylor</strong> (Taylor es el apellido de quien encontró la receta) es el mismo puente, cruzado al revés.</p>
-      <p class="idea" style="font-size:17px">Recuerda qué es un <strong>polinomio</strong>: una suma de potencias de x con números al frente, como 1 + x + <sup>x</sup><sup>2</sup>⁄<sub>2</sub>.</p>
-      <p class="idea" style="font-size:17px">“De Taylor” quiere decir que nos quedamos con <strong>unos cuantos</strong> términos: una suma finita, corta, fácil de calcular a mano.</p>
-      <p class="idea" style="font-size:17px">Empiezas con una función conocida —aquí e<sup>x</sup>, la exponencial de base e ≈ 2.718 que viste en cálculo—.</p>
-      <p class="idea" style="font-size:17px">e<sup>x</sup> es una <strong>máquina</strong> más: le das un x y devuelve un número. Por ejemplo e<sup>0</sup> = 1 y e<sup>0.1</sup> ≈ 1.105.</p>
-      <p class="idea" style="font-size:17px">La gracia de Taylor es imitar esa máquina con pura suma de potencias, sin arrastrar la base e.</p>
-      <p class="idea" style="font-size:17px">Y buscas el polinomio que la <strong>imita</strong> cerca de un punto, quedándote con los primeros términos de su serie de potencias.</p>
-      <p class="idea" style="font-size:17px">Para e<sup>x</sup> alrededor de 0, la receta dice que el coeficiente de cada potencia x<sup>n</sup> es “uno entre n factorial”:</p>
+      <p class="idea" style="font-size:17px">La zona de x donde la suma funciona (aquí, entre −1 y 1) es el <strong>intervalo de convergencia</strong>; la mitad de ese intervalo —la distancia del centro 0 a cada extremo, aquí <strong>1</strong>— es el <strong>radio de convergencia</strong> (un número, no la zona).</p>
+      <p class="idea" style="font-size:17px">El <strong>polinomio de Taylor</strong> cruza el mismo puente al revés: parte de una función conocida y la <strong>imita</strong> cerca de un punto quedándose con <strong>unos cuantos</strong> términos de su serie de potencias.</p>
+      <p class="idea" style="font-size:17px">Tomemos e<sup>x</sup> (la exponencial de base e ≈ 2.718), otra máquina que te da un número. Alrededor de 0, la receta dice que el coeficiente de cada x<sup>n</sup> es <sup>1</sup>⁄<sub>n!</sub>:</p>
       <div class="estep"><div class="oprow">Taylor de e<sup>x</sup> en 0</div><p>Cada término es x<sup>n</sup> dividido entre n factorial. Calculo los factoriales celda por celda:</p><p class="calc"><span class="rw">n!</span> 0!=<b>1</b> <span class="sep">•</span> 1!=<b>1</b> <span class="sep">•</span> 2!=<b>2</b> <span class="sep">•</span> 3!=<b>6</b></p><div class="fx"><div class="sys"><span class="eq">e<sup>x</sup> ≈ 1 + x + <sup>x</sup><sup>2</sup>⁄<sub>2</sub> + <sup>x</sup><sup>3</sup>⁄<sub>6</sub></span></div></div></div>
-      <p class="idea" style="font-size:17px">¿Por qué dividir entre n! y no dejar los términos sueltos? Para que cada término <strong>encoja</strong> al que sigue y la suma no se dispare.</p>
-      <p class="idea" style="font-size:17px">Los denominadores crecen a saltos (2, 6, 24…) mientras arriba, cerca de 0, x apenas cambia:</p>
-      <div class="fx"><div class="sys"><span class="eq"><sup>x</sup><sup>2</sup>⁄<sub>2</sub>,   <sup>x</sup><sup>3</sup>⁄<sub>6</sub>,   <sup>x</sup><sup>4</sup>⁄<sub>24</sub>…</span></div></div>
-      <p class="idea" style="font-size:17px">Cada uno es una <strong>migaja</strong> junto al anterior: por eso la suma infinita se queda quieta.</p>
-      <p class="idea" style="font-size:17px">Compruébalo con números. Toma x = 0.1 y usa solo los tres primeros términos (1, x y <sup>x</sup><sup>2</sup>⁄<sub>2</sub>):</p>
+      <p class="idea" style="font-size:17px">¿Por qué dividir entre n!? Para que cada término <strong>encoja</strong> al siguiente y la suma no se dispare: los denominadores crecen a saltos (2, 6, 24…) mientras x, cerca de 0, apenas cambia.</p>
+      <p class="idea" style="font-size:17px">Compruébalo con x = 0.1 y tres términos:</p>
       <div class="fx"><div class="sys"><span class="eq">1 + 0.1 + (0.1)<sup>2</sup>/2</span><span class="eq">= 1 + 0.1 + 0.005 = 1.105</span></div></div>
-      <p class="idea" style="font-size:17px">Y el valor real es e<sup>0.1</sup> ≈ 1.10517: con tres términos ya pegaste hasta el tercer decimal.</p>
-      <p class="idea" style="font-size:17px">Con más términos, mejor aproximas. La serie <strong>completa</strong> (infinitos términos) es exactamente <em>e</em><sup>x</sup>.</p>
-      <p class="idea" style="font-size:17px">Cerca de x = 0, con pocos términos ya pega muy bien.</p>
+      <p class="idea" style="font-size:17px">El valor real es e<sup>0.1</sup> ≈ 1.10517: con tres términos ya pegas al tercer decimal. La serie completa (infinitos términos) es exactamente e<sup>x</sup>.</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>
