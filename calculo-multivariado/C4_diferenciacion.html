@@ -223,6 +223,20 @@
       <p class="idea">Entonces y<sup>2</sup> vale 16 durante todo el camino, y la altura que vas sintiendo es:</p>
       <div class="fx"><div class="sys"><span class="eq">h = x<sup>2</sup> + 16</span></div></div>
       <p class="idea">Mírala bien: quedó una función de <strong>una sola variable</strong>, de las de bachillerato. Y esas ya sabes derivarlas.</p>
+      <div class="ejemplo">
+        <p class="idea"><strong>Recordatorio exprés de bachillerato.</strong> Por si derivar una potencia se te fue de la cabeza, aquí está de vuelta — de aquí en adelante la usas en cada paso.</p>
+        <p class="idea">La regla cabe en un renglón: bajas el exponente al frente y le restas uno.</p>
+        <div class="fx"><div class="sys"><span class="eq">x<sup>n</sup> → n · x<sup>n−1</sup></span></div></div>
+        <p class="idea">Con números, dos veces:</p>
+        <div class="fx"><div class="sys"><span class="eq">x<sup>2</sup> → 2 · x<sup>2−1</sup> = 2x</span><span class="eq">x<sup>3</sup> → 3 · x<sup>3−1</sup> = 3x<sup>2</sup></span></div></div>
+        <p class="idea">En el primero, 2 − 1 = 1, y x elevado a 1 es solo x; por eso queda 2x.</p>
+        <p class="idea">Y dos casos que se repiten todo el tiempo:</p>
+        <ul class="fases">
+          <li>un <em>puro número</em> (como el 16) → su derivada es <strong>0</strong>, desaparece,</li>
+          <li>una <em>constante por x</em> (como 5x) → queda <strong>la constante</strong>: 5x → 5.</li>
+        </ul>
+        <p class="idea">Con esto en la mano, todo lo que sigue es aplicar la misma regla una y otra vez.</p>
+      </div>
       <p class="idea">La derivada de x<sup>2</sup> + 16 es 2x — el 16 es constante y desaparece.</p>
       <p class="idea">En x = 3, la pendiente hacia el este es:</p>
       <div class="fx"><div class="sys"><span class="eq">2·3 = <strong>6</strong></span></div></div>
@@ -263,6 +277,7 @@
       <p class="idea">Ya sabes medir la pendiente al este y la pendiente al norte. Son dos números, dos respuestas sueltas.</p>
       <p class="idea">La jugada ahora es <strong>guardarlas juntas y en orden</strong>: (pendiente al este, pendiente al norte).</p>
       <p class="idea">Y dos números en orden dibujan una <strong>flecha</strong> en el mapa: camina tanto al este, tanto al norte.</p>
+      <p class="idea">A estos dos números en orden — que juntos dibujan una flecha — se les llama, con su nombre formal, un <strong>vector</strong>.</p>
       <p class="idea">Esa flecha esconde algo enorme. Toma la f de arriba, parada en el punto (2, 1).</p>
       <p class="idea">La pendiente al este:</p>
       <div class="fx"><div class="sys"><span class="eq">2xy = 2·2·1</span><span class="eq">= <strong>4</strong></span></div></div>
@@ -315,6 +330,8 @@
       <p class="idea">La altura donde se apoya, más lo que ganas por cada camino.</p>
       <p class="idea">La fórmula dice exactamente eso, con letras.</p>
       <p class="idea">Los «pasos» son cuánto te alejas del punto de apoyo (x<sub>0</sub>, y<sub>0</sub>): al este llevas (x − x<sub>0</sub>) y al norte (y − y<sub>0</sub>).</p>
+      <p class="idea">Ese pequeño <strong>0</strong> abajo marca <strong>dónde te paras</strong>: x<sub>0</sub> es tu x fija, la del punto de apoyo; la x sin subíndice es <strong>a dónde te mueves</strong>.</p>
+      <p class="idea">Por eso su resta (x − x<sub>0</sub>) es justo <strong>cuántos pasos diste</strong> al este.</p>
       <p class="idea">A esta tabla se le llama el <strong>plano tangente</strong>:</p>
       <div class="fx"><div class="sys"><span class="eq">z = f(x<sub>0</sub>, y<sub>0</sub>) + ∂f/∂x·(x − x<sub>0</sub>) + ∂f/∂y·(y − y<sub>0</sub>)</span></div></div>
       <p class="fx-note">Tres piezas: la altura donde se apoya, más cada pendiente multiplicada por sus pasos. Sin la altura, la tabla flota en el aire; sin las pendientes por sus pasos, no se inclina como el terreno.</p>
@@ -343,7 +360,7 @@
         <div class="opts">
           <button class="opt" data-ok="1">La altura: evaluar f en el punto (1, 2)</button>
           <button class="opt" data-ok="0">El desplazamiento (x − 1) directamente</button>
-          <button class="opt" data-ok="0">La segunda parcial ∂<sup>2</sup>f/∂x<sup>2</sup></button>
+          <button class="opt" data-ok="0">La segunda parcial: derivar dos veces la misma variable</button>
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>La altura es el punto de apoyo del plano: sin ella no sabemos dónde toca la superficie. El desplazamiento no se “calcula”, queda como (x − 1); y las segundas parciales no entran en el plano tangente.</p></div>
       </div>
@@ -488,10 +505,19 @@
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>Un vector más largo inflaría el producto punto sin que la dirección cambie. Normalizando, la derivada direccional mide pendiente pura. El gradiente <strong>no</strong> es unitario.</p></div>
       </div>
+      <p class="idea" style="font-size:17px">¿Y cómo se mide el <strong>largo</strong> de una flecha? La flecha (3, 4) es la <strong>hipotenusa</strong> de un triángulo de catetos 3 y 4, así que por <strong>Pitágoras</strong>:</p>
+      <div class="fx"><div class="sys"><span class="eq">largo de (3, 4) = √(3<sup>2</sup> + 4<sup>2</sup>)</span><span class="eq">= √(9 + 16) = √25 = 5</span></div></div>
       <div class="estep"><div class="oprow">Paso 2 · dirección unitaria</div><p>La dirección (3, 4) mide 5 (porque 3<sup>2</sup> + 4<sup>2</sup> = 25, y √25 = 5). Divido entre 5:</p><p class="calc"><span class="rw">|(3,4)|</span> √(9+16)=√25=<b>5</b> <span class="sep">•</span> <span class="rw">u</span>=(3/5, 4/5)</p></div>
+      <p class="idea" style="font-size:17px">Antes de operar, ¿por qué <strong>multiplicar coordenada con coordenada y sumar</strong> mide la pendiente en tu rumbo?</p>
+      <p class="idea" style="font-size:17px">Vuelve al mapa: la parte de tu rumbo que va <strong>a lo largo</strong> de la curva de nivel no gana altura — esa parte aporta <strong>cero</strong>.</p>
+      <p class="idea" style="font-size:17px">Así que de todo el gradiente (6, 8), lo único que cuenta es <strong>cuánto de él empuja hacia donde caminas</strong> (hacia u).</p>
+      <p class="idea" style="font-size:17px">Y medir «cuánto empuja una flecha en tu rumbo» es exactamente esto: <strong>multiplicar coordenada con coordenada y sumar</strong>.</p>
+      <p class="idea" style="font-size:17px">Esa operación tiene nombre — el <strong>producto punto</strong> — y por eso D<sub>u</sub>f = ∇f · u.</p>
       <div class="estep"><div class="oprow">Paso 3 · producto punto</div><p>La derivada direccional es ∇f punto u: multiplico componente a componente y sumo.</p><p class="calc"><span class="rw">D<sub>u</sub>f</span> 6·(3/5)=18/5 <span class="sep">•</span> 8·(4/5)=32/5 <span class="sep">•</span> 18/5+32/5=50/5=<b>10</b></p></div>
 
       <p class="idea" style="font-size:17px">Como elegí justo la dirección del gradiente, salió el <strong>máximo</strong> posible: <strong>10</strong>, que es la longitud de ∇f(3, 4). En cualquier otra dirección saldría menos.</p>
+      <p class="idea" style="font-size:17px">Y esa longitud sale por el mismo Pitágoras, tomando el gradiente (6, 8):</p>
+      <div class="fx"><div class="sys"><span class="eq">√(6<sup>2</sup> + 8<sup>2</sup>) = √(36 + 64) = √100 = 10</span></div></div>
       <p class="idea" style="font-size:17px">Esa es la respuesta a la ladera: subes más rápido hacia (6, 8), con pendiente 10.</p>
     </section>
 
@@ -504,12 +530,16 @@
       <p class="idea">Eso se escribe ∂<sup>2</sup>f/∂x<sup>2</sup> — el 2 arriba avisa que derivaste dos veces — y se llama <strong>segunda parcial</strong>:</p>
       <div class="fx"><div class="sys"><span class="eq">∂<sup>2</sup>f/∂x<sup>2</sup> = 2y</span></div></div>
       <p class="idea">También puedes cambiar de letra a media ruta: primero por x y luego por y, o al revés. A esas se les llama <strong>parciales cruzadas</strong>.</p>
+      <p class="idea">En símbolos, derivar primero por x y luego por y — es decir, ∂/∂y de ∂f/∂x — se escribe así:</p>
+      <div class="fx"><div class="sys"><span class="eq">∂/∂y ( ∂f/∂x ) = ∂<sup>2</sup>f/∂x∂y</span></div></div>
       <p class="idea">En las funciones normales del curso pasa algo cómodo: <strong>el orden no importa</strong>, por los dos caminos llega el mismo resultado.</p>
       <p class="idea"><strong>La promesa de la tabla.</strong> Que existan las dos parciales solo garantiza dos direcciones bien medidas: este y norte.</p>
       <p class="idea">Cuando eso pasa, decimos que f es <strong>derivable</strong> en el punto.</p>
       <p class="idea">Pero la tabla del plano tangente promete más: pegarse al terreno en <strong>todas</strong> las direcciones a la vez.</p>
       <p class="idea">Cuando esa promesa sí se cumple, decimos que f es <strong>diferenciable</strong> — una condición más fuerte.</p>
       <p class="idea">Hay terrenos con las dos pendientes bien definidas donde la tabla aun así no se recarga bien: imagina un pliegue del terreno justo entre el este y el norte.</p>
+      <p class="idea">Vuelve al <strong>mapa de curvas de nivel</strong> de arriba: piensa en un punto donde caminar <strong>al este</strong> o <strong>al norte</strong> se ve liso — esas dos parciales existen y son sanas.</p>
+      <p class="idea">Pero en una <strong>diagonal</strong>, entre el este y el norte, el terreno cae en ese pliegue: por ese rumbo la tabla ya no se pega.</p>
       <p class="idea">Dos direcciones sanas no garantizan las infinitas restantes.</p>
     </section>
 

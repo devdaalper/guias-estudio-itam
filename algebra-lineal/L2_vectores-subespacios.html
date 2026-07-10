@@ -244,6 +244,7 @@
       </ul>
       <p class="idea">Y en el dibujo pasa algo bonito: al multiplicar por 2, la flecha apunta <strong>hacia el mismo lado</strong> pero mide el doble. Con un peso negativo, se voltea hacia el lado contrario.</p>
       <p class="idea">El peso nunca tuerce la flecha: solo la <strong>alarga</strong>, la <strong>acorta</strong> o la <strong>voltea</strong>.</p>
+      <p class="idea">Un aviso para cuando abras el libro: a este número —el peso— también se le llama <strong>escalar</strong>, justo porque <strong>escala</strong> al vector: lo agranda, lo achica o lo voltea. Peso y escalar son la misma cosa.</p>
     </section>
 
     <section class="sec">
@@ -271,7 +272,8 @@
       <p class="idea">Con letras, para cualquier caso: si u y v son los vectores y a, b son los pesos, la combinación es:</p>
       <div class="fx"><div class="sys"><span class="eq">a·u + b·v</span></div></div>
       <p class="idea">Adentro de esa expresión no hay nada más que lo que ya hiciste: pesos por vectores, y sumar.</p>
-      <p class="idea">Y aquí nace la pregunta estrella de toda la unidad, dicha en simple: <em>"quiero que la jarra final quede exactamente en (7, 13) — ¿cuántas veces hago cada receta?"</em>. Es decir:</p>
+      <p class="idea">Y aquí nace la pregunta estrella de toda la unidad, dicha en simple: <em>"quiero que la jarra final quede exactamente en (7, 13) — ¿cuántas veces hago cada receta?"</em>.</p>
+      <p class="idea">A ese resultado que quieres alcanzar —la jarra final (7, 13)— dale un nombre corto: <strong>w</strong>. Con eso, la pregunta es:</p>
       <div class="fx"><div class="sys"><span class="eq">¿existen pesos a, b con a·u + b·v = w?</span></div></div>
       <p class="idea">Aprender a responder eso sin adivinar es a donde vamos.</p>
       <p class="idea">Antes de seguir, asegúrate de que "combinar" quedó claro y no se confunde con operaciones que <em>no</em> existen aquí:</p>
@@ -297,21 +299,72 @@
       <p class="idea">Siempre obtienes <strong>más o menos de lo mismo</strong>. En el dibujo, todas esas flechas caen sobre una <strong>misma recta</strong>: por eso decimos que un solo vector genera una recta.</p>
       <p class="idea">Con <strong>dos recetas</strong> que apunten en direcciones distintas, la cosa cambia por completo: combinándolas alcanzas <strong>cualquier punto del plano</strong>.</p>
       <p class="idea">Dos direcciones distintas bastan para llegar a todos lados.</p>
+      <p class="idea">La razón, en corto: con una avanzas en su dirección; con la otra, en la suya. Dosificando cuánto tomas de cada una —más de esta, menos de aquella— caes donde quieras. Lo verás dibujado más abajo, en <em>"Dos en cruz"</em>.</p>
       <p class="idea">¿Quedó? Compruébalo:</p>
       <div class="check" data-kind="recall" data-fid="F1_generado" data-tema="generado">
         <div class="qtag">Te toca · recuerda</div>
         <p class="q">¿Qué es el generado (span) de un solo vector no nulo v en R²?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">La recta por el origen en la dirección de v (todos los múltiplos t·v)</button>
+          <button class="opt" data-ok="1">La recta por el origen en la dirección de v (todos sus estiramientos: 2v, ½v, −v…)</button>
           <button class="opt" data-ok="0">Todo el plano R², porque un vector alcanza cualquier punto</button>
           <button class="opt" data-ok="0">Solo el punto v y el origen</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Con un solo vector solo puedes <strong>estirarlo</strong>: los múltiplos t·v forman una recta por el origen. Necesitas un segundo vector en otra dirección para llenar el plano.</p></div>
+        <div class="why"><span class="lbl">Por qué</span><p>Con un solo vector solo puedes <strong>estirarlo</strong>: sus estiramientos (2v, ½v, −v…) forman una recta por el origen. Necesitas un segundo vector en otra dirección para llenar el plano.</p></div>
       </div>
     </section>
 
     <section class="sec">
-      <h3>7 · Independencia: ¿alguna receta sobra?</h3>
+      <h3>7 · Combinar es resolver un sistema</h3>
+      <p class="idea">Al final del escalón 5 quedó una pregunta colgada: <em>"¿existen pesos a, b con a·u + b·v = w?"</em>. Vamos a convertirla en algo que ya sabes resolver.</p>
+      <p class="idea">Pongámosle números concretos. Dos recetas base y un objetivo:</p>
+      <div class="fx"><div class="sys"><span class="eq">u = (1, 3)</span><span class="eq">v = (2, −1)</span><span class="eq">w = (5, 1)</span></div></div>
+      <p class="idea">Con estos números, la pregunta es: ¿cuántas veces cada receta —qué pesos a y b— dan justo w?</p>
+      <div class="fx"><div class="sys"><span class="eq">a·(1, 3) + b·(2, −1) = (5, 1)</span></div></div>
+      <p class="idea">Desármalo con lo que ya hiciste. Primero cada peso entra a su receta (escalón 3):</p>
+      <div class="fx"><div class="sys"><span class="eq">a·(1, 3) = (a, 3a)</span><span class="eq">b·(2, −1) = (2b, −b)</span></div></div>
+      <p class="idea">Ahora se juntan las dos, cada cantidad con la suya (escalón 4):</p>
+      <div class="fx"><div class="sys"><span class="eq">primera: a + 2b</span><span class="eq">segunda: 3a − b</span></div></div>
+      <p class="idea">Y eso tiene que quedar igual a w = (5, 1). Cantidad por cantidad:</p>
+      <div class="fx"><div class="sys"><span class="eq">a + 2b = 5</span><span class="eq">3a − b = 1</span></div></div>
+      <p class="idea">Mira lo que apareció: <strong>un sistema de ecuaciones</strong>, idéntico a los de la Unidad 1, con incógnitas a y b.</p>
+      <p class="idea">Y ya sabes qué hacer con un sistema: quitarle el ruido y dejarlo como <strong>matriz aumentada</strong>.</p>
+      <div class="fx" id="brgMtx"></div>
+      <p class="idea">Ahora fíjate de dónde salió cada columna:</p>
+      <ul class="fases">
+        <li>La primera columna, el 1 y el 3, es <strong>u = (1, 3)</strong> parado de pie.</li>
+        <li>La segunda, el 2 y el −1, es <strong>v = (2, −1)</strong>, también de pie.</li>
+        <li>Tras la barra, <strong>w = (5, 1)</strong>: los resultados.</li>
+      </ul>
+      <p class="idea">Por eso la receta de "pon cada vector como <strong>columna</strong>" no es un truco: es lo que el sistema pide solo.</p>
+      <p class="fx-note">Las entradas de cada vector se apilan hacia <strong>abajo</strong> (la de arriba con la de arriba), nunca de lado.</p>
+
+      <p class="idea">Falta ponerle un nombre corto a todo esto, porque lo vas a escribir muchas veces.</p>
+      <p class="idea">A la tabla de coeficientes —las columnas u y v, sin la de resultados— llámala <strong>A</strong>:</p>
+      <div class="fx" id="brgA"></div>
+      <p class="idea">A los pesos que buscas, júntalos en un vector y llámalo <strong>x</strong>:</p>
+      <div class="fx"><div class="sys"><span class="eq">x = (a, b)</span></div></div>
+      <p class="idea">Piensa en A como una <strong>máquina</strong>: le metes el vector x de pesos y te devuelve la mezcla que producen.</p>
+      <p class="idea">¿Qué devuelve? Justo las dos cantidades que ya calculaste. A ese resultado se le escribe <strong>A·x</strong>:</p>
+      <div class="fx"><div class="sys"><span class="eq">A·x = (a + 2b, 3a − b)</span></div></div>
+      <p class="idea">Léelo despacio: cada renglón de A se empareja con los pesos y se suma.</p>
+      <ul class="fases">
+        <li>El renglón (1, 2) da 1·a + 2·b = a + 2b.</li>
+        <li>El renglón (3, −1) da 3·a − 1·b = 3a − b.</li>
+      </ul>
+      <p class="fx-note">Eso es toda la operación A·x: cada renglón por los pesos, sumando. La misma combinación de siempre, en notación corta.</p>
+      <p class="idea">Pedirle a la máquina que entregue w se escribe así de breve:</p>
+      <div class="fx"><div class="sys"><span class="eq">A·x = w</span></div></div>
+      <p class="idea">Que es exactamente el sistema a + 2b = 5, 3a − b = 1. Nada nuevo: solo un nombre más corto.</p>
+      <p class="idea">Verás dos versiones, según qué haya del lado derecho:</p>
+      <ul class="fases">
+        <li><strong>A·x = w</strong>, con w cualquiera: "¿qué pesos dan esta mezcla?"</li>
+        <li><strong>A·x = 0</strong>, con w el vector cero: "¿qué pesos dan la mezcla vacía (0, 0)?"</li>
+      </ul>
+      <p class="idea">Esta segunda, A·x = 0, es justo la que necesitas para decidir si un vector sobra. La usamos ahora mismo.</p>
+    </section>
+
+    <section class="sec">
+      <h3>8 · Independencia: ¿alguna receta sobra?</h3>
       <p class="idea">Imagina que en tu recetario tienes (2, 3) y también (4, 6). Mira bien la segunda:</p>
       <div class="fx"><div class="sys"><span class="eq">(4, 6) = 2·(2, 3)</span></div></div>
       <p class="idea">Es <strong>exactamente el doble</strong> de la primera. ¿Te sirve de algo tenerla? No: todo lo que prepares con ella ya lo podías preparar con la primera, usando el doble de peso.</p>
@@ -321,10 +374,11 @@
         <li>Si <strong>alguno se puede armar combinando los otros</strong>, ese vector sobra → el conjunto es <strong>dependiente</strong>.</li>
         <li>Si nadie sobra —cada vector aporta una dirección que los demás no logran— → <strong>linealmente independiente</strong>.</li>
       </ul>
-      <p class="idea">¿Y cómo se comprueba a mano, sin adivinar? Con la herramienta que ya dominas de la Unidad 1: pon los vectores como <strong>columnas</strong> de una matriz y <strong>reduce</strong>.</p>
+      <p class="idea">¿Y cómo se comprueba a mano, sin adivinar? Con lo que acabas de armar: pon los vectores como <strong>columnas</strong> de una matriz y <strong>reduce</strong>.</p>
+      <p class="idea">Preguntar si un vector se arma con los otros es preguntar si hay pesos —<strong>no todos cero</strong>— que combinen todo hasta dar la mezcla vacía. Es decir, resolver <strong>A·x = 0</strong>.</p>
       <ul class="fases">
-        <li><strong>Pivote en cada columna</strong> → nadie sobra: independientes.</li>
-        <li><strong>Alguna columna sin pivote</strong> → ese vector era combinación de los anteriores: dependientes.</li>
+        <li><strong>Pivote en cada columna</strong> → la única forma de dar cero es con todos los pesos en cero: nadie sobra, son <strong>independientes</strong>.</li>
+        <li><strong>Alguna columna sin pivote</strong> → esa es una variable libre: existen pesos no todos cero que dan cero, así que ese vector se arma con los otros: <strong>dependientes</strong>.</li>
       </ul>
       <div class="fx" id="indepEx"></div>
       <p class="fx-note">Dos pivotes para dos columnas: estos dos vectores son independientes.</p>
@@ -349,7 +403,7 @@
       <p class="idea" style="font-size:17px">Eso es exactamente preguntar: <strong>¿es w = (5, 1) una combinación de u = (1, 3) y v = (2, −1)?</strong></p>
       <p class="idea" style="font-size:17px">Es decir, busco pesos a, b con:</p>
       <div class="fx"><div class="sys"><span class="eq">a·u + b·v = w</span></div></div>
-      <p class="idea" style="font-size:17px">El truco para hacerlo a mano: pongo u y v en <strong>columnas</strong>, w tras la barra, y reduzco.</p>
+      <p class="idea" style="font-size:17px">Son los mismos números del escalón 7; ahora los resolvemos a fondo. Ya dedujiste cómo se arma: pongo u y v en <strong>columnas</strong>, w tras la barra, y reduzco.</p>
       <p class="idea" style="font-size:17px">En cada paso <strong>tú eliges la operación</strong> y yo la aplico.</p>
       <div class="fx" id="e0"></div>
       <p class="fx-note">Columna 1 = u = (1, 3); columna 2 = v = (2, −1); tras la barra, w = (5, 1).</p>
@@ -408,7 +462,7 @@
         <li><strong>Fase 1 — baja:</strong> haz ceros <em>debajo</em> de cada pivote, de izquierda a derecha, hasta dejar una escalera.</li>
         <li><strong>Fase 2 — lee:</strong> cuenta los pivotes; cada pivote es un vector que aporta dirección nueva.</li>
       </ul>
-      <p class="idea" style="font-size:17px">Estos son los vectores:</p>
+      <p class="idea" style="font-size:17px">Estos son los vectores. Antes de leerlos, fíjate en el numerito de abajo: es solo una <strong>etiqueta</strong> para no confundirlos —v<sub>1</sub> se lee "el vector uno", v<sub>2</sub> "el vector dos"—. No es potencia ni resta, solo un nombre.</p>
       <div class="fx"><div class="sys"><span class="eq">v<sub>1</sub> = (1, 1, 2)</span><span class="eq">v<sub>2</sub> = (1, −1, 1)</span><span class="eq">v<sub>3</sub> = (2, 0, 3)</span></div></div>
       <p class="idea" style="font-size:17px">Los pongo en columnas.</p>
       <div class="estep"><div class="oprow">Matriz [v<sub>1</sub> · v<sub>2</sub> · v<sub>3</sub>]</div><div class="fx" id="t0"></div></div>
@@ -442,10 +496,17 @@
 
       <p class="idea" style="font-size:17px">El tercer renglón quedó <strong>todo ceros</strong>: la tercera columna <strong>no</strong> tiene pivote. Eso delata que el tercer vector sobra:</p>
       <div class="fx"><div class="sys"><span class="eq">v<sub>3</sub> = v<sub>1</sub> + v<sub>2</sub></span></div></div>
-      <p class="idea" style="font-size:17px">Hay <strong>2 pivotes</strong>, así que solo dos vectores son independientes. De ahí se lee todo:</p>
+      <p class="idea" style="font-size:17px">Párate a leer lo que pasó, en voz de cocina.</p>
+      <p class="idea" style="font-size:17px">Tenías <strong>tres recetas</strong>, pero una —la tercera— se armaba juntando las otras dos: sobraba.</p>
+      <p class="idea" style="font-size:17px">Te quedaste con <strong>dos recetas</strong> que bastan para preparar todo lo que el trío preparaba, y de las que <strong>ninguna sobra</strong> (dos pivotes sobrevivieron: dos vectores independientes).</p>
+      <p class="idea" style="font-size:17px">A ese juego mínimo —el más chico que sigue generándolo todo, sin repetidos— se le llama una <strong>base</strong>.</p>
+      <p class="idea" style="font-size:17px">Es como el juego de ingredientes básicos de una cocina: con ellos sale el menú entero, y si quitas uno, algo deja de poder prepararse.</p>
+      <p class="idea" style="font-size:17px">¿Y cuántas direcciones <strong>de verdad distintas</strong> quedaron? Dos: una por cada pivote que sobrevivió.</p>
+      <p class="idea" style="font-size:17px">A ese número —cuántas direcciones realmente distintas hay— se le llama la <strong>dimensión</strong>.</p>
+      <p class="idea" style="font-size:17px">De la matriz reducida se lee todo de un golpe:</p>
       <ul class="fases">
-        <li>la <strong>dimensión del generado es 2</strong> (un plano en R³),</li>
-        <li>una <strong>base</strong> es {v<sub>1</sub>, v<sub>2</sub>}.</li>
+        <li>una <strong>base</strong> del generado es {v<sub>1</sub>, v<sub>2</sub>} (los vectores cuya columna se quedó con pivote),</li>
+        <li>la <strong>dimensión del generado es 2</strong>: un plano dentro de R³.</li>
       </ul>
       <p class="idea" style="font-size:17px">Regla que se repite:</p>
       <div class="fx"><div class="sys"><span class="eq">dimensión = número de pivotes</span></div></div>
@@ -484,6 +545,7 @@
       <p class="idea">A los conjuntos con esa propiedad se les llama <strong>subespacios</strong>.</p>
       <p class="idea">La lista de requisitos es corta — tres cosas, y las dos últimas son justo "no poder salirse" con las dos jugadas que conoces:</p>
       <div class="fx"><div class="sys"><span class="eq">0 ∈ S</span><span class="eq">u, v ∈ S  ⇒  u + v ∈ S</span><span class="eq">u ∈ S, c escalar  ⇒  c·u ∈ S</span></div></div>
+      <p class="fx-note">Léelo en palabras: "∈" es <strong>está en</strong>; "⇒" es <strong>entonces</strong>. El primer renglón pide que el cero esté en S. El segundo: si u y v están en S, su suma u + v también. El tercero: si u está en S, cualquier múltiplo c·u también.</p>
       <p class="fx-note">Si falla cualquiera de las tres, no es subespacio.</p>
       <p class="idea">La más rápida de checar: ¿contiene al vector cero?</p>
       <p class="idea">Por eso los generados <strong>siempre</strong> son subespacios (con pesos en 0 obtienes el cero), y una recta que <strong>no</strong> pasa por el origen nunca lo es.</p>
@@ -507,13 +569,19 @@
       <p class="idea">Al correrla dejó de pasar por el origen — así que ya <strong>no</strong> es subespacio (le falta el cero).</p>
       <p class="idea">Pero tampoco es un conjunto cualquiera: sigue siendo un subespacio en el fondo, solo que <strong>trasladado</strong>. A eso se le llama <strong>subespacio afín</strong>.</p>
       <p class="idea">¿Dónde aparecen? Al resolver <strong>A·x = b</strong> con <strong>b ≠ 0</strong> (sistema <strong>no homogéneo</strong>): sus soluciones forman justo uno de estos mundos corridos.</p>
-      <p class="idea">Y se describe con una suma muy natural:</p>
+      <p class="idea">¿Por qué esa forma? Vale la pena caminarlo, porque no es magia.</p>
+      <p class="idea">Primero consigue <strong>una</strong> solución cualquiera: un punto donde el sistema ya se cumple. Llámalo x<sub>p</sub> —la "p" es de particular.</p>
+      <p class="idea">Ahora párate en ese punto y pregúntate: ¿hacia dónde puedo <strong>moverme sin salirme</strong>, o sea, llegar a otra solución?</p>
+      <p class="idea">Moverte sin cambiar el resultado es sumar un paso que la máquina A <strong>manda al cero</strong>: un vector v con A·v = 0.</p>
+      <p class="idea">La máquina A tiene una costumbre útil: <strong>reparte las sumas</strong> —lo que le hace a un paso combinado es la suma de lo que le hace a cada parte—. Así, si A·x<sub>p</sub> = b y A·v = 0:</p>
+      <div class="fx"><div class="sys"><span class="eq">A·(x<sub>p</sub> + v) = A·x<sub>p</sub> + A·v</span><span class="eq">= b + 0</span><span class="eq">= b</span></div></div>
+      <p class="idea">Sigues cumpliendo el sistema. Por eso toda solución es <strong>un punto fijo más una dirección que A anula</strong>:</p>
       <ul class="fases">
-        <li><strong>un punto donde pararte</strong> (una solución particular x<sub>p</sub>),</li>
-        <li>más <strong>las direcciones en las que puedes moverte</strong> (las soluciones del homogéneo A·x = 0):</li>
+        <li><strong>un punto donde pararte</strong> (la solución particular x<sub>p</sub>),</li>
+        <li>más <strong>las direcciones en las que puedes moverte</strong> (las soluciones de A·x = 0, el sistema <strong>homogéneo</strong> —se llama así porque su lado derecho es 0):</li>
       </ul>
       <div class="fx"><div class="sys"><span class="eq">A·x = 0  →  homogéneo (pasa por 0): subespacio</span><span class="eq">A·x = b, b ≠ 0  →  no homogéneo: afín</span><span class="eq">x = x<sub>p</sub> + t·v   (particular + homogénea)</span></div></div>
-      <p class="fx-note">La <strong>forma paramétrica</strong> es justo esa.</p>
+      <p class="fx-note">La <strong>forma paramétrica</strong> es justo esa. La letra <strong>t</strong> es un número libre que tú eliges —el <strong>parámetro</strong>—: al variarlo, recorres toda la dirección v.</p>
       <p class="idea">Fijas las variables libres como parámetros (t, s…) y expresas toda la solución como x<sub>p</sub> más combinaciones de vectores dirección.</p>
       <div class="check" data-kind="recall" data-fid="F3_afin" data-tema="subespacio_afin">
         <div class="qtag">Te toca · recuerda</div>
@@ -535,14 +603,14 @@
       <div class="estep"><div class="oprow">Despejo cada pivote</div><p>Paso x<sub>3</sub> = t al otro lado, celda por celda:</p><p class="calc"><span class="rw">x<sub>1</sub></span> 5−2·t=<b>5 − 2t</b> <span class="sep">•</span> <span class="rw">x<sub>2</sub></span> 1+1·t=<b>1 + t</b> <span class="sep">•</span> <span class="rw">x<sub>3</sub></span> =<b>t</b></p></div>
       <p class="idea" style="font-size:17px">Junto todo en un vector:</p>
       <div class="fx"><div class="sys"><span class="eq">x = (5, 1, 0) + t·(−2, 1, 1)</span></div></div>
-      <p class="idea" style="font-size:17px">El punto <strong>(5, 1, 0)</strong> es la solución particular x<sub>p</sub>; la dirección <strong>(−2, 1, 1)</strong> genera el espacio nulo.</p>
+      <p class="idea" style="font-size:17px">El punto <strong>(5, 1, 0)</strong> es la solución particular x<sub>p</sub>; la dirección <strong>(−2, 1, 1)</strong> es hacia donde puedes moverte sin salirte —las soluciones de A·x = 0—. En un momento le pondremos nombre: <strong>espacio nulo</strong>.</p>
       <p class="idea" style="font-size:17px">Es una <strong>recta afín</strong>: el generado de (−2, 1, 1) corrido hasta (5, 1, 0), sin pasar por el origen.</p>
     </section>
 
     <section class="sec">
       <h3>Espacio nulo, espacio columna y nulidad</h3>
       <p class="idea">Cierra la unidad con dos nombres que etiquetan cosas que ya conoces.</p>
-      <p class="idea">Piensa en la matriz A como una <strong>máquina</strong>: le metes un vector x y te devuelve otro, A·x.</p>
+      <p class="idea">Recuerda la matriz A como una <strong>máquina</strong> (ya la usaste con los pesos): le metes un vector x y te devuelve otro, A·x.</p>
       <p class="idea">Sobre cualquier máquina hay dos preguntas naturales:</p>
       <ul class="fases">
         <li><strong>¿qué entradas aplasta hasta el cero?</strong></li>
@@ -550,6 +618,8 @@
       </ul>
       <p class="idea">La primera respuesta es el <strong>espacio nulo</strong> (kernel): todas las soluciones de A·x = 0.</p>
       <p class="idea">La segunda es el <strong>espacio columna</strong>: el generado de las columnas de A — su "catálogo de salidas".</p>
+      <p class="idea">Ojo <strong>dónde vive</strong> cada uno. Cada columna de A tiene tantas entradas como renglones tiene A: por eso el espacio columna vive en R<sup>(nº de renglones)</sup>.</p>
+      <p class="idea">El espacio nulo, en cambio, está hecho de vectores x de pesos —uno por columna—, así que vive en R<sup>(nº de columnas)</sup>.</p>
       <p class="idea">Sus tamaños también tienen nombre:</p>
       <ul class="fases">
         <li>la <strong>nulidad</strong> es la dimensión del espacio nulo,</li>
@@ -778,6 +848,9 @@ function mat(rows, opts){
 }
 function set(id, rows, opts){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows, opts); }
 
+// puente · combinar = sistema: matriz aumentada [u v | w] y A = [u v]
+set('brgMtx',[["1","2","5"],["3","−1","1"]]);
+set('brgA',[["1","2"],["3","−1"]],{aug:false});
 // La idea · independencia (dos vectores en columnas, sin barra)
 set('indepEx',[["1","0"],["0","1"]],{aug:false});
 // combinación lineal (co-producido): [u · v | w]

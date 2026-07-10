@@ -197,6 +197,7 @@
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">Imagina el plano de un parque cuadriculado. Dos drones despegan del mismo cruce.</p>
       <p class="idea" style="font-size:17px">Uno vuela hasta la marca <strong>(1, 0)</strong> —una unidad al este—. El otro, hasta la marca <strong>(1, 1)</strong> —una al este y una al norte—.</p>
+      <p class="idea" style="font-size:17px">Para no repetir los paréntesis, a esas dos marcas les pondremos un nombre corto: la primera será <strong>u</strong>; la segunda, <strong>v</strong>.</p>
       <div class="fx"><div class="sys"><span class="eq">u = (1, 0)</span><span class="eq">v = (1, 1)</span></div></div>
       <ul class="fases">
         <li><strong>Primera pregunta:</strong> ¿qué <strong>ángulo</strong> se abre entre sus dos trayectorias?</li>
@@ -235,6 +236,7 @@
         <li>Las de n datos, <strong>Rⁿ</strong>.</li>
       </ul>
       <p class="idea">La R es por los números <em>reales</em> (los de siempre) y el numerito cuenta los datos de cada lista.</p>
+      <p class="idea">Cuidado con ese numerito de arriba: <strong>no es una potencia</strong> ni multiplica nada. Es solo un <strong>rótulo</strong> que dice cuántos datos trae cada lista — R² lista de 2, R³ lista de 3.</p>
       <p class="idea">¿Y el misterio de "más de 3 dimensiones"? No hay tal.</p>
       <p class="idea">La casa de la ficha es un punto de <strong>R⁴</strong> — no porque viva en un universo de cuatro dimensiones, sino porque su ficha trae 4 datos.</p>
       <p class="idea">Nadie dibuja R⁴ — y no hace falta: se trabaja con las listas.</p>
@@ -248,6 +250,11 @@
       <p class="idea">El número de afuera multiplica a cada componente. Se llama "escalar" porque agranda o encoge la lista a escala, sin revolver sus datos.</p>
       <p class="idea">Las mismas dos jugadas, ahora con listas de tres datos:</p>
       <div class="fx"><div class="sys"><span class="eq">(3, −1, 2) + (2, 4, 1) = (5, 3, 3)</span><span class="eq">2·(3, −1, 2) = (6, −2, 4)</span></div></div>
+      <p class="idea"><strong>Restar</strong> no es una tercera jugada: es sumar el opuesto (escalar por −1). Se resta cada componente con la suya:</p>
+      <div class="fx"><div class="sys"><span class="eq">(2, 3) − (1, 4) = (1, −1)</span></div></div>
+      <p class="idea">Y muchas veces la escala y la suma van <strong>juntas</strong>: primero escalas, luego sumas. Por ejemplo, 3·(2, 1) + (1, 5) se hace en dos tiempos:</p>
+      <div class="fx"><div class="sys"><span class="eq">3·(2, 1) = (6, 3)</span><span class="eq">(6, 3) + (1, 5) = (7, 8)</span></div></div>
+      <p class="idea">Siempre en ese orden: la escala primero, la suma después.</p>
       <div class="check" data-kind="item" data-id="I1_operar" data-tema="operaciones_vectores" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">¿Cuánto vale 2·(1, 3) + (0, −1)?</p>
@@ -264,8 +271,12 @@
       <h3>2 · Qué tan lejos: la regla de siempre</h3>
       <p class="idea">De vuelta al mapa. El mercado queda en (3, 4).</p>
       <p class="idea">Caminando por las calles recorres 3 al este y luego 4 al norte: 7 en total. Pero un dron vuela <strong>en línea recta</strong>. ¿Cuánto mide ese vuelo?</p>
-      <p class="idea">Es el Pitágoras de secundaria: el paseo forma un triángulo rectángulo de lados 3 y 4, y el vuelo directo es la hipotenusa.</p>
-      <div class="fx"><div class="sys"><span class="eq">3<sup>2</sup> + 4<sup>2</sup> = 9 + 16</span><span class="eq">= 25</span><span class="eq">√25 = <strong>5</strong></span></div></div>
+      <p class="idea">Es el Pitágoras de secundaria. Recordémoslo: en un triángulo con un <strong>ángulo recto</strong> (una esquina cuadrada, como la de una hoja), el lado más largo —la <strong>hipotenusa</strong>— cumple lado<sup>2</sup> + lado<sup>2</sup> = largo<sup>2</sup>.</p>
+      <p class="idea">El paseo dibuja justo ese triángulo: las dos calles son los lados 3 y 4, y el vuelo directo es la hipotenusa. Elevo cada lado al cuadrado y sumo:</p>
+      <div class="fx"><div class="sys"><span class="eq">3<sup>2</sup> + 4<sup>2</sup> = 9 + 16</span><span class="eq">= 25</span></div></div>
+      <p class="idea">Eso me da el <strong>cuadrado</strong> del largo: 25. Para recuperar el largo tengo que deshacer el cuadrado, y eso lo hace la <strong>raíz cuadrada</strong> √.</p>
+      <p class="idea">√25 pregunta: "¿qué número, multiplicado por sí mismo, da 25?". Como 5·5 = 25, la respuesta es:</p>
+      <div class="fx"><div class="sys"><span class="eq">√25 = <strong>5</strong></span></div></div>
       <p class="idea">El famoso triángulo 3-4-5, caminado en el mapa.</p>
       <p class="idea">Lo valioso es que la receta <strong>no cambia</strong> aunque la lista crezca: elevas cada componente al cuadrado, sumas todo y sacas raíz.</p>
       <p class="idea">Con 2 datos es Pitágoras; con 5 datos, exactamente la misma cuenta.</p>
@@ -309,6 +320,13 @@
       <p class="idea">Y fíjate en el detalle clave: entran dos listas, pero sale <strong>un número solito</strong>, no una lista.</p>
       <p class="idea">Ahora la sorpresa geométrica, la razón de que aparezca en todo el curso.</p>
       <p class="idea">Cuando las dos listas son flechas, esa misma cuenta detecta <strong>qué tanto apuntan hacia el mismo lado</strong>.</p>
+      <p class="idea">Para medir eso entra el <strong>coseno</strong>. No lo pienses como fórmula: es un <strong>medidor de alineación</strong> que, según el ángulo entre dos flechas, marca un número entre 1 y −1.</p>
+      <ul class="fases">
+        <li><em>cos 0° = 1</em> — las flechas apuntan al <strong>mismo</strong> lado: alineación total.</li>
+        <li><em>cos 90° = 0</em> — forman un <strong>ángulo recto</strong>: nada alineadas.</li>
+        <li><em>cos 180° = −1</em> — apuntan a lados <strong>opuestos</strong>.</li>
+      </ul>
+      <p class="idea">Es algo que ya viste en bachillerato; aquí solo lo leemos como ese medidor: 1 alineadas, 0 en escuadra, −1 opuestas.</p>
       <p class="idea">El hecho clave (sale de la ley de los cosenos; hoy solo lo usamos) es:</p>
       <div class="fx"><div class="sys"><span class="eq">u·v = |u| |v| cos θ</span></div></div>
       <p class="idea">La θ —la letra griega theta— es el ángulo entre las flechas.</p>
@@ -340,12 +358,14 @@
       <p class="idea">Si esa división siempre queda entre −1 y 1, el número de arriba nunca puede superar en tamaño al de abajo.</p>
       <p class="idea">Escrito con valor absoluto (el tamaño del número, sin signo):</p>
       <div class="fx"><div class="sys"><span class="eq">| u·v |  ≤  | u | · | v |</span></div></div>
+      <p class="fx-note">Ojo con las barras: son el mismo símbolo con dos trabajos. Cuando abrazan un <strong>vector</strong> (|u|, |v|) miden su longitud —la norma—; cuando abrazan un <strong>número</strong> (|u·v|, y recuerda que u·v es un número) dan su tamaño sin signo —el valor absoluto—.</p>
       <p class="idea">El producto punto tiene tope, y el tope es el producto de las normas.</p>
       <p class="idea">Míralo con números. Toma u = (1, 2) y v = (2, 4). El producto punto:</p>
       <div class="fx"><div class="sys"><span class="eq">1·2 + 2·4 = 2 + 8</span><span class="eq">= 10</span></div></div>
       <p class="idea">Las normas, una por una:</p>
       <div class="fx"><div class="sys"><span class="eq">|u| = √(1 + 4)</span><span class="eq">= √5</span></div></div>
-      <div class="fx"><div class="sys"><span class="eq">|v| = √(4 + 16)</span><span class="eq">= √20</span><span class="eq">= 2√5</span></div></div>
+      <div class="fx"><div class="sys"><span class="eq">|v| = √(4 + 16)</span><span class="eq">= √20</span><span class="eq">= √4 · √5 = 2√5</span></div></div>
+      <p class="fx-note">√20 se parte en √4 · √5, y como √4 = 2 (porque 2·2 = 4), queda 2√5.</p>
       <p class="idea">Así que su producto es:</p>
       <div class="fx"><div class="sys"><span class="eq">|u|·|v| = √5 · 2√5</span><span class="eq">= 2·5</span><span class="eq">= 10</span></div></div>
       <p class="idea">Empate exacto — y no es casualidad: v = 2·u, las flechas apuntan hacia el mismo lado (θ = 0°, cos θ = 1).</p>
@@ -411,7 +431,13 @@
       </div>
       <div class="estep"><div class="oprow">Paso 3 · el coseno</div><p>Sustituyo los tres números en el despeje:</p><p class="calc"><span class="rw">cos θ</span> 1÷(1·√2)=<b>1⁄√2</b></p></div>
 
-      <div class="estep"><div class="oprow">Paso 4 · el ángulo</div><p>El coseno 1⁄√2 es el de un ángulo conocido de memoria:</p><p class="calc"><span class="rw">θ</span> cos θ = 1⁄√2 → θ = <b>45°</b></p></div>
+      <p class="idea" style="font-size:17px">Antes del último paso, reconoce ese 1⁄√2: sale de un triángulo, no hay que creerlo de memoria.</p>
+      <p class="idea" style="font-size:17px">Un triángulo rectángulo con los dos catetos iguales (1 y 1) tiene sus dos ángulos de abajo de 45°. Su hipotenusa, por Pitágoras, mide √(1<sup>2</sup> + 1<sup>2</sup>) = √2.</p>
+      <p class="idea" style="font-size:17px">El coseno es el cateto pegado al ángulo dividido entre la hipotenusa, así que:</p>
+      <div class="fx"><div class="sys"><span class="eq">cos 45° = 1 ÷ √2 = 1⁄√2</span></div></div>
+      <p class="idea" style="font-size:17px">Esos son los cosenos que más vas a reconocer:</p>
+      <div class="fx"><div class="sys"><span class="eq">cos 0° = 1</span><span class="eq">cos 45° = 1⁄√2</span><span class="eq">cos 90° = 0</span></div></div>
+      <div class="estep"><div class="oprow">Paso 4 · el ángulo</div><p>El coseno 1⁄√2 es justo el que acabas de armar con el triángulo:</p><p class="calc"><span class="rw">θ</span> cos θ = 1⁄√2 → θ = <b>45°</b></p></div>
       <p class="idea" style="font-size:17px">El producto punto dio positivo y el ángulo salió agudo: <strong>45°</strong>.</p>
       <p class="idea" style="font-size:17px">Fíjate en el orden que seguiste: normas, producto punto, coseno, ángulo. Ese es todo el método.</p>
       <p class="idea" style="font-size:17px">Si el producto punto hubiera dado cero, el ángulo sería recto.</p>
@@ -455,6 +481,8 @@
       <p class="idea" style="font-size:17px">A esa segunda forma se le llama <strong>coordenadas polares</strong>, y vuelve en todo el curso.</p>
       <p class="idea" style="font-size:17px">Convirtamos el punto (−1, 1) a polares, por partes.</p>
       <div class="estep"><div class="oprow">Parte 1 · el radio</div><p>El radio es la norma del punto: raíz de la suma de cuadrados:</p><p class="calc"><span class="rw">r</span> (−1)<sup>2</sup>=<b>1</b> <span class="sep">•</span> 1<sup>2</sup>=<b>1</b> <span class="sep">•</span> √(1+1)=<b>√2</b></p></div>
+      <p class="idea" style="font-size:17px">Para el ángulo hace falta una palabra. La cuadrícula tiene un <strong>eje horizontal</strong> (la x, el este) y un <strong>eje vertical</strong> (la y, el norte); esos dos ejes la parten en cuatro <strong>cuadrantes</strong>.</p>
+      <p class="idea" style="font-size:17px">Se numeran girando desde arriba-derecha: I arriba-derecha, II arriba-izquierda, III abajo-izquierda, IV abajo-derecha.</p>
       <div class="check" data-kind="item" data-id="E5_paso" data-tema="polares" data-level="juntos">
         <div class="qtag">Te toca · decide la parte</div>
         <p class="q">Antes de dar el ángulo: el punto (−1, 1) tiene x negativo y y positivo. ¿En qué cuadrante cae, y qué le pasa a θ ahí?</p>
@@ -465,10 +493,11 @@
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>x negativo y y positivo es arriba a la izquierda: el segundo cuadrante. Ahí el ángulo medido desde el eje +x va entre 90° y 180°. El cuadrante es lo que decide el ángulo; no basta la calculadora.</p></div>
       </div>
-      <div class="estep"><div class="oprow">Parte 2 · el ángulo</div><p>El punto (−1, 1) tiene x negativo y y positivo: cae en el <strong>segundo cuadrante</strong>. Ahí el ángulo es:</p><p class="calc"><span class="rw">θ</span> segundo cuadrante → <b>135°</b> (o 3π⁄4)</p></div>
+      <div class="estep"><div class="oprow">Parte 2 · el ángulo</div><p>El punto (−1, 1) tiene lados 1 y 1, así que forma 45° con el eje (su ángulo de referencia). Pero cae en el <strong>segundo cuadrante</strong> (arriba a la izquierda), donde el ángulo desde el eje +x se mide como 180° menos ese 45°:</p><p class="calc"><span class="rw">θ</span> 180° − 45° = <b>135°</b></p></div>
       <p class="idea" style="font-size:17px">Listo: (−1, 1) en polares es <strong>r = √2, θ = 135°</strong>.</p>
       <p class="idea" style="font-size:17px">Para volver a cartesianas se usan:</p>
       <div class="fx"><div class="sys"><span class="eq">x = r·cos θ</span><span class="eq">y = r·sen θ</span></div></div>
+      <p class="idea" style="font-size:17px">Aquí el coseno y el seno se reparten el trabajo. Partiendo de la flecha de largo r con ángulo θ, el <strong>coseno</strong> dice cuánto avanza hacia el este (la x) y el <strong>seno</strong>, cuánto sube hacia el norte (la y).</p>
       <p class="idea" style="font-size:17px">El <strong>cuadrante</strong> decide el ángulo: cuídalo siempre.</p>
     </section>
 
@@ -488,6 +517,9 @@
       <p class="idea">Al desarrollar ese producto punto queda una ecuación como la de abajo.</p>
       <div class="fx"><div class="sys"><span class="eq">Recta: (x, y) = (1, 2) + t·(3, −1)</span><span class="eq">Plano: 2x + y − z = 2</span></div></div>
       <p class="fx-note">En el plano, los coeficientes (2, 1, −1) son justo el vector normal: perpendicular a toda la superficie.</p>
+      <p class="idea">Veamos ese desarrollo con números. Tomo la normal (2, 1, −1) y un punto de paso, digamos (1, 0, 0). El desplazamiento hasta un punto (x, y, z) cualquiera es (x − 1, y, z), y pido producto punto cero con la normal:</p>
+      <div class="fx"><div class="sys"><span class="eq">(2, 1, −1)·(x − 1, y, z) = 0</span><span class="eq">2(x − 1) + y − z = 0</span><span class="eq">2x − 2 + y − z = 0</span><span class="eq">2x + y − z = 2</span></div></div>
+      <p class="idea">Ahí sale la ecuación del plano: los coeficientes son la normal, y el 2 de la derecha lo fija el punto de paso.</p>
       <div class="check" data-kind="item" data-id="I3_recta_plano" data-tema="recta_plano" data-level="guiado">
         <div class="qtag">Te toca · decide</div>
         <p class="q">En la recta (x, y) = (1, 2) + t·(3, −1), ¿cuál pieza es la <strong>dirección</strong> (el vector director)?</p>
@@ -751,6 +783,7 @@
         <li><span class="ck">✓</span> Polares: x = r·cos θ, y = r·sen θ; r = norma; cuida el cuadrante del ángulo.</li>
         <li><span class="ck">✓</span> Recta = punto + dirección; plano = punto + normal (los coeficientes son la normal).</li>
         <li><span class="ck">✓</span> Abierto: desigualdad estricta (&lt;); cerrado: incluye la frontera (≤).</li>
+        <li><span class="ck">✓</span> En los libros verás las listas con subíndices, (x<sub>1</sub>, …, x<sub>n</sub>), y a la bola le dicen <strong>vecindad</strong> o <strong>entorno</strong>: es lo mismo que aquí.</li>
       </ul>
     </section>
 

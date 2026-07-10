@@ -196,6 +196,21 @@
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">Vas a cercar un <strong>corral rectangular</strong> contra un muro. Tienes <strong>40 metros de malla</strong> para los otros tres lados.</p>
       <p class="idea" style="font-size:17px">Quieres que el corral encierre <strong>la mayor área posible</strong>. ¿De qué medidas lo haces?</p>
+      <div class="fx"><svg viewBox="0 0 300 195" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Corral rectangular contra un muro: los dos lados verticales miden x, el lado de abajo mide y, y el muro cubre el lado de arriba" style="display:block;width:100%;height:auto;max-width:290px;margin:0 auto">
+        <line x1="55" y1="50" x2="245" y2="50" stroke="#C75D08" stroke-width="7" stroke-linecap="round"/>
+        <text x="150" y="38" text-anchor="middle" font-size="14" font-weight="700" fill="#C75D08">muro (gratis)</text>
+        <line x1="55" y1="50" x2="55" y2="155" stroke="#F5821F" stroke-width="3.5"/>
+        <line x1="245" y1="50" x2="245" y2="155" stroke="#F5821F" stroke-width="3.5"/>
+        <line x1="55" y1="155" x2="245" y2="155" stroke="#F5821F" stroke-width="3.5"/>
+        <text x="150" y="106" text-anchor="middle" font-size="12" font-weight="700" fill="#4b5563">malla en 3 lados</text>
+        <text x="41" y="107" text-anchor="middle" font-size="16" font-weight="800" fill="#283891">x</text>
+        <text x="259" y="107" text-anchor="middle" font-size="16" font-weight="800" fill="#283891">x</text>
+        <text x="150" y="178" text-anchor="middle" font-size="16" font-weight="800" fill="#283891">y</text>
+      </svg></div>
+      <p class="idea" style="font-size:17px">Míralo de frente. El <strong>muro</strong> ya tapa un lado, gratis. La malla solo tiene que cerrar los <strong>otros tres</strong>: los dos lados de largo x y el lado de largo y.</p>
+      <p class="idea" style="font-size:17px">Suma esos tres tramos de malla: x + x + y, es decir <strong>2x + y</strong>. Y solo tienes 40 metros, así que 2x + y tiene que valer 40.</p>
+      <p class="idea" style="font-size:17px">El área que encierra el rectángulo es base por altura, <strong>x · y</strong>: eso es lo que quieres lo más grande posible.</p>
+      <p class="idea" style="font-size:17px">En corto, ese es el problema. No hace falta que entiendas la caja aún; al final la escribes tú:</p>
       <div class="fx" id="corralF"></div>
       <p class="idea" style="font-size:17px">Podrías tantear: 5 por 30, 10 por 20, 15 por 10… pero cada intento es a ciegas. Aunque uno te guste, nunca sabes si un poquito más allá había otro mejor.</p>
       <p class="idea" style="font-size:17px">Lo que hace falta es un método que encuentre el <strong>punto exacto</strong> donde el área ya no puede crecer más.</p>
@@ -234,6 +249,8 @@
       <p class="idea">Suelo llano significa: <strong>las dos pendientes valen cero a la vez</strong>.</p>
       <p class="idea">Míralo con números chicos, en este terreno:</p>
       <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>2</sup> + y<sup>2</sup></span></div></div>
+      <p class="idea">Para sacar f<sub>x</sub> derivas <strong>como siempre</strong>, pero tratando a la otra letra, y, como si fuera un <strong>número fijo</strong>: los términos que son solo de y no cambian, así que desaparecen.</p>
+      <p class="idea">Para f<sub>y</sub>, al revés: la fija es x.</p>
       <p class="idea">Es un hoyo perfecto con fondo en el origen. Sus parciales son:</p>
       <div class="fx"><div class="sys"><span class="eq">f<sub>x</sub> = 2x</span><span class="eq">f<sub>y</sub> = 2y</span></div></div>
       <p class="idea">¿Dónde valen cero las dos a la vez? Solo con x = 0 y y = 0: el punto (0, 0), exactamente el fondo.</p>
@@ -347,7 +364,9 @@
       <p class="idea">Pero acabas de ver que los ejes pueden mentir por omisión: la silla girada f = x·y los dejaba en puros ceros.</p>
       <p class="idea">Por eso al producto hay que <strong>cobrarle la torsión</strong>: se le resta (f<sub>xy</sub>)<sup>2</sup>.</p>
       <p class="idea">Una torsión grande puede voltear el veredicto aunque los ejes se vean de acuerdo.</p>
-      <p class="idea">El resultado se llama <strong>D</strong> — la inicial de <em>determinante</em>, porque es justo el determinante de la tablita hessiana:</p>
+      <p class="fx-note">¿Y por qué al cuadrado, y no la torsión a secas? El cuadrado sale del álgebra de la tablita. Por ahora quédate con la idea: la torsión, tuerza hacia donde tuerza, siempre juega en contra, y elevarla al cuadrado la vuelve positiva para que reste igual en cualquier sentido. El porqué formal lo verás con las formas cuadráticas.</p>
+      <p class="idea">El resultado se llama <strong>D</strong>, por <em>determinante</em>.</p>
+      <p class="idea">No te enredes con esa palabra ahora: más adelante, en Álgebra, verás que D es el "determinante" de la tablita hessiana. Por aquí es solo <strong>esta cuenta</strong>:</p>
       <div class="fx" id="Ddef"></div>
       <p class="idea">Léelo caso por caso, con calma:</p>
       <ul class="fases">
@@ -390,6 +409,7 @@
       <p class="idea" style="font-size:17px">Clasifiquemos el punto crítico de una función concreta.</p>
       <p class="idea" style="font-size:17px">No la mires nada más: en cada paso <strong>tú decides la operación</strong> y yo la ejecuto. La función es:</p>
       <div class="fx" id="ej1f"></div>
+      <p class="idea" style="font-size:17px">Una nota de notación antes de arrancar: vas a ver la parcial escrita <strong>∂/∂x</strong>. Es lo mismo que <strong>f<sub>x</sub></strong> — dos maneras de decir "derivada parcial respecto a x". La "d redonda" ∂ solo avisa que hay más de una variable en juego.</p>
 
       <div class="check" data-kind="item" data-id="E1pred" data-tema="puntos_criticos" data-level="guiado">
         <div class="qtag">Te toca · decide el paso</div>
@@ -512,7 +532,12 @@
       <p class="idea">Justo en el punto más alto del sendero ya no puede haber cruce.</p>
       <p class="idea">Ahí la curva de nivel y el sendero <strong>se tocan sin cruzarse</strong>: por un instante van <strong>paralelos</strong>, en la misma dirección.</p>
       <p class="idea">Si el sendero cruzara la curva, un pasito más adelante habría terreno más alto… y entonces ese no era el punto más alto.</p>
-      <p class="idea">Ahora tradúcelo a flechas, con lo que sabes de la unidad 4: el gradiente ∇f es <strong>perpendicular</strong> a las curvas de nivel de f.</p>
+      <p class="idea">Ahora hay que traducir ese "paralelos" a flechas, y para eso falta una pieza: <strong>por qué el gradiente y las curvas de nivel forman ángulo recto</strong>. Se arma en tres pasos, sin dar nada por sabido.</p>
+      <p class="idea">Uno: una <strong>curva de nivel</strong> une puntos de la <strong>misma altura</strong> — por eso se llama "de nivel". Si caminas a lo largo de ella, tu altura no cambia nada.</p>
+      <p class="idea">Dos: el gradiente ∇f apunta hacia donde la altura <strong>sube más rápido</strong> — es la flecha de la máxima subida.</p>
+      <p class="idea">Tres: entonces ∇f no puede apuntar nada <em>a lo largo</em> de la curva, porque por ahí la altura no cambia y el gradiente solo señala cambio.</p>
+      <p class="idea">Solo le queda una salida: apuntar <strong>cruzado</strong> a la curva, en ángulo recto.</p>
+      <p class="idea">Esa es la pieza que faltaba: el gradiente ∇f es <strong>perpendicular</strong> a las curvas de nivel de f.</p>
       <p class="idea">Y el sendero también tiene su flecha.</p>
       <p class="idea">Escribe la restricción como una función g: para la malla, g = 2x + y, y el sendero es "los puntos donde g vale 40".</p>
       <p class="idea">Entonces el sendero es una curva de nivel <strong>de g</strong>, así que ∇g es perpendicular al sendero.</p>
@@ -645,6 +670,7 @@
           <button class="opt" data-ok="0" id="p8b"></button>
           <button class="opt" data-ok="0" id="p8c"></button>
         </div>
+        <div class="aux"><details><summary>Pista</summary><p>La distancia de un punto al origen es √(x<sup>2</sup> + y<sup>2</sup>); su <strong>cuadrado</strong> —lo que minimizamos para no cargar la raíz— es f = x<sup>2</sup> + y<sup>2</sup>. De ahí ∇f = (2x, 2y).</p></details></div>
         <div class="why"><span class="lbl">Por qué</span><p>Minimizamos f = x<sup>2</sup> + y<sup>2</sup>, así que ∇f = (2x, 2y). La restricción g: x + 2y = 5 tiene ∇g = (1, 2). Lagrange iguala ∇f = λ∇g: <strong>2x = λ, 2y = 2λ</strong>, más la restricción. (La solución es x = 1, y = 2.)</p></div>
       </div>
 

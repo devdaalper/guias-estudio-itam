@@ -207,6 +207,7 @@
       <div class="fx"><div class="sys"><span class="eq">T(1, 0) = (2, 0)</span></div></div>
       <p class="idea">Se lee: "meto (1, 0) a la máquina T, y sale (2, 0)". La entrada va dentro del paréntesis; la salida, después del igual.</p>
       <p class="idea">Ahora sí, el nombre formal.</p>
+      <p class="idea">Esas listas de números que venimos moviendo —(1, 0), (2, 0)— ya tenían nombre desde la Unidad 2: cada una es un <strong>vector</strong>.</p>
       <p class="idea">A cualquier máquina de este tipo —una regla que <strong>a cada vector de entrada le asigna un vector de salida</strong>— se le llama <strong>transformación</strong>. Hay muchas:</p>
       <ul class="fases">
         <li>la <strong>fotocopiadora</strong> que amplía,</li>
@@ -225,7 +226,14 @@
       <div class="fx"><div class="sys"><span class="eq">T(3, 5) = (6, 10)</span></div></div>
       <p class="idea">Las máquinas también se presentan con una línea como esta:</p>
       <div class="fx"><div class="sys"><span class="eq">T: R² → R²</span></div></div>
-      <p class="idea">Nada raro escondido: R² es simplemente <strong>el plano</strong>, la colección de todas las listas de dos números —los vectores de la Unidad 2—.</p>
+      <p class="idea">Desarmemos ese símbolo, porque regresa mucho más adelante.</p>
+      <p class="idea">La <strong>R</strong> es el nombre del montón de todos los números —los de la recta: 0, 1, −3, 2.5…—.</p>
+      <p class="idea">El <strong>numerito de arriba dice cuántos números lleva cada lista</strong>; no es una potencia, no eleva nada.</p>
+      <ul class="fases">
+        <li><strong>R²</strong> = listas de <strong>dos</strong> números: el plano, los vectores de la Unidad 2.</li>
+        <li><strong>R³</strong> = listas de <strong>tres</strong> números: el espacio.</li>
+      </ul>
+      <p class="idea">Así que R² es simplemente <strong>el plano</strong>, y la línea de arriba se lee "T va del plano al plano".</p>
       <p class="idea">La flecha dice de dónde a dónde trabaja la máquina: entra un vector del plano, sale un vector del plano.</p>
       <p class="idea">Cada lado de la flecha tiene nombre:</p>
       <ul class="fases">
@@ -264,7 +272,8 @@
       <p class="idea"><strong>No coincide</strong>: esta máquina no respeta el estiramiento.</p>
       <p class="idea">Ya puedes con el nombre formal: una <strong>transformación lineal</strong> es una máquina que respeta las dos jugadas.</p>
       <p class="idea">Se llama "lineal" porque se lleva bien con las combinaciones <em>lineales</em> de la Unidad 2 — pesos y sumas.</p>
-      <p class="idea">En símbolos, para cualesquiera vectores u, v y cualquier escalar c:</p>
+      <p class="idea">Un apunte de vocabulario antes de los símbolos: al número por el que estiras un vector se le llama <strong>escalar</strong> — es el mismo <strong>"peso"</strong> de la Unidad 2 (peso 2 = estíralo al doble).</p>
+      <p class="idea">En símbolos, para cualesquiera vectores u, v y cualquier escalar c (un peso):</p>
       <div class="fx"><div class="sys"><span class="eq">T(u + v) = T(u) + T(v)</span><span class="eq">T(c·u) = c·T(u)</span></div></div>
       <p class="idea">Léelas como historias, no como fórmulas:</p>
       <ul class="fases">
@@ -289,7 +298,7 @@
       <p class="idea">De la jugada del estiramiento sale un atajo enorme. En la Unidad 2 viste que peso 0 significa "no usas la receta": 0·u = (0, 0).</p>
       <p class="idea">Y una máquina lineal respeta los estiramientos, incluido ese:</p>
       <div class="fx"><div class="sys"><span class="eq">T(0·u) = 0·T(u)</span><span class="eq">= (0, 0)</span></div></div>
-      <p class="idea">Traducción: <strong>toda máquina lineal deja el origen clavado en su sitio</strong>.</p>
+      <p class="idea">Traducción: <strong>toda máquina lineal deja el origen clavado en su sitio</strong>. El <strong>origen</strong> es el punto (0, 0), el centro del plano de donde nace todo.</p>
       <p class="idea">Tiene sentido con las máquinas que conoces: la fotocopiadora amplía alrededor de una esquina fija, el tornamesa gira alrededor de su centro — ese punto no se mueve.</p>
       <p class="idea">Eso te regala un <strong>detector instantáneo de impostoras</strong>: mete (0, 0) a la regla. Si no sale (0, 0), no puede ser lineal, y no necesitas calcular nada más.</p>
       <p class="idea">La máquina "corre todo 1 paso a la derecha" cae al instante:</p>
@@ -327,7 +336,7 @@
       <p class="idea">Pruébalo con la fotocopiadora, donde T(1, 0) = (2, 0) y T(0, 1) = (0, 2):</p>
       <div class="fx"><div class="sys"><span class="eq">T(3, 5) = 3·(2, 0) + 5·(0, 2)</span><span class="eq">= (6, 0) + (0, 10)</span><span class="eq">= (6, 10)</span></div></div>
       <p class="idea">Exactamente lo que da la regla directa, duplicar cada número. <strong>Conociendo dos respuestas, las conoces todas.</strong></p>
-      <p class="idea">Esas dos respuestas se guardan, en orden, como <strong>columnas</strong> de una tabla.</p>
+      <p class="idea">Esas dos respuestas se guardan, en orden, como <strong>columnas</strong> de una tabla — cada columna se lee de arriba abajo, como las columnas de las matrices de la Unidad 1.</p>
       <p class="idea">Esa tabla es la <strong>matriz canónica</strong> de la máquina — su ficha técnica completa ("canónica" porque las preguntas se hacen con la base canónica).</p>
       <p class="idea">Míralo con otra regla:</p>
       <div class="fx"><div class="sys"><span class="eq">T(x, y) = (x + y, 3x − y)</span></div></div>
@@ -336,6 +345,16 @@
       <p class="idea">La primera respuesta entra de primera columna; la segunda, de segunda columna:</p>
       <div class="fx" id="canonEx"></div>
       <p class="fx-note">Multiplicar cualquier vector por esta matriz reproduce la transformación entera. Toda la información de T cabe aquí.</p>
+      <p class="idea">Falta destapar una caja negra: ¿qué significa exactamente <strong>multiplicar</strong> un vector por esa tabla?</p>
+      <p class="idea">No es magia; es una sola cuenta, ordenada. Tomemos un punto cualquiera, digamos (2, 5), y multipliquémoslo por la tabla de arriba.</p>
+      <p class="idea">La regla tiene un solo movimiento: <strong>cada renglón de la tabla se empareja con el vector</strong>, número con número; multiplicas cada par y sumas.</p>
+      <p class="idea">El renglón de arriba, 1 y 1, contra el (2, 5):</p>
+      <p class="calc"><span class="rw">Fila 1</span> 1·2 + 1·5 = 2 + 5 = <b>7</b></p>
+      <p class="idea">El renglón de abajo, 3 y −1, contra el mismo (2, 5):</p>
+      <p class="calc"><span class="rw">Fila 2</span> 3·2 + (−1)·5 = 6 − 5 = <b>1</b></p>
+      <p class="idea">La tabla escupió (7, 1). Ahora aplica la regla directa T(x, y) = (x + y, 3x − y) al mismo punto:</p>
+      <div class="fx"><div class="sys"><span class="eq">T(2, 5) = (2 + 5,   3·2 − 5)</span><span class="eq">= (7, 1)</span></div></div>
+      <p class="idea"><strong>El mismo resultado.</strong> Eso es lo que quiere decir "la matriz reproduce la transformación": multiplicar por la tabla es solo otra forma de aplicar T.</p>
       <div class="check" data-kind="item" data-id="C2_columna" data-tema="matriz_canonica" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">Para T(x, y) = (x − 2y, 4x), ¿qué es la <strong>segunda</strong> columna de su matriz canónica?</p>
@@ -375,14 +394,21 @@
       <div class="fx"><div class="sys"><span class="eq">T(5, 2) = (5, 0)</span></div></div>
       <p class="idea">¿Puede producir (2, 3)? Jamás — ninguna entrada del plano tiene esa sombra. Su catálogo es <strong>solo el eje x</strong>, una recta.</p>
       <p class="idea">A ese catálogo se le llama la <strong>imagen</strong> de T: todo lo que la máquina sí alcanza a producir.</p>
-      <p class="idea">Tampoco es nuevo: las salidas A·x son combinaciones de las columnas de A.</p>
-      <p class="idea">Así que la imagen es el <strong>generado de las columnas</strong> — el espacio columna de la Unidad 2.</p>
-      <p class="idea">Y los tamaños ya sabes nombrarlos desde la Unidad 2:</p>
+      <p class="idea">Tampoco es un objeto nuevo. Recuerda cómo funciona A·x: cada salida sale de <strong>juntar las columnas de la tabla, estirándolas y sumándolas</strong>.</p>
+      <p class="idea">A ese "juntar las columnas de todas las formas posibles" se le llamó <strong>espacio columna</strong> en la Unidad 2. La imagen es exactamente eso.</p>
+      <p class="idea">Falta una palabra para medir estos objetos: <strong>dimensión</strong>.</p>
+      <p class="idea">La dimensión cuenta <strong>en cuántas direcciones distintas te puedes mover</strong> dentro de un espacio, sin repetir camino.</p>
       <ul class="fases">
-        <li>La dimensión del <strong>núcleo</strong> es la <strong>nulidad</strong>.</li>
-        <li>La dimensión de la <strong>imagen</strong> es el <strong>rango</strong>.</li>
+        <li>Un <strong>punto</strong> solo no se mueve a ningún lado → dimensión <strong>0</strong>.</li>
+        <li>Una <strong>recta</strong> va en una sola dirección, adelante o atrás por la misma línea → dimensión <strong>1</strong>.</li>
+        <li>Un <strong>plano</strong> te deja moverte en dos direcciones, a los lados y al frente → dimensión <strong>2</strong>.</li>
       </ul>
-      <p class="idea">Para la máquina sombra: núcleo = una recta (nulidad 1), imagen = una recta (rango 1).</p>
+      <p class="idea">Con esa palabra, los tamaños del núcleo y de la imagen ya tienen nombre propio, de la Unidad 2:</p>
+      <ul class="fases">
+        <li>La dimensión del <strong>núcleo</strong> se llama <strong>nulidad</strong>.</li>
+        <li>La dimensión de la <strong>imagen</strong> se llama <strong>rango</strong>.</li>
+      </ul>
+      <p class="idea">Para la máquina sombra: el núcleo es una recta, y una recta mide 1 → <strong>nulidad 1</strong>. La imagen es otra recta → <strong>rango 1</strong>.</p>
       <p class="idea">Junta las dos ideas con este caso:</p>
       <div class="check" data-kind="item" data-id="C3_sombra" data-tema="imagen" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
@@ -429,6 +455,8 @@
         <div class="why"><span class="lbl">Por qué</span><p>La definición pide <strong>las dos</strong> condiciones. Y el cero, si acaso, debe ir al cero, nunca a otro punto.</p></div>
       </div>
       <div class="estep"><div class="oprow">Prueba del escalado</div><p>Tomo c = 5 y u = (1, 2). Escalo antes de aplicar T y lo comparo con escalar el resultado:</p><p class="calc"><span class="rw">c·u</span> (5·1,5·2)=<b>(5,10)</b> <span class="sep">•</span> T(5,10)=(2·5,5+10)=<b>(10,15)</b></p><p class="calc"><span class="rw">5·T(u)</span> T(1,2)=(2,3) <span class="sep">•</span> 5·(2,3)=<b>(10,15)</b></p><p>Otra vez coinciden: (10, 15). El escalado se respeta, así que <strong>T sí es lineal</strong>.</p></div>
+      <p class="idea" style="font-size:17px">Un aviso honesto: probar con u = (1, 2) y v = (3, 1) <strong>no lo demuestra para siempre</strong> — un ejemplo solo enseña cómo se ve la cuenta.</p>
+      <p class="idea" style="font-size:17px">La prueba de verdad repite estos mismos pasos con <strong>u y v cualesquiera</strong>, usando letras en vez de números. Aquí lo hicimos con números para que se viera el mecanismo.</p>
 
       <div class="check" data-kind="item" data-id="E3_decide" data-tema="matriz_canonica" data-level="guiado">
         <div class="qtag">Te toca · decide el paso</div>
@@ -482,11 +510,18 @@
       <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>Al renglón 1 = [1, 2, −1] le resto 2 veces el renglón 2 = [0, 1, 2]:</p><p class="calc"><span class="rw">R1</span> 1−2·0=<b>1</b> <span class="sep">•</span> 2−2·1=<b>0</b> <span class="sep">•</span> −1−2·2=<b>−5</b></p><div class="fx" id="k2"></div></div>
 
       <p class="idea" style="font-size:17px">Ya está reducida. Hay <strong>2 pivotes</strong> (columnas 1 y 2), así que el <strong>rango es 2</strong>.</p>
-      <p class="idea" style="font-size:17px">La tercera columna no tiene pivote: esa variable es <strong>libre</strong>. Llamo z = t, despejo los pivotes del sistema reducido y sale el núcleo como una sola recta:</p>
-      <div class="fx"><div class="sys"><span class="eq">x = 5t,   y = −2t,   z = t</span><span class="eq">núcleo = t·(5, −2, 1)</span></div></div>
+      <p class="idea" style="font-size:17px">La tercera columna no tiene pivote: esa variable es <strong>libre</strong>. Le doy un comodín, z = t (el parámetro de la Unidad 1).</p>
+      <p class="idea" style="font-size:17px">Ahora leo cada renglón de la reducida como una ecuación igualada a cero — es el sistema A·x = 0 del núcleo. El renglón 1, que es 1, 0, −5, dice:</p>
+      <div class="fx"><div class="sys"><span class="eq">x − 5z = 0</span></div></div>
+      <p class="idea" style="font-size:17px">Paso el −5z al otro lado del igual; al cruzarlo <strong>cambia de signo</strong> y se vuelve +5z. Luego uso z = t:</p>
+      <div class="fx"><div class="sys"><span class="eq">x = 5z</span><span class="eq">= 5t</span></div></div>
+      <p class="idea" style="font-size:17px">El renglón 2, que es 0, 1, 2, dice y + 2z = 0. Paso el +2z al otro lado y se vuelve −2z:</p>
+      <div class="fx"><div class="sys"><span class="eq">y = −2z</span><span class="eq">= −2t</span></div></div>
+      <p class="idea" style="font-size:17px">Junto los tres, y el núcleo sale como una sola recta:</p>
+      <div class="fx"><div class="sys"><span class="eq">x = 5t</span><span class="eq">y = −2t</span><span class="eq">z = t</span><span class="eq">núcleo = t·(5, −2, 1)</span></div></div>
       <p class="fx-note">La nulidad (dimensión del núcleo) es 1. Comprobación rápida con la matriz original, metiendo (5, −2, 1):</p>
       <p class="calc"><span class="rw">R1</span> 5+2·(−2)−1=5−4−1=<b>0</b> <span class="sep">•</span> <span class="rw">R2</span> 5+3·(−2)+1=5−6+1=<b>0</b></p>
-      <div class="estep"><div class="oprow">Y la imagen</div><p>Los pivotes cayeron en las columnas 1 y 2. Ojo con la trampa: la base de la imagen <strong>no</strong> son las columnas de la matriz reducida, sino las columnas <strong>1 y 2 de la matriz ORIGINAL</strong>. Esas dos flechas generan todo lo que T alcanza:</p><div class="fx"><div class="sys"><span class="eq">base de la imagen = { (1, 1),  (2, 3) }</span><span class="eq">dim de la imagen = rango = 2</span></div></div></div>
+      <div class="estep"><div class="oprow">Y la imagen</div><p>Los pivotes cayeron en las columnas 1 y 2. Aquí hay una trampa clásica.</p><p>Al reducir cambiaste los números de las columnas, así que las columnas de la reducida <strong>ya no son las flechas de verdad</strong> de T. Los pivotes solo <strong>señalan cuáles</strong> columnas son las independientes.</p><p>Por eso la base de la imagen son esas columnas señaladas, pero <strong>tomadas de la matriz ORIGINAL</strong> —las columnas 1 y 2 de arriba—, las flechas auténticas que generan todo lo que T alcanza:</p><div class="fx"><div class="sys"><span class="eq">base de la imagen = { (1, 1),  (2, 3) }</span><span class="eq">dim de la imagen = rango = 2</span></div></div></div>
       <p class="fx-note">Núcleo = recta t·(5, −2, 1) · imagen = plano generado por (1, 1) y (2, 3), que ya llena todo el codominio de dimensión 2.</p>
     </section>
 
@@ -521,7 +556,8 @@
       <p class="idea" style="font-size:17px">Dos puntos distintos caen en la misma sombra, y viendo la sombra ya no sabes de cuál punto venía.</p>
       <p class="idea" style="font-size:17px">La fotocopiadora jamás: copias iguales solo salen de originales iguales. A la máquina que <strong>nunca repite salidas</strong> se le llama <strong>inyectiva</strong>.</p>
       <p class="idea" style="font-size:17px">¿Y cómo detectarlo sin probar pares de puntos? Con el núcleo. Si dos entradas distintas dan la misma salida, su diferencia se aplasta al cero — cae en el núcleo.</p>
-      <p class="idea" style="font-size:17px">Así que una máquina lineal repite salidas exactamente cuando su núcleo tiene algo más que el (0, 0). Detector:</p>
+      <p class="idea" style="font-size:17px">Así que una máquina lineal repite salidas exactamente cuando su núcleo tiene algo más que el (0, 0).</p>
+      <p class="idea" style="font-size:17px">Lo anotamos con el símbolo <strong>⇔</strong>, que se lee "una cosa pasa justo cuando pasa la otra, en los dos sentidos":</p>
       <div class="fx"><div class="sys"><span class="eq">inyectiva ⇔ nulidad = 0</span></div></div>
       <p class="idea" style="font-size:17px">La segunda pregunta: <strong>¿su catálogo llena todo el espacio de llegada?</strong></p>
       <p class="idea" style="font-size:17px">Si la imagen cubre el codominio completo —ninguna salida posible se queda sin fabricar—, la máquina es <strong>suprayectiva</strong>.</p>

@@ -214,6 +214,8 @@
       <p class="idea">En unidades pasadas viste que una matriz multiplica vectores: le das una flecha y te devuelve otra flecha.</p>
       <p class="idea">Ahora míralo con otros ojos: si le hace eso a <strong>todas</strong> las flechas del plano a la vez, entonces una matriz es una <strong>máquina que transforma el plano entero</strong>.</p>
       <p class="idea">Como una app de editar fotos: le metes un dibujo y te lo devuelve estirado, inclinado o volteado.</p>
+      <p class="idea">Un recordatorio de cómo se multiplica un renglón por una flecha: cada número del renglón se multiplica con el que le toca de la flecha, y los dos resultados se suman.</p>
+      <p class="idea">Es la misma cuenta del ticket del súper: precio × cantidad de cada producto, y al final sumas para el total.</p>
       <p class="idea">Un ejemplo con números chicos. Toma la máquina de renglones (2, 0) y (0, 3), y métele la flecha (1, 0). El producto que ya sabes hacer da:</p>
       <div class="fx"><div class="sys"><span class="eq">2·1 + 0·0 = 2</span><span class="eq">0·1 + 3·0 = 0</span></div></div>
       <p class="idea">Sale la flecha (2, 0). Métele ahora (0, 1):</p>
@@ -301,6 +303,35 @@
       <p class="idea">Los números de la diagonal siguen haciendo su trabajo de estirar:</p>
       <div class="fx"><div class="sys"><span class="eq">2·3 = 6</span></div></div>
       <p class="idea">Pero los otros dos — el 1 y el 1 de la <strong>otra</strong> diagonal (↗) — <strong>inclinan</strong> el cuadradito: ya no sale un rectángulo derecho, sale un cuadrilátero recargado.</p>
+      <p class="idea">Vamos a ver de dónde sale la resta, no a creerla de memoria. Míralo dibujado.</p>
+      <p class="idea">Los dos renglones son dos flechas que salen del mismo punto: (2, 1) y (1, 3).</p>
+      <p class="idea">Una flecha es una instrucción de camino: (2, 1) dice "2 pasos a la derecha y 1 hacia arriba".</p>
+      <p class="idea">El cuadradito, al pasar por la máquina, queda estirado en el cuadrilátero que esas dos flechas encierran:</p>
+      <div class="viz-plane fx"><svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Los renglones (2, 1) y (1, 3) como dos flechas que encierran un cuadrilátero recargado">
+        <line x1="70" y1="50" x2="70" y2="250" stroke="#eef0f2"/>
+        <line x1="110" y1="50" x2="110" y2="250" stroke="#eef0f2"/>
+        <line x1="150" y1="50" x2="150" y2="250" stroke="#eef0f2"/>
+        <line x1="190" y1="50" x2="190" y2="250" stroke="#eef0f2"/>
+        <line x1="230" y1="50" x2="230" y2="250" stroke="#eef0f2"/>
+        <line x1="50" y1="70" x2="250" y2="70" stroke="#eef0f2"/>
+        <line x1="50" y1="110" x2="250" y2="110" stroke="#eef0f2"/>
+        <line x1="50" y1="150" x2="250" y2="150" stroke="#eef0f2"/>
+        <line x1="50" y1="190" x2="250" y2="190" stroke="#eef0f2"/>
+        <line x1="50" y1="230" x2="250" y2="230" stroke="#eef0f2"/>
+        <line x1="45" y1="230" x2="255" y2="230" stroke="#181B22" stroke-width="1.5"/>
+        <line x1="70" y1="255" x2="70" y2="45" stroke="#181B22" stroke-width="1.5"/>
+        <polygon points="70,230 150,190 190,70 110,110" fill="#F5821F" fill-opacity="0.14" stroke="#C75D08" stroke-width="1.5" stroke-dasharray="5 5"/>
+        <line x1="70" y1="230" x2="150" y2="190" stroke="#F5821F" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="150" cy="190" r="5" fill="#F5821F"/>
+        <line x1="70" y1="230" x2="110" y2="110" stroke="#283891" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="110" cy="110" r="5" fill="#283891"/>
+      </svg></div>
+      <p class="fx-note">La flecha naranja es el renglón (2, 1); la azul, el (1, 3). La máquina "derecha" (solo la diagonal) daría un rectángulo de 2 × 3, área 6. La inclinada da esta figura recargada: encierra un poco menos.</p>
+      <p class="idea">¿Y de qué depende cuánto menos? De qué tan <strong>parecidas</strong> se vuelven las dos flechas al inclinarse.</p>
+      <p class="idea">Acuérdate del escalón 4: si la inclinación es tanta que las dos flechas terminan apuntando <strong>igual</strong>, la figura se aplasta a una raya y el área cae a <strong>0</strong>.</p>
+      <p class="idea">Y fíjate cuándo pasa ese aplaste total: justo cuando el producto de la antidiagonal <strong>alcanza</strong> al de la diagonal, los dos valen lo mismo y su resta da cero.</p>
+      <p class="idea">Esa es la pista: el producto de la antidiagonal mide <strong>cuánto se alinean</strong> las flechas, o sea cuánta área se come la inclinación.</p>
+      <p class="idea">Por eso el área es el producto de la diagonal <strong>menos</strong> el de la antidiagonal.</p>
       <p class="idea">Al recargarse pierde un poco de área. ¿Cuánta pierde? Exactamente el producto de esos dos números:</p>
       <div class="fx"><div class="sys"><span class="eq">1·1 = 1</span></div></div>
       <p class="idea">Área final:</p>
@@ -329,6 +360,9 @@
 
     <section class="sec">
       <h3>6 · El 3×3: desarmarlo en piezas 2×2</h3>
+      <p class="idea">Un aviso antes de entrar: una 3×3 es una máquina que deforma el <strong>espacio</strong> (tres direcciones), no solo el plano.</p>
+      <p class="idea">Por eso su determinante ya no mide área sino <strong>volumen</strong>: cuánto agranda o achica una cajita de 1 × 1 × 1.</p>
+      <p class="idea">La idea de fondo no cambia: el número sigue siendo el <strong>factor de deformación</strong>, y si sale 0, la máquina aplastó el espacio y no se puede deshacer.</p>
       <p class="idea">Para una <strong>3×3</strong> nadie encontró una cruz que funcione.</p>
       <p class="idea">La estrategia es otra, y es muy de la vida diaria: cuando algo es demasiado grande para manejarlo entero, <strong>lo desarmas en piezas chicas que ya dominas</strong>.</p>
       <p class="idea">Un mueble se arma tabla por tabla; el 3×3 se desarma en determinantes 2×2 — y esos ya los sabes hacer con la cruz.</p>
@@ -347,6 +381,8 @@
         <li>Dos pasos: se voltea dos veces y regresa a <em>+</em>.</li>
       </ul>
       <p class="idea">Así se teje el tablero completo.</p>
+      <p class="idea">Y si ese "porqué" te enreda, no te cuelgues de él: lo que de verdad usas es el resultado, un tablero fijo de + y −.</p>
+      <p class="idea">La regla par/impar de aquí abajo te da el signo siempre, sin pensar en volteos.</p>
       <p class="idea">Regla rápida para no memorizar dibujos: suma el número de renglón y el de columna de la entrada.</p>
       <ul class="fases">
         <li><strong>Si da par, va +.</strong></li>
@@ -459,6 +495,37 @@
       <p class="idea" style="font-size:17px">Desarrollar por la columna con dos ceros convirtió un 3×3 en <strong>un solo</strong> 2×2.</p>
     </section>
 
+    <h2 class="modhead">Cuando no hay ceros · los tres términos</h2>
+    <section class="ejemplo">
+      <p class="idea" style="font-size:17px">El de arriba fue amable: dos ceros mataron dos términos y sobró uno solo.</p>
+      <p class="idea" style="font-size:17px">En el examen no siempre habrá ceros. Cuando <strong>ninguna</strong> entrada del renglón es 0, los <strong>tres</strong> términos sobreviven, y hay que hacerlos los tres.</p>
+      <p class="idea" style="font-size:17px">Hagamos uno completo. Esta 3×3 no tiene ni un cero:</p>
+      <div class="estep"><div class="oprow">La matriz</div><div class="fx" id="ym3"></div></div>
+      <p class="idea" style="font-size:17px">Sin ceros, cualquier renglón cuesta lo mismo; tomamos el <strong>primero</strong>: sus entradas son 2, 1 y 1.</p>
+      <p class="idea" style="font-size:17px">El tablero de signos del primer renglón es <strong>+ − +</strong>. Vamos entrada por entrada.</p>
+
+      <div class="estep"><div class="oprow">Término 1 · signo +</div><p>Entrada <strong>2</strong> en (1,1). Tapo su renglón y su columna; queda este menor, y saco su cruz:</p><div class="fx" id="ym3a"></div><p class="calc"><span class="rw">menor</span> 2·3−1·1=<b>5</b> <span class="sep">•</span> <span class="rw">término</span> +2·5=<b>+10</b></p></div>
+
+      <div class="check" data-kind="item" data-id="C3sign" data-tema="cofactores" data-level="juntos">
+        <div class="qtag">Te toca · decide el paso</div>
+        <p class="q">La siguiente entrada es el <strong>1</strong> de la posición (1,2). Según el tablero + − +, ¿qué signo lleva su término?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Positivo, igual que el primero</button>
+          <button class="opt" data-ok="1">Negativo: en el primer renglón el patrón es + − +, y (1,2) cae en el −</button>
+          <button class="opt" data-ok="0">Depende de cuánto valga su menor</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>El signo solo depende de la posición. En el primer renglón el tablero va + − +, así que la entrada del medio, (1,2), lleva <strong>−</strong>. Ese menos es la trampa más común: no lo olvides.</p></div>
+      </div>
+
+      <div class="estep"><div class="oprow">Término 2 · signo − (ojo el menos)</div><p>Entrada <strong>1</strong> en (1,2). Tapo su renglón y su columna; menor y cruz:</p><div class="fx" id="ym3b"></div><p class="calc"><span class="rw">menor</span> 3·3−1·1=<b>8</b> <span class="sep">•</span> <span class="rw">término</span> −1·8=<b>−8</b></p></div>
+
+      <div class="estep"><div class="oprow">Término 3 · signo +</div><p>Entrada <strong>1</strong> en (1,3). Tapo su renglón y su columna; menor y cruz:</p><div class="fx" id="ym3c"></div><p class="calc"><span class="rw">menor</span> 3·1−2·1=<b>1</b> <span class="sep">•</span> <span class="rw">término</span> +1·1=<b>+1</b></p></div>
+
+      <div class="estep"><div class="oprow">Sumo los tres términos</div><p>Junto los tres, respetando sus signos:</p><p class="calc"><span class="rw">det</span> +10 − 8 + 1 = <b>3</b></p></div>
+      <p class="idea" style="font-size:17px">Determinante = <strong>3</strong>. Como no dio cero, esta matriz <strong>sí</strong> se puede invertir.</p>
+      <p class="idea" style="font-size:17px">Tres entradas, tres términos, con los signos <strong>+ − +</strong> en fila. El del medio se resta: ahí es donde casi todos se equivocan.</p>
+    </section>
+
     <section class="sec">
       <h3>Propiedades que te ahorran cuentas</h3>
       <p class="idea">Ya sabes calcular. Ahora aprende a <strong>no</strong> calcular cuando no hace falta: hay matrices que confiesan su determinante con solo mirarlas.</p>
@@ -466,7 +533,7 @@
       <ul class="fases">
         <li><strong>Matriz triangular</strong> — así se llama cuando los ceros llenan todo el triángulo que queda debajo (o arriba) de la diagonal; el nombre viene de ese triángulo de ceros. Su determinante es el <strong>producto de la diagonal</strong>. Nada más.</li>
         <li><strong>Un renglón (o columna) de puros ceros</strong> → determinante 0. La razón la tienes del escalón 6: desarrolla por ese renglón y cada término es 0 × cofactor = 0.</li>
-        <li><strong>Dos renglones (o columnas) iguales o proporcionales</strong> → determinante 0. Dos direcciones repetidas no abren área: la máquina aplasta el plano, y ya sabes lo que significa aplastar.</li>
+        <li><strong>Dos renglones (o columnas) iguales o proporcionales</strong> (proporcionales = uno es el otro multiplicado por un número, como (1, 2) y su doble (2, 4)) → determinante 0. Dos direcciones repetidas no abren área: la máquina aplasta el plano, y ya sabes lo que significa aplastar.</li>
         <li><strong>Intercambiar dos renglones</strong> voltea el espejo: el determinante queda del <strong>mismo tamaño pero con el signo cambiado</strong>.</li>
         <li><strong>Máquinas en serie:</strong> si el dibujo pasa primero por la máquina B y luego por la máquina A, los factores de área se multiplican: una que agranda ×2 seguida de una que agranda ×3 agranda ×6. En símbolos:</li>
       </ul>
@@ -492,7 +559,9 @@
       <h3>Míralo: el determinante 2×2 es un área</h3>
       <p class="idea">Todo lo que llevas construido se puede ver en un solo dibujo.</p>
       <p class="idea">Los dos <strong>renglones</strong> de una 2×2 son dos flechas.</p>
+      <p class="idea">Recuerda que una flecha es una instrucción de camino: el renglón (3, 1) dice "3 pasos a la derecha y 1 hacia arriba".</p>
       <p class="idea">Y el cuadradito testigo, al pasar por la máquina, se convierte exactamente en el <strong>paralelogramo</strong> que esas dos flechas encierran.</p>
+      <p class="idea">Un paralelogramo es un cuadrilátero de lados paralelos: un rectángulo empujado de lado, como el terreno del inicio.</p>
       <p class="idea">Es el cuadrilátero recargado del escalón 5.</p>
       <p class="idea">El determinante es su <strong>área</strong> (con el signo avisando del volteo).</p>
       <p class="idea">Y si las dos flechas apuntan en la misma dirección, no encierran nada: área 0, la máquina que aplasta. Toca cada caso:</p>
@@ -517,6 +586,8 @@
       <p class="idea" style="font-size:17px">Vamos paso a paso con este sistema:</p>
       <div class="fx"><div class="sys"><span class="eq">2x + y = 5</span><span class="eq">x + 3y = 10</span></div></div>
       <div class="estep"><div class="oprow">Determinante del sistema</div><p>Es el de la matriz de coeficientes. Con la cruz:</p><p class="calc"><span class="rw">det</span> 2·3−1·1=<b>5</b></p><div class="fx" id="cr0"></div></div>
+      <p class="idea" style="font-size:17px">Ahora la idea clave del método: para hallar x, en la matriz de coeficientes <strong>tacho la columna de x</strong> (su columna, la del 2 y el 1) y la relleno con los resultados del sistema (el 5 y el 10).</p>
+      <p class="idea" style="font-size:17px">La razón: ese determinante "pregunta" cuánto pesa x en la solución; por eso los resultados entran justo en la columna de x.</p>
       <div class="estep"><div class="oprow">Para x: reemplazo la columna de x por los resultados</div><p>Cambio la columna 2 y 1 por 5 y 10, y saco su determinante. Luego divido entre 5:</p><p class="calc"><span class="rw">det<sub>x</sub></span> 5·3−1·10=<b>5</b> <span class="sep">•</span> <span class="rw">x</span> 5÷5=<b>1</b></p><div class="fx" id="cr1"></div></div>
       <div class="estep"><div class="oprow">Para y: reemplazo la columna de y por los resultados</div><p>Ahora cambio la columna de y por 5 y 10, saco su determinante y divido entre 5:</p><p class="calc"><span class="rw">det<sub>y</sub></span> 2·10−5·1=<b>15</b> <span class="sep">•</span> <span class="rw">y</span> 15÷5=<b>3</b></p><div class="fx" id="cr2"></div></div>
       <p class="idea" style="font-size:17px">Solución: <strong>x = 1</strong>, <strong>y = 3</strong>. Cada incógnita salió de dividir dos determinantes, sin reducir la matriz.</p>
@@ -539,6 +610,9 @@
       <div class="estep"><div class="oprow">Determinante</div><p>Con la cruz, y compruebo que no sea cero:</p><p class="calc"><span class="rw">det</span> 4·2−3·2=<b>2</b></p></div>
       <div class="estep"><div class="oprow">Adjunta</div><p>Intercambio 4 y 2 (diagonal principal) y cambio el signo de 3 y de 2 (la otra diagonal):</p><div class="fx" id="in1"></div></div>
       <div class="estep"><div class="oprow">Divido la adjunta entre el determinante</div><p>Multiplico cada entrada por 1/2:</p><p class="calc"><span class="rw">1/det</span> 2÷2=<b>1</b> <span class="sep">•</span> −3÷2=<b>−3/2</b> <span class="sep">•</span> −2÷2=<b>−1</b> <span class="sep">•</span> 4÷2=<b>2</b></p><div class="fx" id="in2"></div></div>
+      <div class="estep"><div class="oprow">Compruebo: aplico A y luego su inversa</div><p>Multiplico A por la inversa que saqué. Si está bien, tiene que salir la identidad (renglón por columna):</p><p class="calc"><span class="rw">fila 1</span> 4·1+3·(−1)=<b>1</b> <span class="sep">•</span> 4·(−3/2)+3·2=<b>0</b></p><p class="calc"><span class="rw">fila 2</span> 2·1+2·(−1)=<b>0</b> <span class="sep">•</span> 2·(−3/2)+2·2=<b>1</b></p><div class="fx" id="invchk"></div></div>
+      <p class="idea" style="font-size:17px">Salió la <strong>identidad</strong>: unos en la diagonal, ceros afuera.</p>
+      <p class="idea" style="font-size:17px">Y la identidad es "el plano en su lugar" del escalón 4: aplicar A y luego su inversa deja todo como estaba. La inversa <strong>sí deshace</strong> a A.</p>
       <p class="idea" style="font-size:17px">Esa es la inversa. En esta unidad la <strong>inversa por adjunta la trabajamos en 2×2</strong>.</p>
       <p class="idea" style="font-size:17px">(En 3×3 se puede, pero conviene invertir por Gauss-Jordan, de otra unidad.)</p>
     </section>
@@ -752,6 +826,13 @@ setsq('e2m',[["3","1"],["2","4"]]);
 setsq('e3m',[["2","0","1"],["3","1","2"],["1","0","3"]]);
 setsq('e3a',[["2","1"],["1","3"]]);   // menor de (2,2): renglones 1-3, columnas 1-3 (esquinas)
 
+// ===== Cuando no hay ceros (3x3 completo, expansion por 1er renglon) =====
+// M=[[2,1,1],[3,2,1],[1,1,3]] -> +2*(2*3-1*1) -1*(3*3-1*1) +1*(3*1-2*1) = +10 -8 +1 = 3
+setsq('ym3',[["2","1","1"],["3","2","1"],["1","1","3"]]);
+setsq('ym3a',[["2","1"],["1","3"]]);   // menor (1,1): 2*3-1*1 = 5
+setsq('ym3b',[["3","1"],["1","3"]]);   // menor (1,2): 3*3-1*1 = 8
+setsq('ym3c',[["3","2"],["1","1"]]);   // menor (1,3): 3*1-2*1 = 1
+
 // triangular: det = 2*3*1 = 6
 setsq('triang',[["2","5","1"],["0","3","4"],["0","0","1"]]);
 
@@ -764,6 +845,7 @@ setsq('cr2',[["2","5"],["1","10"]]);
 setsq('in0',[["4","3"],["2","2"]]);
 setsq('in1',[["2","−3"],["−2","4"]]);
 setsq('in2',[["1","−3/2"],["−1","2"]]);
+setsq('invchk',[["1","0"],["0","1"]]);   // A * A^-1 = identidad
 
 // ===== práctica =====
 setsq('p1',[["1","2"],["3","4"]]);          // det = 4 - 6 = -2

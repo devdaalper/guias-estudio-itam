@@ -249,7 +249,9 @@
 
     <section class="sec">
       <h3>3 · El dibujo: un terreno sobre el mapa</h3>
-      <p class="idea">Con una perilla, la función se dibujaba como una curva. Con dos perillas el dibujo sube de dimensión, y la mejor forma de verlo es la de la montaña.</p>
+      <p class="idea">Con una perilla, ¿cómo aparecía el dibujo? Por cada número x que metías, la máquina te daba un f(x), y marcabas el punto (x, f(x)) en el plano.</p>
+      <p class="idea">Al hacer eso con todos los x y unir los puntitos, se formaba una <strong>curva</strong>: esa curva era la gráfica de f(x).</p>
+      <p class="idea">Con dos perillas el dibujo pasa de una <strong>línea</strong> a una <strong>superficie</strong>, y la mejor forma de verlo es la de la montaña.</p>
       <p class="idea">Piensa en todas las parejas (x, y) como los puntos de un <strong>mapa plano</strong> tendido en el piso. Sobre cada punto del mapa, la máquina dicta <strong>una altura</strong>.</p>
       <p class="idea">Si levantas esa altura punto por punto, aparece un <strong>terreno</strong>: lomas, valles, planicies.</p>
       <p class="idea">Camínalo con la montaña del inicio:</p>
@@ -281,9 +283,12 @@
       <p class="idea">Buena noticia: solo hay <strong>tres operaciones</strong> capaces de romperse, las mismas tres de bachillerato.</p>
       <ul class="fases">
         <li><em>Dividir entre cero.</em> 1⁄0 no existe: repartir entre nadie no significa nada.</li>
-        <li><em>Raíz par de un negativo.</em> Lo que acabas de ver con √(−7); a lo que vive adentro de una raíz se le llama el <strong>radicando</strong>, y a un radicando de raíz cuadrada le exiges ser mayor o igual que cero.</li>
+        <li><em>Raíz par de un negativo.</em> "Par" es el índice de la raíz: 2, 4, 6…; la más común, y la única que verás aquí, es la <strong>raíz cuadrada</strong>, la de índice 2. Es lo que acabas de ver con √(−7): a lo que vive adentro de una raíz se le llama el <strong>radicando</strong>, y a un radicando de raíz cuadrada le exiges ser mayor o igual que cero.</li>
         <li><em>Logaritmo de cero o de un negativo.</em> El logaritmo pregunta "¿a qué exponente elevo la base para llegar a este número?", y ninguna potencia de una base positiva da cero ni da negativo: adentro de un logaritmo va algo estrictamente positivo.</li>
       </ul>
+      <p class="idea">Detente en una diferencia fina que decide muchos ejercicios: <strong>mayor o igual que cero</strong> no significa lo mismo que <strong>estrictamente positivo</strong>.</p>
+      <p class="idea">Mayor o igual que cero (≥ 0) quiere decir que el 0 <strong>sí</strong> se vale: √0 = 0 existe, por eso la raíz acepta el 0 en su radicando.</p>
+      <p class="idea">Estrictamente positivo (mayor que 0, sin el igual) quiere decir que el 0 <strong>no</strong> se vale: el logaritmo de 0 no existe, por eso el logaritmo exige algo que se pase de 0.</p>
       <p class="idea">Todo lo demás —sumar, restar, multiplicar, elevar al cuadrado— nunca se rompe.</p>
       <div class="check" data-kind="recall" data-fid="F1_restricciones_dominio" data-tema="dominio">
         <div class="qtag">Te toca · recuerda</div>
@@ -337,13 +342,26 @@
         <li>El punto (0, 2): 0 + 4 = 4, también.</li>
         <li>El punto (−2, 0): (−2)² = 4, y 4 + 0 = 4, también.</li>
       </ul>
-      <p class="idea">¿Qué tienen en común? Por Pitágoras, x² + y² es el cuadrado de la <strong>distancia</strong> del punto al centro. Así que pedir x² + y² = 4 es pedir:</p>
+      <p class="idea">¿Qué tienen en común esos puntos? Míralo con un triángulo. Toma el punto (x, y) y el centro (0, 0).</p>
+      <p class="idea">Para ir del centro al punto avanzas <strong>x</strong> en horizontal y luego <strong>y</strong> en vertical: esos dos tramos son los catetos de un triángulo rectángulo, y la <strong>distancia</strong> directa del centro al punto es la hipotenusa.</p>
+      <p class="idea">El teorema de Pitágoras dice que la hipotenusa al cuadrado es la suma de los catetos al cuadrado:</p>
+      <div class="fx" id="pitDist"></div>
+      <p class="idea">O sea que x² + y² <strong>es</strong> el cuadrado de la distancia al centro. Por eso pedir x² + y² = 4 es pedir:</p>
       <div class="fx"><div class="sys"><span class="eq">distancia² = 4</span><span class="eq">distancia = 2</span></div></div>
       <p class="idea">Todos los puntos a distancia 2 del centro forman un <strong>círculo de radio 2</strong>: esa es la línea de altura 4 del tazón.</p>
       <p class="idea">En general se hace igual: eliges una altura k y juntas todos los puntos donde la función vale exactamente k. En símbolos, es la fórmula igualada a una constante:</p>
       <div class="fx"><div class="sys"><span class="eq">f(x, y) = k</span></div></div>
       <p class="idea">A esa línea se le llama <strong>curva de nivel</strong> — "de nivel" porque todos sus puntos están al mismo nivel, a la misma altura.</p>
-      <p class="idea">Si la función tiene <strong>tres</strong> variables ya no salen líneas sino superficies: se llaman <strong>superficies de nivel</strong>. El nombre paraguas para ambos es <strong>conjunto de nivel</strong>.</p>
+      <p class="idea">Ojo: no toda curva de nivel es un círculo — depende de la fórmula.</p>
+      <p class="idea">Prueba con una máquina más simple, f(x, y) = x + y (sin cuadrados). Su curva de nivel k = 5 pide x + y = 5.</p>
+      <div class="fx"><div class="sys"><span class="eq">x + y = 5</span></div></div>
+      <p class="idea">Marca puntos que lo cumplan: (5, 0), (0, 5), (3, 2), (1, 4) — todos suman 5.</p>
+      <p class="idea">Al ponerlos en el mapa caen <strong>alineados</strong>: dibujan una <strong>recta</strong>, no un círculo.</p>
+      <p class="idea">La regla corta: si la fórmula trae <strong>cuadrados</strong> (x² + y²) su curva de nivel es un <strong>círculo</strong>; si es <strong>lineal</strong> (solo x y y sueltas, como x + y) es una <strong>recta</strong>.</p>
+      <p class="idea">¿Y si la máquina tuviera <strong>tres</strong> perillas en vez de dos? Sería el mismo cuento con una entrada más: f(x, y, z), tres números de entrada y uno de salida.</p>
+      <p class="idea">Ya no puedes marcar una altura sobre un mapa plano, pero el truco del "mismo valor" sigue sirviendo: juntas todos los puntos (x, y, z) donde la función vale una misma constante k.</p>
+      <p class="idea">Con tres variables ese conjunto ya no es una línea, sino toda una <strong>superficie</strong> flotando en el espacio: se le llama <strong>superficie de nivel</strong>.</p>
+      <p class="idea">Y el nombre paraguas, que sirve igual para las líneas y para las superficies, es <strong>conjunto de nivel</strong>: todos los puntos donde la función vale lo mismo.</p>
       <div class="check" data-kind="item" data-id="NIVchk" data-tema="curvas_nivel" data-level="guiado">
         <div class="qtag">Te toca · reconoce</div>
         <p class="q">Para f(x, y) = x² + y², ¿qué es la curva de nivel k = 9?</p>
@@ -371,6 +389,9 @@
       <p class="idea">¿Por qué el no es tan barato? Si llegando por un lado la altura se acerca a 0 y llegando por otro se acerca a ½, no puede haber límite.</p>
       <p class="idea">El límite es <strong>un solo número</strong>, y ningún número vale dos cosas a la vez.</p>
       <p class="idea">El sí exige un argumento que cubra <strong>todos los caminos a la vez</strong> — más abajo te enseño el truco que lo logra.</p>
+      <p class="idea">Una cosa más antes de practicar: en el examen esta idea se escribe con un símbolo, y conviene leerlo despacio una vez.</p>
+      <div class="fx" id="limNot"></div>
+      <p class="idea">Se lee así: "el <strong>límite</strong>, cuando la pareja (x, y) <strong>se acerca a</strong> (0, 0), de la fórmula". La flecha → es justamente "se acerca a".</p>
       <div class="check" data-kind="item" data-id="LIMchk" data-tema="limites" data-level="guiado">
         <div class="qtag">Te toca · razona</div>
         <p class="q">Pruebas 5 caminos hacia un punto y por los 5 la altura se acerca a 0. ¿Qué puedes concluir?</p>
@@ -447,6 +468,9 @@
       </ul>
       <p class="idea" style="font-size:17px">Empecemos con un caso que <strong>falla</strong>. Estudiemos el límite en el origen de:</p>
       <div class="estep"><div class="oprow">El límite</div><div class="fx" id="t0"></div></div>
+      <p class="idea" style="font-size:17px">Antes de probar, aclaremos qué es un <strong>camino</strong>. Acercarse al origen en línea recta es venir por una recta que liga la y con la x.</p>
+      <p class="idea" style="font-size:17px">El <strong>eje x</strong> es la recta "y siempre vale 0"; la <strong>diagonal</strong> es la recta "y siempre vale lo mismo que x".</p>
+      <p class="idea" style="font-size:17px">Caminar hacia el origen por ese camino es meter esa regla —y = 0, o y = x— dentro de la fórmula y ver a qué valor tiende.</p>
 
       <div class="check" data-kind="item" data-id="T1pred" data-tema="limites" data-level="juntos">
         <div class="qtag">Te toca · decide el camino</div>
@@ -495,18 +519,63 @@
       <p class="fx-note">Círculos concéntricos, muy juntos donde la superficie sube rápido. Así se lee un tazón sin dibujarlo en 3D.</p>
     </section>
 
+    <section class="sec">
+      <h3>Otra forma de nombrar un punto: distancia y ángulo</h3>
+      <p class="idea">Para el caso que <strong>sí existe</strong> hace falta cubrir todos los caminos de un solo golpe. El truco empieza por nombrar los puntos de otra manera.</p>
+      <p class="idea">Hasta ahora ubicabas un punto con la pareja (x, y): cuánto al este y cuánto al norte.</p>
+      <p class="idea">Hay una segunda forma, igual de válida, con otros dos datos:</p>
+      <ul class="fases">
+        <li><strong>r</strong> = qué tan <strong>lejos</strong> está el punto del origen; es su <strong>distancia</strong>.</li>
+        <li><strong>θ</strong> = hacia qué <strong>dirección</strong> queda, medida como el <strong>ángulo</strong> que giras desde el este, igual que la aguja de una brújula. (θ es una letra griega; se lee "theta".)</li>
+      </ul>
+      <p class="idea">Dibújalo: pon el punto, traza una <strong>flecha</strong> desde el origen hasta él —su largo es r— y marca el ángulo θ que esa flecha abre con el este.</p>
+      <div class="fx">
+        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Un punto ubicado por su distancia r al origen y el ángulo θ desde el este, con su triángulo rectángulo de catetos r·cos θ y r·sen θ" style="display:block;width:100%;max-width:300px;height:auto;margin:0 auto">
+          <line x1="40" y1="160" x2="286" y2="160" stroke="#181B22" stroke-width="1.5"/>
+          <polygon points="292,160 282,155 282,165" fill="#181B22"/>
+          <line x1="40" y1="160" x2="40" y2="18" stroke="#181B22" stroke-width="1.5"/>
+          <text x="256" y="177" font-size="12" fill="#4b5563">este</text>
+          <line x1="40" y1="160" x2="220" y2="160" stroke="#283891" stroke-width="3"/>
+          <line x1="220" y1="160" x2="220" y2="60" stroke="#1C7A3A" stroke-width="3"/>
+          <line x1="40" y1="160" x2="220" y2="60" stroke="#F5821F" stroke-width="3"/>
+          <polygon points="220,60 209,63 215,73" fill="#F5821F"/>
+          <path d="M 80 160 A 40 40 0 0 0 74 141" fill="none" stroke="#C75D08" stroke-width="2"/>
+          <text x="86" y="151" font-size="14" fill="#C75D08">θ</text>
+          <path d="M 208 160 L 208 148 L 220 148" fill="none" stroke="#181B22" stroke-width="1.2"/>
+          <circle cx="220" cy="60" r="4" fill="#181B22"/>
+          <text x="146" y="48" font-size="13" fill="#181B22">punto (x, y)</text>
+          <text x="118" y="103" font-size="14" fill="#C75D08">r</text>
+          <text x="90" y="181" font-size="13" fill="#283891">r·cos θ</text>
+          <text x="226" y="116" font-size="13" fill="#1C7A3A">r·sen θ</text>
+        </svg>
+      </div>
+      <p class="idea">Esa flecha es la hipotenusa de un triángulo rectángulo. Sus dos catetos son: lo que avanzas en horizontal (que es la x del punto) y lo que subes en vertical (que es la y).</p>
+      <p class="idea">Aquí entran el <strong>seno</strong> y el <strong>coseno</strong>. En un triángulo rectángulo, para el ángulo θ, el coseno es el cateto pegado al ángulo dividido por la hipotenusa, y el seno es el cateto de enfrente dividido por la hipotenusa.</p>
+      <p class="idea">El cateto pegado a θ es el horizontal (vale x), el de enfrente es el vertical (vale y), y la hipotenusa es la flecha (vale r):</p>
+      <div class="fx" id="senCosDef"></div>
+      <p class="idea">Despeja la x y la y —multiplica ambos lados por r— y salen las dos traducciones:</p>
+      <div class="fx" id="polarConv"></div>
+      <p class="idea">A esta forma de nombrar el punto, (r, θ) con esas dos fórmulas, se le llama <strong>coordenadas polares</strong>.</p>
+      <p class="idea">Guarda un hecho que usaremos enseguida: sin importar el ángulo, el seno y el coseno <strong>nunca se pasan de 1 ni bajan de −1</strong>.</p>
+      <p class="idea">Tiene sentido con el triángulo: un cateto nunca es más largo que la hipotenusa, así que el cociente cateto ⁄ hipotenusa siempre cae entre −1 y 1.</p>
+      <div class="fx" id="senCosBound"></div>
+      <p class="idea">Y lo mejor: como r es la distancia al origen, acercarse al origen —por el camino que sea— es simplemente hacer <strong>r → 0</strong>, sin importar cuánto valga el ángulo.</p>
+    </section>
+
     <section class="ejemplo">
-      <p class="idea" style="font-size:17px">No siempre falla. Cuando el límite <strong>sí existe</strong> (Fase 2), el argumento que cubre todos los caminos a la vez son las <strong>coordenadas polares</strong>.</p>
+      <p class="idea" style="font-size:17px">No siempre falla. Cuando el límite <strong>sí existe</strong> (Fase 2), el argumento que cubre todos los caminos a la vez son justamente las <strong>coordenadas polares</strong> que acabamos de construir.</p>
       <p class="idea" style="font-size:17px">En lugar de ubicar un punto por (x, y), lo ubicas por r —su <strong>distancia</strong> al origen— y θ —su <strong>ángulo</strong>—, con las traducciones:</p>
       <div class="fx"><div class="sys"><span class="eq">x = r·cos θ</span><span class="eq">y = r·sen θ</span></div></div>
       <p class="idea" style="font-size:17px">La gracia: acercarse al origen por <strong>cualquier</strong> camino es simplemente hacer r → 0, sin importar cómo cambie el ángulo.</p>
       <p class="idea" style="font-size:17px">Estudiemos:</p>
       <div class="estep"><div class="oprow">El límite</div><div class="fx" id="f0"></div></div>
       <div class="estep"><div class="oprow">Cambio a polares · numerador</div><p>Sustituyo x = r·cos θ, y = r·sen θ en x²y:</p><p class="calc"><span class="rw">num</span> x²<b>=r²cos²θ</b> <span class="sep">•</span> y<b>=r·senθ</b> <span class="sep">•</span> x²y<b>=r³cos²θ·senθ</b></p></div>
-      <div class="estep"><div class="oprow">Cambio a polares · denominador</div><p>El patrón x² + y² se vuelve r² (el corazón del truco):</p><p class="calc"><span class="rw">den</span> x²+y²<b>=r²</b></p></div>
+      <div class="estep"><div class="oprow">Cambio a polares · denominador</div><p>Este es el corazón del truco. Sustituyo x = r·cos θ y y = r·sen θ en el patrón x² + y² y desarrollo paso a paso:</p><div class="fx" id="denPolar"></div><p>El último salto usa una identidad que conviene memorizar: para <strong>cualquier</strong> ángulo, cos²θ + sen²θ = 1. Es el Pitágoras del triángulo de antes cuando la hipotenusa mide 1, así que el paréntesis se vuelve 1 y solo sobrevive r².</p><p class="calc"><span class="rw">den</span> x²+y²<b>=r²</b></p></div>
       <div class="estep"><div class="oprow">Divido y simplifico</div><p>Cancelo dos erres arriba con las dos de abajo:</p><p class="calc"><span class="rw">r³÷r²</span> r³⁄r²<b>=r</b> <span class="sep">•</span> queda r·cos²θ·senθ</p><div class="fx" id="f1"></div></div>
-      <p class="idea" style="font-size:17px">Queda <strong>r · cos²θ · sen θ</strong>. El factor de ángulo nunca pasa de 1 en tamaño, así que todo está atrapado entre −r y r.</p>
-      <p class="idea" style="font-size:17px">Cuando <strong>r → 0</strong>, el sándwich lo aplasta a 0, sea cual sea el ángulo.</p>
+      <p class="idea" style="font-size:17px">Queda <strong>r · cos²θ · sen θ</strong>: una r multiplicada por un <strong>factor de ángulo</strong> (el pedazo cos²θ · sen θ).</p>
+      <p class="idea" style="font-size:17px">Recuerda lo que construimos: sen θ y cos θ nunca se pasan de 1 ni bajan de −1. Multiplicar pedazos así entre sí tampoco se pasa de 1, así que el factor de ángulo cabe entre −1 y 1.</p>
+      <p class="idea" style="font-size:17px">Entonces r por (un factor entre −1 y 1) queda atrapado entre <strong>−r y r</strong>.</p>
+      <p class="idea" style="font-size:17px">Cuando <strong>r → 0</strong>, ese sándwich —de −r a r— lo aplasta a 0, sea cual sea el ángulo.</p>
       <div class="fx"><div class="sys"><span class="eq">límite = 0</span></div></div>
       <p class="fx-note">Como todos los caminos dan 0, el límite existe y vale 0. Polares sirven cuando aparece el patrón x² + y².</p>
     </section>
@@ -771,6 +840,13 @@ fx('p6',["lím (x,y)→(0,0)  xy ⁄ (x² + y²)","y = x:   x·x ⁄ (x² + x²)
 fx('p7',["lím (x,y)→(0,0)  x³ ⁄ (x² + y²)"]);
 fx('p8',["lím (x,y)→(0,0)  3x²y ⁄ (x² + y²)"]);
 fx('p9',["lím (x,y)→(0,0)  (x² − y²) ⁄ (x² + y²)"]);
+// andamiaje agregado: Pitágoras de la distancia, lectura del símbolo de límite, construcción de polares e identidad
+fx('pitDist',["(distancia)² = x² + y²"]);
+fx('limNot',["lím (x,y)→(0,0)  f(x, y)"]);
+fx('senCosDef',["cos θ = x ⁄ r","sen θ = y ⁄ r"]);
+fx('polarConv',["x = r·cos θ","y = r·sen θ"]);
+fx('senCosBound',["−1 ≤ cos θ ≤ 1","−1 ≤ sen θ ≤ 1"]);
+fx('denPolar',["x² + y² = r²·cos²θ + r²·sen²θ","= r²·(cos²θ + sen²θ)","= r²·1","= r²"]);
 
 // ===== visual: curvas de nivel de x² + y² (círculos concéntricos) =====
 function PT(x,y){ return [150+x*24, 150-y*24]; }   // centro (150,150), 24 px por unidad

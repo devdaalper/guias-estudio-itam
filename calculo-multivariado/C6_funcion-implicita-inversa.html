@@ -196,10 +196,10 @@
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">Imagina un aro de alambre circular recargado en una pared, con una <strong>gota de agua</strong> detenida sobre el alambre.</p>
       <p class="idea" style="font-size:17px">Si la gota resbala un poquito, ¿qué tan inclinado está el alambre justo ahí: casi plano, o en bajada fuerte?</p>
-      <p class="idea" style="font-size:17px">Eso, en matemáticas, es pedir la <strong>pendiente</strong> de la curva en ese punto.</p>
+      <p class="idea" style="font-size:17px">Eso, en matemáticas, es pedir la <strong>pendiente</strong> de la curva en ese punto: qué tan inclinada está la tablita recta que roza el alambre justo ahí.</p>
       <p class="idea" style="font-size:17px">El aro tiene ecuación:</p>
       <div class="fx"><div class="sys"><span class="eq">x² + y² = 25</span></div></div>
-      <p class="idea" style="font-size:17px">Los puntos (x, y) que la cumplen forman una circunferencia de radio 5.</p>
+      <p class="idea" style="font-size:17px">Cada punto (x, y) que la cumple está a distancia 5 del centro —porque 5² = 25—, y todos juntos dibujan el aro: una circunferencia de radio 5.</p>
       <p class="idea" style="font-size:17px">La gota está en <strong>(3, 4)</strong>, que sí es un punto del aro:</p>
       <div class="fx"><div class="sys"><span class="eq">3² + 4²</span><span class="eq">= 9 + 16</span><span class="eq">= 25</span></div></div>
       <p class="idea" style="font-size:17px">El estorbo: la ecuación trae la x y la y <strong>amarradas en un solo renglón</strong>; nadie te dio “y igual a algo con x”.</p>
@@ -254,11 +254,20 @@
         <li><strong>F<sub>x</sub></strong> es la parcial de F respecto a x: derivas mirando solo la x; la y se queda quieta.</li>
         <li><strong>F<sub>y</sub></strong> es la parcial de F respecto a y.</li>
       </ul>
+      <p class="idea">Veámoslas despacio con nuestro F = x² + y² − 25.</p>
+      <p class="idea">Para F<sub>x</sub> tapo la y —se queda quieta—, así que solo miro x² − 25; su derivada es 2x (la de −25, un número fijo, es 0):</p>
+      <div class="fx"><div class="sys"><span class="eq">tapo y:  x² − 25  →  2x</span></div></div>
+      <p class="idea">Para F<sub>y</sub> al revés: tapo la x, queda y² − 25, y su derivada es 2y.</p>
       <p class="idea">En nuestro ejemplo, F = x² + y² − 25, así que:</p>
       <div class="fx"><div class="sys"><span class="eq">F<sub>x</sub> = 2x</span><span class="eq">F<sub>y</sub> = 2y</span></div></div>
       <p class="idea">Ahora la jugada clave, sin magia. Sobre el arco donde sí hay máquina, y depende de x.</p>
       <p class="idea">Mete esa y dentro de F y observa: sobre la curva, F vale <strong>siempre 0</strong>. No “casi cero” ni “a veces cero”: cero parejo, para toda x del arco.</p>
       <p class="idea">Y una cantidad que nunca cambia tiene derivada 0. Así que derivamos F respecto a x e igualamos a 0.</p>
+      <p class="idea">Al derivar respecto a x, cada pedazo de F reacciona a su manera.</p>
+      <p class="idea">El pedazo que ya es de x aporta su parcial <strong>F<sub>x</sub></strong>: exactamente lo que cambia F cuando muevo la x con la y congelada, la misma F<sub>x</sub> de arriba.</p>
+      <p class="idea">El pedazo que es de y no puede quedarse quieto: como y sigue a la x, aporta su parcial <strong>F<sub>y</sub></strong> multiplicada por lo que cambia la y, que es y′.</p>
+      <p class="idea">En nuestro F = x² + y² − 25 se ve directo: el x² aporta 2x, y el y² aporta 2y·y′.</p>
+      <div class="fx"><div class="sys"><span class="eq">x²  →  2x</span><span class="eq">y²  →  2y·y′</span></div></div>
       <p class="idea">La regla de la cadena reparte el trabajo: la parte de x aporta F<sub>x</sub>, y la parte de y aporta F<sub>y</sub>·y′ — ese y′ aparece porque y es función de x y arrastra su propia derivada:</p>
       <div class="fx"><div class="sys"><span class="eq">F<sub>x</sub> + F<sub>y</sub>·y′ = 0</span></div><p class="fx-note">y′ es la derivada de y respecto a x — también se escribe dy/dx. Es justo la pendiente que buscamos.</p></div>
       <p class="idea">De ahí, puro despeje de secundaria: pasa F<sub>x</sub> al otro lado y divide entre F<sub>y</sub>:</p>
@@ -302,6 +311,8 @@
       <p class="idea">¿Quién manda ahora? En dos variables la que se despejaba era y, y su parcial F<sub>y</sub> era la del denominador, la que no podía ser cero.</p>
       <p class="idea">Aquí la que se despeja es <strong>z</strong>, así que su parcial hereda el puesto: la condición gemela es <strong>F<sub>z</sub> ≠ 0</strong>.</p>
       <p class="idea">Y como la máquina escondida tiene dos entradas, ya no hay una sola pendiente: salen <strong>dos parciales</strong>, una por entrada.</p>
+      <p class="idea">Un aviso de notación antes de escribirlas: cuando hay más de una entrada, en vez de la d normal usamos la <strong>d rizada ∂</strong>.</p>
+      <p class="idea">∂z/∂x se lee “derivo z por x y dejo quietas las demás”; es la misma idea de tapar variables, ahora con su propio símbolo.</p>
       <p class="idea">Las dos con la misma receta “menos la de arriba, entre la del despejado”:</p>
       <div class="fx"><div class="sys"><span class="eq">∂z/∂x = − F<sub>x</sub> / F<sub>z</sub></span><span class="eq">∂z/∂y = − F<sub>y</sub> / F<sub>z</sub></span></div><p class="fx-note">F<sub>z</sub> va siempre en el denominador; por eso hace falta F<sub>z</sub> ≠ 0. Es el caso de dos variables, pero derivando una vez respecto a x y otra respecto a y.</p></div>
       <div class="check" data-kind="item" data-id="IDEA3" data-tema="derivacion_implicita_3var" data-level="guiado">
@@ -406,6 +417,10 @@
     <h2 class="modhead">Sube el tamaño · cuando hay un producto</h2>
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">El salto: ahora un término <strong>mezcla x con y</strong>, y eso pide la <strong>regla del producto</strong>.</p>
+      <p class="idea" style="font-size:17px">Refresquémosla en una línea: la <strong>derivada de un producto A·B</strong> es “derivo A y dejo B, más dejo A y derivo B”.</p>
+      <div class="fx"><div class="sys"><span class="eq">(A·B)′ = A′·B + A·B′</span></div></div>
+      <p class="idea" style="font-size:17px">Prueba con números: (x·x)′ debe dar 2x, y la regla lo confirma — 1·x + x·1 = 2x.</p>
+      <p class="idea" style="font-size:17px">Aplicada a <strong>x·y</strong> (con y función de x): derivo x y dejo y (→ y), más dejo x y derivo y (→ x·y′), o sea y + x·y′.</p>
       <p class="idea" style="font-size:17px">Tomemos <strong>x² + xy + y² = 7</strong> en (1, 2). Lo hacemos en pasos separados, uno por escalón.</p>
       <ul class="fases">
         <li><strong>Fase 1 — derivar:</strong> término a término, con producto y cadena donde toque.</li>
@@ -509,6 +524,16 @@
       <p class="idea">A esa tabla se le llama la <strong>matriz jacobiana</strong> (por Jacobi, el matemático que la estudió), y se abrevia <strong>J</strong>.</p>
       <p class="idea">Es la derivada de la transformación: la versión en matriz de la pendiente.</p>
       <p class="idea">¿Y para qué la queremos? Para saber si la máquina se puede <strong>deshacer</strong>.</p>
+      <p class="idea">Para eso necesitamos un solo número que resuma a J. Construyámoslo despacio con una máquina más simple.</p>
+      <p class="idea">Piensa en una máquina que solo <strong>estira</strong> el plano: agarra cada cuadradito y lo agranda.</p>
+      <p class="idea">Si estira al doble de ancho y al triple de alto, un cuadrito de área 1 se vuelve un rectángulo de área 2 · 3:</p>
+      <div class="fx"><div class="sys"><span class="eq">área nueva = 2 · 3 = 6</span></div></div>
+      <p class="idea">Ese <strong>6</strong> es el <strong>factor de crecimiento del área</strong>: cada pedacito sale 6 veces más grande.</p>
+      <p class="idea">¿Y si la máquina estira a lo ancho pero aplasta lo alto hasta 0? El área nueva es:</p>
+      <div class="fx"><div class="sys"><span class="eq">área nueva = 2 · 0 = 0</span></div></div>
+      <p class="idea">Factor 0 quiere decir que todo el plano queda espachurrado sobre una sola raya.</p>
+      <p class="idea">Y sobre esa raya, dos puntos que antes estaban separados caen <strong>encima</strong> uno del otro; parada ahí ya no sabes de cuál veniste — la misma trampa que la máquina plana con f′ = 0.</p>
+      <p class="idea">Por eso un factor 0 es la señal de <strong>“no se puede deshacer”</strong>.</p>
       <p class="idea">De álgebra lineal recuerdas que el determinante mide el <strong>factor de área</strong> de una matriz —cuánto estira o encoge— y que det = 0 significa <strong>aplastar</strong> el plano en una línea.</p>
       <p class="idea">Aplícalo a J:</p>
       <ul class="fases">
@@ -551,6 +576,12 @@
 
       <div class="estep"><div class="oprow">Parciales de v</div><p>v = 2xy: respecto a x queda 2y; respecto a y queda 2x. Matriz completa:</p><p class="calc"><span class="rw">v</span> ∂v/∂x=<b>2y</b> <span class="sep">•</span> ∂v/∂y=<b>2x</b></p><div class="fx" id="j2"></div></div>
 
+      <p class="idea" style="font-size:17px">Antes del último escalón, recordemos cómo se saca el determinante de una tabla 2×2 y por qué importa.</p>
+      <p class="idea" style="font-size:17px">Ese número es el <strong>factor de área</strong> de la matriz, y se calcula así: <strong>producto de la diagonal menos producto de la antidiagonal</strong>.</p>
+      <div class="fx" id="detRule"></div>
+      <p class="idea" style="font-size:17px">Con esa tabla de ejemplo: diagonal 2 · 4 = 8, antidiagonal 1 · 3 = 3, así que el factor de área es 8 − 3 = 5:</p>
+      <div class="fx"><div class="sys"><span class="eq">det = 2·4 − 1·3</span><span class="eq">= 8 − 3</span><span class="eq">= 5</span></div></div>
+      <p class="idea" style="font-size:17px">Esa misma resta la practicas sola más abajo (P6 y P7); aquí la usamos ya con las parciales de J.</p>
       <div class="estep"><div class="oprow">Determinante · diagonal menos antidiagonal</div><p>Multiplico la diagonal principal y le resto la antidiagonal:</p><p class="calc"><span class="rw">det</span> (2x)(2x)−(−2y)(2y)=<b>4x²+4y²</b></p><div class="fx" id="j3"></div></div>
 
       <div class="estep"><div class="oprow">Evalúo en (2, 1)</div><p>Sustituyo x = 2, y = 1:</p><p class="calc"><span class="rw">det</span> 4·(2²)+4·(1²)=16+4=<b>20</b></p><div class="fx" id="j4"></div></div>
@@ -565,6 +596,8 @@
       <p class="idea">Con transformaciones la historia se repite palabra por palabra.</p>
       <p class="idea">Si <strong>det(J) ≠ 0</strong> en el punto, la transformación es <strong>localmente invertible</strong> (se deshace cerca de ahí).</p>
       <p class="idea">¿Y la “pendiente” de esa reversa? El recíproco de un número era 1 entre el número; el recíproco de una matriz ya lo conoces de álgebra: su <strong>matriz inversa</strong>.</p>
+      <p class="idea">Esa matriz inversa hace con J lo mismo que f⁻¹ hacía con f: la <strong>deshace</strong>. J estira y mueve el plano; J⁻¹ lo regresa a como estaba.</p>
+      <p class="idea">Por eso solo existe cuando J <strong>no aplasta</strong>: hace falta det(J) ≠ 0, el mismo candado de f′(a) ≠ 0.</p>
       <p class="idea">La jacobiana de la reversa es J⁻¹:</p>
       <div class="fx"><div class="sys"><span class="eq">escalar:  (f⁻¹)′(b) = 1 / f′(a)</span><span class="eq">matricial:  J(inversa) = [ J ]⁻¹</span></div><p class="fx-note">“Localmente invertible” = solo cerca de ese punto la transformación se puede deshacer. El recíproco 1/f′(a) es el caso de una variable; con varias, dividir se vuelve invertir la matriz J.</p></div>
       <div class="check" data-kind="recall" data-fid="F4_teorema_funcion_inversa" data-tema="funcion_inversa">
@@ -853,6 +886,8 @@ document.getElementById('j4').innerHTML='<div class="sys"><span class="eq">4(2²
 setM('p6',[["5","2"],["1","3"]]);
 // ===== práctica: matriz jacobiana de P7 =====
 setM('p7',[["4","1"],["2","3"]]);
+// ===== refuerzo: regla del determinante 2×2 (factor de área) =====
+setM('detRule',[["2","1"],["3","4"]]);
 
 // ===== visual: circunferencia y su recta tangente =====
 var CB=150, CS=22, CR=5*CS; // centro (150,150), 22px por unidad, radio 5

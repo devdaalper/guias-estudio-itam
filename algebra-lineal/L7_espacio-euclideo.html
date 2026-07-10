@@ -214,12 +214,18 @@
       <p class="idea">Empieza en un mapa cuadriculado. Caminas <strong>3 cuadras a la derecha y 4 cuadras al frente</strong>: ese paseo es la flecha (3, 4), como las de la Unidad 2.</p>
       <p class="idea">La pregunta nueva es de lo más natural: si en vez de bordear las cuadras caminaras <strong>en diagonal, directo del inicio al final</strong>, ¿cuánto mediría ese atajo?</p>
       <p class="idea">Mira el dibujo mental: el tramo "3 a la derecha" y el tramo "4 al frente" forman una <strong>esquina de 90 grados</strong>, y el atajo diagonal es el lado inclinado del triángulo.</p>
-      <p class="idea">Eso es terreno conocido de secundaria: el <strong>teorema de Pitágoras</strong>. El lado inclinado, elevado al cuadrado, es la suma de los otros dos al cuadrado:</p>
+      <p class="idea">Eso es una <strong>regla de secundaria que aquí recordamos entera</strong>: el teorema de Pitágoras.</p>
+      <p class="idea">Nombra los lados: los <strong>dos lados que forman la esquina</strong> (aquí el 3 y el 4) y el <strong>lado inclinado</strong>, que es el atajo diagonal.</p>
+      <p class="idea">Pitágoras dice que el lado inclinado, elevado al cuadrado, es la suma de los otros dos al cuadrado:</p>
       <div class="fx"><div class="sys"><span class="eq">3<sup>2</sup> + 4<sup>2</sup></span><span class="eq">= 9 + 16</span><span class="eq">= 25</span></div></div>
       <p class="idea">Cuidado con el 25: <strong>no es el largo</strong>, es el largo <em>al cuadrado</em>.</p>
       <p class="idea">Para volver al largo de verdad hay que deshacer ese cuadrado, y deshacer un cuadrado es sacar <strong>raíz</strong>:</p>
       <div class="fx"><div class="sys"><span class="eq">√25 = 5</span></div></div>
       <p class="idea">El atajo mide <strong>5 cuadras</strong> — el famoso triángulo 3-4-5. Por eso la raíz de la fórmula no es un adorno: sin ella te quedas con el largo al cuadrado.</p>
+      <p class="idea">No siempre la raíz sale redonda como √25 = 5. Cuando no es exacta, se <strong>deja indicada</strong>: √2 se queda como √2, sin decimales.</p>
+      <p class="idea">A veces sí se simplifica, sacando un cuadrado escondido. Mira √18: como 18 = 9 · 2 y 9 es un cuadrado perfecto (9 = 3<sup>2</sup>),</p>
+      <div class="fx"><div class="sys"><span class="eq">√18 = √(9 · 2)</span><span class="eq">= √9 · √2</span><span class="eq">= 3√2</span></div></div>
+      <p class="idea">Sin calculadora, esa es la forma final: <strong>3√2</strong>, no un decimal.</p>
       <p class="idea">La misma receta mide cualquier flecha, tenga 2 o 20 coordenadas: <strong>eleva cada coordenada al cuadrado, suma todo y saca raíz</strong>.</p>
       <p class="idea">Para no escribir "el largo de w" a cada rato se usa una doble barra: <strong>‖w‖</strong>.</p>
       <p class="idea">Es prima de una que ya conoces: |−3| = 3 mide el tamaño de un número; ‖w‖ mide el tamaño de una flecha.</p>
@@ -227,6 +233,7 @@
       <div class="fx"><div class="sys"><span class="eq">‖(3, 4)‖ = √(9 + 16)</span><span class="eq">= √25</span><span class="eq">= 5</span></div></div>
       <p class="idea">Y en general, para cualquier flecha w:</p>
       <div class="fx"><div class="sys"><span class="eq">‖w‖ = √(w<sub>1</sub><sup>2</sup> + w<sub>2</sub><sup>2</sup> + …)</span></div></div>
+      <p class="idea">El numerito de abajo es un <strong>subíndice</strong>: w<sub>1</sub> es la <strong>primera</strong> coordenada de w, w<sub>2</sub> la segunda, y así hasta donde llegue.</p>
       <p class="idea">Y ahora sí, el nombre formal: a este largo se le llama la <strong>norma</strong> del vector.</p>
       <p class="idea">La palabra viene del latín: la <em>norma</em> era la escuadra del carpintero, su herramienta para medir. La norma de una flecha es, literalmente, su medida.</p>
       <p class="idea">Dos regalos inmediatos.</p>
@@ -253,6 +260,8 @@
     <section class="sec">
       <h3>2 · Multiplicar flecha con flecha: el producto punto</h3>
       <p class="idea">Para medir el largo usaste las coordenadas de <strong>una</strong> flecha. La herramienta estrella de la unidad compara <strong>dos</strong>.</p>
+      <p class="idea">Antes de la cuenta, el propósito: queremos <strong>un solo número</strong> que diga si dos flechas apuntan hacia el mismo lado o hacia lados contrarios.</p>
+      <p class="idea">Resulta que hay una cuenta muy sencilla que logra justo eso.</p>
       <p class="idea">La cuenta es de primaria: <strong>multiplica coordenada con coordenada, y suma los resultados</strong>.</p>
       <p class="idea">Con u = (2, 3) y v = (4, 1):</p>
       <ul class="fases">
@@ -309,16 +318,65 @@
       <p class="idea">El símbolo lo dice todo — una raya parada sobre una acostada.</p>
       <p class="idea">Lo valioso es cómo se detecta.</p>
       <p class="idea">Ya lo viste asomarse en el escalón anterior: cuando dos flechas quedan en esquina perfecta, su producto punto da <strong>exactamente cero</strong>.</p>
+      <p class="idea">Y tiene sentido sin fórmulas: en esquina perfecta, avanzar a lo largo de una flecha <strong>no adelanta nada</strong> en la dirección de la otra, así que el acuerdo entre ellas es <strong>0</strong>.</p>
       <p class="idea">Ni a favor ni en contra, neutralidad total.</p>
       <p class="idea">Y la regla funciona en los dos sentidos:</p>
       <div class="fx"><div class="sys"><span class="eq">u ⊥ v  ⇔  u · v = 0</span></div></div>
+      <p class="idea">Esa flecha doble <strong>⇔</strong> se lee "una cosa pasa <strong>exactamente cuando</strong> pasa la otra": si son perpendiculares el producto punto da cero, y si el producto punto da cero son perpendiculares.</p>
       <p class="idea">Con la pareja que ya conoces:</p>
       <div class="fx"><div class="sys"><span class="eq">(2, 3) · (3, −2)</span><span class="eq">= 6 − 6</span><span class="eq">= 0</span><span class="eq">→ (2, 3) ⊥ (3, −2)</span></div></div>
       <p class="idea">Esto es oro puro: para saber si dos flechas se cruzan en recto <strong>ya no dibujas ni mides con transportador</strong>. Multiplicas, sumas, y si da cero, son ortogonales.</p>
       <p class="idea">En R<sup>5</sup> o en R<sup>20</sup>, donde no hay dibujo posible, esta es la única manera.</p>
       <p class="idea">¿Y si no da cero? El producto punto también entrega el <strong>ángulo exacto</strong>.</p>
+
+      <p class="idea">Para eso hace falta una idea nueva, y sale otra vez de la sombra.</p>
+      <p class="idea">Da un paso en cierta dirección. Ahora mira <strong>otra</strong> dirección, la de v, y pregúntate: de ese paso, ¿qué <strong>fracción</strong> avanzó a lo largo de v?</p>
+      <p class="idea">Es la sombra del paso sobre la dirección de v, medida como fracción del paso entero.</p>
+      <p class="idea">Míralo en los tres casos extremos:</p>
+      <ul class="fases">
+        <li>El paso va <em>justo</em> hacia donde apunta v → todo el paso cuenta: fracción <strong>1</strong>.</li>
+        <li>El paso cae en <em>esquina perfecta</em> (90°) con v → no avanza nada a lo largo de v: fracción <strong>0</strong>.</li>
+        <li>El paso va <em>al revés</em>, en contra de v → cada tramo resta: fracción <strong>−1</strong>.</li>
+      </ul>
+      <p class="idea">Esa fracción vive siempre entre <strong>−1 y 1</strong>: −1 en contra, 0 en esquina, 1 a favor.</p>
+      <p class="idea">A esa fracción —cuánto del paso avanza en la dirección del otro— se le llama el <strong>coseno</strong> del ángulo entre las dos flechas.</p>
+
+      <p class="idea">Como en el examen no hay calculadora, conviene tener de memoria el coseno de unos pocos ángulos redondos:</p>
+      <div class="fx"><div class="sys"><span class="eq">cos 0° = 1</span><span class="eq">cos 45° = 1/√2</span><span class="eq">cos 90° = 0</span><span class="eq">cos 180° = −1</span></div></div>
+
+      <p class="idea">El único valor raro es el <strong>1/√2</strong> del 45°. De dónde sale se ve con un triángulo.</p>
+      <p class="idea">Camina en diagonal a 45°: avanzas <strong>1 a la derecha y 1 hacia arriba</strong>. Los dos lados que forman la esquina miden lo mismo, y por eso la diagonal parte la esquina justo a la mitad: <strong>45°</strong>.</p>
+      <p class="idea">¿Cuánto mide ese paso diagonal? Es el lado inclinado, y Pitágoras lo da:</p>
+      <div class="fx"><div class="sys"><span class="eq">paso = √(1<sup>2</sup> + 1<sup>2</sup>)</span><span class="eq">= √2</span></div></div>
+      <p class="idea">De ese paso de largo √2, la parte que avanza a la derecha —su sombra— mide <strong>1</strong>.</p>
+      <p class="idea">Así que la fracción, el coseno de 45°, es la sombra entre el paso entero:</p>
+      <div class="fx"><div class="sys"><span class="eq">cos 45° = 1 / √2</span></div></div>
+      <div class="fx" style="padding:10px"><svg viewBox="0 0 300 205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triángulo rectángulo isósceles con dos lados de 1, diagonal de raíz de 2 y ángulo de 45 grados" style="display:block;width:100%;height:auto;max-width:300px;margin:0 auto">
+        <line x1="60" y1="165" x2="200" y2="165" stroke="#283891" stroke-width="4" stroke-linecap="round"/>
+        <line x1="200" y1="165" x2="200" y2="25" stroke="#181B22" stroke-width="1.5"/>
+        <line x1="60" y1="165" x2="200" y2="25" stroke="#C75D08" stroke-width="4" stroke-linecap="round"/>
+        <polyline points="186,165 186,151 200,151" fill="none" stroke="#181B22" stroke-width="1.4"/>
+        <text x="122" y="187" font-size="16" font-weight="700" fill="#283891">1</text>
+        <text x="209" y="100" font-size="16" font-weight="700" fill="#181B22">1</text>
+        <text x="96" y="86" font-size="16" font-weight="700" fill="#C75D08">√2</text>
+        <text x="84" y="157" font-size="13" font-weight="700" fill="#334155">45°</text>
+      </svg></div>
+      <p class="fx-note">La diagonal naranja es el paso (mide √2); su sombra sobre la base azul mide 1. La fracción sombra ÷ paso = 1/√2 es, precisamente, el coseno de 45°.</p>
+
+      <div class="check" data-kind="recall" data-fid="F_cos45" data-tema="angulo">
+        <div class="qtag">Te toca · recuerda</div>
+        <p class="q">Si el coseno del ángulo vale 1/√2, ¿qué ángulo es?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">45°</button>
+          <button class="opt" data-ok="0">90°</button>
+          <button class="opt" data-ok="0">0°</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>De la tabla: cos 45° = 1/√2. El 90° tiene coseno 0 (esquina perfecta) y el 0° tiene coseno 1 (misma dirección).</p></div>
+      </div>
+
+      <p class="idea">Perfecto para leer la tabla. ¿Y cómo se calcula ese coseno directo de las coordenadas de u y v, sin transportador? Ahí entra el producto punto.</p>
       <p class="idea">La idea: el "acuerdo" crudo crece cuando las flechas son más largas, así que para quedarte solo con la dirección lo divides entre los dos largos.</p>
-      <p class="idea">Lo que queda es el coseno del ángulo (el coseno de la trigonometría de siempre; al ángulo se le suele llamar θ, "theta"):</p>
+      <p class="idea">Lo que queda es el coseno del ángulo (el mismo coseno que acabas de construir; al ángulo se le suele llamar θ, "theta"):</p>
       <div class="fx"><div class="sys"><span class="eq">cos θ = (u · v) / (‖u‖ · ‖v‖)</span></div></div>
       <p class="idea">Léela como "el acuerdo, dividido entre los tamaños".</p>
       <p class="idea">Y confirma la esquina: si u · v = 0, el coseno vale 0, y el único ángulo entre 0° y 180° con coseno 0 es <strong>90°</strong>.</p>
@@ -405,6 +463,8 @@
         <li><strong>Paso 2 — el factor:</strong> divides <em>arriba entre abajo</em>. Sale un número.</li>
         <li><strong>Paso 3 — escalas v:</strong> multiplicas ese factor por el vector v.</li>
       </ul>
+      <p class="idea" style="font-size:17px">¿De dónde sale esa fórmula? La sombra cae <strong>a lo largo de v</strong>, así que es v estirada o encogida: <strong>un factor por v</strong>.</p>
+      <p class="idea" style="font-size:17px">Ese factor es el acuerdo entre las flechas, u · v, ajustado por el tamaño de v: por eso se divide entre v · v (que es ‖v‖<sup>2</sup>, el tamaño de v al cuadrado).</p>
       <div class="fx"><div class="sys"><span class="eq">proy<sub>v</sub>(u) = ( (u · v) / (v · v) ) · v</span></div></div>
       <p class="idea" style="font-size:17px">Proyectemos u = (2, 4) sobre v = (1, 1), paso a paso.</p>
 
@@ -465,6 +525,7 @@
       </ul>
       <p class="idea">En las dos puedes ubicar puntos, pero en la cuadriculada todo es más fácil: medir, comparar, leer coordenadas.</p>
       <p class="idea">Con las bases que conociste en la Unidad 2 pasa igual.</p>
+      <p class="idea">Recuerda qué es una <strong>base</strong>: el juego de flechas con las que, combinándolas, se arma cualquier otra flecha del espacio.</p>
       <p class="idea">Una base cuyas flechas son <strong>ortogonales entre sí</strong> — todas en esquina perfecta — es muchísimo más cómoda que una base chueca.</p>
       <p class="idea">¿Y si tu base vino chueca? Se endereza, y la herramienta ya la tienes.</p>
       <p class="idea">La sombra de una flecha sobre otra es la parte que avanza <strong>a lo largo</strong> de ella — es decir, exactamente <strong>lo que las hace chuecas</strong>.</p>
@@ -481,6 +542,7 @@
 
     <section class="ejemplo">
       <p class="idea" style="font-size:17px">Enderecemos una base chueca de verdad: v<sub>1</sub> = (3, 0) y v<sub>2</sub> = (2, 2) no están en esquina perfecta.</p>
+      <p class="idea" style="font-size:17px">Ojo con el subíndice aquí: el numerito de abajo dice <strong>cuál flecha</strong> (v<sub>1</sub> es la primera, v<sub>2</sub> la segunda), no cuál coordenada.</p>
       <p class="idea" style="font-size:17px">Compruébalo con su producto punto:</p>
       <div class="fx"><div class="sys"><span class="eq">(3)(2) + (0)(2) = 6</span></div></div>
       <p class="idea" style="font-size:17px">Da 6, no cero.</p>
@@ -495,7 +557,8 @@
       <p class="idea" style="font-size:17px">Si además divides cada uno entre su norma, cada flecha queda unitaria y la base se llama <strong>ortonormal</strong>.</p>
       <p class="idea" style="font-size:17px"><em>Orto</em> por las esquinas perfectas, <em>normal</em> porque cada norma vale 1.</p>
       <p class="idea" style="font-size:17px">Aquí: (1, 0) y (0, 1).</p>
-      <p class="fx-note">Idea de mínimos cuadrados: cuando un sistema no tiene solución exacta (más ecuaciones que incógnitas), la mejor respuesta posible es <strong>proyectar</strong> el vector de datos sobre lo alcanzable y quedarte con esa sombra. Es la misma proyección de esta unidad, aplicada para aproximar.</p>
+      <p class="fx-note"><strong>Adelanto — mínimos cuadrados.</strong> A veces tomas muchas mediciones que no cuadran entre sí: un sistema con más ecuaciones que incógnitas, sin solución exacta. El "vector de datos" son esas mediciones juntas en una flecha; "lo alcanzable" es lo que el modelo sí puede producir.</p>
+      <p class="fx-note">La mejor respuesta es quedarte con la <strong>sombra</strong> de los datos sobre lo alcanzable: el punto más cercano posible. Es la misma proyección de esta unidad, aplicada para aproximar; la verás completa más adelante.</p>
     </section>
 
     <h2 class="modhead">Tu turno</h2>

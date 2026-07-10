@@ -285,18 +285,31 @@
       <p class="idea">Dan ganas de factorizar la v… pero hay un detalle: A es una máquina y λ es un número suelto, y no se pueden restar tal cual.</p>
       <p class="idea">El arreglo es una matriz que ya conoces: <strong>I</strong>, la <strong>identidad</strong> — unos en la diagonal, ceros fuera. Es <strong>la máquina que no hace nada</strong>: I·v devuelve la misma v.</p>
       <p class="idea">Por eso λ·v es lo mismo que (λI)·v: "estirar todo λ veces", convertido en máquina.</p>
+      <p class="idea">Compruébalo con λ = 3: I·(x, y) devuelve (x, y), así que (3I)·(x, y) = (3x, 3y) = 3·(x, y). Igual que multiplicar la flecha por 3.</p>
       <p class="idea">Ahora las dos máquinas sí se restan, y la v se factoriza:</p>
       <div class="fx"><div class="sys"><span class="eq">(A − λI)·v = 0</span></div></div>
       <p class="idea">Lee esa línea como una historia: buscamos una máquina, (A − λI), que <strong>aplaste una flecha no nula hasta el cero</strong>.</p>
+      <p class="idea">Cuando una máquina aplasta así, sus dos renglones terminan diciendo lo mismo.</p>
+      <p class="idea">Por eso, al buscar la flecha aplastada, <strong>un solo renglón basta</strong>, y sus soluciones forman toda una recta — una <strong>dirección entera</strong>. Ese es el motivo de que un vector propio sea una dirección, no un punto suelto.</p>
+      <p class="idea">Recuerda de la Unidad 5 qué es el <strong>determinante</strong>: un número que mide si la máquina conserva el plano o lo aplana.</p>
       <p class="idea">Y de la Unidad 5 sabes exactamente cuándo una máquina puede aplastar así: cuando su <strong>determinante vale 0</strong>.</p>
       <p class="idea">Porque entonces colapsa el plano entero a una recta, y hay flechas que caen en el cero.</p>
       <p class="idea">Esa es la condición que caza a λ:</p>
       <div class="fx"><div class="sys"><span class="eq">det(A − λI) = 0</span></div></div>
+      <p class="fx-note">De la Unidad 5: el determinante de una 2×2 es el producto de la diagonal principal menos el de la otra. Cuidado con los signos — restar un negativo suma; por ejemplo, 20 − (−6) = 20 + 6 = 26.</p>
       <p class="idea">Al desarrollar ese determinante queda una ecuación normal donde la incógnita es λ: un <strong>polinomio</strong>.</p>
       <p class="idea">Se le llama el <strong>polinomio característico</strong> de la matriz — "característico" porque es su huella digital.</p>
       <p class="idea">Cada máquina tiene el suyo, y sus raíces son exactamente sus valores propios.</p>
+      <p class="fx-note">Las <strong>raíces</strong> de un polinomio son los valores de λ que lo vuelven cero. Por ejemplo, las raíces de λ² − 5λ + 6 son 2 y 3, porque cada uno lo hace valer 0.</p>
       <p class="idea">Para las 2×2 hay además un atajo que vale oro.</p>
       <p class="idea">Primero un nombre corto: la <strong>traza</strong> de una matriz es <strong>la suma de su diagonal</strong> (el "rastro" que dejan sus entradas principales).</p>
+      <p class="idea">¿De dónde sale la forma de ese polinomio? Ármalo una vez con una 2×2 cualquiera, de letras:</p>
+      <div class="fx" id="genLam"></div>
+      <p class="idea">Su determinante (diagonal menos la otra):</p>
+      <p class="calc"><span class="rw">det</span> (a−λ)(d−λ) − b·c</p>
+      <p class="idea">Desarrollo (a−λ)(d−λ) = ad − aλ − dλ + λ² y agrupo por potencias de λ:</p>
+      <div class="fx"><div class="sys"><span class="eq">λ² − (a + d)·λ + (a·d − b·c) = 0</span></div></div>
+      <p class="idea">Y ahí aparecen viejos conocidos: <strong>a + d</strong> es la suma de la diagonal (la traza) y <strong>a·d − b·c</strong> es el determinante.</p>
       <p class="idea">En toda 2×2 el polinomio característico sale siempre con la misma forma:</p>
       <div class="fx"><div class="sys"><span class="eq">λ² − (traza)·λ + (det) = 0</span></div></div>
       <p class="idea">Y sus dos soluciones cumplen algo comodísimo:</p>
@@ -318,7 +331,46 @@
     </section>
 
     <section class="sec">
-      <h3>4 · Diagonalizar: mirar la máquina desde sus ejes</h3>
+      <h3>4 · El atajo de las triangulares</h3>
+      <p class="idea">A veces la máquina viene con una forma especial que <strong>regala</strong> los valores propios, sin polinomio ni cuentas.</p>
+      <p class="idea">Mira esta:</p>
+      <div class="fx" id="triA"></div>
+      <p class="idea">Fíjate en la esquina de abajo a la izquierda: es un <strong>0</strong>. Todo lo que queda <strong>debajo de la diagonal</strong> son ceros — una escalera de ceros.</p>
+      <p class="idea">A una matriz así se le llama <strong>triangular</strong>: los números vivos se juntan arriba de la diagonal, como en un triángulo.</p>
+      <p class="idea">Ármale su A − λI como siempre, restando λ solo a la diagonal:</p>
+      <div class="fx" id="triAlam"></div>
+      <p class="idea">Ahora saca su determinante 2×2 (producto de la diagonal menos producto de la otra):</p>
+      <p class="calc"><span class="rw">det</span> (2−λ)(5−λ) − 7·0 = (2−λ)(5−λ) − 0 = <b>(2−λ)(5−λ)</b></p>
+      <p class="idea">Ese 0 de abajo borró el otro producto (7·0 = 0). Quedó <strong>solo la diagonal multiplicándose</strong>:</p>
+      <div class="fx"><div class="sys"><span class="eq">(2 − λ)(5 − λ) = 0</span></div></div>
+      <p class="idea">¿Cuándo vale 0 un producto? Cuando uno de sus factores es 0:</p>
+      <ul class="fases">
+        <li>2 − λ = 0, o sea <strong>λ = 2</strong>,</li>
+        <li>5 − λ = 0, o sea <strong>λ = 5</strong>.</li>
+      </ul>
+      <p class="idea">¡Son exactamente los dos números de la diagonal!</p>
+      <p class="idea">Esa es la regla completa: <strong>en una matriz triangular, los valores propios son los números de la diagonal, tal cual</strong>. Se leen, no se calculan.</p>
+      <p class="idea">Y con matrices grandes el ahorro es enorme. Hasta aquí todas fueron 2×2 (máquinas para flechas de dos números). Esta es una <strong>3×3</strong>, para flechas de tres números:</p>
+      <div class="fx" id="tri3"></div>
+      <p class="idea">Debajo de la diagonal, otra vez pura escalera de ceros: también es triangular.</p>
+      <p class="idea">Una 3×3 normal te obligaría a resolver un <strong>polinomio de grado 3</strong> (uno con λ³), harina de otro costal. Pero al ser triangular, los ceros de abajo vuelven a borrar todo y el determinante se parte en la pura diagonal:</p>
+      <div class="fx"><div class="sys"><span class="eq">(4 − λ)(6 − λ)(2 − λ) = 0</span></div></div>
+      <p class="idea">Sus valores propios son <strong>4, 6 y 2</strong> — la diagonal, sin resolver nada.</p>
+      <div class="check" data-kind="item" data-id="Ctri" data-tema="valores_propios" data-level="juntos">
+        <div class="qtag">Te toca · lee la diagonal</div>
+        <p class="q">Esta matriz también es triangular (ceros debajo de la diagonal). ¿Cuáles son sus valores propios?</p>
+        <div class="fx" id="triChk"></div>
+        <div class="opts">
+          <button class="opt" data-ok="0">Hay que resolver un polinomio de grado 3</button>
+          <button class="opt" data-ok="1">2, 7 y −3 (los de la diagonal)</button>
+          <button class="opt" data-ok="0">0, 0 y 0</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>En una matriz triangular los ceros de abajo hacen que el determinante quede solo la diagonal. Sus valores propios son directamente esos números: <strong>2, 7 y −3</strong>. Ni polinomio ni cuentas.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>5 · Diagonalizar: mirar la máquina desde sus ejes</h3>
       <p class="idea">Falta la jugada final, la que le da nombre al tema.</p>
       <p class="idea">Una matriz <strong>diagonal</strong> es la que solo tiene números en la diagonal y ceros en todo lo demás.</p>
       <p class="idea">Como máquina, es la más fácil del universo, porque <strong>no mezcla nada</strong>.</p>
@@ -336,6 +388,7 @@
         <li>y <strong>D</strong> (D de diagonal) lleva los <strong>valores propios en la diagonal</strong>, en el mismo orden que sus columnas.</li>
       </ul>
       <p class="idea">P⁻¹ es la inversa de P — la máquina de regreso, la misma idea de la Unidad 5.</p>
+      <p class="idea">Buena noticia: para <strong>diagonalizar</strong> (armar P y D) no necesitas calcular P⁻¹. Solo aparece si te piden reconstruir A o una potencia; y cuando haga falta, se saca con el método de inversas de la Unidad 5.</p>
       <p class="idea">Con eso, la matriz se reescribe así:</p>
       <div class="fx" id="pdpIntro"></div>
       <p class="fx-note">Columnas de P: los vectores propios (1, 1) y (1, −1). Diagonal de D: los valores propios 3 y 1. Cada eje se estira por su valor propio, sin giros ni mezclas.</p>
@@ -357,6 +410,48 @@
           <button class="opt" data-ok="0">P y D son iguales, y P⁻¹ deshace la operación</button>
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>Cada columna de P es una dirección propia; D dice cuánto se estira <strong>en esa columna</strong>. El orden debe coincidir: la columna 1 de P va con el valor propio de la posición 1 de D.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>6 · Cuando faltan direcciones: matrices defectuosas</h3>
+      <p class="idea">Queda el objetivo prometido en la portada: reconocer cuándo una máquina <strong>no</strong> se puede diagonalizar.</p>
+      <p class="idea">Vuelve a la receta: P junta los <strong>vectores propios como columnas</strong>. Para una 2×2, P necesita <strong>2 columnas</strong>, o sea <strong>2 vectores propios</strong>.</p>
+      <p class="idea">Pero no vale cualquier par: las dos columnas deben apuntar en <strong>direcciones de verdad distintas</strong>.</p>
+      <p class="idea">En la Unidad 2 viste el nombre de eso: dos vectores son <strong>independientes</strong> cuando ninguno es solo una copia estirada del otro — apuntan a lados genuinamente diferentes.</p>
+      <p class="idea">En el ejemplo largo, (1, 1) y (1, −1) apuntaban a lados distintos: 2 vectores propios <strong>independientes</strong>, y por eso P se llenó sin problema.</p>
+      <p class="idea">La regla, entonces:</p>
+      <ul class="fases">
+        <li>para diagonalizar una 2×2 hacen falta <strong>2 vectores propios independientes</strong>,</li>
+        <li>y para una más grande, <strong>tantos como su tamaño</strong> (una 3×3 pide 3).</li>
+      </ul>
+      <p class="idea">¿Siempre salen los dos? No. Mira esta máquina:</p>
+      <div class="fx" id="defA"></div>
+      <p class="idea">Sácale el polinomio con el atajo de la traza y el determinante:</p>
+      <p class="calc"><span class="rw">traza</span> 2+4=<b>6</b> <span class="sep">•</span> <span class="rw">det</span> 2·4−1·(−1)=8−(−1)=8+1=<b>9</b></p>
+      <p class="fx-note">Cuidado con el determinante: menos por menos suma, por eso 8 − (−1) = 8 + 1 = 9.</p>
+      <div class="fx"><div class="sys"><span class="eq">λ² − 6λ + 9 = 0</span></div></div>
+      <p class="idea">Busco dos números que sumen 6 y multipliquen 9: son <strong>3 y 3</strong>. Factoriza así:</p>
+      <div class="fx"><div class="sys"><span class="eq">(λ − 3)(λ − 3) = 0</span><span class="eq">(λ − 3)² = 0</span></div></div>
+      <p class="idea">Aquí λ = 3 aparece <strong>dos veces</strong>. Cuando un valor propio sale repetido así, se dice que tiene <strong>multiplicidad 2</strong> (multiplicidad = cuántas veces se repite).</p>
+      <p class="idea">Un solo valor propio para llenar las dos columnas. ¿Alcanzará para dar dos direcciones? Búscale sus flechas con (A − 3I)v = 0:</p>
+      <div class="fx" id="defA3I"></div>
+      <p class="idea">Los dos renglones dicen lo mismo: −x + y = 0, o sea y = x.</p>
+      <p class="calc"><span class="rw">A−3I</span> renglón: −x+y=0 <span class="sep">•</span> y=x <span class="sep">•</span> dirección: <b>(1, 1)</b></p>
+      <p class="idea">Y se acabó. Solo sale <strong>una</strong> dirección, (1, 1). No hay una segunda distinta: el valor repetido no trajo una flecha nueva.</p>
+      <p class="idea">P necesita 2 columnas independientes y solo tenemos 1. <strong>No se puede llenar</strong>, así que esta matriz <strong>no se puede diagonalizar</strong>.</p>
+      <p class="idea">A una matriz así —que no reúne suficientes vectores propios independientes para llenar P— se le llama <strong>defectuosa</strong> (le falta algo, como un producto con defecto de fábrica).</p>
+      <p class="idea">Un matiz que el examen adora: repetido <strong>no</strong> significa siempre defectuosa. A veces un valor repetido sí regala dos direcciones distintas, y entonces la matriz sí se diagonaliza.</p>
+      <p class="idea">Pero cuando solo trae una, como aquí, P queda coja.</p>
+      <div class="check" data-kind="item" data-id="Cdefect" data-tema="diagonalizabilidad" data-level="juntos">
+        <div class="qtag">Te toca · decide</div>
+        <p class="q">Una matriz 2×2 tiene un valor propio repetido que solo aporta la dirección (1, 0) — una sola. ¿Se puede diagonalizar?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">Sí: un valor propio repetido siempre alcanza para las dos columnas</button>
+          <button class="opt" data-ok="1">No: con una sola dirección, P se queda sin su segunda columna independiente</button>
+          <button class="opt" data-ok="0">Sí: se repite (1, 0) en las dos columnas de P</button>
+        </div>
+        <div class="why"><span class="lbl">Por qué</span><p>Para diagonalizar una 2×2 hacen falta <strong>2 vectores propios independientes</strong>. Una sola dirección llena una columna, no dos; repetirla no da una columna nueva independiente. La matriz es <strong>defectuosa</strong>: no diagonalizable.</p></div>
       </div>
     </section>
 
@@ -462,6 +557,8 @@
       <p class="idea" style="font-size:17px">Míralo con tus ojos nuevos: si un reparto ya no cambia, la máquina lo devuelve <strong>idéntico</strong>.</p>
       <p class="idea" style="font-size:17px">Una flecha que sale igual, estirada por 1… ¡el estado estable es un <strong>vector propio con λ = 1</strong>!</p>
       <p class="idea" style="font-size:17px">El salto de esta sección no es que la matriz crezca: es que <strong>los números traen decimales</strong> y solo nos interesa ese vector.</p>
+      <p class="idea" style="font-size:17px">¿Por qué λ = 1 siempre está en Markov? Porque cada columna suma 1: nadie aparece ni desaparece.</p>
+      <p class="idea" style="font-size:17px">Eso obliga a que exista un reparto que la máquina devuelve <strong>idéntico</strong>. Idéntico = estirado por 1: ese es el vector propio de <strong>λ = 1</strong>, y por eso nunca falla.</p>
       <p class="idea" style="font-size:17px">Se hace en <strong>dos fases</strong>:</p>
       <ul class="fases">
         <li><strong>Fase 1 — los valores propios:</strong> en una cadena de Markov, <em>λ = 1</em> viene garantizado (siempre existe un reparto de equilibrio); el otro sale con la traza, sin armar polinomio.</li>
@@ -494,6 +591,7 @@
         <div class="why"><span class="lbl">Por qué</span><p>“−x + 2y = 0” es lo mismo que x = 2y. Tomando y = 1 sale x = 2, o sea (2, 1). Ese vector apunta al reparto de equilibrio.</p></div>
       </div>
       <div class="estep"><div class="oprow">Fase 2 · estado estable</div><p>Despejo el renglón y llevo el vector a proporciones que sumen 1:</p><p class="calc"><span class="rw">v</span> −x+2y=0 → x=2y <span class="sep">•</span> vector: (2, 1) <span class="sep">•</span> proporción: <b>2/3</b> y <b>1/3</b></p></div>
+      <p class="fx-note">¿De dónde salen 2/3 y 1/3? El vector (2, 1) marca las proporciones al repartir entre el total. Sumo las partes: 2 + 1 = 3; cada una entre 3 → 2/3 para la ciudad y 1/3 para el suburbio.</p>
       <p class="idea" style="font-size:17px">Como el otro valor propio (0.7) es menor que 1, su parte se <strong>encoge</strong> año con año hasta desaparecer.</p>
       <p class="idea" style="font-size:17px">Sin importar el reparto inicial, la población tiende al estado estable: <strong>2/3 en la ciudad, 1/3 en el suburbio</strong>.</p>
       <p class="idea" style="font-size:17px">Ese es el problema del inicio, resuelto de un solo golpe con el valor propio 1.</p>
@@ -758,6 +856,19 @@ document.getElementById('pdpIntro').innerHTML =
   matSq([["½","½"],["½","−½"]])+
   '</div>'+
   '<p class="fx-note" style="margin-top:8px">A = P·D·P⁻¹. Columnas de P: los vectores propios (1, 1) y (1, −1). Diagonal de D: los valores propios 3 y 1.</p>';
+
+// ---- La idea · grieta: polinomio genérico (sección 3) ----
+setSq('genLam',[["a−λ","b"],["c","d−λ"]]);
+
+// ---- La idea · triangulares (sección 4) ----
+setSq('triA',[["2","7"],["0","5"]]);
+setSq('triAlam',[["2−λ","7"],["0","5−λ"]]);
+setSq('tri3',[["4","2","1"],["0","6","3"],["0","0","2"]]);
+setSq('triChk',[["2","5","1"],["0","7","4"],["0","0","−3"]]);
+
+// ---- La idea · defectuosas (sección 6) ----
+setSq('defA',[["2","1"],["−1","4"]]);
+setSq('defA3I',[["−1","1"],["−1","1"]]);
 
 // ---- Yo lo hago · contigo: diagonalización de A=[[2,1],[1,2]] ----
 setSq('d0',[["2","1"],["1","2"]]);
