@@ -85,6 +85,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -503,6 +504,156 @@
           <div class="estep"><div class="oprow">R1 ↔ R2</div><p>Intercambio renglones para poner el 1 arriba a la izquierda como primer pivote:</p><div class="fx" id="p14b"></div></div>
           <div class="estep"><div class="oprow">R1 → R1 ÷ (−1) · luego R2 → R2 ÷ (−1)</div><p>Normalizo cada pivote a 1. R1 = [−1, 0] ÷ (−1) = [1, 0]; R2 = [0, 1] ya está:</p><p class="calc"><span class="rw">R1</span> −1÷(−1)=<b>1</b> <span class="sep">•</span> 0=<b>0</b></p><div class="fx" id="p14c"></div></div>
           <p class="verdict"><strong>Rango 2, nulidad 0.</strong> La RREF es la identidad: 2 pivotes, ninguna columna libre. Nulidad 0 ⇒ <strong>inyectiva</strong>; rango 2 = dimensión del codominio ⇒ <strong>suprayectiva</strong>. Es <strong>biyectiva</strong>. Tiene sentido: girar 90° no aplasta nada al cero y cubre todo el plano; se puede deshacer girando 90° al otro lado.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te definen T solo por sus datos, te piden constantes, la notación es de conjunto y toca <strong>justificar</strong>. Estos problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 EXAMEN : T abstracta definida por sus valores en la base ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="T_abstracta" data-level="examen">
+      <div class="phead"><span class="pnum">15</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">T definida solo por sus valores en la base</p>
+      <p class="pstatement">Sea T: R² → R² una transformación lineal tal que T(1, 0) = (2, 1) y T(0, 1) = (−1, 3). Encuentra T(3, 5) y escribe la matriz canónica de T. Justifica cada paso usando la linealidad.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(1, 0) = (2, 1)</span>
+        <span class="eq">T(0, 1) = (−1, 3)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Aquí no te dan la regla de T: solo dos datos, qué hace con (1, 0) y con (0, 1) — justo la base canónica. Como T es lineal, esos dos datos la determinan por completo: cualquier vector es combinación de la base y T respeta combinaciones. El trabajo es escribir (3, 5) en la base y dejar que la linealidad haga el resto.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · escribir (3, 5) en la base</div><p>Descompongo el vector en la base canónica:</p>
+            <p class="calc"><span class="rw">(3, 5)</span> 3·(1, 0) + 5·(0, 1)=<b>(3, 5)</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · aplicar la linealidad</div><p>T reparte la combinación: T(3, 5) = 3·T(1, 0) + 5·T(0, 1). Sustituyo los datos:</p>
+            <p class="calc"><span class="rw">3·(2, 1)</span>=<b>(6, 3)</b> <span class="sep">•</span> <span class="rw">5·(−1, 3)</span>=<b>(−5, 15)</b> <span class="sep">•</span> suma: (6−5, 3+15)=<b>(1, 18)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · matriz canónica</div><p>Las columnas de la matriz son las imágenes de la base, en orden: primera columna (2, 1), segunda columna (−1, 3):</p>
+            <div class="fx"><div class="sys"><span class="eq">A con renglones [2, −1] y [1, 3]</span><span class="eq">columnas: T(1, 0) = (2, 1) y T(0, 1) = (−1, 3)</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 4 · comprobar por el otro camino</div><p>Multiplico A por (3, 5); debe reproducir el resultado del Paso 2:</p>
+            <p class="calc"><span class="rw">R1</span> 2·3+(−1)·5=6−5=<b>1</b> <span class="sep">•</span> <span class="rw">R2</span> 1·3+3·5=3+15=<b>18</b></p>
+            <p>Los dos caminos dan (1, 18). Cierra.</p></div>
+          <p class="verdict"><strong>T(3, 5) = (1, 18)</strong> y la matriz canónica tiene renglones [2, −1] y [1, 3] (las imágenes de la base van como <strong>columnas</strong>). El error que cuesta puntos: acomodar T(1, 0) y T(0, 1) como renglones de la matriz — van como columnas, siempre.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 EXAMEN : inverso — a tal que T no sea inyectiva ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="inverso_inyectividad" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla a para que falle la inyectividad</p>
+      <p class="pstatement">Sea T: R² → R² la transformación lineal cuya matriz canónica es A, con renglones [2, a] y [4, 6]. Determina el valor de a para el cual T no es inyectiva y, para ese valor, exhibe un vector no nulo del núcleo.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">R1 de A = [2, a]</span>
+        <span class="eq">R2 de A = [4, 6]</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"No inyectiva" se traduce a números: nulidad mayor que 0, o sea alguna columna se queda sin pivote al reducir. Con 2 columnas eso pasa exactamente cuando el rango cae a 1. El problema es inverso: en vez de reducir una matriz fija, reduzco con la a adentro y la obligo a fallar.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · reducir con la a adentro</div><p>R2 → R2 − 2·R1, arrastrando la a como si fuera un número:</p>
+            <p class="calc"><span class="rw">R2</span> 4−2·2=<b>0</b> <span class="sep">•</span> 6−2·a=<b>6 − 2a</b></p>
+            <p>Queda R2 = [0, 6 − 2a]. Si esa entrada no es cero, hay 2 pivotes y T es inyectiva.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · forzar la falla</div><p>Para que el segundo pivote desaparezca, igualo a cero y despejo:</p>
+            <p class="calc"><span class="rw">6 − 2a = 0</span> 2a=6 <span class="sep">•</span> a=<b>3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · núcleo para a = 3</div><p>Con a = 3, T(x, y) = (2x + 3y, 4x + 6y) y el segundo renglón es el doble del primero. El núcleo sale de 2x + 3y = 0; tomo y = 2, x = −3 y compruebo en LAS DOS entradas:</p>
+            <p class="calc"><span class="rw">R1</span> 2·(−3)+3·2=−6+6=<b>0</b> <span class="sep">•</span> <span class="rw">R2</span> 4·(−3)+6·2=−12+12=<b>0</b></p></div>
+          <p class="verdict"><strong>a = 3.</strong> Con ese valor, (−3, 2) es un vector no nulo del núcleo (T(−3, 2) = (0, 0)), así que T deja de ser inyectiva; para cualquier otra a, hay 2 pivotes y sí lo es. El error que cuesta puntos: hallar la a y no comprobar el vector del núcleo en las dos entradas — un signo mal ahí tira el problema entero.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 EXAMEN : V/F con justificación — rango-nulidad ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="vf_rango_nulidad" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Decide si cada afirmación es verdadera o falsa. En cada caso escribe una justificación de una línea (un argumento con números o un contraejemplo); sin justificación no hay puntos.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">(i) Existe T: R³ → R² lineal e inyectiva.</span>
+        <span class="eq">(ii) Si T: R³ → R³ es lineal y tiene rango 3, entonces T es biyectiva.</span>
+        <span class="eq">(iii) Para toda T: R⁴ → R³ lineal, rango + nulidad = 3.</span>
+        <span class="eq">(iv) Si T: R² → R³ es lineal e inyectiva, su imagen es un plano en R³.</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Todo se decide con dos herramientas: el teorema rango + nulidad = dimensión del <strong>dominio</strong>, y el techo del rango (no pasa del número de renglones ni del de columnas). "Justificar" no es escribir un párrafo: es una línea con el número que decide.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · (i)</div><p>El codominio es R², así que el rango es a lo más 2. Por rango-nulidad con dominio de dimensión 3:</p>
+            <p class="calc"><span class="rw">nulidad</span> 3 − rango ≥ 3 − 2=<b>1</b> &gt; 0</p>
+            <p>Siempre hay núcleo no trivial: nunca es inyectiva. <strong>Falsa.</strong></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · (ii)</div><p>Rango 3 con dominio de dimensión 3:</p>
+            <p class="calc"><span class="rw">nulidad</span> 3 − 3=<b>0</b> ⇒ inyectiva <span class="sep">•</span> <span class="rw">rango</span> 3 = dim del codominio ⇒ suprayectiva</p>
+            <p>Las dos juntas dan biyectiva. <strong>Verdadera.</strong></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · (iii)</div><p>El teorema suma al número de columnas = dimensión del <strong>dominio</strong> = 4, no del codominio:</p>
+            <p class="calc"><span class="rw">rango + nulidad</span>=<b>4</b> ≠ 3</p>
+            <p>La afirmación usa el 3 del codominio: esa es exactamente la trampa. <strong>Falsa.</strong></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · (iv)</div><p>Inyectiva ⇒ nulidad 0 ⇒ rango = 2 − 0 = 2. La imagen es un subespacio de dimensión 2 dentro de R³: un plano por el origen. <strong>Verdadera.</strong></p>
+            <p class="calc"><span class="rw">rango</span> 2 − 0=<b>2</b> ⇒ imagen de dimensión 2 en R³</p></div>
+          <p class="verdict"><strong>(i) F · (ii) V · (iii) F · (iv) V.</strong> Justificaciones de examen: (i) nulidad ≥ 3 − 2 = 1 &gt; 0; (ii) nulidad 0 y rango = dim codominio; (iii) rango + nulidad = dim del dominio = 4; (iv) rango 2 ⇒ imagen de dimensión 2. El error que cuesta puntos: atinar la letra y justificar con "se ve que…" — la justificación ES el número.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 EXAMEN : núcleo e imagen completos, notación de conjunto ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="nucleo_imagen_examen" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Núcleo e imagen, en notación de conjunto</p>
+      <p class="pstatement">Sea T: R³ → R³ la transformación lineal cuya matriz canónica es A, con renglones [1, 2, 1], [2, 4, 3] y [1, 2, 2]. Determina una base de ker(T) y una base de im(T), verifica el teorema de rango-nulidad y decide si T es suprayectiva.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">A: R1 = [1, 2, 1] · R2 = [2, 4, 3] · R3 = [1, 2, 2]</span>
+        <span class="eq">ker(T) = {v ∈ R³ | T(v) = (0, 0, 0)}</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La notación ker(T) = {v ∈ R³ | T(v) = (0, 0, 0)} se lee: "los vectores v de R³ que T manda al cero" — es el núcleo de siempre, con vestido formal. im(T) es la imagen. El plan es el del cuadernillo: reducir A, leer pivotes y columnas libres.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · ceros bajo el primer pivote</div><p>R2 → R2 − 2·R1 y luego R3 → R3 − R1:</p>
+            <p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 4−2·2=<b>0</b> <span class="sep">•</span> 3−2·1=<b>1</b></p>
+            <p class="calc"><span class="rw">R3</span> 1−1=<b>0</b> <span class="sep">•</span> 2−2=<b>0</b> <span class="sep">•</span> 2−1=<b>1</b></p>
+            <p>Quedan R2 = [0, 0, 1] y R3 = [0, 0, 1].</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · limpiar hasta RREF</div><p>R3 → R3 − R2 anula el tercer renglón; R1 → R1 − R2 limpia el 1 de arriba en la tercera columna:</p>
+            <p class="calc"><span class="rw">R3</span> 0−0=<b>0</b> <span class="sep">•</span> 0−0=<b>0</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> <span class="rw">R1</span> 1−1=<b>0</b> (tercera entrada)</p>
+            <div class="fx"><div class="sys"><span class="eq">RREF: [1, 2, 0] · [0, 0, 1] · [0, 0, 0]</span></div></div>
+            <p>Pivotes en las columnas <strong>1 y 3</strong>; la columna 2 queda libre.</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · núcleo</div><p>Sistema reducido: x + 2y = 0 y z = 0. Con y = t, x = −2t:</p>
+            <div class="fx"><div class="sys"><span class="eq">x = −2t,   y = t,   z = 0</span><span class="eq">ker(T) = t·(−2, 1, 0)</span></div></div>
+            <p>Compruebo (−2, 1, 0) en la matriz ORIGINAL, renglón por renglón:</p>
+            <p class="calc"><span class="rw">R1</span> 1·(−2)+2·1+1·0=<b>0</b> <span class="sep">•</span> <span class="rw">R2</span> 2·(−2)+4·1+3·0=<b>0</b> <span class="sep">•</span> <span class="rw">R3</span> 1·(−2)+2·1+2·0=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · imagen</div><p>Los pivotes cayeron en las columnas 1 y 3, así que la base de la imagen son las columnas 1 y 3 <strong>de la matriz ORIGINAL</strong>: (1, 2, 1) y (1, 3, 2). La columna 2 = (2, 4, 2) es el doble de la 1; por eso no da pivote.</p></div>
+          <p class="verdict"><strong>Base de ker(T) = { (−2, 1, 0) }</strong> (nulidad 1) y <strong>base de im(T) = { (1, 2, 1), (1, 3, 2) }</strong> (rango 2). Verificación: rango + nulidad = 2 + 1 = 3 = nº de columnas ✓. Suprayectiva pediría rango 3; con rango 2 &lt; 3, <strong>no es suprayectiva</strong> (ni inyectiva). El error que cuesta puntos: dar como base de la imagen las columnas de la RREF en vez de las originales.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 EXAMEN : decide si es lineal — contraejemplo numérico ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="no_lineal_contraejemplo" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Demuestra que no es lineal</p>
+      <p class="pstatement">Decide, usando la definición, si la transformación T: R² → R² dada por T(x, y) = (x + y, x·y) es lineal. Si lo es, demuéstralo; si no lo es, exhibe un contraejemplo numérico concreto que viole una de las dos condiciones.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y) = (x + y, x·y)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Usando la definición" significa atacar la suma T(u+v) = T(u)+T(v) y el escalado T(c·u) = c·T(u); la intuición no puntúa. Y ojo con la trampa: aquí T(0, 0) = (0 + 0, 0·0) = (0, 0), así que el filtro del cero NO la descarta. Para demostrar que NO es lineal basta <strong>un</strong> contraejemplo con números; para demostrar que sí, habría que probarlo con letras.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · contraejemplo con la suma</div><p>Tomo u = (1, 0) y v = (0, 1) y comparo los dos caminos:</p>
+            <p class="calc"><span class="rw">u+v</span> (1, 1) <span class="sep">•</span> T(1, 1)=(1+1, 1·1)=<b>(2, 1)</b></p>
+            <p class="calc"><span class="rw">T(u)</span> (1+0, 1·0)=<b>(1, 0)</b> <span class="sep">•</span> <span class="rw">T(v)</span> (0+1, 0·1)=<b>(1, 0)</b> <span class="sep">•</span> suma=<b>(2, 0)</b></p>
+            <p>(2, 1) ≠ (2, 0): la segunda entrada no coincide. La suma se viola.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · el escalado también falla (refuerzo)</div><p>Con c = 2 y u = (1, 1):</p>
+            <p class="calc"><span class="rw">c·u</span> (2, 2) <span class="sep">•</span> T(2, 2)=(2+2, 2·2)=<b>(4, 4)</b></p>
+            <p class="calc"><span class="rw">2·T(u)</span> T(1, 1)=(2, 1) <span class="sep">•</span> 2·(2, 1)=<b>(4, 2)</b></p>
+            <p>(4, 4) ≠ (4, 2). Con violar una condición ya estaba; esta segunda lo confirma.</p></div>
+          <p class="verdict warn"><strong>T no es lineal.</strong> Contraejemplo: con u = (1, 0) y v = (0, 1), T(u + v) = (2, 1) pero T(u) + T(v) = (2, 0). El producto x·y multiplica las variables entre sí, y eso rompe la linealidad aunque el cero se quede quieto. El error que cuesta puntos: verificar solo T(0) = 0 y concluir "es lineal" — el filtro del cero solo descarta, nunca confirma.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

@@ -81,6 +81,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -401,6 +402,164 @@
           <div class="estep"><p><strong>(b) Falso.</strong> W tiene dimensión 2, así que una base suya debe tener <strong>exactamente 2</strong> vectores. Aquí hay <strong>3</strong>: se le agregó un vector a una base ya completa, de modo que el conjunto es forzosamente <strong>l.d.</strong> (el tercero es combinación de los dos primeros). Demasiados vectores ⇒ no es base.</p></div>
           <div class="estep"><p><strong>(c) Falso.</strong> (4,2,0) = 2·(2,1,0): son <strong>l.d.</strong> Aunque ambos están en W, no generan todo el plano (solo una recta). No es base.</p></div>
           <p class="verdict">Regla que se repite en el parcial: para ser <strong>base</strong> de un subespacio de dimensión k hacen falta <strong>exactamente k vectores</strong>, <strong>l.i.</strong> y <strong>dentro</strong> del subespacio. Fallar cualquiera de las tres tumba la afirmación.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: los planos vienen escritos como conjuntos, las afirmaciones se deciden verdadero o falso, aparecen constantes por hallar, y toca <strong>justificar</strong> cada respuesta. Estos cinco problemas vienen en ese formato, calcado de la tarea real del curso. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 NIVEL EXAMEN · V/F con justificación (A1+A5) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="vf_independencia" data-level="examen">
+      <div class="phead"><span class="pnum">11</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, justificando cada respuesta</p>
+      <p class="pstatement">Considere los siguientes vectores de R³. Indique cuáles de las siguientes afirmaciones son verdaderas o falsas, <strong>justificando su respuesta</strong>.</p>
+      <div class="fx"><div class="sys" style="font-size:18px">
+        <span class="eq">v₁ = (1, 0, −2) · v₂ = (0, 1, 1) · v₃ = (1⁄2, 1, 0)</span>
+        <span class="eq">v₄ = (1, 1, 0) · v₅ = (0, 0, 0)</span>
+      </div></div>
+      <div class="fx"><div class="sys" style="font-size:17px">
+        <span class="eq">(a) El conjunto {v₁, v₂, v₃} es linealmente independiente.</span>
+        <span class="eq">(b) El conjunto {v₁, v₂, v₄} es linealmente independiente.</span>
+        <span class="eq">(c) Cualquier conjunto que contenga al vector v₅ no puede ser una base de ningún subespacio de R³.</span>
+        <span class="eq">(d) El conjunto {v₁, v₃} es linealmente dependiente.</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Cuatro afirmaciones, cuatro veredictos. En este formato la letra sola no vale nada: cada V o F se gana con un argumento de una o dos líneas — o exhibes la combinación o eliminación que lo prueba, o das el contraejemplo.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · (a) busca la dependencia</div><p>El vector con fracción es el sospechoso de siempre. Pruebo si v₃ es combinación de v₁ y v₂:</p>
+            <p class="calc">(1⁄2)·v₁ + 1·v₂ = (1⁄2, 0, −1) + (0, 1, 1) = (1⁄2, 1, 0) = v₃</p>
+            <p>v₃ depende de los otros dos → el conjunto es l.d. → <strong>(a) es FALSA</strong>.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · (b) eliminación completa</div><p>Pongo v₁, v₂, v₄ como renglones y escalono:</p>
+            <p class="calc">R3 → R3 − R1: (1, 1, 0) − (1, 0, −2) = (0, 1, 2)</p>
+            <p class="calc">R3 → R3 − R2: (0, 1, 2) − (0, 1, 1) = (0, 0, 1)</p>
+            <p>Quedan <strong>3 pivotes</strong> (ningún renglón se anuló) → <strong>(b) es VERDADERA</strong>.</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · (c) la trampa del vector cero</div><p>Con v₅ = (0, 0, 0) siempre existe una combinación <strong>no trivial</strong> que da el vector cero:</p>
+            <p class="calc">1·v₅ + 0·v₁ + 0·v₂ = (0, 0, 0), con coeficiente 1 ≠ 0</p>
+            <p>Todo conjunto que contenga a v₅ es l.d., y una base debe ser l.i. → jamás es base → <strong>(c) es VERDADERA</strong>.</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · (d) ¿son múltiplos?</div><p>Dos vectores son l.d. solo si uno es múltiplo del otro. Si v₃ = c·v₁: la primera componente pide c = 1⁄2, pero la segunda pide c·0 = 1, imposible.</p>
+            <p>No son múltiplos → son l.i. → <strong>(d) es FALSA</strong>.</p></div>
+          <p class="verdict">(a) F: v₃ = (1⁄2)v₁ + v₂. · (b) V: la eliminación deja 3 pivotes. · (c) V: 1·v₅ + 0·(los demás) = 0 es combinación no trivial. · (d) F: v₁ y v₃ no son múltiplos. <strong>El error que cuesta puntos:</strong> contestar la letra sin la justificación — el profesor califica el argumento, no la letra.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 NIVEL EXAMEN · base de un plano en notación de conjunto (A2+A3) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="base_de_plano" data-level="examen">
+      <div class="phead"><span class="pnum">12</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">¿Es base de ESE plano?</p>
+      <p class="pstatement">Considere el plano V. Decida, <strong>justificando su respuesta</strong>, si cada conjunto es una base para V.</p>
+      <div class="fx"><div class="sys" style="font-size:18px">
+        <span class="eq">V = {(x, y, z) ∈ R³ | 4x − 2y + 2z = 0}</span>
+      </div></div>
+      <div class="fx"><div class="sys" style="font-size:17px">
+        <span class="eq">(a) B₁ = {(1, 0, −2), (0, 1, 1)}</span>
+        <span class="eq">(b) B₂ = {(1, 0, −2), (1, 1, 0)}</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La notación se lee así: V son <strong>todos los puntos (x, y, z) de R³ cuyas coordenadas cumplen 4x − 2y + 2z = 0</strong>. Es un plano que pasa por el origen → su dimensión es 2. Ser base de V exige tres cosas: los vectores viven <strong>dentro</strong> de V, son <strong>l.i.</strong> y <strong>generan</strong> V. No es "base de R³": es base de ese plano.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · simplifica la ecuación</div><p>Divido entre 2 (misma ecuación, mismo plano):</p>
+            <p class="calc">4x − 2y + 2z = 0  ⟺  2x − y + z = 0</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · (a) checa las tres condiciones</div><p>¿Están en V? Sustituyo en 2x − y + z:</p>
+            <p class="calc">(1, 0, −2): 2(1) − 0 + (−2) = 0 ✓ · (0, 1, 1): 0 − 1 + 1 = 0 ✓</p>
+            <p>¿L.i.? Ninguno es múltiplo del otro (mira la primera componente: 1 contra 0). ¿Generan V? De la ecuación, todo punto de V cumple z = −2x + y, y:</p>
+            <p class="calc">x·(1, 0, −2) + y·(0, 1, 1) = (x, y, −2x + y) = (x, y, z)</p>
+            <p>Cualquier punto de V es combinación de B₁ → <strong>(a) es VERDADERA</strong>: B₁ es base de V.</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · (b) el vector fuera del plano</div><p>Checo si (1, 1, 0) está en V:</p>
+            <p class="calc">(1, 1, 0): 2(1) − 1 + 0 = 1 ≠ 0</p>
+            <p>No cumple la ecuación → (1, 1, 0) ∉ V. Un vector fuera de V no puede ir en una base de V (aunque B₂ sí es l.i., no genera a V: genera otro plano) → <strong>(b) es FALSA</strong>.</p></div>
+          <p class="verdict">(a) V: están en V, son l.i. y generan. · (b) F: (1, 1, 0) no cumple la ecuación de V. <strong>El error que cuesta puntos:</strong> checar solo l.i. y olvidar verificar que cada vector esté DENTRO del subespacio — es la trampa exacta de la tarea del curso.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 NIVEL EXAMEN · contención de generados (A4) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="contencion_gen" data-level="examen">
+      <div class="phead"><span class="pnum">13</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Contención de generados: ¿la recta cabe en el plano?</p>
+      <p class="pstatement">Sean los vectores de abajo y L = gen({v₃}). Indique si cada afirmación es verdadera o falsa, <strong>justificando su respuesta</strong>.</p>
+      <div class="fx"><div class="sys" style="font-size:18px">
+        <span class="eq">v₁ = (1, 0, −2) · v₂ = (0, 1, 1) · v₃ = (1⁄2, 1, 0)</span>
+      </div></div>
+      <div class="fx"><div class="sys" style="font-size:17px">
+        <span class="eq">(a) L = gen({v₃}) ⊂ gen({v₁, v₂})</span>
+        <span class="eq">(b) Una base para L es B = {(1, 2, 0)}</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>gen({v₃}) se lee "<strong>todos los múltiplos de v₃</strong>": una recta por el origen. gen({v₁, v₂}) son <strong>todas las combinaciones a·v₁ + b·v₂</strong>: un plano. El símbolo ⊂ pregunta si toda la recta vive dentro del plano. Como todo punto de L es t·v₃, basta decidir si <strong>v₃ mismo</strong> es combinación de v₁ y v₂.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · (a) plantea a·v₁ + b·v₂ = v₃</div><p>Igualo componente a componente:</p>
+            <p class="calc">1ª componente: a·1 + b·0 = 1⁄2 → a = 1⁄2</p>
+            <p class="calc">2ª componente: a·0 + b·1 = 1 → b = 1</p>
+            <p class="calc">3ª componente (comprobación): −2·(1⁄2) + 1·(1) = −1 + 1 = 0 ✓ (coincide con v₃)</p>
+            <p>Entonces v₃ = (1⁄2)v₁ + v₂, y todo múltiplo t·v₃ = (t⁄2)·v₁ + t·v₂ también es combinación → <strong>(a) es VERDADERA</strong>.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · (b) ¿(1, 2, 0) genera la misma recta?</div><p>Comparo con v₃:</p>
+            <p class="calc">2·v₃ = 2·(1⁄2, 1, 0) = (1, 2, 0)</p>
+            <p>Es un múltiplo <strong>no nulo</strong> de v₃ → genera exactamente la misma recta L, y un solo vector distinto de cero siempre es l.i. → es base de L → <strong>(b) es VERDADERA</strong>.</p></div>
+          <p class="verdict">(a) V: v₃ = (1⁄2)v₁ + v₂, la recta L queda dentro del plano. · (b) V: (1, 2, 0) = 2·v₃ es múltiplo no nulo → genera L y es l.i. <strong>El error que cuesta puntos:</strong> creer que la base de L "tiene que ser v₃" — cualquier múltiplo no nulo sirve, y (1, 2, 0) evita la fracción.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 NIVEL EXAMEN · inverso: a para que sea l.d. (A6) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="inverso_ld" data-level="examen">
+      <div class="phead"><span class="pnum">14</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Problema inverso: fabrica la dependencia</p>
+      <p class="pstatement">Encuentre todos los valores de a ∈ R para los cuales el conjunto es <strong>linealmente dependiente</strong>. Justifique.</p>
+      <div class="fx"><div class="sys" style="font-size:18px">
+        <span class="eq">{(1, 1, a), (0, 2, 1), (1, 3, 2)}</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Aquí nadie te pregunta si son l.i.: te piden el valor de a que <strong>rompe</strong> la independencia. Es el método de siempre (escalonar) pero al revés: escalonas con la a adentro y preguntas para qué valor de a aparece un renglón de ceros.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · escalona con la a adentro</div><p>Llamo v₁ = (1, 1, a), v₂ = (0, 2, 1), v₃ = (1, 3, 2) y los pongo como renglones. El único renglón que empieza en 1 aparte del primero es el tercero:</p>
+            <p class="calc">R3 → R3 − R1: (1, 3, 2) − (1, 1, a) = (0, 2, 2 − a)</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · limpia la segunda columna</div>
+            <p class="calc">R3 → R3 − R2: (0, 2, 2 − a) − (0, 2, 1) = (0, 0, 1 − a)</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · pide el renglón de ceros</div><p>El conjunto es l.d. exactamente cuando el tercer renglón se anula:</p>
+            <p class="calc">1 − a = 0  ⟺  a = 1</p>
+            <p>Si a ≠ 1 quedan 3 pivotes → l.i. El único valor que produce dependencia es a = 1.</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · comprueba sustituyendo</div><p>Con a = 1, v₁ = (1, 1, 1). Busco la dependencia explícita:</p>
+            <p class="calc">v₁ + v₂ = (1, 1, 1) + (0, 2, 1) = (1, 3, 2) = v₃ ✓</p></div>
+          <p class="verdict">a = 1 es el único valor: con él, v₃ = v₁ + v₂ y el conjunto es l.d. <strong>El error que cuesta puntos:</strong> hallar a y no sustituirlo de vuelta — la comprobación v₁ + v₂ = v₃ es la que asegura la respuesta (y detecta errores de signo).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 NIVEL EXAMEN · base y dimensión de un plano dado (A2+A3) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="base_plano" data-level="examen">
+      <div class="phead"><span class="pnum">15</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Base y dimensión desde la ecuación, con justificación</p>
+      <p class="pstatement">Considere el subespacio W. Encuentre una <strong>base</strong> para W y determine su <strong>dimensión</strong>. Justifique que el conjunto propuesto es, en efecto, una base de W.</p>
+      <div class="fx"><div class="sys" style="font-size:18px">
+        <span class="eq">W = {(x, y, z) ∈ R³ | x + 3y − 2z = 0}</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>W son <strong>los puntos (x, y, z) de R³ que cumplen x + 3y − 2z = 0</strong>: un plano por el origen. Eso es un sistema homogéneo de UNA ecuación con 3 incógnitas: 1 pivote y 2 variables libres. Espera dimensión 3 − 1 = 2 y una base de exactamente 2 vectores.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · despeja el pivote</div><p>El pivote es x; las libres son y = s, z = t:</p>
+            <p class="calc">x = −3y + 2z = −3s + 2t</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · escribe la paramétrica y separa</div>
+            <div class="fx"><div class="sys"><span class="eq">(x, y, z) = (−3s + 2t, s, t) = s·(−3, 1, 0) + t·(2, 0, 1)</span></div></div>
+            <p>Los dos vectores que acompañan a s y t son los candidatos a base.</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · justifica que es base</div><p><strong>Están en W</strong> (sustituyo en x + 3y − 2z):</p>
+            <p class="calc">(−3, 1, 0): −3 + 3(1) − 2(0) = 0 ✓ · (2, 0, 1): 2 + 3(0) − 2(1) = 0 ✓</p>
+            <p><strong>Son l.i.</strong>: ninguno es múltiplo del otro (mira la componente y: 1 contra 0). <strong>Generan W</strong>: toda solución de la ecuación se escribió como s·(−3, 1, 0) + t·(2, 0, 1) en el paso 2.</p></div>
+          <p class="verdict">Base de W: {(−3, 1, 0), (2, 0, 1)} y dim W = 2. Cualquier otra pareja l.i. dentro de W también es base válida (por ejemplo, múltiplos de estos). <strong>El error que cuesta puntos:</strong> proponer vectores que no cumplen la ecuación, o dar la paramétrica sin extraer los dos vectores y sin justificar l.i.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

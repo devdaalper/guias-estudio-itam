@@ -85,6 +85,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -433,6 +434,127 @@
           <div class="estep"><div class="oprow">Paso 2 · relacionar x e y</div><p>De y = 2λ y x = λ (o sea λ = x), sustituyo:</p><p class="calc"><span class="rw">rel.</span> y=2λ=2·x → <b>y=2x</b></p></div>
           <div class="estep"><div class="oprow">Paso 3 · usar la malla</div><p>Meto y = 2x en 2x + y = 40:</p><p class="calc"><span class="rw">x</span> 2x+2x=40 → 4x=40 → <b>x=10</b> <span class="sep">•</span> <span class="rw">y</span> y=2·10=<b>20</b></p><div class="fx" id="p12b"></div></div>
           <p class="verdict">Medidas: <strong>x = 10 m</strong> (cada lado perpendicular al muro) y <strong>y = 20 m</strong> (lado paralelo al muro). Área máxima = 10·20 = <strong>200 m<sup>2</sup></strong>. Verifico la malla: 2(10) + 20 = 40 ✓. El tanteo del inicio (5×30 = 150, 15×10 = 150) se queda corto: el método da el punto exacto.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan datos sueltos y pides constantes, te escriben límites en vez de parciales, y toca <strong>justificar</strong>. Estos problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 : inverso — a para que (2,2) sea punto crítico + clasificar ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="examen_inverso_critico" data-level="examen">
+      <div class="phead"><span class="pnum">13</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Determina la constante y clasifica el punto</p>
+      <p class="pstatement">Sea f(x, y) = x<sup>3</sup> + y<sup>3</sup> + a·xy, con a una constante. Determina el valor de a para el cual (2, 2) es un punto crítico de f y, con ese valor de a, clasifica dicho punto mediante el criterio de la segunda derivada. Justifica.</p>
+      <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>3</sup> + y<sup>3</sup> + a·xy</span><span class="eq">(2, 2) punto crítico  →  a = ?</span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"(2, 2) es punto crítico" se lee: <strong>las dos parciales valen cero en (2, 2)</strong>. Aquí el juego va al revés: no busco el punto — me lo dan — busco la a que obliga a f<sub>x</sub>(2, 2) = 0 <strong>y</strong> f<sub>y</sub>(2, 2) = 0 a la vez. Después, con esa a ya fija, clasifico como siempre: hessiana, D, veredicto.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · parciales con la a adentro</div><p>Derivo dejando la a como un número que aún no conozco:</p><p class="calc"><span class="rw">f<sub>x</sub></span> 3x<sup>2</sup>+ay <span class="sep">•</span> <span class="rw">f<sub>y</sub></span> 3y<sup>2</sup>+ax</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · evaluar en (2, 2) e igualar a cero</div><p>Sustituyo x = 2, y = 2 en cada una:</p><p class="calc"><span class="rw">f<sub>x</sub>(2,2)</span> 3·4+a·2=12+2a=0 → 2a=−12 → <b>a=−6</b></p><p class="calc"><span class="rw">f<sub>y</sub>(2,2)</span> 3·4+a·2=12+2a=0 → <b>a=−6</b> (la misma — consistente)</p><p>Las dos ecuaciones exigen el mismo valor, así que sí existe la a pedida. Si hubieran dado valores distintos, la respuesta sería "no existe tal a".</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · comprobar de vuelta</div><p>Con a = −6, f(x, y) = x<sup>3</sup> + y<sup>3</sup> − 6xy. Verifico que (2, 2) de verdad es crítico:</p><p class="calc"><span class="rw">f<sub>x</sub>(2,2)</span> 12−6·2=12−12=<b>0</b> ✓ <span class="sep">•</span> <span class="rw">f<sub>y</sub>(2,2)</span> 12−6·2=<b>0</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · clasificar con la hessiana</div><p>Segundas derivadas: f<sub>xx</sub> = 6x, f<sub>yy</sub> = 6y, f<sub>xy</sub> = a = −6. Evalúo en (2, 2):</p><p class="calc"><span class="rw">D</span> (12)(12)−(−6)<sup>2</sup>=144−36=<b>108</b> <span class="sep">•</span> 108 &gt; 0 <span class="sep">•</span> f<sub>xx</sub>=12 &gt; 0 <span class="sep">•</span> <b>mínimo</b></p></div>
+          <p class="verdict"><strong>a = −6</strong>, y con ese valor <strong>(2, 2) es un mínimo local</strong> (D = 108 &gt; 0, f<sub>xx</sub> = 12 &gt; 0). El error que cuesta puntos: hallar a con <strong>una sola</strong> parcial — el punto es crítico solo si las <strong>dos</strong> se anulan. Y ojo: con a = −6, el origen (0, 0) también resulta crítico (D = −36 &lt; 0, silla); si el enunciado pidiera "todos los puntos críticos", no lo olvides.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 : máxima razón de crecimiento + direccional → constantes ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="examen_gradiente_constantes" data-level="examen">
+      <div class="phead"><span class="pnum">14</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Razón de crecimiento: halla las constantes</p>
+      <p class="pstatement">Sea f(x, y) = ax<sup>2</sup> + b·xy, con a y b constantes. En el punto P = (1, 1) se sabe que la máxima razón de crecimiento de f vale √18, que la derivada direccional de f en la dirección del vector v = (1, 1) es igual a 0, y que f<sub>x</sub>(1, 1) &gt; 0. Determina a y b.</p>
+      <div class="fx"><div class="sys"><span class="eq">f(x, y) = ax<sup>2</sup> + b·xy</span><span class="eq">máxima razón de crecimiento en P = (1, 1):  √18</span><span class="eq">D<sub>v</sub>f(1, 1) = 0,  con  v = (1, 1)</span><span class="eq">f<sub>x</sub>(1, 1) &gt; 0</span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Máxima razón de crecimiento" se lee: <strong>la norma del gradiente</strong>, ‖∇f(P)‖. "Derivada direccional en la dirección de v" se lee: ∇f(P) · u, donde u es <strong>v normalizado</strong> (unitario). Y "f<sub>x</sub> &gt; 0" es el desempate de signo que va a hacer falta al sacar una raíz. Nunca conozco a y b directamente: primero encuentro el gradiente numérico y al final regreso a las constantes.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · el gradiente en P, con a y b adentro</div><p>Derivo y evalúo en (1, 1). Para no arrastrar letras, bautizo sus componentes p y q:</p><p class="calc"><span class="rw">f<sub>x</sub></span> 2ax+by → en (1,1): <b>2a+b = p</b> <span class="sep">•</span> <span class="rw">f<sub>y</sub></span> bx → en (1,1): <b>b = q</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · usar la direccional nula</div><p>Normalizo v = (1, 1): su norma es √2, así que u = (1⁄√2, 1⁄√2). La direccional vale cero:</p><p class="calc"><span class="rw">D<sub>v</sub>f</span> (p+q)⁄√2=0 → p+q=0 → <b>q=−p</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · usar la máxima razón de crecimiento</div><p>‖∇f(P)‖ = √18 se eleva al cuadrado para quitar la raíz:</p><p class="calc"><span class="rw">norma</span> p<sup>2</sup>+q<sup>2</sup>=18 <span class="sep">•</span> <span class="rw">con q=−p</span> p<sup>2</sup>+p<sup>2</sup>=2p<sup>2</sup>=18 → p<sup>2</sup>=9 → <b>p=±3</b></p><p class="calc"><span class="rw">signo</span> f<sub>x</sub>(1,1)=p &gt; 0 → <b>p=3</b>, <b>q=−3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · regresar a las constantes</div><p>Recupero a y b de p = 2a + b y q = b:</p><p class="calc"><span class="rw">b</span> b=q=<b>−3</b> <span class="sep">•</span> <span class="rw">a</span> 2a+(−3)=3 → 2a=6 → <b>a=3</b></p><p>Compruebo todo de vuelta con f = 3x<sup>2</sup> − 3xy: f<sub>x</sub>(1,1) = 6 − 3 = 3 &gt; 0 ✓; f<sub>y</sub>(1,1) = −3 ✓; ‖(3, −3)‖ = √(9+9) = √18 ✓; direccional: (3 − 3)⁄√2 = 0 ✓.</p></div>
+          <p class="verdict"><strong>a = 3, b = −3</strong> (o sea f(x, y) = 3x<sup>2</sup> − 3xy, con ∇f(1, 1) = (3, −3)). Los dos errores que cuestan puntos aquí: usar v = (1, 1) <strong>sin normalizar</strong>, y olvidar el ± al despejar p<sup>2</sup> = 9 — la condición f<sub>x</sub> &gt; 0 está en el enunciado precisamente para ese desempate.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 : V/F justificado sobre el criterio D ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="examen_vf_criterio" data-level="examen">
+      <div class="phead"><span class="pnum">15</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Sea (a, b) un punto crítico de f, con segundas derivadas parciales continuas, y sea D el discriminante del criterio de la segunda derivada, evaluado en (a, b). Decide si cada afirmación es <strong>verdadera o falsa</strong>. Justifica cada respuesta: un argumento breve si es verdadera, un <strong>contraejemplo</strong> si es falsa.</p>
+      <div class="fx"><div class="sys"><span class="eq">D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup>,  evaluado en (a, b)</span></div></div>
+      <ol class="fases">
+        <li>Si D &lt; 0, entonces f tiene un punto silla en (a, b).</li>
+        <li>Si D &gt; 0, entonces f tiene un mínimo local en (a, b).</li>
+        <li>Si D = 0, entonces f no tiene ni máximo ni mínimo en (a, b).</li>
+        <li>Si f<sub>xx</sub>(a, b) &gt; 0 y f<sub>yy</sub>(a, b) &gt; 0, entonces f tiene un mínimo local en (a, b).</li>
+      </ol>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Este formato exige la memoria <strong>exacta</strong> del criterio: D &lt; 0 → silla; D &gt; 0 → el signo de f<sub>xx</sub> decide entre mínimo y máximo; D = 0 → el criterio <strong>no decide</strong>. "Justifica" significa: lo verdadero se apoya en el criterio tal cual, y lo falso <strong>se mata con un contraejemplo concreto</strong> de una línea.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · afirmación i</div><p><strong>Verdadera.</strong> Es el criterio, literal: D &lt; 0 en un punto crítico siempre significa punto silla, sin mirar nada más.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · afirmación ii</div><p><strong>Falsa.</strong> D &gt; 0 solo dice "cima o hoyo"; falta el signo de f<sub>xx</sub>. Contraejemplo: f = −x<sup>2</sup> − y<sup>2</sup> en (0, 0):</p><p class="calc"><span class="rw">D</span> (−2)(−2)−0<sup>2</sup>=<b>4</b> &gt; 0 <span class="sep">•</span> f<sub>xx</sub>=−2 &lt; 0 <span class="sep">•</span> es un <b>máximo</b>, no un mínimo</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · afirmación iii</div><p><strong>Falsa.</strong> D = 0 significa que el criterio no decide — no que el punto no sea extremo. Contraejemplo: f = x<sup>4</sup> + y<sup>4</sup> en (0, 0):</p><p class="calc"><span class="rw">D</span> (12·0<sup>2</sup>)(12·0<sup>2</sup>)−0<sup>2</sup>=<b>0</b> <span class="sep">•</span> y aun así (0,0) <b>sí es mínimo</b>: f ≥ 0 y f(0,0)=0</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · afirmación iv</div><p><strong>Falsa.</strong> Las dos curvaturas diagonales positivas no bastan: el término cruzado puede ganarles. Contraejemplo: f = x<sup>2</sup> + 3xy + y<sup>2</sup> en (0, 0), que es punto crítico (f<sub>x</sub> = 2x + 3y y f<sub>y</sub> = 3x + 2y se anulan ahí):</p><p class="calc"><span class="rw">D</span> (2)(2)−3<sup>2</sup>=4−9=<b>−5</b> &lt; 0 <span class="sep">•</span> f<sub>xx</sub>=2 &gt; 0, f<sub>yy</sub>=2 &gt; 0 <span class="sep">•</span> y es <b>silla</b></p></div>
+          <p class="verdict"><strong>i) V · ii) F · iii) F · iv) F.</strong> En el examen, un V/F sin justificar vale cero aunque aciertes; y "justificar" lo falso repitiendo el enunciado tampoco da puntos — lo falso se derriba con un contraejemplo concreto, como los tres de arriba.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 : Lagrange directo — puntos de xy=9 más cercanos al origen ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="examen_lagrange" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Lagrange: los puntos más cercanos al origen</p>
+      <p class="pstatement">Determina, usando multiplicadores de Lagrange, los puntos de la curva xy = 9 que están más cerca del origen, y calcula la distancia mínima correspondiente.</p>
+      <div class="fx"><div class="sys"><span class="eq">curva:  xy = 9</span><span class="eq">minimizar la distancia al origen</span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Más cerca del origen" se lee: <strong>minimizar la distancia</strong>. En la práctica se minimiza su <strong>cuadrado</strong>, f = x<sup>2</sup> + y<sup>2</sup> — gana en el mismo punto y evita raíces. La restricción es g: xy = 9. Nota que el enunciado dice "los puntos", en plural: hay que encontrarlos todos.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · gradientes y sistema</div><p>∇f = (2x, 2y) y ∇g = (y, x). El sistema de Lagrange:</p><p class="calc"><span class="rw">x</span> 2x=λy <span class="sep">•</span> <span class="rw">y</span> 2y=λx <span class="sep">•</span> <span class="rw">g</span> xy=9</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · eliminar λ</div><p>Como xy = 9, ni x ni y pueden ser cero. De la primera, λ = 2x⁄y; lo meto en la segunda:</p><p class="calc"><span class="rw">sust.</span> 2y=(2x⁄y)·x → 2y<sup>2</sup>=2x<sup>2</sup> → y<sup>2</sup>=x<sup>2</sup> → <b>y=x</b> <span class="sep">o</span> <b>y=−x</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · filtrar con la restricción</div><p>Pruebo cada rama contra xy = 9:</p><p class="calc"><span class="rw">y=−x</span> xy=−x<sup>2</sup>=9 → imposible (un cuadrado no es negativo) <span class="sep">•</span> se descarta</p><p class="calc"><span class="rw">y=x</span> x·x=x<sup>2</sup>=9 → <b>x=3</b> <span class="sep">o</span> <b>x=−3</b> → puntos <b>(3, 3)</b> y <b>(−3, −3)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · la distancia</div><p>En ambos puntos el cuadrado de la distancia vale lo mismo, y al final sí saco la raíz:</p><p class="calc"><span class="rw">f</span> 3<sup>2</sup>+3<sup>2</sup>=9+9=<b>18</b> <span class="sep">•</span> <span class="rw">dist.</span> √18=√(9·2)=<b>3√2</b></p><p>Verifico en la curva: 3·3 = 9 ✓ y (−3)·(−3) = 9 ✓.</p></div>
+          <p class="verdict">Dos puntos: <strong>(3, 3) y (−3, −3)</strong>, ambos a distancia mínima <strong>3√2</strong>. Los dos errores que cuestan puntos: quedarse solo con (3, 3) — la hipérbola tiene <strong>dos ramas</strong> y el examen espera ambos — y reportar 18, que es la distancia <strong>al cuadrado</strong>, en vez de √18 = 3√2.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 : encadenado — todos los puntos críticos + tabla de casos ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="examen_clasificacion_completa" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Clasificación completa, con todos los casos</p>
+      <p class="pstatement">Determina <strong>todos</strong> los puntos críticos de la función y clasifica cada uno mediante el criterio de la segunda derivada. Presenta la clasificación en una tabla: punto, D, f<sub>xx</sub>, conclusión.</p>
+      <div class="fx"><div class="sys"><span class="eq">f(x, y) = x<sup>3</sup> − 3x + x·y<sup>2</sup></span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Todos" avisa que el sistema f<sub>x</sub> = 0, f<sub>y</sub> = 0 tiene <strong>varias</strong> soluciones. La clave está en que una ecuación va a ser un <strong>producto igualado a cero</strong>: eso abre casos (un factor u otro) y hay que seguir <strong>todas</strong> las ramas, no solo la primera.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · parciales = 0</div><p>El término x·y<sup>2</sup> aporta y<sup>2</sup> a f<sub>x</sub> y 2xy a f<sub>y</sub>:</p><p class="calc"><span class="rw">f<sub>x</sub></span> 3x<sup>2</sup>−3+y<sup>2</sup>=0 <span class="sep">•</span> <span class="rw">f<sub>y</sub></span> 2xy=0 → <b>x=0</b> <span class="sep">o</span> <b>y=0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · caso y = 0</div><p>Meto y = 0 en la primera ecuación:</p><p class="calc"><span class="rw">f<sub>x</sub></span> 3x<sup>2</sup>−3=0 → x<sup>2</sup>=1 → <b>x=1</b> <span class="sep">o</span> <b>x=−1</b> → puntos <b>(1, 0)</b> y <b>(−1, 0)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · caso x = 0</div><p>Meto x = 0 en la primera ecuación:</p><p class="calc"><span class="rw">f<sub>x</sub></span> 0−3+y<sup>2</sup>=0 → y<sup>2</sup>=3 → <b>y=√3</b> <span class="sep">o</span> <b>y=−√3</b> → puntos <b>(0, √3)</b> y <b>(0, −√3)</b></p><p>Cuatro puntos críticos en total. Verifico uno de cada rama: en (1, 0), f<sub>y</sub> = 2·1·0 = 0 ✓; en (0, √3), f<sub>x</sub> = −3 + 3 = 0 ✓.</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · hessiana genérica</div><p>Segundas derivadas: f<sub>xx</sub> = 6x, f<sub>yy</sub> = 2x, f<sub>xy</sub> = 2y. Todo depende del punto:</p><p class="calc"><span class="rw">D</span> (6x)(2x)−(2y)<sup>2</sup>=<b>12x<sup>2</sup>−4y<sup>2</sup></b></p></div>
+          <div class="estep"><div class="oprow">Paso 5 · evaluar punto por punto — la tabla</div><p>Sustituyo cada punto en D = 12x<sup>2</sup> − 4y<sup>2</sup> y, cuando D &gt; 0, miro f<sub>xx</sub> = 6x:</p>
+            <div class="fx"><div class="sys" style="font-size:16px">
+              <span class="eq">(1, 0) → D = 12 &gt; 0, f<sub>xx</sub> = 6 &gt; 0 → mínimo</span>
+              <span class="eq">(−1, 0) → D = 12 &gt; 0, f<sub>xx</sub> = −6 &lt; 0 → máximo</span>
+              <span class="eq">(0, √3) → D = −12 &lt; 0 → punto silla</span>
+              <span class="eq">(0, −√3) → D = −12 &lt; 0 → punto silla</span>
+            </div></div>
+            <p class="calc"><span class="rw">(±1,0)</span> 12·1−4·0=<b>12</b> <span class="sep">•</span> <span class="rw">(0,±√3)</span> 12·0−4·3=<b>−12</b></p>
+          </div>
+          <p class="verdict">Cuatro puntos, tres veredictos: <strong>(1, 0) mínimo</strong>, <strong>(−1, 0) máximo</strong>, <strong>(0, √3) y (0, −√3) puntos silla</strong>. Los errores que cuestan puntos: en 2xy = 0 quedarse solo con y = 0 (se pierden las dos sillas), y con D = 12 &gt; 0 declarar "mínimo" en automático — en (−1, 0) el signo de f<sub>xx</sub> lo convierte en máximo.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

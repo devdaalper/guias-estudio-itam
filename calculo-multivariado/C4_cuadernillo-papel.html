@@ -82,6 +82,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -498,6 +499,132 @@
           <div class="estep"><div class="oprow">Paso 2 · dirección unitaria</div><p>La dirección (1, 1) mide √(1<sup>2</sup> + 1<sup>2</sup>) = √2, así que divido entre √2:</p><p class="calc"><span class="rw">|(1,1)|</span> √(1+1)=<b>√2</b> <span class="sep">•</span> <span class="rw">u</span>=(1/√2, 1/√2)</p></div>
           <div class="estep"><div class="oprow">Paso 3 · producto punto</div><p>D<sub>u</sub>T = ∇T · u:</p><p class="calc"><span class="rw">D<sub>u</sub>T</span> 6·(1/√2)=6/√2 <span class="sep">•</span> −2·(1/√2)=−2/√2 <span class="sep">•</span> (6−2)/√2=4/√2=<b>2√2</b></p></div>
           <p class="verdict"><strong>La temperatura sube</strong>, porque D<sub>u</sub>T = 2√2 &gt; 0, a un ritmo de <strong>2√2 ≈ 2.83</strong> por unidad de distancia. El signo del producto punto decide si sube o baja: positivo sube, negativo baja.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan datos sueltos y te piden constantes, te escriben límites en vez de parciales, y toca <strong>justificar</strong>. Estos cinco problemas vienen en ese formato, clonado del parcial real. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 NIVEL EXAMEN : constantes via limite-definicion + plano tangente ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="plano_tangente" data-level="examen">
+      <div class="phead"><span class="pnum">15</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Constantes a y b, y el plano tangente</p>
+      <p class="pstatement">Sea f : ℝ<sup>2</sup> → ℝ dada por f(x, y) = ax<sup>2</sup>y + by<sup>3</sup> − x<sup>2</sup>, donde a y b son constantes. Se sabe que lim<sub>h→0</sub> [f(1 + h, 2) − f(1, 2)] ⁄ h = 6 y que f(1, 2) = 11. Determina el valor de las constantes a y b, y escribe la ecuación del plano tangente a la gráfica de f en el punto (1, 2, 11).</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = ax<sup>2</sup>y + by<sup>3</sup> − x<sup>2</sup></span>
+        <span class="eq">lim<sub>h→0</sub> [f(1 + h, 2) − f(1, 2)] ⁄ h = 6</span>
+        <span class="eq">f(1, 2) = 11</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Ese límite es una parcial disfrazada. La h está sumada en el <strong>primer</strong> lugar, f(1 + h, 2): se mueve la x desde 1 con la y fija en 2. Por definición, el límite ES <strong>∂f/∂x(1, 2) = 6</strong>. Con f(1, 2) = 11 tengo dos condiciones para dos constantes.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · primera condición: ∂f/∂x(1, 2) = 6</div><p>Derivo con las letras a bordo, congelando la y (by<sup>3</sup> es constante):</p><p class="calc"><span class="rw">∂f/∂x</span> deriva ax<sup>2</sup>y=<b>2axy</b> <span class="sep">•</span> deriva by<sup>3</sup>=<b>0</b> <span class="sep">•</span> deriva −x<sup>2</sup>=<b>−2x</b></p><p class="calc"><span class="rw">en (1,2)</span> 2a·1·2=<b>4a</b> <span class="sep">•</span> −2·1=<b>−2</b> <span class="sep">•</span> 4a − 2 = 6 → 4a=<b>8</b> → a=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · segunda condición: f(1, 2) = 11</div><p>Evalúo f en (1, 2) con a = 2 ya puesto:</p><p class="calc"><span class="rw">f(1,2)</span> 2·1<sup>2</sup>·2=<b>4</b> <span class="sep">•</span> b·2<sup>3</sup>=<b>8b</b> <span class="sep">•</span> −1<sup>2</sup>=<b>−1</b> <span class="sep">•</span> 4 + 8b − 1 = 11 → 8b=<b>8</b> → b=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · comprobar sustituyendo de vuelta</div><p>Con a = 2, b = 1 queda f = 2x<sup>2</sup>y + y<sup>3</sup> − x<sup>2</sup>. Reviso que las DOS condiciones se cumplan:</p><p class="calc"><span class="rw">f(1,2)</span> 4 + 8 − 1=<b>11</b> ✓ <span class="sep">•</span> <span class="rw">∂f/∂x</span>=4xy − 2x <span class="sep">•</span> en (1,2): 8 − 2=<b>6</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · plano tangente en (1, 2, 11)</div><p>Falta la otra pendiente. ∂f/∂y = 2x<sup>2</sup> + 3y<sup>2</sup> (con a = 2, b = 1):</p><p class="calc"><span class="rw">∂f/∂y(1,2)</span> 2·1=<b>2</b> <span class="sep">•</span> 3·2<sup>2</sup>=<b>12</b> <span class="sep">•</span> 2 + 12=<b>14</b></p>
+            <div class="fx"><div class="sys"><span class="eq">z = 11 + 6(x − 1) + 14(y − 2)</span></div></div>
+          </div>
+          <p class="verdict"><strong>a = 2, b = 1</strong> y el plano es <strong>z = 11 + 6(x − 1) + 14(y − 2)</strong>. El error que cuesta puntos: leer el límite como ∂f/∂y. Mira DÓNDE está la h: primer lugar → se mueve la x → es ∂f/∂x.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 NIVEL EXAMEN : f abstracta + regla de la cadena ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="regla_cadena" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">f abstracta: cadena con parciales dadas</p>
+      <p class="pstatement">Sea z = f(x, y), donde f : ℝ<sup>2</sup> → ℝ es diferenciable y tal que ∂f/∂x(4, 6) = 3 y ∂f/∂y(4, 6) = 2. Si x = u<sup>2</sup> + av, y = 3u − v<sup>2</sup>, y la diferencia ∂z/∂u − ∂z/∂v vale 6 cuando u = 2 y v = 0, encuentra el valor de la constante a.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">∂f/∂x(4, 6) = 3,   ∂f/∂y(4, 6) = 2</span>
+        <span class="eq">x = u<sup>2</sup> + av,   y = 3u − v<sup>2</sup></span>
+        <span class="eq">∂z/∂u − ∂z/∂v = 6   en u = 2, v = 0</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Nunca vas a conocer f: solo te dan sus dos parciales en UN punto. La cadena dice ∂z/∂u = (∂f/∂x)(∂x/∂u) + (∂f/∂y)(∂y/∂u), e igual con v. Primero reviso en qué punto (x, y) caigo cuando u = 2, v = 0:</p><p class="calc"><span class="rw">x</span> 2<sup>2</sup> + a·0=<b>4</b> <span class="sep">•</span> <span class="rw">y</span> 3·2 − 0<sup>2</sup>=<b>6</b> <span class="sep">•</span> caigo en <b>(4, 6)</b>: justo donde me dieron las parciales</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · derivadas de las intermedias</div><p>Derivo x e y respecto a u y v, y evalúo en u = 2, v = 0:</p><p class="calc"><span class="rw">∂x/∂u</span>=2u=<b>4</b> <span class="sep">•</span> <span class="rw">∂x/∂v</span>=<b>a</b> <span class="sep">•</span> <span class="rw">∂y/∂u</span>=<b>3</b> <span class="sep">•</span> <span class="rw">∂y/∂v</span>=−2v=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · armar las dos cadenas</div><p>Uso ∂f/∂x = 3 y ∂f/∂y = 2 (los datos en (4, 6)):</p><p class="calc"><span class="rw">∂z/∂u</span> 3·4=<b>12</b> <span class="sep">•</span> 2·3=<b>6</b> <span class="sep">•</span> 12 + 6=<b>18</b></p><p class="calc"><span class="rw">∂z/∂v</span> 3·a=<b>3a</b> <span class="sep">•</span> 2·0=<b>0</b> <span class="sep">•</span> total=<b>3a</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · imponer la condición y despejar</div><p>La diferencia vale 6:</p><p class="calc"><span class="rw">∂z/∂u − ∂z/∂v</span> 18 − 3a = 6 <span class="sep">•</span> 3a=<b>12</b> <span class="sep">•</span> a=<b>4</b></p><p>Compruebo de vuelta: con a = 4, ∂z/∂v = 12 y 18 − 12 = 6 ✓.</p></div>
+          <p class="verdict"><strong>a = 4.</strong> El error que cuesta puntos: evaluar las parciales de f en (u, v) = (2, 0) en vez de en (x, y) = (4, 6). Las parciales de f viven en el mundo (x, y); por eso el primer movimiento es SIEMPRE ubicar a qué (x, y) llegas.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 NIVEL EXAMEN : plano tangente paralelo a un plano dado ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="plano_tangente" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Plano tangente paralelo a un plano dado</p>
+      <p class="pstatement">Sea f(x, y) = x<sup>2</sup> + xy + y<sup>2</sup>. Encuentra el punto de la gráfica de z = f(x, y) en el cual el plano tangente a dicha gráfica es paralelo al plano z = 4x + 5y, y escribe la ecuación de dicho plano tangente.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x<sup>2</sup> + xy + y<sup>2</sup></span>
+        <span class="eq">plano dado:  z = 4x + 5y</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Aquí NO te dan el punto: te lo piden. "Paralelo a z = 4x + 5y" significa mismas pendientes: necesito el punto donde <strong>∂f/∂x = 4</strong> y <strong>∂f/∂y = 5</strong> a la vez. Eso arma un sistema de dos ecuaciones; el problema de plano tangente corre al revés.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · parciales generales</div><p>Congelando la otra variable en cada caso:</p><p class="calc"><span class="rw">∂f/∂x</span>=<b>2x + y</b> <span class="sep">•</span> <span class="rw">∂f/∂y</span>=<b>x + 2y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · igualar a las pendientes dadas y resolver</div><p>2x + y = 4 y x + 2y = 5. Doblo la primera y le resto la segunda:</p><p class="calc"><span class="rw">doble</span> 4x + 2y = 8 <span class="sep">•</span> <span class="rw">resta</span> (4x + 2y) − (x + 2y) = 8 − 5 <span class="sep">•</span> 3x=<b>3</b> → x=<b>1</b></p><p class="calc"><span class="rw">y</span> de 2x + y = 4: y = 4 − 2·1=<b>2</b> <span class="sep">•</span> <span class="rw">checo</span> x + 2y = 1 + 4=<b>5</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · altura del punto de tangencia</div><p>Meto (1, 2) en f:</p><p class="calc"><span class="rw">f(1,2)</span> 1<sup>2</sup>=<b>1</b> <span class="sep">•</span> 1·2=<b>2</b> <span class="sep">•</span> 2<sup>2</sup>=<b>4</b> <span class="sep">•</span> 1 + 2 + 4=<b>7</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · escribir el plano y verificar el paralelismo</div><p>Altura 7, pendientes 4 y 5:</p>
+            <div class="fx"><div class="sys"><span class="eq">z = 7 + 4(x − 1) + 5(y − 2) = 4x + 5y − 7</span></div></div>
+            <p>Mismos coeficientes 4 y 5 que el plano dado, distinta constante (−7 contra 0): paralelo y no igual ✓.</p>
+          </div>
+          <p class="verdict">Punto de tangencia <strong>(1, 2, 7)</strong>, plano <strong>z = 4x + 5y − 7</strong>. El error que cuesta puntos: dar solo (1, 2) sin la altura, o igualar el plano tangente al plano dado — paralelo pide mismas pendientes, no el mismo plano.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 NIVEL EXAMEN : demuestra que no existe f (Clairaut) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="orden_superior" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Demuestra que no existe tal f</p>
+      <p class="pstatement">Demuestra que no existe una función f : ℝ<sup>2</sup> → ℝ tal que ∇f(x, y) = (2xy + y<sup>2</sup>, x<sup>2</sup> − 3xy) para todo (x, y) ∈ ℝ<sup>2</sup>.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">∇f(x, y) = ( 2xy + y<sup>2</sup> ,  x<sup>2</sup> − 3xy )</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Te afirman que alguna f tiene ∂f/∂x = 2xy + y<sup>2</sup> y ∂f/∂y = x<sup>2</sup> − 3xy en todo el plano. Estrategia del "demuestra que no existe": <strong>supón que sí existe y llega a una contradicción</strong>. El arma es Clairaut: como esas expresiones son polinomios, f tendría segundas parciales continuas y las cruzadas f<sub>xy</sub> y f<sub>yx</sub> estarían obligadas a coincidir.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · cruzada desde la primera componente</div><p>Derivo ∂f/∂x = 2xy + y<sup>2</sup> respecto a <strong>y</strong> (la x congelada):</p><p class="calc"><span class="rw">f<sub>xy</sub></span> deriva 2xy=<b>2x</b> <span class="sep">•</span> deriva y<sup>2</sup>=<b>2y</b> <span class="sep">•</span> total=<b>2x + 2y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · cruzada desde la segunda componente</div><p>Derivo ∂f/∂y = x<sup>2</sup> − 3xy respecto a <strong>x</strong> (la y congelada):</p><p class="calc"><span class="rw">f<sub>yx</sub></span> deriva x<sup>2</sup>=<b>2x</b> <span class="sep">•</span> deriva −3xy=<b>−3y</b> <span class="sep">•</span> total=<b>2x − 3y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · chocar las dos</div><p>Clairaut exige 2x + 2y = 2x − 3y para TODO (x, y), o sea 5y = 0 siempre — falso. Lo remato con un punto concreto:</p><p class="calc"><span class="rw">en (0,1)</span> f<sub>xy</sub> = 2·0 + 2·1=<b>2</b> <span class="sep">•</span> f<sub>yx</sub> = 2·0 − 3·1=<b>−3</b> <span class="sep">•</span> 2 ≠ −3 → contradicción</p></div>
+          <p class="verdict warn"><strong>No existe tal f.</strong> En el examen basta escribir: "Si existiera, por Clairaut f<sub>xy</sub> = f<sub>yx</sub>; pero salen 2x + 2y y 2x − 3y, que en (0, 1) valen 2 y −3. Contradicción." El error que cuesta puntos: derivar cada componente respecto a su PROPIA variable — eso da f<sub>xx</sub> y f<sub>yy</sub>, que no tienen por qué coincidir y no prueban nada.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 NIVEL EXAMEN : direccional con datos → constantes + maximo crecimiento ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="derivada_direccional" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Direccional con datos: halla a, b y el máximo crecimiento</p>
+      <p class="pstatement">Sea f(x, y) = ax<sup>2</sup> + by<sup>2</sup>, con a y b constantes. La derivada direccional de f en el punto (1, 1) en la dirección del vector (3, 4) vale 2, y en la dirección del vector (4, −3) vale 6. Determina los valores de a y b, y encuentra la dirección de máximo crecimiento de f en (1, 1) y su valor.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = ax<sup>2</sup> + by<sup>2</sup></span>
+        <span class="eq">direccional en (1, 1) hacia (3, 4): vale 2</span>
+        <span class="eq">direccional en (1, 1) hacia (4, −3): vale 6</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Derivada direccional en la dirección del vector v" = ∇f · u con u = v dividido entre su longitud: <strong>normalizar primero</strong>. Ambos vectores miden 5 (triángulo 3-4-5). Cada dato es una ecuación; las incógnitas a y b viven dentro del gradiente.</p><p class="calc"><span class="rw">|(3,4)|</span> √(9+16)=√25=<b>5</b> <span class="sep">•</span> <span class="rw">|(4,−3)|</span> √(16+9)=√25=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 1 · gradiente con letras</div><p>∇f = (2ax, 2by), y en (1, 1):</p><p class="calc"><span class="rw">∇f(1,1)</span> (2a·1, 2b·1)=<b>(2a, 2b)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · las dos ecuaciones</div><p>Producto punto con cada dirección unitaria, igualado a su dato:</p><p class="calc"><span class="rw">hacia (3,4)</span> (2a·3 + 2b·4) ⁄ 5 = 2 <span class="sep">•</span> 6a + 8b = 10 <span class="sep">•</span> <b>3a + 4b = 5</b></p><p class="calc"><span class="rw">hacia (4,−3)</span> (2a·4 − 2b·3) ⁄ 5 = 6 <span class="sep">•</span> 8a − 6b = 30 <span class="sep">•</span> <b>4a − 3b = 15</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · resolver el sistema</div><p>Multiplico la primera por 3 y la segunda por 4 para eliminar b:</p><p class="calc"><span class="rw">por 3</span> 9a + 12b = 15 <span class="sep">•</span> <span class="rw">por 4</span> 16a − 12b = 60 <span class="sep">•</span> <span class="rw">suma</span> 25a = 75 → a=<b>3</b></p><p class="calc"><span class="rw">b</span> de 3a + 4b = 5: 9 + 4b = 5 → 4b=<b>−4</b> → b=<b>−1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · máximo crecimiento y comprobación</div><p>∇f(1, 1) = (2·3, 2·(−1)) = (6, −2). La dirección de máximo crecimiento es la del gradiente y su valor es su longitud:</p><p class="calc"><span class="rw">|∇f|</span> 6<sup>2</sup>=36 <span class="sep">•</span> (−2)<sup>2</sup>=4 <span class="sep">•</span> √40=<b>2√10</b></p><p>Compruebo los datos de vuelta: (6·3 − 2·4) ⁄ 5 = 10 ⁄ 5 = 2 ✓ y (6·4 + 2·3) ⁄ 5 = 30 ⁄ 5 = 6 ✓.</p></div>
+          <p class="verdict"><strong>a = 3, b = −1</strong>; máximo crecimiento en la dirección de <strong>(6, −2)</strong> con valor <strong>√40 = 2√10</strong>. El error que cuesta puntos: usar (3, 4) y (4, −3) sin dividir entre 5 — las ecuaciones salen infladas por 5 y las constantes, mal.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

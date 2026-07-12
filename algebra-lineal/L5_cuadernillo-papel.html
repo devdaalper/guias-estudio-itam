@@ -81,6 +81,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -488,6 +489,139 @@
           <div class="estep"><div class="oprow">Adjunta</div><p>Intercambio la diagonal principal (el 4 y el 2 se cambian a 2 y 4) y cambio el signo de la otra (el 1 y el 3 se vuelven −1 y −3):</p><div class="fx" id="p15a"></div></div>
           <div class="estep"><div class="oprow">Divido la adjunta entre el determinante</div><p>Cada entrada entre 5:</p><p class="calc"><span class="rw">1/det</span> 2÷5=<b>2/5</b> <span class="sep">•</span> −1÷5=<b>−1/5</b> <span class="sep">•</span> −3÷5=<b>−3/5</b> <span class="sep">•</span> 4÷5=<b>4/5</b></p><div class="fx" id="p15i"></div></div>
           <p class="verdict"><strong>Esa es la inversa.</strong> Con determinante 5, cada entrada de la adjunta se divide entre 5; por eso salen fracciones. Compruebo una entrada de A·A⁻¹: primer renglón de A (4, 1) por la primera columna de A⁻¹ (2/5, −3/5) = 4·(2/5) + 1·(−3/5) = 8/5 − 3/5 = 5/5 = 1 ✓.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan la matriz con una letra dentro y piden la constante, te escriben afirmaciones para decidir y toca <strong>justificar</strong>. Estos problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 EXAMEN : inverso (A6), a tal que det(A)=0 ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="examen_det_parametro" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla a para que la matriz sea singular</p>
+      <p class="pstatement">Sea a ∈ R y sea A la matriz que aparece abajo. Determina <strong>todos los valores de a</strong> para los cuales A <strong>no es invertible</strong>. Justifica el criterio que uses.</p>
+      <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>1</span></div>
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>a</span><span>0</span></div>
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>4</span><span>1</span></div>
+      </div><span class="brk brk-r"></span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"No es invertible" es código de examen para <strong>det(A) = 0</strong>. Y "sea a ∈ R" solo dice que a es un número desconocido: calculo el determinante <strong>arrastrando la a como si fuera un número</strong>, me queda una ecuación en a, y la resuelvo. "Todos los valores" avisa que la respuesta puede ser uno o varios.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · elegir por dónde desarrollar</div><p>La columna 3 es (1, 0, 1): trae un cero y ninguna a. Desarrollo por ahí; sus signos del tablero son <strong>+ − +</strong>.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · los dos menores vivos</div><p>El 0 de (2,3) anula su término sin calcular nada. Quedan el 1 de (1,3), signo +, y el 1 de (3,3), signo +:</p><p class="calc"><span class="rw">(1,3)</span> menor 2·4−a·3=<b>8−3a</b> <span class="sep">•</span> <span class="rw">(3,3)</span> menor 1·a−2·2=<b>a−4</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · armar det(A) y resolver la ecuación</div><p>Sumo los términos vivos con todo y signo:</p><p class="calc"><span class="rw">det(A)</span> 1·(8−3a) + 0 + 1·(a−4) = 8−3a+a−4 = <b>4−2a</b></p><p class="calc"><span class="rw">det=0</span> 4−2a=0 → 2a=4 → <b>a=2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · comprobar sustituyendo a = 2</div><p>Con a = 2 los renglones quedan (1, 2, 1), (2, 2, 0), (3, 4, 1). Verifico por Sarrus (diagonales que bajan menos diagonales que suben):</p><p class="calc"><span class="rw">↘</span> 1·2·1 + 2·0·3 + 1·2·4 = 2+0+8 = <b>10</b> <span class="sep">•</span> <span class="rw">↗</span> 1·2·3 + 1·0·4 + 2·2·1 = 6+0+4 = <b>10</b> <span class="sep">•</span> <span class="rw">det</span> 10−10=<b>0</b> ✓</p><p>Y se ve a ojo: renglón 3 = renglón 1 + renglón 2 (1+2=3, 2+2=4, 1+0=1). Renglones dependientes → determinante 0, como debía.</p></div>
+          <p class="verdict"><strong>A no es invertible únicamente cuando a = 2.</strong> Para cualquier otro valor, det(A) = 4 − 2a ≠ 0 y A sí se invierte. El error que cuesta puntos: dejar el determinante 4 − 2a sin cerrar la ecuación, o dar "a = 2" sin aclarar que para los demás valores <em>sí</em> es invertible — el enunciado pidió <em>todos</em> los casos.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 EXAMEN : V/F con justificacion (A1+A5), propiedades del det ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="examen_vf_propiedades" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Sean A y B matrices de 3×3. Decide si cada afirmación es <strong>verdadera (V) o falsa (F)</strong>. Justifica cada respuesta: la propiedad exacta, un argumento de una línea o un contraejemplo explícito. Respuesta sin justificación no recibe puntos.<br><strong>(i)</strong> Si dos renglones de A son proporcionales, entonces det(A) = 0.<br><strong>(ii)</strong> Si A es triangular, entonces det(A) es el producto de las entradas de su diagonal.<br><strong>(iii)</strong> det(A·B) = det(A)·det(B).<br><strong>(iv)</strong> det(2A) = 2·det(A).</p>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>En un V/F de este profesor cada inciso vale por su <strong>justificación</strong>: para una falsa basta <strong>un contraejemplo concreto</strong> (una matriz con números); para una verdadera, citar la propiedad o dar el argumento de una línea. Sospecha siempre de la que "suena obvia": ahí vive la trampa.</p></div>
+          <div class="estep"><div class="oprow">(i) Renglones proporcionales → det = 0 · VERDADERA</div><p>Si un renglón es c veces otro, saco el factor c del renglón: quedan <strong>dos renglones iguales</strong>, y con dos renglones iguales el determinante es 0. Mini-comprobación numérica:</p><p class="calc"><span class="rw">ej.</span> renglones (2, 5) y (6, 15): 2·15−5·6=30−30=<b>0</b> ✓</p></div>
+          <div class="estep"><div class="oprow">(ii) Triangular → producto de la diagonal · VERDADERA</div><p>Al desarrollar por la primera columna solo sobrevive la entrada de la diagonal, y eso se repite en cada menor: queda el producto de la diagonal. Comprobación:</p><p class="calc"><span class="rw">ej.</span> diagonal 2, 3, 5 con ceros abajo: 2·3·5=<b>30</b> ✓</p></div>
+          <div class="estep"><div class="oprow">(iii) det(A·B) = det(A)·det(B) · VERDADERA</div><p>Es la propiedad del producto (el determinante es multiplicativo). La compruebo con dos triangulares fáciles:</p><p class="calc"><span class="rw">A</span> [[2, 1],[0, 3]] det=<b>6</b> <span class="sep">•</span> <span class="rw">B</span> [[1, 4],[0, 5]] det=<b>5</b> <span class="sep">•</span> <span class="rw">A·B</span> [[2, 13],[0, 15]] det=2·15−13·0=<b>30</b>=6·5 ✓</p></div>
+          <div class="estep"><div class="oprow">(iv) det(2A) = 2·det(A) · FALSA</div><p>2A multiplica por 2 los <strong>tres</strong> renglones, y cada renglón aporta su factor: det(2A) = 2·2·2·det(A) = <strong>8·det(A)</strong>. Contraejemplo con la identidad:</p><p class="calc"><span class="rw">A=I₃</span> det(I₃)=<b>1</b> <span class="sep">•</span> <span class="rw">2I₃</span> diagonal (2, 2, 2) → det=2·2·2=<b>8</b> <span class="sep">•</span> <span class="rw">pero</span> 2·det(I₃)=<b>2</b> ≠ 8</p></div>
+          <p class="verdict"><strong>(i) V · (ii) V · (iii) V · (iv) F — en 3×3, det(2A) = 2³·det(A) = 8·det(A).</strong> Como se escribe en el examen: "Falsa: con A = I₃, det(2I₃) = 8 ≠ 2 = 2·det(I₃)". El punto que más se pierde aquí: contestar V o F sin justificar — vale cero aunque le atines.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 EXAMEN : encadenado (M5) det <-> independencia lineal <-> base ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="examen_det_independencia" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Un determinante decide la independencia</p>
+      <p class="pstatement">Sean v₁, v₂, v₃ ∈ R³ los vectores de abajo. Determina, mediante el cálculo de <strong>un solo determinante</strong>, si el conjunto {v₁, v₂, v₃} es <strong>linealmente independiente</strong>. Justifica por qué ese determinante responde la pregunta y concluye si {v₁, v₂, v₃} es una base de R³.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">v₁ = (1, 0, 2)</span>
+        <span class="eq">v₂ = (2, 1, 3)</span>
+        <span class="eq">v₃ = (1, 1, 4)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Acomodo los tres vectores como <strong>renglones de una 3×3</strong>. La conexión que hay que escribir: pedir c₁v₁ + c₂v₂ + c₃v₃ = 0 es un sistema homogéneo cuya matriz de coeficientes es esa 3×3. Si su determinante es <strong>distinto de 0</strong>, la única solución es c₁ = c₂ = c₃ = 0 → el conjunto es LI. Si da 0, hay combinaciones no triviales → LD. Un solo número decide.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · armar la matriz y desarrollar</div><p>El primer renglón (1, 0, 2) trae un cero: desarrollo por ahí con signos + − +.</p><div class="fx"><div class="dtx"><span class="dbar"></span><div class="cols">
+            <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>2</span></div>
+            <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>3</span></div>
+            <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>4</span></div>
+          </div><span class="dbar"></span></div></div><p class="calc"><span class="rw">(1,1)</span> menor 1·4−3·1=<b>1</b> → +1·1=<b>1</b> <span class="sep">•</span> <span class="rw">(1,2)</span> 0·(menor)=<b>0</b> <span class="sep">•</span> <span class="rw">(1,3)</span> menor 2·1−1·1=<b>1</b> → +2·1=<b>2</b></p><p class="calc"><span class="rw">det</span> 1 + 0 + 2 = <b>3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · verificar por Sarrus</div><p>Segunda vía para blindar el número:</p><p class="calc"><span class="rw">↘</span> 1·1·4 + 0·3·1 + 2·2·1 = 4+0+4 = <b>8</b> <span class="sep">•</span> <span class="rw">↗</span> 2·1·1 + 1·3·1 + 0·2·4 = 2+3+0 = <b>5</b> <span class="sep">•</span> <span class="rw">det</span> 8−5=<b>3</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · cerrar la conexión</div><p>det = 3 ≠ 0 → el sistema homogéneo solo tiene la solución trivial → <strong>{v₁, v₂, v₃} es LI</strong>. Y tres vectores LI en R³ (que tiene dimensión 3) son automáticamente una <strong>base</strong> de R³.</p></div>
+          <p class="verdict"><strong>El conjunto es linealmente independiente y sí es base de R³ (det = 3 ≠ 0).</strong> Errores que cuestan puntos: creer que se necesita det positivo o det = 1 (basta ≠ 0), y entregar solo el número sin escribir la conexión det ↔ LI ↔ base — el enunciado pidió la justificación, no solo la cuenta.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 EXAMEN : Cramer con parametro en el lado derecho ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="examen_cramer_parametro" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Cramer con parámetro en el lado derecho</p>
+      <p class="pstatement">Sea a ∈ R. Considera el sistema de abajo. Demuestra que el sistema tiene <strong>solución única para todo valor de a</strong> y encuentra x e y <strong>en términos de a</strong> mediante la regla de Cramer. Comprueba tu solución.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">2x + y = a</span>
+        <span class="eq">3x + 2y = a + 1</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La a vive en el <strong>lado derecho</strong>, no entre los coeficientes. Eso significa que el determinante del sistema es un número fijo (sin a): si sale distinto de 0, hay solución única <strong>sin importar cuánto valga a</strong> — eso es lo que piden "demostrar". Y la respuesta no será un número: será una <strong>expresión en a</strong>. Eso es normal en este formato.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · determinante del sistema (la demostración)</div><p>Solo coeficientes, sin a:</p><div class="fx"><div class="dtx"><span class="dbar"></span><div class="cols">
+            <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span></div>
+            <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>2</span></div>
+          </div><span class="dbar"></span></div></div><p class="calc"><span class="rw">det</span> 2·2−1·3=4−3=<b>1</b></p><p>Como det = 1 ≠ 0 y no depende de a, el sistema tiene solución única para <strong>todo</strong> a ∈ R. Queda demostrado, y además dividir entre 1 saldrá gratis.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · determinante para x</div><p>Reemplazo la columna de x por el lado derecho (a, a+1), arrastrando la a:</p><div class="fx"><div class="dtx"><span class="dbar"></span><div class="cols">
+            <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>1</span></div>
+            <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>a+1</span><span>2</span></div>
+          </div><span class="dbar"></span></div></div><p class="calc"><span class="rw">det<sub>x</sub></span> a·2−1·(a+1)=2a−a−1=<b>a−1</b> <span class="sep">•</span> <span class="rw">x</span> (a−1)÷1=<b>a−1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · determinante para y</div><p>Ahora la columna de y se cambia por (a, a+1):</p><div class="fx"><div class="dtx"><span class="dbar"></span><div class="cols">
+            <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>a</span></div>
+            <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>a+1</span></div>
+          </div><span class="dbar"></span></div></div><p class="calc"><span class="rw">det<sub>y</sub></span> 2·(a+1)−a·3=2a+2−3a=<b>2−a</b> <span class="sep">•</span> <span class="rw">y</span> (2−a)÷1=<b>2−a</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · comprobar (con letra y con número)</div><p>Sustituyo x = a − 1, y = 2 − a en las dos ecuaciones originales:</p><p class="calc"><span class="rw">ec. 1</span> 2·(a−1) + (2−a) = 2a−2+2−a = <b>a</b> ✓ <span class="sep">•</span> <span class="rw">ec. 2</span> 3·(a−1) + 2·(2−a) = 3a−3+4−2a = <b>a+1</b> ✓</p><p class="calc"><span class="rw">a=3</span> x=2, y=−1 → 2·2−1=<b>3</b> ✓ y 3·2−2=<b>4</b>=3+1 ✓</p></div>
+          <p class="verdict"><strong>x = a − 1, y = 2 − a, solución única para todo a ∈ R (porque det del sistema = 1 ≠ 0, y no depende de a).</strong> Los dos errores caros: asustarse porque la respuesta "lleva letra" y dejar el problema, y aplicar Cramer sin antes justificar la unicidad — el "demuestra" del enunciado son puntos aparte.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 EXAMEN : 3x3 sin ceros, cofactores + verificacion por Sarrus ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="examen_cofactores_sarrus" data-level="examen">
+      <div class="phead"><span class="pnum">20</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Cofactores y Sarrus deben coincidir</p>
+      <p class="pstatement">Sea A la matriz de abajo. Calcula det(A) desarrollando por cofactores <strong>a lo largo del primer renglón</strong> y verifica tu resultado mediante la <strong>regla de Sarrus</strong>. Ambos procedimientos deben aparecer completos en tu hoja.</p>
+      <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span></div>
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>5</span><span>1</span></div>
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>1</span><span>2</span></div>
+      </div><span class="brk brk-r"></span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Aquí no hay ceros que ayuden y el renglón viene <strong>impuesto</strong>: primer renglón, signos + − +. Que pidan dos métodos no es capricho: es un <strong>auto-chequeo</strong> integrado — si cofactores y Sarrus no coinciden, hay un error y toca cazarlo antes de entregar.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · primer término: 1 en (1,1), signo +</div><p>Tapo renglón 1 y columna 1; queda [[5, 1],[1, 2]]:</p><p class="calc"><span class="rw">menor</span> 5·2−1·1=10−1=<b>9</b> <span class="sep">•</span> <span class="rw">término</span> +(1·9)=<b>9</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · segundo término: 2 en (1,2), signo −</div><p>Tapo renglón 1 y columna 2; queda [[2, 1],[3, 2]]. Este es el del signo menos del tablero:</p><p class="calc"><span class="rw">menor</span> 2·2−1·3=4−3=<b>1</b> <span class="sep">•</span> <span class="rw">término</span> −(2·1)=<b>−2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · tercer término: 3 en (1,3), signo +</div><p>Tapo renglón 1 y columna 3; queda [[2, 5],[3, 1]]:</p><p class="calc"><span class="rw">menor</span> 2·1−5·3=2−15=<b>−13</b> <span class="sep">•</span> <span class="rw">término</span> +(3·(−13))=<b>−39</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · sumar los tres términos</div><p>Con sus signos ya incorporados:</p><p class="calc"><span class="rw">det</span> 9 + (−2) + (−39) = <b>−32</b></p></div>
+          <div class="estep"><div class="oprow">Paso 5 · verificar por Sarrus</div><p>Copio los renglones 1 y 2 debajo de la matriz; sumo los tres productos de las diagonales que bajan ↘ y resto los tres de las que suben ↗:</p><p class="calc"><span class="rw">↘</span> 1·5·2 + 2·1·3 + 3·2·1 = 10+6+6 = <b>22</b> <span class="sep">•</span> <span class="rw">↗</span> 3·5·3 + 1·1·1 + 2·2·2 = 45+1+8 = <b>54</b></p><p class="calc"><span class="rw">det</span> 22−54=<b>−32</b> ✓ coincide con cofactores</p></div>
+          <p class="verdict"><strong>det(A) = −32, confirmado por los dos métodos.</strong> Negativo y grande: perfectamente válido, y como det ≠ 0, A se invierte. El punto que más se pierde: el signo − del término del medio del tablero — si lo sumas te da −28, y Sarrus te delata la diferencia. Por eso el profesor pide ambos métodos.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

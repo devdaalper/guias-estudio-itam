@@ -86,6 +86,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -507,6 +508,131 @@
           <div class="estep"><div class="oprow">Paso 3 · el resto perpendicular</div><p>Resto = torre − punto cercano = p − proy:</p><p class="calc"><span class="rw">resto</span> 10−6=<b>4</b> <span class="sep">•</span> 5−8=<b>−3</b> <span class="sep">•</span> =<b>(4, −3)</b></p></div>
           <div class="estep"><div class="oprow">Paso 4 · la distancia</div><p>La distancia es la norma del resto (aquí, otra vez la terna 3-4-5):</p><p class="calc"><span class="rw">dist</span> √(4<sup>2</sup>+(−3)<sup>2</sup>)=√(16+9)=√25=<b>5</b></p></div>
           <p class="verdict">El punto más cercano de la trayectoria es <strong>(6, 8)</strong> y el dron pasa a <strong>5 unidades</strong> de la torre. Comprueba que el resto es perpendicular a la trayectoria: (4, −3) · (6, 8) = 24 − 24 = 0 ✓. Todo el problema del dron es <strong>una proyección más una norma</strong>: nada de tantear puntos sobre la recta.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan la condición y despejas el parámetro, te piden <strong>demostrar</strong> una identidad, y en los verdadero/falso toca <strong>justificar</strong> cada letra. Estos cinco problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 EXAMEN : inverso, parámetro para ortogonalidad (A6) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="ortogonalidad" data-level="examen">
+      <div class="phead"><span class="pnum">15</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">El parámetro que fuerza la ortogonalidad</p>
+      <p class="pstatement">Sean u = (a, 1, 2) y v = (a, −3, a) vectores de R<sup>3</sup>. Determina <strong>todos</strong> los valores de a ∈ R para los cuales u y v son ortogonales, y justifica por qué no existen otros.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (a, 1, 2)</span>
+        <span class="eq">v = (a, −3, a)</span>
+        <span class="eq">condición: u · v = 0</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Ortogonales" se traduce a una sola ecuación: u · v = 0. Como a aparece en <strong>los dos</strong> vectores, al multiplicar la primera coordenada saldrá a·a: la ecuación será cuadrática, así que puede haber hasta dos valores. El "todos los valores" del enunciado avisa exactamente de eso.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · escribe u · v con a adentro</div><p>Coordenada por coordenada, sin evaluar todavía:</p><p class="calc"><span class="rw">u·v</span> (a)(a)=<b>a<sup>2</sup></b> <span class="sep">•</span> (1)(−3)=<b>−3</b> <span class="sep">•</span> (2)(a)=<b>2a</b> <span class="sep">•</span> suma=<b>a<sup>2</sup>+2a−3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · iguala a cero y factoriza</div><p>Busco dos números que multiplicados den −3 y sumados den +2: son +3 y −1.</p><p class="calc"><span class="rw">=0</span> a<sup>2</sup>+2a−3=0 <span class="sep">•</span> (a+3)(a−1)=0 <span class="sep">•</span> a=<b>−3</b> o a=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Comprobación · sustituye los dos valores</div><p>Cada candidato debe devolver producto punto cero:</p><p class="calc"><span class="rw">a=1</span> (1,1,2)·(1,−3,1)=1−3+2=<b>0</b> <span class="sep">•</span> <span class="rw">a=−3</span> (−3,1,2)·(−3,−3,−3)=9−3−6=<b>0</b></p></div>
+          <p class="verdict"><strong>a = −3 y a = 1</strong>, y no existen otros: la condición es una ecuación cuadrática, que tiene a lo sumo dos raíces, y ya aparecieron ambas. El error que cuesta puntos: quedarse con una sola raíz — o "perder" el a<sup>2</sup> tratando la ecuación como lineal — cuando el enunciado pidió <strong>todos</strong> los valores.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 EXAMEN : demuestra corto, norma de una suma (M4) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="norma" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Demuestra la identidad de la norma de una suma</p>
+      <p class="pstatement">Demuestra que para cualesquiera u, v ∈ R<sup>n</sup> se cumple ‖u + v‖<sup>2</sup> = ‖u‖<sup>2</sup> + 2(u · v) + ‖v‖<sup>2</sup>, usando únicamente que ‖w‖<sup>2</sup> = w · w y las propiedades del producto punto (distributiva y simétrica). Después verifica la identidad con u = (3, 4) y v = (1, 2).</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">‖u + v‖<sup>2</sup> = ‖u‖<sup>2</sup> + 2(u · v) + ‖v‖<sup>2</sup></span>
+        <span class="eq">u = (3, 4), v = (1, 2)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Demuestra" no pide números: pide una cadena de igualdades donde cada paso se apoye en una propiedad con nombre. La llave que abre todo: una norma al cuadrado <strong>es</strong> un producto punto, ‖w‖<sup>2</sup> = w · w. La verificación numérica va después, aparte.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · convierte la norma en producto punto</div><p>Aplico la definición al vector u + v:</p><p class="calc"><span class="rw">def</span> ‖u+v‖<sup>2</sup>=<b>(u+v)·(u+v)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · distribuye como un binomio</div><p>La propiedad distributiva reparte el producto punto en los cuatro cruces:</p><p class="calc"><span class="rw">distrib.</span> (u+v)·(u+v)=<b>u·u+u·v+v·u+v·v</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · usa la simetría y agrupa</div><p>Como v · u = u · v (simetría), los dos términos de en medio se juntan:</p><p class="calc"><span class="rw">simetría</span> u·u+2(u·v)+v·v=<b>‖u‖<sup>2</sup>+2(u·v)+‖v‖<sup>2</sup></b> <span class="sep">•</span> queda demostrado</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · verifica con u = (3, 4), v = (1, 2)</div><p>Primero el lado izquierdo, con u + v = (4, 6):</p><p class="calc"><span class="rw">izq</span> ‖(4,6)‖<sup>2</sup>=4<sup>2</sup>+6<sup>2</sup>=16+36=<b>52</b></p><p>Ahora el lado derecho, pieza por pieza:</p><p class="calc"><span class="rw">‖u‖<sup>2</sup></span> 9+16=<b>25</b> <span class="sep">•</span> <span class="rw">‖v‖<sup>2</sup></span> 1+4=<b>5</b> <span class="sep">•</span> <span class="rw">u·v</span> (3)(1)+(4)(2)=3+8=<b>11</b> <span class="sep">•</span> <span class="rw">der</span> 25+2(11)+5=25+22+5=<b>52</b></p></div>
+          <p class="verdict">Identidad demostrada en tres igualdades (definición → distributiva → simetría) y verificada: ambos lados valen <strong>52</strong>. El error que cuesta puntos: olvidar el término cruzado 2(u · v) — sin él el lado derecho daría 25 + 5 = 30 ≠ 52 — o creer que ‖u + v‖ = ‖u‖ + ‖v‖: la norma <strong>no</strong> se reparte en sumas; lo que se expande es su cuadrado.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 EXAMEN : verdadero/falso con justificación (A1) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="verdadero_falso" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación obligatoria</p>
+      <p class="pstatement">Decide si cada afirmación es verdadera o falsa. Toda respuesta debe ir acompañada de una <strong>justificación</strong>: un argumento de una línea o un contraejemplo explícito. Una letra sin justificar no recibe puntos.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">(i) Si u · v = 0, entonces u = 0 o v = 0.</span>
+        <span class="eq">(ii) Para todos u, v ∈ R<sup>n</sup>: ‖u + v‖ = ‖u‖ + ‖v‖.</span>
+        <span class="eq">(iii) Para todos u, v ∈ R<sup>n</sup>: |u · v| ≤ ‖u‖·‖v‖.</span>
+        <span class="eq">(iv) Para todo v ≠ 0: proy<sub>v</sub>(v) = v.</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>En este formato cada letra vale solo con su justificación. "Falsa" se derrota con <strong>un</strong> contraejemplo numérico concreto; "verdadera" exige un argumento que cubra todos los casos — un ejemplo que funcione no demuestra nada.</p></div>
+          <div class="estep"><div class="oprow">(i) · FALSA</div><p>Contraejemplo: dos vectores no nulos con producto punto cero.</p><p class="calc"><span class="rw">contra</span> (1,0)·(0,1)=(1)(0)+(0)(1)=<b>0</b> <span class="sep">•</span> y ninguno es el vector cero</p></div>
+          <div class="estep"><div class="oprow">(ii) · FALSA</div><p>Contraejemplo con u = (1, 0) y v = (0, 1):</p><p class="calc"><span class="rw">izq</span> ‖(1,1)‖=√(1+1)=<b>√2</b> <span class="sep">•</span> <span class="rw">der</span> 1+1=<b>2</b> <span class="sep">•</span> √2≠2</p><p>La regla verdadera es la desigualdad del triángulo: ‖u + v‖ ≤ ‖u‖ + ‖v‖ — con ≤, no con =.</p></div>
+          <div class="estep"><div class="oprow">(iii) · VERDADERA (Cauchy-Schwarz)</div><p>Como cos θ = (u · v)/(‖u‖‖v‖) y todo coseno cumple |cos θ| ≤ 1, al multiplicar por ‖u‖‖v‖ queda |u · v| ≤ ‖u‖‖v‖ (y si algún vector es cero, ambos lados valen 0). Chequeo rápido con u = (3, 4), v = (1, 2):</p><p class="calc"><span class="rw">|u·v|</span> |3+8|=<b>11</b> <span class="sep">•</span> <span class="rw">‖u‖‖v‖</span> 5·√5=<b>√125</b> <span class="sep">•</span> 11=√121≤√125 ✓</p></div>
+          <div class="estep"><div class="oprow">(iv) · VERDADERA</div><p>Aplico la fórmula de proyección a v sobre sí mismo:</p><p class="calc"><span class="rw">proy<sub>v</sub>(v)</span> ((v·v)/(v·v))·v=1·v=<b>v</b></p><p>El factor da exactamente 1: la sombra de v sobre su propia dirección es él mismo.</p></div>
+          <p class="verdict"><strong>(i) F</strong> — contraejemplo (1, 0) · (0, 1) = 0 con ambos no nulos · <strong>(ii) F</strong> — √2 ≠ 2 con (1, 0) y (0, 1); solo vale ≤ (triángulo) · <strong>(iii) V</strong> — |cos θ| ≤ 1 (Cauchy-Schwarz) · <strong>(iv) V</strong> — el factor (v · v)/(v · v) = 1. El error que cuesta puntos: responder V o F sin justificar — en este formato la letra sola vale cero.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 EXAMEN : proyección + descomposición paralelo/perpendicular ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="proyeccion" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Descompón u en paralelo más perpendicular</p>
+      <p class="pstatement">Sean u = (3, 4, 2) y v = (2, 1, 0) en R<sup>3</sup>. Calcula proy<sub>v</sub>(u) y escribe u como suma u = u<sub>∥</sub> + u<sub>⊥</sub>, donde u<sub>∥</sub> es paralelo a v y u<sub>⊥</sub> es ortogonal a v. Verifica ambas cosas: que u<sub>⊥</sub> · v = 0 y que las dos piezas suman u.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (3, 4, 2)</span>
+        <span class="eq">v = (2, 1, 0)</span>
+        <span class="eq">u = u<sub>∥</sub> + u<sub>⊥</sub>, con u<sub>∥</sub> = proy<sub>v</sub>(u)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>u<sub>∥</sub> es exactamente la proyección de u sobre v ("paralelo a v" = múltiplo de v), y u<sub>⊥</sub> es lo que sobra al restarla: u<sub>⊥</sub> = u − u<sub>∥</sub>. El enunciado pide la descomposición completa con <strong>doble</strong> verificación: ortogonalidad y suma.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · los dos productos punto</div><p>Arriba u · v; abajo v consigo mismo:</p><p class="calc"><span class="rw">u·v</span> (3)(2)+(4)(1)+(2)(0)=6+4+0=<b>10</b> <span class="sep">•</span> <span class="rw">v·v</span> 4+1+0=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · el factor y u<sub>∥</sub></div><p>Divido arriba entre abajo y escalo v:</p><p class="calc"><span class="rw">factor</span> 10÷5=<b>2</b> <span class="sep">•</span> <span class="rw">u∥</span> 2·(2,1,0)=<b>(4, 2, 0)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · u<sub>⊥</sub> = u − u<sub>∥</sub></div><p>Resto coordenada por coordenada:</p><p class="calc"><span class="rw">u⊥</span> 3−4=<b>−1</b> <span class="sep">•</span> 4−2=<b>2</b> <span class="sep">•</span> 2−0=<b>2</b> <span class="sep">•</span> =<b>(−1, 2, 2)</b></p></div>
+          <div class="estep"><div class="oprow">Comprobación doble · ortogonal y suma</div><p>Primero el producto punto con v; luego que las piezas reconstruyen u:</p><p class="calc"><span class="rw">u⊥·v</span> (−1)(2)+(2)(1)+(2)(0)=−2+2+0=<b>0</b> <span class="sep">•</span> <span class="rw">u∥+u⊥</span> (4−1, 2+2, 0+2)=<b>(3, 4, 2)</b>=u ✓</p></div>
+          <p class="verdict">u = <strong>(4, 2, 0) + (−1, 2, 2)</strong>, con u<sub>∥</sub> = proy<sub>v</sub>(u) = (4, 2, 0) paralelo a v y u<sub>⊥</sub> = (−1, 2, 2) ortogonal a v. El error que cuesta puntos: poner u · u en el denominador (abajo va SIEMPRE v · v) y entregar sin las dos comprobaciones — si u<sub>⊥</sub> · v no da cero o las piezas no suman u, hay un error de cuenta seguro.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 EXAMEN : encadenado Gram-Schmidt → base ortonormal (M5) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="gram_schmidt" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">De base cualquiera a base ortonormal, encadenado</p>
+      <p class="pstatement">Aplica el proceso de Gram-Schmidt a la base B = {(2, 1), (4, 7)} de R<sup>2</sup> para obtener una base ortogonal {u<sub>1</sub>, u<sub>2</sub>}. Verifica que u<sub>1</sub> · u<sub>2</sub> = 0 y, a partir de ella, escribe la base <strong>ortonormal</strong> correspondiente.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">v<sub>1</sub> = (2, 1)</span>
+        <span class="eq">v<sub>2</sub> = (4, 7)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Son dos tareas encadenadas: primero Gram-Schmidt deja los vectores perpendiculares entre sí (base ortogonal); después "ortonormal" añade norma 1, así que cada vector <strong>nuevo</strong> se divide entre su norma. El orden importa: ortogonalizar primero, normalizar al final.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · el primero se queda</div><p>Tomo u<sub>1</sub> = v<sub>1</sub> sin cambios:</p><p class="calc"><span class="rw">u₁</span> =<b>(2, 1)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · los dos productos punto</div><p>Arriba v<sub>2</sub> con u<sub>1</sub>; abajo u<sub>1</sub> consigo mismo:</p><p class="calc"><span class="rw">v₂·u₁</span> (4)(2)+(7)(1)=8+7=<b>15</b> <span class="sep">•</span> <span class="rw">u₁·u₁</span> 4+1=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · factor, proyección y resta</div><p>Factor = 15/5 = 3; escalo u<sub>1</sub> y se lo quito a v<sub>2</sub>:</p><p class="calc"><span class="rw">proy</span> 3·(2,1)=<b>(6, 3)</b> <span class="sep">•</span> <span class="rw">u₂</span> 4−6=<b>−2</b> <span class="sep">•</span> 7−3=<b>4</b> <span class="sep">•</span> =<b>(−2, 4)</b></p></div>
+          <div class="estep"><div class="oprow">Comprobación · ortogonales</div><p>El producto punto de los nuevos tiene que dar cero:</p><p class="calc"><span class="rw">u₁·u₂</span> (2)(−2)+(1)(4)=−4+4=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · normaliza los vectores NUEVOS</div><p>Divido u<sub>1</sub> y u<sub>2</sub> (no los originales) entre sus normas:</p><p class="calc"><span class="rw">‖u₁‖</span> √(4+1)=<b>√5</b> <span class="sep">•</span> <span class="rw">‖u₂‖</span> √(4+16)=√20=<b>2√5</b></p><p class="calc"><span class="rw">e₁</span> (2/√5, 1/√5) <span class="sep">•</span> <span class="rw">e₂</span> (−2/(2√5), 4/(2√5))=<b>(−1/√5, 2/√5)</b> <span class="sep">•</span> chequeo: ‖e₁‖<sup>2</sup>=4/5+1/5=<b>1</b> ✓</p></div>
+          <p class="verdict">Base ortogonal: <strong>{(2, 1), (−2, 4)}</strong>. Base ortonormal: <strong>{(2/√5, 1/√5), (−1/√5, 2/√5)}</strong>. El error que cuesta puntos: normalizar v<sub>1</sub> y v<sub>2</sub> originales en vez de u<sub>1</sub> y u<sub>2</sub> — quedan unitarios pero NO perpendiculares. Y simplifica √20 = 2√5 antes de dividir; deja las raíces exactas, sin decimales.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

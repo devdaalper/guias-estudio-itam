@@ -77,6 +77,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -465,6 +466,107 @@
           <div class="estep"><div class="oprow">Verifico el radio</div><p>Debo tener | x | &lt; 1:</p><p class="calc"><span class="rw">| x |</span> |−<sup>2</sup>⁄<sub>3</sub>|=<sup>2</sup>⁄<sub>3</sub> <span class="sep">•</span> <sup>2</sup>⁄<sub>3</sub>&lt;1 → <b>válido</b></p></div>
           <div class="estep"><div class="oprow">Aplico la fórmula</div><p>1 − x con x negativo se vuelve una suma, y divido:</p><p class="calc"><span class="rw">1−x</span> 1−(−<sup>2</sup>⁄<sub>3</sub>)=1+<sup>2</sup>⁄<sub>3</sub>=<b><sup>5</sup>⁄<sub>3</sub></b> <span class="sep">•</span> <span class="rw">S</span> <sup>1</sup>⁄<sub>(5/3)</sub>=<b><sup>3</sup>⁄<sub>5</sub></b></p><div class="fx"><div class="sys"><span class="eq">S = <sup>1</sup>⁄<sub>(1 − (−2/3))</sub> = <sup>1</sup>⁄<sub>(5/3)</sub> = <sup>3</sup>⁄<sub>5</sub></span></div></div></div>
           <p class="verdict"><strong>La serie suma <sup>3</sup>⁄<sub>5</sub>.</strong> El truco es leer x = −<sup>2</sup>⁄<sub>3</sub> (la alternancia viene del signo de x, no de un (−1)<sup>n</sup> aparte). Ojo con el doble signo: 1 − (−<sup>2</sup>⁄<sub>3</sub>) se vuelve 1 + <sup>2</sup>⁄<sub>3</sub>, el error más común aquí.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan la suma y te piden la razón, te ponen a decidir verdadero o falso, y toca <strong>justificar</strong> cada respuesta. Estos problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 EXAMEN : inverso — hallar r dada la suma ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="serie_geometrica" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla la razón, dada la suma</p>
+      <p class="pstatement">Sea r un número real. Determina el valor de r para el cual la serie geométrica converge y su suma vale exactamente 6. Justifica que, con el valor hallado, la serie en efecto converge.</p>
+      <div class="fx"><div class="sys"><span class="eq">∑<sub>n = 0</sub><sup>∞</sup> 4 · r<sup>n</sup> = 6</span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Es el problema geométrico <strong>al revés</strong>: te dan la suma (6) y la incógnita es la razón r. La sigma arranca en n = 0, así que el primer término es 4 · r<sup>0</sup> = 4. Datos: a = 4, S = 6; incógnita: r.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · planteo la ecuación</div><p>Escribo la fórmula de la suma con los datos puestos:</p><p class="calc"><span class="rw">S</span> <sup>4</sup>⁄<sub>(1 − r)</sub>=<b>6</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · despejo r</div><p>Multiplico cruzado y despejo, celda por celda:</p><p class="calc"><span class="rw">1−r</span> <sup>4</sup>⁄<sub>6</sub>=<b><sup>2</sup>⁄<sub>3</sub></b> <span class="sep">•</span> <span class="rw">r</span> 1−<sup>2</sup>⁄<sub>3</sub>=<b><sup>1</sup>⁄<sub>3</sub></b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · compruebo de vuelta</div><p>En un inverso la comprobación es parte de la respuesta: verifico | r | &lt; 1 y sustituyo en la fórmula:</p><p class="calc"><span class="rw">| r |</span> <sup>1</sup>⁄<sub>3</sub>&lt;1 → <b>converge</b> <span class="sep">•</span> <span class="rw">S</span> <sup>4</sup>⁄<sub>(2/3)</sub>=4·<sup>3</sup>⁄<sub>2</sub>=<b>6</b> ✓</p><div class="fx"><div class="sys"><span class="eq">S = <sup>4</sup>⁄<sub>(1 − 1/3)</sub> = <sup>4</sup>⁄<sub>(2/3)</sub> = 6 ✓</span></div></div></div>
+          <p class="verdict"><strong>r = <sup>1</sup>⁄<sub>3</sub>.</strong> El error que cuesta puntos: no comprobar | r | &lt; 1 al final (si el despeje diera r ≥ 1, la respuesta correcta sería “no existe tal r”), y confundir el primer término: con n = 0 el primer sumando es 4, no 4r.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 EXAMEN : V/F con justificación sobre criterios ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="criterios" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Decide si cada afirmación es <strong>verdadera o falsa</strong>. Justifica cada respuesta: un argumento de una línea o un contraejemplo explícito. Sin justificación no hay puntos.</p>
+      <div class="fx"><div class="sys"><span class="eq">(i) Si a<sub>n</sub> → 0, entonces ∑ a<sub>n</sub> converge.</span><span class="eq">(ii) Si ∑ a<sub>n</sub> converge, entonces a<sub>n</sub> → 0.</span><span class="eq">(iii) La serie ∑<sub>n = 1</sub><sup>∞</sup> <sup>1</sup>⁄<sub>n<sup>3/2</sup></sub> converge.</span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Cada afirmación se decide <strong>y</strong> se justifica. Para una FALSA basta un contraejemplo concreto con nombre y apellido; para una VERDADERA, citar el resultado exacto que la respalda. Ojo con la dirección de la implicación: (i) y (ii) dicen cosas distintas.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · (i) es FALSA</div><p>Contraejemplo: la armónica. Sus términos van a 0 y aun así la serie diverge:</p><p class="calc"><span class="rw">a<sub>n</sub></span> <sup>1</sup>⁄<sub>n</sub>→<b>0</b> <span class="sep">•</span> ∑ <sup>1</sup>⁄<sub>n</sub> <b>diverge</b> (armónica)</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · (ii) es VERDADERA</div><p>Es exactamente el criterio del término n-ésimo: que la serie converja <strong>obliga</strong> a los sumandos a encogerse a 0. Es condición necesaria:</p><p class="calc"><span class="rw">∑ a<sub>n</sub></span> converge → <b>a<sub>n</sub> → 0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · (iii) es VERDADERA</div><p>Es una p-serie; comparo el exponente con 1:</p><p class="calc"><span class="rw">p</span> =<b><sup>3</sup>⁄<sub>2</sub></b> <span class="sep">•</span> <sup>3</sup>⁄<sub>2</sub>&gt;1 → <b>converge</b></p></div>
+          <p class="verdict"><strong>(i) F</strong> — contraejemplo: ∑ <sup>1</sup>⁄<sub>n</sub> tiene a<sub>n</sub> → 0 y diverge. <strong>(ii) V</strong> — criterio del término n-ésimo (condición necesaria). <strong>(iii) V</strong> — p-serie con p = <sup>3</sup>⁄<sub>2</sub> &gt; 1. El error que cuesta puntos: invertir la implicación — a<sub>n</sub> → 0 es <strong>necesaria</strong> para converger, jamás suficiente.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 EXAMEN : límites de sucesiones, término dominante ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="limite_sucesion" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Tres sucesiones, tres veredictos</p>
+      <p class="pstatement">Para cada una de las siguientes sucesiones, calcula lím<sub>n→∞</sub> del término general o justifica que la sucesión diverge.</p>
+      <div class="fx"><div class="sys"><span class="eq">a) a<sub>n</sub> = (6n<sup>3</sup> − 4n + 1) / (2n<sup>3</sup> + 5n<sup>2</sup>)</span><span class="eq">b) b<sub>n</sub> = (n<sup>2</sup> + 3n) / (5n<sup>3</sup> + 1)</span><span class="eq">c) c<sub>n</sub> = (n<sup>4</sup> − n) / (3n<sup>2</sup> + 7)</span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Tres cocientes de polinomios en n; la pregunta de fondo es una sola: <strong>¿qué grado manda arriba y abajo?</strong> Empatan → cociente de coeficientes; gana abajo → 0; gana arriba → diverge.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · a) los grados empatan</div><p>Grado 3 arriba y grado 3 abajo: manda el cociente de los coeficientes de n<sup>3</sup>:</p><p class="calc"><span class="rw">grados</span> 3 y 3 <span class="sep">•</span> <span class="rw">L</span> <sup>6</sup>⁄<sub>2</sub>=<b>3</b> → converge a 3</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · b) abajo gana</div><p>Grado 2 arriba contra grado 3 abajo: el denominador se dispara y la fracción se aplasta:</p><p class="calc"><span class="rw">grados</span> 2 y 3 <span class="sep">•</span> <span class="rw">L</span> =<b>0</b> → converge a 0</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · c) arriba gana</div><p>Grado 4 arriba contra grado 2 abajo: el numerador crece mucho más rápido y el cociente crece sin freno:</p><p class="calc"><span class="rw">grados</span> 4 y 2 <span class="sep">•</span> c<sub>n</sub> crece sin tope → <b>diverge</b></p></div>
+          <p class="verdict"><strong>a) 3 · b) 0 · c) diverge.</strong> El error que cuesta puntos: aplicar el cociente de coeficientes en b) o c) — esa regla vale <strong>solo</strong> con grados iguales. Y en c) no basta decir “diverge”: se justifica con el grado (arriba 4 &gt; abajo 2).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 EXAMEN : criterio de la razón, factorial + potencia + polinomio ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="criterio_razon" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Razón con las tres piezas a la vez</p>
+      <p class="pstatement">Determina si la siguiente serie converge o diverge. Indica el criterio que usas, escribe el cociente completo y calcula el límite.</p>
+      <div class="fx"><div class="sys"><span class="eq">∑<sub>n = 1</sub><sup>∞</sup> <sup>n<sup>2</sup> · 2<sup>n</sup></sup>⁄<sub>n!</sub></span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>El término general mezcla las tres piezas: polinomio (n<sup>2</sup>), potencia (2<sup>n</sup>) y factorial (n!). Con un factorial a la vista, el criterio natural es el de la <strong>razón</strong>: L &lt; 1 converge, L &gt; 1 diverge.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · armo el cociente</div><p>Término n+1 por el recíproco del término n:</p><p class="calc"><span class="rw">a<sub>n+1</sub>/a<sub>n</sub></span> <sup>(n+1)<sup>2</sup>·2<sup>n+1</sup></sup>⁄<sub>(n+1)!</sub> <span class="sep">•</span> <sup>n!</sup>⁄<sub>n<sup>2</sup>·2<sup>n</sup></sub></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · simplifico pieza por pieza</div><p>Cada pieza se simplifica por separado: la potencia deja un 2, el factorial deja <sup>1</sup>⁄<sub>(n+1)</sub>, y (n+1)<sup>2</sup> entre (n+1) deja (n+1):</p><p class="calc"><span class="rw">2<sup>n+1</sup>/2<sup>n</sup></span> =<b>2</b> <span class="sep">•</span> <span class="rw">n!/(n+1)!</span> =<b><sup>1</sup>⁄<sub>(n+1)</sub></b> <span class="sep">•</span> junto: 2·<sup>(n+1)<sup>2</sup></sup>⁄<sub>(n+1)·n<sup>2</sup></sub>=<b><sup>2(n+1)</sup>⁄<sub>n<sup>2</sup></sub></b></p><div class="fx"><div class="sys"><span class="eq">a<sub>n+1</sub> / a<sub>n</sub> = <sup>2(n + 1)</sup>⁄<sub>n<sup>2</sup></sub></span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · tomo el límite y decido</div><p>Grado 1 arriba contra grado 2 abajo: abajo gana y la fracción se aplasta:</p><p class="calc"><span class="rw">L</span> lím <sup>2(n+1)</sup>⁄<sub>n<sup>2</sup></sub>=<b>0</b> <span class="sep">•</span> 0&lt;1 → <b>converge</b></p></div>
+          <p class="verdict"><strong>Converge</strong> (criterio de la razón, L = 0 &lt; 1). El factorial se traga a la potencia y al polinomio juntos. El error que cuesta puntos: cancelar mal (n+1)! con n! o tirar el (n+1)<sup>2</sup> “porque casi es n<sup>2</sup>” sin escribirlo — el cociente se escribe completo y se simplifica pieza por pieza.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 EXAMEN : encadenado — descomponer en dos geométricas ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="serie_geometrica" data-level="examen">
+      <div class="phead"><span class="pnum">20</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Una serie que en realidad son dos</p>
+      <p class="pstatement">Calcula el valor exacto de la siguiente serie. Justifica la convergencia de cada parte que uses en el cálculo.</p>
+      <div class="fx"><div class="sys"><span class="eq">∑<sub>n = 1</sub><sup>∞</sup> <sup>(2<sup>n</sup> + 3<sup>n</sup>)</sup>⁄<sub>6<sup>n</sup></sub></span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Tal cual está, la serie <strong>no</strong> es geométrica: el numerador suma dos potencias. Pero el 6<sup>n</sup> de abajo reparte entre los dos sumandos de arriba, y cada pedazo sí es geométrico. La jugada: separar, sumar cada uno y juntar.</p><p class="calc"><span class="rw">separo</span> <sup>2<sup>n</sup></sup>⁄<sub>6<sup>n</sup></sub>=(<sup>1</sup>⁄<sub>3</sub>)<sup>n</sup> <span class="sep">•</span> <sup>3<sup>n</sup></sup>⁄<sub>6<sup>n</sup></sub>=(<sup>1</sup>⁄<sub>2</sub>)<sup>n</sup></p></div>
+          <div class="estep"><div class="oprow">Paso 1 · sumo la primera geométrica</div><p>∑ (<sup>1</sup>⁄<sub>3</sub>)<sup>n</sup> desde n = 1: el primer término (n = 1) es <sup>1</sup>⁄<sub>3</sub> y la razón es <sup>1</sup>⁄<sub>3</sub> &lt; 1, converge:</p><p class="calc"><span class="rw">1−r</span> 1−<sup>1</sup>⁄<sub>3</sub>=<b><sup>2</sup>⁄<sub>3</sub></b> <span class="sep">•</span> <span class="rw">S<sub>1</sub></span> <sup>(1/3)</sup>⁄<sub>(2/3)</sub>=<sup>1</sup>⁄<sub>3</sub>·<sup>3</sup>⁄<sub>2</sub>=<b><sup>1</sup>⁄<sub>2</sub></b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · sumo la segunda geométrica</div><p>∑ (<sup>1</sup>⁄<sub>2</sub>)<sup>n</sup> desde n = 1: primer término <sup>1</sup>⁄<sub>2</sub>, razón <sup>1</sup>⁄<sub>2</sub> &lt; 1, converge:</p><p class="calc"><span class="rw">1−r</span> 1−<sup>1</sup>⁄<sub>2</sub>=<b><sup>1</sup>⁄<sub>2</sub></b> <span class="sep">•</span> <span class="rw">S<sub>2</sub></span> <sup>(1/2)</sup>⁄<sub>(1/2)</sub>=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · junto y compruebo</div><p>Como ambas piezas convergen, la suma de la serie es la suma de las dos. Cotejo con las primeras sumas parciales: <sup>5</sup>⁄<sub>6</sub> ≈ 0.83, luego ≈ 1.19, luego ≈ 1.36… se acercan a 1.5 sin pasarse ✓:</p><p class="calc"><span class="rw">S</span> <sup>1</sup>⁄<sub>2</sub>+1=<b><sup>3</sup>⁄<sub>2</sub></b></p><div class="fx"><div class="sys"><span class="eq">S = <sup>1</sup>⁄<sub>2</sub> + 1 = <sup>3</sup>⁄<sub>2</sub></span></div></div></div>
+          <p class="verdict"><strong>La serie suma <sup>3</sup>⁄<sub>2</sub>.</strong> Dos errores que cuestan puntos: tomar el primer término como 1 (la sigma arranca en n = 1, no en n = 0, así que cada pieza arranca en su propia razón), y separar la serie en dos <strong>sin justificar</strong> que ambas convergen — la separación solo es legal cuando cada pedazo converge por su cuenta.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

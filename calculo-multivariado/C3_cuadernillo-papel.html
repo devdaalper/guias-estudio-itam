@@ -74,6 +74,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -474,6 +475,124 @@
           <div class="estep"><div class="oprow">Leo el dominio</div><p>Distancia al origen a lo más √25 = 5: el disco cerrado de radio 5:</p><p class="calc"><span class="rw">radio</span> √25<b>=5</b> <span class="sep">•</span> disco cerrado</p><div class="fx" id="p14b"></div></div>
           <div class="estep"><div class="oprow">Leo la imagen</div><p>x² + y² va de 0 (centro) a 25 (borde). Evalúo la altura en los dos extremos:</p><p class="calc"><span class="rw">centro</span> √(25−0)<b>=5</b> <span class="sep">•</span> <span class="rw">borde</span> √(25−25)<b>=0</b></p><div class="fx" id="p14c"></div></div>
           <p class="verdict"><strong>Dominio: disco de radio 5</strong> (la base circular de la loma). <strong>Imagen: alturas de 0 a 5.</strong> El <strong>borde</strong> del dominio (x² + y² = 25) es justo donde la loma toca el suelo, altura 0; el centro es la cima, altura 5. Fuera del disco la fórmula pediría raíz de un negativo: ahí ya no hay terreno.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan el valor por un camino y te piden la constante, te escriben los dominios en notación de conjunto, y toca <strong>justificar y demostrar</strong>. Estos problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 NIVEL EXAMEN : inverso — a tal que el límite por y = ax valga 2/5 ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="limite_inverso_parametro" data-level="examen">
+      <div class="phead"><span class="pnum">15</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla la constante del camino</p>
+      <p class="pstatement">Sea f(x, y) = xy ⁄ (x² + y²) para (x, y) ≠ (0, 0). Determina <strong>todos</strong> los valores de a ∈ R tales que lím<sub>x→0</sub> f(x, ax) = 2 ⁄ 5. Con base en tu resultado, decide si lím<sub>(x,y)→(0,0)</sub> f(x, y) existe. Justifica.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = xy ⁄ (x² + y²),   (x, y) ≠ (0, 0)</span>
+        <span class="eq">lím<sub>x→0</sub> f(x, ax) = 2 ⁄ 5</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"f(x, ax)" se lee: <strong>camina hacia el origen sobre la recta y = ax</strong> (sustituye y por ax y deja que x → 0). Te dan el valor de ese límite (2 ⁄ 5) y te piden la pendiente a: es el ejercicio de siempre, al revés. La segunda parte pregunta por el límite <strong>global</strong>, el de verdad, por todos los caminos.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · sustituyo y = ax y simplifico</div><p>Meto y = ax en numerador y denominador y cancelo x²:</p><p class="calc"><span class="rw">num</span> x·(ax)<b>=ax²</b> <span class="sep">•</span> <span class="rw">den</span> x²+(ax)²<b>=x²(1+a²)</b> <span class="sep">•</span> ax²÷x²(1+a²)<b>=a⁄(1+a²)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · igualo a 2 ⁄ 5 y resuelvo</div><p>El cociente ya no depende de x: el límite por la recta es a ⁄ (1 + a²). Lo igualo al dato y resuelvo la cuadrática:</p><p class="calc"><span class="rw">igualo</span> 5a<b>=2(1+a²)</b> <span class="sep">•</span> 2a²−5a+2<b>=0</b> <span class="sep">•</span> a=(5±√(25−16))⁄4<b>=(5±3)⁄4</b></p><div class="fx"><div class="sys"><span class="eq">2a² − 5a + 2 = 0   ⇒   a = 2  o  a = 1 ⁄ 2</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · compruebo sustituyendo de vuelta</div><p>Regreso cada valor a a ⁄ (1 + a²):</p><p class="calc"><span class="rw">a=2</span> 2⁄(1+4)<b>=2⁄5</b> ✓ <span class="sep">•</span> <span class="rw">a=1⁄2</span> (1⁄2)÷(5⁄4)=(1⁄2)·(4⁄5)=4⁄10<b>=2⁄5</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · ¿existe el límite global?</div><p>El valor por rectas <strong>depende de la pendiente</strong>: con a = 0 (el eje x) sale 0, no 2 ⁄ 5:</p><p class="calc"><span class="rw">a=0</span> 0⁄(1+0)<b>=0</b> <span class="sep">•</span> 0<b>≠</b>2⁄5 <span class="sep">•</span> el límite global <b>no existe</b></p></div>
+          <p class="verdict"><strong>a = 2 o a = 1 ⁄ 2</strong>, y el límite global <strong>no existe</strong>: rectas distintas dan valores distintos (a = 0 da 0, a = 2 da 2 ⁄ 5). Error típico: quedarse con una sola raíz de la cuadrática, o creer que "por y = 2x da 2 ⁄ 5" hace que el límite valga 2 ⁄ 5 — un camino nunca define el límite.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 NIVEL EXAMEN : V/F con justificación — dominios en notación de conjunto ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="dominio_vf_justificacion" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Decide si cada afirmación es <strong>verdadera o falsa</strong>. Justifica cada una con un argumento breve o un contraejemplo; <strong>sin justificación no hay puntos</strong>.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = ln(x² + y² − 9),   g(x, y) = √(x − 2y),   h(x, y) = √(y − x²)</span>
+        <span class="eq">(i)   Dom(f) = {(x, y) ∈ R² : x² + y² ≥ 9}</span>
+        <span class="eq">(ii)   (2, −1) ∈ Dom(g)</span>
+        <span class="eq">(iii)   Dom(h) = {(x, y) ∈ R² : y &gt; x²}</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Dom(f)" es el <strong>dominio</strong>: los puntos donde la fórmula tiene sentido. "{(x, y) ∈ R² : condición}" se lee: <strong>las parejas del plano que cumplen la condición</strong>. Para cada afirmación decides V o F y das la razón en una línea; un solo punto que falle sirve de contraejemplo.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · (i) el logaritmo es estricto</div><p>ln exige argumento <strong>estrictamente positivo</strong>: x² + y² − 9 &gt; 0, o sea x² + y² &gt; 9. La afirmación pone ≥, que metería el borde. Pruebo un punto del borde:</p><p class="calc"><span class="rw">ln</span> exige &gt;0 <span class="sep">•</span> <span class="rw">(3,0)</span> 9+0−9<b>=0</b> <span class="sep">•</span> ln(0) <b>no existe</b> ⇒ <b>FALSA</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · (ii) evalúo el punto en la raíz</div><p>Basta sustituir (2, −1) en el radicando x − 2y y checar el signo:</p><p class="calc"><span class="rw">radicando</span> 2−2·(−1)=2+2<b>=4</b> <span class="sep">•</span> 4≥0 ✓ <span class="sep">•</span> √4<b>=2</b> ⇒ <b>VERDADERA</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · (iii) la raíz par admite el 0</div><p>La raíz pide y − x² <strong>≥ 0</strong>, o sea y ≥ x². La afirmación exige y &gt; x² y deja fuera la parábola y = x², donde la raíz sí existe:</p><p class="calc"><span class="rw">raíz</span> pide ≥0 <span class="sep">•</span> <span class="rw">(1,1)</span> 1−1<b>=0</b> <span class="sep">•</span> √0<b>=0</b> sí existe ⇒ <b>FALSA</b></p></div>
+          <p class="verdict"><strong>(i) FALSA</strong> — el log es estricto: Dom(f) = {(x, y) ∈ R² : x² + y² &gt; 9}, el borde queda fuera. <strong>(ii) VERDADERA</strong> — el radicando da 4 ≥ 0. <strong>(iii) FALSA</strong> — la raíz admite el 0: es y ≥ x², la parábola sí entra. Error típico: intercambiar el ≥ de la raíz con el &gt; del logaritmo — en el borde se deciden los puntos.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 NIVEL EXAMEN : curva de nivel con cuadrado a completar ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="curva_nivel_examen" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Identifica la curva de nivel</p>
+      <p class="pstatement">Sea f(x, y) = x² + y² − 6y. Considera la curva de nivel de f correspondiente a k = 7. Identifica <strong>qué tipo de curva es</strong> (circunferencia, recta o parábola), escribe su <strong>ecuación en forma estándar</strong> y da sus elementos (centro y radio, si aplica).</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x² + y² − 6y,   k = 7</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La curva de nivel k = 7 es el conjunto {(x, y) ∈ R² : f(x, y) = 7}: <strong>igualar la fórmula a 7</strong> y reconocer la figura que describe esa ecuación. Como la ecuación trae un término −6y, no va a estar en forma estándar de entrada: hay que acomodarla.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · igualo la fórmula a k = 7</div><p>Hay x² y y² con el mismo signo y coeficiente 1: huele a circunferencia, pero el −6y estorba:</p><p class="calc"><span class="rw">nivel</span> x²+y²−6y<b>=7</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · completo el cuadrado en y</div><p>Tomo la mitad del 6 y la elevo al cuadrado:</p><p class="calc"><span class="rw">mitad</span> 6÷2<b>=3</b> <span class="sep">•</span> 3²<b>=9</b> <span class="sep">•</span> y²−6y<b>=(y−3)²−9</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · forma estándar y radio</div><p>Sustituyo y paso el −9 al otro lado:</p><p class="calc"><span class="rw">acomodo</span> x²+(y−3)²−9<b>=7</b> <span class="sep">•</span> x²+(y−3)²<b>=16</b> <span class="sep">•</span> <span class="rw">radio</span> √16<b>=4</b></p><div class="fx"><div class="sys"><span class="eq">x² + (y − 3)² = 16</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 4 · compruebo con un punto</div><p>El punto (4, 3) debería estar en la curva (centro más radio en x). Lo meto en la fórmula original:</p><p class="calc"><span class="rw">f(4,3)</span> 16+9−18<b>=7</b> ✓ <span class="sep">•</span> <span class="rw">f(0,7)</span> 0+49−42<b>=7</b> ✓</p></div>
+          <p class="verdict"><strong>Es una circunferencia de centro (0, 3) y radio 4</strong>: x² + (y − 3)² = 16. Error típico: ver el −6y y contestar "parábola" — parábola es cuando UNA variable no está al cuadrado; aquí las dos lo están: se completa el cuadrado. Otro clásico: dar radio 16 en vez de √16 = 4.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 NIVEL EXAMEN : demuestra que el límite NO existe (rectas engañan, parábola rompe) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="limite_no_existe_demuestra" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Demuestra que el límite no existe</p>
+      <p class="pstatement">Demuestra que el siguiente límite <strong>no existe</strong>. Exhibe explícitamente <strong>dos trayectorias</strong> hacia (0, 0) que produzcan valores distintos; evalúa el límite sobre cada una y concluye.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">lím<sub>(x,y)→(0,0)</sub>   x²y ⁄ (x⁴ + y²)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Demuestra que no existe" = encontrar <strong>dos caminos con límites distintos</strong> y escribirlos con todo: qué camino es, la sustitución y el valor. La redacción cuenta puntos. Ojo con el denominador: mezcla x⁴ con y², y eso es una pista de qué camino lo rompe.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · camino 1: eje x (y = 0)</div><p>Sustituyo y = 0:</p><p class="calc"><span class="rw">num</span> x²·0<b>=0</b> <span class="sep">•</span> <span class="rw">den</span> x⁴+0<b>=x⁴</b> <span class="sep">•</span> 0÷x⁴<b>=0</b> → <b>0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · la trampa: TODAS las rectas dan 0</div><p>Pruebo y = mx para ver si alguna recta discrepa:</p><p class="calc"><span class="rw">num</span> x²·(mx)<b>=mx³</b> <span class="sep">•</span> <span class="rw">den</span> x⁴+m²x²<b>=x²(x²+m²)</b> <span class="sep">•</span> mx³÷x²(x²+m²)<b>=mx⁄(x²+m²)</b> → <b>0</b></p><p>Toda recta da 0. Si me quedo aquí, podría creer (mal) que el límite existe.</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · camino 2: la parábola y = x²</div><p>Elijo el camino que iguala los grados del denominador (x⁴ y y² = x⁴):</p><p class="calc"><span class="rw">num</span> x²·x²<b>=x⁴</b> <span class="sep">•</span> <span class="rw">den</span> x⁴+(x²)²<b>=2x⁴</b> <span class="sep">•</span> x⁴÷2x⁴<b>=½</b> → <b>½</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · comparo y concluyo</div><p>Dos trayectorias, dos valores:</p><p class="calc"><span class="rw">eje x</span> 0 <span class="sep">•</span> <span class="rw">y=x²</span> ½ <span class="sep">•</span> 0<b>≠</b>½ ⇒ <b>no existe</b></p></div>
+          <p class="verdict warn"><strong>El límite no existe:</strong> por el eje x vale 0 y por la parábola y = x² vale ½. Error típico: probar solo rectas y = mx (aquí TODAS dan 0) y concluir que el límite existe — cuando el denominador mezcla x⁴ con y², el camino que lo rompe es y = x².</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 NIVEL EXAMEN : límite que SÍ existe — polares + sándwich ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="limite_polares_sandwich" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Calcula el límite o demuestra que no existe</p>
+      <p class="pstatement">Determina, <strong>si existe</strong>, el valor del siguiente límite. Si existe, demuéstralo con <strong>coordenadas polares y una cota explícita</strong>; si no existe, exhibe dos trayectorias que discrepen.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">lím<sub>(x,y)→(0,0)</sub>   (x³ + y³) ⁄ (x² + y²)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>El profesor <strong>no te dice si existe</strong>: eso también se decide. Plan: sospechar con dos caminos baratos; si discrepan, ya terminé (no existe); si coinciden, ese valor es el candidato y lo <strong>demuestro</strong> con polares y el sándwich (una cota que aplaste todo al candidato).</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · sospecho con los ejes</div><p>Dos caminos baratos primero:</p><p class="calc"><span class="rw">eje x</span> x³÷x²<b>=x</b> → <b>0</b> <span class="sep">•</span> <span class="rw">eje y</span> y³÷y²<b>=y</b> → <b>0</b> <span class="sep">•</span> candidato 0, aún sin demostrar</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · paso a polares</div><p>Sustituyo x = r·cos θ, y = r·sen θ; el patrón x² + y² colapsa a r²:</p><p class="calc"><span class="rw">num</span> r³cos³θ+r³sen³θ<b>=r³(cos³θ+sen³θ)</b> <span class="sep">•</span> <span class="rw">den</span> x²+y²<b>=r²</b> <span class="sep">•</span> r³÷r²<b>=r</b></p><div class="fx"><div class="sys"><span class="eq">queda   r·(cos³θ + sen³θ)</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · acoto el factor de ángulo (sándwich)</div><p>Cada término trigonométrico vive entre −1 y 1, así que la suma no pasa de 2 en tamaño:</p><p class="calc"><span class="rw">cota</span> |cos³θ|≤1 y |sen³θ|≤1 <span class="sep">•</span> |cos³θ+sen³θ|<b>≤2</b> <span class="sep">•</span> atrapado entre −2r y 2r <span class="sep">•</span> r→0<b>⇒0</b></p></div>
+          <p class="verdict"><strong>El límite existe y vale 0.</strong> La cota es la demostración: −2r ≤ r(cos³θ + sen³θ) ≤ 2r y ambos extremos van a 0. Error típico: escribir "queda r por algo de θ, y r → 0, listo" <strong>sin acotar el algo</strong> — sin la cota ≤ 2 no hay demostración, porque un factor de ángulo no acotado podría arruinar el límite.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

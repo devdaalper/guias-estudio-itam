@@ -85,6 +85,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -505,6 +506,119 @@
           <div class="estep"><div class="oprow">Parciales de y</div><p>y = r·sen θ. Respecto a r → sen θ. Respecto a θ → r·cos θ:</p><p class="calc"><span class="rw">y</span> ∂y/∂r=<b>sen θ</b> <span class="sep">•</span> ∂y/∂θ=<b>r·cos θ</b></p><div class="fx" id="p15b"></div></div>
           <div class="estep"><div class="oprow">Determinante</div><p>Diagonal menos antidiagonal. Uso que cos²θ + sen²θ = 1:</p><p class="calc"><span class="rw">det</span> (cos θ)(r·cos θ)−(−r·sen θ)(sen θ)=r·cos²θ+r·sen²θ=<b>r</b></p><div class="fx" id="p15c"></div></div>
           <p class="verdict">El jacobiano de las polares es <strong>r</strong>. Se anula solo en <strong>r = 0</strong> (el origen), donde el cambio de coordenadas deja de ser invertible: por eso el origen es siempre el punto delicado en polares. Este r es el factor extra que aparece en la integral: dA = r·dr·dθ.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: la curva llega revuelta y piden la recta en forma y = mx + b, la superficie no viene acomodada como F = 0, te piden la constante que anula un jacobiano, y toca <strong>justificar</strong>. Estos problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 EXAMEN : recta tangente y = mx + b (patrón literal del parcial) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="recta_tangente_implicita" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Recta tangente a una curva implícita</p>
+      <p class="pstatement">La ecuación de una curva en el plano xy está dada por <strong>x³ + y² − 2x = 5</strong>. Encuentra la ecuación de la recta tangente a esta curva en el punto <strong>P(2, 1)</strong> y escríbela en la forma <strong>y = mx + b</strong>.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x³ + y² − 2x = 5,  P(2, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>“Recta tangente a la curva” = necesito la pendiente en P, y en una curva implícita la pendiente es dy/dx = −F<sub>x</sub>/F<sub>y</sub>. Con la pendiente armo la recta por P y la acomodo como y = mx + b. Antes de derivar, confirmo que P está en la curva:</p><p class="calc"><span class="rw">P</span> 2³+1²−2·2=8+1−4=<b>5 ✓</b></p></div>
+          <div class="estep"><div class="oprow">Paso 1 · F y sus parciales</div><p>Paso todo a un lado: F = x³ + y² − 2x − 5. Derivo y evalúo en (2, 1):</p><p class="calc"><span class="rw">F</span> F<sub>x</sub>=3x²−2→12−2=<b>10</b> <span class="sep">•</span> F<sub>y</sub>=2y→<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · pendiente en P</div><p>Fórmula del teorema, con F<sub>x</sub> arriba y F<sub>y</sub> abajo:</p><p class="calc"><span class="rw">m</span> =−F<sub>x</sub>/F<sub>y</sub>=−10÷2=<b>−5</b></p><div class="fx"><div class="sys"><span class="eq">dy/dx = −10/2 = −5</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · punto-pendiente → y = mx + b</div><p>Recta por (2, 1) con m = −5; despejo y:</p><p class="calc"><span class="rw">recta</span> y−1=−5(x−2) <span class="sep">•</span> y=−5x+10+1=<b>−5x+11</b></p><div class="fx"><div class="sys"><span class="eq">y = −5x + 11</span></div></div></div>
+          <p class="verdict"><strong>y = −5x + 11</strong> (m = −5, b = 11). Comprueba: en x = 2 da y = −10 + 11 = 1 ✓, pasa por P. El error que cuesta puntos: entregar y − 1 = −5(x − 2) sin acomodar — el enunciado exige la forma y = mx + b.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 EXAMEN : plano tangente a superficie implícita (patrón literal del parcial) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="plano_tangente_superficie" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Plano tangente a una superficie implícita</p>
+      <p class="pstatement">Encuentra la ecuación del plano tangente a la superficie en R³ dada por la ecuación <strong>x³ + y³ + z³ = 3xyz + 14</strong> en el punto <strong>P(2, −1, 1)</strong>.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x³ + y³ + z³ = 3xyz + 14,  P(2, −1, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La superficie no viene como z = f(x, y): viene implícita. Traducción: paso todo a un lado para tener F(x, y, z) = 0; el vector normal del plano tangente es el gradiente ∇F(P), y el plano es F<sub>x</sub>·(x − x₀) + F<sub>y</sub>·(y − y₀) + F<sub>z</sub>·(z − z₀) = 0. Confirmo que P está en la superficie:</p><p class="calc"><span class="rw">P</span> izq:8−1+1=<b>8</b> <span class="sep">•</span> der:3·2·(−1)·1+14=−6+14=<b>8 ✓</b></p></div>
+          <div class="estep"><div class="oprow">Paso 1 · F y sus tres parciales</div><p>F = x³ + y³ + z³ − 3xyz − 14. Ojo: el 3xyz cruzó restando y aporta a las TRES parciales:</p><p class="calc"><span class="rw">F</span> F<sub>x</sub>=<b>3x²−3yz</b> <span class="sep">•</span> F<sub>y</sub>=<b>3y²−3xz</b> <span class="sep">•</span> F<sub>z</sub>=<b>3z²−3xy</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · gradiente en P(2, −1, 1)</div><p>Sustituyo x = 2, y = −1, z = 1 en cada una (cuido el doble menos):</p><p class="calc"><span class="rw">∇F</span> F<sub>x</sub>=12−3(−1)(1)=12+3=<b>15</b> <span class="sep">•</span> F<sub>y</sub>=3−3(2)(1)=<b>−3</b> <span class="sep">•</span> F<sub>z</sub>=3−3(2)(−1)=3+6=<b>9</b></p><div class="fx"><div class="sys"><span class="eq">∇F(P) = (15, −3, 9) = 3·(5, −1, 3)</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · armo el plano</div><p>Uso el normal simplificado (5, −1, 3) y el punto P:</p><p class="calc"><span class="rw">plano</span> 5(x−2)−(y+1)+3(z−1)=0 <span class="sep">•</span> 5x−y+3z=10+1+3=<b>14</b></p><div class="fx"><div class="sys"><span class="eq">5x − y + 3z = 14</span></div></div></div>
+          <p class="verdict"><strong>5x − y + 3z = 14</strong>. Comprueba con P: 5·2 − (−1) + 3·1 = 10 + 1 + 3 = 14 ✓. El error que cuesta puntos: derivar solo el lado izquierdo y olvidar pasar el 3xyz a F — sin ese término las tres parciales salen mal.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 EXAMEN : vector normal no nulo (patrón literal del parcial) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="vector_normal_superficie" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Vector normal no nulo</p>
+      <p class="pstatement">Determina un vector no nulo y normal a la superficie <strong>z²x³ + y³e<sup>x−1</sup> = 3 + x²z·e<sup>y−1</sup></strong> en el punto <strong>(1, 1, 2)</strong>.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">z²x³ + y³e<sup>x−1</sup> = 3 + x²z·e<sup>y−1</sup>,  en (1, 1, 2)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>“Vector normal a la superficie” = el gradiente ∇F evaluado en el punto, con F = todo a un lado. No piden el plano: solo el vector, y que no sea (0, 0, 0). Las exponenciales están construidas a modo: en el punto, x − 1 = 0 y y − 1 = 0, así que e⁰ = 1 y todo se evalúa a mano. Confirmo el punto:</p><p class="calc"><span class="rw">P</span> izq:2²·1+1·1=<b>5</b> <span class="sep">•</span> der:3+1·2·1=<b>5 ✓</b></p></div>
+          <div class="estep"><div class="oprow">Paso 1 · F y su parcial F<sub>x</sub></div><p>F = z²x³ + y³e<sup>x−1</sup> − x²z·e<sup>y−1</sup> − 3. Derivo respecto a x (la exponencial e<sup>x−1</sup> se deriva a sí misma) y evalúo con e⁰ = 1:</p><p class="calc"><span class="rw">F<sub>x</sub></span> =3x²z²+y³e<sup>x−1</sup>−2xz·e<sup>y−1</sup>→12+1−4=<b>9</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · F<sub>y</sub></div><p>Respecto a y: el término y³ baja el 3; en el término restado, e<sup>y−1</sup> se deriva a sí misma y conserva su x²z:</p><p class="calc"><span class="rw">F<sub>y</sub></span> =3y²e<sup>x−1</sup>−x²z·e<sup>y−1</sup>→3−2=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · F<sub>z</sub></div><p>Respecto a z: z² baja el 2; el término restado es lineal en z:</p><p class="calc"><span class="rw">F<sub>z</sub></span> =2zx³−x²e<sup>y−1</sup>→4−1=<b>3</b></p><div class="fx"><div class="sys"><span class="eq">∇F(1, 1, 2) = (9, 1, 3)</span></div></div></div>
+          <p class="verdict">Un vector normal es <strong>(9, 1, 3)</strong>, que no es el vector cero ✓ (cualquier múltiplo distinto de cero también vale). El error que cuesta puntos: no pasar el lado derecho restando — el término x²z·e<sup>y−1</sup> debe entrar a F con signo menos, o las tres parciales salen con el signo cambiado.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 EXAMEN : inverso — a tal que el jacobiano se anule (patrón A6/M1) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="jacobiano" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla la constante: jacobiano que se anula</p>
+      <p class="pstatement">Sea T : R² → R² dada por <strong>T(x, y) = (x² + ay, xy)</strong>, donde a es una constante. Encuentra el valor de a tal que el determinante de la matriz jacobiana de T en el punto <strong>(2, 1)</strong> sea igual a cero, y di qué concluye el teorema de la función inversa en ese punto para ese valor de a.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y) = (x² + ay, xy),  det J = 0 en (2, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Es un problema inverso: no me dan a, me la piden. Traducción: a viaja dentro de la matriz como si fuera un número. Plan: armo el jacobiano con a adentro, saco el determinante (queda en función de a), evalúo en (2, 1), igualo a cero y despejo a.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · jacobiano con a adentro</div><p>Fila de u = x² + ay: (2x, a). Fila de v = xy: (y, x). Determinante: diagonal menos antidiagonal:</p><p class="calc"><span class="rw">J</span> u:(<b>2x</b>,<b>a</b>) <span class="sep">•</span> v:(<b>y</b>,<b>x</b>) <span class="sep">•</span> det=(2x)(x)−(a)(y)=<b>2x²−ay</b></p><div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols"><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2x</span><span>a</span></div><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>y</span><span>x</span></div></div><span class="brk brk-r"></span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · evalúo en (2, 1) e igualo a cero</div><p>Sustituyo x = 2, y = 1 y resuelvo para a:</p><p class="calc"><span class="rw">det</span> 2·(2²)−a·1=8−a=0 → a=<b>8</b></p><div class="fx"><div class="sys"><span class="eq">8 − a = 0  →  a = 8</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · sustituyo de vuelta (comprobación)</div><p>Con a = 8, la matriz en (2, 1) queda con det = 4·2 − 8·1 = 0 ✓. De hecho la fila (4, 8) es 4 veces la fila (1, 2): filas proporcionales, determinante cero seguro:</p><p class="calc"><span class="rw">✓</span> J(2,1): filas (4,8) y (1,2) <span class="sep">•</span> det=8−8=<b>0 ✓</b></p><div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols"><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>8</span></div><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span></div></div><span class="brk brk-r"></span></div></div></div>
+          <p class="verdict"><strong>a = 8</strong>. Con ese valor, det J(2, 1) = 0 y el teorema de la función inversa <strong>no garantiza</strong> inversa local ahí. Cuidado con la redacción que cuesta puntos: el teorema no afirma que la inversa no exista — solo se queda sin decir nada. “No garantiza” es la conclusión correcta.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 EXAMEN : V/F justificado — teorema de la implícita y de la inversa (patrón A1) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="teorema_implicita_inversa" data-level="examen">
+      <div class="phead"><span class="pnum">20</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Decide si cada afirmación es verdadera o falsa. <strong>Justifica</strong> cada una con un argumento de una línea o un contraejemplo; sin justificación no hay puntos. <strong>(a)</strong> La ecuación x² + y² = 25 define a y como función implícita de x cerca del punto (5, 0). <strong>(b)</strong> Si f : R → R es de clase C¹ con f(3) = 7 y f′(3) = 5, entonces f tiene inversa local cerca de 3 y (f⁻¹)′(7) = 1/5. <strong>(c)</strong> Si el determinante jacobiano de T en un punto p vale cero, el teorema de la función inversa asegura que T no tiene inversa cerca de p.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">(a) x² + y² = 25, en (5, 0)</span>
+        <span class="eq">(b) f(3) = 7,  f′(3) = 5</span>
+        <span class="eq">(c) det J<sub>T</sub>(p) = 0</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>“Define a y como función implícita cerca de P” pregunta por el teorema de la función implícita: la condición es F<sub>y</sub> ≠ 0 en el punto. “Inversa local” pregunta por el teorema de la inversa: f′ ≠ 0 (o det J ≠ 0). Cada inciso se decide evaluando UNA condición en el punto — y en (c) hay que cuidar la dirección lógica del teorema.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · (a) el círculo en (5, 0)</div><p>El punto sí está en el círculo (25 + 0 = 25 ✓), pero F = x² + y² − 25 tiene F<sub>y</sub> = 2y, que en (5, 0) vale cero. La condición falla, y de hecho ahí la tangente es vertical: a cada x un poco menor que 5 le corresponden DOS valores de y. <strong>Falsa</strong>:</p><p class="calc"><span class="rw">(a)</span> F<sub>y</sub>=2y→2·0=<b>0</b> → no se puede despejar y</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · (b) la inversa y su derivada</div><p>f′(3) = 5 ≠ 0 y f es C¹ → el teorema garantiza inversa local cerca de 3, con (f⁻¹)′(b) = 1/f′(a), donde a = 3 y b = f(3) = 7. <strong>Verdadera</strong>:</p><p class="calc"><span class="rw">(b)</span> (f⁻¹)′(7)=1÷f′(3)=<b>1/5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · (c) la dirección del teorema</div><p>El teorema va en una sola dirección: det ≠ 0 ⇒ hay inversa local. Cuando det = 0, el teorema no concluye nada — ni a favor ni en contra. Contraejemplo: f(x) = x³ cumple f′(0) = 0 y aun así tiene inversa (la raíz cúbica, f⁻¹(y) = ∛y). <strong>Falsa</strong>:</p><p class="calc"><span class="rw">(c)</span> f(x)=x³ → f′(0)=<b>0</b> y la inversa ∛y existe</p></div>
+          <p class="verdict"><strong>(a) F</strong> — F<sub>y</sub>(5, 0) = 0, el teorema no permite despejar y. <strong>(b) V</strong> — f′(3) = 5 ≠ 0 y (f⁻¹)′(7) = 1/5. <strong>(c) F</strong> — det = 0 significa “sin garantía”, no “sin inversa” (contraejemplo x³). El error que más cuesta: responder V o F sin la línea de justificación — la justificación vale tanto como la letra.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

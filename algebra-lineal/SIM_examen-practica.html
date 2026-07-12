@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulacro de examen · Álgebra Lineal I</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+  /* barras verticales para determinantes escritos como |A| */
+  .dtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .dbar{width:0;border-left:2.5px solid var(--ink);align-self:stretch}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;position:absolute;left:0;top:1px}
+
+  /* ===== problemas ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.dtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  @media(max-width:400px){.sys,.mtx,.dtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">90 min · sin calculadora</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Álgebra Lineal I · Simulacro de examen</p>
+    <h1>Simulacro de <mark>examen</mark> · Álgebra Lineal I</h1>
+    <p class="lead">Hazlo como examen: 90 minutos, sin calculadora, sin abrir soluciones hasta terminar todo.</p>
+    <div class="learn">
+      <h2>Los seis bloques del examen</h2>
+      <ol>
+        <li><span class="n">1</span> Sistemas de ecuaciones</li>
+        <li><span class="n">2</span> Vectores, subespacios y bases</li>
+        <li><span class="n">3</span> Transformaciones lineales</li>
+        <li><span class="n">4</span> Determinantes</li>
+        <li><span class="n">5</span> Valores propios y diagonalización</li>
+        <li><span class="n">6</span> Espacio euclídeo</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Cómo usar este simulacro</h2>
+    <section class="sec">
+      <h3>Protocolo de examen, no de estudio</h3>
+      <p class="idea">Este archivo se trabaja distinto a los cuadernillos. <strong>Pon un cronómetro de 90 minutos</strong>, toma hojas en blanco y resuelve los 11 problemas <strong>en orden y en papel</strong>, completos, con todas las justificaciones que pide cada enunciado. <strong>No abras ninguna solución hasta que suene el cronómetro o hayas terminado todo.</strong> Solo entonces abre problema por problema, coteja contra tu hoja y marca los botones. Al final genera el reporte para el tutor.</p>
+      <p class="idea">Los enunciados vienen en la voz del profesor: notación formal, sin pistas, con "justifica" y "determina todos los valores". Si un enunciado no se deja leer a la primera, tradúcelo tú a palabras llanas antes de calcular — ese es exactamente el músculo que el examen evalúa primero.</p>
+    </section>
+
+    <h2 class="modhead">Sistemas de ecuaciones</h2>
+
+    <!-- ============ S1 : sistema con parametro a -> clasificacion ============ -->
+    <section class="prob" data-kind="prob" data-id="S1" data-tema="sistemas_parametro" data-level="examen">
+      <div class="phead"><span class="pnum">1</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Clasificación de un sistema con parámetro</p>
+      <p class="pstatement">Sea a ∈ R. Clasifica el sistema siguiente según los valores de a: <strong>solución única, infinitas soluciones o ninguna solución</strong>. En los casos con infinitas soluciones, da la solución general. Justifica cada caso.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + y + a·z = 1</span>
+        <span class="eq">x + a·y + z = 1</span>
+        <span class="eq">a·x + y + z = 1</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Clasificar según a" no es resolver una vez: es <strong>separar los valores de a en casos</strong>. La herramienta: el determinante de la matriz de coeficientes decide "única" contra "no única". En los valores de a donde ese determinante se anula, hay que mirar el sistema a mano para distinguir <strong>infinitas</strong> de <strong>ninguna</strong> — el determinante solo no alcanza.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · determinante de coeficientes (cofactores, renglón 1)</div><p>Arrastro la a como si fuera un número. Signos del renglón 1: + − +:</p><p class="calc"><span class="rw">(1,1)</span> menor a·1−1·1=<b>a−1</b> → +1·(a−1) <span class="sep">•</span> <span class="rw">(1,2)</span> menor 1·1−1·a=1−a → −1·(1−a)=<b>a−1</b> <span class="sep">•</span> <span class="rw">(1,3)</span> menor 1·1−a·a=1−a² → +a·(1−a²)=<b>a−a³</b></p><p class="calc"><span class="rw">det</span> (a−1)+(a−1)+(a−a³) = <b>3a−2−a³</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · verificar por Sarrus</div><p>Segunda vía para blindar el polinomio:</p><p class="calc"><span class="rw">↘</span> 1·a·1 + 1·1·a + a·1·1 = <b>3a</b> <span class="sep">•</span> <span class="rw">↗</span> a·a·a + 1·1·1 + 1·1·1 = <b>a³+2</b> <span class="sep">•</span> <span class="rw">det</span> 3a−(a³+2)=<b>3a−2−a³</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · factorizar y hallar los ceros</div><p>det = −(a³−3a+2). Pruebo a = 1: 1−3+2 = 0 → (a−1) es factor. Divido a³−3a+2 entre (a−1): queda a²+a−2, que se factoriza en (a−1)(a+2):</p><p class="calc"><span class="rw">factor</span> a³−3a+2 = (a−1)(a²+a−2) = (a−1)²(a+2) <span class="sep">•</span> <span class="rw">det</span> −(a−1)²·(a+2) = 0 → <b>a=1 o a=−2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · caso a ≠ 1 y a ≠ −2</div><p>det ≠ 0 → <strong>solución única</strong>. (De hecho, por la simetría del sistema x = y = z, y la ecuación queda (a+2)·x = 1.)</p></div>
+          <div class="estep"><div class="oprow">Paso 5 · caso a = 1</div><p>Las tres ecuaciones se vuelven la misma: x + y + z = 1. Una sola ecuación con tres incógnitas → <strong>infinitas soluciones</strong>. Con y = s, z = t libres:</p><p class="calc"><span class="rw">general</span> (x, y, z) = <b>(1−s−t, s, t)</b>, s, t ∈ R</p></div>
+          <div class="estep"><div class="oprow">Paso 6 · caso a = −2</div><p>Las ecuaciones son x+y−2z = 1, x−2y+z = 1, −2x+y+z = 1. Sumo las tres — el lado izquierdo se cancela completo:</p><p class="calc"><span class="rw">x</span> 1+1−2=<b>0</b> <span class="sep">•</span> <span class="rw">y</span> 1−2+1=<b>0</b> <span class="sep">•</span> <span class="rw">z</span> −2+1+1=<b>0</b> <span class="sep">•</span> <span class="rw">derecha</span> 1+1+1=<b>3</b> → 0=3 ✗</p><p>Contradicción → <strong>ninguna solución</strong>.</p></div>
+          <p class="verdict"><strong>Única si a ≠ 1 y a ≠ −2 · infinitas si a = 1 (solución general (1−s−t, s, t)) · ninguna si a = −2.</strong> El error que cuesta puntos: quedarse en "det = 0 para a = 1 y a = −2" sin separar los dos casos — det 0 solo dice "no única"; distinguir infinitas de ninguna se gana examinando las ecuaciones.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ S2 : sistema 3x3 completo por Gauss ============ -->
+    <section class="prob" data-kind="prob" data-id="S2" data-tema="sistemas_gauss_3x3" data-level="examen">
+      <div class="phead"><span class="pnum">2</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Sistema 3×3 por eliminación gaussiana</p>
+      <p class="pstatement">Resuelve completamente el sistema siguiente mediante eliminación gaussiana. Indica explícitamente cada operación de renglón que utilices y <strong>comprueba tu solución en las tres ecuaciones originales</strong>.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + 2y − z = 7</span>
+        <span class="eq">2x + 5y + z = 9</span>
+        <span class="eq">−x + y + 4z = −10</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Indica cada operación" significa que las operaciones de renglón <strong>también se califican</strong>: escribo R2 → R2 − 2R1 al margen, no solo el resultado. Y "comprueba" es la sustitución final en las tres ecuaciones — puntos aparte que no hay que regalar. Paso todo a matriz aumentada y escalono.</p><div class="fx"><div class="sys"><span class="eq">[ 1, 2, −1 | 7 ]</span><span class="eq">[ 2, 5, 1 | 9 ]</span><span class="eq">[ −1, 1, 4 | −10 ]</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 1 · hacer ceros bajo el primer pivote</div><p>R2 → R2 − 2R1 y R3 → R3 + R1:</p><p class="calc"><span class="rw">R2−2R1</span> (2−2, 5−4, 1−(−2) | 9−14) = <b>[ 0, 1, 3 | −5 ]</b> <span class="sep">•</span> <span class="rw">R3+R1</span> (−1+1, 1+2, 4−1 | −10+7) = <b>[ 0, 3, 3 | −3 ]</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · limpiar el segundo pivote</div><p>R3 → (1/3)·R3 para trabajar con números chicos, y luego R3 → R3 − R2:</p><p class="calc"><span class="rw">(1/3)R3</span> [ 0, 1, 1 | −1 ] <span class="sep">•</span> <span class="rw">R3−R2</span> (0, 0, 1−3 | −1−(−5)) = <b>[ 0, 0, −2 | 4 ]</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · sustitución hacia atrás</div><p>De abajo hacia arriba:</p><p class="calc"><span class="rw">z</span> −2z=4 → z=<b>−2</b> <span class="sep">•</span> <span class="rw">y</span> y+3z=−5 → y=−5−3·(−2)=−5+6=<b>1</b> <span class="sep">•</span> <span class="rw">x</span> x=7−2y+z=7−2−2=<b>3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · comprobar en las tres ecuaciones originales</div><p>Sustituyo (3, 1, −2):</p><p class="calc"><span class="rw">ec. 1</span> 3+2·1−(−2)=3+2+2=<b>7</b> ✓ <span class="sep">•</span> <span class="rw">ec. 2</span> 2·3+5·1+(−2)=6+5−2=<b>9</b> ✓ <span class="sep">•</span> <span class="rw">ec. 3</span> −3+1+4·(−2)=−3+1−8=<b>−10</b> ✓</p></div>
+          <p class="verdict"><strong>(x, y, z) = (3, 1, −2), solución única.</strong> Los puntos se pierden en dos lugares: los signos al restar renglones (el 1−(−2) = 3 de R2 es el clásico) y saltarse la comprobación cuando el enunciado la pide explícitamente — es la parte más barata del problema y también se califica.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Vectores, subespacios y bases</h2>
+
+    <!-- ============ S3 : V/F justificado estilo Tarea 3 ============ -->
+    <section class="prob" data-kind="prob" data-id="S3" data-tema="subespacios_vf" data-level="examen">
+      <div class="phead"><span class="pnum">3</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Considera los vectores u₁, u₂, u₃, u₄ dados abajo. Indica cuáles de las siguientes afirmaciones son <strong>verdaderas o falsas, justificando su respuesta</strong>. Respuesta sin justificación no recibe puntos.<br><strong>(i)</strong> El conjunto {u₁, u₂, u₃} es linealmente independiente.<br><strong>(ii)</strong> gen({u₃}) ⊂ gen({u₁, u₂}).<br><strong>(iii)</strong> Cualquier conjunto que contenga a u₄ no puede ser linealmente independiente.<br><strong>(iv)</strong> El conjunto {u₁, u₂} es una base de R³.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u₁ = (1, 2, 0)</span>
+        <span class="eq">u₂ = (0, 1, −1)</span>
+        <span class="eq">u₃ = (2, 5, −1)</span>
+        <span class="eq">u₄ = (0, 0, 0)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>En un V/F de este formato cada inciso vale por su <strong>justificación</strong>: para una falsa, un cálculo o contraejemplo concreto; para una verdadera, la propiedad o el argumento de una línea. Antes de contestar nada, miro los vectores buscando relaciones a ojo — aquí u₃ huele a combinación de u₁ y u₂, y u₄ es el vector cero: la trampa clásica.</p></div>
+          <div class="estep"><div class="oprow">(i) {u₁, u₂, u₃} independiente · FALSA</div><p>Pruebo la relación sospechosa 2u₁ + u₂:</p><p class="calc"><span class="rw">2u₁+u₂</span> (2+0, 4+1, 0−1) = <b>(2, 5, −1)</b> = u₃ ✓</p><p>Como u₃ = 2u₁ + u₂, la combinación 2u₁ + u₂ − u₃ = 0 no es trivial → LD. Doble vía con el determinante (renglones u₁, u₂, u₃), desarrollando por el renglón 1:</p><p class="calc"><span class="rw">(1,1)</span> +1·(1·(−1)−(−1)·5)=<b>4</b> <span class="sep">•</span> <span class="rw">(1,2)</span> −2·(0·(−1)−(−1)·2)=<b>−4</b> <span class="sep">•</span> <span class="rw">(1,3)</span> 0·(menor)=<b>0</b> <span class="sep">•</span> <span class="rw">det</span> 4−4+0=<b>0</b> ✓</p></div>
+          <div class="estep"><div class="oprow">(ii) gen({u₃}) ⊂ gen({u₁, u₂}) · VERDADERA</div><p>Ya vimos u₃ = 2u₁ + u₂ ∈ gen({u₁, u₂}). Todo elemento de gen({u₃}) es de la forma c·u₃ = 2c·u₁ + c·u₂, que también está en gen({u₁, u₂}). La contención se justifica exhibiendo esa combinación.</p></div>
+          <div class="estep"><div class="oprow">(iii) todo conjunto con u₄ es LD · VERDADERA</div><p>u₄ es el vector cero. La combinación 1·u₄ + 0·(los demás) = 0 tiene un coeficiente distinto de cero (el 1) → combinación no trivial que da cero → el conjunto <strong>nunca</strong> puede ser LI, sin importar qué más contenga.</p></div>
+          <div class="estep"><div class="oprow">(iv) {u₁, u₂} base de R³ · FALSA</div><p>dim(R³) = 3: toda base de R³ tiene exactamente 3 vectores. Dos vectores generan a lo más un plano, nunca todo R³. (Por ejemplo, no se puede alcanzar cualquier vector con tercera coordenada arbitraria fijando ya x e y.) Falla la condición de generar, así que no es base.</p></div>
+          <p class="verdict"><strong>(i) F · (ii) V · (iii) V · (iv) F.</strong> Como se escribe en el examen: "(i) Falsa: u₃ = 2u₁ + u₂". El punto que más se pierde: decidir bien V o F pero justificar con "se ve que sí" — sin la combinación explícita o la propiedad citada, el inciso vale cero.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ S4 : base de un plano dado por ecuacion ============ -->
+    <section class="prob" data-kind="prob" data-id="S4" data-tema="base_plano" data-level="examen">
+      <div class="phead"><span class="pnum">4</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Base de un plano dado por su ecuación</p>
+      <p class="pstatement">Sea V el subespacio de R³ definido abajo. <strong>(a)</strong> Encuentra una base de V y determina dim(V). <strong>(b)</strong> Verifica que cada vector de tu base pertenece a V. <strong>(c)</strong> Decide si w = (8, −1, 2) pertenece a V; en caso afirmativo, escríbelo como combinación lineal de tu base.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">V = {(x, y, z) ∈ R³ | x + 2y − 3z = 0}</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La notación se lee: "V es el conjunto de todos los (x, y, z) de R³ que cumplen x + 2y − 3z = 0". Una ecuación homogénea en R³ = un <strong>plano por el origen</strong>. Para la base: despejo una variable, dejo las otras dos libres como parámetros y separo — cada parámetro regala un vector de la base.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · despejar y parametrizar</div><p>Despejo x (su coeficiente es 1): x = −2y + 3z. Con y = s y z = t libres:</p><p class="calc"><span class="rw">vector</span> (x, y, z) = (−2s+3t, s, t) = s·(−2, 1, 0) + t·(3, 0, 1)</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · base y dimensión</div><p>B = {(−2, 1, 0), (3, 0, 1)}. Son LI: mirando la segunda y tercera coordenadas, (1, 0) y (0, 1), ninguno es múltiplo del otro. Dos vectores LI que generan V → base, y <strong>dim(V) = 2</strong> (como corresponde a un plano).</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · verificar que la base vive en V</div><p>Cada vector debe cumplir la ecuación de V:</p><p class="calc"><span class="rw">(−2,1,0)</span> −2+2·1−3·0=<b>0</b> ✓ <span class="sep">•</span> <span class="rw">(3,0,1)</span> 3+2·0−3·1=<b>0</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · ¿w = (8, −1, 2) está en V?</div><p>Primero la ecuación; luego la combinación. Los coeficientes se leen directo de las coordenadas y y z de w (así se construyó la base):</p><p class="calc"><span class="rw">ecuación</span> 8+2·(−1)−3·2=8−2−6=<b>0</b> ✓ pertenece <span class="sep">•</span> <span class="rw">s</span> = coord. y = <b>−1</b> <span class="sep">•</span> <span class="rw">t</span> = coord. z = <b>2</b></p><p class="calc"><span class="rw">check</span> −1·(−2, 1, 0) + 2·(3, 0, 1) = (2+6, −1, 2) = <b>(8, −1, 2)</b> ✓</p></div>
+          <p class="verdict"><strong>B = {(−2, 1, 0), (3, 0, 1)}, dim(V) = 2, y w ∈ V con w = −u₁ + 2u₂.</strong> Dos errores caros: dar tres vectores "porque estamos en R³" (la dimensión la manda la ecuación, no el espacio ambiente) y olvidar la verificación del inciso (b) — sustituir cada vector en la ecuación toma dos renglones y vale puntos. Ojo: la base no es única; cualquier par LI dentro del plano también es válido.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ S5 : inverso, a para dependencia lineal ============ -->
+    <section class="prob" data-kind="prob" data-id="S5" data-tema="ld_parametro" data-level="examen">
+      <div class="phead"><span class="pnum">5</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla a para que el conjunto sea dependiente</p>
+      <p class="pstatement">Determina <strong>todos los valores de a ∈ R</strong> para los cuales el conjunto de abajo es <strong>linealmente dependiente</strong>. Para cada valor hallado, exhibe explícitamente una combinación lineal no trivial que lo demuestre.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">{ (1, 1, 2), (2, a, 1), (3, 4, a) }</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Tres vectores en R³ son LD exactamente cuando el determinante de la 3×3 que forman (como renglones) es <strong>cero</strong>. La a aparece dos veces, así que el determinante será un polinomio en a — "todos los valores" avisa que puede haber más de una raíz. Y "exhibe la combinación" pide un segundo entregable: los coeficientes concretos, no solo la a.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · determinante con la a adentro (cofactores, renglón 1)</div><p>Signos + − +:</p><p class="calc"><span class="rw">(1,1)</span> menor a·a−1·4=<b>a²−4</b> <span class="sep">•</span> <span class="rw">(1,2)</span> menor 2·a−1·3=2a−3, con signo −: <b>−(2a−3)</b> <span class="sep">•</span> <span class="rw">(1,3)</span> menor 2·4−a·3=8−3a, por 2: <b>2(8−3a)</b></p><p class="calc"><span class="rw">det</span> (a²−4)−(2a−3)+(16−6a) = a²−4−2a+3+16−6a = <b>a²−8a+15</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · resolver det = 0</div><p>Busco dos números que multipliquen 15 y sumen 8: son 3 y 5:</p><p class="calc"><span class="rw">factor</span> a²−8a+15 = (a−3)(a−5) = 0 → <b>a=3 o a=5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · combinación explícita para a = 3</div><p>Los vectores quedan (1, 1, 2), (2, 3, 1), (3, 4, 3). El tercero salta a la vista:</p><p class="calc"><span class="rw">v₁+v₂</span> (1+2, 1+3, 2+1) = <b>(3, 4, 3)</b> = v₃ ✓ → <b>v₁ + v₂ − v₃ = 0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · combinación explícita para a = 5</div><p>Los vectores quedan (1, 1, 2), (2, 5, 1), (3, 4, 5). Primero confirmo det = 0 por Sarrus y luego doy la combinación entera:</p><p class="calc"><span class="rw">↘</span> 1·5·5 + 1·1·3 + 2·2·4 = 25+3+16 = <b>44</b> <span class="sep">•</span> <span class="rw">↗</span> 3·5·2 + 4·1·1 + 5·2·1 = 30+4+10 = <b>44</b> <span class="sep">•</span> <span class="rw">det</span> 44−44=<b>0</b> ✓</p><p class="calc"><span class="rw">7v₁+v₂−3v₃</span> (7+2−9, 7+5−12, 14+1−15) = <b>(0, 0, 0)</b> ✓ → <b>7v₁ + v₂ − 3v₃ = 0</b></p></div>
+          <p class="verdict"><strong>a = 3 y a = 5.</strong> Con a = 3: v₁ + v₂ − v₃ = 0; con a = 5: 7v₁ + v₂ − 3v₃ = 0. Dos errores que cuestan puntos: entregar una sola raíz de la cuadrática ("todos los valores" eran dos) y dar la a sin la combinación no trivial — el enunciado pedía exhibirla, y esa parte vale tanto como la ecuación.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Transformaciones lineales</h2>
+
+    <!-- ============ S6 : T abstracta con imagenes de una base no canonica ============ -->
+    <section class="prob" data-kind="prob" data-id="S6" data-tema="transformacion_abstracta" data-level="examen">
+      <div class="phead"><span class="pnum">6</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">T conocida solo por sus imágenes</p>
+      <p class="pstatement">Sea T : R² → R² una transformación lineal tal que se cumplen las dos condiciones de abajo. <strong>(a)</strong> Calcula T(3, 1). <strong>(b)</strong> Encuentra la matriz de T respecto de la base canónica. <strong>(c)</strong> Verifica tu matriz aplicándola a (1, 1) y a (1, −1).</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(1, 1) = (2, 5)</span>
+        <span class="eq">T(1, −1) = (4, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>No conozco la fórmula de T: solo sé qué hace con (1, 1) y (1, −1). Como esos dos vectores forman una base de R², eso <strong>determina T por completo</strong>. La única herramienta es la linealidad: T(α·u + β·v) = α·T(u) + β·T(v). El plan: escribir cada vector que me pidan como combinación de (1, 1) y (1, −1), y repartir la T.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · T(3, 1)</div><p>Busco α, β con (3, 1) = α·(1, 1) + β·(1, −1). Coordenada a coordenada: α+β = 3 y α−β = 1. Sumo las dos ecuaciones:</p><p class="calc"><span class="rw">α</span> 2α=4 → α=<b>2</b> <span class="sep">•</span> <span class="rw">β</span> β=3−2=<b>1</b> <span class="sep">•</span> <span class="rw">T(3,1)</span> 2·(2, 5) + 1·(4, 1) = (4+4, 10+1) = <b>(8, 11)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · imágenes de la base canónica</div><p>Para la matriz necesito T(e₁) y T(e₂). Escribo e₁ y e₂ en la base dada — las combinaciones salen con mitades:</p><p class="calc"><span class="rw">e₁</span> (1,0) = (1/2)·(1,1) + (1/2)·(1,−1) → T(e₁) = ((2+4)/2, (5+1)/2) = <b>(3, 3)</b></p><p class="calc"><span class="rw">e₂</span> (0,1) = (1/2)·(1,1) − (1/2)·(1,−1) → T(e₂) = ((2−4)/2, (5−1)/2) = <b>(−1, 2)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · armar la matriz (columnas = imágenes)</div><p>Las columnas de la matriz canónica son T(e₁) y T(e₂), en ese orden:</p><div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+            <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−1</span></div>
+            <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>2</span></div>
+          </div><span class="brk brk-r"></span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 4 · verificar con los datos originales</div><p>La matriz debe reproducir las dos condiciones del enunciado — y de paso el inciso (a):</p><p class="calc"><span class="rw">A·(1,1)</span> (3−1, 3+2) = <b>(2, 5)</b> ✓ <span class="sep">•</span> <span class="rw">A·(1,−1)</span> (3+1, 3−2) = <b>(4, 1)</b> ✓ <span class="sep">•</span> <span class="rw">A·(3,1)</span> (9−1, 9+2) = <b>(8, 11)</b> ✓</p></div>
+          <p class="verdict"><strong>T(3, 1) = (8, 11) y la matriz canónica es la de arriba (columnas (3, 3) y (−1, 2)).</strong> El error clásico de este formato: poner (2, 5) y (4, 1) como columnas de la matriz — esas son las imágenes de (1, 1) y (1, −1), no de e₁ y e₂. La matriz canónica se arma con T(e₁) y T(e₂), y hay que calcularlas.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ S7 : nucleo, imagen, rango-nulidad ============ -->
+    <section class="prob" data-kind="prob" data-id="S7" data-tema="nucleo_imagen" data-level="examen">
+      <div class="phead"><span class="pnum">7</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Núcleo, imagen y el teorema de la dimensión</p>
+      <p class="pstatement">Sea T : R³ → R³ la transformación lineal definida abajo. <strong>(a)</strong> Encuentra una base del núcleo de T. <strong>(b)</strong> Encuentra una base de la imagen de T. <strong>(c)</strong> Da el rango y la nulidad, y verifica el teorema de la dimensión. <strong>(d)</strong> Decide, justificando, si T es inyectiva y si es suprayectiva.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">T(x, y, z) = (x + 4y + 2z, 2x + 9y + 5z, x + 5y + 3z)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Núcleo = soluciones de T(v) = 0, o sea un sistema homogéneo. Imagen = lo que generan las <strong>columnas</strong> de la matriz de T. Rango + nulidad debe dar 3 (la dimensión del dominio). Inyectiva ⇔ núcleo = {0}; suprayectiva ⇔ rango = 3. Todo sale de escalonar una sola matriz.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · matriz de T y escalonado</div><p>Los renglones son los coeficientes de cada componente. Escalono:</p><div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+            <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>4</span><span>2</span></div>
+            <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>9</span><span>5</span></div>
+            <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>5</span><span>3</span></div>
+          </div><span class="brk brk-r"></span></div></div><p class="calc"><span class="rw">R2−2R1</span> (0, 9−8, 5−4) = <b>(0, 1, 1)</b> <span class="sep">•</span> <span class="rw">R3−R1</span> (0, 5−4, 3−2) = <b>(0, 1, 1)</b> <span class="sep">•</span> <span class="rw">R3−R2</span> <b>(0, 0, 0)</b></p><p>Dos renglones no nulos → <strong>rango 2</strong>, y por el teorema, nulidad = 3 − 2 = 1.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · núcleo</div><p>El sistema escalonado: x + 4y + 2z = 0 y y + z = 0. Con z = t libre: y = −t, y x = −4y − 2z = 4t − 2t = 2t:</p><p class="calc"><span class="rw">núcleo</span> (x, y, z) = t·<b>(2, −1, 1)</b> → base del núcleo: { (2, −1, 1) }, nulidad <b>1</b></p><p>Compruebo aplicando T al vector:</p><p class="calc"><span class="rw">T(2,−1,1)</span> (2−4+2, 4−9+5, 2−5+3) = <b>(0, 0, 0)</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · imagen</div><p>Los pivotes quedaron en las columnas 1 y 2 → las columnas 1 y 2 <strong>originales</strong> generan la imagen: c₁ = (1, 2, 1) y c₂ = (4, 9, 5). Son LI (no son múltiplos). La tercera columna sobra porque es combinación de esas dos:</p><p class="calc"><span class="rw">c₂−2c₁</span> (4−2, 9−4, 5−2) = <b>(2, 5, 3)</b> = c₃ ✓</p><p>Base de la imagen: { (1, 2, 1), (4, 9, 5) }, rango <b>2</b>.</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · teorema de la dimensión y clasificación</div><p>Verifico: rango + nulidad = 2 + 1 = 3 = dim(R³) ✓. Nulidad 1 &gt; 0 → el núcleo tiene más que el cero → <strong>no inyectiva</strong>. Rango 2 &lt; 3 → la imagen no llena R³ → <strong>no suprayectiva</strong>.</p></div>
+          <p class="verdict"><strong>Núcleo = gen{(2, −1, 1)}; imagen = gen{(1, 2, 1), (4, 9, 5)}; rango 2, nulidad 1 (2 + 1 = 3 ✓); ni inyectiva ni suprayectiva.</strong> El error que cuesta puntos: dar como base de la imagen los renglones escalonados — la imagen se genera con las <em>columnas originales</em> de las posiciones pivote, no con lo que quedó tras escalonar.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Determinantes</h2>
+
+    <!-- ============ S8 : det 3x3 por dos metodos ============ -->
+    <section class="prob" data-kind="prob" data-id="S8" data-tema="det_dos_metodos" data-level="examen">
+      <div class="phead"><span class="pnum">8</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Un determinante, dos métodos</p>
+      <p class="pstatement">Sea A la matriz de abajo. Calcula det(A) desarrollando por cofactores <strong>a lo largo de la primera columna</strong> y verifica tu resultado mediante la <strong>regla de Sarrus</strong>. Ambos procedimientos deben aparecer completos. Concluye si A es invertible.</p>
+      <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>3</span></div>
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>4</span><span>2</span></div>
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>2</span><span>1</span></div>
+      </div><span class="brk brk-r"></span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La columna viene <strong>impuesta</strong>: primera columna, cuyos signos en el tablero son <strong>+ − +</strong> (de arriba hacia abajo). Pedir dos métodos es un auto-chequeo integrado: si cofactores y Sarrus no coinciden, hay un error escondido y toca cazarlo antes de entregar.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · primer término: 2 en (1,1), signo +</div><p>Tapo renglón 1 y columna 1; queda [[4, 2],[2, 1]]:</p><p class="calc"><span class="rw">menor</span> 4·1−2·2=4−4=<b>0</b> <span class="sep">•</span> <span class="rw">término</span> +(2·0)=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · segundo término: 1 en (2,1), signo −</div><p>Tapo renglón 2 y columna 1; queda [[1, 3],[2, 1]]. Este lleva el signo menos del tablero:</p><p class="calc"><span class="rw">menor</span> 1·1−3·2=1−6=<b>−5</b> <span class="sep">•</span> <span class="rw">término</span> −(1·(−5))=<b>+5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · tercer término: 3 en (3,1), signo +</div><p>Tapo renglón 3 y columna 1; queda [[1, 3],[4, 2]]:</p><p class="calc"><span class="rw">menor</span> 1·2−3·4=2−12=<b>−10</b> <span class="sep">•</span> <span class="rw">término</span> +(3·(−10))=<b>−30</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · sumar los términos</div><p>Con sus signos ya incorporados:</p><p class="calc"><span class="rw">det</span> 0 + 5 + (−30) = <b>−25</b></p></div>
+          <div class="estep"><div class="oprow">Paso 5 · verificar por Sarrus</div><p>Copio los renglones 1 y 2 debajo; sumo las diagonales que bajan ↘ y resto las que suben ↗:</p><p class="calc"><span class="rw">↘</span> 2·4·1 + 1·2·3 + 3·1·2 = 8+6+6 = <b>20</b> <span class="sep">•</span> <span class="rw">↗</span> 3·4·3 + 2·2·2 + 1·1·1 = 36+8+1 = <b>45</b></p><p class="calc"><span class="rw">det</span> 20−45=<b>−25</b> ✓ coincide con cofactores</p></div>
+          <p class="verdict"><strong>det(A) = −25, confirmado por ambos métodos. Como −25 ≠ 0, A es invertible.</strong> Los puntos se pierden en el signo − de la posición (2,1) del tablero (al desarrollar por columna, el patrón + − + corre hacia abajo) y en concluir "no invertible" por ver el determinante negativo — invertible es det ≠ 0, con cualquier signo.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ S9 : inverso, a para det = 0 ============ -->
+    <section class="prob" data-kind="prob" data-id="S9" data-tema="det_parametro" data-level="examen">
+      <div class="phead"><span class="pnum">9</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla a para que la matriz sea singular</p>
+      <p class="pstatement">Sea a ∈ R y sea B la matriz de abajo. Determina <strong>todos los valores de a</strong> para los cuales B es <strong>singular</strong>. Comprueba tu respuesta sustituyendo el valor hallado en la matriz.</p>
+      <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>a</span></div>
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>3</span></div>
+        <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>4</span><span>1</span><span>2</span></div>
+      </div><span class="brk brk-r"></span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Singular" es código de examen para <strong>no invertible</strong>, o sea det(B) = 0. La a se arrastra como un número más: el determinante quedará como expresión en a, la igualo a cero y despejo. "Comprueba" pide sustituir el valor de vuelta y ver que el determinante efectivamente muere.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · elegir por dónde desarrollar</div><p>El renglón 2 es (1, 0, 3): trae un cero y ninguna a. Desarrollo por ahí. Signos del tablero en el renglón 2: <strong>− + −</strong>.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · los dos términos vivos</div><p>El 0 de (2,2) anula su término. Quedan el 1 de (2,1), signo −, y el 3 de (2,3), signo −:</p><p class="calc"><span class="rw">(2,1)</span> menor 1·2−a·1=2−a → −(1·(2−a))=<b>a−2</b> <span class="sep">•</span> <span class="rw">(2,3)</span> menor 2·1−1·4=−2 → −(3·(−2))=<b>+6</b></p><p class="calc"><span class="rw">det(B)</span> (a−2) + 0 + 6 = <b>a+4</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · resolver det = 0</div><p class="calc"><span class="rw">det=0</span> a+4=0 → <b>a=−4</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · comprobar con a = −4</div><p>Los renglones quedan (2, 1, −4), (1, 0, 3), (4, 1, 2). Verifico por Sarrus:</p><p class="calc"><span class="rw">↘</span> 2·0·2 + 1·3·4 + (−4)·1·1 = 0+12−4 = <b>8</b> <span class="sep">•</span> <span class="rw">↗</span> 4·0·(−4) + 1·3·2 + 2·1·1 = 0+6+2 = <b>8</b> <span class="sep">•</span> <span class="rw">det</span> 8−8=<b>0</b> ✓</p><p>Y se ve a ojo: R3 = R1 + 2·R2 (2+2 = 4, 1+0 = 1, −4+6 = 2). Renglones dependientes → determinante 0, como debía.</p></div>
+          <p class="verdict"><strong>B es singular únicamente cuando a = −4; para cualquier otro valor, det(B) = a + 4 ≠ 0 y B es invertible.</strong> El error que cuesta puntos aquí: los dos signos − del tablero en el renglón 2 (posiciones (2,1) y (2,3)) — perder uno cambia el determinante completo y la a sale mal.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Valores propios y diagonalización</h2>
+
+    <!-- ============ S10 : valores y vectores propios completos + diagonalizacion ============ -->
+    <section class="prob" data-kind="prob" data-id="S10" data-tema="valores_propios" data-level="examen">
+      <div class="phead"><span class="pnum">10</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Valores propios, vectores propios y P·D·P⁻¹</p>
+      <p class="pstatement">Sea A la matriz de abajo. <strong>(a)</strong> Encuentra todos los valores propios de A. <strong>(b)</strong> Para cada valor propio, encuentra un vector propio. <strong>(c)</strong> Verifica en cada caso que A·v = λ·v. <strong>(d)</strong> Decide si A es diagonalizable; si lo es, escribe matrices P y D tales que A = P·D·P⁻¹.</p>
+      <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+        <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span></div>
+        <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span></div>
+      </div><span class="brk brk-r"></span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Cuatro entregables encadenados: los λ salen de det(A − λI) = 0; cada vector propio, de resolver (A − λI)·v = 0 con solución <strong>no nula</strong>; la verificación es multiplicar A·v y comparar con λ·v tal cual; y diagonalizable significa juntar tantos vectores propios LI como el tamaño de la matriz — en 2×2, dos.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · polinomio característico</div><p>Resto λ en la diagonal y saco el determinante:</p><p class="calc"><span class="rw">det(A−λI)</span> (1−λ)(3−λ)−4·2 = 3−4λ+λ²−8 = <b>λ²−4λ−5</b></p><p>Factorizo: dos números que multipliquen −5 y sumen −4: son −5 y +1:</p><p class="calc"><span class="rw">factor</span> λ²−4λ−5 = (λ−5)(λ+1) = 0 → <b>λ₁=5, λ₂=−1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · vector propio de λ = 5</div><p>A − 5I = [[−4, 4],[2, −2]]. El sistema: −4x + 4y = 0 → y = x. Tomo x = 1:</p><p class="calc"><span class="rw">v₁</span> = <b>(1, 1)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · vector propio de λ = −1</div><p>A + I = [[2, 4],[2, 4]]. El sistema: 2x + 4y = 0 → x = −2y. Tomo y = −1:</p><p class="calc"><span class="rw">v₂</span> = <b>(2, −1)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · verificar A·v = λ·v</div><p>Multiplico A por cada vector, sin atajos:</p><p class="calc"><span class="rw">A·(1,1)</span> (1·1+4·1, 2·1+3·1) = <b>(5, 5)</b> = 5·(1, 1) ✓</p><p class="calc"><span class="rw">A·(2,−1)</span> (1·2+4·(−1), 2·2+3·(−1)) = (2−4, 4−3) = <b>(−2, 1)</b> = −1·(2, −1) ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 5 · diagonalización</div><p>Dos valores propios <strong>distintos</strong> en una 2×2 → los vectores propios son LI automáticamente → A es <strong>diagonalizable</strong>. P lleva los vectores propios como columnas y D los λ en el mismo orden:</p><div class="fx"><div class="sys"><span class="eq">P = [ (1, 1) | (2, −1) ] ,  D con diagonal (5, −1)</span></div></div><p>Chequeo rápido de LI: det(P) = 1·(−1) − 2·1 = −3 ≠ 0 ✓. Y la columna a columna: A·P tiene columnas A·v₁ = (5, 5) y A·v₂ = (−2, 1), exactamente las columnas de P·D ✓.</p></div>
+          <p class="verdict"><strong>λ = 5 con v = (1, 1) y λ = −1 con v = (2, −1); A es diagonalizable con P = [[1, 2],[1, −1]] y D = [[5, 0],[0, −1]].</strong> El error que cuesta puntos: desordenar P respecto de D — si (1, 1) va en la primera columna de P, el 5 va en la primera posición de D; cruzarlos rompe A = P·D·P⁻¹ aunque todo lo demás esté bien.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Espacio euclídeo</h2>
+
+    <!-- ============ S11 : proyeccion + ortogonalidad ============ -->
+    <section class="prob" data-kind="prob" data-id="S11" data-tema="proyeccion_ortogonalidad" data-level="examen">
+      <div class="phead"><span class="pnum">11</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Proyección ortogonal y descomposición</p>
+      <p class="pstatement">Sean u y v los vectores de R³ dados abajo, con el producto punto usual. <strong>(a)</strong> Calcula proy<sub>v</sub>(u). <strong>(b)</strong> Escribe u = p + w, donde p es paralelo a v y w es ortogonal a v; verifica que w · v = 0 y que las dos piezas suman u. <strong>(c)</strong> Determina a ∈ R tal que el vector (a, 3, −2) sea ortogonal a v.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (2, 5, 4)</span>
+        <span class="eq">v = (2, 2, 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>El subíndice de proy<sub>v</sub>(u) dice <strong>sobre qué vector</strong> se proyecta: sobre v. La fórmula: proy<sub>v</sub>(u) = ((u · v) / (v · v)) · v — el cociente lleva v · v abajo, no la norma. La descomposición del inciso (b) es gratis una vez hecha la proyección: p es la proyección misma y w = u − p. Y "ortogonal" siempre se traduce a "producto punto igual a cero".</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · los dos productos punto</div><p class="calc"><span class="rw">u·v</span> 2·2+5·2+4·1 = 4+10+4 = <b>18</b> <span class="sep">•</span> <span class="rw">v·v</span> 2·2+2·2+1·1 = 4+4+1 = <b>9</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · la proyección</div><p>El factor es 18/9 = 2, y escala a v:</p><p class="calc"><span class="rw">proy<sub>v</sub>(u)</span> 2·(2, 2, 1) = <b>(4, 4, 2)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · descomposición u = p + w</div><p>p = (4, 4, 2) y w = u − p:</p><p class="calc"><span class="rw">w</span> (2−4, 5−4, 4−2) = <b>(−2, 1, 2)</b></p><p>Verifico las dos condiciones que pide el enunciado:</p><p class="calc"><span class="rw">w·v</span> (−2)·2+1·2+2·1 = −4+2+2 = <b>0</b> ✓ <span class="sep">•</span> <span class="rw">p+w</span> (4−2, 4+1, 2+2) = <b>(2, 5, 4)</b> = u ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · la a de la ortogonalidad</div><p>Planteo (a, 3, −2) · v = 0 y despejo:</p><p class="calc"><span class="rw">producto</span> a·2+3·2+(−2)·1 = 2a+6−2 = 2a+4 = 0 → <b>a=−2</b></p><p class="calc"><span class="rw">check</span> (−2, 3, −2)·(2, 2, 1) = −4+6−2 = <b>0</b> ✓</p></div>
+          <p class="verdict"><strong>proy<sub>v</sub>(u) = (4, 4, 2); w = (−2, 1, 2) con w · v = 0 ✓; a = −2.</strong> Los dos errores caros: proyectar sobre u en vez de sobre v (el subíndice manda) y dividir entre la norma ‖v‖ = 3 en vez de entre v · v = 9 — la fórmula lleva el producto punto de v consigo mismo, sin raíz.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="chuleta">
+      <h3>Antes de entregar: barrido de un minuto</h3>
+      <p class="sub">Lo que este examen penaliza más, en frío.</p>
+      <ul>
+        <li><span class="ck">✗</span> <strong>Responder sin justificar.</strong> V/F sin argumento, "a = tal" sin la ecuación, base sin verificar pertenencia: valen cero aunque el número esté bien.</li>
+        <li><span class="ck">✗</span> <strong>det = 0 leído a medias.</strong> Determinante cero solo dice "no hay solución única / no invertible / LD": distinguir infinitas de ninguna exige mirar el sistema.</li>
+        <li><span class="ck">✗</span> <strong>"Todos los valores de a" contestado con uno.</strong> Si la ecuación en a es cuadrática, casi siempre hay dos raíces y el enunciado las quiere todas.</li>
+        <li><span class="ck">✗</span> <strong>Los signos del tablero de cofactores.</strong> Al desarrollar por renglones o columnas pares, los signos arrancan en −. Un signo perdido arrastra todo el problema.</li>
+        <li><span class="ck">✗</span> <strong>Columnas y renglones confundidos.</strong> La matriz de T lleva las imágenes de la base canónica por columnas; la base de la imagen sale de las columnas originales pivote.</li>
+        <li><span class="ck">✗</span> <strong>Saltarse la comprobación pedida.</strong> Sustituir de vuelta (la solución en el sistema, la a en la matriz, A·v contra λ·v, w·v = 0) es la parte más barata del problema y también se califica.</li>
+      </ul>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre del simulacro</h3>
+      <p class="nota">Qué tan lista te sientes para el examen real después de este simulacro. 1 = nada · 5 = lista.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="../index.html"><span class="sp">← Menú</span><span class="ti">Volver al índice</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Simulacro de examen · Álgebra Lineal I</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"SIM", leccion:"SIM_examen-practica",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_SIM_examen.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

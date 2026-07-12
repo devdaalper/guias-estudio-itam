@@ -202,6 +202,41 @@
     </section>
 
     <section class="card">
+      <div class="head"><span class="badge def">Notación</span><h3>Traductor de examen: del límite a la parcial</h3></div>
+      <div class="body">
+        <div class="fx">
+          <div class="stmt">
+            <span class="lbl">Cómo te lo escriben en el examen</span>
+            <span class="eq">El profesor no escribe «∂f/∂y(1, 2)»: te planta el límite crudo y tú debes reconocerlo. La regla de lectura:</span>
+            <ul class="cond">
+              <li><span class="k">1</span><span>La variable que <strong>carga la h</strong> es la que se deriva. Los números que se quedan quietos son <strong>el punto</strong>.</span></li>
+              <li><span class="k">2</span><span>h en el <strong>primer</strong> lugar → parcial en x: lím<sub>h→0</sub> [f(a + h, b) − f(a, b)] / h = ∂f/∂x (a, b).</span></li>
+              <li><span class="k">3</span><span>h en el <strong>segundo</strong> lugar → parcial en y: lím<sub>h→0</sub> [f(a, b + h) − f(a, b)] / h = ∂f/∂y (a, b).</span></li>
+            </ul>
+            <span class="eq">Leído con números: lím<sub>h→0</sub> [f(1, 2 + h) − f(1, 2)] / h = <strong>∂f/∂y (1, 2)</strong> — la h viaja en el segundo lugar y el punto es (1, 2).</span>
+            <span class="eq">Variante con signo: si te dicen «lím A = −lím B», traduce <strong>cada lado</strong> a su parcial y queda una ecuación: por ejemplo ∂f/∂y (2, −1) = −∂f/∂x (2, −1).</span>
+          </div>
+        </div>
+        <div class="porque"><span class="lbl">Por qué</span><p>En el parcial real este disfraz aparece <strong>sin avisar</strong>: el enunciado te da dos o tres límites de este tipo como «datos» y el problema entero depende de traducirlos. Si los reconoces, cada límite es una parcial servida en bandeja; si no, el problema no arranca.</p></div>
+        <div class="drill" data-kind="recall" data-fid="F1b_traductor_examen" data-tema="derivadas_parciales">
+          <div class="qtag">Recall · traduce como en el examen</div>
+          <p class="q">Traduce: lím<sub>h→0</sub> [f(3, −1 + h) − f(3, −1)] / h. ¿Qué parcial es, en qué punto? Y si el enunciado dice que ese límite vale 3, ¿qué dato tienes ya?</p>
+          <button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer">
+            <span class="lbl">Respuesta</span>
+            <div class="stmt"><span class="eq">Es ∂f/∂y (3, −1): la h viaja en el segundo lugar y el punto quieto es (3, −1). Si el límite vale 3, ya tienes el dato ∂f/∂y (3, −1) = 3, listo para usarse (por ejemplo, en el plano tangente).</span></div>
+          </div>
+          <div class="selfrep">
+            <span class="srtag">¿Cómo te salió?</span>
+            <button type="button" data-rep="de_memoria">De memoria</button>
+            <button type="button" data-rep="con_pista">Con pista</button>
+            <button type="button" data-rep="falla">Falla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
       <div class="head"><span class="badge def">Notación</span><h3>Parciales de orden superior y notación</h3></div>
       <div class="body">
         <div class="fx">

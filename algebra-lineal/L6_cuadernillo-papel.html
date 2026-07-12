@@ -82,6 +82,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -461,6 +462,114 @@
           <div class="estep"><div class="oprow">Paso 5 · armar P y D</div><p>Vectores en columnas; valores propios en la misma posición. Columna 1 ↔ λ = 6, columna 2 ↔ λ = 1:</p><div class="fx" id="p14d"></div></div>
           <div class="estep"><div class="oprow">Verificación · A·v = 6·v</div><p>Multiplico A por (4, 1):</p><p class="calc"><span class="rw">A·v</span> fila1: 5·4+4·1=<b>24</b> <span class="sep">•</span> fila2: 1·4+2·1=<b>6</b> <span class="sep">•</span> A·v=(24, 6)=6·(4, 1) ✓</p></div>
           <p class="verdict">Valores propios <strong>6</strong> y <strong>1</strong> (no 5 y 2, la diagonal); vectores <strong>(4, 1)</strong> y <strong>(1, −1)</strong>. La verificación A·v = 6·v confirma el vector. Con dos independientes, <strong>A = P·D·P⁻¹</strong>.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan el valor propio y te piden la constante, te sueltan una lista de afirmaciones para decidir <strong>verdadero o falso</strong>, y toca <strong>justificar</strong>. Estos problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 EXAMEN : inverso, a tal que λ=3 sea valor propio ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="valor_propio_inverso" data-level="examen">
+      <div class="phead"><span class="pnum">15</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla la constante para un valor propio dado</p>
+      <p class="pstatement">Encuentre el valor de <strong>a ∈ R</strong> tal que <strong>λ = 3</strong> sea un valor propio de la matriz A. Verifique su respuesta comprobando que det(A − 3I) = 0.</p>
+      <div class="fx"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:21px"><span style="font-weight:700">A =</span><div class="mtx"><span class="brk brk-l"></span><div class="cols"><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span></div><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>a</span></div></div><span class="brk brk-r"></span></div></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>«λ = 3 es un valor propio de A» se lee como una sola ecuación: <strong>det(A − 3I) = 0</strong>. No me piden diagonalizar nada: me piden la a que hace que ese determinante valga cero. Armo el determinante con la a adentro, lo igualo a 0 y despejo.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · armar A − 3I</div><p>Resto 3 solo a la diagonal (el 1 y la a); el 4 y el 2 de fuera no se tocan:</p><p class="calc"><span class="rw">A−3I</span> 1−3=<b>−2</b> <span class="sep">•</span> a−3 queda con la letra <span class="sep">•</span> fuera: 4 y 2 igual</p><div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols"><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>−2</span><span>4</span></div><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>a−3</span></div></div><span class="brk brk-r"></span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · determinante igual a cero</div><p>Diagonal por diagonal menos la otra, y despejo la a:</p><p class="calc"><span class="rw">det</span> (−2)(a−3)−4·2 = −2a+6−8 = <b>−2a−2</b> <span class="sep">•</span> −2a−2=0 <span class="sep">•</span> a=<b>−1</b></p><div class="fx"><div class="sys"><span class="eq">−2a − 2 = 0 → a = −1</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · sustituir de vuelta (la verificación que piden)</div><p>Con a = −1, la esquina queda a − 3 = −4. Recalculo el determinante completo:</p><p class="calc"><span class="rw">check</span> det = (−2)(−4)−4·2 = 8−8 = <b>0</b> ✓ <span class="sep">•</span> λ=3 sí es valor propio</p></div>
+          <p class="verdict"><strong>a = −1</strong>. Con ese valor, det(A − 3I) = 0, así que λ = 3 es valor propio (el otro sale de la traza: 1 + (−1) = 0, luego λ₂ = 0 − 3 = −3). El error que cuesta puntos: restarle λ a <strong>toda</strong> la matriz en vez de solo a la diagonal, o perder un signo al distribuir (−2)(a − 3).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 EXAMEN : V/F con justificación, diagonalizabilidad ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="diagonalizabilidad" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Decida si cada afirmación es <strong>verdadera o falsa</strong>. Justifique cada respuesta con un argumento breve o un contraejemplo; una respuesta sin justificación no recibe puntos.</p>
+      <p class="pstatement">(i) Si una matriz de 2×2 tiene dos valores propios distintos, entonces es diagonalizable.<br>(ii) La matriz B de abajo es diagonalizable.<br>(iii) Si una matriz es diagonalizable, entonces es invertible.<br>(iv) Si un valor propio de una matriz de 2×2 tiene multiplicidad 2 (está repetido), la matriz no puede ser diagonalizable.</p>
+      <div class="fx"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:21px"><span style="font-weight:700">B =</span><div class="mtx"><span class="brk brk-l"></span><div class="cols"><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span></div><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>3</span></div></div><span class="brk brk-r"></span></div></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>En un V/F del profesor, la letra V o F vale cero sin su porqué. Para «verdadera» necesito un argumento que funcione siempre; para «falsa» basta <strong>un</strong> contraejemplo concreto. La pregunta de fondo en todas es la misma: ¿alcanzan los vectores propios independientes para llenar P?</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · afirmación (i)</div><p><strong>Verdadera.</strong> Cada valor propio aporta al menos un vector propio, y vectores propios de valores propios <strong>distintos</strong> son independientes entre sí. Con dos valores distintos junto dos vectores independientes: P se llena.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · afirmación (ii)</div><p><strong>Falsa.</strong> B es triangular, así que su valor propio es 3, doble. Cuento sus direcciones propias:</p><p class="calc"><span class="rw">B−3I</span> 3−3=<b>0</b> en la diagonal <span class="sep">•</span> queda el renglón 0x+1y=0 <span class="sep">•</span> y=0 → solo v=(1, 0)</p><p>Necesito 2 vectores independientes y solo hay 1: B es <strong>defectuosa</strong>, no se diagonaliza.</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · afirmación (iii)</div><p><strong>Falsa.</strong> Diagonalizable habla de tener vectores propios suficientes; invertible habla de det ≠ 0. Son cosas independientes. Contraejemplo: la matriz diagonal con 1 y 0 en la diagonal ya es diagonal (luego diagonalizable), pero su determinante es 1·0 = 0: no es invertible.</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · afirmación (iv)</div><p><strong>Falsa.</strong> Contraejemplo: la identidad I de 2×2 tiene a λ = 1 con multiplicidad 2, y sin embargo <strong>cualquier</strong> vector cumple I·v = 1·v: hay dos direcciones independientes de sobra y sí se diagonaliza (ya es diagonal). Repetido no siempre significa defectuosa; lo que decide es cuántas direcciones aporta ese λ.</p></div>
+          <p class="verdict"><strong>(i) V · (ii) F · (iii) F · (iv) F.</strong> En el examen escribe la justificación en una línea: (i) valores distintos dan vectores independientes; (ii) λ = 3 doble solo aporta la dirección (1, 0); (iii) diag(1, 0) es diagonalizable con det = 0; (iv) I tiene λ = 1 doble y se diagonaliza. El error que cuesta puntos: contestar V/F «de bulto» sin contraejemplo — ahí se va la mitad de la calificación.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 EXAMEN : Markov estilo Tarea 7 (transición → estado estable) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="markov_estado_estable" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Cadena de Markov: del reparto inicial al largo plazo</p>
+      <p class="pstatement">Un sistema de bicicletas públicas entrará en operación el siguiente año. Las autoridades de tránsito estimaron la matriz de transición P de abajo, que describe el movimiento año con año entre quienes usan la bicicleta (B) y quienes usan el automóvil (A). Suponga que la población de la ciudad se mantiene aproximadamente constante y que al arrancar el 50% adopta la bicicleta y el 50% sigue en automóvil. <strong>a)</strong> ¿Qué porcentaje usará la bicicleta después de un año? <strong>b)</strong> En el largo plazo, ¿qué porcentaje usará la bicicleta? <strong>c)</strong> ¿Existe un reparto inicial que mantenga constantes las proporciones a lo largo del tiempo?</p>
+      <div class="fx"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:21px"><span style="font-weight:700">P =</span><div class="mtx"><span class="brk brk-l"></span><div class="cols"><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>0.6</span><span>0.1</span></div><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>0.4</span><span>0.9</span></div></div><span class="brk brk-r"></span></div></div></div>
+      <p class="fx-note">Columna 1: quienes hoy usan la bicicleta (60% sigue en B, 40% se pasa a A). Columna 2: quienes usan el automóvil (10% se pasa a B, 90% sigue en A). Cada columna suma 1.</p>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La matriz empuja el reparto de un año al siguiente: x<sub>k+1</sub> = P·x<sub>k</sub>. El inciso a) es una sola multiplicación. Los incisos b) y c) son la <strong>misma</strong> pregunta disfrazada: el reparto que ya no cambia, o sea el vector con P·x = x — el vector propio de λ = 1, normalizado para que sume 1.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · un año: multiplicar P por (0.5, 0.5)</div><p>Cada renglón de P por el vector inicial:</p><p class="calc"><span class="rw">fila1</span> 0.6·0.5+0.1·0.5=0.30+0.05=<b>0.35</b> <span class="sep">•</span> <span class="rw">fila2</span> 0.4·0.5+0.9·0.5=0.20+0.45=<b>0.65</b></p><p>Después de un año: 35% en bicicleta, 65% en automóvil (y 0.35 + 0.65 = 1 ✓).</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · P − I para el estado estable</div><p>Resto 1 a la diagonal de P; lo de fuera no cambia:</p><p class="calc"><span class="rw">P−I</span> 0.6−1=<b>−0.4</b> <span class="sep">•</span> 0.9−1=<b>−0.1</b> <span class="sep">•</span> fuera: 0.1 y 0.4 igual</p><div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols"><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>−0.4</span><span>0.1</span></div><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>0.4</span><span>−0.1</span></div></div><span class="brk brk-r"></span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · resolver el renglón y normalizar</div><p>Primer renglón: −0.4x + 0.1y = 0. Multiplico por 10 y despejo:</p><p class="calc"><span class="rw">×10</span> −4x+y=0 <span class="sep">•</span> y=4x → v=(1, 4) <span class="sep">•</span> <span class="rw">prop</span> 1+4=5 <span class="sep">•</span> 1/5=<b>0.2</b> <span class="sep">•</span> 4/5=<b>0.8</b></p></div>
+          <div class="estep"><div class="oprow">Verificación · P·x = x</div><p>Compruebo que (0.2, 0.8) de verdad no cambia:</p><p class="calc"><span class="rw">fila1</span> 0.6·0.2+0.1·0.8=0.12+0.08=<b>0.20</b> ✓ <span class="sep">•</span> <span class="rw">fila2</span> 0.4·0.2+0.9·0.8=0.08+0.72=<b>0.80</b> ✓</p></div>
+          <p class="verdict"><strong>a) 35%</strong> usa la bicicleta tras un año. <strong>b)</strong> En el largo plazo se estabiliza en <strong>20% bicicleta y 80% automóvil</strong> (el otro valor propio es traza − 1 = 1.5 − 1 = 0.5 &lt; 1, así que su parte se apaga). <strong>c) Sí:</strong> exactamente el reparto 20%-80%, el estado estable. El error que cuesta puntos: iterar año tras año en el inciso b) en vez de usar el vector propio de λ = 1, u olvidar normalizar (1, 4) para que sume 1.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 EXAMEN : directo, valores y vectores propios completos + verificación ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="valores_vectores_propios" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Valores y vectores propios, completo y verificado</p>
+      <p class="pstatement">Considere la matriz A. Encuentre el polinomio característico de la matriz, sus valores propios y un vector propio asociado a cada valor propio. Verifique cada pareja comprobando que <strong>A·v = λ·v</strong>.</p>
+      <div class="fx"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:21px"><span style="font-weight:700">A =</span><div class="mtx"><span class="brk brk-l"></span><div class="cols"><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span></div><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span></div></div><span class="brk brk-r"></span></div></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>«Polinomio característico» es p<sub>A</sub>(λ) = det(A − λI); sus raíces son los valores propios, y para cada raíz λ el vector propio sale de resolver (A − λI)v = 0. Es la cadena completa del curso, sin pistas: polinomio → raíces → un vector por raíz → verificar.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · polinomio con traza y det</div><p>Atajo de la 2×2:</p><p class="calc"><span class="rw">traza</span> 2+1=<b>3</b> <span class="sep">•</span> <span class="rw">det</span> 2·1−3·2=2−6=<b>−4</b></p><div class="fx"><div class="sys"><span class="eq">p<sub>A</sub>(λ) = λ² − 3λ − 4</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · factorizar</div><p>Dos números que suman 3 y multiplican −4: 4 y −1.</p><p class="calc"><span class="rw">factor</span> 4+(−1)=<b>3</b> <span class="sep">•</span> 4·(−1)=<b>−4</b> <span class="sep">•</span> (λ−4)(λ+1)=0 → λ=<b>4</b> y <b>−1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · vector de λ = 4</div><p>Resto 4 a la diagonal. Renglón: −2x + 3y = 0, o sea 2x = 3y:</p><p class="calc"><span class="rw">A−4I</span> 2−4=<b>−2</b> <span class="sep">•</span> 1−4=<b>−3</b> <span class="sep">•</span> −2x+3y=0 → x=3, y=2 → <b>v = (3, 2)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · vector de λ = −1</div><p>Sumo 1 a la diagonal. Renglón: 3x + 3y = 0, o sea x = −y:</p><p class="calc"><span class="rw">A+I</span> 2+1=<b>3</b> <span class="sep">•</span> 1+1=<b>2</b> <span class="sep">•</span> 3x+3y=0 → x=−y → <b>v = (1, −1)</b></p></div>
+          <div class="estep"><div class="oprow">Verificación · A·v = λ·v en las dos parejas</div><p>Multiplico A por cada vector y comparo:</p><p class="calc"><span class="rw">λ=4</span> A·(3, 2): fila1 2·3+3·2=<b>12</b> <span class="sep">•</span> fila2 2·3+1·2=<b>8</b> <span class="sep">•</span> (12, 8)=4·(3, 2) ✓</p><p class="calc"><span class="rw">λ=−1</span> A·(1, −1): fila1 2·1+3·(−1)=<b>−1</b> <span class="sep">•</span> fila2 2·1+1·(−1)=<b>1</b> <span class="sep">•</span> (−1, 1)=−1·(1, −1) ✓</p></div>
+          <p class="verdict">Polinomio <strong>λ² − 3λ − 4</strong>; valores propios <strong>4</strong> y <strong>−1</strong>; vectores <strong>(3, 2)</strong> y <strong>(1, −1)</strong>. Doble control: 4 + (−1) = 3 = traza y 4·(−1) = −4 = det ✓. El error que cuesta puntos: escribir el vector volteado — de −2x + 3y = 0 sale x = 3, y = 2, no (2, 3); la verificación A·v = λ·v lo caza al instante.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 EXAMEN : encadenado, det(A−λI) → traza/det → diagonalizable ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="traza_det_valores_propios" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Del polinomio a la matriz: traza, det y diagonalizabilidad</p>
+      <p class="pstatement">Sea A una matriz de 2×2 tal que su polinomio característico es el de abajo. <strong>Sin conocer las entradas de A</strong>: <strong>a)</strong> determine los valores propios de A; <strong>b)</strong> determine la traza y el determinante de A; <strong>c)</strong> justifique si A es invertible; <strong>d)</strong> justifique si A es diagonalizable y, de serlo, exhiba una matriz D válida.</p>
+      <div class="fx"><div class="sys"><span class="eq">det(A − λI) = λ² − 9λ + 18</span></div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Me dan det(A − λI) ya armado y <strong>nunca</strong> voy a ver la matriz. No hace falta: las raíces del polinomio son los valores propios, su <strong>suma</strong> es la traza y su <strong>producto</strong> es el determinante. Todo lo que piden vive en el polinomio.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · raíces del polinomio</div><p>Dos números que suman 9 y multiplican 18: 6 y 3.</p><p class="calc"><span class="rw">factor</span> 6+3=<b>9</b> <span class="sep">•</span> 6·3=<b>18</b> <span class="sep">•</span> (λ−6)(λ−3)=0 → λ=<b>6</b> y <b>3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · traza y determinante sin ver A</div><p>Suma y producto de los valores propios. Doble control: en λ² − (traza)·λ + (det), el coeficiente −9 trae la traza con signo cambiado y el 18 es el det tal cual:</p><p class="calc"><span class="rw">traza</span> 6+3=<b>9</b> <span class="sep">•</span> <span class="rw">det</span> 6·3=<b>18</b> <span class="sep">•</span> coeficientes: −(9) y +18 ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · ¿invertible?</div><p><strong>Sí.</strong> det(A) = 18 ≠ 0. Dicho con valores propios: λ = 0 no es raíz del polinomio (18 ≠ 0 al evaluar en cero), y una matriz solo deja de ser invertible cuando 0 es valor propio.</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · ¿diagonalizable? armar D</div><p><strong>Sí.</strong> Tiene dos valores propios <strong>distintos</strong> (6 ≠ 3), así que junta dos vectores propios independientes y P se llena. Una D válida pone los valores en la diagonal:</p><div class="fx"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:21px"><span style="font-weight:700">D =</span><div class="mtx"><span class="brk brk-l"></span><div class="cols"><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>0</span></div><div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>3</span></div></div><span class="brk brk-r"></span></div></div></div></div>
+          <p class="verdict"><strong>a)</strong> λ = <strong>6</strong> y <strong>3</strong> · <strong>b)</strong> traza = <strong>9</strong>, det = <strong>18</strong> · <strong>c)</strong> invertible (det ≠ 0) · <strong>d)</strong> diagonalizable, con D = diag(6, 3). El error que cuesta puntos: creer que sin la matriz no se puede contestar — el polinomio ya trae la traza y el det en sus coeficientes (la traza, con el signo cambiado).</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

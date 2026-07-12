@@ -85,6 +85,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -524,6 +525,124 @@
           <div class="estep"><div class="oprow">Paso 2 · producto punto</div><p>Multiplico pares y sumo. Ojo con el signo del primer par:</p><p class="calc"><span class="rw">u·v</span> (−1)(1)=<b>−1</b> <span class="sep">•</span> (0)(1)=<b>0</b> <span class="sep">•</span> suma=<b>−1</b></p></div>
           <div class="estep"><div class="oprow">Paso 3 · coseno y ángulo</div><p>El producto punto negativo hará el coseno negativo, señal de ángulo obtuso:</p><p class="calc"><span class="rw">cos θ</span> −1÷(1·√2)=<b>−1⁄√2</b> <span class="sep">•</span> <span class="rw">θ</span> <b>135°</b></p></div>
           <p class="verdict">El ángulo es <strong>135°</strong>, <strong>obtuso</strong>. Lo anticipaste bien: como el producto punto salió <strong>negativo</strong>, el coseno es negativo y el ángulo pasa de 90°. El signo del producto punto ya te dice si el ángulo es agudo (+), recto (0) u obtuso (−) antes de terminar la cuenta.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan la distancia y despejas la coordenada, te escriben los conjuntos como {x ∈ R² : …}, y toca <strong>justificar</strong>. Estos problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 EXAMEN : distancia inversa, hallar a ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="distancia_inversa" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Hallar la constante a partir de la distancia</p>
+      <p class="pstatement">Sean <strong>P = (1, 2, −1)</strong> y <strong>Q = (a, 5, 3)</strong> puntos de R³. Determina <strong>todos los valores de a ∈ R</strong> tales que d(P, Q) = 13.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">P = (1, 2, −1),  Q = (a, 5, 3)</span>
+        <span class="eq">d(P, Q) = 13</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Aquí nadie te pide calcular una distancia: te la <strong>dan</strong> (vale 13) y la incógnita vive dentro de una coordenada de Q. "d(P, Q)" se lee: la norma de la diferencia Q − P. El plan es escribir esa distancia en función de a, igualarla a 13 y despejar. Y ojo con el "todos": avisa que puede haber más de un valor.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · la diferencia Q − P</div><p>Resto coordenada a coordenada, dejando la a viva:</p><p class="calc"><span class="rw">Q−P</span> a−1 <span class="sep">•</span> 5−2=<b>3</b> <span class="sep">•</span> 3−(−1)=<b>4</b> <span class="sep">•</span> = <b>(a−1, 3, 4)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · plantear la ecuación</div><p>La distancia es la norma de esa diferencia. La igualo a 13 y elevo al cuadrado ambos lados para quitar la raíz:</p><p class="calc"><span class="rw">ec</span> √((a−1)<sup>2</sup>+3<sup>2</sup>+4<sup>2</sup>)=13 <span class="sep">•</span> (a−1)<sup>2</sup>+9+16=169 <span class="sep">•</span> (a−1)<sup>2</sup>+25=169</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · despejar a — con los dos signos</div><p>Paso el 25 restando. Un cuadrado que vale 144 tiene <strong>dos</strong> raíces:</p><p class="calc"><span class="rw">a</span> (a−1)<sup>2</sup>=144 <span class="sep">•</span> a−1=12 → a=<b>13</b> <span class="sep">•</span> a−1=−12 → a=<b>−11</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · comprobar los dos valores</div><p>Sustituyo cada a de vuelta en la distancia:</p><p class="calc"><span class="rw">a=13</span> Q−P=(12, 3, 4) <span class="sep">•</span> 144+9+16=169 <span class="sep">•</span> √169=<b>13</b> ✓ <span class="sep">•</span> <span class="rw">a=−11</span> Q−P=(−12, 3, 4) <span class="sep">•</span> 144+9+16=169 <span class="sep">•</span> √169=<b>13</b> ✓</p></div>
+          <p class="verdict"><strong>a = 13 y a = −11</strong> (los dos cumplen). El error que cuesta puntos: quedarse con a − 1 = 12 y entregar solo a = 13. Al despejar un cuadrado salen dos signos, y el enunciado pedía <strong>todos</strong> los valores.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 EXAMEN : a para ortogonalidad, con verificación ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="ortogonalidad_inversa" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Hallar a para que sean ortogonales</p>
+      <p class="pstatement">Sean <strong>u = (a, −1, 2)</strong> y <strong>v = (2, a, 4)</strong> vectores de R³. Determina el valor de <strong>a ∈ R</strong> para el cual u y v son <strong>ortogonales</strong>, y verifica que con ese valor efectivamente u·v = 0.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (a, −1, 2),  v = (2, a, 4)</span>
+        <span class="eq">u·v = 0</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Ortogonales" es la palabra formal para perpendiculares, y se traduce en una sola condición: <strong>u·v = 0</strong>. La a aparece en los <strong>dos</strong> vectores, así que al armar el producto punto van a salir dos términos con a: hay que juntarlos con cuidado de signos.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · el producto punto con la a viva</div><p>Multiplico los pares posición por posición:</p><p class="calc"><span class="rw">u·v</span> (a)(2)=<b>2a</b> <span class="sep">•</span> (−1)(a)=<b>−a</b> <span class="sep">•</span> (2)(4)=<b>8</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · igualar a cero y despejar</div><p>Sumo los tres términos — los dos de a se combinan — e igualo a cero:</p><p class="calc"><span class="rw">ec</span> 2a−a+8=0 <span class="sep">•</span> a+8=0 <span class="sep">•</span> a=<b>−8</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · verificar sustituyendo</div><p>Con a = −8 quedan u = (−8, −1, 2) y v = (2, −8, 4). Compruebo el producto punto completo:</p><p class="calc"><span class="rw">u·v</span> (−8)(2)=<b>−16</b> <span class="sep">•</span> (−1)(−8)=<b>8</b> <span class="sep">•</span> (2)(4)=<b>8</b> <span class="sep">•</span> −16+8+8=<b>0</b> ✓</p></div>
+          <p class="verdict"><strong>a = −8</strong>, y la verificación cierra: u·v = −16 + 8 + 8 = 0 ✓. El error que cuesta puntos: sumar 2a + a = 3a olvidando que el segundo término es (−1)(a) = <strong>−a</strong>; ese despiste da a = −8⁄3 y pierde el problema completo.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 EXAMEN : V/F justificado, bolas y abiertos ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="abiertos_cerrados_vf" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Decide si cada afirmación es <strong>verdadera o falsa</strong>. Justifica cada respuesta con un argumento breve o un contraejemplo — <strong>sin justificación no hay puntos</strong>. <strong>(i)</strong> La bola abierta B(c, r) = {x ∈ R² : ‖x − c‖ &lt; r} contiene a los puntos de su frontera. <strong>(ii)</strong> El conjunto {(3, 1)}, formado por un solo punto de R², es abierto. <strong>(iii)</strong> El conjunto A = {x ∈ R² : ‖x − (1, 2)‖ ≤ 3} es cerrado y el punto (4, 2) pertenece a A.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">B(c, r) = {x ∈ R² : ‖x − c‖ &lt; r}</span>
+        <span class="eq">A = {x ∈ R² : ‖x − (1, 2)‖ ≤ 3}</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La notación {x ∈ R² : condición} se lee: "los puntos x del plano que cumplen la condición". Y ‖x − c‖ es la <strong>distancia</strong> de x al centro c. La clave de todo el problema está en el símbolo: &lt; estricto deja <strong>fuera</strong> el borde; ≤ lo <strong>incluye</strong>. Con eso, cada afirmación se decide comparando distancias.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · afirmación (i)</div><p>La frontera de la bola son los x con ‖x − c‖ = r exactamente. ¿Cumplen la condición de pertenencia ‖x − c‖ &lt; r? No: r &lt; r es falso. La bola abierta no contiene a <strong>ninguno</strong> de sus puntos frontera. <strong>FALSA</strong>.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · afirmación (ii)</div><p>Abierto significa: alrededor de <strong>cada</strong> punto del conjunto cabe una bola completa dentro del conjunto. Cualquier bola B((3, 1), r) con r &gt; 0 contiene infinitos puntos distintos de (3, 1), y ninguno de ellos está en {(3, 1)}: no cabe bola alguna. <strong>FALSA</strong> (de hecho, un punto solo es un conjunto cerrado).</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · afirmación (iii)</div><p>El signo es ≤: incluye su frontera, así que A es <strong>cerrado</strong> ✓. Falta ver si (4, 2) pertenece — es decir, si su distancia al centro (1, 2) es a lo más 3:</p><p class="calc"><span class="rw">dist</span> (4, 2)−(1, 2)=(3, 0) <span class="sep">•</span> √(3<sup>2</sup>+0<sup>2</sup>)=√9=<b>3</b> <span class="sep">•</span> 3 ≤ 3 <b>sí</b> ✓</p><p>Cae justo en la frontera, y la frontera está incluida. <strong>VERDADERA</strong>.</p></div>
+          <p class="verdict"><strong>(i) F</strong> — la condición ‖x − c‖ &lt; r es estricta: un punto con distancia exactamente r no la cumple. <strong>(ii) F</strong> — ninguna bola centrada en (3, 1) cabe dentro de un conjunto de un solo punto. <strong>(iii) V</strong> — el ≤ hace a A cerrado y ‖(4, 2) − (1, 2)‖ = 3 ≤ 3. El error que cuesta puntos: contestar V o F "a secas" — en este formato la justificación ES la calificación.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 EXAMEN : plano por punto y normal + pertenencia ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="plano_examen" data-level="examen">
+      <div class="phead"><span class="pnum">20</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Escribir el plano y decidir pertenencia</p>
+      <p class="pstatement">Determina la ecuación cartesiana del plano <strong>Π</strong> que pasa por el punto <strong>P<sub>0</sub> = (2, −1, 3)</strong> y tiene vector normal <strong>n = (3, −2, 1)</strong>. Decide, justificando, si el punto <strong>Q = (1, −3, 2)</strong> pertenece a Π.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">P<sub>0</sub> = (2, −1, 3),  n = (3, −2, 1)</span>
+        <span class="eq">¿Q = (1, −3, 2) ∈ Π?</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Te dan las dos piezas que definen un plano: un <strong>punto de paso</strong> P<sub>0</sub> y la <strong>normal</strong> n. La ecuación sale de exigir que el vector X − P<sub>0</sub> sea perpendicular a n, o sea n·(X − P<sub>0</sub>) = 0. Y "¿Q pertenece a Π?" se traduce en: sustituir Q en la ecuación y ver si la igualdad se cumple.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · armar y expandir la ecuación</div><p>Cada coeficiente de la normal multiplica a su variable menos la coordenada del punto de paso. Ojo con el signo: y − (−1) = y + 1:</p><p class="calc"><span class="rw">Π</span> 3(x−2)−2(y+1)+1(z−3)=0 <span class="sep">•</span> 3x−6−2y−2+z−3=0 <span class="sep">•</span> 3x−2y+z=<b>11</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · comprobar con el propio P<sub>0</sub></div><p>El plano debe pasar por su punto de paso; si no lo hace, algo salió mal:</p><p class="calc"><span class="rw">P<sub>0</sub></span> 3(2)=<b>6</b> <span class="sep">•</span> −2(−1)=<b>2</b> <span class="sep">•</span> 1(3)=<b>3</b> <span class="sep">•</span> 6+2+3=<b>11</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · probar el punto Q</div><p>Sustituyo Q = (1, −3, 2) en el lado izquierdo y comparo con 11:</p><p class="calc"><span class="rw">Q</span> 3(1)=<b>3</b> <span class="sep">•</span> −2(−3)=<b>6</b> <span class="sep">•</span> 1(2)=<b>2</b> <span class="sep">•</span> 3+6+2=<b>11</b> = 11 <b>sí cumple</b></p></div>
+          <p class="verdict">La ecuación es <strong>Π: 3x − 2y + z = 11</strong>, y el punto <strong>Q = (1, −3, 2) sí pertenece</strong> (al sustituirlo queda 11 = 11). El error que cuesta puntos: el signo en y − (−1) — hay que restar el punto de paso <strong>con sus signos</strong>; escribir y − 1 en lugar de y + 1 arrastra mal todo el término independiente.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 EXAMEN : Cauchy-Schwarz, igualdad y caso estricto ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="cauchy_schwarz_igualdad" data-level="examen">
+      <div class="phead"><span class="pnum">21</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Cauchy-Schwarz: cuándo se vuelve igualdad</p>
+      <p class="pstatement">Sean <strong>u = (3, 4)</strong>, <strong>v = (6, 8)</strong> y <strong>w = (4, −3)</strong> vectores de R². <strong>(a)</strong> Verifica numéricamente la desigualdad de Cauchy-Schwarz, |u·v| ≤ ‖u‖ ‖v‖, para el par (u, v) y para el par (u, w). <strong>(b)</strong> En exactamente uno de los dos pares se alcanza la igualdad: identifícalo y enuncia la condición general bajo la cual eso ocurre, justificando por qué ese par la cumple.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">|u·v| ≤ ‖u‖ ‖v‖</span>
+        <span class="eq">u = (3, 4),  v = (6, 8),  w = (4, −3)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Verificar numéricamente" significa calcular <strong>cada lado por separado</strong> y comparar los números. Son dos pares, así que toca: tres normas (la de u se reutiliza) y dos productos punto. Después viene la parte teórica: ¿cuándo el ≤ se convierte en =? Esa es la pregunta que el profesor realmente está calificando.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · las tres normas</div><p>Cuadro, sumo y saco raíz para cada vector:</p><p class="calc"><span class="rw">‖u‖</span> √(3<sup>2</sup>+4<sup>2</sup>)=√25=<b>5</b> <span class="sep">•</span> <span class="rw">‖v‖</span> √(6<sup>2</sup>+8<sup>2</sup>)=√100=<b>10</b> <span class="sep">•</span> <span class="rw">‖w‖</span> √(4<sup>2</sup>+(−3)<sup>2</sup>)=√25=<b>5</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · el par (u, v)</div><p>Producto punto, valor absoluto, y comparo contra el producto de normas:</p><p class="calc"><span class="rw">u·v</span> (3)(6)=<b>18</b> <span class="sep">•</span> (4)(8)=<b>32</b> <span class="sep">•</span> suma=<b>50</b> <span class="sep">•</span> |50|=<b>50</b> <span class="sep">•</span> <span class="rw">‖u‖‖v‖</span> 5·10=<b>50</b> <span class="sep">•</span> 50 ≤ 50 <b>igualdad</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · el par (u, w)</div><p>Lo mismo con w:</p><p class="calc"><span class="rw">u·w</span> (3)(4)=<b>12</b> <span class="sep">•</span> (4)(−3)=<b>−12</b> <span class="sep">•</span> suma=<b>0</b> <span class="sep">•</span> |0|=<b>0</b> <span class="sep">•</span> <span class="rw">‖u‖‖w‖</span> 5·5=<b>25</b> <span class="sep">•</span> 0 &lt; 25 <b>estricta</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · quién alcanza la igualdad y por qué</div><p>La igualdad se dio en (u, v). No es casualidad: <strong>v = 2u</strong>, porque 2·(3, 4) = (6, 8). La condición general es: |u·v| = ‖u‖ ‖v‖ ocurre <strong>si y solo si uno de los vectores es múltiplo escalar del otro</strong> (vectores paralelos). En cambio w no es múltiplo de u — de hecho u·w = 0: son ortogonales, el extremo opuesto de la desigualdad.</p></div>
+          <p class="verdict"><strong>(u, v): 50 = 50, igualdad</strong>, porque v = 2u (múltiplos → paralelos). <strong>(u, w): 0 &lt; 25, estricta</strong> (son ortogonales). El error que cuesta puntos: hacer las cuentas y saltarse la parte (b) — la condición de igualdad "uno es múltiplo del otro" es exactamente lo que vale la calificación en este problema.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

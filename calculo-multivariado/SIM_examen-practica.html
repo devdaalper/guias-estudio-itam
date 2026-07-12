@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulacro de examen · Cálculo Multivariado</title>
+<style>
+  :root{
+    --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
+    --navy:#283891; --green:#39B54A; --green-deep:#1C7A3A; --green-tint:#E6F5EC;
+    --cream:#FFF3E7; --slate:#334155; --muted:#4b5563; --line:#e7e2da; --grid:#eef0f2;
+    --bg:#faf8f4; --red:#CF2E2E; --red-tint:#fdecf1;
+    --shadow:4px 4px 0 var(--ink); --shadow-hero:7px 7px 0 var(--ink);
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 40px}
+
+  .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 0;margin-bottom:8px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .volver{font-size:15px;font-weight:800;text-decoration:none;color:var(--deep);border:2px solid var(--ink);border-radius:999px;padding:5px 14px;background:#fff;white-space:nowrap;transition:transform .1s,box-shadow .1s}
+  .volver:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand b{color:var(--orange)}
+  .tag{font-size:15px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:4px 13px;background:#fff}
+
+  .hero{border:2px solid var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);margin-top:16px;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:30px 30px;background-color:#fff;box-shadow:var(--shadow-hero)}
+  .kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
+  .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
+  .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
+  .learn{margin:22px 0 0;display:grid;gap:10px}
+  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
+  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
+  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
+  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+
+  main{display:grid;gap:16px;margin-top:22px}
+  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
+  .idea strong{font-weight:800}
+
+  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sys .eq{white-space:nowrap}
+  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
+  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
+  .calc b{color:var(--ink);font-weight:800}
+  .calc .sep{color:#c9c2b6;margin:0 5px}
+  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
+  .brk{width:10px;border:2.5px solid var(--ink)}
+  .brk-l{border-right:0;border-radius:5px 0 0 5px}
+  .brk-r{border-left:0;border-radius:0 5px 5px 0}
+  .cols{padding:8px 4px}
+  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
+  .mrow>span{text-align:right;min-width:24px}
+  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+
+  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .chuleta h3{margin:0 0 2px;font-size:19px}
+  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .chuleta li .ck{color:var(--red);font-weight:800;position:absolute;left:0;top:1px}
+
+  /* ===== problemas del simulacro ===== */
+  .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
+  .prob.done-ok{border-color:var(--green);background:#f3faf5}
+  .prob.done-half{border-color:var(--deep);background:#fdf5ec}
+  .prob.done-no{border-color:#d6336c;background:#fdf1f5}
+  .phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pnum{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
+  .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
+  .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
+  .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .pstatement{margin:0;font-size:17px;max-width:64ch}
+  .pstatement strong{font-weight:800}
+
+  .paper{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:var(--deep);background:var(--cream);border:1.5px dashed var(--deep);border-radius:10px;padding:9px 14px;justify-self:start}
+
+  details.sol{border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  details.sol>summary{cursor:pointer;font-weight:800;color:#fff;background:var(--navy);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:11px;list-style:none;font-size:16px}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary .chev{transition:transform .15s}
+  details.sol[open]>summary{border-radius:11px 11px 0 0}
+  details.sol[open]>summary .chev{transform:rotate(90deg)}
+  .solbody{padding:16px 18px;display:grid;gap:14px}
+  .estep{display:grid;gap:8px}
+  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
+  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
+  .estep p strong{color:var(--ink)}
+  .verdict{margin:0;font-size:17px;font-weight:700;color:var(--green-deep);background:var(--green-tint);border:1.5px solid #bfe6cd;border-radius:10px;padding:11px 14px}
+  .verdict.warn{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
+
+  .report{display:grid;gap:9px;border-top:1.5px dashed var(--line);padding-top:14px}
+  .report .rlabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .rbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .rbtn{font:inherit;font-weight:700;font-size:16px;padding:11px 16px;border:2px solid var(--line);border-radius:11px;background:#fff;cursor:pointer;flex:1;min-width:120px;transition:transform .1s,border-color .1s}
+  .rbtn:hover{transform:translateY(-1px)}
+  .rbtn.ok:hover{border-color:var(--green)}
+  .rbtn.half:hover{border-color:var(--deep)}
+  .rbtn.no:hover{border-color:#d6336c}
+  .rbtn.sel-ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
+  .rbtn.sel-half{border-color:var(--deep);background:var(--cream);color:var(--deep)}
+  .rbtn.sel-no{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+
+  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
+  .cierre h3{margin:0;font-size:19px}
+  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
+  .nota{font-size:15px;color:var(--muted);margin-top:8px}
+  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
+  .pill.ok{background:var(--green-tint);color:var(--green-deep)}
+  .pill.half{background:var(--cream);color:var(--deep)}
+  .pill.no{background:var(--red-tint);color:#a01243}
+  .cont{font-size:14px;color:var(--muted);font-weight:700}
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
+  .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .nav-lecs a.next{text-align:right;margin-left:auto}
+  .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .nav-lecs .ti{font-size:16px;font-weight:700}
+  footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+  footer p{margin:0;color:var(--muted);font-size:15px}
+  footer b{color:var(--orange)}
+  /*hardening-360*/
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
+  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html" class="volver">← Menú</a>
+    <div class="brand">aprueba<b>.net</b></div>
+    <span class="tag">90 min · sin calculadora</span>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Cálculo Multivariado · Simulacro de examen</p>
+    <h1>Simulacro de examen · <mark>Cálculo Multivariado</mark></h1>
+    <p class="lead">Hazlo como examen: 90 minutos, sin calculadora, sin abrir soluciones hasta terminar todo.</p>
+    <div class="learn">
+      <h2>Los bloques del examen</h2>
+      <ol>
+        <li><span class="n">1</span> Sucesiones y series</li>
+        <li><span class="n">2</span> Espacio Rⁿ</li>
+        <li><span class="n">3</span> Funciones, dominios y límites</li>
+        <li><span class="n">4</span> Diferenciabilidad y plano tangente</li>
+        <li><span class="n">5</span> Regla de la cadena y direccionales</li>
+        <li><span class="n">6</span> Optimización</li>
+        <li><span class="n">7</span> Integración doble</li>
+      </ol>
+    </div>
+  </header>
+
+  <main>
+
+    <h2 class="modhead">Reglas del simulacro</h2>
+    <section class="sec">
+      <h3>Así se toma este examen</h3>
+      <p class="idea">Pon un cronómetro en <strong>90 minutos</strong>. Resuelve los 11 problemas en una hoja, en orden o saltando los que se traben, <strong>sin calculadora y sin abrir ninguna solución</strong>. Cuando termines todo (o se acabe el tiempo), abre las soluciones una por una, coteja tu hoja y marca cómo te fue en cada problema. Al final genera el reporte para el tutor.</p>
+      <p class="idea">Los enunciados están en <strong>voz de profesor</strong>: notación formal, datos sueltos, constantes por determinar y justificaciones obligatorias. Es el formato real del parcial — si un enunciado se siente seco, ese es el punto.</p>
+    </section>
+
+    <h2 class="modhead">Sucesiones y series</h2>
+
+    <!-- ============ S1 : geométrica inversa, razón negativa ============ -->
+    <section class="prob" data-kind="prob" data-id="S1" data-tema="serie_geometrica" data-level="examen">
+      <div class="phead"><span class="pnum">1</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla la razón, dada la suma</p>
+      <p class="pstatement">Sea r un número real tal que la serie de abajo converge y su suma vale 8. Determina el valor de r, justifica que con ese valor la serie en efecto converge, y calcula el valor de ∑<sub>n = 1</sub><sup>∞</sup> 10 · r<sup>n</sup>.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">∑<sub>n = 0</sub><sup>∞</sup> 10 · r<sup>n</sup> = 8</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Problema geométrico <strong>al revés</strong>: la suma (8) es dato y la razón r es la incógnita. La sigma arranca en n = 0, así que el primer término es 10 · r<sup>0</sup> = 10. Ojo con la señal escondida: la suma total (8) es <strong>menor</strong> que el primer término (10) — eso solo pasa si los términos que siguen restan, es decir, si r es negativa.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · plantear la ecuación</div><p>Fórmula de la suma geométrica con a = 10 y S = 8:</p><p class="calc"><span class="rw">S</span> (10) ⁄ (1 − r) = <b>8</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · despejar r</div><p>Multiplico cruzado y despejo, cuenta por cuenta:</p><p class="calc"><span class="rw">1 − r</span> <sup>10</sup>⁄<sub>8</sub>=<b><sup>5</sup>⁄<sub>4</sub></b> <span class="sep">•</span> <span class="rw">r</span> 1 − <sup>5</sup>⁄<sub>4</sub>=<b>−<sup>1</sup>⁄<sub>4</sub></b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · comprobar de vuelta</div><p>En un inverso la comprobación es parte de la respuesta. Primero | r | &lt; 1, luego sustituyo:</p><p class="calc"><span class="rw">| r |</span> <sup>1</sup>⁄<sub>4</sub> &lt; 1 → <b>converge</b> <span class="sep">•</span> <span class="rw">S</span> 10 ⁄ (1 + <sup>1</sup>⁄<sub>4</sub>) = 10 ⁄ <sup>5</sup>⁄<sub>4</sub> = 10·<sup>4</sup>⁄<sub>5</sub>=<b>8</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · la cola desde n = 1</div><p>La serie completa menos el término de n = 0:</p><p class="calc"><span class="rw">cola</span> 8 − 10=<b>−2</b> <span class="sep">•</span> <span class="rw">cotejo</span> primer término 10·(−<sup>1</sup>⁄<sub>4</sub>)=−<sup>5</sup>⁄<sub>2</sub>, razón −<sup>1</sup>⁄<sub>4</sub>: (−<sup>5</sup>⁄<sub>2</sub>) ⁄ <sup>5</sup>⁄<sub>4</sub>=<b>−2</b> ✓</p></div>
+          <p class="verdict"><strong>r = −<sup>1</sup>⁄<sub>4</sub></strong> y ∑<sub>n = 1</sub><sup>∞</sup> 10 · r<sup>n</sup> = <strong>−2</strong>. El error que cuesta puntos: descartar la r negativa "porque una suma no puede ser menor que el primer término" — sí puede, alternando signos. Y siempre cerrar con | r | &lt; 1: sin eso, el despeje no vale nada.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ S2 : criterio de la razon con factorial (diverge) ============ -->
+    <section class="prob" data-kind="prob" data-id="S2" data-tema="criterio_razon" data-level="examen">
+      <div class="phead"><span class="pnum">2</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Criterio de la razón con factorial</p>
+      <p class="pstatement">Determina si la siguiente serie converge o diverge. Indica el criterio que usas, escribe el cociente completo y calcula el límite. Justifica tu conclusión.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">∑<sub>n = 1</sub><sup>∞</sup> <sup>n!</sup>⁄<sub>10<sup>n</sup></sub></span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>El término general enfrenta un factorial (n!) contra una potencia (10<sup>n</sup>). Con un factorial a la vista, el criterio natural es el de la <strong>razón</strong>: L &lt; 1 converge, L &gt; 1 (o L = ∞) diverge. La pregunta de fondo: ¿quién crece más rápido, n! o 10<sup>n</sup>?</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · armar el cociente</div><p>Término n + 1 por el recíproco del término n:</p><p class="calc"><span class="rw">a<sub>n+1</sub>/a<sub>n</sub></span> <sup>(n+1)!</sup>⁄<sub>10<sup>n+1</sup></sub> <span class="sep">•</span> <sup>10<sup>n</sup></sup>⁄<sub>n!</sub></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · simplificar pieza por pieza</div><p>El factorial deja (n + 1); la potencia deja un <sup>1</sup>⁄<sub>10</sub>:</p><p class="calc"><span class="rw">(n+1)!/n!</span> =<b>n + 1</b> <span class="sep">•</span> <span class="rw">10<sup>n</sup>/10<sup>n+1</sup></span> =<b><sup>1</sup>⁄<sub>10</sub></b> <span class="sep">•</span> junto: <b><sup>(n + 1)</sup>⁄<sub>10</sub></b></p>
+            <div class="fx"><div class="sys"><span class="eq">a<sub>n+1</sub> ⁄ a<sub>n</sub> = <sup>(n + 1)</sup>⁄<sub>10</sub></span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 3 · tomar el límite y decidir</div><p>El cociente crece sin tope:</p><p class="calc"><span class="rw">L</span> lím <sup>(n+1)</sup>⁄<sub>10</sub>=<b>∞</b> <span class="sep">•</span> ∞ &gt; 1 → <b>diverge</b></p><p>Lectura extra: desde n = 10 cada término se multiplica por más de 1 — los sumandos <strong>crecen</strong>, ni siquiera tienden a 0. Doble razón para divergir.</p></div>
+          <p class="verdict warn"><strong>Diverge</strong> (criterio de la razón, L = ∞ &gt; 1). El error que cuesta puntos: creer que 10<sup>n</sup> le gana al factorial "porque 10 es grande" — la potencia multiplica siempre por 10, el factorial multiplica por n + 1, que tarde o temprano rebasa a cualquier base fija. Y cuidado con cancelar mal: (n + 1)! ⁄ n! = n + 1, no 1.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Espacio Rⁿ</h2>
+
+    <!-- ============ S3 : ortogonalidad con parametro + normas + Pitagoras ============ -->
+    <section class="prob" data-kind="prob" data-id="S3" data-tema="espacio_rn" data-level="examen">
+      <div class="phead"><span class="pnum">3</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Ortogonalidad con parámetro y normas</p>
+      <p class="pstatement">Sean u = (2, a, 6) y v = (3, 4, −3) vectores de R³. Determina el valor de a ∈ R para el cual u y v son ortogonales. Con ese valor de a, calcula ‖u‖ y ‖v‖, y verifica numéricamente que ‖u + v‖² = ‖u‖² + ‖v‖².</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">u = (2, a, 6),   v = (3, 4, −3)</span>
+        <span class="eq">u ⊥ v,   ¿a?</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Ortogonales" se traduce a una sola ecuación: <strong>u · v = 0</strong>. Como a aparece lineal en el producto punto, sale una ecuación de primer grado. La última parte es el teorema de Pitágoras vectorial — vale <strong>justo porque</strong> u · v = 0, y el problema te pide verlo con números.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · producto punto igual a cero</div><p>Componente por componente:</p><p class="calc"><span class="rw">u · v</span> 2·3=<b>6</b> <span class="sep">•</span> a·4=<b>4a</b> <span class="sep">•</span> 6·(−3)=<b>−18</b> <span class="sep">•</span> 6 + 4a − 18 = 0 → 4a=<b>12</b> → a=<b>3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · normas con a = 3</div><p>Con u = (2, 3, 6): suma de cuadrados y raíz:</p><p class="calc"><span class="rw">‖u‖</span> √(4 + 9 + 36)=√49=<b>7</b> <span class="sep">•</span> <span class="rw">‖v‖</span> √(9 + 16 + 9)=<b>√34</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · verificar Pitágoras</div><p>Sumo los vectores y comparo cuadrados:</p><p class="calc"><span class="rw">u + v</span> (2+3, 3+4, 6−3)=<b>(5, 7, 3)</b> <span class="sep">•</span> <span class="rw">‖u+v‖²</span> 25 + 49 + 9=<b>83</b></p><p class="calc"><span class="rw">‖u‖² + ‖v‖²</span> 49 + 34=<b>83</b> <span class="sep">•</span> 83 = 83 ✓</p></div>
+          <p class="verdict"><strong>a = 3</strong>, ‖u‖ = <strong>7</strong>, ‖v‖ = <strong>√34</strong>, y 83 = 83 confirma que ‖u + v‖² = ‖u‖² + ‖v‖² — la identidad pitagórica, que solo es válida cuando u · v = 0. El error que cuesta puntos: comerse el signo del −18 (queda 4a + 24 = 0 y a sale mal), o "verificar" Pitágoras sin haber comprobado antes la ortogonalidad.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Funciones, dominios y límites</h2>
+
+    <!-- ============ S4 : dominio con set-builder ============ -->
+    <section class="prob" data-kind="prob" data-id="S4" data-tema="dominio" data-level="examen">
+      <div class="phead"><span class="pnum">4</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Dominio en notación de conjunto</p>
+      <p class="pstatement">Determina el dominio de la función de abajo. Exprésalo en notación de conjunto y descríbelo geométricamente, indicando con precisión qué fronteras pertenecen al dominio y cuáles no.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = √(x² + y² − 16) + ln(y − 1)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>El dominio son los (x, y) donde <strong>todo</strong> está definido. Hay dos vigilantes con reglas distintas: la raíz cuadrada exige su interior <strong>≥ 0</strong> (el cero sí se vale), y el logaritmo exige su interior <strong>&gt; 0</strong> (estricto: ln(0) no existe). El dominio es la intersección de las dos condiciones.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · condición de la raíz</div><p>Interior de la raíz mayor o igual que cero:</p><p class="calc"><span class="rw">raíz</span> x² + y² − 16 ≥ 0 <span class="sep">•</span> x² + y² ≥ <b>16</b></p><p>Geométricamente: los puntos <strong>fuera o sobre</strong> la circunferencia de radio 4 centrada en el origen. El borde sí entra.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · condición del logaritmo</div><p>Interior del ln estrictamente positivo:</p><p class="calc"><span class="rw">ln</span> y − 1 &gt; 0 <span class="sep">•</span> y &gt; <b>1</b></p><p>Geométricamente: estrictamente <strong>arriba</strong> de la recta y = 1. La recta no entra.</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · intersectar y escribir el conjunto</div><p>Las dos condiciones a la vez, en notación de conjunto:</p>
+            <div class="fx"><div class="sys"><span class="eq">Dom f = {(x, y) ∈ R² | x² + y² ≥ 16,  y &gt; 1}</span></div></div>
+          </div>
+          <p class="verdict"><strong>Dom f = {(x, y) ∈ R² | x² + y² ≥ 16, y &gt; 1}</strong>: la parte del plano que está arriba de la recta y = 1 y fuera del disco de radio 4 (el arco de circunferencia con y &gt; 1 sí pertenece; la recta y = 1 no). El error que cuesta puntos: cruzar las desigualdades — poner ≥ en el logaritmo o &gt; en la raíz. La raíz tolera el cero; el logaritmo, jamás.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ S5 : limite que no existe (parabola delata) ============ -->
+    <section class="prob" data-kind="prob" data-id="S5" data-tema="limites" data-level="examen">
+      <div class="phead"><span class="pnum">5</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Demuestra que el límite no existe</p>
+      <p class="pstatement">Demuestra que el siguiente límite no existe.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">lím<sub>(x, y)→(0, 0)</sub>  <sup>2x²y</sup>⁄<sub>(x⁴ + y²)</sub></span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Para demostrar que un límite doble <strong>no existe</strong> basta exhibir dos trayectorias hacia (0, 0) con resultados distintos. La trampa de este problema: por <strong>todas las rectas</strong> el límite da lo mismo — la trayectoria que lo delata es curva. La pista es el x⁴ del denominador: para emparejar grados con y² conviene probar y = x².</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · por las rectas y = mx</div><p>Sustituyo y = mx y simplifico:</p><p class="calc"><span class="rw">y = mx</span> <sup>2x²·mx</sup>⁄<sub>(x⁴ + m²x²)</sub> = <sup>2mx³</sup>⁄<sub>x²(x² + m²)</sub> = <b><sup>2mx</sup>⁄<sub>(x² + m²)</sub></b> <span class="sep">•</span> x → 0: → <b>0</b></p><p>Y por el eje y (x = 0) el numerador es 0, también da <b>0</b>. Toda recta da 0.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · por la parábola y = x²</div><p>Sustituyo y = x²:</p><p class="calc"><span class="rw">y = x²</span> <sup>2x²·x²</sup>⁄<sub>(x⁴ + x⁴)</sub> = <sup>2x⁴</sup>⁄<sub>2x⁴</sub> = <b>1</b> <span class="sep">•</span> constante → límite <b>1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · chocar los dos resultados</div><p>Dos trayectorias, dos valores:</p><p class="calc"><span class="rw">rectas</span> <b>0</b> <span class="sep">•</span> <span class="rw">parábola</span> <b>1</b> <span class="sep">•</span> 0 ≠ 1 → <b>el límite no existe</b></p></div>
+          <p class="verdict warn"><strong>El límite no existe</strong>: por toda recta da 0 y por la parábola y = x² da 1. El error que cuesta puntos: probar solo rectas y concluir "el límite es 0" — que infinitas trayectorias coincidan <strong>jamás</strong> demuestra que el límite exista. Cuando el denominador trae grados desparejos (x⁴ contra y²), la trayectoria sospechosa es la que los empareja: y = x².</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Diferenciabilidad y plano tangente</h2>
+
+    <!-- ============ S6 : constantes a, b via limite-definicion + plano tangente ============ -->
+    <section class="prob" data-kind="prob" data-id="S6" data-tema="limite_definicion" data-level="examen">
+      <div class="phead"><span class="pnum">6</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Constantes a y b, y el plano tangente</p>
+      <p class="pstatement">Sea f : ℝ<sup>2</sup> → ℝ dada por f(x, y) = ax²y + bxy² + 2x, donde a y b son constantes. Se sabe que lim<sub>h→0</sub> [f(2, 1 + h) − f(2, 1)] ⁄ h = 8 y que f(2, 1) = 10. Determina el valor de las constantes a y b, y escribe la ecuación del plano tangente a la gráfica de f en el punto (2, 1, 10).</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = ax²y + bxy² + 2x</span>
+        <span class="eq">lim<sub>h→0</sub> [f(2, 1 + h) − f(2, 1)] ⁄ h = 8</span>
+        <span class="eq">f(2, 1) = 10</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Ese límite es una parcial disfrazada. La h está sumada en el <strong>segundo</strong> lugar, f(2, 1 + h): se mueve la y con la x fija en 2. Por definición, el límite ES <strong>∂f/∂y(2, 1) = 8</strong>. Junto con f(2, 1) = 10 tengo dos ecuaciones para dos constantes.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · primera condición: ∂f/∂y(2, 1) = 8</div><p>Derivo respecto a y con las letras a bordo (el término 2x no tiene y, deriva a 0):</p><p class="calc"><span class="rw">∂f/∂y</span> deriva ax²y=<b>ax²</b> <span class="sep">•</span> deriva bxy²=<b>2bxy</b> <span class="sep">•</span> deriva 2x=<b>0</b></p><p class="calc"><span class="rw">en (2,1)</span> a·4=<b>4a</b> <span class="sep">•</span> 2b·2·1=<b>4b</b> <span class="sep">•</span> 4a + 4b = 8 → <b>a + b = 2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · segunda condición: f(2, 1) = 10</div><p>Evalúo f en (2, 1) término por término:</p><p class="calc"><span class="rw">f(2,1)</span> a·4·1=<b>4a</b> <span class="sep">•</span> b·2·1=<b>2b</b> <span class="sep">•</span> 2·2=<b>4</b> <span class="sep">•</span> 4a + 2b + 4 = 10 → <b>2a + b = 3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · resolver el sistema</div><p>Resto la primera ecuación a la segunda:</p><p class="calc"><span class="rw">resta</span> (2a + b) − (a + b) = 3 − 2 → a=<b>1</b> <span class="sep">•</span> <span class="rw">b</span> de a + b = 2: b=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · comprobar sustituyendo de vuelta</div><p>Con a = 1, b = 1 queda f = x²y + xy² + 2x. Reviso las DOS condiciones:</p><p class="calc"><span class="rw">f(2,1)</span> 4 + 2 + 4=<b>10</b> ✓ <span class="sep">•</span> <span class="rw">∂f/∂y</span> = x² + 2xy <span class="sep">•</span> en (2,1): 4 + 4=<b>8</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 5 · plano tangente en (2, 1, 10)</div><p>Falta la otra pendiente. ∂f/∂x = 2xy + y² + 2 (con a = b = 1):</p><p class="calc"><span class="rw">∂f/∂x(2,1)</span> 2·2·1=<b>4</b> <span class="sep">•</span> 1²=<b>1</b> <span class="sep">•</span> +2 <span class="sep">•</span> 4 + 1 + 2=<b>7</b></p>
+            <div class="fx"><div class="sys"><span class="eq">z = 10 + 7(x − 2) + 8(y − 1)</span></div></div>
+          </div>
+          <p class="verdict"><strong>a = 1, b = 1</strong> y el plano es <strong>z = 10 + 7(x − 2) + 8(y − 1)</strong>. El error que cuesta puntos: leer el límite como ∂f/∂x. Mira DÓNDE está la h: segundo lugar → se mueve la y → es ∂f/∂y.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ S7 : plano tangente paralelo a un plano dado ============ -->
+    <section class="prob" data-kind="prob" data-id="S7" data-tema="plano_tangente" data-level="examen">
+      <div class="phead"><span class="pnum">7</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Plano tangente paralelo a un plano dado</p>
+      <p class="pstatement">Sea f(x, y) = x² − 2xy + 3y². Encuentra el punto de la gráfica de z = f(x, y) en el cual el plano tangente a dicha gráfica es paralelo al plano z = 2x + 6y, y escribe la ecuación de dicho plano tangente.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x² − 2xy + 3y²</span>
+        <span class="eq">plano dado:  z = 2x + 6y</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Aquí NO te dan el punto: te lo piden. "Paralelo a z = 2x + 6y" significa mismas pendientes: busco el punto donde <strong>∂f/∂x = 2</strong> y <strong>∂f/∂y = 6</strong> a la vez. Eso arma un sistema de dos ecuaciones — el problema del plano tangente corriendo al revés.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · parciales generales</div><p>Congelando la otra variable en cada caso:</p><p class="calc"><span class="rw">∂f/∂x</span> =<b>2x − 2y</b> <span class="sep">•</span> <span class="rw">∂f/∂y</span> =<b>−2x + 6y</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · igualar a las pendientes dadas y resolver</div><p>2x − 2y = 2 (o sea x − y = 1) y −2x + 6y = 6 (o sea −x + 3y = 3). Sumo las dos simplificadas:</p><p class="calc"><span class="rw">suma</span> (x − y) + (−x + 3y) = 1 + 3 <span class="sep">•</span> 2y=<b>4</b> → y=<b>2</b> <span class="sep">•</span> <span class="rw">x</span> de x − y = 1: x=<b>3</b></p><p class="calc"><span class="rw">checo</span> ∂f/∂x(3,2) = 6 − 4=<b>2</b> ✓ <span class="sep">•</span> ∂f/∂y(3,2) = −6 + 12=<b>6</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · altura del punto de tangencia</div><p>Meto (3, 2) en f:</p><p class="calc"><span class="rw">f(3,2)</span> 3²=<b>9</b> <span class="sep">•</span> −2·3·2=<b>−12</b> <span class="sep">•</span> 3·2²=<b>12</b> <span class="sep">•</span> 9 − 12 + 12=<b>9</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · escribir el plano y verificar el paralelismo</div><p>Altura 9, pendientes 2 y 6:</p>
+            <div class="fx"><div class="sys"><span class="eq">z = 9 + 2(x − 3) + 6(y − 2) = 2x + 6y − 9</span></div></div>
+            <p>Mismos coeficientes 2 y 6 que el plano dado, distinta constante (−9 contra 0): paralelo y no igual ✓.</p>
+          </div>
+          <p class="verdict">Punto de tangencia <strong>(3, 2, 9)</strong>, plano <strong>z = 2x + 6y − 9</strong>. El error que cuesta puntos: dar solo (3, 2) sin la altura, o resolver una sola de las dos ecuaciones — el paralelismo exige las DOS pendientes a la vez.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Regla de la cadena y direccionales</h2>
+
+    <!-- ============ S8 : f abstracta con parciales dadas ============ -->
+    <section class="prob" data-kind="prob" data-id="S8" data-tema="regla_cadena" data-level="examen">
+      <div class="phead"><span class="pnum">8</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">f abstracta: cadena con parciales dadas</p>
+      <p class="pstatement">Sea z = f(x, y), donde f : ℝ<sup>2</sup> → ℝ es diferenciable y tal que ∂f/∂x(3, 1) = 2 y ∂f/∂y(3, 1) = 5. Si x = 3u² + av, y = u + 4v², y la diferencia ∂z/∂u − ∂z/∂v vale 7 cuando u = 1 y v = 0, encuentra el valor de la constante a.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">∂f/∂x(3, 1) = 2,   ∂f/∂y(3, 1) = 5</span>
+        <span class="eq">x = 3u² + av,   y = u + 4v²</span>
+        <span class="eq">∂z/∂u − ∂z/∂v = 7   en u = 1, v = 0</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Nunca vas a conocer f: solo te dan sus dos parciales en UN punto. La cadena dice ∂z/∂u = (∂f/∂x)(∂x/∂u) + (∂f/∂y)(∂y/∂u), e igual con v. Primer movimiento obligado: ¿a qué (x, y) caigo cuando u = 1, v = 0?</p><p class="calc"><span class="rw">x</span> 3·1² + a·0=<b>3</b> <span class="sep">•</span> <span class="rw">y</span> 1 + 4·0²=<b>1</b> <span class="sep">•</span> caigo en <b>(3, 1)</b>: justo donde me dieron las parciales</p><p>Nota fina: el término a·v se apaga en el punto (v = 0), pero <strong>no</strong> en la derivada ∂x/∂v — ahí es donde la a sobrevive.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · derivadas de las intermedias</div><p>Derivo x e y respecto a u y v, y evalúo en u = 1, v = 0:</p><p class="calc"><span class="rw">∂x/∂u</span> =6u=<b>6</b> <span class="sep">•</span> <span class="rw">∂x/∂v</span> =<b>a</b> <span class="sep">•</span> <span class="rw">∂y/∂u</span> =<b>1</b> <span class="sep">•</span> <span class="rw">∂y/∂v</span> =8v=<b>0</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · armar las dos cadenas</div><p>Uso ∂f/∂x = 2 y ∂f/∂y = 5 (los datos en (3, 1)):</p><p class="calc"><span class="rw">∂z/∂u</span> 2·6=<b>12</b> <span class="sep">•</span> 5·1=<b>5</b> <span class="sep">•</span> 12 + 5=<b>17</b></p><p class="calc"><span class="rw">∂z/∂v</span> 2·a=<b>2a</b> <span class="sep">•</span> 5·0=<b>0</b> <span class="sep">•</span> total=<b>2a</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · imponer la condición y despejar</div><p>La diferencia vale 7:</p><p class="calc"><span class="rw">∂z/∂u − ∂z/∂v</span> 17 − 2a = 7 <span class="sep">•</span> 2a=<b>10</b> <span class="sep">•</span> a=<b>5</b></p><p>Compruebo de vuelta: con a = 5, ∂z/∂v = 10 y 17 − 10 = 7 ✓.</p></div>
+          <p class="verdict"><strong>a = 5.</strong> El error que cuesta puntos: evaluar las parciales de f en (u, v) = (1, 0) en vez de en (x, y) = (3, 1). Las parciales de f viven en el mundo (x, y); por eso el primer movimiento es SIEMPRE ubicar a qué (x, y) llegas.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ S9 : direccional con datos → constantes + maximo crecimiento ============ -->
+    <section class="prob" data-kind="prob" data-id="S9" data-tema="derivada_direccional" data-level="examen">
+      <div class="phead"><span class="pnum">9</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Direccionales con datos: halla a, b y el máximo crecimiento</p>
+      <p class="pstatement">Sea f(x, y) = ax²y + by², con a y b constantes. La derivada direccional de f en el punto (1, 1) en la dirección del vector (1, 0) vale 8, y en la dirección del vector (0, −2) vale −6. Determina los valores de a y b, y encuentra la dirección de máximo crecimiento de f en (1, 1) y su valor.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = ax²y + by²</span>
+        <span class="eq">direccional en (1, 1) hacia (1, 0): vale 8</span>
+        <span class="eq">direccional en (1, 1) hacia (0, −2): vale −6</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"Direccional en la dirección del vector v" = ∇f · u con u unitario: <strong>normalizar primero</strong>. (1, 0) ya mide 1; (0, −2) mide 2, así que su unitario es (0, −1). Cada dato es una ecuación; las incógnitas a y b viven dentro del gradiente.</p><p class="calc"><span class="rw">|(1,0)|</span> =<b>1</b> <span class="sep">•</span> <span class="rw">|(0,−2)|</span> √(0 + 4)=<b>2</b> → u=<b>(0, −1)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 1 · gradiente con letras</div><p>∇f = (2axy, ax² + 2by), y en (1, 1):</p><p class="calc"><span class="rw">∇f(1,1)</span> (2a·1·1, a·1 + 2b·1)=<b>(2a, a + 2b)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · las dos ecuaciones</div><p>Producto punto con cada dirección unitaria, igualado a su dato:</p><p class="calc"><span class="rw">hacia (1,0)</span> (2a, a+2b)·(1, 0) = 2a = 8 → a=<b>4</b></p><p class="calc"><span class="rw">hacia (0,−1)</span> (2a, a+2b)·(0, −1) = −(a + 2b) = −6 <span class="sep">•</span> a + 2b = 6 <span class="sep">•</span> 4 + 2b = 6 → b=<b>1</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · máximo crecimiento y comprobación</div><p>∇f(1, 1) = (2·4, 4 + 2·1) = (8, 6). La dirección de máximo crecimiento es la del gradiente y su valor es su longitud:</p><p class="calc"><span class="rw">|∇f|</span> 8²=64 <span class="sep">•</span> 6²=36 <span class="sep">•</span> √(64 + 36)=√100=<b>10</b></p><p>Compruebo de vuelta con f = 4x²y + y²: ∂f/∂x = 8xy → 8 en (1,1) ✓; ∂f/∂y = 4x² + 2y → 6 en (1,1), y hacia (0, −1): −6 ✓.</p></div>
+          <p class="verdict"><strong>a = 4, b = 1</strong>; máximo crecimiento en la dirección de <strong>(8, 6)</strong> — unitaria (<sup>4</sup>⁄<sub>5</sub>, <sup>3</sup>⁄<sub>5</sub>) — con valor <strong>10</strong>. El error que cuesta puntos: usar (0, −2) sin dividir entre 2, o perder el signo del −6 — la ecuación queda a + 2b = −6 y las constantes salen mal.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Optimización</h2>
+
+    <!-- ============ S10 : criticos + clasificacion con hessiana ============ -->
+    <section class="prob" data-kind="prob" data-id="S10" data-tema="optimizacion" data-level="examen">
+      <div class="phead"><span class="pnum">10</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Puntos críticos y su clasificación</p>
+      <p class="pstatement">Sea f(x, y) = x³ − 12x + y² − 6y. Determina todos los puntos críticos de f y clasifica cada uno mediante el criterio de la segunda derivada (hessiana). Para el extremo local que encuentres, da el valor de f en ese punto.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">f(x, y) = x³ − 12x + y² − 6y</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Dos tareas encadenadas: (1) críticos = puntos donde <strong>ambas</strong> parciales valen cero a la vez; (2) clasificar cada uno con D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)². D &gt; 0 con f<sub>xx</sub> &gt; 0 mínimo, D &gt; 0 con f<sub>xx</sub> &lt; 0 máximo, D &lt; 0 silla. "Todos" avisa: puede haber más de uno.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · anular las parciales</div><p>Cada ecuación por separado:</p><p class="calc"><span class="rw">f<sub>x</sub></span> 3x² − 12 = 0 <span class="sep">•</span> x² = 4 → x=<b>2</b> o x=<b>−2</b></p><p class="calc"><span class="rw">f<sub>y</sub></span> 2y − 6 = 0 → y=<b>3</b></p><p>Críticos: <strong>(2, 3)</strong> y <strong>(−2, 3)</strong>.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · segundas parciales y D</div><p>Armo el discriminante:</p><p class="calc"><span class="rw">f<sub>xx</sub></span> =<b>6x</b> <span class="sep">•</span> <span class="rw">f<sub>yy</sub></span> =<b>2</b> <span class="sep">•</span> <span class="rw">f<sub>xy</sub></span> =<b>0</b> <span class="sep">•</span> <span class="rw">D</span> (6x)(2) − 0²=<b>12x</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · clasificar (2, 3)</div><p>Evalúo D y f<sub>xx</sub>:</p><p class="calc"><span class="rw">D</span> 12·2=<b>24</b> &gt; 0 <span class="sep">•</span> <span class="rw">f<sub>xx</sub></span> 6·2=<b>12</b> &gt; 0 → <b>mínimo local</b></p><p class="calc"><span class="rw">f(2,3)</span> 8 − 24=<b>−16</b> <span class="sep">•</span> 9 − 18=<b>−9</b> <span class="sep">•</span> −16 − 9=<b>−25</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · clasificar (−2, 3)</div><p>Mismo D, otro signo:</p><p class="calc"><span class="rw">D</span> 12·(−2)=<b>−24</b> &lt; 0 → <b>punto silla</b> (con D &lt; 0 ya no se mira f<sub>xx</sub>)</p></div>
+          <p class="verdict"><strong>(2, 3) es mínimo local con f(2, 3) = −25; (−2, 3) es punto silla.</strong> El error que cuesta puntos: quedarse solo con x = 2 al resolver x² = 4 (la raíz negativa también cuenta), o clasificar mirando solo f<sub>xx</sub> sin calcular D.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Integración doble</h2>
+
+    <!-- ============ S11 : polares sobre semidisco ============ -->
+    <section class="prob" data-kind="prob" data-id="S11" data-tema="integral_doble" data-level="examen">
+      <div class="phead"><span class="pnum">11</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Integral doble en polares</p>
+      <p class="pstatement">Sea R la mitad superior del disco x² + y² ≤ 9 (es decir, la parte con y ≥ 0). Calcula ∬<sub>R</sub> y dA usando coordenadas polares. Plantea los límites, incluye el jacobiano y evalúa hasta el número.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">∬<sub>R</sub> y dA,   R = {(x, y) ∈ R² | x² + y² ≤ 9,  y ≥ 0}</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Semidisco de radio 3 → región redonda → <strong>polares</strong>. La región: r de 0 a 3, y θ de 0 a π (media vuelta, la de arriba). El integrando se traduce: y = r·sen θ. Y el elemento de área lleva su jacobiano: dA = r dr dθ. Integrando total: (r·sen θ)·r = r²·sen θ.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · plantear la integral</div><p>Con los límites y el jacobiano puestos:</p>
+            <div class="fx"><div class="sys"><span class="eq">∫<sub>0</sub><sup>π</sup> ∫<sub>0</sub><sup>3</sup> r²·sen θ  dr dθ</span></div></div>
+            <p>Los límites son constantes y el integrando se separa (r² por sen θ): la doble se vuelve el <strong>producto</strong> de dos integrales de una variable.</p>
+          </div>
+          <div class="estep"><div class="oprow">Paso 2 · la parte radial</div><p>Integro r² de 0 a 3:</p><p class="calc"><span class="rw">∫ r² dr</span> = <sup>r³</sup>⁄<sub>3</sub> <span class="sep">•</span> en 3: <sup>27</sup>⁄<sub>3</sub>=<b>9</b> <span class="sep">•</span> en 0: <b>0</b> <span class="sep">•</span> total=<b>9</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · la parte angular</div><p>Integro sen θ de 0 a π:</p><p class="calc"><span class="rw">∫ sen θ dθ</span> = −cos θ <span class="sep">•</span> en π: −(−1)=<b>1</b> <span class="sep">•</span> en 0: −1 <span class="sep">•</span> 1 − (−1)=<b>2</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · producto y comprobación en cartesianas</div><p>Multiplico las dos partes:</p><p class="calc"><span class="rw">∬</span> 9·2=<b>18</b></p><p>Comprobación por el otro camino (cartesianas): ∫<sub>0</sub><sup>√(9−x²)</sup> y dy = (9 − x²) ⁄ 2, y luego ∫<sub>−3</sub><sup>3</sup> (9 − x²) ⁄ 2 dx = <sup>1</sup>⁄<sub>2</sub>·(9x − <sup>x³</sup>⁄<sub>3</sub>) evaluado de −3 a 3 = <sup>1</sup>⁄<sub>2</sub>·(18 − (−18)) = <b>18</b> ✓. Los dos órdenes coinciden.</p></div>
+          <p class="verdict"><strong>∬<sub>R</sub> y dA = 18.</strong> Dos errores que cuestan puntos: olvidar el jacobiano r (la integral queda en r·sen θ y sale 9, la mitad), y poner θ de 0 a 2π — el seno se cancela en la vuelta completa y daría 0, pero la región es solo la mitad superior.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <section class="cierre">
+      <h3>Cierre del simulacro</h3>
+      <p class="nota">Qué tan lista te sientes para el examen real después de este simulacro. 1 = nada · 5 = lo domino.</p>
+      <div class="escala" id="esc"></div>
+      <div id="reporte"></div>
+      <button class="btn" id="gen">Generar reporte para el tutor</button>
+    </section>
+
+    <nav class="nav-lecs"><a class="prev" href="../index.html"><span class="sp">← Menú</span><span class="ti">Volver al índice de unidades</span></a></nav>
+
+    <footer><p>aprueba<b>.net</b> · Simulacro de examen · Cálculo Multivariado</p></footer>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+
+/* ---------- render de matrices (por si se necesitan) ---------- */
+function mat(rows, augmented){
+  var cols = rows[0].length;
+  var coeffs = augmented ? cols-1 : cols;
+  var gtc = augmented ? ('repeat('+coeffs+',auto) 16px auto') : ('repeat('+coeffs+',auto)');
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
+    if(augmented){ cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>'; }
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setM(id, rows, aug){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows, !!aug); }
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"calculo_multivariado", unidad:"SIM", leccion:"SIM_examen-practica",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_calculo_SIM_examen-practica.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

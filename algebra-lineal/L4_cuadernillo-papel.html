@@ -82,6 +82,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -494,6 +495,255 @@
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
     </section>
 
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan el producto y piden un factor, te piden los valores de <em>a</em> que rompen la inversa, y toca <strong>justificar</strong> cada propiedad que uses. Estos cinco vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 EXAMEN : a tal que A no sea invertible (patrón A6, inverso) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="existencia_inversa" data-level="examen">
+      <div class="phead"><span class="pnum">15</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">¿Para qué a se rompe la inversa?</p>
+      <p class="pstatement">Sea A la matriz de 3×3 que se muestra, con a ∈ R. Determina <strong>todos</strong> los valores de a para los cuales A <strong>no</strong> es invertible. Justifica tu respuesta mediante reducción por renglones.</p>
+      <div class="fx"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:21px;font-variant-numeric:tabular-nums">
+        <span>A =</span>
+        <div class="mtx"><span class="brk brk-l"></span><div class="cols">
+          <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>a</span></div>
+          <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>1</span></div>
+          <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>3</span><span>4</span></div>
+        </div><span class="brk brk-r"></span></div>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>"No invertible" significa que al reducir [A | I] la parte izquierda <strong>no llega</strong> a la identidad: en algún momento aparece un renglón de ceros. Como la a viaja dentro de la matriz, reduzco arrastrándola como si fuera un número y busco qué valor de a produce ese renglón de ceros. Solo necesito la parte izquierda: si ahí sale un renglón de ceros, la inversa ya es imposible.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · R3 → R3 − R1</div><p>Hago cero el 1 de abajo a la izquierda. A la fila 3 = (1, 3, 4) le resto la fila 1 = (1, 2, a):</p><p class="calc"><span class="rw">R3</span> 1−1=<b>0</b> <span class="sep">•</span> 3−2=<b>1</b> <span class="sep">•</span> 4−a=<b>4−a</b></p>
+            <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+              <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>a</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>1</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>4−a</span></div>
+            </div><span class="brk brk-r"></span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 2 · R3 → R3 − R2</div><p>Hago cero el 1 de en medio del renglón 3. A la fila 3 = (0, 1, 4−a) le resto la fila 2 = (0, 1, 1):</p><p class="calc"><span class="rw">R3</span> 0−0=<b>0</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> (4−a)−1=<b>3−a</b></p>
+            <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+              <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>a</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>1</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>3−a</span></div>
+            </div><span class="brk brk-r"></span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 3 · leer la condición</div><p>La izquierda quedó triangular con pivotes 1, 1 y <strong>3−a</strong>. Si 3−a ≠ 0 hay tres pivotes y la reducción sí llega a la identidad: A es invertible. El renglón de ceros aparece <strong>exactamente</strong> cuando 3−a = 0, es decir, a = 3.</p></div>
+          <div class="estep"><div class="oprow">Comprobación · sustituir a = 3</div><p>Con a = 3, el renglón 3 = (1, 3, 4) es la suma del renglón 1 = (1, 2, 3) más el renglón 2 = (0, 1, 1): renglones dependientes, matriz singular, tal como pedía el enunciado.</p><p class="calc"><span class="rw">R1+R2</span> 1+0=<b>1</b> <span class="sep">•</span> 2+1=<b>3</b> <span class="sep">•</span> 3+1=<b>4</b> <span class="sep">•</span> = R3 ✓</p></div>
+          <p class="verdict"><strong>A no es invertible únicamente cuando a = 3.</strong> El error que cuesta puntos: dar el valor sin justificar (el renglón de ceros ES la justificación) o equivocar el signo en (4−a)−1 = 3−a.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 EXAMEN : V/F con justificación (patrón A1) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="propiedades_producto" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Sean A y B matrices de n×n; en (ii) supón además que ambas son invertibles. Decide si cada afirmación es <strong>verdadera o falsa</strong>. Si es verdadera, da un argumento breve; si es falsa, exhibe un <strong>contraejemplo concreto</strong> con matrices de 2×2. Sin justificación no hay puntos.</p>
+      <div class="fx"><div class="sys" style="font-size:19px">
+        <span class="eq">(i)&#8194;(A·B)ᵀ = Bᵀ·Aᵀ</span>
+        <span class="eq">(ii)&#8194;(A·B)⁻¹ = B⁻¹·A⁻¹</span>
+        <span class="eq">(iii)&#8194;(A + B)² = A² + 2·A·B + B²</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Verdadera = un argumento de una o dos líneas que valga para <strong>todas</strong> las matrices. Falsa = basta <strong>un</strong> contraejemplo con números. La sospecha para (iii): desarrollar el binomio con números usa que los factores conmutan, y con matrices A·B casi nunca es B·A.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · (i) es VERDADERA</div><p>Es la propiedad de la transpuesta de un producto: <strong>al transponer, el orden de los factores se invierte</strong>. La comprobaste con números en el problema 2 de este cuadernillo; en el examen basta citarla bien escrita, con el orden volteado.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · (ii) es VERDADERA</div><p>Para verificar que B⁻¹·A⁻¹ es la inversa de A·B, multiplico y veo si da la identidad. Las asociaciones colapsan solas:</p>
+            <div class="fx"><div class="sys" style="font-size:19px">
+              <span class="eq">(A·B)·(B⁻¹·A⁻¹) = A·(B·B⁻¹)·A⁻¹</span>
+              <span class="eq">= A·I·A⁻¹ = A·A⁻¹ = I ✓</span>
+            </div></div>
+            <p>Como el producto da I, ese candidato <strong>es</strong> la inversa de A·B. Fíjate: también aquí el orden se invierte.</p>
+          </div>
+          <div class="estep"><div class="oprow">Paso 3 · (iii) es FALSA — contraejemplo</div><p>Tomo dos matrices que no conmutan:</p>
+            <div class="fx"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:21px;font-variant-numeric:tabular-nums">
+              <span>A =</span>
+              <div class="mtx"><span class="brk brk-l"></span><div class="cols">
+                <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span></div>
+                <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span></div>
+              </div><span class="brk brk-r"></span></div>
+              <span>B =</span>
+              <div class="mtx"><span class="brk brk-l"></span><div class="cols">
+                <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span></div>
+                <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span></div>
+              </div><span class="brk brk-r"></span></div>
+            </div></div>
+            <p>Lado izquierdo: A + B = renglón (2, 1), renglón (1, 2), y lo elevo al cuadrado casilla por casilla:</p>
+            <p class="calc"><span class="rw">c₁₁</span> 2·2=<b>4</b> <span class="sep">•</span> 1·1=<b>1</b> <span class="sep">•</span> suma=<b>5</b></p>
+            <p class="calc"><span class="rw">c₁₂</span> 2·1=<b>2</b> <span class="sep">•</span> 1·2=<b>2</b> <span class="sep">•</span> suma=<b>4</b></p>
+            <p class="calc"><span class="rw">c₂₁</span> 1·2=<b>2</b> <span class="sep">•</span> 2·1=<b>2</b> <span class="sep">•</span> suma=<b>4</b></p>
+            <p class="calc"><span class="rw">c₂₂</span> 1·1=<b>1</b> <span class="sep">•</span> 2·2=<b>4</b> <span class="sep">•</span> suma=<b>5</b></p>
+            <p>Lado derecho: calculo cada pieza por renglón-columna (compacto, verifica cada suma en tu hoja):</p>
+            <p class="calc"><span class="rw">A²</span> c₁₁=<b>1</b> <span class="sep">•</span> c₁₂=1·1+1·1=<b>2</b> <span class="sep">•</span> c₂₁=<b>0</b> <span class="sep">•</span> c₂₂=<b>1</b></p>
+            <p class="calc"><span class="rw">B²</span> c₁₁=<b>1</b> <span class="sep">•</span> c₁₂=<b>0</b> <span class="sep">•</span> c₂₁=1·1+1·1=<b>2</b> <span class="sep">•</span> c₂₂=<b>1</b></p>
+            <p class="calc"><span class="rw">A·B</span> c₁₁=1+1=<b>2</b> <span class="sep">•</span> c₁₂=0+1=<b>1</b> <span class="sep">•</span> c₂₁=0+1=<b>1</b> <span class="sep">•</span> c₂₂=0+1=<b>1</b></p>
+            <p class="calc"><span class="rw">Σ</span> A²+2·A·B+B²: c₁₁=1+4+1=<b>6</b> <span class="sep">•</span> c₁₂=2+2+0=<b>4</b> <span class="sep">•</span> c₂₁=0+2+2=<b>4</b> <span class="sep">•</span> c₂₂=1+2+1=<b>4</b></p>
+            <p>Comparo: (A+B)² = renglón (5, 4), renglón (4, 5), pero A²+2·A·B+B² = renglón (6, 4), renglón (4, 4). Las esquinas no coinciden (5 ≠ 6 y 5 ≠ 4).</p>
+          </div>
+          <div class="estep"><div class="oprow">Paso 4 · por qué falla</div><p>El desarrollo correcto es (A+B)² = A² + A·B + B·A + B². Para juntar los términos de en medio en 2·A·B se necesitaría A·B = B·A, y aquí B·A = renglón (1, 1), renglón (1, 2) ≠ A·B = renglón (2, 1), renglón (1, 1). Con estos valores A²+A·B+B·A+B² sí da renglón (5, 4), renglón (4, 5), igual que (A+B)².</p></div>
+          <p class="verdict"><strong>(i) V</strong> — al transponer un producto el orden se invierte. <strong>(ii) V</strong> — (A·B)·(B⁻¹·A⁻¹) = I, así que B⁻¹·A⁻¹ es la inversa. <strong>(iii) F</strong> — con el contraejemplo, (A+B)² = (5, 4 / 4, 5) pero A²+2·A·B+B² = (6, 4 / 4, 4). El error que cuesta puntos: "justificar" (iii) con álgebra de números; el binomio con matrices es A² + A·B + B·A + B².</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 EXAMEN : matrices abstractas, recuperar A (análogo M2) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="matrices_abstractas" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Recupera A del producto</p>
+      <p class="pstatement">Sean A y B matrices de 2×2 tales que se cumplen los datos de abajo. Encuentra la matriz A. Justifica el procedimiento; no se aceptan tanteos entrada por entrada.</p>
+      <div class="fx"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:21px;font-variant-numeric:tabular-nums">
+        <span>A·B =</span>
+        <div class="mtx"><span class="brk brk-l"></span><div class="cols">
+          <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>3</span></div>
+          <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span></div>
+        </div><span class="brk brk-r"></span></div>
+        <span>B =</span>
+        <div class="mtx"><span class="brk brk-l"></span><div class="cols">
+          <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span></div>
+          <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span></div>
+        </div><span class="brk brk-r"></span></div>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>No conozco A, pero conozco A·B y B. Si B tiene inversa, puedo "cancelarla" multiplicando por B⁻¹ <strong>por la derecha</strong>: (A·B)·B⁻¹ = A·(B·B⁻¹) = A·I = A. Por la derecha y no por la izquierda, porque B está pegada a A por la derecha; el producto no conmuta, así que el lado importa.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · invertir B con [B | I]</div><p>Pego la identidad. Para no arrastrar fracciones, primero R1 → R1 − R2:</p><p class="calc"><span class="rw">R1</span> 3−2=<b>1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 1−0=<b>1</b> <span class="sep">•</span> 0−1=<b>−1</b></p><p>Luego R2 → R2 − 2·R1 con la nueva fila 1 = (1, 0 | 1, −1):</p><p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·0=<b>1</b> <span class="sep">•</span> 0−2·1=<b>−2</b> <span class="sep">•</span> 1−2·(−1)=<b>3</b></p>
+            <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+              <div class="mrow" style="grid-template-columns:repeat(2,auto) 16px repeat(2,auto)"><span>1</span><span>0</span><span class="msep"></span><span>1</span><span>−1</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(2,auto) 16px repeat(2,auto)"><span>0</span><span>1</span><span class="msep"></span><span>−2</span><span>3</span></div>
+            </div><span class="brk brk-r"></span></div></div>
+            <p>La izquierda ya es la identidad, así que B⁻¹ = renglón (1, −1), renglón (−2, 3).</p>
+          </div>
+          <div class="estep"><div class="oprow">Paso 2 · A = (A·B)·B⁻¹, casilla por casilla</div><p>Multiplico el dato A·B = renglón (7, 3), renglón (2, 1) por B⁻¹ = renglón (1, −1), renglón (−2, 3):</p>
+            <p class="calc"><span class="rw">c₁₁</span> 7·1=<b>7</b> <span class="sep">•</span> 3·(−2)=<b>−6</b> <span class="sep">•</span> suma=<b>1</b></p>
+            <p class="calc"><span class="rw">c₁₂</span> 7·(−1)=<b>−7</b> <span class="sep">•</span> 3·3=<b>9</b> <span class="sep">•</span> suma=<b>2</b></p>
+            <p class="calc"><span class="rw">c₂₁</span> 2·1=<b>2</b> <span class="sep">•</span> 1·(−2)=<b>−2</b> <span class="sep">•</span> suma=<b>0</b></p>
+            <p class="calc"><span class="rw">c₂₂</span> 2·(−1)=<b>−2</b> <span class="sep">•</span> 1·3=<b>3</b> <span class="sep">•</span> suma=<b>1</b></p>
+          </div>
+          <div class="estep"><div class="oprow">Comprobación · A·B da el dato</div><p>Con A = renglón (1, 2), renglón (0, 1), multiplico A·B y debe salir el dato del enunciado:</p><p class="calc"><span class="rw">A·B</span> c₁₁=3+4=<b>7</b> <span class="sep">•</span> c₁₂=1+2=<b>3</b> <span class="sep">•</span> c₂₁=0+2=<b>2</b> <span class="sep">•</span> c₂₂=0+1=<b>1</b> <span class="sep">•</span> ✓</p></div>
+          <p class="verdict"><strong>A = renglón (1, 2), renglón (0, 1).</strong> El error que cuesta puntos: multiplicar B⁻¹ por el lado equivocado. B⁻¹·(A·B) NO es A (da renglón (5, 2), renglón (−8, −3)): como el producto no conmuta, la inversa se pega por el lado donde está B.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 EXAMEN : inversa 3x3 por [A|I] con verificación (directo examen) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="inversa_gauss_jordan" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Inversa de una 3×3, con verificación</p>
+      <p class="pstatement">Sea A la matriz de 3×3 de abajo. Calcula A⁻¹ por el método [A | I] y <strong>verifica</strong> tu resultado comprobando que A·A⁻¹ = I<sub>3</sub>.</p>
+      <div class="fx"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:21px;font-variant-numeric:tabular-nums">
+        <span>A =</span>
+        <div class="mtx"><span class="brk brk-l"></span><div class="cols">
+          <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>2</span></div>
+          <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>3</span></div>
+          <div class="mrow" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>2</span></div>
+        </div><span class="brk brk-r"></span></div>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Mismo método que en las 2×2, solo que ahora [A | I] mide 3×6 y hay que limpiar tres columnas: primero ceros <strong>abajo</strong> de cada pivote, luego ceros <strong>arriba</strong>. Cada operación se aplica a la fila completa, identidad incluida. La verificación final no es adorno: el enunciado la pide y vale puntos.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · ceros abajo del primer pivote</div><p>R2 → R2 − 2·R1 y R3 → R3 − R1:</p>
+            <p class="calc"><span class="rw">R2</span> 2−2=<b>0</b> <span class="sep">•</span> 1−0=<b>1</b> <span class="sep">•</span> 3−4=<b>−1</b> <span class="sep">•</span> 0−2=<b>−2</b> <span class="sep">•</span> 1−0=<b>1</b> <span class="sep">•</span> 0−0=<b>0</b></p>
+            <p class="calc"><span class="rw">R3</span> 1−1=<b>0</b> <span class="sep">•</span> 1−0=<b>1</b> <span class="sep">•</span> 2−2=<b>0</b> <span class="sep">•</span> 0−1=<b>−1</b> <span class="sep">•</span> 0−0=<b>0</b> <span class="sep">•</span> 1−0=<b>1</b></p>
+            <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+              <div class="mrow" style="grid-template-columns:repeat(3,auto) 16px repeat(3,auto)"><span>1</span><span>0</span><span>2</span><span class="msep"></span><span>1</span><span>0</span><span>0</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(3,auto) 16px repeat(3,auto)"><span>0</span><span>1</span><span>−1</span><span class="msep"></span><span>−2</span><span>1</span><span>0</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(3,auto) 16px repeat(3,auto)"><span>0</span><span>1</span><span>0</span><span class="msep"></span><span>−1</span><span>0</span><span>1</span></div>
+            </div><span class="brk brk-r"></span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 2 · R3 → R3 − R2</div><p>Cero abajo del segundo pivote:</p>
+            <p class="calc"><span class="rw">R3</span> 0−0=<b>0</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 0−(−1)=<b>1</b> <span class="sep">•</span> −1−(−2)=<b>1</b> <span class="sep">•</span> 0−1=<b>−1</b> <span class="sep">•</span> 1−0=<b>1</b></p>
+            <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+              <div class="mrow" style="grid-template-columns:repeat(3,auto) 16px repeat(3,auto)"><span>1</span><span>0</span><span>2</span><span class="msep"></span><span>1</span><span>0</span><span>0</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(3,auto) 16px repeat(3,auto)"><span>0</span><span>1</span><span>−1</span><span class="msep"></span><span>−2</span><span>1</span><span>0</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(3,auto) 16px repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span class="msep"></span><span>1</span><span>−1</span><span>1</span></div>
+            </div><span class="brk brk-r"></span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 3 · limpiar arriba: R2 → R2 + R3 y R1 → R1 − 2·R3</div><p>Los tres pivotes ya son 1; ahora ceros arriba del tercero:</p>
+            <p class="calc"><span class="rw">R2</span> 0+0=<b>0</b> <span class="sep">•</span> 1+0=<b>1</b> <span class="sep">•</span> −1+1=<b>0</b> <span class="sep">•</span> −2+1=<b>−1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 0+1=<b>1</b></p>
+            <p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 0−0=<b>0</b> <span class="sep">•</span> 2−2=<b>0</b> <span class="sep">•</span> 1−2=<b>−1</b> <span class="sep">•</span> 0+2=<b>2</b> <span class="sep">•</span> 0−2=<b>−2</b></p>
+            <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+              <div class="mrow" style="grid-template-columns:repeat(3,auto) 16px repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span class="msep"></span><span>−1</span><span>2</span><span>−2</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(3,auto) 16px repeat(3,auto)"><span>0</span><span>1</span><span>0</span><span class="msep"></span><span>−1</span><span>0</span><span>1</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(3,auto) 16px repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span class="msep"></span><span>1</span><span>−1</span><span>1</span></div>
+            </div><span class="brk brk-r"></span></div></div>
+            <p>En la columna 2 no hubo nada que limpiar arriba (ya había un 0). La derecha es A⁻¹.</p>
+          </div>
+          <div class="estep"><div class="oprow">Verificación · A·A⁻¹ = I<sub>3</sub></div><p>Multiplico renglón por columna; cada renglón de A contra las tres columnas de A⁻¹ (columnas: (−1, −1, 1), (2, 0, −1), (−2, 1, 1)):</p>
+            <p class="calc"><span class="rw">R1</span> −1+0+2=<b>1</b> <span class="sep">•</span> 2+0−2=<b>0</b> <span class="sep">•</span> −2+0+2=<b>0</b></p>
+            <p class="calc"><span class="rw">R2</span> −2−1+3=<b>0</b> <span class="sep">•</span> 4+0−3=<b>1</b> <span class="sep">•</span> −4+1+3=<b>0</b></p>
+            <p class="calc"><span class="rw">R3</span> −1−1+2=<b>0</b> <span class="sep">•</span> 2+0−2=<b>0</b> <span class="sep">•</span> −2+1+2=<b>1</b></p>
+            <p>Sale la identidad 3×3: unos en la diagonal, ceros fuera.</p>
+          </div>
+          <p class="verdict"><strong>A⁻¹ = renglón (−1, 2, −2), renglón (−1, 0, 1), renglón (1, −1, 1)</strong>, y A·A⁻¹ = I<sub>3</sub> ✓. El error que cuesta puntos: operar solo la parte izquierda de [A | I] u olvidar la verificación cuando el enunciado la pide explícitamente.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 EXAMEN : ecuación matricial A·X = B (encadenado, patrón M5) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="ecuacion_matricial" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Despeja la matriz X</p>
+      <p class="pstatement">Sean A y B las matrices de abajo. Encuentra la matriz X de 2×2 tal que <strong>A·X = B</strong>. Indica con claridad por qué lado multiplicas y por qué.</p>
+      <div class="fx"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:21px;font-variant-numeric:tabular-nums">
+        <span>A =</span>
+        <div class="mtx"><span class="brk brk-l"></span><div class="cols">
+          <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span></div>
+          <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>2</span></div>
+        </div><span class="brk brk-r"></span></div>
+        <span>B =</span>
+        <div class="mtx"><span class="brk brk-l"></span><div class="cols">
+          <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span></div>
+          <div class="mrow" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span></div>
+        </div><span class="brk brk-r"></span></div>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Es un despeje, pero de matrices: en A·X = B, la A está pegada a X <strong>por la izquierda</strong>, así que multiplico ambos lados por A⁻¹ <strong>por la izquierda</strong>: A⁻¹·(A·X) = A⁻¹·B, y la izquierda colapsa a X. El plan encadena dos técnicas: primero invertir A con [A | I], luego un producto renglón por columna.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · invertir A con [A | I]</div><p>Pego la identidad: fila 1 = (2, 1 | 1, 0), fila 2 = (3, 2 | 0, 1). Para fabricar un 1 sin fracciones, R2 → R2 − R1 y luego subo esa fila con R1 ↔ R2:</p>
+            <p class="calc"><span class="rw">R2</span> 3−2=<b>1</b> <span class="sep">•</span> 2−1=<b>1</b> <span class="sep">•</span> 0−1=<b>−1</b> <span class="sep">•</span> 1−0=<b>1</b></p>
+            <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+              <div class="mrow" style="grid-template-columns:repeat(2,auto) 16px repeat(2,auto)"><span>1</span><span>1</span><span class="msep"></span><span>−1</span><span>1</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(2,auto) 16px repeat(2,auto)"><span>2</span><span>1</span><span class="msep"></span><span>1</span><span>0</span></div>
+            </div><span class="brk brk-r"></span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 2 · R2 → R2 − 2·R1, luego R2 → R2 ÷ (−1)</div><p>Cero abajo del pivote y normalizo:</p>
+            <p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·1=<b>−1</b> <span class="sep">•</span> 1−2·(−1)=<b>3</b> <span class="sep">•</span> 0−2·1=<b>−2</b></p>
+            <p class="calc"><span class="rw">R2÷(−1)</span> 0=<b>0</b> <span class="sep">•</span> −1÷(−1)=<b>1</b> <span class="sep">•</span> 3÷(−1)=<b>−3</b> <span class="sep">•</span> −2÷(−1)=<b>2</b></p>
+          </div>
+          <div class="estep"><div class="oprow">Paso 3 · R1 → R1 − R2</div><p>Limpio arriba y leo la inversa:</p>
+            <p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> −1−(−3)=<b>2</b> <span class="sep">•</span> 1−2=<b>−1</b></p>
+            <div class="fx"><div class="mtx"><span class="brk brk-l"></span><div class="cols">
+              <div class="mrow" style="grid-template-columns:repeat(2,auto) 16px repeat(2,auto)"><span>1</span><span>0</span><span class="msep"></span><span>2</span><span>−1</span></div>
+              <div class="mrow" style="grid-template-columns:repeat(2,auto) 16px repeat(2,auto)"><span>0</span><span>1</span><span class="msep"></span><span>−3</span><span>2</span></div>
+            </div><span class="brk brk-r"></span></div></div>
+            <p>A⁻¹ = renglón (2, −1), renglón (−3, 2).</p>
+          </div>
+          <div class="estep"><div class="oprow">Paso 4 · X = A⁻¹·B, casilla por casilla</div><p>Multiplico A⁻¹ = renglón (2, −1), renglón (−3, 2) por B = renglón (1, 0), renglón (1, 2). Ojo: A⁻¹ va a la <strong>izquierda</strong>:</p>
+            <p class="calc"><span class="rw">c₁₁</span> 2·1=<b>2</b> <span class="sep">•</span> −1·1=<b>−1</b> <span class="sep">•</span> suma=<b>1</b></p>
+            <p class="calc"><span class="rw">c₁₂</span> 2·0=<b>0</b> <span class="sep">•</span> −1·2=<b>−2</b> <span class="sep">•</span> suma=<b>−2</b></p>
+            <p class="calc"><span class="rw">c₂₁</span> −3·1=<b>−3</b> <span class="sep">•</span> 2·1=<b>2</b> <span class="sep">•</span> suma=<b>−1</b></p>
+            <p class="calc"><span class="rw">c₂₂</span> −3·0=<b>0</b> <span class="sep">•</span> 2·2=<b>4</b> <span class="sep">•</span> suma=<b>4</b></p>
+          </div>
+          <div class="estep"><div class="oprow">Comprobación · A·X = B</div><p>Con X = renglón (1, −2), renglón (−1, 4), multiplico A·X y debe salir B:</p><p class="calc"><span class="rw">A·X</span> c₁₁=2−1=<b>1</b> <span class="sep">•</span> c₁₂=−4+4=<b>0</b> <span class="sep">•</span> c₂₁=3−2=<b>1</b> <span class="sep">•</span> c₂₂=−6+8=<b>2</b> <span class="sep">•</span> = B ✓</p></div>
+          <p class="verdict"><strong>X = renglón (1, −2), renglón (−1, 4).</strong> El error que cuesta puntos: calcular B·A⁻¹ en lugar de A⁻¹·B. Como el producto no conmuta, salen matrices distintas (B·A⁻¹ = renglón (2, −1), renglón (−4, 3)) y esa NO cumple A·X = B.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
     <h2 class="modhead">Chequeo rápido — sin lápiz</h2>
 
     <section class="chuleta">
@@ -598,6 +848,214 @@
   </main>
 </div>
 
+<script>
+"use strict";
+
+/* ---------- render de matriz cuadrada (corchetes, sin barra aumentada) ---------- */
+function sq(rows){
+  var n = rows[0].length;
+  var gtc = 'repeat('+n+',auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<n;j++) cells+='<span>'+rows[r][j]+'</span>';
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setsq(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=sq(rows); }
+
+/* ---------- helper adicional: matriz ancha/aumentada [A | B] con barra tras la columna sepCol ---------- */
+function matWide(rows, sepCol){
+  var n = rows[0].length;
+  var gtc = 'repeat('+sepCol+',auto) 16px repeat('+(n-sepCol)+',auto)';
+  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
+  for(var r=0;r<rows.length;r++){
+    var cells='';
+    for(var j=0;j<n;j++){
+      cells+='<span>'+rows[r][j]+'</span>';
+      if(j===sepCol-1) cells+='<span class="msep"></span>';
+    }
+    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
+  }
+  return h+'</div><span class="brk brk-r"></span></div>';
+}
+function setWide(id, rows, sepCol){ var el=document.getElementById(id); if(el) el.innerHTML=matWide(rows, sepCol); }
+
+/* ---------- helper adicional: fila de etiquetas y matrices ("A =" [...] "B =" [...]) ---------- */
+function setGroup(id, parts){
+  var el=document.getElementById(id); if(!el) return;
+  var h='<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:21px;font-variant-numeric:tabular-nums">';
+  for(var i=0;i<parts.length;i++){ h += (typeof parts[i]==='string') ? '<span>'+parts[i]+'</span>' : sq(parts[i]); }
+  el.innerHTML=h+'</div>';
+}
+
+/* ===== RG1 : A(2×3)·B(3×2) -> renglón (2,−3), renglón (10,8) ===== */
+setGroup('rg1p',["A =",[["1","2","0"],["3","−1","1"]],"B =",[["2","1"],["0","−2"],["4","3"]]]);
+setsq('rg1r',[["2","−3"],["10","8"]]);
+
+/* ===== RG2 : transpuesta de A(2×3) + regla (M·N)ᵀ = Nᵀ·Mᵀ ===== */
+setGroup('rg2a',["A =",[["1","2","3"],["4","5","6"]]]);
+setsq('rg2b',[["1","4"],["2","5"],["3","6"]]);
+setsq('rg2c',[["7","2"],["3","1"]]);
+setsq('rg2d',[["7","3"],["2","1"]]);
+setsq('rg2e',[["7","3"],["2","1"]]);
+
+/* ===== RG3 : inversa de renglón (1,3), renglón (2,7) por Gauss-Jordan ===== */
+setGroup('rg3a',["A =",[["1","3"],["2","7"]]]);
+setWide('rg3b',[["1","3","1","0"],["2","7","0","1"]],2);
+setWide('rg3c',[["1","3","1","0"],["0","1","−2","1"]],2);
+setWide('rg3d',[["1","0","7","−3"],["0","1","−2","1"]],2);
+setGroup('rg3e',["A⁻¹ =",[["7","−3"],["−2","1"]]]);
+
+/* ===== P4 : producto 2×2 -> renglón (11,7), renglón (15,25) ===== */
+setGroup('p4p',["A =",[["2","1"],["0","5"]],"B =",[["4","1"],["3","5"]]]);
+setsq('p4r',[["11","7"],["15","25"]]);
+
+/* ===== P5 : A·B ≠ B·A ===== */
+setGroup('p5p',["A =",[["1","2"],["0","1"]],"B =",[["2","0"],["1","3"]]]);
+setsq('p5ab',[["4","6"],["1","3"]]);
+setsq('p5ba',[["2","4"],["1","5"]]);
+
+/* ===== P7 : transponer 3×2 -> 2×3 ===== */
+setsq('p7p',[["5","2"],["1","4"],["0","7"]]);
+setsq('p7t',[["5","1","0"],["2","4","7"]]);
+
+/* ===== P8 : inversa de renglón (1,2), renglón (1,3) ===== */
+setGroup('p8p',["A =",[["1","2"],["1","3"]]]);
+setWide('p8a',[["1","2","1","0"],["1","3","0","1"]],2);
+setWide('p8b',[["1","2","1","0"],["0","1","−1","1"]],2);
+setWide('p8c',[["1","0","3","−2"],["0","1","−1","1"]],2);
+setGroup('p8d',["A⁻¹ =",[["3","−2"],["−1","1"]]]);
+
+/* ===== P9 : inversa con pivote a normalizar, renglón (2,4), renglón (1,3) ===== */
+setGroup('p9p',["A =",[["2","4"],["1","3"]]]);
+setWide('p9a',[["1","3","0","1"],["2","4","1","0"]],2);
+setWide('p9b',[["1","3","0","1"],["0","−2","1","−2"]],2);
+setWide('p9c',[["1","3","0","1"],["0","1","−½","1"]],2);
+setWide('p9d',[["1","0","3⁄2","−2"],["0","1","−½","1"]],2);
+
+/* ===== P10 : singular, renglón (2,6), renglón (3,9) ===== */
+setGroup('p10p',["A =",[["2","6"],["3","9"]]]);
+setWide('p10a',[["1","3","½","0"],["3","9","0","1"]],2);
+setWide('p10b',[["1","3","½","0"],["0","0","−3⁄2","1"]],2);
+
+/* ===== P11 : diagonal, simétrica y triangular superior ===== */
+setGroup('p11p',[[["7","0","0"],["0","4","0"],["0","0","2"]],[["3","1","5"],["1","6","2"],["5","2","8"]],[["3","5","2"],["0","4","1"],["0","0","6"]]]);
+
+/* ===== P12 : identidad y A·A ===== */
+setGroup('p12p',["A =",[["2","1"],["0","3"]],"I =",[["1","0"],["0","1"]]]);
+setsq('p12r',[["4","5"],["0","9"]]);
+
+/* ===== P13 : recetas por precios (2×2 por 2×1) ===== */
+setGroup('p13p',[[["2","1"],["1","3"]],"·",[["30"],["20"]]]);
+setsq('p13r',[["80"],["90"]]);
+
+/* ===== P14 : inversa de renglón (2,1), renglón (1,1) ===== */
+setGroup('p14p',["A =",[["2","1"],["1","1"]]]);
+setWide('p14a',[["1","1","0","1"],["2","1","1","0"]],2);
+setWide('p14b',[["1","1","0","1"],["0","−1","1","−2"]],2);
+setWide('p14c',[["1","1","0","1"],["0","1","−1","2"]],2);
+setWide('p14d',[["1","0","1","−1"],["0","1","−1","2"]],2);
+
+/* =========================================================
+   INSTRUMENTACIÓN — sesión + reporte
+   ========================================================= */
+var session = {
+  fecha:new Date().toISOString().slice(0,10),
+  materia:"algebra_lineal", unidad:"U4_algebra_matricial", leccion:"L4_cuadernillo-papel",
+  duracion_min:0, items:[], autoconfianza:null, resumen_legible:""
+};
+var t0ms = Date.now();
+var TOT = document.querySelectorAll('[data-kind="prob"]').length;
+
+var RES_LABEL = { logre:"Lo logré", medias:"A medias", nopude:"No pude" };
+var RES_ORDER = [
+  {key:"logre",  cls:"ok",   sel:"sel-ok",   done:"done-ok",   txt:"Lo logré"},
+  {key:"medias", cls:"half", sel:"sel-half", done:"done-half", txt:"A medias"},
+  {key:"nopude", cls:"no",   sel:"sel-no",   done:"done-no",   txt:"No pude"}
+];
+
+function upsertItem(id, tema, resultado, tiempo_s){
+  var found=null;
+  for(var i=0;i<session.items.length;i++){ if(session.items[i].id===id){ found=session.items[i]; break; } }
+  if(found){ found.resultado=resultado; found.tiempo_s=tiempo_s; }
+  else { session.items.push({ id:id, tema:tema, resultado:resultado, tiempo_s:tiempo_s }); }
+}
+
+document.querySelectorAll('[data-kind="prob"]').forEach(function(block){
+  var id   = block.getAttribute('data-id');
+  var tema = block.getAttribute('data-tema');
+  var startedAt = Date.now();
+  var host = block.querySelector('.rbtns');
+  if(!host) return;
+  var btns = [];
+  RES_ORDER.forEach(function(cfg){
+    var b=document.createElement('button');
+    b.className='rbtn '+cfg.cls;
+    b.textContent=cfg.txt;
+    b.onclick=function(){
+      btns.forEach(function(x){ x.el.classList.remove('sel-ok','sel-half','sel-no'); });
+      block.classList.remove('done-ok','done-half','done-no');
+      b.classList.add(cfg.sel);
+      block.classList.add(cfg.done);
+      var tiempo_s = Math.round((Date.now()-startedAt)/1000);
+      upsertItem(id, tema, cfg.key, tiempo_s);
+    };
+    host.appendChild(b);
+    btns.push({el:b, cfg:cfg});
+  });
+});
+
+/* ---------- autoconfianza ---------- */
+var esc = document.getElementById('esc');
+[1,2,3,4,5].forEach(function(n){
+  var b=document.createElement('button'); b.textContent=n;
+  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
+  esc.appendChild(b);
+});
+
+/* ---------- resumen legible ---------- */
+function buildSummary(){
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  var reportados = session.items.length;
+  var trabas = session.items.filter(function(x){return x.resultado!=="logre";}).map(function(x){return x.id;});
+  var s="Reportó "+reportados+"/"+TOT+" problemas. ";
+  s+="Lo logró: "+logre+" · A medias: "+medias+" · No pudo: "+nopude+". ";
+  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas reportadas. ";
+  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
+  return s;
+}
+
+document.getElementById('gen').onclick=function(){
+  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
+  session.resumen_legible=buildSummary();
+  var nombre=session.fecha+"_algebra_U4_cuadernillo.json";
+  var json=JSON.stringify(session,null,2);
+  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
+  var pills=session.items.map(function(it){
+    var c = it.resultado==="logre"?"ok":(it.resultado==="medias"?"half":"no");
+    return '<span class="pill '+c+'">'+it.id+": "+RES_LABEL[it.resultado]+'</span>';
+  }).join("")||'<span class="nota">— sin problemas reportados —</span>';
+  var logre  = session.items.filter(function(x){return x.resultado==="logre";}).length;
+  var medias = session.items.filter(function(x){return x.resultado==="medias";}).length;
+  var nopude = session.items.filter(function(x){return x.resultado==="nopude";}).length;
+  document.getElementById('reporte').innerHTML=
+    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
+    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
+    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT+'</strong> reportados · <strong>'+logre+'</strong> logrados · <strong>'+medias+'</strong> a medias · <strong>'+nopude+'</strong> no pudo · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
+    '<div>'+pills+'</div>'+
+    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
+    '<button class="btn ghost" id="cp">Copiar</button>'+
+    '<textarea id="ta" readonly>'+json+'</textarea>'+
+    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
+    '</div>';
+  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
+  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
 <script>
 /* autotest: opción múltiple con opciones BARAJADAS (posición aleatoria) + revelar al elegir */
 (function(){

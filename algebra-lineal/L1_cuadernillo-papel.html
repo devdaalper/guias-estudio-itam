@@ -81,6 +81,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -442,6 +443,228 @@
           <div class="estep"><div class="oprow">R1 → R1 − R2 · R3 → R3 − R2</div><p>Limpio la columna y arriba y abajo. El pivote de z queda directo.</p><div class="fx" id="p10d"></div></div>
           <div class="estep"><div class="oprow">R1 → R1 − 2·R3</div><p>Limpio la última columna arriba. RREF.</p><div class="fx" id="p10e"></div></div>
           <p class="verdict"><strong>A = 5, B = 3, C = 4.</strong> Compruebo: 5+3+4 = 12 ✓ y 2(5)+3+3(4) = 25 ✓. Solución única (3 pivotes, 3 incógnitas), y las tres cantidades son enteras positivas, así que tiene sentido físico.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan el sistema con una constante desconocida y te piden hallarla, te escriben renglones sueltos como [ 0, 0 | 3 ] y toca <strong>justificar</strong> cada clasificación. Estos cinco problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 : inverso, a para infinitas soluciones ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="inverso_infinitas" data-level="examen">
+      <div class="phead"><span class="pnum">11</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla a para que haya infinitas soluciones</p>
+      <p class="pstatement">Considera el sistema, donde <strong>a ∈ ℝ</strong>. Determina el valor de a para el cual el sistema tiene una <strong>infinidad de soluciones</strong> y, para ese valor, escribe la <strong>solución general en forma paramétrica</strong>. Indica qué ocurre con los demás valores de a.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + y + 2z = 4</span>
+        <span class="eq">2x + 3y + 5z = 10</span>
+        <span class="eq">3x + 4y + a·z = 14</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>«Infinitas soluciones» significa que al reducir debe quedar una <strong>columna sin pivote y sin contradicción</strong>: algún renglón tiene que anularse completo (0 = 0). El plan: escalono la matriz aumentada tratando la a como un número normal y vigilo el renglón donde queda viva.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · escalonar la columna x</div><p>Escribo [A | b] y hago ceros bajo el primer pivote con R2 → R2 − 2·R1 y R3 → R3 − 3·R1.</p>
+            <p class="calc">R2: 2 − 2·1 = 0 · 3 − 2·1 = 1 · 5 − 2·2 = 1 · 10 − 2·4 = 2</p>
+            <p class="calc">R3: 3 − 3·1 = 0 · 4 − 3·1 = 1 · a − 3·2 = a − 6 · 14 − 3·4 = 2</p>
+            <div class="fx"><div class="sys">
+              <span class="eq">[ 1, 1, 2 | 4 ]</span>
+              <span class="eq">[ 0, 1, 1 | 2 ]</span>
+              <span class="eq">[ 0, 1, a − 6 | 2 ]</span>
+            </div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 2 · R3 → R3 − R2</div>
+            <p class="calc">(a − 6) − 1 = a − 7 · 2 − 2 = 0</p>
+            <div class="fx"><div class="sys"><span class="eq">[ 0, 0, a − 7 | 0 ]</span></div></div>
+            <p>Si a ≠ 7, ese renglón dice (a − 7)·z = 0 ⇒ z = 0 y el sistema tiene <strong>solución única</strong>. Para infinitas necesito que el renglón se anule entero: <strong>a − 7 = 0 ⇒ a = 7</strong>.</p>
+          </div>
+          <div class="estep"><div class="oprow">Paso 3 · sustituir a = 7 de vuelta</div><p>Con a = 7 el tercer renglón queda <strong>[ 0, 0, 0 | 0 ]</strong>: se anula sin contradicción. Quedan 2 pivotes para 3 incógnitas ⇒ la columna z no tiene pivote ⇒ z es libre ⇒ infinitas. Confirmado.</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · RREF y forma paramétrica</div><p>Limpio la y de arriba con R1 → R1 − R2.</p>
+            <p class="calc">1 − 0 = 1 · 1 − 1 = 0 · 2 − 1 = 1 · 4 − 2 = 2</p>
+            <div class="fx"><div class="sys">
+              <span class="eq">[ 1, 0, 1 | 2 ]</span>
+              <span class="eq">[ 0, 1, 1 | 2 ]</span>
+              <span class="eq">[ 0, 0, 0 | 0 ]</span>
+            </div></div>
+            <p>Leo los renglones: x + z = 2 y también y + z = 2. Con <strong>z = t</strong> libre:</p>
+            <div class="fx"><div class="sys"><span class="eq">x = 2 − t</span><span class="eq">y = 2 − t</span><span class="eq">z = t</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 5 · verificar en el sistema original</div>
+            <p class="calc">E1: (2 − t) + (2 − t) + 2t = 4 ✓ · E2: 2(2 − t) + 3(2 − t) + 5t = 4 + 6 − 5t + 5t = 10 ✓ · E3: 3(2 − t) + 4(2 − t) + 7t = 6 + 8 − 7t + 7t = 14 ✓</p>
+          </div>
+          <p class="verdict"><strong>a = 7</strong>, y la solución general es <strong>(x, y, z) = (2, 2, 0) + t·(−1, −1, 1)</strong>, t ∈ ℝ. Para a ≠ 7 la solución es <strong>única</strong> (nunca «ninguna», porque el lado derecho de ese renglón es 0). Error típico: hallar a = 7 y no dar la paramétrica — el problema pide las dos cosas.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 : inverso, a sin solucion ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="inverso_sin_solucion" data-level="examen">
+      <div class="phead"><span class="pnum">12</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Halla los valores de a sin solución</p>
+      <p class="pstatement">Sea <strong>a ∈ ℝ</strong>. Determina todos los valores de a para los que el sistema <strong>no tiene solución</strong>. Justifica exhibiendo el renglón que produce la inconsistencia, y di qué ocurre con los demás valores de a.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + y + z = 2</span>
+        <span class="eq">2x + 3y + z = 5</span>
+        <span class="eq">4x + 5y + a·z = 11</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>«No tiene solución» significa que al escalonar aparece un renglón <strong>[ 0, 0, 0 | c ] con c ≠ 0</strong> (una contradicción 0 = c). Escalono con la a viva y busco qué valor de a produce exactamente eso.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · escalonar la columna x</div><p>R2 → R2 − 2·R1 y R3 → R3 − 4·R1.</p>
+            <p class="calc">R2: 2 − 2·1 = 0 · 3 − 2·1 = 1 · 1 − 2·1 = −1 · 5 − 2·2 = 1</p>
+            <p class="calc">R3: 4 − 4·1 = 0 · 5 − 4·1 = 1 · a − 4·1 = a − 4 · 11 − 4·2 = 3</p>
+            <div class="fx"><div class="sys">
+              <span class="eq">[ 1, 1, 1 | 2 ]</span>
+              <span class="eq">[ 0, 1, −1 | 1 ]</span>
+              <span class="eq">[ 0, 1, a − 4 | 3 ]</span>
+            </div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 2 · R3 → R3 − R2</div>
+            <p class="calc">(a − 4) − (−1) = a − 3 · 3 − 1 = 2</p>
+            <div class="fx"><div class="sys"><span class="eq">[ 0, 0, a − 3 | 2 ]</span></div></div>
+            <p>Ese renglón dice (a − 3)·z = 2. Si <strong>a = 3</strong> queda 0·z = 2, o sea <strong>0 = 2</strong>: contradicción, sin solución. Si a ≠ 3 hay pivote en z y la solución es única.</p>
+          </div>
+          <div class="estep"><div class="oprow">Paso 3 · sustituir a = 3 de vuelta</div><p>Con a = 3, la tercera ecuación es 4x + 5y + 3z = 11. Pero su lado izquierdo es exactamente 2·E1 + E2:</p>
+            <p class="calc">2(x + y + z) + (2x + 3y + z) = 4x + 5y + 3z · lados derechos: 2·2 + 5 = 9 ≠ 11</p>
+            <p>Mismo lado izquierdo, lados derechos distintos (9 contra 11): las tres ecuaciones se contradicen. El renglón revelador es <strong>[ 0, 0, 0 | 2 ]</strong>. Confirmado.</p>
+          </div>
+          <p class="verdict warn"><strong>No hay solución exactamente cuando a = 3.</strong> Para todo a ≠ 3 la solución es única, y nunca hay infinitas (el 2 del lado derecho no desaparece con ningún a). Error típico: confundir [ 0, 0, 0 | 2 ] (ninguna) con [ 0, 0, 0 | 0 ] (infinitas).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 : V/F con justificacion ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="vf_operaciones_clasificacion" data-level="examen">
+      <div class="phead"><span class="pnum">13</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Decide si cada afirmación es <strong>verdadera o falsa</strong>. Justifica cada respuesta: un argumento breve si es verdadera, un <strong>contraejemplo explícito</strong> si es falsa. Sin justificación no hay puntos.</p>
+      <div class="fx"><div class="sys" style="font-size:17px">
+        <span class="eq">(i) Multiplicar un renglón por 0 es una operación de renglón válida.</span>
+        <span class="eq">(ii) El renglón [ 0, 0 | 3 ] implica que no hay solución.</span>
+        <span class="eq">(iii) Un renglón de puros ceros implica infinitas soluciones.</span>
+        <span class="eq">(iv) Con más incógnitas que ecuaciones no puede haber solución única.</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>En V/F la calificación vive en la <strong>justificación</strong>. Verdadera = un argumento que sirva para cualquier sistema; falsa = me basta <strong>un</strong> sistema concreto donde la afirmación falle. Reviso una por una.</p></div>
+          <div class="estep"><div class="oprow">(i) · FALSA</div><p>Las operaciones válidas son: intercambiar renglones, sumar a un renglón un múltiplo de otro, y multiplicar un renglón por una constante <strong>c ≠ 0</strong>. Multiplicar por 0 borra la ecuación y no es reversible: cambia el conjunto de soluciones.</p>
+            <p class="calc">Contraejemplo: la ecuación x = 5 tiene solución única. Multiplico su renglón por 0 → queda 0 = 0 → ahora «cualquier x sirve». El sistema cambió.</p>
+          </div>
+          <div class="estep"><div class="oprow">(ii) · VERDADERA</div><p>Ese renglón se lee <strong>0·x + 0·y = 3</strong>, es decir 0 = 3: imposible. Un sistema con un renglón así es inconsistente y no tiene solución, sin importar el resto de la matriz.</p></div>
+          <div class="estep"><div class="oprow">(iii) · FALSA</div><p>Un renglón de puros ceros solo dice que esa ecuación era <strong>redundante</strong>; no decide nada por sí solo.</p>
+            <p class="calc">Contraejemplo: x + y = 2 · 2x + 2y = 4 · x − y = 0. Al reducir, R2 − 2·R1 = [ 0, 0 | 0 ] (renglón de ceros), pero quedan pivotes en x y en y: solución única x = 1, y = 1.</p>
+            <p>También puede pasar que otro renglón dé 0 = c ≠ 0 y entonces no hay <strong>ninguna</strong> solución. El renglón de ceros no garantiza infinitas.</p>
+          </div>
+          <div class="estep"><div class="oprow">(iv) · VERDADERA</div><p>Hay a lo más un pivote por ecuación: pivotes ≤ ecuaciones &lt; incógnitas. Siempre sobra una columna sin pivote. Si el sistema es consistente, esa variable es libre → infinitas; si no, ninguna. <strong>Única es imposible</strong> (es exactamente lo que anticipaste en el problema 6).</p></div>
+          <p class="verdict"><strong>(i) F · (ii) V · (iii) F · (iv) V.</strong> Error típico: contestar la letra sin el contraejemplo — en el examen la justificación vale más que la letra, y una falsa sin contraejemplo concreto no da puntos.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 : 3x3 completo nivel examen ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="gauss_jordan_examen" data-level="examen">
+      <div class="phead"><span class="pnum">14</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Gauss-Jordan completo, como lo pide el parcial</p>
+      <p class="pstatement">Resuelve el sistema mediante <strong>Gauss-Jordan</strong>: lleva la matriz aumentada [A | b] a su forma escalonada reducida indicando <strong>cada operación de renglón</strong>, clasifica el sistema (única, ninguna o infinitas) y <strong>verifica</strong> tu solución en el sistema original.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">x + 2y + z = 3</span>
+        <span class="eq">2x − y + 3z = 14</span>
+        <span class="eq">3x + y − 2z = −1</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Es el método directo, pero en formato de examen: se califica el <strong>proceso</strong> (cada operación escrita), la <strong>clasificación</strong> y la <strong>verificación</strong>, no solo los tres números. Escribo [A | b] y escalono.</p>
+            <div class="fx"><div class="sys">
+              <span class="eq">[ 1, 2, 1 | 3 ]</span>
+              <span class="eq">[ 2, −1, 3 | 14 ]</span>
+              <span class="eq">[ 3, 1, −2 | −1 ]</span>
+            </div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 1 · R2 → R2 − 2·R1 · R3 → R3 − 3·R1</div>
+            <p class="calc">R2: 2 − 2 = 0 · −1 − 4 = −5 · 3 − 2 = 1 · 14 − 6 = 8</p>
+            <p class="calc">R3: 3 − 3 = 0 · 1 − 6 = −5 · −2 − 3 = −5 · −1 − 9 = −10</p>
+            <div class="fx"><div class="sys">
+              <span class="eq">[ 1, 2, 1 | 3 ]</span>
+              <span class="eq">[ 0, −5, 1 | 8 ]</span>
+              <span class="eq">[ 0, −5, −5 | −10 ]</span>
+            </div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 2 · R3 → R3 − R2, luego R3 ÷ (−6)</div>
+            <p class="calc">R3: −5 − (−5) = 0 · −5 − 1 = −6 · −10 − 8 = −18 · después −18 ÷ (−6) = 3</p>
+            <div class="fx"><div class="sys"><span class="eq">[ 0, 0, 1 | 3 ]  →  z = 3</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 3 · R2 → R2 − R3, luego R2 ÷ (−5)</div>
+            <p class="calc">R2: 1 − 1 = 0 · 8 − 3 = 5 · queda [ 0, −5, 0 | 5 ] · después 5 ÷ (−5) = −1</p>
+            <div class="fx"><div class="sys"><span class="eq">[ 0, 1, 0 | −1 ]  →  y = −1</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 4 · R1 → R1 − R3, luego R1 → R1 − 2·R2</div>
+            <p class="calc">R1 − R3: [ 1, 2, 0 | 0 ] · R1 − 2·R2: 2 − 2·1 = 0 · 0 − 2·(−1) = 2</p>
+            <div class="fx"><div class="sys"><span class="eq">[ 1, 0, 0 | 2 ]  →  x = 2</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 5 · verificar en el sistema original</div>
+            <p class="calc">E1: 2 + 2(−1) + 3 = 2 − 2 + 3 = 3 ✓ · E2: 2(2) − (−1) + 3(3) = 4 + 1 + 9 = 14 ✓ · E3: 3(2) + (−1) − 2(3) = 6 − 1 − 6 = −1 ✓</p>
+          </div>
+          <p class="verdict"><strong>x = 2, y = −1, z = 3</strong>. Hay 3 pivotes para 3 incógnitas ⇒ <strong>solución única</strong>. Error típico: los signos al dividir entre −5 y −6 — escribe la división completa en vez de hacerla «de cabeza».</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 : encadenado, modelado con parametro ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="modelado_parametro" data-level="examen">
+      <div class="phead"><span class="pnum">15</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Modelado con parámetro: precios encadenados</p>
+      <p class="pstatement">En una papelería, un lápiz, una pluma y un cuaderno cuestan <strong>$60</strong>; dos lápices, tres plumas y un cuaderno cuestan <strong>$100</strong>; y cuatro lápices, cinco plumas y tres cuadernos cuestan <strong>a pesos</strong>. (i) Plantea el sistema y escribe su matriz aumentada. (ii) Determina el valor de a para el que el sistema es <strong>consistente</strong> y clasifícalo. (iii) Para ese valor, escribe la <strong>solución general paramétrica</strong> y calcula los tres precios sabiendo además que el cuaderno cuesta <strong>$35</strong>.</p>
+      <div class="fx"><div class="sys" style="font-size:17px">
+        <span class="eq">1 lápiz + 1 pluma + 1 cuaderno = $60</span>
+        <span class="eq">2 lápices + 3 plumas + 1 cuaderno = $100</span>
+        <span class="eq">4 lápices + 5 plumas + 3 cuadernos = a pesos</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Defino <strong>x = precio del lápiz</strong>, <strong>y = precio de la pluma</strong>, <strong>z = precio del cuaderno</strong>. Cada compra es una ecuación; la a es el total desconocido de la tercera. «Consistente» = que tenga al menos una solución.</p>
+            <div class="fx"><div class="sys">
+              <span class="eq">[ 1, 1, 1 | 60 ]</span>
+              <span class="eq">[ 2, 3, 1 | 100 ]</span>
+              <span class="eq">[ 4, 5, 3 | a ]</span>
+            </div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 1 · escalonar la columna x</div><p>R2 → R2 − 2·R1 y R3 → R3 − 4·R1.</p>
+            <p class="calc">R2: 3 − 2 = 1 · 1 − 2 = −1 · 100 − 120 = −20</p>
+            <p class="calc">R3: 5 − 4 = 1 · 3 − 4 = −1 · a − 240</p>
+            <div class="fx"><div class="sys">
+              <span class="eq">[ 1, 1, 1 | 60 ]</span>
+              <span class="eq">[ 0, 1, −1 | −20 ]</span>
+              <span class="eq">[ 0, 1, −1 | a − 240 ]</span>
+            </div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 2 · R3 → R3 − R2: el valor de a</div>
+            <p class="calc">R3: 0 · 0 · (−1) − (−1) = 0 · (a − 240) − (−20) = a − 220</p>
+            <div class="fx"><div class="sys"><span class="eq">[ 0, 0, 0 | a − 220 ]</span></div></div>
+            <p>Si a ≠ 220 el renglón dice 0 = a − 220 ≠ 0: sin solución. Consistente exige <strong>a = 220</strong>. Comprobación de vuelta: el lado izquierdo de la tercera compra es 2·E1 + E2 (2 + 2 = 4 lápices, 2 + 3 = 5 plumas, 2 + 1 = 3 cuadernos), así que su precio debe ser 2(60) + 100 = 220 ✓.</p>
+          </div>
+          <div class="estep"><div class="oprow">Paso 3 · clasificar y parametrizar (a = 220)</div><p>Con a = 220 quedan 2 pivotes para 3 incógnitas, sin contradicción ⇒ <strong>infinitas soluciones</strong>: los datos no bastan para fijar los precios. Limpio arriba con R1 → R1 − R2:</p>
+            <p class="calc">R1: 1 − 1 = 0 en y · 1 − (−1) = 2 en z · 60 − (−20) = 80</p>
+            <div class="fx"><div class="sys"><span class="eq">[ 1, 0, 2 | 80 ]</span><span class="eq">[ 0, 1, −1 | −20 ]</span><span class="eq">[ 0, 0, 0 | 0 ]</span></div></div>
+            <p>Leo: x + 2z = 80 y también y − z = −20. Con <strong>z = t</strong>:</p>
+            <div class="fx"><div class="sys"><span class="eq">x = 80 − 2t</span><span class="eq">y = −20 + t</span><span class="eq">z = t</span></div></div>
+          </div>
+          <div class="estep"><div class="oprow">Paso 4 · el dato extra fija los precios</div><p>Cuaderno de $35 ⇒ t = 35:</p>
+            <p class="calc">x = 80 − 2(35) = 80 − 70 = 10 · y = −20 + 35 = 15 · z = 35</p>
+            <p class="calc">Verifico en el original: 10 + 15 + 35 = 60 ✓ · 2(10) + 3(15) + 35 = 20 + 45 + 35 = 100 ✓ · 4(10) + 5(15) + 3(35) = 40 + 75 + 105 = 220 ✓</p>
+          </div>
+          <p class="verdict"><strong>a = 220</strong>; solución general <strong>(x, y, z) = (80, −20, 0) + t·(−2, 1, 1)</strong>, t ∈ ℝ; con el cuaderno de $35: <strong>lápiz $10, pluma $15, cuaderno $35</strong>. Error típico: dar «una» terna sin notar que sin el dato extra hay infinitas — y ojo: para que los tres precios sean positivos se necesita 20 &lt; t &lt; 40.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>

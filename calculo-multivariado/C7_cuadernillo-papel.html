@@ -71,6 +71,7 @@
   .lvl.resuelto{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
   .lvl.guiado{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
   .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
+  .lvl.examen{color:#a01243;background:var(--red-tint);border-color:#e9b8c6}
   .ptitle{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
   .pstatement{margin:0;font-size:17px;max-width:64ch}
   .pstatement strong{font-weight:800}
@@ -464,6 +465,130 @@
           <div class="estep"><div class="oprow">Paso 1 · armo el jacobiano</div><p>Calculo las cuatro parciales: ∂x/∂u = 1, ∂x/∂v = 1, ∂y/∂u = 1, ∂y/∂v = −1.</p><div class="fx" id="p14jac"></div><p class="calc"><span class="rw">det</span> (1)·(−1) − (1)·(1) = −1 − 1 = <b>−2</b> <span class="sep">•</span> |J| = <b>2</b></p></div>
           <div class="estep"><div class="oprow">Paso 2 · integro con el factor</div><p>El factor es |J| = 2. La integral del 1 sobre el cuadrado en uv (área 1) es 2 por esa área:</p><p class="calc"><span class="rw">área uv</span> 1·1 = <b>1</b> <span class="sep">•</span> por |J|=2 <span class="sep">•</span> queda <b>2</b></p></div>
           <p class="verdict">El área es <strong>2</strong>. El determinante salió <strong>−2</strong> (signo negativo por el orden de las filas), pero el área no puede ser negativa: entra el <strong>valor absoluto</strong>, |J| = 2. Esa es la regla general del cambio de variable — el mismo motivo por el que en polares se usa |r| = r.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <h2 class="modhead">Nivel examen — como te lo van a preguntar</h2>
+    <section class="sec">
+      <h3>El formato crudo del profesor</h3>
+      <p class="idea">Hasta aquí practicaste el método con instrucciones amigables. En el examen te lo van a preguntar <strong>al revés y en notación formal</strong>: te dan el valor de la integral y la incógnita es una constante, te escriben la iterada cruda y tú reconstruyes la región, y toca <strong>justificar</strong>. Estos problemas vienen en ese formato. Papel primero, como siempre.</p>
+    </section>
+
+    <!-- ============ EX1 EXAMEN : inverso — hallar la constante [M1] ============ -->
+    <section class="prob" data-kind="prob" data-id="EX1" data-tema="integral_doble_rectangulo" data-level="examen">
+      <div class="phead"><span class="pnum">15</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Hallar la constante que cuadra la integral</p>
+      <p class="pstatement">Sea f(x, y) = ax + y², con a una constante real, y sea R = [0, 2] × [0, 3]. Se sabe que la integral de f sobre R vale 30. Determina el valor de a.</p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∬<sub>R</sub> (ax + y²) dA = 30</span>
+        <span class="eq">R = [0, 2] × [0, 3]</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Es el problema de siempre, al revés: no te piden calcular la integral — te dicen cuánto vale (30) y la incógnita es la constante a que vive dentro del integrando. R = [0, 2] × [0, 3] se lee: x va de 0 a 2, y va de 0 a 3. Plan: integro como siempre arrastrando la a como si fuera un número, el resultado queda en función de a, lo igualo a 30 y despejo.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · integro por dentro (en y), con la a a cuestas</div><p>Con x constante, la primitiva de (ax + y²) respecto a y es ax·y + y³/3. La evalúo entre y = 0 y y = 3:</p><p class="calc"><span class="rw">en y=3</span> ax·3 + 3³/3 = 3ax + 27/3 = <b>3ax + 9</b> <span class="sep">•</span> <span class="rw">en y=0</span> <b>0</b> <span class="sep">•</span> queda <b>3ax + 9</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro por fuera (en x)</div><p>La primitiva de (3ax + 9) respecto a x es 3a·x²/2 + 9x. La evalúo entre x = 0 y x = 2:</p><p class="calc"><span class="rw">en x=2</span> 3a·2²/2 + 9·2 = 3a·2 + 18 = <b>6a + 18</b> <span class="sep">•</span> <span class="rw">en x=0</span> <b>0</b> <span class="sep">•</span> queda <b>6a + 18</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · igualo al dato y despejo</div><p>El enunciado dice que esa integral vale 30. Igualo, resuelvo la ecuación en a y compruebo sustituyendo de vuelta:</p><p class="calc"><span class="rw">ecuación</span> 6a + 18 = 30 <span class="sep">•</span> 6a = 12 <span class="sep">•</span> a = <b>2</b> <span class="sep">•</span> <span class="rw">checo</span> 6·2 + 18 = <b>30</b> ✓</p></div>
+          <p class="verdict">a = <strong>2</strong>. El error que cuesta puntos: tratar la a como si fuera variable de integración. La a es un número fijo: viaja intacta por las dos integrales y solo al final, con la ecuación armada, se despeja.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX2 EXAMEN : cambio de orden obligado [M5] ============ -->
+    <section class="prob" data-kind="prob" data-id="EX2" data-tema="cambio_orden" data-level="examen">
+      <div class="phead"><span class="pnum">16</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">La iterada que no sale en el orden dado</p>
+      <p class="pstatement">Evalúa la siguiente integral iterada. Dibuja la región de integración y justifica cada cambio que hagas.</p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∫<sub>0</sub><sup>4</sup> ∫<sub>√y</sub><sup>2</sup> √(x³ + 1) dx dy</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Te dan una iterada en el orden dx dy y piden su valor. Primer intento honesto: integrar √(x³ + 1) respecto a x… y no se puede — esa función no tiene primitiva elemental. Eso no es un callejón sin salida: es la señal de que el problema está diseñado para <strong>cambiar el orden</strong>. Plan: leo la región desde los límites, la dibujo, la reescribo en dy dx, y en ese orden sí sale.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · reconstruyo la región desde los límites</div><p>Afuera: y de 0 a 4. Adentro: x de √y a 2. La condición x ≥ √y (con todo positivo) equivale a y ≤ x². La región es la que queda bajo la parábola y = x², desde x = 0 hasta x = 2, con piso y = 0.</p><p class="calc"><span class="rw">en y=0</span> x va de √0 = 0 a <b>2</b> <span class="sep">•</span> <span class="rw">en y=4</span> x va de √4 = 2 a 2: la franja se <b>cierra</b> — ahí termina la región</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · invierto el orden (dy dx)</div><p>Con x fija entre 0 y 2, la y sube desde 0 hasta la parábola y = x². La misma región, descrita por franjas verticales:</p><div class="fx"><div class="sys intg"><span class="eq">∫<sub>0</sub><sup>2</sup> ∫<sub>0</sub><sup>x²</sup> √(x³ + 1) dy dx</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · integro por dentro (en y)</div><p>El integrando no tiene y: es constante en la interior. Integrar una constante es multiplicarla por el largo del intervalo:</p><p class="calc"><span class="rw">interior</span> √(x³ + 1)·(x² − 0) = <b>x²·√(x³ + 1)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · integro por fuera, con sustitución</div><p>Tomo u = x³ + 1, así du = 3x² dx — justo el x² que apareció al invertir. Entonces la integral es (1/3)·∫ √u du = (1/3)·(2/3)·u<sup>3/2</sup>, o sea la primitiva es (2/9)·(x³ + 1)<sup>3/2</sup>. Evalúo entre x = 0 y x = 2, usando 9<sup>3/2</sup> = (√9)³ = 27:</p><p class="calc"><span class="rw">en x=2</span> (2/9)·(8 + 1)<sup>3/2</sup> = (2/9)·27 = <b>6</b> <span class="sep">•</span> <span class="rw">en x=0</span> (2/9)·1 = <b>2/9</b> <span class="sep">•</span> resta = 54/9 − 2/9 = <b>52/9</b></p></div>
+          <p class="verdict">La integral vale <strong>52/9</strong>. Lo que cuesta puntos: pelearse a fuerza bruta con ∫ √(x³ + 1) dx (no existe primitiva elemental) o invertir los límites sin dibujar la región. Cuando la interior se atora así, el cambio de orden no es un truco opcional: es el método.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX3 EXAMEN : V/F justificado — Fubini y tipos de región [A1] ============ -->
+    <section class="prob" data-kind="prob" data-id="EX3" data-tema="region_general" data-level="examen">
+      <div class="phead"><span class="pnum">17</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Verdadero o falso, con justificación</p>
+      <p class="pstatement">Decide si cada afirmación es verdadera o falsa. <strong>Justifica</strong> cada respuesta: un argumento breve si es verdadera, un contraejemplo concreto si es falsa. Sin justificación no hay puntos.</p>
+      <p class="pstatement"><strong>(i)</strong> Si f es continua en el rectángulo R = [a, b] × [c, d], entonces ∫<sub>a</sub><sup>b</sup> ∫<sub>c</sub><sup>d</sup> f dy dx = ∫<sub>c</sub><sup>d</sup> ∫<sub>a</sub><sup>b</sup> f dx dy.<br>
+      <strong>(ii)</strong> En una integral iterada, los límites de la integral exterior pueden depender de la variable interior.<br>
+      <strong>(iii)</strong> Toda región tipo I es también una región tipo II.<br>
+      <strong>(iv)</strong> Si una región es a la vez tipo I y tipo II, integrar una f continua en un orden o en el otro da el mismo valor.</p>
+      <div class="fx"><div class="sys">
+        <span class="eq">tipo I: a ≤ x ≤ b, g<sub>1</sub>(x) ≤ y ≤ g<sub>2</sub>(x)</span>
+        <span class="eq">tipo II: c ≤ y ≤ d, h<sub>1</sub>(y) ≤ x ≤ h<sub>2</sub>(y)</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>En este formato la letra V o F sola vale cero: se califica la justificación. «Justifica» significa: si es V, nombra el teorema o da la razón en una línea; si es F, exhibe un contraejemplo con números concretos. Todo el bloque gira alrededor de Fubini y de cómo se describen las regiones.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · (i) — Verdadera</div><p>Es exactamente el teorema de <strong>Fubini</strong> en un rectángulo: con f continua, las dos iteradas existen y valen lo mismo. Justificación de examen: «Fubini: f continua sobre un rectángulo se integra en cualquier orden». Lo viste en acción en el problema 1: la integral de x + 2y sobre [0, 2] × [0, 1] da 4 en ambos órdenes.</p></div>
+          <div class="estep"><div class="oprow">Paso 2 · (ii) — Falsa</div><p>Los límites de <strong>afuera</strong> deben ser constantes: la exterior es la última evaluación y de ahí tiene que salir un número. Si el límite exterior trajera la variable interior, el «resultado» quedaría con una variable viva:</p><p class="calc"><span class="rw">absurdo</span> si la exterior fuera de 0 a x, al evaluar quedaría una <b>x sin dueño</b> <span class="sep">•</span> el resultado no sería un número → planteo inválido</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · (iii) — Falsa</div><p>Contraejemplo: D = la región bajo y = (x − 1)², con 0 ≤ x ≤ 2 y piso y = 0. Cada rebanada vertical es un solo segmento (tipo I ✓). Pero la rebanada horizontal a la altura y = 1/4 se parte en dos pedazos — la parábola toca el piso en x = 1 y deja un hueco en medio:</p><p class="calc"><span class="rw">en y=1/4</span> (x − 1)² ≥ 1/4 <span class="sep">•</span> x − 1 ≤ −1/2 o x − 1 ≥ 1/2 <span class="sep">•</span> x en [0, 1/2] <b>o</b> en [3/2, 2] → <b>dos pedazos</b> → no es tipo II</p></div>
+          <div class="estep"><div class="oprow">Paso 4 · (iv) — Verdadera</div><p>Es la misma región y la misma f: la integral doble es <strong>una sola</strong>; tipo I y tipo II son dos maneras de describirla, no dos integrales distintas. Fubini para regiones generales garantiza que ambas iteradas dan ese único valor. Es justo lo que comprobaste en el problema 7 al invertir el orden.</p></div>
+          <p class="verdict">(i) <strong>V</strong> — Fubini en un rectángulo · (ii) <strong>F</strong> — los límites de afuera son constantes; si no, el resultado no es un número · (iii) <strong>F</strong> — contraejemplo: la región bajo y = (x − 1)² en [0, 2]: la rebanada a y = 1/4 se parte en dos · (iv) <strong>V</strong> — la integral es de la región, no de la descripción. El error que cuesta puntos: contestar la letra sin justificar — aquí la letra sola vale cero.</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX4 EXAMEN : polares sobre un anillo (notación de conjunto) ============ -->
+    <section class="prob" data-kind="prob" data-id="EX4" data-tema="polares" data-level="examen">
+      <div class="phead"><span class="pnum">18</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">Integral sobre un anillo, en notación de conjunto</p>
+      <p class="pstatement">Sea D = {(x, y) ∈ R² | 1 ≤ x² + y² ≤ 9}. Calcula la integral de x² + y² sobre D.</p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∬<sub>D</sub> (x² + y²) dA</span>
+        <span class="eq">D = {(x, y) ∈ R² | 1 ≤ x² + y² ≤ 9}</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La notación de conjunto describe quién es D: los puntos cuyo x² + y² (la distancia al origen, al cuadrado) está entre 1 y 9. Eso es un <strong>anillo</strong>: lo que queda entre el círculo de radio 1 y el de radio √9 = 3. Ojo: radio 3, no 9 — la desigualdad trae el cuadrado. Con x² + y² en la región y también en el integrando, el problema pide polares a gritos.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · paso a polares, con jacobiano</div><p>Con x = r·cos θ, y = r·sen θ: x² + y² = r² y dA = r dr dθ. El integrando total es r²·r = r³. La región en polares: r de 1 a 3, θ toda la vuelta.</p><div class="fx"><div class="sys intg"><span class="eq">∫<sub>0</sub><sup>2π</sup> ∫<sub>1</sub><sup>3</sup> r³ dr dθ</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 2 · integro en r</div><p>La primitiva de r³ es r⁴/4. La evalúo entre r = 1 y r = 3:</p><p class="calc"><span class="rw">en r=3</span> 3⁴/4 = <b>81/4</b> <span class="sep">•</span> <span class="rw">en r=1</span> <b>1/4</b> <span class="sep">•</span> resta = 80/4 = <b>20</b></p></div>
+          <div class="estep"><div class="oprow">Paso 3 · integro en θ</div><p>Queda la constante 20 por dθ de 0 a 2π:</p><p class="calc"><span class="rw">θ</span> 20·(2π − 0) = <b>40π</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · compruebo por resta de discos</div><p>El anillo es el disco de radio 3 menos el disco de radio 1, y esta integral sobre un disco de radio R vale 2π·R⁴/4:</p><p class="calc"><span class="rw">R=3</span> 2π·81/4 = 81π/2 <span class="sep">•</span> <span class="rw">R=1</span> 2π·1/4 = π/2 <span class="sep">•</span> resta = 80π/2 = <b>40π</b> ✓</p></div>
+          <p class="verdict">La integral vale <strong>40π</strong>. Dos errores que cuestan puntos: llevar r hasta 9 (el 9 es el radio al cuadrado: r llega a 3) y olvidar el jacobiano (con r² a secas saldría 52π/3, que está mal).</p>
+        </div>
+      </details>
+      <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
+    </section>
+
+    <!-- ============ EX5 EXAMEN : encadenado — región entre dos curvas [M5] ============ -->
+    <section class="prob" data-kind="prob" data-id="EX5" data-tema="region_general" data-level="examen">
+      <div class="phead"><span class="pnum">19</span><span class="lvl examen">Nivel examen</span></div>
+      <p class="ptitle">La región te la dan en palabras</p>
+      <p class="pstatement">Sea D la región acotada por las curvas y = x² y y = 2x. Calcula ∬<sub>D</sub> x dA. Determina los puntos de intersección de las curvas y plantea los límites de integración antes de evaluar.</p>
+      <div class="fx"><div class="sys intg">
+        <span class="eq">∬<sub>D</sub> x dA</span>
+        <span class="eq">D: región acotada por y = x² y y = 2x</span>
+      </div></div>
+      <p class="paper">✍ Trabájalo en papel — completo, como en el parcial</p>
+      <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
+        <div class="solbody">
+          <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>«Región acotada por dos curvas» = la zona encerrada entre ellas. Aquí nadie te da los límites: los fabricas tú. Plan encadenado: (1) intersecciones — dónde se cierran las curvas; (2) quién va arriba entre esas x; (3) plantear tipo I e integrar de adentro hacia afuera.</p></div>
+          <div class="estep"><div class="oprow">Paso 1 · intersecciones de las curvas</div><p>Igualo las dos curvas y resuelvo. Verifico que los puntos cierren en ambas:</p><p class="calc"><span class="rw">igualo</span> x² = 2x <span class="sep">•</span> x² − 2x = 0 <span class="sep">•</span> x(x − 2) = 0 <span class="sep">•</span> x = <b>0</b> o x = <b>2</b> <span class="sep">•</span> <span class="rw">checo x=2</span> x² = 4 y 2x = 4 ✓ → puntos <b>(0, 0)</b> y <b>(2, 4)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 2 · quién va arriba y límites tipo I</div><p>Pruebo un punto intermedio, x = 1: la recta da 2x = 2 y la parábola da x² = 1. La recta va arriba en todo el intervalo. Entonces: y de x² (abajo) a 2x (arriba); x de 0 a 2.</p><div class="fx"><div class="sys intg"><span class="eq">∫<sub>0</sub><sup>2</sup> ∫<sub>x²</sub><sup>2x</sup> x dy dx</span></div></div></div>
+          <div class="estep"><div class="oprow">Paso 3 · integro por dentro (en y)</div><p>Con x constante, x es constante frente a y: integrar es multiplicar por el largo del intervalo.</p><p class="calc"><span class="rw">interior</span> x·(2x − x²) = <b>2x² − x³</b></p></div>
+          <div class="estep"><div class="oprow">Paso 4 · integro por fuera (en x)</div><p>La primitiva de (2x² − x³) es 2x³/3 − x⁴/4. La evalúo entre x = 0 y x = 2:</p><p class="calc"><span class="rw">en x=2</span> 2·8/3 − 16/4 = 16/3 − 4 = 16/3 − 12/3 = <b>4/3</b> <span class="sep">•</span> <span class="rw">en x=0</span> <b>0</b> <span class="sep">•</span> resta = <b>4/3</b></p></div>
+          <div class="estep"><div class="oprow">Paso 5 · compruebo en el otro orden (tipo II)</div><p>Despejo cada curva: la recta da x = y/2 (izquierda) y la parábola x = √y (derecha), con y de 0 a 4. La interior en x da x²/2 evaluada entre ellas:</p><p class="calc"><span class="rw">interior</span> y/2 − y²/8 <span class="sep">•</span> <span class="rw">exterior</span> y²/4 − y³/24 entre 0 y 4 = 16/4 − 64/24 = 4 − 8/3 = <b>4/3</b> ✓</p></div>
+          <p class="verdict">∬<sub>D</sub> x dA = <strong>4/3</strong>. El error que cuesta puntos: poner los límites internos al revés (de 2x a x² regala un signo negativo) o saltarse las intersecciones — si los límites no salen de resolver x² = 2x, todo lo demás pasa sobre una región equivocada. La comprobación en el otro orden es tu red: mismo 4/3 por los dos caminos.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
