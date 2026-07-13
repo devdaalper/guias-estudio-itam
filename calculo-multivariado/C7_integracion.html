@@ -32,114 +32,115 @@
   .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
   .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
   .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
-  .learn{margin:22px 0 0;display:grid;gap:10px}
-  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
-  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
-  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
-  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+  .today{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;margin-top:20px;padding:13px 16px;background:#fff;border:2px solid var(--ink);border-radius:14px}
+  .today .n{width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;display:grid;place-items:center}
+  .today p{margin:0}
+  .today b{font-weight:800}
+  .today small{display:block;color:var(--muted);font-size:15px}
 
-  main{display:grid;gap:16px;margin-top:22px}
-  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+  .route-label{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep);margin:20px 0 8px}
+  .route{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px}
+  .step{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 7px;background:#fff;border:2px solid var(--ink);border-radius:999px;cursor:pointer;font:inherit;font-weight:700;font-size:15px;color:var(--ink);transition:transform .1s}
+  .step .num{width:26px;height:26px;border-radius:50%;background:#eef1fb;color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:14px}
+  .step:hover{transform:translateY(-1px)}
+  .step[aria-selected="true"]{background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+  .step[aria-selected="true"] .num{background:#fff;color:var(--deep)}
+  .step.is-done{border-color:var(--green-deep)}
+  .step.is-done .num{background:var(--green);color:#fff}
 
-  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
-  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
-  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
-  .idea strong{font-weight:800}
+  main{display:grid;gap:16px;margin-top:6px}
+  .lesson{display:none}
+  .lesson.is-active{display:grid;gap:16px}
+  .lesson-head{margin-top:6px}
+  .micro{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .lesson-head h2{margin:.15em 0 .1em;font-size:clamp(23px,3.6vw,31px);letter-spacing:-.02em}
+  .goal{margin:0;color:var(--muted)}
 
-  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
-  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
-  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
-  .fases li{font-size:17px;line-height:1.5}
-  .fases em{font-style:normal;color:var(--deep);font-weight:700}
-  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
-  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
-  .calc b{color:var(--ink);font-weight:800}
-  .calc .sep{color:#c9c2b6;margin:0 5px}
-  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:22px 22px 24px;display:grid;gap:17px;box-shadow:var(--shadow)}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
+  .idea strong{font-weight:800;color:var(--ink)}
+  .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
+  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
+  .paso{color:var(--muted);font-size:16px}
+  .paso::before{content:"→ ";color:var(--orange);font-weight:800}
+
+  .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums;text-align:center}
   .sys .eq{white-space:nowrap}
-  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
-  .brk{width:10px;border:2.5px solid var(--ink)}
-  .brk-l{border-right:0;border-radius:5px 0 0 5px}
-  .brk-r{border-left:0;border-radius:0 5px 5px 0}
-  .cols{padding:8px 4px}
-  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
-  .mrow>span{text-align:right;min-width:24px}
-  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+  .unknown{color:var(--deep);font-weight:800}
+  .matrix-form{display:flex;align-items:center;gap:14px;justify-content:center;font-size:21px}
+  .matrix{display:grid;grid-template-columns:repeat(2,minmax(26px,auto));gap:8px 16px;padding:6px 12px;border-left:3px solid var(--ink);border-right:3px solid var(--ink)}
+  .matrix.three{grid-template-columns:repeat(3,minmax(26px,auto))}
+  .matrix span{display:grid;place-items:center;min-height:30px;padding:0 4px;border-radius:6px}
+  .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
+  .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
+
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+
+  .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
+  .visual svg{display:block;width:100%;height:auto}
+  .visual figcaption{margin-top:8px;color:var(--muted);font-size:15px;text-align:center}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;color:var(--slate);font-size:15px}
+  .dot{display:inline-block;width:11px;height:11px;margin-right:5px;border-radius:50%;background:var(--orange)}
+  .dot.green{background:var(--green-deep)}
+
+  .criteria{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .criterion{padding:12px 10px;background:#fff;border:2px solid var(--ink);border-radius:12px;text-align:center;font-weight:700;font-size:15px;line-height:1.35}
+  .criterion b{display:block;color:var(--deep);font-size:24px}
+
+  .mixlab{display:grid;gap:14px;padding:16px;border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9}
+  .mix-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .recipe{padding:12px;border:1.5px solid var(--line);border-radius:12px;background:#fff}
+  .recipe h4{margin:0 0 2px;font-size:17px}
+  .recipe p{margin:0 0 10px;font-size:15px;color:var(--muted)}
+  .pick{display:flex;flex-wrap:wrap;gap:7px}
+  .pick button{font:inherit;font-size:15px;font-weight:700;padding:8px 11px;background:#fff;border:2px solid var(--line);border-radius:9px;cursor:pointer}
+  .pick button:hover{border-color:var(--orange)}
+  .pick button.is-on{background:var(--orange);border-color:var(--ink);color:#fff}
+  .mix-result{padding:12px;background:var(--cream);border:1.5px solid var(--line);border-radius:12px;text-align:center}
+  .mix-result p{margin:0;font-size:15px;color:var(--slate)}
+  .mix-result strong{display:block;font-size:21px;color:var(--ink)}
 
   .check{display:grid;gap:11px;padding:16px 18px;border:1.5px solid #cfd6f2;border-radius:12px;background:#eef1fb}
-  .check .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
-  .check .qtag::before{content:"✎ "}
-  .check .q{margin:0;font-weight:700;font-size:17px}
-
+  .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .qtag::before{content:"✎ "}
+  .q{margin:0;font-size:17px}
+  .q strong{font-weight:800}
   .opts{display:grid;gap:10px}
-  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s;min-width:0;overflow-wrap:anywhere}
   .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
-  .opt:disabled{cursor:default}
+  .opt:disabled{cursor:default;transform:none}
   .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
   .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .fb{display:none;border:1.5px solid;border-radius:10px;padding:11px 14px;font-size:17px}
+  .fb.show{display:block}
+  .fb.ok{border-color:#bfe6cd;background:#eef7f0}
+  .fb.no{border-color:#f0d6b8;background:#fdf3ea}
+  .fb p{margin:0}
+  .fb .okc,.fb .nudge{display:none}
+  .fb.ok .okc{display:block}
+  .fb.no .nudge{display:block}
 
-  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
-  .why.show{display:block}
-  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
-  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
-  .why.miss>.lbl{color:var(--deep)}
-  .why p{margin:0}
-
-  .ejemplo{border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9;padding:18px 20px;display:grid;gap:14px}
-  .estep{display:grid;gap:8px}
-  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
-  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
-
-  .practice{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
-  .practice .phead h3{margin:0;font-size:19px}
-  .practice .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
-  .pitem{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff;transition:border-color .2s,background .2s}
-  .pitem.solved{border-color:var(--green);background:#f3faf5}
-  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
-  .lvl.guiado{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
-  .lvl.juntos{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
-  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
-  .pstatement{margin:0;font-size:17px}
-  .aux summary{cursor:pointer;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;list-style:none;width:max-content;font-size:15px}
-  .aux summary::-webkit-details-marker{display:none}
-  .aux summary:hover{border-color:var(--navy);background:#f7f8fc}
-  .aux details[open] summary{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
-  .aux p{margin:8px 2px 0;font-size:16px;color:var(--slate)}
-
-  .viz{display:grid;gap:12px}
-  .viz-tabs{display:flex;gap:8px;flex-wrap:wrap}
-  .viz-tab{font:inherit;font-weight:700;font-size:15px;padding:9px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
-  .viz-tab:hover{border-color:var(--orange);transform:translateY(-1px)}
-  .viz-tab.active{border-color:var(--ink);background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
-  .viz-plane{padding:10px}
-  .viz-plane svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
-  .viz-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--slate)}
-  .viz-legend span{display:inline-flex;align-items:center;gap:7px}
-  .viz-legend i{width:18px;height:4px;border-radius:2px;display:inline-block}
-  .viz-cap{margin:0;font-size:17px;color:var(--slate);min-height:1.6em}
-
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
-
-  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
-  .cierre h3{margin:0;font-size:19px}
-  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
-  .escala button:hover{border-color:var(--orange)}
-  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
-  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .lesson-nav{display:flex;justify-content:space-between;gap:12px;margin-top:4px}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:12px 20px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;text-decoration:none;display:inline-block}
   .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
   .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
-  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
-  .nota{font-size:15px;color:var(--muted);margin-top:8px}
-  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
-  .cont{font-size:14px;color:var(--muted);font-weight:700}
-  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
+
+  .finish{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow);padding:20px 22px}
+  .finish h3{margin:0;font-size:19px}
+  .finish p{margin:0}
+  .nota{font-size:15px;color:var(--muted)}
+  .escala{display:flex;gap:10px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:52px;padding:13px 0;font-size:19px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .report{display:none;padding:13px 15px;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:12px}
+  .report.show{display:block}
+  .report p{margin:0}
+
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:10px}
   .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
@@ -150,18 +151,18 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*aire-matematico*/
-  .sec{gap:16px}
+  .sec{gap:17px}
   .idea{line-height:1.72}
-  .fx{margin:4px 0;justify-self:center}
-  .fases{gap:9px;margin:2px 0}
-  .ejemplo{gap:16px}
+  .fx{margin:8px 0;justify-self:center}
+  .visual{margin:6px 0}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
-  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  main,.lesson.is-active,.sec,.check,.opts,.finish{grid-template-columns:minmax(0,1fr)}
+  .sec,.check,.opts,.opt,.fx,.sys,.visual,.mixlab,.mix-grid,.criteria,.finish{min-width:0}
+  .fx,.sys,.visual,.mixlab{max-width:100%}
+  .idea,.q,.opt{overflow-wrap:anywhere}
+  @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
+  @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -176,774 +177,590 @@
   <header class="hero">
     <p class="kick">Cálculo Multivariado · Unidad 7</p>
     <h1>Integrales dobles, triples y <mark>cambio de variable</mark></h1>
-    <p class="lead">El tema completo, de principio a fin. Aquí no se adivina: se dibuja la región, se ordenan los límites y se integra de adentro hacia afuera. Todo a mano, sin calculadora.</p>
-    <div class="learn">
-      <h2>Al terminar vas a poder</h2>
-      <ol>
-        <li><span class="n">1</span> Plantear una integral doble como iterada</li>
-        <li><span class="n">2</span> Aplicar el teorema de Fubini</li>
-        <li><span class="n">3</span> Poner límites en regiones generales</li>
-        <li><span class="n">4</span> Invertir el orden de integración</li>
-        <li><span class="n">5</span> Cambiar de variable con el jacobiano</li>
-        <li><span class="n">6</span> Integrar en cilíndricas y esféricas</li>
-      </ol>
+    <p class="lead">Una idea a la vez, sabiendo siempre a dónde vas: cada lección anuncia su tema del temario y te lleva de lo cotidiano hasta su definición formal. Todo a mano, sin calculadora.</p>
+    <div class="today">
+      <span class="n" id="heroStep">1</span>
+      <p><b id="heroGoal">Entender qué suma la integral doble.</b><small>Avanza con libertad. Un error nunca bloquea el siguiente paso.</small></p>
     </div>
   </header>
 
+  <p class="route-label">Tu ruta · ocho ideas breves</p>
+  <nav class="route" role="tablist" aria-label="Ruta de microlecciones">
+    <button class="step" role="tab" data-go="1" aria-selected="true"><span class="num">1</span>Integral doble</button>
+    <button class="step" role="tab" data-go="2" aria-selected="false"><span class="num">2</span>Integral iterada</button>
+    <button class="step" role="tab" data-go="3" aria-selected="false"><span class="num">3</span>Teorema de Fubini</button>
+    <button class="step" role="tab" data-go="4" aria-selected="false"><span class="num">4</span>Regiones generales</button>
+    <button class="step" role="tab" data-go="5" aria-selected="false"><span class="num">5</span>Cambio de orden</button>
+    <button class="step" role="tab" data-go="6" aria-selected="false"><span class="num">6</span>Coordenadas polares</button>
+    <button class="step" role="tab" data-go="7" aria-selected="false"><span class="num">7</span>Integrales triples</button>
+    <button class="step" role="tab" data-go="8" aria-selected="false"><span class="num">8</span>Cilíndricas y esféricas</button>
+  </nav>
+
   <main>
 
-    <h2 class="modhead">Empecemos por un problema</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Tienes una placa metálica con forma de <strong>triángulo</strong>: sus esquinas caen en los puntos (0, 0), (1, 0) y (1, 1) de una cuadrícula medida en centímetros.</p>
-      <p class="idea" style="font-size:17px">La placa no es pareja: cerca de la esquina (0, 0) es delgadita y casi no pesa; hacia la esquina (1, 1) es más gruesa y pesa más.</p>
-      <p class="idea" style="font-size:17px">El dato exacto: parada en el punto (x, y), cada cm² de placa pesa <strong>x + y</strong> gramos. Por ejemplo:</p>
-      <div class="fx"><div class="sys"><span class="eq">en (1, 1): 1 + 1 = 2</span><span class="eq">en (0.5, 0): 0.5 + 0 = 0.5</span></div></div>
-      <p class="idea" style="font-size:17px">La pregunta: ¿cuánto pesa la placa <strong>completa</strong>?</p>
-      <div class="fx"><div class="sys"><span class="eq">masa = suma de (x + y)</span><span class="eq">sobre todo el triángulo</span></div></div>
-      <p class="idea" style="font-size:17px">El peso cambia en <strong>dos direcciones a la vez</strong>, y no se recorre un intervalo de recta sino una <strong>región del plano</strong>: no basta con integrar como en bachillerato.</p>
-      <p class="idea" style="font-size:17px">Hace falta una herramienta que sume sobre un área completa. La construimos desde cero, y al final calculas esta masa tú sola.</p>
-    </section>
-
-    <h2 class="modhead">La idea</h2>
-
-    <section class="sec">
-      <h3>1 · Rellenar el piso con columnitas</h3>
-      <p class="idea">Recuerda qué era integrar con UNA variable: cortabas el área bajo una curva en <strong>rebanaditas</strong> y las sumabas todas.</p>
-      <p class="idea">Integrar nunca fue otra cosa: <strong>sumar muchos pedacitos</strong>.</p>
-      <p class="idea">Ahora la foto de dos variables: f(x, y) es un <strong>terreno</strong>. El piso es el plano x-y y sobre cada punto hay una <strong>altura</strong>.</p>
-      <p class="idea">La pregunta nueva: ¿cuánto <strong>volumen</strong> hay entre un pedazo de piso R y el terreno de encima?</p>
-      <p class="idea">Misma jugada, en versión piso: cuadricula el piso en <strong>baldosas</strong> chiquitas y sobre cada una levanta una <strong>columnita</strong> hasta el terreno.</p>
-      <div class="fx"><div class="sys"><span class="eq">volumen de una columnita = base · altura</span></div></div>
-      <p class="idea">El volumen total es la suma de todas. Con números: un piso de 2 × 3, en 6 baldosas de 1 × 1, con alturas 1, 1, 2, 2, 3 y 3:</p>
-      <div class="fx"><div class="sys"><span class="eq">1 + 1 + 2 + 2 + 3 + 3 = <strong>12 m³</strong></span></div></div>
-      <p class="idea">Es aproximado; con baldosas más chicas se vuelve exacto.</p>
-      <p class="idea">En símbolos: la base diminuta es <strong>dA</strong> y la altura en (x, y) es f(x, y), así que cada columnita aporta f(x, y)·dA.</p>
-      <p class="idea">Para "suma todas" van <strong>dos</strong> S estiradas, porque el piso se recorre en dos direcciones:</p>
-      <div class="fx" id="ideaDbl"></div>
-      <p class="idea">Se lee "suma f por dA sobre toda la región R". Es la <strong>integral doble</strong>: la rebanadita de bachillerato hecha columnita.</p>
-      <div class="check" data-kind="item" data-id="C1_dA" data-tema="integral_doble" data-level="guiado">
-        <div class="qtag">Te toca · reconoce</div>
-        <p class="q">En ∬<sub>R</sub> f(x, y) dA, ¿qué representa el dA?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Un pedacito de área de la región; f se evalúa ahí y se suma sobre toda R</button>
-          <button class="opt" data-ok="0">La derivada de f respecto al área</button>
-          <button class="opt" data-ok="0">El área total de la región, un número fijo</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>dA es el elemento de área: el "cuadrito" infinitesimal. La integral suma f·dA sobre todos ellos. Cuando f = 1, esa suma da justo el <strong>área</strong> de R.</p></div>
+    <section class="lesson is-active" data-step="1">
+      <header class="lesson-head"><p class="micro">Microlección 1 de 8 · Tema: Integrales dobles sobre un rectángulo</p><h2>Integral doble: sumar sobre un área entera</h2><p class="goal">Meta: entender qué suma la integral doble y qué es el dA.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy conoces la herramienta de toda la unidad: la <strong>integral doble</strong>.</p>
+        <p class="idea">El nombre asusta, pero es la integral de bachillerato con un piso más ancho. La construimos con calma.</p>
+        <p class="idea">Recuerda qué era integrar con una variable: cortabas el área bajo una curva en rebanaditas y las sumabas todas.</p>
+        <p class="idea">Integrar nunca fue otra cosa que <strong>sumar muchos pedacitos</strong>.</p>
+        <p class="idea">Ahora la foto de dos variables. La función f(x, y) es un <strong>terreno</strong>: el piso es el plano x-y y sobre cada punto hay una altura.</p>
+        <p class="idea key">La pregunta nueva: ¿cuánto <strong>volumen</strong> hay entre un pedazo de piso R y el terreno de encima?</p>
+        <p class="idea">Misma jugada, en versión piso: cuadriculas el piso en baldosas chiquitas y sobre cada una levantas una columnita hasta el terreno.</p>
+        <div class="fx"><div class="sys"><span class="eq">volumen de una columnita = base · altura</span></div></div>
+        <p class="idea">El volumen total es la suma de todas. Con baldosas más chicas, la suma se vuelve exacta.</p>
+        <figure class="visual">
+          <svg viewBox="0 0 520 240" role="img" aria-label="El piso se cuadricula en baldosas y sobre cada una se levanta una columnita hasta el terreno">
+            <path d="M88 150 L154 120 L220 95 L286 75 L352 60" fill="none" stroke="#283891" stroke-width="3" stroke-dasharray="8 6"/>
+            <rect x="60" y="150" width="56" height="50" fill="rgba(245,130,31,.18)" stroke="#C75D08" stroke-width="2"/>
+            <rect x="126" y="120" width="56" height="80" fill="rgba(245,130,31,.18)" stroke="#C75D08" stroke-width="2"/>
+            <rect x="192" y="95" width="56" height="105" fill="rgba(245,130,31,.18)" stroke="#C75D08" stroke-width="2"/>
+            <rect x="258" y="75" width="56" height="125" fill="rgba(245,130,31,.18)" stroke="#C75D08" stroke-width="2"/>
+            <rect x="324" y="60" width="56" height="140" fill="rgba(245,130,31,.18)" stroke="#C75D08" stroke-width="2"/>
+            <line x1="48" y1="200" x2="470" y2="200" stroke="#181B22" stroke-width="2"/>
+            <text x="360" y="46" font-size="15" fill="#283891" font-weight="700">terreno f(x, y)</text>
+            <text x="88" y="222" font-size="14" fill="#C75D08" font-weight="700">baldosa dA</text>
+            <text x="286" y="222" font-size="14" fill="#334155">columnita = f · dA</text>
+          </svg>
+          <figcaption>Cada baldosa dA sostiene una columnita de altura f. Sumarlas todas es la integral doble.</figcaption>
+        </figure>
+        <p class="idea">En símbolos, la base diminuta es <strong>dA</strong> y la altura en (x, y) es f(x, y); cada columnita aporta f(x, y)·dA.</p>
+        <p class="idea">Para «súmalas todas» van dos S estiradas, porque el piso se recorre en dos direcciones:</p>
+        <div class="fx"><div class="sys"><span class="eq">∬<sub>R</sub> f(x, y) dA</span></div></div>
+        <p class="idea">Y con esto ya llegaste. Esa suma sobre toda una región es la <strong>integral doble</strong>. Tu curso la enuncia así:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario del curso, tema 7.1</span>La <strong>integral doble</strong> de f sobre una región R, ∬<sub>R</sub> f(x, y) dA, es el límite de las sumas de f(x, y)·dA cuando las baldosas se hacen cada vez más pequeñas. Cuando f = 1, esa suma da el <strong>área</strong> de R.</p>
+        <p class="idea">Léela con lo que ya tienes: cada f(x, y)·dA es una columnita, la doble S las suma todas, y si el terreno tiene altura constante 1, sumar sus bases da el área del piso.</p>
+        <p class="idea paso">Asegura la pieza con los dos retos de abajo.</p>
+        <p class="idea paso">Y en cuanto la tengas, seguimos con lo natural: ya sabes QUÉ suma; falta el <strong>cómo</strong> se calcula.</p>
       </div>
+      <div class="check challenge" data-kind="item" data-id="M1G" data-tema="integral_doble" data-level="guiado" data-module="1">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Reconoce el dA.</strong> En ∬<sub>R</sub> f(x, y) dA, ¿qué representa el dA?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Un pedacito de área del piso; f se evalúa ahí y se suma sobre toda R</button>
+          <button class="opt" data-ok="0">La derivada de f respecto al área</button>
+          <button class="opt" data-ok="0">El área total de R, un número fijo</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ dA es el «cuadrito» de área; la doble suma f·dA sobre todos ellos.</p><p class="nudge">✕ dA no es una derivada ni el área total: es el pedacito que se repite. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M1S" data-tema="integral_doble" data-level="solo" data-module="1">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Suma las columnitas.</strong> Un piso de 2 × 2 se parte en 4 baldosas de 1 × 1. Las columnitas miden 1, 2, 2 y 3 de alto. ¿Cuánto vale el volumen aproximado?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">4, que es el área del piso</button>
+          <button class="opt" data-ok="1">8, sumando las cuatro columnitas: 1 + 2 + 2 + 3</button>
+          <button class="opt" data-ok="0">24, multiplicando las cuatro alturas</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ La doble suma columnitas: 1 + 2 + 2 + 3 = 8.</p><p class="nudge">✕ No es el área ni el producto: suma las alturas de las cuatro columnitas. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>2 · Cómo sumar las columnitas: por renglones</h3>
-      <p class="idea">Ya sabes QUÉ es. Falta el CÓMO: nadie suma columnitas de una en una, son infinitas.</p>
-      <p class="idea">El truco es sumarlas <strong>en orden</strong>, renglón por renglón. Congela un renglón (una <strong>y</strong> fija) y suma sus columnitas caminando en x.</p>
-      <p class="idea">Con y congelada, esa suma es una integral de <strong>una sola variable</strong>; su total depende del renglón, así que queda en función de y.</p>
-      <p class="idea">Luego suma los totales de todos los renglones recorriendo y: otra integral de una variable.</p>
-      <p class="idea">Quedan dos integrales, <strong>una dentro de la otra</strong>:</p>
-      <div class="fx" id="ideaIter"></div>
-      <p class="idea">Los numeritos del ∫ marcan dónde arranca (abajo) y termina (arriba) el barrido: adentro x de a a b, afuera y de c a d.</p>
-      <p class="fx-note">Se resuelve de adentro hacia afuera: primero la de dx (con y congelada); su resultado, ya solo en y, es el <strong>integrando</strong> de la de afuera.</p>
-      <p class="idea">A esta forma de calcular se le llama <strong>integral iterada</strong> (iterar = repetir).</p>
-      <div class="check" data-kind="recall" data-fid="F1_integral_interna" data-tema="fubini">
-        <div class="qtag">Te toca · recuerda</div>
-        <p class="q">Al resolver la integral de adentro respecto a x, ¿cómo se trata a la otra variable, y?</p>
+    <section class="lesson" data-step="2">
+      <header class="lesson-head"><p class="micro">Microlección 2 de 8 · Tema: Integrales dobles sobre un rectángulo</p><h2>Integral iterada: de adentro hacia afuera</h2><p class="goal">Meta: resolver una doble como dos integrales de una variable.</p></header>
+      <div class="sec">
+        <p class="idea lede">Ya sabes qué suma la doble. Hoy aprendes a <strong>calcularla</strong>: la <strong>integral iterada</strong>.</p>
+        <p class="idea">Nadie suma columnitas de una en una, son infinitas. El truco es sumarlas en orden, renglón por renglón.</p>
+        <p class="idea">Congela un renglón —una <strong>y</strong> fija— y suma sus columnitas caminando en x.</p>
+        <p class="idea">Con y congelada, esa suma es una integral de <strong>una sola variable</strong>. Su total depende del renglón, así que queda en función de y.</p>
+        <p class="idea">Luego sumas los totales de todos los renglones recorriendo y: otra integral de una variable. Quedan dos integrales, una dentro de la otra:</p>
+        <div class="fx"><div class="sys"><span class="eq">∫<sub>c</sub><sup>d</sup> ( ∫<sub>a</sub><sup>b</sup> f(x, y) dx ) dy</span></div></div>
+        <p class="idea">Se resuelve de <strong>adentro hacia afuera</strong>: primero la de dx con y congelada; su resultado, ya solo en y, es el integrando de la de afuera.</p>
+        <p class="idea key">Al integrar por dentro, la otra variable se trata como un <strong>número fijo</strong> — el reflejo exacto de la derivada parcial.</p>
+        <figure class="visual">
+          <svg viewBox="0 0 520 236" role="img" aria-label="Una rebanada vertical recorre la region: la integral de adentro suma una rebanada, la de afuera la desliza">
+            <defs><marker id="arr2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#181B22"/></marker></defs>
+            <rect x="80" y="60" width="360" height="130" rx="6" fill="rgba(40,56,145,.10)" stroke="#283891" stroke-width="3"/>
+            <line x1="150" y1="60" x2="150" y2="190" stroke="#D1D5DB" stroke-width="4" stroke-dasharray="6 6"/>
+            <line x1="360" y1="60" x2="360" y2="190" stroke="#D1D5DB" stroke-width="4" stroke-dasharray="6 6"/>
+            <line x1="210" y1="60" x2="210" y2="190" stroke="#F5821F" stroke-width="7" stroke-linecap="round"/>
+            <line x1="112" y1="210" x2="410" y2="210" stroke="#181B22" stroke-width="3" marker-end="url(#arr2)"/>
+            <text x="210" y="50" font-size="14" fill="#C75D08" font-weight="700" text-anchor="middle">rebanada (integral de adentro)</text>
+            <text x="262" y="228" font-size="14" fill="#334155">la de afuera la desliza</text>
+          </svg>
+          <figcaption>La integral de adentro suma una rebanada entera; la de afuera la desliza por toda la región.</figcaption>
+        </figure>
+        <p class="idea">¿Y cómo se saca cada número? Integrar es el revés de derivar: buscas de qué función salió el ritmo de cambio.</p>
+        <p class="idea">Para potencias hay receta: <strong>sube el exponente en 1 y divide entre el nuevo</strong>. Así, la de x es x²/2:</p>
+        <div class="fx"><div class="sys"><span class="eq">antiderivada de x → x²/2</span><span class="eq">su derivada de vuelta es x</span></div></div>
+        <p class="idea">Con dos numeritos abajo y arriba no pides una función sino un número. Encierras la antiderivada en un corchete y restas arriba menos abajo:</p>
+        <div class="fx"><div class="sys"><span class="eq">∫<sub>0</sub><sup>2</sup> x dx = [ x²/2 ]<sub>0</sub><sup>2</sup> = 2 − 0 = 2</span></div></div>
+        <p class="idea">Y con esto ya tienes el método completo. Tu curso lo enuncia así:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario del curso, tema 7.1</span>La <strong>integral iterada</strong> ∫<sub>c</sub><sup>d</sup> ∫<sub>a</sub><sup>b</sup> f(x, y) dx dy se calcula de adentro hacia afuera: primero se integra en x tratando a y como constante, y el resultado, ya solo en y, se integra luego en y.</p>
+        <p class="idea">Léela de vuelta: la de adentro barre un renglón con y fija; la de afuera junta los renglones. Iterar es repetir la misma cuenta dos veces.</p>
+        <p class="idea paso">Fija el método con los retos de abajo.</p>
+        <p class="idea paso">Y en cuanto lo tengas, aparece la primera pregunta interesante: ¿importa el orden, primero x o primero y?</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M2G" data-tema="integral_iterada" data-level="guiado" data-module="2">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>La variable congelada.</strong> Al resolver la integral de adentro respecto a x, ¿cómo se trata a la otra variable, y?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Como una constante: y no se mueve mientras se integra en x</button>
+          <button class="opt" data-ok="1">Como una constante: y no se mueve mientras integras en x</button>
           <button class="opt" data-ok="0">Como cero: se elimina del integrando</button>
           <button class="opt" data-ok="0">Se integra también en y al mismo tiempo</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Es el reflejo exacto de la derivada parcial: al trabajar con una variable, las demás quedan <strong>fijas</strong>. Solo al pasar a la integral de afuera, y vuelve a moverse.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Igual que en la derivada parcial: al trabajar una variable, las demás quedan fijas.</p><p class="nudge">✕ La y no desaparece ni se integra a la vez: se queda quieta como número. Intenta de nuevo.</p></div>
       </div>
+      <div class="check challenge" data-kind="item" data-id="M2S" data-tema="integral_iterada" data-level="solo" data-module="2">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Usa el corchete.</strong> Con la misma receta, ¿cuánto vale ∫<sub>0</sub><sup>2</sup> 3 dy?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">3, la función no cambia al integrar</button>
+          <button class="opt" data-ok="1">6, porque la antiderivada de 3 es 3y y [ 3y ]<sub>0</sub><sup>2</sup> = 6 − 0</button>
+          <button class="opt" data-ok="0">5, sumando 3 + 2</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ La antiderivada de la constante 3 es 3y; evaluada de 0 a 2 da 6.</p><p class="nudge">✕ Antideriva primero (3 → 3y) y evalúa arriba menos abajo. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>3 · Renglones o columnas: el total no cambia</h3>
-      <p class="idea">¿Y si barres por columnas — primero y con x congelada, y al final x?</p>
-      <p class="idea">Piensa en las butacas de un cine con 3 filas de 4:</p>
-      <div class="fx"><div class="sys"><span class="eq">filas: 4 + 4 + 4 = 12</span><span class="eq">columnas: 3 + 3 + 3 + 3 = 12</span></div></div>
-      <p class="idea">Cuentas lo mismo en otro orden; el total no cambia. Con las columnitas, igual.</p>
-      <p class="idea">Ese hecho es el <strong>teorema de Fubini</strong>: sobre un <strong>rectángulo</strong> y con f continua (sin saltos), integras en el orden que quieras:</p>
-      <div class="fx" id="ideaFubini"></div>
-      <p class="idea">Ojo: esto es directo solo en un rectángulo, con los cuatro límites constantes. Con bordes inclinados o curvos, invertir cuesta más (lo ves abajo).</p>
-      <div class="check" data-kind="item" data-id="C3_fubini" data-tema="fubini" data-level="guiado">
-        <div class="qtag">Te toca · decide</div>
-        <p class="q">¿Cuándo puedes intercambiar el orden dx dy ↔ dy dx nada más, sin cambiar los límites?</p>
+    <section class="lesson" data-step="3">
+      <header class="lesson-head"><p class="micro">Microlección 3 de 8 · Tema: Teorema de Fubini</p><h2>Teorema de Fubini: el orden es libre</h2><p class="goal">Meta: saber cuándo puedes intercambiar el orden sin cambiar los límites.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy llega el primer teorema con nombre: el <strong>teorema de Fubini</strong>.</p>
+        <p class="idea">Retomamos la pregunta que dejamos: ¿cambia algo si barres primero por columnas en vez de por renglones?</p>
+        <p class="idea">Piensa en las butacas de un cine con 3 filas de 4 asientos:</p>
+        <div class="fx"><div class="sys"><span class="eq">por filas: 4 + 4 + 4 = 12</span><span class="eq">por columnas: 3 + 3 + 3 + 3 = 12</span></div></div>
+        <p class="idea">Cuentas lo mismo en otro orden; el total no cambia. Con las columnitas, igual.</p>
+        <figure class="visual">
+          <svg viewBox="0 0 520 220" role="img" aria-label="Un arreglo de 3 filas por 4 columnas de asientos, contado por filas y por columnas da 12">
+            <g fill="#283891">
+              <circle cx="150" cy="70" r="14"/><circle cx="230" cy="70" r="14"/><circle cx="310" cy="70" r="14"/><circle cx="390" cy="70" r="14"/>
+              <circle cx="150" cy="120" r="14"/><circle cx="230" cy="120" r="14"/><circle cx="310" cy="120" r="14"/><circle cx="390" cy="120" r="14"/>
+              <circle cx="150" cy="170" r="14"/><circle cx="230" cy="170" r="14"/><circle cx="310" cy="170" r="14"/><circle cx="390" cy="170" r="14"/>
+            </g>
+            <text x="90" y="76" font-size="15" fill="#C75D08" font-weight="700" text-anchor="end">4</text>
+            <text x="90" y="126" font-size="15" fill="#C75D08" font-weight="700" text-anchor="end">4</text>
+            <text x="90" y="176" font-size="15" fill="#C75D08" font-weight="700" text-anchor="end">4</text>
+            <text x="150" y="205" font-size="15" fill="#1C7A3A" font-weight="700" text-anchor="middle">3</text>
+            <text x="230" y="205" font-size="15" fill="#1C7A3A" font-weight="700" text-anchor="middle">3</text>
+            <text x="310" y="205" font-size="15" fill="#1C7A3A" font-weight="700" text-anchor="middle">3</text>
+            <text x="390" y="205" font-size="15" fill="#1C7A3A" font-weight="700" text-anchor="middle">3</text>
+          </svg>
+          <figcaption>Por filas (naranja) o por columnas (verde): las dos cuentas llegan a 12.</figcaption>
+        </figure>
+        <p class="idea key">Ese hecho es el <strong>teorema de Fubini</strong>: sobre un rectángulo y con f continua, integras en el orden que quieras.</p>
+        <p class="idea">Míralo con números. Sobre el rectángulo 0 ≤ x ≤ 2, 0 ≤ y ≤ 3, integra f = x en los dos órdenes:</p>
+        <div class="fx"><div class="sys"><span class="eq">dy dx: ∫<sub>0</sub><sup>2</sup> ( ∫<sub>0</sub><sup>3</sup> x dy ) dx = ∫<sub>0</sub><sup>2</sup> 3x dx = 6</span><span class="eq">dx dy: ∫<sub>0</sub><sup>3</sup> ( ∫<sub>0</sub><sup>2</sup> x dx ) dy = ∫<sub>0</sub><sup>3</sup> 2 dy = 6</span></div></div>
+        <p class="idea">Los dos caminos dan <strong>6</strong>: el orden no cambió el resultado. Tu curso lo enuncia así:</p>
+        <p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · Temario del curso, tema 7.2</span><strong>Teorema de Fubini</strong>: si f es continua sobre el rectángulo R = [a, b] × [c, d], entonces ∬<sub>R</sub> f dA = ∫<sub>a</sub><sup>b</sup> ∫<sub>c</sub><sup>d</sup> f dy dx = ∫<sub>c</sub><sup>d</sup> ∫<sub>a</sub><sup>b</sup> f dx dy.</p>
+        <p class="idea">Léelo de vuelta: los dos lados son las butacas contadas por filas y por columnas. Ojo: esto es directo solo en un <strong>rectángulo</strong>, con los cuatro límites constantes.</p>
+        <p class="idea paso">Comprueba que entendiste con los retos de abajo.</p>
+        <p class="idea paso">Y prepárate para lo que sigue: cuando el piso <strong>no</strong> es rectángulo, poner los límites deja de ser gratis.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M3G" data-tema="fubini" data-level="guiado" data-module="3">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Decide cuándo.</strong> ¿Cuándo puedes intercambiar dx dy ↔ dy dx sin tocar los límites?</p>
         <div class="opts">
           <button class="opt" data-ok="1">Cuando la región es un rectángulo: los cuatro límites son constantes</button>
           <button class="opt" data-ok="0">Siempre; el orden nunca afecta a los límites</button>
           <button class="opt" data-ok="0">Nunca; cambiar de orden siempre exige rehacer todo</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>En un rectángulo los límites no dependen de la otra variable, así que se copian tal cual. En una región curva sí hay que redibujar y reescribir los límites al invertir.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ En un rectángulo los límites no dependen de la otra variable, así que se copian igual.</p><p class="nudge">✕ Fuera del rectángulo, los límites sí cambian al invertir. Intenta de nuevo.</p></div>
       </div>
+      <div class="check challenge" data-kind="item" data-id="M3S" data-tema="fubini" data-level="solo" data-module="3">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Mismo rectángulo, otra función.</strong> Sobre 0 ≤ x ≤ 2, 0 ≤ y ≤ 3, ¿cuánto vale ∬ y dA? Por Fubini, da lo mismo en cualquier orden.</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">6</button>
+          <button class="opt" data-ok="1">9</button>
+          <button class="opt" data-ok="0">18</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ En dy dx: ∫<sub>0</sub><sup>3</sup> y dy = 9/2, por 2 da 9. En dx dy: ∫<sub>0</sub><sup>2</sup> y dx = 2y, e ∫<sub>0</sub><sup>3</sup> 2y dy = 9. Iguales.</p><p class="nudge">✕ Integra un orden completo: primero por dentro, luego por fuera. Cuidado con el 1/2 de la potencia. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>4 · Cuando el piso no es rectángulo, la región manda</h3>
-      <p class="idea">Vuelve a la placa triangular: esquinas (0, 0), (1, 0) y (1, 1). Su borde inclinado es la recta y = x (sobre ella cada punto tiene su y igual a su x).</p>
-      <p class="idea">Bárrela por columnas: congela una x y camina en y. ¿Hasta dónde llegas? Depende de dónde estés:</p>
-      <ul class="fases">
-        <li>en x = 0.5, y va de 0 hasta la diagonal, o sea y = 0.5;</li>
-        <li>en x = 0.9, de y = 0 hasta y = 0.9.</li>
-      </ul>
-      <p class="idea">Siempre de 0 hasta <strong>x</strong>.</p>
-      <p class="idea">Eso es lo nuevo: cuando la región no es un rectángulo, los límites de <strong>adentro</strong> son <strong>funciones</strong> de la variable de afuera, no números fijos.</p>
-      <p class="idea">Hay dos formas de describirlo. <strong>Tipo I</strong>: x entre constantes por fuera; para cada x, y sube de una curva de abajo g(x) a una de arriba h(x):</p>
-      <div class="fx" id="ideaTipo1"></div>
-      <p class="idea"><strong>Tipo II</strong>: al revés — y entre constantes por fuera; para cada y, x cruza de p(y) a q(y):</p>
-      <div class="fx" id="ideaTipo2"></div>
-      <p class="fx-note">Regla de oro: los límites de <strong>afuera</strong> son siempre constantes; los de <strong>adentro</strong> pueden depender de la variable de afuera, nunca al revés.</p>
-      <div class="check" data-kind="item" data-id="C4_limites" data-tema="region_general" data-level="juntos">
-        <div class="qtag">Te toca · detecta el error</div>
-        <p class="q">¿Cuál de estos planteos está MAL armado?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Afuera dx con límites de 0 a y, adentro dy con límites de 0 a 1</button>
-          <button class="opt" data-ok="0">Afuera dx de 0 a 1, adentro dy de 0 a x</button>
-          <button class="opt" data-ok="0">Afuera dy de 0 a 1, adentro dx de y a 1</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La integral de <strong>afuera</strong> nunca puede depender de la variable de adentro: "de 0 a y" en la de afuera deja una y suelta al final, sin valor. Los otros dos respetan la regla.</p></div>
+    <section class="lesson" data-step="4">
+      <header class="lesson-head"><p class="micro">Microlección 4 de 8 · Tema: Integrales dobles sobre regiones generales</p><h2>Regiones generales: la región manda los límites</h2><p class="goal">Meta: escribir límites de tipo I y tipo II sin equivocar cuál depende de cuál.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy el piso deja de ser rectángulo: entran las <strong>regiones generales</strong>.</p>
+        <p class="idea">Toma una placa triangular con esquinas (0, 0), (1, 0) y (1, 1). Su borde inclinado es la recta y = x.</p>
+        <p class="idea">Bárrela por columnas: congela una x y camina en y. ¿Hasta dónde llegas? Depende de dónde estés:</p>
+        <div class="fx"><div class="sys"><span class="eq">en x = 0.5: y va de 0 a 0.5</span><span class="eq">en x = 0.9: y va de 0 a 0.9</span></div></div>
+        <p class="idea">Siempre de 0 hasta <strong>x</strong>. Eso es lo nuevo.</p>
+        <figure class="visual">
+          <svg viewBox="0 0 300 250" role="img" aria-label="Triangulo con vertices en el origen, en (1,0) y en (1,1); dos rebanadas verticales suben de y igual a 0 hasta la diagonal y igual a x">
+            <line x1="55" y1="215" x2="240" y2="215" stroke="#64748B" stroke-width="1.5"/>
+            <line x1="70" y1="230" x2="70" y2="60" stroke="#64748B" stroke-width="1.5"/>
+            <polygon points="70,215 200,215 200,85" fill="rgba(40,56,145,.10)" stroke="#283891" stroke-width="2.5"/>
+            <line x1="70" y1="215" x2="200" y2="85" stroke="#181B22" stroke-width="2.5"/>
+            <line x1="135" y1="215" x2="135" y2="150" stroke="#F5821F" stroke-width="6" stroke-linecap="round"/>
+            <line x1="187" y1="215" x2="187" y2="98" stroke="#F5821F" stroke-width="6" stroke-linecap="round"/>
+            <text x="150" y="130" font-size="14" fill="#181B22" font-weight="700">y = x</text>
+            <text x="205" y="228" font-size="13" fill="#334155">(1, 0)</text>
+            <text x="205" y="82" font-size="13" fill="#334155">(1, 1)</text>
+          </svg>
+          <figcaption>En cada columna, y sube de 0 hasta la diagonal y = x. El límite de arriba cambia con x.</figcaption>
+        </figure>
+        <p class="idea key">Cuando la región no es rectángulo, los límites de <strong>adentro</strong> son funciones de la variable de afuera, no números fijos.</p>
+        <p class="idea">Hay dos formas de describirla. <strong>Tipo I</strong>: x entre constantes por fuera; para cada x, y sube de una curva g(x) a otra h(x):</p>
+        <div class="fx"><div class="sys"><span class="eq">∫<sub>a</sub><sup>b</sup> ∫<sub>g(x)</sub><sup>h(x)</sup> f(x, y) dy dx</span></div></div>
+        <p class="idea"><strong>Tipo II</strong>: al revés — y entre constantes por fuera; para cada y, x cruza de p(y) a q(y):</p>
+        <div class="fx"><div class="sys"><span class="eq">∫<sub>c</sub><sup>d</sup> ∫<sub>p(y)</sub><sup>q(y)</sup> f(x, y) dx dy</span></div></div>
+        <p class="idea">Tu curso lo enuncia así:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario del curso, tema 7.3</span>Una región es de <strong>tipo I</strong> si R = { (x, y) : a ≤ x ≤ b, g(x) ≤ y ≤ h(x) } y de <strong>tipo II</strong> si R = { (x, y) : c ≤ y ≤ d, p(y) ≤ x ≤ q(y) }. La integral se plantea con esos límites.</p>
+        <p class="idea">Regla de oro para leerla: los límites de <strong>afuera</strong> son siempre constantes; los de adentro pueden depender de la variable de afuera, nunca al revés.</p>
+        <p class="idea paso">Detecta el error en el primer reto y arma tú los límites en el segundo.</p>
+        <p class="idea paso">Con esto en la mano, la próxima idea es el movimiento estrella del examen: cambiar el orden de integración.</p>
       </div>
+      <div class="check challenge" data-kind="item" data-id="M4G" data-tema="region_general" data-level="guiado" data-module="4">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Detecta el error.</strong> ¿Cuál de estos planteos está MAL armado?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Afuera dx de 0 a y; adentro dy de 0 a 1</button>
+          <button class="opt" data-ok="0">Afuera dx de 0 a 1; adentro dy de 0 a x</button>
+          <button class="opt" data-ok="0">Afuera dy de 0 a 1; adentro dx de y a 1</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ La de afuera no puede depender de la variable de adentro: «de 0 a y» deja una y suelta al final.</p><p class="nudge">✕ Busca cuál integral de afuera tiene un límite que no es constante. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M4S" data-tema="region_general" data-level="solo" data-module="4">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Arma los límites.</strong> Región: para cada x entre 0 y 2, y sube de 0 a 2x. ¿Cuál es su planteo tipo I correcto?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">x de 0 a 2x por fuera; y de 0 a 2 por dentro</button>
+          <button class="opt" data-ok="1">x de 0 a 2 por fuera; y de 0 a 2x por dentro</button>
+          <button class="opt" data-ok="0">x de 0 a 2 por fuera; y de 0 a 2 por dentro</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Afuera x entre las constantes 0 y 2; adentro y hasta la curva 2x.</p><p class="nudge">✕ El límite de afuera debe ser constante y el de adentro puede depender de x. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
 
-    <h2 class="modhead">Antes de calcular · el motor de la integral</h2>
-    <section class="sec">
-      <h3>El motor: antiderivar y evaluar entre límites</h3>
-      <p class="idea">Ya sabes QUÉ hace la integral (sumar rebanaditas); falta el CÓMO se saca el número, que usarás en cada paso.</p>
-      <p class="idea">Integrar es el revés de derivar: te dan el ritmo de cambio y buscas de qué función salió.</p>
-      <p class="idea">Así, "integrar x" es <strong>buscar una función cuya derivada sea x</strong>.</p>
-      <p class="idea">Para potencias hay receta: <strong>sube el exponente en 1 y divide entre el nuevo</strong>. La x es x<sup>1</sup> → queda x²/2:</p>
-      <div class="fx" id="antiRule"></div>
-      <p class="idea">Compruébalo: la derivada de x²/2 es x. A esa función se le llama <strong>antiderivada</strong> (o primitiva).</p>
-      <p class="idea">Tres reglas que la doble usa a cada rato:</p>
-      <ul class="fases">
-        <li>Un <strong>número fijo</strong> se integra multiplicándolo por la variable: la primitiva de c respecto a y es c·y.</li>
-        <li>Un <strong>coeficiente al frente</strong> se queda quieto y solo integras la potencia: la primitiva de 3x²/2 es x³/2.</li>
-        <li>Una <strong>suma</strong> se integra término a término: la primitiva de x + y es la de x más la de y.</li>
-      </ul>
-      <p class="idea">La primera sorprende: al integrar en y con la x fija, la <strong>x</strong> hace de número fijo, así que su primitiva es <strong>x·y</strong>.</p>
-      <p class="idea">Con dos numeritos, como ∫<sub>0</sub><sup>2</sup> x dx, no pides una función sino un <strong>número</strong>. Esos son los <strong>límites</strong>: abajo empiezas a barrer, arriba terminas.</p>
-      <p class="idea">La receta para el número:</p>
-      <ul class="fases">
-        <li>halla la antiderivada;</li>
-        <li>evalúala <strong>arriba</strong>;</li>
-        <li>evalúala <strong>abajo</strong>;</li>
-        <li>resta: <strong>arriba menos abajo</strong>.</li>
-      </ul>
-      <p class="idea">Para no reescribirla, se encierra la antiderivada en un <strong>corchete</strong> con los dos límites: evalúa arriba, evalúa abajo, resta.</p>
-      <p class="idea">Con ∫<sub>0</sub><sup>2</sup> x dx (antiderivada x²/2):</p>
-      <p class="calc"><span class="rw">en 2</span> 2²/2 = <b>2</b> <span class="sep">•</span> <span class="rw">en 0</span> 0²/2 = <b>0</b> <span class="sep">•</span> resta = <b>2</b></p>
-      <div class="fx" id="antiEval"></div>
-      <p class="idea">Ese corchete <strong>[ … ]<sub>a</sub><sup>b</sup></strong> = arriba menos abajo es el motor de toda la guía.</p>
-      <p class="idea">Aviso: con dos variables antiderivas en una y tratas la otra como <strong>número fijo</strong>; el corchete se usa idéntico.</p>
-      <div class="check" data-kind="item" data-id="C5_bracket" data-tema="antiderivada" data-level="guiado">
-        <div class="qtag">Te toca · calcula</div>
-        <p class="q">Con la misma receta, ¿cuánto vale ∫<sub>0</sub><sup>3</sup> x dx? (la antiderivada de x es x²/2)</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">9/2, porque [ x²/2 ]<sub>0</sub><sup>3</sup> = 3²/2 − 0 = 9/2</button>
-          <button class="opt" data-ok="0">3, la función no cambia al integrar</button>
-          <button class="opt" data-ok="0">x²/2, que es la antiderivada sin evaluar</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Evalúas la antiderivada arriba (3²/2 = 9/2) y abajo (0), y restas: <strong>9/2</strong>. El corchete siempre es arriba menos abajo.</p></div>
+    <section class="lesson" data-step="5">
+      <header class="lesson-head"><p class="micro">Microlección 5 de 8 · Tema: Cambio en el orden de integración</p><h2>Cambio de orden: la misma región, descrita al revés</h2><p class="goal">Meta: pasar de tipo I a tipo II reescribiendo los límites.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy el movimiento que más cae en examen: <strong>invertir el orden</strong> de integración.</p>
+        <p class="idea">No tiene misterio: es el mismo piso y las mismas columnitas, barridas al revés. El total no cambia.</p>
+        <p class="idea">¿Para qué? Porque a veces la integral de adentro es imposible en un orden y sale fácil en el otro.</p>
+        <p class="idea">El piso: la región entre la parábola y = x² y la recta y = x. Se cruzan en (0, 0) y (1, 1).</p>
+        <p class="idea">En medio, la recta va por encima — en x = 0.5, la recta vale 0.5 y la parábola 0.25.</p>
+        <figure class="visual">
+          <svg viewBox="0 0 300 250" role="img" aria-label="Region entre la recta y igual a x por arriba y la parabola y igual a x cuadrada por abajo, con una rebanada horizontal">
+            <line x1="65" y1="210" x2="240" y2="210" stroke="#64748B" stroke-width="1.5"/>
+            <line x1="80" y1="230" x2="80" y2="70" stroke="#64748B" stroke-width="1.5"/>
+            <path d="M80 210 L200 90 L200 90 Q140 150 80 210 Z" fill="rgba(40,56,145,.12)" stroke="none"/>
+            <line x1="80" y1="210" x2="200" y2="90" stroke="#181B22" stroke-width="2.5"/>
+            <path d="M80 210 Q140 202 170 150 Q188 118 200 90" fill="none" stroke="#C75D08" stroke-width="2.5"/>
+            <line x1="140" y1="150" x2="165" y2="150" stroke="#F5821F" stroke-width="6" stroke-linecap="round"/>
+            <text x="150" y="110" font-size="13" fill="#181B22" font-weight="700">y = x</text>
+            <text x="196" y="175" font-size="13" fill="#C75D08" font-weight="700">y = x²</text>
+            <text x="150" y="145" font-size="12" fill="#334155">x: y → √y</text>
+          </svg>
+          <figcaption>Con y fija, la rebanada horizontal cruza de la recta x = y a la parábola x = √y.</figcaption>
+        </figure>
+        <p class="idea">Viene dada en el orden dy dx: para cada x, y sube de la parábola x² a la recta x:</p>
+        <div class="fx"><div class="sys"><span class="eq">∫<sub>0</sub><sup>1</sup> ∫<sub>x²</sub><sup>x</sup> f(x, y) dy dx</span></div></div>
+        <p class="idea">Para invertirla, despejas x en cada frontera:</p>
+        <div class="fx"><div class="sys"><span class="eq">de y = x² sale x = √y</span><span class="eq">de y = x sale x = y</span></div></div>
+        <p class="idea">En el rango 0 ≤ y ≤ 1 se cumple y ≤ √y, así que la recta x = y queda a la izquierda y la parábola x = √y a la derecha.</p>
+        <p class="idea key">Para cada y fija, x cruza de la curva izquierda a la derecha: de x = y hasta x = √y.</p>
+        <div class="fx"><div class="sys"><span class="eq">∫<sub>0</sub><sup>1</sup> ∫<sub>y</sub><sup>√y</sup> f(x, y) dx dy</span></div></div>
+        <p class="idea">Comprobación rápida con f = 1: el área de esta región da 1/6 en los dos órdenes. Tu curso lo enuncia así:</p>
+        <p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · Temario del curso, tema 7.4</span>Si una región D se describe como tipo I y como tipo II, las dos integrales iteradas coinciden: ∫<sub>a</sub><sup>b</sup> ∫<sub>g(x)</sub><sup>h(x)</sup> f dy dx = ∫<sub>c</sub><sup>d</sup> ∫<sub>p(y)</sub><sup>q(y)</sup> f dx dy. <strong>Cambiar el orden</strong> es reescribir D con los límites intercambiados.</p>
+        <p class="idea">Léelo de vuelta: los dos lados suman lo mismo sobre la misma región D; solo cambia el recorrido. Por eso el valor nunca cambia.</p>
+        <p class="idea paso">Practica el despeje en el primer reto y la inversión completa en el segundo.</p>
+        <p class="idea paso">Con las regiones dominadas, la próxima idea rompe con la cuadrícula: pisos redondos y coordenadas polares.</p>
       </div>
-    </section>
-
-    <h2 class="modhead">Yo lo hago · contigo</h2>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Calculemos la integral doble de <strong>x + y</strong> sobre el triángulo donde y va de <strong>0 hasta x</strong>, con x de <strong>0 a 1</strong> (justo la placa del inicio).</p>
-      <p class="idea" style="font-size:17px">En cada paso <strong>tú eliges la operación</strong> y yo hago la cuenta.</p>
-      <div class="fx" id="e0"></div>
-
-      <div class="check" data-kind="item" data-id="E1pred" data-tema="region_general" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Es una región tipo I. ¿Qué integral se resuelve <strong>primero</strong> y cómo se tratan las variables?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">La de adentro (dy), tratando a x como constante</button>
-          <button class="opt" data-ok="0">La de afuera (dx), tratando a y como constante</button>
-          <button class="opt" data-ok="0">Las dos a la vez, sumando x e y</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Siempre de adentro hacia afuera. Aquí la de adentro es dy: integras en y con x fija, y su resultado (ya solo en x) pasa a la de afuera.</p></div>
-      </div>
-      <div class="estep"><div class="oprow">Paso 1 · integro por dentro (en y)</div><p>Trato a x como constante. La primitiva de (x + y) respecto a y es x·y + y²/2. Ahora la evalúo entre y = 0 y y = x:</p><p class="calc"><span class="rw">en y=x</span> x·x + x²/2 = x² + x²/2 = <b>3x²/2</b> <span class="sep">•</span> <span class="rw">en y=0</span> <b>0</b></p><div class="fx" id="e1"></div></div>
-
-      <div class="check" data-kind="item" data-id="E2pred" data-tema="region_general" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Quedó 3x²/2, ya solo en x. ¿Qué falta para tener el número final?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Integrar 3x²/2 respecto a x, entre 0 y 1</button>
-          <button class="opt" data-ok="0">Volver a integrar en y, entre 0 y x</button>
-          <button class="opt" data-ok="0">Derivar 3x²/2 respecto a x</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La de adentro ya se fue; ahora es una integral normal de una variable. Los límites de afuera eran x de 0 a 1, así que integras 3x²/2 en ese intervalo.</p></div>
-      </div>
-      <div class="estep"><div class="oprow">Paso 2 · integro por fuera (en x)</div><p>Ya es una integral de una variable. La primitiva de 3x²/2 es x³/2. La evalúo entre x = 0 y x = 1:</p><p class="calc"><span class="rw">en x=1</span> 1³/2 = <b>1/2</b> <span class="sep">•</span> <span class="rw">en x=0</span> <b>0</b> <span class="sep">•</span> resta = <b>1/2</b></p><div class="fx" id="e2"></div></div>
-      <p class="idea" style="font-size:17px">La masa de la placa es <strong>1/2</strong> gramos.</p>
-      <p class="idea" style="font-size:17px">Fíjate en el orden que seguiste: primero <strong>adentro</strong> con la otra variable fija, luego <strong>afuera</strong> como integral normal. Ese es todo el método de la doble.</p>
-    </section>
-
-    <h2 class="modhead">Sube el tamaño · invertir el orden</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">El movimiento que más cae en examen: <strong>invertir el orden</strong> de integración.</p>
-      <p class="idea" style="font-size:17px">No tiene misterio: es el mismo piso y las mismas columnitas, descrito barriendo al revés. El total no cambia.</p>
-      <p class="idea" style="font-size:17px">¿Para qué? Porque a veces la integral de adentro es imposible en un orden y sale fácil en el otro.</p>
-      <p class="idea" style="font-size:17px">Se hace en <strong>dos fases</strong>:</p>
-      <ul class="fases">
-        <li><strong>Fase 1 — dibuja y despeja:</strong> identifica las curvas frontera y despeja la variable de adentro en términos de la de afuera.</li>
-        <li><strong>Fase 2 — reescribe:</strong> pasa de tipo I a tipo II (o al revés) con los nuevos límites. La región es la misma.</li>
-      </ul>
-      <p class="idea" style="font-size:17px">El piso ahora: la región entre la parábola <strong>y = x²</strong> y la recta <strong>y = x</strong>. Se cruzan en (0, 0) y (1, 1), y en medio la recta va por encima (en x = 0.5: recta 0.5, parábola 0.25).</p>
-      <p class="idea" style="font-size:17px">Viene dada primero en el orden dy dx.</p>
-      <div class="estep"><div class="oprow">Orden original (dy dx)</div><p>Para cada x entre 0 y 1, y sube de la parábola x² a la recta x.</p><div class="fx" id="t0"></div></div>
-
-      <div class="check" data-kind="item" data-id="T1pred" data-tema="cambio_orden" data-level="juntos">
-        <div class="qtag">Te toca · decide la fase</div>
-        <p class="q"><strong>Fase 1.</strong> Para invertir a dx dy hay que despejar x en cada curva. ¿Cómo quedan?</p>
+      <div class="check challenge" data-kind="item" data-id="M5G" data-tema="cambio_orden" data-level="guiado" data-module="5">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Despeja las curvas.</strong> Para invertir la región entre y = x² y y = x, despejas x en cada una. ¿Cómo quedan?</p>
         <div class="opts">
           <button class="opt" data-ok="1">De y = x² sale x = √y; de y = x sale x = y</button>
           <button class="opt" data-ok="0">De y = x² sale x = y²; de y = x sale x = √y</button>
           <button class="opt" data-ok="0">No se pueden despejar: hay que integrar así como está</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Despejar x en cada frontera es el paso previo obligado. De y = x², tomando raíz, x = √y. De y = x, directo, x = y.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Tomando raíz en y = x², x = √y; en y = x, directo, x = y.</p><p class="nudge">✕ Despeja x: en y = x² saca raíz cuadrada. Intenta de nuevo.</p></div>
       </div>
-      <div class="estep"><div class="oprow">Fase 1 · despejo las curvas</div><p>Sobre la región y va de 0 a 1. Comparo las dos fronteras en ese rango para saber cuál queda a la izquierda:</p><p class="calc"><span class="rw">en y=1/4</span> x=y da <b>0.25</b> <span class="sep">•</span> x=√y da <b>0.5</b> <span class="sep">•</span> así x=y &lt; x=√y</p><div class="fx" id="t1"></div></div>
-
-      <div class="check" data-kind="item" data-id="T2pred" data-tema="cambio_orden" data-level="juntos">
-        <div class="qtag">Te toca · decide la fase</div>
-        <p class="q"><strong>Fase 2.</strong> Para una y fija entre 0 y 1, ¿entre qué valores va x en el nuevo orden dx dy?</p>
+      <div class="check challenge" data-kind="item" data-id="M5S" data-tema="cambio_orden" data-level="solo" data-module="5">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Inviértela tú.</strong> El triángulo 0 ≤ y ≤ x ≤ 1 viene como x de 0 a 1, y de 0 a x. Al invertir a dx dy, ¿qué límites quedan?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">De x = y hasta x = √y (la recta a la izquierda, la parábola a la derecha)</button>
-          <button class="opt" data-ok="0">De x = √y hasta x = y</button>
-          <button class="opt" data-ok="0">De x = 0 hasta x = 1, sin depender de y</button>
+          <button class="opt" data-ok="0">y de 0 a 1 por fuera; x de 0 a y por dentro</button>
+          <button class="opt" data-ok="1">y de 0 a 1 por fuera; x de y a 1 por dentro</button>
+          <button class="opt" data-ok="0">y de 0 a x por fuera; x de 0 a 1 por dentro</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>En (0, 1) se cumple y ≤ √y, así que la recta x = y está a la izquierda y la parábola x = √y a la derecha. El límite de adentro va del menor al mayor.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Para cada y, x va de la recta x = y hasta x = 1. La región es la misma.</p><p class="nudge">✕ Fija una y y mira entre qué valores corre x en el triángulo. Intenta de nuevo.</p></div>
       </div>
-      <div class="estep"><div class="oprow">Fase 2 · orden invertido (dx dy)</div><p>Misma región, ahora tipo II: y por fuera entre constantes 0 y 1, x por dentro entre las dos curvas despejadas.</p><div class="fx" id="t2"></div></div>
-      <p class="idea" style="font-size:17px">Comprobación con f = 1 (el área): en ambos órdenes da <strong>1/6</strong>.</p>
-      <p class="idea" style="font-size:17px">Invertir el orden es solo <strong>redescribir la misma región</strong>: nunca cambia el resultado, pero a veces vuelve fácil una integral imposible.</p>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>Míralo: la iterada barre la región</h3>
-      <p class="idea">Una <strong>rebanada</strong> es un renglón (o una columna) entero de columnitas ya sumado: eso hace la integral de adentro. La de afuera <strong>desliza</strong> esa rebanada por toda la región.</p>
-      <p class="idea">Toca cada caso para ver cómo se acomodan los límites (el tercero es un adelanto de la sección que sigue):</p>
-      <div class="viz">
-        <div class="viz-tabs" id="vizTabs">
-          <button class="viz-tab" data-case="rect">Rectángulo</button>
-          <button class="viz-tab" data-case="tipo1">Región tipo I</button>
-          <button class="viz-tab" data-case="polar">Disco (polares)</button>
+    <section class="lesson" data-step="6">
+      <header class="lesson-head"><p class="micro">Microlección 6 de 8 · Tema: Cambio de variables (coordenadas polares)</p><h2>Coordenadas polares: cambiar de variable con el jacobiano</h2><p class="goal">Meta: escribir dA = r dr dθ y entender de dónde sale el factor r.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy el piso se vuelve <strong>redondo</strong> y cambiamos de variable a <strong>coordenadas polares</strong>.</p>
+        <p class="idea">Con x, y los límites de un disco salen con raíces feas como √(1 − x²): es cortar lo redondo con cuadrícula cuadrada.</p>
+        <p class="idea">Mejor cortarlo con <strong>anillos</strong> alrededor del centro y <strong>rayos</strong> que salen de él, como una diana.</p>
+        <p class="idea">Ese corte nombra cada punto de otra forma: a qué distancia del centro estás (r) y en qué dirección, como ángulo (θ).</p>
+        <p class="idea">¿De dónde salen el cos θ y el sen θ que traducen entre los dos idiomas? De un triángulo rectángulo.</p>
+        <p class="idea">Caminas r en la dirección θ; sus catetos son lo que avanzas a la derecha (x) y lo que subes (y).</p>
+        <figure class="visual">
+          <svg viewBox="0 0 340 178" role="img" aria-label="Triángulo rectángulo: hipotenusa r en ángulo theta, cateto horizontal x igual a r por cos theta, cateto vertical y igual a r por sen theta">
+            <line x1="24" y1="150" x2="234" y2="150" stroke="#F5821F" stroke-width="3.5"/>
+            <line x1="234" y1="150" x2="234" y2="46" stroke="#283891" stroke-width="3.5"/>
+            <line x1="24" y1="150" x2="234" y2="46" stroke="#181B22" stroke-width="3"/>
+            <rect x="222" y="138" width="12" height="12" fill="none" stroke="#181B22" stroke-width="1.2"/>
+            <path d="M 54 150 A 30 30 0 0 0 51 137" fill="none" stroke="#181B22" stroke-width="1.3"/>
+            <text x="38" y="144" font-size="14" fill="#181B22">θ</text>
+            <text x="108" y="88" font-size="15" fill="#C75D08" font-weight="700">r</text>
+            <text x="129" y="170" font-size="13" fill="#C75D08" font-weight="700" text-anchor="middle">x = r·cos θ</text>
+            <text x="244" y="102" font-size="13" fill="#283891" font-weight="700">y = r·sen θ</text>
+          </svg>
+          <figcaption>La hipotenusa mide r; sus catetos son x e y. De ahí salen el coseno y el seno.</figcaption>
+        </figure>
+        <p class="idea">Cada cateto sobre la hipotenusa es un coseno o un seno; despejando x e y:</p>
+        <div class="fx"><div class="sys"><span class="eq">x = r·cos θ</span><span class="eq">y = r·sen θ</span></div></div>
+        <p class="idea">Pero hay una trampa, y es el corazón de la sección: los pedacitos de los anillos <strong>no son del mismo tamaño</strong>.</p>
+        <p class="idea">Cerca del centro, girar un ángulo te mueve poquito; en el borde, el mismo giro recorre un arco mucho más largo. Compruébalo aquí:</p>
+        <div class="mixlab" aria-label="Laboratorio del pedacito polar">
+          <div class="mix-grid">
+            <div class="recipe"><h4>Distancia al centro (r)</h4><p>qué tan lejos del centro</p><div class="pick" data-mix="r"><button data-value="1" class="is-on">r = 1 (cerca)</button><button data-value="2">r = 2 (medio)</button><button data-value="3">r = 3 (borde)</button></div></div>
+            <div class="recipe"><h4>Giro (dθ)</h4><p>tamaño del giro, en radianes</p><div class="pick" data-mix="dth"><button data-value="0.1" class="is-on">0.1 (chico)</button><button data-value="0.2">0.2 (medio)</button><button data-value="0.3">0.3 (grande)</button></div></div>
+          </div>
+          <div class="mix-result"><p>El arco que barre ese pedacito</p><strong id="labArc">arco ≈ r · dθ = 1 · 0.1 = 0.1</strong><p id="labMsg">En el anillo r = 1 es la referencia. Más lejos, el mismo giro barre más arco.</p></div>
         </div>
-        <div class="viz-plane fx" id="vizPlane"></div>
-        <div class="viz-legend"><span><i style="background:#F5821F"></i>Rebanada interior</span><span><i style="background:#283891"></i>Frontera de la región</span></div>
-        <p class="viz-cap" id="vizCap"></p>
+        <p class="idea">El contorno del anillo a distancia r mide 2π·r, así que un giro chiquito dθ recorre un arco r·dθ — crece con r.</p>
+        <p class="idea">Por eso un pedacito de anillo mide dr de ancho y r·dθ de largo. Su área es el producto:</p>
+        <div class="fx"><div class="sys"><span class="eq">área ≈ dr · (r·dθ)</span><span class="eq">= r·dr·dθ</span></div></div>
+        <p class="idea">Ese factor que corrige el tamaño se llama <strong>jacobiano</strong>. El de polares es r:</p>
+        <div class="fx"><div class="sys"><span class="eq">dA = dx dy = r dr dθ</span></div></div>
+        <p class="idea">Tu curso lo enuncia así:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario del curso, tema 7.7</span>Al cambiar a <strong>coordenadas polares</strong> con x = r·cos θ, y = r·sen θ, el elemento de área se transforma en dA = <strong>r dr dθ</strong>, donde r es el valor absoluto del jacobiano de la transformación.</p>
+        <p class="idea">Léela de vuelta: cambiar de variable no es solo sustituir x e y; hay que multiplicar por r para que los pedacitos cuenten con su tamaño real.</p>
+        <p class="idea">Míralo funcionar con el área del disco de radio 1 (r de 0 a 1, θ toda la vuelta):</p>
+        <div class="fx"><div class="sys"><span class="eq">∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>1</sup> r dr dθ</span><span class="eq">= 2π · (1/2) = π</span></div></div>
+        <p class="idea">Da <strong>π</strong>, justo el área del disco. El jacobiano no es opcional.</p>
+        <p class="idea paso">Juega el laboratorio de arriba y luego cierra con los retos.</p>
+        <p class="idea paso">La próxima idea sube una dimensión: del piso plano a los sólidos con volumen.</p>
       </div>
-    </section>
-
-    <h2 class="modhead">Sube el tamaño · cambio de variable</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ahora un piso <strong>redondo</strong>: un disco. Con x, y los límites salen con raíces feas tipo √(1 − x²) y las integrales se amargan — es cortar lo redondo con cuadrícula cuadrada.</p>
-      <p class="idea" style="font-size:17px">Mejor cortarlo con <strong>anillos</strong> alrededor del centro y <strong>rayos</strong> que salen de él, como una diana.</p>
-      <p class="idea" style="font-size:17px">Ese corte pide nombrar los puntos de otra forma. En vez de (x, y):</p>
-      <ul class="fases">
-        <li>a qué <strong>distancia del centro</strong> estás (la llamamos r),</li>
-        <li>hacia qué <strong>dirección</strong>, medida como un ángulo (θ).</li>
-      </ul>
-      <p class="idea" style="font-size:17px">A ese par se le llama <strong>coordenadas polares</strong>.</p>
-      <p class="idea" style="font-size:17px">¿De dónde salen el cos θ y el sen θ que traducen entre los dos idiomas? De un triángulo rectángulo.</p>
-      <p class="idea" style="font-size:17px">Caminas una distancia r desde el centro en la dirección θ (desde la horizontal). Ese recorrido arma un triángulo rectángulo: la <strong>hipotenusa</strong> mide r y sus catetos son lo que avanzaste a la derecha (x) y lo que subiste (y).</p>
-      <div class="fx"><svg viewBox="0 0 340 178" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triángulo rectángulo: hipotenusa r en ángulo theta, cateto horizontal x = r por cos theta, cateto vertical y = r por sen theta" style="display:block;width:100%;height:auto;max-width:300px;margin:0 auto">
-        <line x1="24" y1="150" x2="234" y2="150" stroke="#F5821F" stroke-width="3.5"/>
-        <line x1="234" y1="150" x2="234" y2="46" stroke="#283891" stroke-width="3.5"/>
-        <line x1="24" y1="150" x2="234" y2="46" stroke="#181B22" stroke-width="3"/>
-        <rect x="222" y="138" width="12" height="12" fill="none" stroke="#181B22" stroke-width="1.2"/>
-        <path d="M 54 150 A 30 30 0 0 0 51 137" fill="none" stroke="#181B22" stroke-width="1.3"/>
-        <text x="38" y="144" font-size="14" fill="#181B22">θ</text>
-        <text x="108" y="88" font-size="15" fill="#C75D08" font-weight="700">r</text>
-        <text x="129" y="170" font-size="13" fill="#C75D08" font-weight="700" text-anchor="middle">x = r·cos θ</text>
-        <text x="244" y="102" font-size="13" fill="#283891" font-weight="700">y = r·sen θ</text>
-      </svg></div>
-      <p class="idea" style="font-size:17px">cos θ y sen θ dependen solo del ángulo θ (se leen de tablas o se memorizan). Cada uno es una fracción de ese triángulo: el cateto pegado a θ sobre r, y el de enfrente sobre r. Como esos catetos son x e y:</p>
-      <div class="fx" id="polTrig"></div>
-      <p class="idea" style="font-size:17px">Despeja x e y multiplicando por r y tienes la traducción entre los dos idiomas:</p>
-      <div class="fx"><div class="sys"><span class="eq">x = r·cos θ</span><span class="eq">y = r·sen θ</span></div></div>
-      <p class="idea" style="font-size:17px">Pero hay una trampa, y es el corazón de la sección: los pedacitos que forman los anillos y rayos <strong>no son del mismo tamaño</strong>.</p>
-      <p class="idea" style="font-size:17px">Cerca del centro, girar un ángulo te mueve poquito; en el borde, el mismo giro recorre un arco mucho más largo.</p>
-      <p class="idea" style="font-size:17px">Con números, la vuelta completa en un disco de radio 2:</p>
-      <div class="fx"><div class="sys"><span class="eq">por el borde: 2π·2 ≈ 12.6 m</span><span class="eq">a medio metro: 2π·0.5 ≈ 3.1 m</span></div></div>
-      <p class="idea" style="font-size:17px">¿De dónde sale ese largo? La vuelta completa es un ángulo de 2π y el contorno del anillo a distancia r mide 2π·r. (En radianes: 360° = 2π, 180° = π, 90° = π/2.)</p>
-      <p class="idea" style="font-size:17px">Un giro chiquito dθ es la fracción dθ/2π de la vuelta, así que su arco es esa fracción del contorno:</p>
-      <div class="fx" id="arcoDeriv"></div>
-      <p class="idea" style="font-size:17px">Por eso un pedacito de anillo mide dr de ancho y <strong>r·dθ</strong> de largo — el arco crece con r. Su área es ancho por largo:</p>
-      <div class="fx"><div class="sys"><span class="eq">área ≈ dr · (r·dθ)</span><span class="eq">= r·dr·dθ</span></div></div>
-      <p class="idea" style="font-size:17px">Si sumaras dr·dθ a secas, contarías parejo pedacitos que no lo son, y el número saldría mal.</p>
-      <p class="idea" style="font-size:17px">Ese factor que corrige el tamaño al cambiar de coordenadas se llama <strong>jacobiano</strong> (por el matemático Jacobi). El de polares es r:</p>
-      <div class="fx" id="polDA"></div>
-      <p class="fx-note">El jacobiano entra siempre con <strong>valor absoluto</strong> — un área no puede ser negativa. En polares r ya es positivo, por eso no se le ven las barras.</p>
-
-      <div class="check" data-kind="item" data-id="J1pred" data-tema="cambio_variable" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Al pasar de dx dy a coordenadas polares, ¿qué reemplaza al elemento de área?</p>
+      <div class="check challenge" data-kind="item" data-id="M6G" data-tema="cambio_variable" data-level="guiado" data-module="6">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>El elemento en polares.</strong> Al pasar de dx dy a coordenadas polares, ¿qué reemplaza al elemento de área?</p>
         <div class="opts">
           <button class="opt" data-ok="1">r dr dθ: aparece un factor r, el jacobiano de polares</button>
           <button class="opt" data-ok="0">dr dθ, sin ningún factor extra</button>
           <button class="opt" data-ok="0">r² dr dθ, el mismo factor que en esféricas</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>En polares los "cuadritos" se estiran conforme te alejas del origen; ese estiramiento es el factor <strong>r</strong>. Sin él, el número sale mal.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Los pedacitos se estiran al alejarse del centro; ese estiramiento es el factor r.</p><p class="nudge">✕ Falta el factor que corrige el tamaño de los pedacitos. Intenta de nuevo.</p></div>
       </div>
-      <p class="idea" style="font-size:17px">Con eso, el área del disco de radio 1 sale a mano: región 0 ≤ r ≤ 1, 0 ≤ θ ≤ 2π, integrando el 1 con su factor r.</p>
-      <div class="estep"><div class="oprow">Paso 1 · planteo en polares</div><p>El integrando es 1, pero el elemento de área trae el factor r, así que integro r dr dθ.</p><div class="fx" id="f0"></div></div>
-      <div class="estep"><div class="oprow">Paso 2 · integro en r</div><p>Trato θ como constante. La primitiva de r es r²/2, evaluada de 0 a 1:</p><p class="calc"><span class="rw">en r=1</span> 1²/2 = <b>1/2</b> <span class="sep">•</span> <span class="rw">en r=0</span> <b>0</b> <span class="sep">•</span> queda <b>1/2</b></p><div class="fx" id="f1"></div></div>
-      <div class="estep"><div class="oprow">Paso 3 · integro en θ</div><p>Queda la constante 1/2 por dθ de 0 a 2π: solo multiplica por el largo del intervalo.</p><p class="calc"><span class="rw">θ</span> (1/2)·(2π − 0) = <b>π</b></p><div class="fx" id="f2"></div></div>
-      <p class="idea" style="font-size:17px">Resultado: <strong>π</strong>, el área del disco unitario. Sin el factor r saldría mal: el jacobiano <strong>no es opcional</strong>.</p>
+      <div class="check challenge" data-kind="item" data-id="M6S" data-tema="cambio_variable" data-level="solo" data-module="6">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Área de otro disco.</strong> Con dA = r dr dθ, ¿cuánto vale el área del disco de radio 4 (r de 0 a 4, θ de 0 a 2π)?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">8π</button>
+          <button class="opt" data-ok="1">16π</button>
+          <button class="opt" data-ok="0">4π</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ ∫<sub>0</sub><sup>4</sup> r dr = 8, por 2π da 16π = π·4².</p><p class="nudge">✕ Integra r de 0 a 4 (no olvides el factor r) y multiplica por 2π. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
 
-    <h2 class="modhead">Sube el tamaño · triples en 3D</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Último salto: el objeto ya no es un piso sino un <strong>sólido</strong> con volumen — un cubo, una lata, una pelota.</p>
-      <p class="idea" style="font-size:17px">La receta se repite con una dimensión más: en vez de columnitas, rellenas el sólido con <strong>cajitas</strong> diminutas.</p>
-      <p class="idea" style="font-size:17px">Cada cajita tiene un volumen <strong>dV</strong>. Si f es la densidad, cada una aporta f·dV.</p>
-      <div class="fx"><div class="sys"><span class="eq">f·dV</span></div></div>
-      <p class="idea" style="font-size:17px">Sumarlas es una <strong>integral triple</strong> (tres eses ∭, tres direcciones).</p>
-      <p class="idea" style="font-size:17px">Se calcula igual que la doble: de adentro hacia afuera, con las de afuera congeladas.</p>
-      <p class="idea" style="font-size:17px">En coordenadas normales la cajita es un cubito:</p>
-      <div class="fx"><div class="sys"><span class="eq">dV = dx dy dz</span></div></div>
-      <p class="idea" style="font-size:17px">Y el truco de cambiar de coordenadas también se repite.</p>
-      <p class="idea" style="font-size:17px">Simetría alrededor de un <strong>eje</strong> (lata, tubo) → <strong>cilíndricas</strong>: las polares del piso más la altura z. Su jacobiano es el mismo r de los anillos.</p>
-      <p class="idea" style="font-size:17px">Simetría alrededor de un <strong>punto</strong> (una pelota) → <strong>esféricas</strong>. Sus tres etiquetas:</p>
-      <ul class="fases">
-        <li>ρ es la distancia al centro (la r de 3D),</li>
-        <li>θ la vuelta de siempre,</li>
-        <li>φ el ángulo que bajas desde el polo norte.</li>
-      </ul>
-      <p class="idea" style="font-size:17px">Aviso: los dos jacobianos del 3D —la r de cilíndricas y el ρ²·sen φ de esféricas— van al examen <strong>de memoria</strong>. Aquí solo les damos sentido y comprobamos que funcionan.</p>
-      <p class="idea" style="font-size:17px">El jacobiano esférico es <strong>ρ²·sen φ</strong>, pieza por pieza:</p>
-      <ul class="fases">
-        <li>el ρ² porque lejos del centro los pedacitos se agrandan en dos direcciones a la vez,</li>
-        <li>el sen φ porque cerca de los polos las rebanadas se afinan: en el ecuador (φ = π/2) valen ancho completo, sen(π/2) = 1; hacia el polo (φ → 0) se encogen, sen 0 = 0.</li>
-      </ul>
-      <p class="idea" style="font-size:17px">Cada sistema trae su elemento de volumen:</p>
-      <div class="fx" id="dV3d"></div>
-      <p class="idea" style="font-size:17px"><strong>Cilíndricas</strong>: el volumen de un cilindro de radio 1 y altura 2 sale de barrer r de 0 a 1, θ toda la vuelta y z de 0 a 2, con el factor r:</p>
-      <div class="fx" id="cilEx"></div>
-      <p class="fx-note">Coincide con π·R²·h = π·1²·2 = 2π.</p>
-      <p class="idea" style="font-size:17px">Ahora las <strong>esféricas</strong>: el volumen de la esfera de radio 1. La región:</p>
-      <div class="fx"><div class="sys"><span class="eq">0 ≤ ρ ≤ 1</span><span class="eq">0 ≤ φ ≤ π</span><span class="eq">0 ≤ θ ≤ 2π</span></div></div>
-      <div class="estep"><div class="oprow">Planteo la triple</div><p>El integrando es solo el jacobiano ρ²·sen φ; como los límites son constantes, los tres factores se separan.</p><div class="fx" id="s0"></div></div>
-
-      <div class="check" data-kind="item" data-id="S1pred" data-tema="coordenadas_3d" data-level="juntos">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Empiezo por el factor en ρ, con φ y θ fijas. ¿Cuál es la integral y su primitiva?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Integrar ρ² respecto a ρ; primitiva ρ³/3</button>
-          <button class="opt" data-ok="0">Integrar ρ² respecto a φ; primitiva ρ²·φ</button>
-          <button class="opt" data-ok="0">Derivar ρ²; queda 2ρ</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Con φ y θ fijas, sen φ es una constante que sale; el único factor con ρ es ρ². Su primitiva es ρ³/3 (subes el exponente y divides).</p></div>
+    <section class="lesson" data-step="7">
+      <header class="lesson-head"><p class="micro">Microlección 7 de 8 · Tema: Integrales triples</p><h2>Integrales triples: rellenar un sólido con cajitas</h2><p class="goal">Meta: plantear una triple y reconocer el elemento de volumen dV.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy el objeto deja de ser un piso y se vuelve un <strong>sólido</strong> con volumen: la <strong>integral triple</strong>.</p>
+        <p class="idea">Un cubo, una lata, una pelota. La receta se repite con una dimensión más.</p>
+        <p class="idea">En vez de columnitas, rellenas el sólido con <strong>cajitas</strong> diminutas. Cada una tiene un volumen dV.</p>
+        <p class="idea">Si f es la densidad, cada cajita aporta f·dV; sumarlas todas es una integral triple — tres eses, tres direcciones:</p>
+        <div class="fx"><div class="sys"><span class="eq">∭<sub>E</sub> f(x, y, z) dV</span></div></div>
+        <figure class="visual">
+          <svg viewBox="0 0 360 250" role="img" aria-label="Un solido en forma de caja dividido en cajitas pequeñas; se resalta una cajita de volumen dV">
+            <polygon points="90,90 250,90 310,55 150,55" fill="#f2f0ea" stroke="#181B22" stroke-width="2"/>
+            <polygon points="250,90 310,55 310,190 250,225" fill="#e7e2da" stroke="#181B22" stroke-width="2"/>
+            <rect x="90" y="90" width="160" height="135" fill="#fff" stroke="#181B22" stroke-width="2"/>
+            <g stroke="#c9c2b6" stroke-width="1">
+              <line x1="143" y1="90" x2="143" y2="225"/><line x1="196" y1="90" x2="196" y2="225"/>
+              <line x1="90" y1="135" x2="250" y2="135"/><line x1="90" y1="180" x2="250" y2="180"/>
+            </g>
+            <rect x="143" y="135" width="53" height="45" fill="rgba(245,130,31,.30)" stroke="#C75D08" stroke-width="2"/>
+            <text x="169" y="162" font-size="14" fill="#C75D08" font-weight="800" text-anchor="middle">dV</text>
+            <text x="300" y="235" font-size="14" fill="#334155" text-anchor="end">sólido E</text>
+          </svg>
+          <figcaption>El sólido se rellena con cajitas dV. Sumar f·dV sobre todas es la integral triple.</figcaption>
+        </figure>
+        <p class="idea">Se calcula igual que la doble: de <strong>adentro hacia afuera</strong>, con las de afuera congeladas.</p>
+        <p class="idea key">En coordenadas normales la cajita es un cubito: dV = dx dy dz.</p>
+        <p class="idea">Y cuando f = 1, la triple da el <strong>volumen</strong> del sólido, igual que la doble daba el área. Tu curso lo enuncia así:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario del curso, tema 7.8</span>La <strong>integral triple</strong> de f sobre un sólido E, ∭<sub>E</sub> f dV, suma f·dV sobre cajitas cada vez más pequeñas y se calcula como una integral iterada de tres variables. Con f = 1 da el volumen de E.</p>
+        <p class="idea">Léela de vuelta: dV es el pedacito de volumen, las tres S lo suman por todo el sólido, y de adentro hacia afuera se resuelve una variable a la vez.</p>
+        <p class="idea paso">Fija la idea con los retos de abajo.</p>
+        <p class="idea paso">Y en la última idea, el truco de cambiar de coordenadas también sube al espacio: cilíndricas y esféricas.</p>
       </div>
-      <div class="estep"><div class="oprow">Integro en ρ</div><p>Primitiva ρ³/3, evaluada de 0 a 1:</p><p class="calc"><span class="rw">en ρ=1</span> 1³/3 = <b>1/3</b> <span class="sep">•</span> <span class="rw">en ρ=0</span> <b>0</b> <span class="sep">•</span> queda <b>1/3</b></p><div class="fx" id="s1"></div></div>
-      <p class="idea" style="font-size:17px">Este paso usa dos datos de trigonometría que en el examen van de memoria:</p>
-      <ul class="fases">
-        <li>la antiderivada de sen φ es <strong>−cos φ</strong> (derivar −cos φ devuelve sen φ);</li>
-        <li>cos 0 = 1 (sin bajar nada) y cos π = −1 (media vuelta, el polo opuesto), así que −cos 0 = −1 y −cos π = 1.</li>
-      </ul>
-      <div class="estep"><div class="oprow">Integro en φ</div><p>La primitiva de sen φ es −cos φ, evaluada de 0 a π:</p><p class="calc"><span class="rw">en φ=π</span> −cos π = <b>1</b> <span class="sep">•</span> <span class="rw">en φ=0</span> −cos 0 = <b>−1</b> <span class="sep">•</span> resta = <b>2</b></p><div class="fx" id="s2"></div></div>
-      <div class="estep"><div class="oprow">Integro en θ</div><p>Queda una constante por dθ de 0 a 2π: multiplica por 2π.</p><p class="calc"><span class="rw">θ</span> (1/3)·2·2π = <b>4π/3</b></p><div class="fx" id="s3"></div></div>
-      <p class="idea" style="font-size:17px">Resultado: <strong>4π/3</strong>, justo la fórmula (4/3)πR³ con R = 1.</p>
-      <p class="idea" style="font-size:17px">La memoria de los dos jacobianos —r y ρ²·sen φ— es lo que hay que llevar al examen.</p>
+      <div class="check challenge" data-kind="item" data-id="M7G" data-tema="integral_triple" data-level="guiado" data-module="7">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Reconoce el dV.</strong> En ∭<sub>E</sub> f dV, ¿qué representa el dV?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Un pedacito de volumen del sólido; f se evalúa ahí y se suma sobre todo E</button>
+          <button class="opt" data-ok="0">La derivada de f respecto al volumen</button>
+          <button class="opt" data-ok="0">El volumen total de E, un número fijo</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ dV es la «cajita» de volumen; la triple suma f·dV sobre todas. Con f = 1 da el volumen.</p><p class="nudge">✕ dV no es una derivada ni el volumen total: es la cajita que se repite. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M7S" data-tema="integral_triple" data-level="solo" data-module="7">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Volumen de una caja.</strong> El volumen de la caja 0 ≤ x ≤ 2, 0 ≤ y ≤ 2, 0 ≤ z ≤ 3 es ∭ 1 dV. ¿Cuánto vale?</p>
+        <div class="opts">
+          <button class="opt" data-ok="0">7, sumando 2 + 2 + 3</button>
+          <button class="opt" data-ok="1">12, el producto 2 · 2 · 3</button>
+          <button class="opt" data-ok="0">6, el área de una cara</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Con f = 1 la triple da el volumen: 2 · 2 · 3 = 12.</p><p class="nudge">✕ El volumen de una caja es el producto de sus tres lados. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Última idea →</button></div>
     </section>
 
-    <h2 class="modhead">Tu turno</h2>
-    <section class="practice">
-      <div class="phead"><h3>De guiado a solo</h3><p class="sub">Toca tu respuesta. Si fallas, vuelve a intentar. El apoyo se va retirando. · <span class="cont" id="cont"></span></p></div>
-
-      <div class="pitem" data-kind="item" data-id="P1" data-tema="integral_doble" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">¿Qué calcula la integral doble de la función constante 1 sobre una región R?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">El área de R</button>
-          <button class="opt" data-ok="0">El perímetro de R</button>
-          <button class="opt" data-ok="0">Siempre 1, porque la función vale 1</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Si f = 1, cada cuadrito aporta 1·dA. La suma de todos los dA es justo el área.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>∬<sub>R</sub> 1 dA suma todos los elementos de área: da el <strong>área</strong> de R. Por eso el área del disco o del triángulo sale integrando el 1.</p></div>
+    <section class="lesson" data-step="8">
+      <header class="lesson-head"><p class="micro">Microlección 8 de 8 · Tema: Coordenadas cilíndricas y esféricas</p><h2>Cilíndricas y esféricas: los dos jacobianos del espacio</h2><p class="goal">Meta: recordar dV = r dz dr dθ y dV = ρ²·sen φ dρ dφ dθ.</p></header>
+      <div class="sec">
+        <p class="idea lede">Última pieza: cambiar de coordenadas en 3D con <strong>cilíndricas</strong> y <strong>esféricas</strong>.</p>
+        <p class="idea">El truco de polares también sube al espacio. Según la simetría del sólido, eliges el sistema.</p>
+        <p class="idea">Simetría alrededor de un <strong>eje</strong> —una lata, un tubo— pide <strong>cilíndricas</strong>: las polares del piso más la altura z.</p>
+        <p class="idea key">El jacobiano de cilíndricas es el mismo r de los anillos: dV = r dz dr dθ.</p>
+        <p class="idea">Simetría alrededor de un <strong>punto</strong> —una pelota— pide <strong>esféricas</strong>, con tres etiquetas:</p>
+        <div class="fx"><div class="sys"><span class="eq">ρ: distancia al centro</span><span class="eq">θ: la vuelta de siempre</span><span class="eq">φ: cuánto bajas desde el polo</span></div></div>
+        <figure class="visual">
+          <svg viewBox="0 0 520 230" role="img" aria-label="Un cilindro con simetria de eje a la izquierda y una esfera con simetria de punto a la derecha, con sus coordenadas">
+            <ellipse cx="130" cy="55" rx="66" ry="20" fill="rgba(40,56,145,.10)" stroke="#283891" stroke-width="2.5"/>
+            <line x1="64" y1="55" x2="64" y2="180" stroke="#283891" stroke-width="2.5"/>
+            <line x1="196" y1="55" x2="196" y2="180" stroke="#283891" stroke-width="2.5"/>
+            <path d="M64 180 A66 20 0 0 0 196 180" fill="none" stroke="#283891" stroke-width="2.5"/>
+            <line x1="130" y1="30" x2="130" y2="205" stroke="#181B22" stroke-width="1.5" stroke-dasharray="6 5"/>
+            <text x="130" y="222" font-size="14" fill="#334155" text-anchor="middle">eje → cilíndricas (r, θ, z)</text>
+            <circle cx="410" cy="110" r="82" fill="rgba(245,130,31,.10)" stroke="#C75D08" stroke-width="2.5"/>
+            <line x1="410" y1="110" x2="470" y2="66" stroke="#C75D08" stroke-width="3"/>
+            <line x1="410" y1="28" x2="410" y2="110" stroke="#181B22" stroke-width="1.5" stroke-dasharray="6 5"/>
+            <circle cx="410" cy="110" r="4" fill="#181B22"/>
+            <text x="445" y="70" font-size="14" fill="#C75D08" font-weight="700">ρ</text>
+            <text x="418" y="60" font-size="13" fill="#181B22">φ</text>
+            <text x="410" y="222" font-size="14" fill="#334155" text-anchor="middle">punto → esféricas (ρ, φ, θ)</text>
+          </svg>
+          <figcaption>Simetría de eje: cilíndricas. Simetría de punto: esféricas. Cada una trae su jacobiano.</figcaption>
+        </figure>
+        <p class="idea">El jacobiano esférico es <strong>ρ²·sen φ</strong>: el ρ² porque lejos del centro los pedacitos se agrandan en dos direcciones.</p>
+        <p class="idea">Y el sen φ porque cerca de los polos las rebanadas se afinan; en el ecuador valen ancho completo.</p>
+        <p class="idea">Cada sistema trae su elemento de volumen:</p>
+        <div class="fx"><div class="sys"><span class="eq">Cilíndricas: dV = r dz dr dθ</span><span class="eq">Esféricas: dV = ρ²·sen φ dρ dφ dθ</span></div></div>
+        <p class="idea">Tu curso lo enuncia así:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario del curso, tema 7.8</span>En <strong>cilíndricas</strong> (x = r cos θ, y = r sen θ, z = z) el elemento es dV = <strong>r dz dr dθ</strong>. En <strong>esféricas</strong> (x = ρ sen φ cos θ, y = ρ sen φ sen θ, z = ρ cos φ) es dV = <strong>ρ²·sen φ dρ dφ dθ</strong>.</p>
+        <p class="idea">Léelos de vuelta: cada sistema multiplica por su jacobiano para que los pedacitos cuenten con su tamaño. Estos dos factores van al examen de <strong>memoria</strong>.</p>
+        <p class="idea">Compruébalo con la esfera de radio 1 (ρ de 0 a 1, φ de 0 a π, θ de 0 a 2π); los tres factores se separan:</p>
+        <div class="fx"><div class="sys"><span class="eq">V = ( ∫<sub>0</sub><sup>1</sup> ρ² dρ )( ∫<sub>0</sub><sup>π</sup> sen φ dφ )( ∫<sub>0</sub><sup>2π</sup> dθ )</span><span class="eq">= (1/3)(2)(2π) = 4π/3</span></div></div>
+        <p class="idea">Da <strong>4π/3</strong>, justo la fórmula (4/3)πR³ con R = 1.</p>
+        <p class="idea paso">Cierra la unidad con los dos retos y el reporte de abajo.</p>
       </div>
-
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="fubini" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Vas a integrar la función 2 sobre el rectángulo con x de 0 a 1 y y de 0 a 3. ¿Cuánto vale y por qué?</p>
-        <div class="fx" id="p2"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">6, porque es 2 · área = 2 · (1·3)</button>
-          <button class="opt" data-ok="0">2, la función no cambia al integrar</button>
-          <button class="opt" data-ok="0">5, sumando los lados 2 + 3</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Integrar una constante c sobre R da c por el área de R. El área del rectángulo es base por altura.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>∬ 2 dA = 2 · (área) = 2 · (1·3) = <strong>6</strong>. Con una constante no hace falta hacer las dos integrales: es la constante por el área.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="region_general" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Región tipo I: para cada x fija, y sube de 0 a x. ¿Cuánto vale la integral interior de la función 1 respecto a y?</p>
-        <div class="fx" id="p3"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">x, porque la primitiva de 1 es y, evaluada entre 0 y x</button>
-          <button class="opt" data-ok="0">1, la función no cambia al integrar</button>
-          <button class="opt" data-ok="0">x²/2</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>∫ 1 dy = y; evaluada de 0 a x da x − 0 = <strong>x</strong>. Ese resultado, ya solo en x, pasa a la integral de afuera.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="region_general" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Integral doble de la función 2x sobre el triángulo con y de 0 a x, x de 0 a 2. Primero la interior: con x constante, ¿cuánto da la integral en y?</p>
-        <div class="fx" id="p4"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">2x², porque la primitiva de 2x en y es 2x·y, evaluada entre 0 y x</button>
-          <button class="opt" data-ok="0">x², porque el 2 se cancela al integrar</button>
-          <button class="opt" data-ok="0">2x, la función no cambia al integrar en y</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Como x es constante frente a y, la integral de 2x dy es 2x·y. Evalúa en y = x y en y = 0.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>La primitiva de 2x en y es 2x·y; entre 0 y x da 2x·x − 0 = <strong>2x²</strong>. Ese resultado, ya solo en x, entra en la integral de afuera.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="region_general" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Ciérrala tú sola: la misma doble de 2x sobre ese triángulo (y de 0 a x, x de 0 a 2). Ya viste que la interior deja 2x². Integra por fuera en x y da el número final.</p>
-        <div class="fx" id="p5"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">16/3</button>
-          <button class="opt" data-ok="0">8/3</button>
-          <button class="opt" data-ok="0">4</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Tras la interior queda la integral de 2x² en x, de 0 a 2: la primitiva es 2x³/3, evaluada en 2 da 2·8/3 = <strong>16/3</strong>. Primero adentro, luego afuera.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P6" data-tema="cambio_orden" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Te damos una región en forma tipo II abajo: y por fuera entre constantes, x por dentro entre dos fronteras. ¿Qué región del plano describe?</p>
-        <div class="fx" id="p6"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">El triángulo donde 0 ≤ y ≤ x ≤ 1: para cada y, x va de la recta x = y hasta x = 1</button>
-          <button class="opt" data-ok="0">Un rectángulo completo con x de 0 a 1 y y de 0 a 1</button>
-          <button class="opt" data-ok="0">La región sobre la recta y = x, donde x va de 0 a y</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Dibuja la recta x = y. Para una y fija, x arranca en esa recta y termina en x = 1. Eso recorta un triángulo.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Con y entre 0 y 1 y x entre y y 1 se cumple y ≤ x ≤ 1: es el triángulo <strong>0 ≤ y ≤ x ≤ 1</strong>. Verlo así es el paso previo a reescribir los límites.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P7" data-tema="cambio_orden" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Es la misma región del paso anterior (y de 0 a 1 por fuera, x de y a 1 por dentro). Inviértela tú a orden dy dx. ¿Cómo quedan los límites?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="p7a"></button>
-          <button class="opt" data-ok="0" id="p7b"></button>
-          <button class="opt" data-ok="0" id="p7c"></button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La región es el triángulo 0 ≤ y ≤ x ≤ 1. Por columnas: x de 0 a 1 afuera, y de 0 a x adentro. Misma región, solo redescrita.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P8" data-tema="cambio_variable" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Vas a armar el área del disco de radio 2 en polares. Ya sabes que 0 ≤ θ ≤ 2π. Con el jacobiano correcto y los límites de r, ¿cuál integral queda bien?</p>
-        <div class="fx" id="p8"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">La de r de 0 a 2, con el factor r (dA = r dr dθ)</button>
-          <button class="opt" data-ok="0">La de r de 0 a 2, sin el factor r</button>
-          <button class="opt" data-ok="0">La de r de 0 a 2, con factor r² (el jacobiano de esféricas)</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>El radio va de 0 al borde (r = 2) y el jacobiano de polares es r, no r². Se copia el mismo armado del disco unitario.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>En polares dA = <strong>r</strong> dr dθ. Con r de 0 a 2 y θ de 0 a 2π, la integral da 2π·(2) = 4π, el área del disco de radio 2.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P9" data-tema="cambio_variable" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Ahora ejecútalo tú sola: el área del disco de radio 3 en polares.</p>
-        <p class="pstatement">Pones los límites (r de 0 al borde, θ toda la vuelta), metes el jacobiano e integras hasta el número. ¿Cuánto da?</p>
-        <div class="fx" id="p9"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">9π</button>
-          <button class="opt" data-ok="0">6π</button>
-          <button class="opt" data-ok="0">18π</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Con dA = r dr dθ: en r la primitiva r²/2 evaluada en 3 da 9/2; por 2π da <strong>9π</strong>. Sin el factor r saldría 6π (mal); con r² por error, 18π.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P10" data-tema="coordenadas_3d" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">En una integral triple en coordenadas esféricas, ¿cuál es el elemento de volumen correcto?</p>
-        <div class="fx" id="p10"></div>
+      <div class="check challenge" data-kind="item" data-id="M8G" data-tema="coordenadas_3d" data-level="guiado" data-module="8">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>El elemento esférico.</strong> En una integral triple en coordenadas esféricas, ¿cuál es el elemento de volumen correcto?</p>
         <div class="opts">
           <button class="opt" data-ok="1">ρ²·sen φ dρ dφ dθ</button>
           <button class="opt" data-ok="0">ρ·sen φ dρ dφ dθ</button>
-          <button class="opt" data-ok="0">r dz dr dθ (ese es el de cilíndricas)</button>
+          <button class="opt" data-ok="0">r dz dr dθ, que es el de cilíndricas</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>El jacobiano esférico lleva ρ al cuadrado y el seno del ángulo polar φ. El de cilíndricas es solo r.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>El jacobiano esférico es <strong>ρ²·sen φ</strong>. El de cilíndricas es r; no hay que confundirlos.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ El jacobiano esférico lleva ρ al cuadrado y el seno del ángulo polar φ.</p><p class="nudge">✕ El esférico no es el de cilíndricas ni lleva ρ a la primera potencia. Intenta de nuevo.</p></div>
       </div>
-
-      <div class="pitem" data-kind="item" data-id="P11" data-tema="coordenadas_3d" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">En el volumen de la esfera, con φ y θ fijas, el primer factor es la integral interior en ρ que aparece abajo. ¿Cuánto vale?</p>
-        <div class="fx" id="p11"></div>
+      <div class="check challenge" data-kind="item" data-id="M8S" data-tema="coordenadas_3d" data-level="solo" data-module="8">
+        <div class="qtag">Ahora tú · transferencia</div>
+        <p class="q"><strong>Esfera más grande.</strong> Con dV = ρ²·sen φ dρ dφ dθ, el volumen de la esfera de radio 2 (ρ de 0 a 2, φ de 0 a π, θ de 0 a 2π). ¿Cuánto da?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">1/3, porque la primitiva de ρ² es ρ³/3, evaluada de 0 a 1</button>
-          <button class="opt" data-ok="0">1, la función no cambia al integrar</button>
-          <button class="opt" data-ok="0">2, que es el factor de la integral en φ</button>
+          <button class="opt" data-ok="0">16π/3</button>
+          <button class="opt" data-ok="1">32π/3</button>
+          <button class="opt" data-ok="0">8π</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Es una integral de una variable: sube el exponente y divide. La integral de ρ² da ρ³/3.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>La primitiva de ρ² es ρ³/3; entre 0 y 1 da <strong>1/3</strong>. Ese es uno de tres factores; luego se multiplica por el de φ (que da 2) y el de θ (que da 2π).</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ ∫<sub>0</sub><sup>2</sup> ρ² dρ = 8/3, por 2 y por 2π da 32π/3 = (4/3)π·2³.</p><p class="nudge">✕ Separa los tres factores; el de ρ usa ρ³/3 evaluado hasta 2. Intenta de nuevo.</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P12" data-tema="coordenadas_3d" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Quieres el volumen de un cilindro de radio 1 y altura 3 en cilíndricas. ¿Cuál integral lo plantea bien?</p>
-        <div class="fx" id="p12"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">La de r de 0 a 1, z de 0 a 3, θ toda la vuelta, con el factor r</button>
-          <button class="opt" data-ok="0">La misma, pero sin el factor r</button>
-          <button class="opt" data-ok="0">La misma, pero con factor ρ²·sen φ (jacobiano de esféricas)</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>En cilíndricas dV = <strong>r dz dr dθ</strong>. Con r de 0 a 1, z de 0 a 3 y θ de 0 a 2π da 2π·(1/2)·3 = 3π = π·R²·h.</p></div>
-      </div>
+      <section class="finish">
+        <h3>Cierra sin mirar arriba</h3>
+        <p>Explica en voz alta la cadena: integral doble → iterada → Fubini → regiones generales → cambio de orden → polares → triples → cilíndricas y esféricas.</p>
+        <p>Después responde: <strong>¿por qué el cambio de variable necesita el jacobiano?</strong></p>
+        <p class="nota">¿Qué tan segura te sientes planteando y resolviendo integrales múltiples ahora? 1 = nada · 5 = lo domino.</p>
+        <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
+        <button class="btn" id="makeReport">Generar reporte para el tutor</button>
+        <div class="report" id="reportSummary" aria-live="polite"></div>
+      </section>
+
+      <nav class="nav-lecs"><a href="C7_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C7_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
+
+      <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
-
-    <div class="check" data-kind="recall" data-fid="F2_jacobiano_signo" data-tema="cambio_variable">
-      <div class="qtag">Te toca · recuerda</div>
-      <p class="q">Al cambiar de variable en una integral, ¿qué factor se agrega y con qué signo entra?</p>
-      <div class="opts">
-        <button class="opt" data-ok="1">El valor absoluto del jacobiano de la transformación</button>
-        <button class="opt" data-ok="0">El jacobiano tal cual, conservando su signo</button>
-        <button class="opt" data-ok="0">El inverso del jacobiano</button>
-      </div>
-      <div class="why"><span class="lbl">Por qué</span><p>El área (y el volumen) no puede ser negativa, así que va el <strong>valor absoluto</strong> del jacobiano. En polares |r| = r y en esféricas ρ²·sen φ ya son positivos en su rango, por eso se ven sin barras.</p></div>
-    </div>
-
-    <section class="chuleta">
-      <h3>Para memorizar</h3>
-      <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
-      <ul>
-        <li><span class="ck">✓</span> Integral doble = iterada: se resuelve de adentro hacia afuera; la interior trata la otra variable como constante.</li>
-        <li><span class="ck">✓</span> Con f = 1, la doble da el área de la región (y la triple, el volumen).</li>
-        <li><span class="ck">✓</span> Fubini: en un rectángulo puedes elegir el orden; el resultado no cambia.</li>
-        <li><span class="ck">✓</span> Límites: los de afuera SIEMPRE constantes; los de adentro pueden depender de la variable de afuera.</li>
-        <li><span class="ck">✓</span> Tipo I: x por fuera entre constantes, y por dentro entre curvas. Tipo II: al revés.</li>
-        <li><span class="ck">✓</span> Cambiar de orden = pasar de tipo I a tipo II (o al revés): redibujar la región y reescribir los límites; el valor es el mismo.</li>
-        <li><span class="ck">✓</span> Cambio de variable: agrega el valor absoluto del jacobiano. Polares: x = r·cos θ, y = r·sen θ; dA = r dr dθ.</li>
-        <li><span class="ck">✓</span> Cilíndricas: dV = r dz dr dθ. Esféricas: dV = ρ²·sen φ dρ dφ dθ. Esfera de radio R: volumen (4/3)πR³.</li>
-        <li><span class="ck">✓</span> Motor de toda integral entre a y b: halla la antiderivada F y calcula F(b) − F(a) (arriba menos abajo). Potencias: sube el exponente y divide (x → x²/2, ρ² → ρ³/3).</li>
-        <li><span class="ck">✓</span> Trig de memoria: cos 0 = 1, cos π = −1, sen 0 = 0, sen(π/2) = 1; la antiderivada de sen es −cos.</li>
-      </ul>
-    </section>
-
-    <section class="cierre">
-      <h3>¿Cómo te fue?</h3>
-      <p class="nota">Qué tan segura te sientes planteando y resolviendo integrales múltiples ahora. 1 = nada · 5 = lo domino.</p>
-      <div class="escala" id="esc"></div>
-      <div id="reporte"></div>
-      <button class="btn" id="gen">Generar reporte para el tutor</button>
-    </section>
-
-    <nav class="nav-lecs"><a href="C7_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C7_cuadernillo-papel.html"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
-
-    <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 7</p></footer>
 
   </main>
+
+  <footer><p>aprueba<b>.net</b> · Guía de estudio · Cálculo Multivariado · Unidad 7</p></footer>
+
 </div>
 
 <script>
-"use strict";
-
-function mat(rows){
-  var coeffs = rows[0].length - 1;
-  var gtc = 'repeat('+coeffs+',auto) 16px auto';
-  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
-  for(var r=0;r<rows.length;r++){
-    var cells='';
-    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
-    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
-    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
-  }
-  return h+'</div><span class="brk brk-r"></span></div>';
-}
-function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
-
-// ===== datos: fórmulas en bloques .sys (integrales, no matrices) =====
-function fx(id, lines){ var el=document.getElementById(id); if(el){ el.innerHTML='<div class="sys">'+lines.map(function(s){return '<span class="eq">'+s+'</span>';}).join('')+'</div>'; } }
-
-// La idea — definiciones y formas
-fx('ideaDbl',['∬<sub>R</sub> f(x, y) dA']);
-fx('ideaIter',['∫<sub>c</sub><sup>d</sup> ( ∫<sub>a</sub><sup>b</sup> f(x, y) dx ) dy']);
-fx('ideaFubini',['∫<sub>c</sub><sup>d</sup> ∫<sub>a</sub><sup>b</sup> f dx dy  =  ∫<sub>a</sub><sup>b</sup> ∫<sub>c</sub><sup>d</sup> f dy dx']);
-fx('ideaTipo1',['∫<sub>a</sub><sup>b</sup> ∫<sub>g(x)</sub><sup>h(x)</sup> f(x, y) dy dx']);
-fx('ideaTipo2',['∫<sub>c</sub><sup>d</sup> ∫<sub>p(y)</sub><sup>q(y)</sup> f(x, y) dx dy']);
-
-// Motor de la integral 1-var (antiderivar + evaluar entre límites)
-fx('antiRule',['antiderivada de x  →  x²/2','porque la derivada de x²/2 es x']);
-fx('antiEval',['∫<sub>0</sub><sup>2</sup> x dx = [ x²/2 ]<sub>0</sub><sup>2</sup>','= 2²/2 − 0²/2 = 2 − 0 = 2']);
-
-// Polares: triángulo de conversión y arco r·dθ
-fx('polTrig',['cos θ = x / r','sen θ = y / r']);
-fx('arcoDeriv',['arco = (dθ / 2π) · (2π·r) = r·dθ']);
-
-// Yo lo hago — integral doble sobre triángulo (x+y), y:0..x, x:0..1
-fx('e0',['∫<sub>0</sub><sup>1</sup> ∫<sub>0</sub><sup>x</sup> (x + y) dy dx']);
-fx('e1',['∫<sub>0</sub><sup>x</sup> (x + y) dy = [ x·y + y²/2 ]<sub>0</sub><sup>x</sup> = 3x²/2']);
-fx('e2',['∫<sub>0</sub><sup>1</sup> 3x²/2 dx = [ x³/2 ]<sub>0</sub><sup>1</sup> = 1/2']);
-
-// Sube el tamaño — cambio de orden, región entre y=x² y y=x
-fx('t0',['∫<sub>0</sub><sup>1</sup> ∫<sub>x²</sub><sup>x</sup> f(x, y) dy dx']);
-fx('t1',['y = x²  →  x = √y','y = x  →  x = y']);
-fx('t2',['∫<sub>0</sub><sup>1</sup> ∫<sub>y</sub><sup>√y</sup> f(x, y) dx dy']);
-
-// Sube el tamaño — polares, área del disco de radio 1
-fx('polDA',['dA = dx dy = r dr dθ']);
-fx('f0',['∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>1</sup> 1 · r dr dθ']);
-fx('f1',['∫<sub>0</sub><sup>1</sup> r dr = [ r²/2 ]<sub>0</sub><sup>1</sup> = 1/2']);
-fx('f2',['∫<sub>0</sub><sup>2π</sup> (1/2) dθ = (1/2)(2π) = π']);
-
-// Sube el tamaño — 3D: cilíndricas y esféricas
-fx('dV3d',['Cilíndricas:  dV = r dz dr dθ','Esféricas:  dV = ρ²·sen φ dρ dφ dθ']);
-fx('cilEx',['V = ∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>1</sup> ∫<sub>0</sub><sup>2</sup> r dz dr dθ = 2π · (1/2) · 2 = 2π']);
-fx('s0',['V = ∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>π</sup> ∫<sub>0</sub><sup>1</sup> ρ²·sen φ dρ dφ dθ']);
-fx('s1',['∫<sub>0</sub><sup>1</sup> ρ² dρ = [ ρ³/3 ]<sub>0</sub><sup>1</sup> = 1/3']);
-fx('s2',['∫<sub>0</sub><sup>π</sup> sen φ dφ = [ −cos φ ]<sub>0</sub><sup>π</sup> = 2']);
-fx('s3',['V = (1/3)(2) ∫<sub>0</sub><sup>2π</sup> dθ = (1/3)(2)(2π) = 4π/3']);
-
-// práctica
-fx('p2',['∬ 2 dA sobre 0≤x≤1, 0≤y≤3','= 2 · (área) = ?']);
-fx('p3',['∫<sub>0</sub><sup>x</sup> 1 dy = [ y ]<sub>0</sub><sup>x</sup> = ?']);
-fx('p4',['∫<sub>0</sub><sup>2</sup> ∫<sub>0</sub><sup>x</sup> 2x dy dx','interior:  ∫<sub>0</sub><sup>x</sup> 2x dy = ?']);
-fx('p5',['∬ 2x dA  =  ∫<sub>0</sub><sup>2</sup> ( 2x² ) dx = ?']);
-fx('p6',['∫<sub>0</sub><sup>1</sup> ∫<sub>y</sub><sup>1</sup> f(x, y) dx dy','(tipo II:  y por fuera,  x de y a 1)']);
-fx('p8',['Disco r ≤ 2 :  0 ≤ r ≤ 2 ,  0 ≤ θ ≤ 2π','dA = r dr dθ']);
-fx('p9',['Disco r ≤ 3 :  0 ≤ r ≤ 3 ,  0 ≤ θ ≤ 2π','Área = ∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>3</sup> r dr dθ = ?']);
-fx('p10',['dV = ? · dρ dφ dθ']);
-fx('p11',['∫<sub>0</sub><sup>1</sup> ρ² dρ = ?']);
-fx('p12',['Cilindro r ≤ 1 , 0 ≤ z ≤ 3 :  dV = r dz dr dθ']);
-// opciones del cambio de orden (P7)
-fx('p7a',['x: 0 → 1  (afuera)','y: 0 → x  (adentro)']);
-fx('p7b',['x: 0 → 1  (afuera)','y: x → 1  (adentro)']);
-fx('p7c',['y: 0 → 1  (afuera)','x: 0 → y  (adentro)']);
-
-// ===== visual: la iterada barre la región =====
-function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
-var VG='', VA='';
 (function(){
-  for(var g=-1; g<=5; g++){
-    var a=PT(g,-1), b=PT(g,5), c=PT(-1,g), d=PT(5,g);
-    VG+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/>'+'<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';
-  }
-  var x0=PT(-1,0), x1=PT(5,0), y0=PT(0,-1), y1=PT(0,5);
-  VA='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/>'+'<line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';
-})();
-// --- helpers de dibujo de regiones (usan PT del molde) ---
-function poly(pts,fill,stroke){
-  var d=pts.map(function(p){var q=PT(p[0],p[1]);return q[0]+','+q[1];}).join(' ');
-  return '<polygon points="'+d+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="3"/>';
-}
-function vslice(x,y0,y1){
-  var a=PT(x,y0), b=PT(x,y1);
-  return '<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#F5821F" stroke-width="4" stroke-linecap="round"/>'+
-    '<polygon points="'+b[0]+','+(b[1]-2)+' '+(b[0]-5)+','+(b[1]+7)+' '+(b[0]+5)+','+(b[1]+7)+'" fill="#F5821F"/>';
-}
-function drawPlane(cse){
-  var body, cap;
-  if(cse==='rect'){
-    body=poly([[0,0],[2,0],[2,3],[0,3]],'rgba(40,56,145,.10)','#283891')+vslice(1,0,3);
-    cap='Rectángulo: los cuatro límites son números fijos. Fijas una x, sumas a lo largo de la rebanada vertical (de y=0 a y=3), y luego deslizas la rebanada de x=0 a x=2.';
-  } else if(cse==='tipo1'){
-    body=poly([[0,0],[3,0],[3,3]],'rgba(40,56,145,.10)','#283891')+vslice(1.6,0,1.6);
-    cap='Región tipo I (aquí y de 0 a x): la rebanada arranca en y=0 y termina en la recta y=x. Su altura cambia con x, por eso el límite de adentro es una función, no un número.';
-  } else {
-    var pts='', N=48;
-    for(var i=0;i<=N;i++){ var t=2*Math.PI*i/N, q=PT(2*Math.cos(t),2*Math.sin(t)); pts+=q[0]+','+q[1]+' '; }
-    body='<polygon points="'+pts.trim()+'" fill="rgba(40,56,145,.10)" stroke="#283891" stroke-width="3"/>';
-    var o=PT(0,0), edge=PT(2*Math.cos(0.9),2*Math.sin(0.9));
-    body+='<line x1="'+o[0]+'" y1="'+o[1]+'" x2="'+edge[0]+'" y2="'+edge[1]+'" stroke="#F5821F" stroke-width="4" stroke-linecap="round"/>';
-    body+='<circle cx="'+edge[0]+'" cy="'+edge[1]+'" r="4.5" fill="#F5821F"/>';
-    cap='Disco: en polares la rebanada es un radio que va de r=0 al borde, y luego el ángulo θ barre toda la vuelta. El elemento de área es r dr dθ; el factor r es el jacobiano.';
-  }
-  document.getElementById('vizPlane').innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Región de integración en el plano">'+VG+VA+body+'</svg>';
-  document.getElementById('vizCap').textContent=cap;
-}
-document.querySelectorAll('.viz-tab').forEach(function(b){
-  b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawPlane(b.getAttribute('data-case')); };
-});
-(function(){ var f=document.querySelector('.viz-tab'); f.classList.add('active'); drawPlane('rect'); })();
-
-// ===== instrumentación =====
-var session = {
-  fecha:new Date().toISOString().slice(0,10),
-  materia:"calculo", unidad:"U7_integracion", leccion:"C7_integracion",
-  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
-};
-var t0ms = Date.now();
-var TOT_EJ = document.querySelectorAll('[data-kind="item"]').length;
-function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.items.length+"/"+TOT_EJ+" ejercicios"; }
-
-document.querySelectorAll('[data-kind]').forEach(function(block){
-  var kind = block.getAttribute('data-kind');
-  var start = Date.now(), intentos = 0, done = false;
-  var why = block.querySelector('.why');
-  block.querySelectorAll('.opt').forEach(function(b){
-    b.onclick = function(){
-      if(done) return;
-      intentos++;
-      if(b.getAttribute('data-ok')==="1"){
-        done = true; b.classList.add('right');
-        if(why) why.classList.add('show');
-        var pit = block.closest('.pitem'); if(pit) pit.classList.add('solved');
-        if(kind==="recall"){
-          session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:(intentos===1?"de_memoria":"con_pista") });
-        } else {
-          session.items.push({ id:block.getAttribute('data-id'), tema:block.getAttribute('data-tema'),
-            nivel:(block.getAttribute('data-level')||"-"), intentos:intentos, correcto:true, tiempo_s:Math.round((Date.now()-start)/1000) });
-          updateCont();
-        }
-      } else {
-        b.classList.add('wrong'); b.disabled = true;
-        if(why){ why.classList.add('show','miss'); }
-      }
-    };
+  'use strict';
+  var KEY='valentina-calculo-u7-guia-micro';
+  var goals=[
+    'Integral doble: sumar el volumen bajo un terreno con columnitas.',
+    'Integral iterada: resolver de adentro hacia afuera, una variable a la vez.',
+    'Teorema de Fubini: en un rectángulo el orden de integración es libre.',
+    'Regiones generales: poner límites de tipo I y tipo II.',
+    'Cambio de orden: redescribir la misma región al revés.',
+    'Coordenadas polares: cambiar de variable con el jacobiano r.',
+    'Integrales triples: rellenar un sólido con cajitas dV.',
+    'Cilíndricas y esféricas: los dos jacobianos del espacio.'
+  ];
+  var state={current:1,started:new Date().toISOString(),items:{},confidence:null};
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&saved.items){state=saved;}}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  function shuffle(box){var a=Array.prototype.slice.call(box.children);for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}for(var k=0;k<a.length;k++){box.appendChild(a[k]);}}
+  function markDone(){document.querySelectorAll('.step').forEach(function(btn){var m=btn.dataset.go;var cards=document.querySelectorAll('.challenge[data-module="'+m+'"]');var ids=Array.prototype.map.call(cards,function(x){return x.dataset.id;});btn.classList.toggle('is-done',ids.length>0&&ids.every(function(id){return state.items[id]&&state.items[id].correct;}));});}
+  function progress(){var total=document.querySelectorAll('.challenge').length;var done=Object.keys(state.items).filter(function(id){return state.items[id].correct;}).length;return {done:done,total:total};}
+  function go(n){n=Math.max(1,Math.min(8,Number(n)||1));state.current=n;save();
+    document.querySelectorAll('.lesson').forEach(function(x){x.classList.toggle('is-active',Number(x.dataset.step)===n);});
+    document.querySelectorAll('.step').forEach(function(x){x.setAttribute('aria-selected',String(Number(x.dataset.go)===n));});
+    document.getElementById('heroStep').textContent=n;
+    document.getElementById('heroGoal').textContent=goals[n-1];
+    window.scrollTo({top:0,behavior:'smooth'});}
+  document.querySelectorAll('.opts').forEach(shuffle);
+  document.querySelectorAll('.challenge').forEach(function(card){
+    var id=card.dataset.id;var fb=card.querySelector('.fb');var prev=state.items[id];
+    if(prev&&prev.correct){card.querySelectorAll('.opt').forEach(function(b){b.disabled=true;if(b.dataset.ok==='1')b.classList.add('right');});fb.className='fb show ok';}
+    card.querySelectorAll('.opt').forEach(function(btn){btn.addEventListener('click',function(){
+      if(state.items[id]&&state.items[id].correct)return;
+      var rec=state.items[id]||{attempts:0,correct:false,tema:card.dataset.tema,level:card.dataset.level,module:Number(card.dataset.module)};
+      rec.attempts+=1;
+      if(btn.dataset.ok==='1'){rec.correct=true;card.querySelectorAll('.opt').forEach(function(b){b.disabled=true;b.classList.remove('wrong');if(b.dataset.ok==='1')b.classList.add('right');});fb.className='fb show ok';}
+      else{btn.disabled=true;btn.classList.add('wrong');fb.className='fb show no';}
+      state.items[id]=rec;save();markDone();
+    });});
   });
-});
-
-var esc = document.getElementById('esc');
-[1,2,3,4,5].forEach(function(n){
-  var b=document.createElement('button'); b.textContent=n;
-  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
-  esc.appendChild(b);
-});
-
-function buildSummary(){
-  var c=session.items.filter(function(x){return x.correcto;}).length;
-  var trabas=session.items.filter(function(x){return x.intentos>1;}).map(function(x){return x.id;});
-  var rec=session.formulas.map(function(f){return f.id+": "+f.recall;});
-  var s="Resolvió "+c+"/"+TOT_EJ+" ejercicios. ";
-  s+= rec.length? ("Recall de fórmulas → "+rec.join(" · ")+". ") : "No hizo el recall de fórmulas. ";
-  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas. ";
-  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
-  return s;
-}
-document.getElementById('gen').onclick=function(){
-  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
-  session.resumen_legible=buildSummary();
-  var nombre=session.fecha+"_calculo_U7.json";
-  var json=JSON.stringify(session,null,2);
-  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
-  var recPills=session.formulas.map(function(f){return '<span class="pill">'+f.id+": "+f.recall+'</span>';}).join("")||'<span class="nota">— sin recall —</span>';
-  document.getElementById('reporte').innerHTML=
-    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
-    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
-    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT_EJ+'</strong> ejercicios · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
-    '<div>Fórmulas: '+recPills+'</div>'+
-    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
-    '<button class="btn ghost" id="cp">Copiar</button>'+
-    '<textarea id="ta" readonly>'+json+'</textarea>'+
-    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
-    '</div>';
-  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
-  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
-};
-updateCont();
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);});});
+  document.querySelectorAll('[data-next]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.next);});});
+  document.querySelectorAll('[data-prev]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.prev);});});
+  var mix={r:1,dth:0.1};
+  function paintMix(){var arco=(mix.r*mix.dth).toFixed(1);
+    document.getElementById('labArc').textContent='arco ≈ r · dθ = '+mix.r+' · '+mix.dth+' = '+arco;
+    var msg;
+    if(mix.r===1){msg='En el anillo r = 1 es la referencia. Más lejos, el mismo giro barre más arco.';}
+    else{msg='En r = '+mix.r+' el arco es '+mix.r+' veces el de r = 1: el mismo giro recorre más. Por eso entra el factor r.';}
+    document.getElementById('labMsg').textContent=msg;}
+  document.querySelectorAll('.pick').forEach(function(group){group.querySelectorAll('button').forEach(function(btn){btn.addEventListener('click',function(){
+    var key=group.dataset.mix;mix[key]=Number(btn.dataset.value);
+    group.querySelectorAll('button').forEach(function(x){x.classList.toggle('is-on',x===btn);});paintMix();});});});
+  document.querySelectorAll('[data-confidence]').forEach(function(btn){btn.addEventListener('click',function(){
+    state.confidence=Number(btn.dataset.confidence);save();
+    document.querySelectorAll('[data-confidence]').forEach(function(x){x.classList.toggle('sel',x===btn);});});
+    if(state.confidence===Number(btn.dataset.confidence))btn.classList.add('sel');});
+  document.getElementById('makeReport').addEventListener('click',function(){
+    var p=progress();
+    var weak=Object.keys(state.items).filter(function(id){return state.items[id].attempts>1;});
+    var report={fecha:new Date().toISOString().slice(0,10),materia:'calculo_multivariado',unidad:'U7_integracion',leccion:'C7_integracion',inicio:state.started,
+      duracion_min:Math.max(1,Math.round((Date.now()-new Date(state.started).getTime())/60000)),
+      items:Object.keys(state.items).map(function(id){var x=state.items[id];return {id:id,tema:x.tema,nivel:x.level,modulo:x.module,intentos:x.attempts,correcto:x.correct};}),
+      autoconfianza:state.confidence,
+      resumen_legible:'Resolvió '+p.done+'/'+p.total+' actividades. Requirieron más de un intento: '+(weak.length?weak.join(', '):'ninguna')+'. Confianza: '+(state.confidence||'sin registrar')+'/5.'};
+    var blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=report.fecha+'_calculo_U7.json';a.click();URL.revokeObjectURL(url);
+    var box=document.getElementById('reportSummary');box.className='report show';box.innerHTML='<p><strong>Reporte listo.</strong> '+report.resumen_legible+'</p>';});
+  markDone();go(state.current||1);
+})();
 </script>
 </body>
 </html>

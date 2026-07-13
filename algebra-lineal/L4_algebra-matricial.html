@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Álgebra Lineal · U4 — Álgebra matricial: producto, transpuesta e inversa</title>
+<title>Álgebra Lineal · U4 — Álgebra de matrices</title>
 <style>
   :root{
     --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
@@ -32,114 +32,115 @@
   .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
   .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
   .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
-  .learn{margin:22px 0 0;display:grid;gap:10px}
-  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
-  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
-  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
-  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--orange);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+  .today{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;margin-top:20px;padding:13px 16px;background:#fff;border:2px solid var(--ink);border-radius:14px}
+  .today .n{width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;display:grid;place-items:center}
+  .today p{margin:0}
+  .today b{font-weight:800}
+  .today small{display:block;color:var(--muted);font-size:15px}
 
-  main{display:grid;gap:16px;margin-top:22px}
-  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+  .route-label{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep);margin:20px 0 8px}
+  .route{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px}
+  .step{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 7px;background:#fff;border:2px solid var(--ink);border-radius:999px;cursor:pointer;font:inherit;font-weight:700;font-size:15px;color:var(--ink);transition:transform .1s}
+  .step .num{width:26px;height:26px;border-radius:50%;background:#eef1fb;color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:14px}
+  .step:hover{transform:translateY(-1px)}
+  .step[aria-selected="true"]{background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+  .step[aria-selected="true"] .num{background:#fff;color:var(--deep)}
+  .step.is-done{border-color:var(--green-deep)}
+  .step.is-done .num{background:var(--green);color:#fff}
 
-  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
-  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
-  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
-  .idea strong{font-weight:800}
+  main{display:grid;gap:16px;margin-top:6px}
+  .lesson{display:none}
+  .lesson.is-active{display:grid;gap:16px}
+  .lesson-head{margin-top:6px}
+  .micro{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .lesson-head h2{margin:.15em 0 .1em;font-size:clamp(23px,3.6vw,31px);letter-spacing:-.02em}
+  .goal{margin:0;color:var(--muted)}
 
-  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
-  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
-  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
-  .fases li{font-size:17px;line-height:1.5}
-  .fases em{font-style:normal;color:var(--deep);font-weight:700}
-  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
-  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
-  .calc b{color:var(--ink);font-weight:800}
-  .calc .sep{color:#c9c2b6;margin:0 5px}
-  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:22px 22px 24px;display:grid;gap:17px;box-shadow:var(--shadow)}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
+  .idea strong{font-weight:800;color:var(--ink)}
+  .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
+  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
+  .paso{color:var(--muted);font-size:16px}
+  .paso::before{content:"→ ";color:var(--orange);font-weight:800}
+
+  .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums;text-align:center}
   .sys .eq{white-space:nowrap}
-  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
-  .brk{width:10px;border:2.5px solid var(--ink)}
-  .brk-l{border-right:0;border-radius:5px 0 0 5px}
-  .brk-r{border-left:0;border-radius:0 5px 5px 0}
-  .cols{padding:8px 4px}
-  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
-  .mrow>span{text-align:right;min-width:24px}
-  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+  .unknown{color:var(--deep);font-weight:800}
+  .matrix-form{display:flex;align-items:center;gap:14px;justify-content:center;font-size:21px}
+  .matrix{display:grid;grid-template-columns:repeat(2,minmax(26px,auto));gap:8px 16px;padding:6px 12px;border-left:3px solid var(--ink);border-right:3px solid var(--ink)}
+  .matrix.three{grid-template-columns:repeat(3,minmax(26px,auto))}
+  .matrix span{display:grid;place-items:center;min-height:30px;padding:0 4px;border-radius:6px}
+  .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
+  .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
+
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+
+  .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
+  .visual svg{display:block;width:100%;height:auto}
+  .visual figcaption{margin-top:8px;color:var(--muted);font-size:15px;text-align:center}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;color:var(--slate);font-size:15px}
+  .dot{display:inline-block;width:11px;height:11px;margin-right:5px;border-radius:50%;background:var(--orange)}
+  .dot.green{background:var(--green-deep)}
+
+  .criteria{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .criterion{padding:12px 10px;background:#fff;border:2px solid var(--ink);border-radius:12px;text-align:center;font-weight:700;font-size:15px;line-height:1.35}
+  .criterion b{display:block;color:var(--deep);font-size:24px}
+
+  .mixlab{display:grid;gap:14px;padding:16px;border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9}
+  .mix-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .recipe{padding:12px;border:1.5px solid var(--line);border-radius:12px;background:#fff}
+  .recipe h4{margin:0 0 2px;font-size:17px}
+  .recipe p{margin:0 0 10px;font-size:15px;color:var(--muted)}
+  .pick{display:flex;flex-wrap:wrap;gap:7px}
+  .pick button{font:inherit;font-size:15px;font-weight:700;padding:8px 11px;background:#fff;border:2px solid var(--line);border-radius:9px;cursor:pointer}
+  .pick button:hover{border-color:var(--orange)}
+  .pick button.is-on{background:var(--orange);border-color:var(--ink);color:#fff}
+  .mix-result{padding:12px;background:var(--cream);border:1.5px solid var(--line);border-radius:12px;text-align:center}
+  .mix-result p{margin:0;font-size:15px;color:var(--slate)}
+  .mix-result strong{display:block;font-size:21px;color:var(--ink)}
 
   .check{display:grid;gap:11px;padding:16px 18px;border:1.5px solid #cfd6f2;border-radius:12px;background:#eef1fb}
-  .check .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
-  .check .qtag::before{content:"✎ "}
-  .check .q{margin:0;font-weight:700;font-size:17px}
-
+  .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .qtag::before{content:"✎ "}
+  .q{margin:0;font-size:17px}
+  .q strong{font-weight:800}
   .opts{display:grid;gap:10px}
-  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s;min-width:0;overflow-wrap:anywhere}
   .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
-  .opt:disabled{cursor:default}
+  .opt:disabled{cursor:default;transform:none}
   .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
   .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .fb{display:none;border:1.5px solid;border-radius:10px;padding:11px 14px;font-size:17px}
+  .fb.show{display:block}
+  .fb.ok{border-color:#bfe6cd;background:#eef7f0}
+  .fb.no{border-color:#f0d6b8;background:#fdf3ea}
+  .fb p{margin:0}
+  .fb .okc,.fb .nudge{display:none}
+  .fb.ok .okc{display:block}
+  .fb.no .nudge{display:block}
 
-  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
-  .why.show{display:block}
-  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
-  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
-  .why.miss>.lbl{color:var(--deep)}
-  .why p{margin:0}
-
-  .ejemplo{border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9;padding:18px 20px;display:grid;gap:14px}
-  .estep{display:grid;gap:8px}
-  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--deep);font-size:16px;background:var(--cream);border:1px solid #f0d6b8;border-radius:8px;padding:5px 12px;justify-self:start}
-  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
-
-  .practice{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
-  .practice .phead h3{margin:0;font-size:19px}
-  .practice .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
-  .pitem{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff;transition:border-color .2s,background .2s}
-  .pitem.solved{border-color:var(--green);background:#f3faf5}
-  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
-  .lvl.guiado{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
-  .lvl.juntos{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
-  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
-  .pstatement{margin:0;font-size:17px}
-  .aux summary{cursor:pointer;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;list-style:none;width:max-content;font-size:15px}
-  .aux summary::-webkit-details-marker{display:none}
-  .aux summary:hover{border-color:var(--navy);background:#f7f8fc}
-  .aux details[open] summary{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
-  .aux p{margin:8px 2px 0;font-size:16px;color:var(--slate)}
-
-  .viz{display:grid;gap:12px}
-  .viz-tabs{display:flex;gap:8px;flex-wrap:wrap}
-  .viz-tab{font:inherit;font-weight:700;font-size:15px;padding:9px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
-  .viz-tab:hover{border-color:var(--orange);transform:translateY(-1px)}
-  .viz-tab.active{border-color:var(--ink);background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
-  .viz-plane{padding:10px}
-  .viz-plane svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
-  .viz-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--slate)}
-  .viz-legend span{display:inline-flex;align-items:center;gap:7px}
-  .viz-legend i{width:18px;height:4px;border-radius:2px;display:inline-block}
-  .viz-cap{margin:0;font-size:17px;color:var(--slate);min-height:1.6em}
-
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
-
-  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
-  .cierre h3{margin:0;font-size:19px}
-  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
-  .escala button:hover{border-color:var(--orange)}
-  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
-  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .lesson-nav{display:flex;justify-content:space-between;gap:12px;margin-top:4px}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:12px 20px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;text-decoration:none;display:inline-block}
   .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
   .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
-  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
-  .nota{font-size:15px;color:var(--muted);margin-top:8px}
-  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
-  .cont{font-size:14px;color:var(--muted);font-weight:700}
-  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
+
+  .finish{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow);padding:20px 22px}
+  .finish h3{margin:0;font-size:19px}
+  .finish p{margin:0}
+  .nota{font-size:15px;color:var(--muted)}
+  .escala{display:flex;gap:10px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:52px;padding:13px 0;font-size:19px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .report{display:none;padding:13px 15px;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:12px}
+  .report.show{display:block}
+  .report p{margin:0}
+
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:10px}
   .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
@@ -150,18 +151,18 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*aire-matematico*/
-  .sec{gap:16px}
+  .sec{gap:17px}
   .idea{line-height:1.72}
-  .fx{margin:4px 0;justify-self:center}
-  .fases{gap:9px;margin:2px 0}
-  .ejemplo{gap:16px}
+  .fx{margin:8px 0;justify-self:center}
+  .visual{margin:6px 0}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
-  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  main,.lesson.is-active,.sec,.check,.opts,.finish{grid-template-columns:minmax(0,1fr)}
+  .sec,.check,.opts,.opt,.fx,.sys,.visual,.mixlab,.mix-grid,.criteria,.finish{min-width:0}
+  .fx,.sys,.visual,.mixlab{max-width:100%}
+  .idea,.q,.opt{overflow-wrap:anywhere}
+  @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
+  @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -175,862 +176,581 @@
 
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 4</p>
-    <h1>El álgebra <mark>matricial</mark>: producto, transpuesta e inversa</h1>
-    <p class="lead">El tema completo, de principio a fin. Aquí no se adivina: se recuerda la regla y se razona el paso. Todo a mano, sin calculadora.</p>
-    <div class="learn">
-      <h2>Al terminar vas a poder</h2>
-      <ol>
-        <li><span class="n">1</span> Multiplicar dos matrices renglón por columna</li>
-        <li><span class="n">2</span> Saber cuándo el producto está definido</li>
-        <li><span class="n">3</span> Calcular la transpuesta y usar sus reglas</li>
-        <li><span class="n">4</span> Reconocer la matriz identidad y qué hace</li>
-        <li><span class="n">5</span> Invertir una matriz por Gauss-Jordan</li>
-        <li><span class="n">6</span> Decidir cuándo existe la inversa</li>
-      </ol>
+    <h1>Operar <mark>tablas enteras</mark> como si fueran números</h1>
+    <p class="lead">Una idea a la vez, sabiendo siempre a dónde vas: cada lección anuncia su concepto del temario y te lleva de la cuenta de la caja hasta su definición formal.</p>
+    <div class="today">
+      <span class="n" id="heroStep">1</span>
+      <p><b id="heroGoal">La matriz: leer tamaño y casillas sin confundir el orden.</b><small>Avanza con libertad. Un error nunca bloquea el siguiente paso.</small></p>
     </div>
   </header>
 
+  <p class="route-label">Tu ruta · ocho ideas breves</p>
+  <nav class="route" role="tablist" aria-label="Ruta de microlecciones">
+    <button class="step" role="tab" data-go="1" aria-selected="true"><span class="num">1</span>Matriz</button>
+    <button class="step" role="tab" data-go="2" aria-selected="false"><span class="num">2</span>Suma y escalar</button>
+    <button class="step" role="tab" data-go="3" aria-selected="false"><span class="num">3</span>Producto</button>
+    <button class="step" role="tab" data-go="4" aria-selected="false"><span class="num">4</span>Propiedades</button>
+    <button class="step" role="tab" data-go="5" aria-selected="false"><span class="num">5</span>Transpuesta</button>
+    <button class="step" role="tab" data-go="6" aria-selected="false"><span class="num">6</span>Identidad e inversa</button>
+    <button class="step" role="tab" data-go="7" aria-selected="false"><span class="num">7</span>Gauss-Jordan</button>
+    <button class="step" role="tab" data-go="8" aria-selected="false"><span class="num">8</span>Matrices elementales</button>
+  </nav>
+
   <main>
 
-    <h2 class="modhead">Empecemos por un problema</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Una tienda vende dos combos:</p>
-      <ul class="fases">
-        <li>el <strong>combo A</strong> lleva <strong>2 cafés y 1 pan</strong>,</li>
-        <li>el <strong>combo B</strong> lleva <strong>1 café y 3 panes</strong>.</li>
-      </ul>
-      <p class="idea" style="font-size:17px">Un café cuesta $30 y un pan $20.</p>
-      <p class="idea" style="font-size:17px">Quieres el precio de cada combo. Y luego, al revés: dado el precio, ¿puedes <strong>deshacer</strong> la cuenta y recuperar cuántos cafés y panes había?</p>
-      <p class="idea" style="font-size:17px">Estas dos cajas con corchetes son solo <strong>tablas de números</strong>: una guarda las recetas, la otra los precios.</p>
-      <div class="fx" id="prob0"></div>
-      <p class="idea" style="font-size:17px">En esta guía vas a operar tablas enteras como si fueran números:</p>
-      <ul class="fases">
-        <li><strong>multiplicarlas</strong>, para sacar los dos precios de un golpe,</li>
-        <li><strong>voltearlas</strong>,</li>
-        <li>y construir la tabla que <strong>deshace</strong> una cuenta.</li>
-      </ul>
-      <p class="idea" style="font-size:17px">Todo a mano, <strong>sin calculadora</strong>.</p>
-    </section>
-
-    <h2 class="modhead">La idea · empecemos por lo más simple</h2>
-
-    <section class="sec">
-      <h3>1 · Una matriz es una tabla</h3>
-      <p class="idea">Una <strong>matriz</strong> es lo que acabas de ver: una <strong>tabla de números</strong> en renglones y columnas.</p>
-      <p class="idea">En la tabla de la tienda, cada <strong>renglón</strong> es un combo y cada <strong>columna</strong> un ingrediente.</p>
-      <p class="idea">Ya usaste una en la Unidad 1: la matriz aumentada era la tabla de un sistema. Ahora la tabla es la protagonista.</p>
-      <p class="idea">El <strong>tamaño</strong> se dice siempre en este orden:</p>
-      <div class="fx"><div class="sys"><span class="eq">tamaño = renglones × columnas</span></div></div>
-      <p class="idea">La tabla de recetas tiene 2 renglones y 2 columnas: es de <strong>2×2</strong>.</p>
-      <p class="idea">Una de 2×3 no es lo mismo que una de 3×2 — como 2 combos de 3 ingredientes no es lo mismo que 3 combos de 2.</p>
-      <p class="idea">Y cada casilla tiene su dirección, como un asiento de cine: <strong>primero la fila, luego el lugar</strong>.</p>
-      <p class="idea">La casilla de la fila 1, columna 2 se abrevia <strong>a<sub>12</sub></strong>: la letra nombra la matriz; los dos numeritos de abajo dicen fila y columna.</p>
-      <p class="idea">En la tabla de recetas:</p>
-      <div class="fx"><div class="sys"><span class="eq">a<sub>12</sub> = 1</span></div></div>
-      <p class="idea">Ese 1 es el pan del combo A.</p>
-      <div class="check" data-kind="item" data-id="TABchk" data-tema="lectura_matriz" data-level="guiado">
-        <div class="qtag">Te toca · lee la tabla</div>
-        <p class="q">En una matriz A, ¿qué número es <strong>a<sub>23</sub></strong>?</p>
+    <section class="lesson is-active" data-step="1">
+      <header class="lesson-head"><p class="micro">Microlección 1 de 8 · Tema: La matriz y sus entradas</p><h2>La matriz: una tabla con dirección</h2><p class="goal">Meta: localizar cualquier casilla a<sub>ij</sub> sin confundir fila y columna.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy conoces a la protagonista de toda la unidad: la <strong>matriz</strong>.</p>
+        <p class="idea">La palabra impone, pero el objeto ya lo usaste en la Unidad 1: la matriz aumentada era la tabla de un sistema. Ahora la tabla es la protagonista.</p>
+        <p class="idea">Mira una recién salida de la vida real. Una tienda vende dos combos: el <strong>combo A</strong> lleva 2 cafés y 1 pan; el <strong>combo B</strong>, 1 café y 3 panes.</p>
+        <p class="idea">Acomodado en tabla — cada renglón un combo, cada columna un ingrediente — queda así:</p>
+        <div class="fx"><div class="matrix-form"><span>Recetas =</span><span class="matrix" aria-label="Matriz de recetas con renglones 2 1 y 1 3"><span>2</span><span>1</span><span>1</span><span>3</span></span></div></div>
+        <p class="idea">Eso es una matriz. Su <strong>tamaño</strong> se dice siempre en el mismo orden:</p>
+        <div class="fx"><div class="sys"><span class="eq">tamaño = renglones × columnas</span></div></div>
+        <p class="idea">La de recetas tiene 2 renglones y 2 columnas: es de <strong>2×2</strong>. Y una de 2×3 no es lo mismo que una de 3×2 — como 2 combos de 3 ingredientes no es lo mismo que 3 combos de 2.</p>
+        <p class="idea">Además, cada casilla tiene su dirección, como un asiento de cine: primero la fila, luego el lugar.</p>
+        <figure class="visual">
+          <svg viewBox="0 0 560 260" role="img" aria-label="La tabla de recetas con la casilla a sub 1 2 señalada">
+            <text x="255" y="62" text-anchor="middle" font-size="15" font-weight="800" fill="#475569">CAFÉ</text>
+            <text x="385" y="62" text-anchor="middle" font-size="15" font-weight="800" fill="#475569">PAN</text>
+            <text x="145" y="122" text-anchor="end" font-size="15" font-weight="800" fill="#475569">COMBO A</text>
+            <text x="145" y="197" text-anchor="end" font-size="15" font-weight="800" fill="#475569">COMBO B</text>
+            <rect x="210" y="88" width="90" height="56" rx="10" fill="white" stroke="#181B22" stroke-width="2.5"/>
+            <text x="255" y="124" text-anchor="middle" font-size="24" font-weight="800" fill="#181B22">2</text>
+            <rect x="340" y="88" width="90" height="56" rx="10" fill="#FFF3E7" stroke="#F5821F" stroke-width="3"/>
+            <text x="385" y="124" text-anchor="middle" font-size="24" font-weight="800" fill="#C75D08">1</text>
+            <rect x="210" y="163" width="90" height="56" rx="10" fill="white" stroke="#181B22" stroke-width="2.5"/>
+            <text x="255" y="199" text-anchor="middle" font-size="24" font-weight="800" fill="#181B22">1</text>
+            <rect x="340" y="163" width="90" height="56" rx="10" fill="white" stroke="#181B22" stroke-width="2.5"/>
+            <text x="385" y="199" text-anchor="middle" font-size="24" font-weight="800" fill="#181B22">3</text>
+            <text x="470" y="105" font-size="20" font-weight="800" fill="#C75D08">a₁₂</text>
+            <path d="M468 112 L438 116" stroke="#C75D08" stroke-width="2.5" fill="none"/>
+            <text x="452" y="140" font-size="14" fill="#475569">fila 1,</text>
+            <text x="452" y="158" font-size="14" fill="#475569">columna 2</text>
+          </svg>
+          <figcaption>La casilla señalada vive en la fila 1, columna 2: es el pan del combo A.</figcaption>
+        </figure>
+        <p class="idea key">La casilla de la fila i, columna j se abrevia <strong>a<sub>ij</sub></strong>: fila primero, columna después. En la tabla de recetas, a<sub>12</sub> = 1.</p>
+        <p class="idea">Y con esto ya llegaste: una tabla de números donde cada casilla tiene dirección. Tu curso la enuncia así:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>Una <strong>matriz</strong> A de m×n es un arreglo rectangular de números con m renglones y n columnas; la entrada del renglón i y la columna j se denota a<sub>ij</sub>.</p>
+        <p class="idea">Léela con lo que ya tienes: m×n es «renglones × columnas», y a<sub>ij</sub> es tu asiento de cine. La de recetas es de 2×2, con a<sub>12</sub> = 1.</p>
+        <p class="idea">Cuando renglones y columnas empatan, la matriz gana un apellido que usaremos toda la unidad:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 4.1</span>Una matriz es <strong>cuadrada</strong> si tiene el mismo número de renglones y columnas. Es decir, si n = m.</p>
+        <p class="idea">La de recetas es cuadrada: 2 = 2. Guarda ese apellido — más adelante verás que solo las cuadradas pueden aspirar a inversa.</p>
+        <p class="idea paso">Asegura la lectura con los dos retos. Y en cuanto la tengas, les damos vida a estas tablas: se suman y se estiran igual que los números.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M1G" data-tema="lectura_matriz" data-level="guiado" data-module="1">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Lee la dirección.</strong> En la tabla de recetas, ¿qué guarda la casilla a<sub>12</sub>?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">El de la fila 2, columna 3: fila primero, columna después</button>
-          <button class="opt" data-ok="0">El de la columna 2, fila 3: columna primero, fila después</button>
-          <button class="opt" data-ok="0">El resultado de multiplicar 2 por 3</button>
+          <button class="opt" data-ok="1">El 1 de la fila 1, columna 2: el pan del combo A</button>
+          <button class="opt" data-ok="0">El 1 de la fila 2, columna 1: el café del combo B</button>
+          <button class="opt" data-ok="0">El 2, porque es el primer número de la tabla</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Los numeritos de abajo se leen siempre en el mismo orden: <strong>fila, luego columna</strong>. a<sub>23</sub> vive en el renglón 2, columna 3 — como buscar un asiento: fila 2, lugar 3.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Fila primero, columna después: renglón 1, columna 2 — el pan del combo A.</p><p class="nudge">✕ Los numeritos de abajo se leen en orden fijo: primero la fila, luego la columna. Intenta de nuevo.</p></div>
       </div>
-    </section>
-
-    <section class="sec">
-      <h3>2 · El costo de un combo: multiplica y suma</h3>
-      <p class="idea">Olvida las matrices un momento y saca el precio del combo A como lo harías en la caja. Lleva 2 cafés de $30 y 1 pan de $20.</p>
-      <p class="idea">¿Qué haces? <strong>Multiplicas cada cantidad por su precio, y sumas todo</strong>:</p>
-      <div class="fx"><div class="sys"><span class="eq">2·30 + 1·20</span><span class="eq">= 60 + 20</span><span class="eq">= 80</span></div></div>
-      <p class="idea">El combo A cuesta <strong>$80</strong>.</p>
-      <p class="idea">Ahora fíjate de dónde salió cada número:</p>
-      <ul class="fases">
-        <li>las cantidades (2 y 1) son el <strong>renglón</strong> del combo A en la tabla de recetas,</li>
-        <li>los precios (30 y 20) son la <strong>columna</strong> de precios.</li>
-      </ul>
-      <p class="idea">La cuenta completa fue: <strong>un renglón contra una columna — multiplicar en pares y sumar</strong>.</p>
-      <p class="idea">Y cada cantidad se emparejó con SU precio: los cafés con el precio del café, los panes con el del pan. Nunca cruzado.</p>
-      <p class="idea">Esa cuenta de caja es el corazón de toda la unidad. Hazla tú con el otro combo:</p>
-      <div class="check" data-kind="item" data-id="COSTchk" data-tema="producto_matrices" data-level="guiado">
-        <div class="qtag">Te toca · saca la cuenta</div>
-        <p class="q">El combo B lleva <strong>1 café</strong> ($30) y <strong>3 panes</strong> ($20). ¿Cuánto cuesta?</p>
+      <div class="check challenge" data-kind="item" data-id="M1S" data-tema="lectura_matriz" data-level="solo" data-module="1">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Cambia los datos.</strong> Una tabla tiene 4 renglones y 4 columnas. ¿Cómo la describes?</p>
         <div class="opts">
-          <button class="opt" data-ok="0">30 + 20 = $50: sumo los precios y ya</button>
-          <button class="opt" data-ok="1">1·30 + 3·20 = 30 + 60 = $90</button>
-          <button class="opt" data-ok="0">1·20 + 3·30 = 20 + 90 = $110</button>
+          <button class="opt" data-ok="1">Es de 4×4 y además cuadrada: renglones y columnas empatan</button>
+          <button class="opt" data-ok="0">Es de 4×4, pero cuadrada solo si sus números se repiten</button>
+          <button class="opt" data-ok="0">Es de 8×8, porque filas y columnas se suman</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Renglón del combo B = (1, 3); columna de precios = (30, 20). En pares: el 1 va con el 30 (cafés con precio de café) y el 3 con el 20 (panes con precio de pan). Suma: 30 + 60 = 90. La opción de $110 empareja cruzado — el error clásico — y la de $50 olvida multiplicar por las cantidades.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Tamaño 4×4, y como 4 = 4, es cuadrada. Los números de adentro no importan para eso.</p><p class="nudge">✕ El tamaño se escribe renglones × columnas, y «cuadrada» solo compara esos dos números. Intenta de nuevo.</p></div>
       </div>
+      <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>3 · Ahora sí: el producto de matrices</h3>
-      <p class="idea">¿Y si la tienda abre una sucursal con otros precios? Entonces habría <strong>dos</strong> columnas de precios, una por sucursal.</p>
-      <p class="idea">Y querrías una tabla nueva de costos: cada combo en cada sucursal.</p>
-      <p class="idea">Cada casilla de esa tabla sale de <strong>una cuenta de caja</strong>: el renglón de su combo contra la columna de precios de su sucursal.</p>
-      <p class="idea">A hacer todas esas cuentas de un jalón y acomodarlas en una tabla se le llama <strong>producto de matrices</strong>, y se escribe <strong>A·B</strong>:</p>
-      <ul class="fases">
-        <li><em>A</em> es la de la izquierda: pone los renglones,</li>
-        <li><em>B</em> es la de la derecha: pone las columnas.</li>
-      </ul>
-      <p class="idea">La regla: <strong>cada casilla del resultado empareja un renglón de A con una columna de B</strong> — multiplicar en pares y sumar, igual que en la caja.</p>
-      <p class="idea">Por eso se dice que el producto es <strong>renglón por columna</strong>: nunca una casilla contra otra casilla.</p>
-      <p class="idea">Míralo con puros números. La casilla de arriba a la izquierda usa el renglón 1 de la izquierda, (1, 2, 0), y la columna 1 de la derecha, (2, 0, 4):</p>
-      <div class="fx" id="prodA"></div>
-      <p class="fx-note">Para la casilla de arriba a la izquierda: primer renglón de la primera contra primera columna de la segunda.</p>
-      <div class="fx"><div class="sys"><span class="eq">1·2 + 2·0 + 0·4</span><span class="eq">= 2 + 0 + 0</span><span class="eq">= 2</span></div></div>
-      <p class="idea">Multiplicar en pares y sumar — idéntico a la caja.</p>
-      <p class="idea">Y así una casilla a la vez, cada una con su propio renglón y su propia columna.</p>
-      <div class="check" data-kind="item" data-id="PRODchk" data-tema="producto_matrices" data-level="guiado">
-        <div class="qtag">Te toca · reconoce</div>
-        <p class="q">Para la casilla de arriba a la <strong>derecha</strong> del resultado, ¿qué renglón y qué columna emparejas?</p>
+    <section class="lesson" data-step="2">
+      <header class="lesson-head"><p class="micro">Microlección 2 de 8 · Tema: Suma y multiplicación por escalar</p><h2>Suma y escalar: casilla por casilla</h2><p class="goal">Meta: sumar dos matrices y multiplicar una por un escalar.</p></header>
+      <div class="sec">
+        <p class="idea lede">Ya lees matrices. Hoy les das sus dos primeras operaciones: la <strong>suma</strong> y la <strong>multiplicación por escalar</strong>.</p>
+        <p class="idea">Las dos son de buenas: trabajan casilla por casilla, sin sorpresas.</p>
+        <p class="idea">La tienda apunta cuántos combos vendió — cada renglón un combo, cada columna una sucursal. El lunes vendió L; el martes, M:</p>
+        <div class="fx"><div class="matrix-form"><span>L =</span><span class="matrix" aria-label="Ventas del lunes: renglones 3 2 y 1 4"><span>3</span><span>2</span><span>1</span><span>4</span></span><span>M =</span><span class="matrix" aria-label="Ventas del martes: renglones 2 1 y 0 3"><span>2</span><span>1</span><span>0</span><span>3</span></span></div></div>
+        <p class="idea">¿El total de los dos días? Cada casilla se suma con su gemela — la de su misma fila y su misma columna:</p>
+        <div class="fx"><div class="matrix-form"><span>L + M =</span><span class="matrix" aria-label="Total: renglones 5 3 y 1 7"><span>5</span><span>3</span><span>1</span><span>7</span></span></div></div>
+        <p class="idea">Léelo de vuelta: el 5 de arriba a la izquierda es 3 + 2, y el 7 de abajo a la derecha es 4 + 3. Ninguna casilla se metió con otra que no fuera su gemela.</p>
+        <p class="idea">Eso sí: para tener gemela, las dos tablas deben ser del <strong>mismo tamaño</strong>. Una 2×2 con una 2×3 no se puede sumar.</p>
+        <p class="idea">La segunda operación es estirar. Si el miércoles se planea vender el doble del lunes, multiplicas la tabla por 2 — y el 2 entra a todas las casillas:</p>
+        <div class="fx"><div class="matrix-form"><span>2·L =</span><span class="matrix" aria-label="El doble del lunes: renglones 6 4 y 2 8"><span>6</span><span>4</span><span>2</span><span>8</span></span></div></div>
+        <p class="idea key">Suma y escalar operan casilla por casilla: nada se cruza, nada cambia de lugar.</p>
+        <p class="idea">Y con esto ya llegaste. Tu curso escribe la primera así:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 4.4</span>Sean A = (a<sub>ij</sub>) y B = (b<sub>ij</sub>) matrices de m×n. La <strong>suma</strong> A + B = (c<sub>ij</sub>) es tal que c<sub>ij</sub> = a<sub>ij</sub> + b<sub>ij</sub> para todo i, j.</p>
+        <p class="idea">Tradúcela: c<sub>ij</sub> = a<sub>ij</sub> + b<sub>ij</sub> dice «cada casilla del total es la casilla del lunes más su gemela del martes». Y el «de m×n» repetido es el requisito del mismo tamaño.</p>
+        <p class="idea">La segunda es igual de directa:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 4.5</span>Sea A = (a<sub>ij</sub>) una matriz y r ∈ R. El <strong>múltiplo escalar</strong> r·A = (b<sub>ij</sub>) es tal que b<sub>ij</sub> = r·a<sub>ij</sub>.</p>
+        <p class="idea">El r — el <strong>escalar</strong>, un número suelto — entra a cada casilla. Tu 2·L, en símbolos.</p>
+        <p class="idea paso">Dos retos para fijarlo.</p>
+        <p class="idea paso">Y una advertencia para la siguiente: multiplicar una matriz <strong>por otra matriz</strong> no funciona casilla por casilla. Tiene jugada propia — la reina del examen.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M2G" data-tema="suma_escalar" data-level="guiado" data-module="2">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Suma gemelas.</strong> En el total L + M de arriba, ¿cuánto vale la casilla de la fila 2, columna 2?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Renglón 1 de la izquierda con columna 2 de la derecha</button>
-          <button class="opt" data-ok="0">Renglón 2 de la izquierda con columna 1 de la derecha</button>
-          <button class="opt" data-ok="0">Renglón 1 de la izquierda con renglón 1 de la derecha</button>
+          <button class="opt" data-ok="1">4 + 3 = 7</button>
+          <button class="opt" data-ok="0">4 + 3 + 2 + 1 = 10</button>
+          <button class="opt" data-ok="0">4 − 3 = 1</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La casilla de fila <em>i</em>, columna <em>j</em> siempre usa el <strong>renglón i</strong> de la izquierda y la <strong>columna j</strong> de la derecha. Arriba a la derecha es fila 1, columna 2.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Casilla con su gemela y nada más: 4 del lunes más 3 del martes.</p><p class="nudge">✕ Busca la fila 2, columna 2 en cada tabla y suma solo esas dos casillas. Intenta de nuevo.</p></div>
       </div>
-    </section>
-
-    <section class="sec">
-      <h3>4 · Cuándo el producto está definido</h3>
-      <p class="idea">La cuenta de la caja tiene un requisito escondido.</p>
-      <p class="idea">Si el combo lleva 3 ingredientes, la lista de precios debe traer <strong>3 precios</strong> — ni uno más, ni uno menos —, porque cada cantidad se empareja con el suyo.</p>
-      <p class="idea">Con matrices es igual: para hacer renglón por columna, el renglón de la izquierda y la columna de la derecha deben tener <strong>la misma cantidad de números</strong>.</p>
-      <p class="idea">Si no, no hay forma de emparejar, y el producto no se puede hacer.</p>
-      <p class="idea">¿Cómo checarlo rápido?</p>
-      <ul class="fases">
-        <li>El renglón de la izquierda tiene tantos números como <strong>columnas</strong> tiene su matriz.</li>
-        <li>La columna de la derecha, tantos como <strong>renglones</strong> tiene la suya.</li>
-      </ul>
-      <p class="idea">Así que escribe los dos tamaños seguidos:</p>
-      <div class="fx"><div class="sys"><span class="eq">2×3 por 3×2</span></div></div>
-      <p class="idea">Y lee dos cosas:</p>
-      <ul class="fases">
-        <li>los <strong>números de en medio</strong>: si coinciden, el producto existe;</li>
-        <li>los <strong>de los extremos</strong>: te dicen de qué tamaño queda el resultado.</li>
-      </ul>
-      <div class="viz">
-        <div class="viz-plane fx" id="dimViz"></div>
-        <p class="viz-cap" id="dimCap">Una de 2×3 por una de 3×2: los treses de en medio coinciden, así que el producto existe y mide 2×2.</p>
-      </div>
-      <p class="fx-note">Si los números de en medio no coinciden, el producto ni siquiera existe.</p>
-      <div class="check" data-kind="item" data-id="DIMchk" data-tema="dimensiones" data-level="guiado">
-        <div class="qtag">Te toca · decide</div>
-        <p class="q">Quieres multiplicar una de <strong>4×2</strong> por una de <strong>3×5</strong>, en ese orden. ¿Se puede?</p>
+      <div class="check challenge" data-kind="item" data-id="M2S" data-tema="suma_escalar" data-level="solo" data-module="2">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Estira una tabla.</strong> Con C = renglones (5, 2) y (0, 4), ¿cuánto vale 2·C?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">No: los de en medio son 2 y 3, no coinciden</button>
-          <button class="opt" data-ok="0">Sí, y mide 4×5</button>
-          <button class="opt" data-ok="0">Sí, y mide 2×3</button>
+          <button class="opt" data-ok="1">Renglones (10, 4) y (0, 8)</button>
+          <button class="opt" data-ok="0">Renglones (7, 4) y (2, 6)</button>
+          <button class="opt" data-ok="0">Renglones (10, 2) y (0, 8)</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Los números de en medio son <strong>2</strong> (de la primera) y <strong>3</strong> (de la segunda). Como no son iguales, no hay forma de emparejar renglón con columna: el producto no existe.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ El 2 entra a las cuatro casillas: 10, 4, 0 y 8.</p><p class="nudge">✕ Multiplicar por escalar no es sumar 2: es multiplicar cada casilla por 2, sin saltarse ninguna. Intenta de nuevo.</p></div>
       </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>5 · El orden importa</h3>
-      <p class="idea">Con números sueltos, multiplicar es de buenas:</p>
-      <div class="fx"><div class="sys"><span class="eq">3·5 = 5·3</span></div></div>
-      <p class="idea">El orden da igual. Con matrices <strong>no</strong>, y conviene entender por qué antes de memorizarlo.</p>
-      <p class="idea">Piensa en vestirte: ponerte calcetines y luego zapatos no es lo mismo que ponerte zapatos y luego calcetines.</p>
-      <p class="idea">Cuando cada paso <strong>transforma</strong> lo que recibe, el orden de los pasos cambia el resultado.</p>
-      <p class="idea">Y multiplicar por una matriz es eso: una acción completa sobre lo que le des — no un numerito suelto.</p>
-      <p class="idea">En la tienda ya se ve:</p>
-      <ul class="fases">
-        <li><em>recetas·precios</em> se puede: 2×2 por 2×1, los de en medio son 2 y 2;</li>
-        <li><em>precios·recetas</em> ni siquiera se puede armar: sería 2×1 por 2×2, y en medio quedan un 1 y un 2 que no coinciden.</li>
-      </ul>
-      <p class="idea">Y aun cuando los dos órdenes existen, casi nunca dan lo mismo.</p>
-      <p class="idea">Compruébalo con una sola casilla. Toma estas A y B:</p>
-      <div class="fx" id="ordAB"></div>
-      <p class="idea">Calcula solo la esquina de arriba a la izquierda en cada orden:</p>
-      <div class="fx"><div class="sys"><span class="eq">A·B: c<sub>11</sub> = 1·1 + 1·1 = 2</span><span class="eq">B·A: c<sub>11</sub> = 1·1 + 0·0 = 1</span></div></div>
-      <p class="idea">Misma pareja, distinto orden — y ya la primera casilla salió diferente. Por eso siempre se dice <strong>quién va primero</strong>.</p>
-      <div class="check" data-kind="recall" data-fid="F1_conmutatividad" data-tema="producto_matrices">
-        <div class="qtag">Te toca · recuerda</div>
-        <p class="q">Con matrices, ¿el orden en que multiplicas importa?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Sí importa: en general A por B no es igual a B por A</button>
-          <button class="opt" data-ok="0">No importa: A por B siempre es igual a B por A</button>
-          <button class="opt" data-ok="0">Da igual el resultado, solo cambia el tamaño</button>
+    <section class="lesson" data-step="3">
+      <header class="lesson-head"><p class="micro">Microlección 3 de 8 · Tema: Producto de matrices</p><h2>El producto de matrices: la cuenta de la caja</h2><p class="goal">Meta: calcular una casilla del producto emparejando renglón y columna.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy llega la operación reina de la unidad: el <strong>producto de matrices</strong>.</p>
+        <p class="idea">Quedamos en que no va casilla contra casilla. Para ver cómo va, párate en la caja de la tienda.</p>
+        <p class="idea">El combo A lleva 2 cafés y 1 pan. Un café cuesta $30 y un pan $20. ¿El precio del combo? Multiplicas cada cantidad por su precio y sumas:</p>
+        <div class="fx"><div class="sys"><span class="eq">2·30 + 1·20</span><span class="eq">= 60 + 20</span><span class="eq">= 80</span></div></div>
+        <p class="idea">Fíjate de dónde salió cada número: las cantidades (2, 1) son el <strong>renglón</strong> del combo A, y los precios (30, 20) son la <strong>columna</strong> de precios.</p>
+        <p class="idea">Cada cantidad se emparejó con SU precio — nunca cruzado.</p>
+        <p class="idea key">Esa es la jugada del producto: <strong>un renglón contra una columna</strong>, multiplicar en pares y sumar.</p>
+        <p class="idea">Ahora con puros números. Toma estas dos tablas — la izquierda pone los renglones; la derecha, las columnas:</p>
+        <div class="fx"><div class="matrix-form"><span>A =</span><span class="matrix three" aria-label="Matriz A de 2 por 3"><span>1</span><span>2</span><span>0</span><span>3</span><span>−1</span><span>1</span></span><span>B =</span><span class="matrix" aria-label="Matriz B de 3 por 2"><span>2</span><span>1</span><span>0</span><span>−2</span><span>4</span><span>3</span></span></div></div>
+        <p class="idea">Cada casilla del resultado tiene su propia pareja renglón-columna: la casilla c<sub>ij</sub> usa el renglón i de A y la columna j de B. Ármalas tú:</p>
+        <div class="mixlab" aria-label="Laboratorio del producto: arma cada casilla">
+          <div class="mix-grid">
+            <div class="recipe"><h4>Renglón de A</h4><p>decide la fila de la casilla</p><div class="pick" data-mix="f"><button data-value="1" class="is-on">Fila 1</button><button data-value="2">Fila 2</button></div></div>
+            <div class="recipe"><h4>Columna de B</h4><p>decide la columna de la casilla</p><div class="pick" data-mix="c"><button data-value="1" class="is-on">Columna 1</button><button data-value="2">Columna 2</button></div></div>
+          </div>
+          <div class="mix-result"><p>La casilla que armaste</p><strong id="mixWords">c₁₁ = 2</strong><p id="mixFormula">fila 1 (1, 2, 0) con columna 1 (2, 0, 4) → 1·2 + 2·0 + 0·4 = 2</p></div>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El producto de matrices <strong>no es conmutativo</strong>. A veces ni siquiera B por A está definido, y cuando lo está casi nunca coincide con A por B.</p></div>
+        <p class="idea">¿Notas el patrón? Cambiar de casilla solo cambia qué renglón y qué columna se emparejan. La cuenta es siempre la misma: en pares, y sumar.</p>
+        <p class="idea">Las cuatro casillas juntas forman el producto:</p>
+        <div class="fx"><div class="matrix-form"><span>A·B =</span><span class="matrix" aria-label="Producto: renglones 2 menos 3 y 10 8"><span>2</span><span>−3</span><span>10</span><span>8</span></span></div></div>
+        <p class="idea">Y con esto ya llegaste: hiciste todas las cuentas de caja de una sola vez. Tu curso lo enuncia así:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>Si A es de m×n y B es de n×p, el <strong>producto</strong> A·B es la matriz de m×p cuya entrada c<sub>ij</sub> se obtiene multiplicando en pares el renglón i de A con la columna j de B y sumando los resultados.</p>
+        <p class="idea">Léela de vuelta: c<sub>ij</sub> nombra la casilla; la i dice qué renglón tomas de la izquierda y la j qué columna de la derecha — tu cuenta de la caja, automatizada.</p>
+        <p class="idea paso">Asegura la jugada con los dos retos.</p>
+        <p class="idea paso">Y fíjate en la n que se repite en «m×n por n×p»: no es casualidad. Es el requisito escondido del producto — la siguiente lección.</p>
       </div>
-    </section>
-
-    <section class="sec">
-      <h3>6 · La transpuesta: voltear la tabla</h3>
-      <p class="idea">A veces conviene ver la misma tabla al revés. El proveedor no la quiere por combo, sino <strong>por ingrediente</strong>: el café en un renglón, el pan en otro.</p>
-      <p class="idea">No es información nueva: es la <strong>misma tabla volteada</strong> — lo que era renglón pasa a ser columna, en el mismo orden.</p>
-      <p class="idea">Con números se ve al instante. El renglón (1, 2, 3) se pone de pie y queda como la primera columna; el (4, 5, 6), como la segunda:</p>
-      <div class="fx" id="transEx"></div>
-      <p class="fx-note">Cada renglón de la izquierda es una columna a la derecha, en el mismo orden.</p>
-      <p class="idea">A esa tabla volteada se le llama la <strong>transpuesta</strong> de A, y se escribe <strong>A<sup>T</sup></strong>.</p>
-      <p class="idea">El tamaño se voltea con ella:</p>
-      <div class="fx"><div class="sys"><span class="eq">A de 2×3 → A<sup>T</sup> de 3×2</span></div></div>
-      <p class="idea">Las casillas donde fila y columna coinciden — a<sub>11</sub>, a<sub>22</sub>, a<sub>33</sub>… — forman la <strong>diagonal principal</strong>, la línea que baja desde la esquina de arriba a la izquierda.</p>
-      <p class="idea">Al transponer, esas casillas <strong>no se mueven</strong>: la tabla gira sobre esa línea como una bisagra.</p>
-      <div class="check" data-kind="item" data-id="TRchk" data-tema="transpuesta" data-level="guiado">
-        <div class="qtag">Te toca · predice</div>
-        <p class="q">Si una matriz mide <strong>3×5</strong>, ¿qué tamaño tiene su transpuesta?</p>
+      <div class="check challenge" data-kind="item" data-id="M3G" data-tema="producto_matrices" data-level="guiado" data-module="3">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Arma una casilla.</strong> Con las A y B de arriba, c<sub>21</sub> empareja el renglón (3, −1, 1) con la columna (2, 0, 4). ¿Cuánto da?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">5×3</button>
-          <button class="opt" data-ok="0">3×5, no cambia</button>
-          <button class="opt" data-ok="0">5×5</button>
+          <button class="opt" data-ok="1">3·2 + (−1)·0 + 1·4 = 10</button>
+          <button class="opt" data-ok="0">3·2 + (−1)·0 + 1·4 = 6</button>
+          <button class="opt" data-ok="0">3 + 2 + (−1) + 0 + 1 + 4 = 9</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Transponer intercambia filas y columnas: lo que era 3×5 pasa a 5×3. Los renglones se vuelven columnas.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ En pares y sumando: 6 + 0 + 4 = 10.</p><p class="nudge">✕ Multiplica cada pareja — 3·2, (−1)·0, 1·4 — y luego suma los tres resultados. Intenta de nuevo.</p></div>
       </div>
-
-      <p class="idea">Falta una regla, la que más se equivoca en examen: transponer un <strong>producto</strong>.</p>
-      <p class="idea">Vuelve a los <strong>calcetines y zapatos</strong> del escalón 5. Para deshacer "calcetines y luego zapatos" inviertes el orden: primero te quitas los zapatos.</p>
-      <p class="idea">Transponer un producto hace justo eso: <strong>voltea el orden</strong> de los dos factores.</p>
-      <div class="fx"><div class="sys"><span class="eq">(A·B)<sup>T</sup> = B<sup>T</sup>·A<sup>T</sup></span></div></div>
-      <p class="idea">Primero la de la derecha, B<sup>T</sup>. Si conservaras el orden, saldría otra tabla distinta.</p>
-    </section>
-
-    <section class="sec">
-      <h3>7 · La identidad: el 1 de las matrices</h3>
-      <p class="idea">Entre los números hay uno muy especial: el 1. Multiplicar por 1 <strong>no hace nada</strong>:</p>
-      <div class="fx"><div class="sys"><span class="eq">7·1 = 7</span><span class="eq">80·1 = 80</span></div></div>
-      <p class="idea">Suena inútil, pero "no hacer nada" es la referencia que necesitas para poder hablar de <strong>deshacer</strong> (eso viene en el siguiente escalón).</p>
-      <p class="idea">Pregunta natural: ¿existirá una matriz con ese papel — una que, al multiplicar por ella, deje cualquier tabla igualita?</p>
-      <p class="idea">Existe, y tiene esta pinta: <strong>unos en la diagonal principal, ceros en todo lo demás</strong>. Esta es la de tamaño 3:</p>
-      <div class="fx" id="identEx"></div>
-      <p class="fx-note">Multiplicar cualquier matriz por la identidad del tamaño correcto la deja igual: A por I es A.</p>
-      <p class="idea">Se llama <strong>matriz identidad</strong> — deja a cada matriz idéntica a como estaba — y se escribe <strong>I</strong>. En símbolos:</p>
-      <div class="fx"><div class="sys"><span class="eq">A·I = A</span></div></div>
-      <p class="idea">¿Por qué funciona? Haz una casilla y lo ves. Al emparejar un renglón con una columna de I:</p>
-      <ul class="fases">
-        <li>el único 1 de esa columna deja pasar un solo número,</li>
-        <li>y los ceros apagan todos los demás.</li>
-      </ul>
-      <p class="idea">Sale exactamente el número que ya estaba ahí.</p>
-      <div class="check" data-kind="item" data-id="IDchk" data-tema="identidad" data-level="guiado">
-        <div class="qtag">Te toca · decide</div>
-        <p class="q">Multiplicas una matriz A por la identidad de su mismo tamaño. ¿Qué obtienes?</p>
+      <div class="check challenge" data-kind="item" data-id="M3S" data-tema="producto_matrices" data-level="solo" data-module="3">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Otra cuenta de caja.</strong> Emparejas el renglón (2, 5) con la columna (3, 1). ¿Cuánto vale esa casilla?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">La misma A, sin ningún cambio</button>
-          <button class="opt" data-ok="0">La matriz identidad</button>
-          <button class="opt" data-ok="0">Una matriz de puros ceros</button>
+          <button class="opt" data-ok="1">2·3 + 5·1 = 11</button>
+          <button class="opt" data-ok="0">2·1 + 5·3 = 17</button>
+          <button class="opt" data-ok="0">3 + 1 = 4</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La identidad hace en las matrices lo que el <strong>1</strong> hace en los números: no altera nada. A por I es A (y también I por A es A).</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Cada número con su pareja de la misma posición: 6 + 5 = 11.</p><p class="nudge">✕ El primero va con el primero y el segundo con el segundo; no cruces parejas ni olvides multiplicar. Intenta de nuevo.</p></div>
       </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>8 · La inversa: la tabla que deshace</h3>
-      <p class="idea">Casi todo lo que haces con números se puede <strong>deshacer</strong>. ¿Multiplicaste por 5? Divide entre 5 y regresas a donde estabas:</p>
-      <div class="fx"><div class="sys"><span class="eq">7 → 35 → 7</span></div></div>
-      <p class="idea">Deshacer es que, al final del viaje de ida y vuelta, quede <strong>como si no hubieras hecho nada</strong> — y "no hacer nada", en matrices, ya tiene nombre: la identidad.</p>
-      <p class="idea">La <strong>inversa</strong> de A es la matriz que deshace lo que A hace: al multiplicarlas, queda la identidad.</p>
-      <p class="idea">Se escribe <strong>A<sup>−1</sup></strong>, igual que 5<sup>−1</sup> es 1/5, el número que multiplica a 5 para dar 1:</p>
-      <div class="fx"><div class="sys"><span class="eq">A·A<sup>−1</sup> = I</span></div></div>
-      <p class="idea">Ojo: <strong>no toda matriz se puede deshacer</strong>. Con números el culpable es el 0: multiplicar por 0 <strong>aplasta</strong>.</p>
-      <div class="fx"><div class="sys"><span class="eq">7·0 = 0</span><span class="eq">4·0 = 0</span></div></div>
-      <p class="idea">Si solo ves el 0, no sabes de dónde venías: la información se destruyó y no hay cómo recuperarla.</p>
-      <p class="idea">Hay matrices que aplastan igual, y esas tampoco tienen inversa; más abajo aprenderás a delatarlas.</p>
-      <p class="idea">Esto es el "deshacer la cuenta" de la tienda: si las recetas convierten cafés y panes en precios, la inversa convierte los precios de vuelta en cafés y panes.</p>
-      <p class="idea">Solo falta aprender a <strong>encontrarla</strong> — a eso vamos.</p>
-      <div class="check" data-kind="item" data-id="INVchk" data-tema="inversa_concepto" data-level="guiado">
-        <div class="qtag">Te toca · reconoce</div>
-        <p class="q">¿Qué significa que B sea la <strong>inversa</strong> de A?</p>
+    <section class="lesson" data-step="4">
+      <header class="lesson-head"><p class="micro">Microlección 4 de 8 · Tema: Propiedades del producto</p><h2>Propiedades del producto: tamaño y orden</h2><p class="goal">Meta: decidir si un producto existe, qué tamaño deja y si el orden se puede voltear.</p></header>
+      <div class="sec">
+        <p class="idea lede">Ya multiplicas casillas. Hoy tocan las <strong>propiedades del producto</strong>: cuándo existe, qué tamaño deja y por qué el orden importa.</p>
+        <p class="idea">Primero el requisito escondido. Si el combo lleva 3 ingredientes, la lista de precios debe traer 3 precios — cada cantidad necesita su pareja.</p>
+        <p class="idea">Con matrices es igual: el renglón de la izquierda y la columna de la derecha deben tener la misma cantidad de números.</p>
+        <p class="idea">El truco para comprobarlo es escribir los dos tamaños seguidos:</p>
+        <div class="fx"><div class="sys"><span class="eq">2×3 por 3×2</span></div></div>
+        <p class="idea">Y leer dos cosas: si los números <strong>de en medio</strong> coinciden, el producto existe; los <strong>de los extremos</strong> dan el tamaño del resultado.</p>
+        <figure class="visual">
+          <svg viewBox="0 0 380 150" role="img" aria-label="Compatibilidad de tamaños para el producto de matrices">
+            <rect x="6" y="34" width="86" height="52" rx="10" fill="#FFF3E7" stroke="#F5821F" stroke-width="2.5"/><text x="49" y="66" text-anchor="middle" font-size="22" font-weight="800" fill="#181B22">2×3</text>
+            <text x="106" y="66" text-anchor="middle" font-size="22" font-weight="800" fill="#334155">·</text>
+            <rect x="120" y="34" width="86" height="52" rx="10" fill="#eef1fb" stroke="#283891" stroke-width="2.5"/><text x="163" y="66" text-anchor="middle" font-size="22" font-weight="800" fill="#181B22">3×2</text>
+            <text x="230" y="66" text-anchor="middle" font-size="22" font-weight="800" fill="#334155">=</text>
+            <rect x="250" y="34" width="86" height="52" rx="10" fill="white" stroke="#334155" stroke-width="2.5"/><text x="293" y="66" text-anchor="middle" font-size="22" font-weight="800" fill="#181B22">2×2</text>
+            <path d="M78 100 C 78 122, 150 122, 150 100" fill="none" stroke="#334155" stroke-width="2.5"/>
+            <text x="114" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#C75D08">3 = 3 → sí se puede</text>
+            <text x="293" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#C75D08">extremos → tamaño</text>
+          </svg>
+          <figcaption>Los números de en medio deciden si el producto existe; los extremos, cuánto mide.</figcaption>
+        </figure>
+        <p class="idea">Si los de en medio no coinciden — 4×2 por 3×5, por ejemplo — el producto ni siquiera existe.</p>
+        <p class="idea">Segunda propiedad, la que más sorprende. Con números sueltos el orden da igual: 3·5 = 5·3. Con matrices no, y conviene ver por qué.</p>
+        <p class="idea">Multiplicar por una matriz es una acción completa — como vestirse: calcetines y luego zapatos no es lo mismo que zapatos y luego calcetines.</p>
+        <p class="idea">Compruébalo con una sola casilla:</p>
+        <div class="fx"><div class="matrix-form"><span>A =</span><span class="matrix" aria-label="Matriz A: renglones 1 1 y 0 1"><span>1</span><span>1</span><span>0</span><span>1</span></span><span>B =</span><span class="matrix" aria-label="Matriz B: renglones 1 0 y 1 1"><span>1</span><span>0</span><span>1</span><span>1</span></span></div></div>
+        <div class="fx"><div class="sys"><span class="eq">A·B: c<sub>11</sub> = 1·1 + 1·1 = 2</span><span class="eq">B·A: c<sub>11</sub> = 1·1 + 0·0 = 1</span></div></div>
+        <p class="idea">Misma pareja, distinto orden — y ya la primera casilla salió diferente.</p>
+        <p class="idea key">El producto de matrices <strong>no es conmutativo</strong>: siempre se dice quién va primero.</p>
+        <p class="idea">¿Y qué sí se vale? Tu curso lo deja en lista:</p>
+        <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teo. 4.1</span>Sean A, B, C matrices de m×n, D, F de n×p y G de p×k. Entonces: A + B = B + A; A + (B + C) = (A + B) + C; (A + B)·D = A·D + B·D; A·(D + F) = A·D + A·F; (A·D)·G = A·(D·G).</p>
+        <p class="idea">Léelo por lo que dice y por lo que calla: puedes agrupar como quieras y repartir sobre la suma… pero en ninguna línea aparece A·D = D·A.</p>
+        <p class="idea">La conmutatividad del producto no está en la lista, porque no se cumple.</p>
+        <p class="idea paso">Dos retos para asegurar tamaño y orden.</p>
+        <p class="idea paso">Después, una operación que no calcula nada nuevo pero reacomoda todo: voltear la tabla.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M4G" data-tema="propiedades_producto" data-level="guiado" data-module="4">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Lee el experimento.</strong> Arriba viste c<sub>11</sub> = 2 en A·B y c<sub>11</sub> = 1 en B·A. ¿Qué concluyes?</p>
         <div class="opts">
+          <button class="opt" data-ok="1">Que A·B ≠ B·A: el orden de los factores cambia el resultado</button>
+          <button class="opt" data-ok="0">Que hubo un error de cuenta: deberían coincidir</button>
+          <button class="opt" data-ok="0">Que A·B y B·A siempre difieren exactamente en 1</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Basta una casilla distinta para que las tablas completas sean distintas.</p><p class="nudge">✕ Las dos cuentas están bien hechas; piensa qué dice de la conmutatividad que no coincidan. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M4S" data-tema="propiedades_producto" data-level="solo" data-module="4">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Decide con los tamaños.</strong> ¿Puedes multiplicar una de 4×2 por una de 2×5, en ese orden?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Sí: los de en medio son 2 y 2, y el resultado mide 4×5</button>
+          <button class="opt" data-ok="0">No: el 4 y el 5 no coinciden</button>
+          <button class="opt" data-ok="0">Sí, y el resultado mide 2×2</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Medios iguales (2 = 2): existe. Extremos 4 y 5: tamaño 4×5.</p><p class="nudge">✕ Escribe 4×2 por 2×5 y compara solo los números de en medio; los extremos dan el tamaño. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
+    </section>
+
+    <section class="lesson" data-step="5">
+      <header class="lesson-head"><p class="micro">Microlección 5 de 8 · Tema: Matriz transpuesta</p><h2>La transpuesta: voltear la tabla</h2><p class="goal">Meta: transponer una matriz y voltear el orden en (A·B)<sup>T</sup>.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy, una operación que no inventa información: la <strong>transpuesta</strong>, la misma tabla volteada.</p>
+        <p class="idea">La tienda otra vez. El proveedor no quiere la tabla por combo, sino por ingrediente: el café en un renglón, el pan en otro. Mismos datos, otro acomodo.</p>
+        <p class="idea">Con números se ve al instante: cada renglón se pone de pie y queda como columna, en el mismo orden.</p>
+        <figure class="visual">
+          <svg viewBox="0 0 620 260" role="img" aria-label="La matriz A y su transpuesta: los renglones pasan a ser columnas">
+            <text x="140" y="40" text-anchor="middle" font-size="20" font-weight="800" fill="#181B22">A</text>
+            <rect x="20" y="52" width="240" height="160" rx="14" fill="white" stroke="#181B22" stroke-width="3"/>
+            <rect x="36" y="76" width="208" height="44" rx="9" fill="#FFF3E7"/>
+            <text x="80" y="106" text-anchor="middle" font-size="23" font-weight="800" fill="#C75D08">1</text>
+            <text x="140" y="106" text-anchor="middle" font-size="23" font-weight="800" fill="#C75D08">2</text>
+            <text x="200" y="106" text-anchor="middle" font-size="23" font-weight="800" fill="#C75D08">3</text>
+            <text x="80" y="176" text-anchor="middle" font-size="23" font-weight="800" fill="#181B22">4</text>
+            <text x="140" y="176" text-anchor="middle" font-size="23" font-weight="800" fill="#181B22">5</text>
+            <text x="200" y="176" text-anchor="middle" font-size="23" font-weight="800" fill="#181B22">6</text>
+            <path d="M285 130 L345 130" stroke="#334155" stroke-width="3.5" fill="none"/>
+            <path d="M338 122 L352 130 L338 138 Z" fill="#334155"/>
+            <text x="318" y="112" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">de pie</text>
+            <text x="470" y="40" text-anchor="middle" font-size="20" font-weight="800" fill="#181B22">Aᵀ</text>
+            <rect x="370" y="52" width="200" height="190" rx="14" fill="white" stroke="#181B22" stroke-width="3"/>
+            <rect x="400" y="66" width="56" height="164" rx="9" fill="#FFF3E7"/>
+            <text x="428" y="102" text-anchor="middle" font-size="23" font-weight="800" fill="#C75D08">1</text>
+            <text x="428" y="158" text-anchor="middle" font-size="23" font-weight="800" fill="#C75D08">2</text>
+            <text x="428" y="214" text-anchor="middle" font-size="23" font-weight="800" fill="#C75D08">3</text>
+            <text x="512" y="102" text-anchor="middle" font-size="23" font-weight="800" fill="#181B22">4</text>
+            <text x="512" y="158" text-anchor="middle" font-size="23" font-weight="800" fill="#181B22">5</text>
+            <text x="512" y="214" text-anchor="middle" font-size="23" font-weight="800" fill="#181B22">6</text>
+          </svg>
+          <figcaption>El renglón (1, 2, 3) se pone de pie y queda como primera columna. El (4, 5, 6), como segunda.</figcaption>
+        </figure>
+        <p class="idea">A esa tabla volteada se le llama la transpuesta de A, y se escribe <strong>A<sup>T</sup></strong>. El tamaño se voltea con ella:</p>
+        <div class="fx"><div class="sys"><span class="eq">A de 2×3 → A<sup>T</sup> de 3×2</span></div></div>
+        <p class="idea">Y con esto ya llegaste. Tu curso lo dice en una sola línea:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 4.6</span>Sea A = (a<sub>ij</sub>) una matriz de n×m. La <strong>transpuesta</strong> de A, denotada A<sup>T</sup> = (b<sub>ij</sub>), es tal que b<sub>ij</sub> = a<sub>ji</sub>.</p>
+        <p class="idea">Léela de vuelta: b<sub>ij</sub> = a<sub>ji</sub> es el volteo completo en cuatro símbolos — la casilla (i, j) de la nueva tabla guarda lo que estaba en (j, i). Fila y columna intercambian papeles.</p>
+        <p class="idea">Falta la regla donde más se falla en examen: transponer un <strong>producto</strong>.</p>
+        <p class="idea">Recuerda los calcetines y zapatos de la lección pasada: para deshacer una secuencia se empieza por lo último.</p>
+        <div class="fx"><div class="sys"><span class="eq">(A·B)<sup>T</sup> = B<sup>T</sup>·A<sup>T</sup></span></div></div>
+        <p class="idea key">Al transponer un producto, el orden se voltea: primero B<sup>T</sup>, después A<sup>T</sup>.</p>
+        <p class="idea">Esa regla viene con sus hermanas, todas en un mismo teorema del curso:</p>
+        <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teo. 4.3</span>Si r es un escalar y A, B son matrices cuadradas de n×n, entonces: (A<sup>T</sup>)<sup>T</sup> = A; (A + B)<sup>T</sup> = A<sup>T</sup> + B<sup>T</sup>; (A·B)<sup>T</sup> = B<sup>T</sup>·A<sup>T</sup>; (r·A)<sup>T</sup> = r·A<sup>T</sup>.</p>
+        <p class="idea">En palabras: voltear dos veces te regresa a la original, la suma y el escalar no se inmutan… y solo el producto exige voltear el orden.</p>
+        <p class="idea paso">Dos retos para dejarlo firme.</p>
+        <p class="idea paso">Y prepárate: lo que sigue es la pareja central del temario — la tabla que no hace nada y la tabla que deshace.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M5G" data-tema="transpuesta" data-level="guiado" data-module="5">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Voltea la tabla.</strong> En A = renglones (1, 2, 3) y (4, 5, 6), ¿cuál es la primera columna de A<sup>T</sup>?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">(1, 2, 3): el primer renglón, puesto de pie</button>
+          <button class="opt" data-ok="0">(4, 5, 6): el segundo renglón</button>
+          <button class="opt" data-ok="0">(1, 4): los primeros números de cada renglón</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ El renglón 1 completo se convierte en la columna 1, en el mismo orden.</p><p class="nudge">✕ Toma el primer renglón de A y escríbelo de arriba hacia abajo. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M5S" data-tema="transpuesta" data-level="solo" data-module="5">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Cambia los datos.</strong> C = renglones (7, 0) y (2, 5). ¿Cuál es C<sup>T</sup>?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Renglones (7, 2) y (0, 5)</button>
+          <button class="opt" data-ok="0">Renglones (7, 0) y (2, 5): la transpuesta no cambia nada</button>
+          <button class="opt" data-ok="0">Renglones (5, 2) y (0, 7)</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ El renglón (7, 0) quedó de pie como primera columna, y el (2, 5) como segunda.</p><p class="nudge">✕ Pon cada renglón de pie: el primero pasa a ser la columna 1 y el segundo la columna 2. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
+    </section>
+
+    <section class="lesson" data-step="6">
+      <header class="lesson-head"><p class="micro">Microlección 6 de 8 · Tema: Matriz identidad e inversa</p><h2>Identidad e inversa: no hacer nada y deshacer</h2><p class="goal">Meta: decir qué cumple la inversa y cuándo no existe.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy, la pareja central del temario: la <strong>matriz identidad</strong> y la <strong>matriz inversa</strong>.</p>
+        <p class="idea">Entre los números hay uno que no hace nada: el 1. Multiplicar por 1 deja todo igual — 7·1 = 7.</p>
+        <p class="idea">Suena inútil, pero «no hacer nada» es la referencia para poder hablar de <strong>deshacer</strong>. ¿Hay una matriz con ese papel? Sí: unos en la diagonal principal, ceros en todo lo demás.</p>
+        <div class="fx"><div class="matrix-form"><span>I =</span><span class="matrix" aria-label="Matriz identidad de 2 por 2"><span class="pivot">1</span><span>0</span><span>0</span><span class="pivot">1</span></span></div></div>
+        <p class="idea">Se llama <strong>matriz identidad</strong> — deja a cada matriz idéntica — y hay una por cada tamaño. En símbolos:</p>
+        <div class="fx"><div class="sys"><span class="eq">A·I = A</span></div></div>
+        <p class="idea">Con la referencia lista, ya se puede hablar de deshacer. Con números: ¿multiplicaste por 5? Divide entre 5 y regresas a donde estabas — 7 → 35 → 7.</p>
+        <p class="idea">La <strong>inversa</strong> de A es la matriz que deshace lo que A hace. Se escribe A<sup>−1</sup>, y su prueba de fuego es que el viaje redondo quede en «no hacer nada»:</p>
+        <div class="fx"><div class="sys"><span class="eq">A·A<sup>−1</sup> = I</span></div></div>
+        <figure class="visual">
+          <svg viewBox="0 0 620 250" role="img" aria-label="Ida con A y regreso con la inversa de A">
+            <rect x="40" y="75" width="130" height="100" rx="16" fill="#FFF3E7" stroke="#181B22" stroke-width="3"/>
+            <text x="105" y="132" text-anchor="middle" font-size="26" font-weight="800" fill="#181B22">x</text>
+            <rect x="450" y="75" width="130" height="100" rx="16" fill="#E6F5EC" stroke="#181B22" stroke-width="3"/>
+            <text x="515" y="132" text-anchor="middle" font-size="26" font-weight="800" fill="#181B22">A·x</text>
+            <path d="M185 100 H430" stroke="#283891" stroke-width="4" fill="none"/>
+            <path d="M424 92 L440 100 L424 108 Z" fill="#283891"/>
+            <text x="310" y="88" text-anchor="middle" font-size="20" font-weight="800" fill="#283891">A</text>
+            <path d="M435 152 H190" stroke="#C75D08" stroke-width="4" fill="none"/>
+            <path d="M196 144 L180 152 L196 160 Z" fill="#C75D08"/>
+            <text x="310" y="186" text-anchor="middle" font-size="20" font-weight="800" fill="#C75D08">A⁻¹</text>
+          </svg>
+          <figcaption>Ida con A, regreso con A<sup>−1</sup>. El viaje redondo deja todo como estaba: la identidad.</figcaption>
+        </figure>
+        <p class="idea">Ojo: <strong>no toda matriz se puede deshacer</strong>. Con números el culpable es el 0: como 7·0 = 0 y 4·0 = 0, al ver solo el 0 ya no sabes de dónde venías.</p>
+        <p class="idea key">Hay matrices que aplastan información igual que el 0 — y esas no tienen inversa. Su nombre del curso: <strong>singulares</strong>.</p>
+        <p class="idea">Y con esto ya llegaste a las dos definiciones:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 4.7 y 4.8</span>Una matriz A cuadrada es <strong>invertible</strong> si existe una única matriz B tal que A·B = B·A = I; B es la matriz inversa de A y se denota A<sup>−1</sup>. Si no existe la inversa de A, decimos que A es <strong>singular</strong> o no invertible.</p>
+        <p class="idea">Fíjate en dos detalles: pide A·B y también B·A — deshacer de ida y de vuelta — y pide que A sea <strong>cuadrada</strong>, el apellido de la lección 1.</p>
+        <p class="idea">La inversa también trae sus reglas de operación, y una ya la conoces:</p>
+        <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teo. 4.4</span>Sean A y B matrices no singulares. Entonces: A<sup>−1</sup> es no singular y (A<sup>−1</sup>)<sup>−1</sup> = A; A·B es no singular y (A·B)<sup>−1</sup> = B<sup>−1</sup>·A<sup>−1</sup>; (A<sup>T</sup>)<sup>−1</sup> = (A<sup>−1</sup>)<sup>T</sup>.</p>
+        <p class="idea">La del medio es la misma jugada que la transpuesta: deshacer un producto voltea el orden — zapatos primero, calcetines después.</p>
+        <p class="idea paso">Dos retos para asegurar la pareja.</p>
+        <p class="idea paso">Saber qué es la inversa no dice cómo encontrarla. Eso — lo que de verdad cae en examen — es la siguiente lección.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M6G" data-tema="inversa_concepto" data-level="guiado" data-module="6">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Reconoce a la que deshace.</strong> ¿Qué significa que B sea la inversa de A?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Que B deshace lo que A hace: A·B = I y B·A = I</button>
           <button class="opt" data-ok="0">Que B es A volteada: los renglones pasan a ser columnas</button>
-          <button class="opt" data-ok="0">Que B tiene los mismos números que A pero con el signo cambiado</button>
-          <button class="opt" data-ok="1">Que B deshace lo que A hace: A·B da la identidad</button>
+          <button class="opt" data-ok="0">Que B tiene los números de A con el signo cambiado</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Inversa = la que <strong>deshace</strong>: A·B = I, como 5 por 1/5 da 1. Voltear renglones y columnas es la <strong>transpuesta</strong> (otra operación distinta), y cambiar signos no deshace nada.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Inversa = deshacer: el viaje de ida y vuelta termina en la identidad.</p><p class="nudge">✕ Voltear renglones es la transpuesta, otra operación. Deshacer pide que el producto dé la identidad. Intenta de nuevo.</p></div>
       </div>
+      <div class="check challenge" data-kind="item" data-id="M6S" data-tema="inversa_concepto" data-level="solo" data-module="6">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Deshaz una secuencia.</strong> M y N son invertibles. ¿Cuál es la inversa del producto M·N?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">N<sup>−1</sup>·M<sup>−1</sup>: el orden se voltea</button>
+          <button class="opt" data-ok="0">M<sup>−1</sup>·N<sup>−1</sup>: el mismo orden</button>
+          <button class="opt" data-ok="0">El producto de dos invertibles puede no tener inversa</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Como con la transpuesta: para deshacer la secuencia, se deshace primero lo último.</p><p class="nudge">✕ Piensa en calcetines y zapatos: ¿qué te quitas primero para deshacer el proceso? Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
 
-    <h2 class="modhead">Yo lo hago · contigo</h2>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Multipliquemos una de 2×3 por una de 3×2 — las mismas dos tablas del escalón 3.</p>
-      <p class="idea" style="font-size:17px">Como los treses de en medio coinciden, el resultado es 2×2.</p>
-      <p class="idea" style="font-size:17px">En cada casilla <strong>tú decides el emparejamiento</strong> y yo hago la cuenta.</p>
-      <div class="estep"><div class="oprow">Las dos matrices</div><div class="fx" id="pe0"></div></div>
-
-      <div class="check" data-kind="item" data-id="E1pred" data-tema="producto_matrices" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Empezamos por la casilla de <strong>arriba a la izquierda</strong> del resultado (fila 1, columna 1). ¿Qué emparejas?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Renglón 1 (1, 2, 0) con columna 1 (2, 0, 4)</button>
-          <button class="opt" data-ok="0">Renglón 1 (1, 2, 0) con renglón 1 (2, 1)</button>
-          <button class="opt" data-ok="0">Columna 1 con columna 1</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Fila 1, columna 1 usa el <strong>renglón 1</strong> de la izquierda y la <strong>columna 1</strong> de la derecha. Se multiplican en pares y se suma.</p></div>
+    <section class="lesson" data-step="7">
+      <header class="lesson-head"><p class="micro">Microlección 7 de 8 · Tema: Inversa por Gauss-Jordan</p><h2>Gauss-Jordan: encontrar la inversa</h2><p class="goal">Meta: leer la inversa al final de reducir [A | I].</p></header>
+      <div class="sec">
+        <p class="idea lede">Ya sabes qué es la inversa. Hoy aprendes a <strong>encontrarla</strong>: el método de <strong>Gauss-Jordan</strong>.</p>
+        <p class="idea">El truco es elegante: pegas una copia de la identidad al lado de A, y con operaciones de renglón conviertes la parte de A en la identidad.</p>
+        <p class="idea">Esa copia va grabando el camino de deshacer — y al terminar queda convertida, ella misma, en A<sup>−1</sup>.</p>
+        <figure class="visual">
+          <svg viewBox="0 0 660 190" role="img" aria-label="El bloque A junto a I se reduce hasta I junto a la inversa de A">
+            <rect x="10" y="40" width="230" height="110" rx="14" fill="white" stroke="#181B22" stroke-width="3"/>
+            <rect x="123" y="52" width="3" height="86" fill="#181B22"/>
+            <text x="66" y="106" text-anchor="middle" font-size="30" font-weight="800" fill="#181B22">A</text>
+            <text x="182" y="106" text-anchor="middle" font-size="30" font-weight="800" fill="#475569">I</text>
+            <path d="M262 95 H382" stroke="#334155" stroke-width="4" fill="none"/>
+            <path d="M376 87 L392 95 L376 103 Z" fill="#334155"/>
+            <text x="325" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">operaciones</text>
+            <text x="325" y="128" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">de renglón</text>
+            <rect x="415" y="40" width="230" height="110" rx="14" fill="white" stroke="#181B22" stroke-width="3"/>
+            <rect x="528" y="52" width="3" height="86" fill="#181B22"/>
+            <text x="471" y="106" text-anchor="middle" font-size="30" font-weight="800" fill="#475569">I</text>
+            <text x="587" y="106" text-anchor="middle" font-size="30" font-weight="800" fill="#C75D08">A⁻¹</text>
+          </svg>
+          <figcaption>Todo el bloque viaja junto: cuando la izquierda llega a I, la derecha ya es la inversa.</figcaption>
+        </figure>
+        <p class="idea">Hazlo completo una vez, con A = renglones (1, 3) y (2, 7). El bloque pegado se ve así:</p>
+        <div class="fx"><div class="matrix-form"><span>[A | I] =</span><span class="matrix" style="grid-template-columns:repeat(2,minmax(24px,auto)) 8px repeat(2,minmax(24px,auto))" aria-label="Bloque aumentado A junto a la identidad"><span>1</span><span>3</span><span style="padding:0;width:2px;background:#181B22;justify-self:center"></span><span>1</span><span>0</span><span>2</span><span>7</span><span style="padding:0;width:2px;background:#181B22;justify-self:center"></span><span>0</span><span>1</span></span></div></div>
+        <p class="idea paso">Primer movimiento — R2 → R2 − 2·R1: al renglón de abajo le resto dos veces el de arriba, celda por celda, identidad incluida. Queda 2 − 2·1 = 0 y 7 − 2·3 = 1 a la izquierda; 0 − 2·1 = −2 y 1 − 2·0 = 1 a la derecha.</p>
+        <div class="fx"><div class="matrix-form"><span class="matrix" style="grid-template-columns:repeat(2,minmax(24px,auto)) 8px repeat(2,minmax(24px,auto))" aria-label="Bloque tras el primer movimiento"><span class="pivot">1</span><span>3</span><span style="padding:0;width:2px;background:#181B22;justify-self:center"></span><span>1</span><span>0</span><span>0</span><span class="pivot">1</span><span style="padding:0;width:2px;background:#181B22;justify-self:center"></span><span>−2</span><span>1</span></span></div></div>
+        <p class="idea paso">Segundo movimiento — R1 → R1 − 3·R2: con el pivote de abajo limpio el 3 de arriba. Queda 3 − 3·1 = 0 a la izquierda; 1 − 3·(−2) = 7 y 0 − 3·1 = −3 a la derecha.</p>
+        <div class="fx"><div class="matrix-form"><span class="matrix" style="grid-template-columns:repeat(2,minmax(24px,auto)) 8px repeat(2,minmax(24px,auto))" aria-label="Bloque final con la identidad a la izquierda"><span class="pivot">1</span><span>0</span><span style="padding:0;width:2px;background:#181B22;justify-self:center"></span><span>7</span><span>−3</span><span>0</span><span class="pivot">1</span><span style="padding:0;width:2px;background:#181B22;justify-self:center"></span><span>−2</span><span>1</span></span></div></div>
+        <p class="idea key">La izquierda ya es la identidad — así que la derecha <strong>es</strong> la inversa: A<sup>−1</sup> = renglones (7, −3) y (−2, 1).</p>
+        <p class="idea">Compruébalo con la casilla de arriba a la izquierda de A·A<sup>−1</sup>:</p>
+        <div class="fx"><div class="sys"><span class="eq">1·7 + 3·(−2)</span><span class="eq">= 7 − 6</span><span class="eq">= 1</span></div></div>
+        <p class="idea">Ese 1 es la esquina de la identidad. Las otras tres casillas también salen — la inversa es correcta.</p>
+        <p class="idea">¿Y si la matriz era de las que aplastan? El método la delata solo: aparece un <strong>renglón de puros ceros</strong> a la izquierda.</p>
+        <p class="idea">Pasa, por ejemplo, con renglones (1, 3) y (2, 6), porque 2·(1, 3) = (2, 6) — al restar, el renglón 2 se apaga y ya no hay cómo llegar a la identidad.</p>
+        <p class="idea">¿Por qué funciona siempre este método? Porque llegar a la identidad y tener inversa son la misma cosa. Tu curso lo firma como teorema:</p>
+        <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teo. 4.7</span>Una matriz de n×n es no singular si y solo si es equivalente por renglones a la matriz identidad I<sub>n</sub>.</p>
+        <p class="idea">«Equivalente por renglones a I<sub>n</sub>» = con operaciones de renglón puedes convertirla en la identidad.</p>
+        <p class="idea">Si llegas, la inversa existe y quedó a la derecha; si un renglón se apaga, nunca llegarás: singular.</p>
+        <p class="idea paso">Dos retos para asegurar el método. La práctica completa en papel vive en tu cuadernillo.</p>
+        <p class="idea paso">Queda una última pregunta en la unidad: ¿qué son, en el fondo, esas operaciones de renglón? Cada una es… una matriz. Con eso cerramos.</p>
       </div>
-      <div class="estep"><div class="oprow">Fila 1 × Columna 1</div><p>Empareja (1, 2, 0) con (2, 0, 4), término a término, y suma:</p><p class="calc"><span class="rw">c₁₁</span> 1·2=<b>2</b> <span class="sep">•</span> 2·0=<b>0</b> <span class="sep">•</span> 0·4=<b>0</b> <span class="sep">•</span> suma=<b>2</b></p></div>
-
-      <div class="check" data-kind="item" data-id="E2pred" data-tema="producto_matrices" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Para la casilla de arriba a la <strong>derecha</strong> (fila 1, columna 2) usas el mismo primer renglón, pero ¿con cuál columna?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Con la columna 2: (1, −2, 3)</button>
-          <button class="opt" data-ok="0">Con el renglón 2 de la primera matriz</button>
-          <button class="opt" data-ok="0">Otra vez con la columna 1: (2, 0, 4)</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La casilla de fila 1, columna 2 empareja el <strong>renglón 1</strong> con la <strong>columna 2</strong>.</p></div>
-      </div>
-      <div class="estep"><div class="oprow">Fila 1 × Columna 2</div><p>Ahora (1, 2, 0) contra la columna 2 = (1, −2, 3):</p><p class="calc"><span class="rw">c₁₂</span> 1·1=<b>1</b> <span class="sep">•</span> 2·(−2)=<b>−4</b> <span class="sep">•</span> 0·3=<b>0</b> <span class="sep">•</span> suma=<b>−3</b></p></div>
-
-      <div class="check" data-kind="item" data-id="E3pred" data-tema="producto_matrices" data-level="juntos">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Ahora bajamos a la casilla de <strong>abajo a la izquierda</strong> (fila 2, columna 1). ¿Qué emparejas?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Renglón 2 (3, −1, 1) con columna 1 (2, 0, 4)</button>
-          <button class="opt" data-ok="0">Renglón 1 (1, 2, 0) con columna 1 (2, 0, 4)</button>
-          <button class="opt" data-ok="0">Renglón 2 (3, −1, 1) con columna 2 (1, −2, 3)</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Fila 2, columna 1 usa el <strong>renglón 2</strong> de la izquierda y la <strong>columna 1</strong> de la derecha. Cambia el renglón, no la columna.</p></div>
-      </div>
-      <div class="estep"><div class="oprow">Fila 2 × Columna 1</div><p>Bajo al renglón 2 = (3, −1, 1) contra la columna 1 = (2, 0, 4):</p><p class="calc"><span class="rw">c₂₁</span> 3·2=<b>6</b> <span class="sep">•</span> −1·0=<b>0</b> <span class="sep">•</span> 1·4=<b>4</b> <span class="sep">•</span> suma=<b>10</b></p></div>
-
-      <div class="check" data-kind="item" data-id="E4pred" data-tema="producto_matrices" data-level="juntos">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Falta la última casilla, abajo a la <strong>derecha</strong> (fila 2, columna 2). Antes de ver la cuenta, ¿cuánto crees que da? Pista: (3, −1, 1) contra (1, −2, 3).</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">3·1 + (−1)·(−2) + 1·3 = 8</button>
-          <button class="opt" data-ok="0">3·1 + (−1)·(−2) + 1·3 = 4</button>
-          <button class="opt" data-ok="0">3·1 + (−1)·2 + 1·3 = 4</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Renglón 2 con columna 2, en pares: 3·1=3, (−1)·(−2)=2 (menos por menos, más), 1·3=3. Suma 3 + 2 + 3 = 8.</p></div>
-      </div>
-      <div class="estep"><div class="oprow">Fila 2 × Columna 2</div><p>El mismo renglón 2 = (3, −1, 1) contra la columna 2 = (1, −2, 3):</p><p class="calc"><span class="rw">c₂₂</span> 3·1=<b>3</b> <span class="sep">•</span> −1·(−2)=<b>2</b> <span class="sep">•</span> 1·3=<b>3</b> <span class="sep">•</span> suma=<b>8</b></p></div>
-      <div class="estep"><div class="oprow">El producto completo</div><div class="fx" id="pe1"></div></div>
-      <p class="idea" style="font-size:17px">Cuatro casillas, cada una un renglón contra una columna. Fíjate: <strong>una casilla a la vez</strong>, nunca todo de golpe. Ese es todo el mecanismo.</p>
-    </section>
-
-    <h2 class="modhead">Sube el tamaño · invertir por Gauss-Jordan</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ya sabes <strong>qué</strong> es la inversa: la tabla que deshace, la que cumple A·A<sup>−1</sup> = I.</p>
-      <p class="idea" style="font-size:17px">Falta el <strong>cómo encontrarla</strong> — y esto es lo que de verdad cae en examen.</p>
-      <p class="idea" style="font-size:17px">El truco: pegas una copia de la identidad al lado de A y conviertes A en la identidad con operaciones de renglón.</p>
-      <p class="idea" style="font-size:17px">Esa copia va <strong>grabando el camino de deshacer</strong>, y al terminar queda convertida en A<sup>−1</sup>.</p>
-      <p class="idea" style="font-size:17px">En la práctica son <strong>dos movimientos</strong>:</p>
-      <ul class="fases">
-        <li><strong>Pega la identidad:</strong> forma el bloque <em>[A | I]</em>, con A a la izquierda y la identidad a la derecha.</li>
-        <li><strong>Reduce hasta la identidad:</strong> con operaciones de renglón, lleva la izquierda a la identidad; lo que quede a la derecha <em>es</em> la inversa.</li>
-      </ul>
-      <p class="idea" style="font-size:17px">Tomemos A = renglón (1, 3) y renglón (2, 7). Cada operación se hace sobre <strong>toda</strong> la fila, identidad incluida.</p>
-      <div class="estep"><div class="oprow">Pego la identidad: [A | I]</div><div class="fx" id="in0"></div></div>
-
-      <div class="check" data-kind="item" data-id="I1pred" data-tema="inversa_gauss_jordan" data-level="juntos">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">El renglón 1 ya empieza con 1. Quieres hacer <strong>cero</strong> la esquina de abajo a la izquierda (hay un 2). ¿Qué operación lo logra?</p>
+      <div class="check challenge" data-kind="item" data-id="M7G" data-tema="inversa_gauss_jordan" data-level="guiado" data-module="7">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Elige el movimiento.</strong> En [A | I] con A = renglones (1, 3) y (2, 7), ¿qué operación hace cero el 2 de abajo a la izquierda?</p>
         <div class="opts">
           <button class="opt" data-ok="1">R2 → R2 − 2·R1</button>
           <button class="opt" data-ok="0">R2 → R2 + 2·R1</button>
           <button class="opt" data-ok="0">R1 → R1 − 2·R2</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Arriba la primera columna vale 1; restar 2 veces ese renglón deja 2 − 2·1 = 0 en la esquina de abajo.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Arriba hay un 1: restar dos veces esa fila deja 2 − 2·1 = 0.</p><p class="nudge">✕ El pivote de arriba vale 1; busca el múltiplo de esa fila que cancele exactamente el 2 de abajo. Intenta de nuevo.</p></div>
       </div>
-      <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>A la fila 2 = (2, 7 | 0, 1) le resto 2 veces la fila 1 = (1, 3 | 1, 0), celda por celda:</p><p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 7−2·3=<b>1</b> <span class="sep">•</span> 0−2·1=<b>−2</b> <span class="sep">•</span> 1−2·0=<b>1</b></p><div class="fx" id="in1"></div></div>
-
-      <p class="idea" style="font-size:17px">Ese 1 que quedó al frente del renglón de abajo es un <strong>pivote</strong> — el 1 líder de cada renglón, como en la Unidad 1.</p>
-
-      <div class="check" data-kind="item" data-id="I2pred" data-tema="inversa_gauss_jordan" data-level="juntos">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">El pivote de abajo ya es 1. Pero arriba, en la segunda columna, todavía queda un 3. ¿Qué lo limpia sin dañar el pivote de la izquierda?</p>
+      <div class="check challenge" data-kind="item" data-id="M7S" data-tema="inversa_gauss_jordan" data-level="solo" data-module="7">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Lee el final.</strong> Redujiste otra [A | I] y quedó: izquierda = identidad, derecha = renglones (13, −4) y (−3, 1). ¿Cuál es A<sup>−1</sup>?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">R1 → R1 − 3·R2</button>
-          <button class="opt" data-ok="0">R1 → R1 + 3·R2</button>
-          <button class="opt" data-ok="0">R2 → R2 − 3·R1</button>
+          <button class="opt" data-ok="1">Renglones (13, −4) y (−3, 1): lo que quedó a la derecha</button>
+          <button class="opt" data-ok="0">Renglones (1, 0) y (0, 1): la parte izquierda</button>
+          <button class="opt" data-ok="0">Todavía falta un paso más de reducción</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La fila 2 ya es (0, 1 | …). Restar 3 veces esa fila a la fila 1 cancela el 3 de la segunda columna y no toca la primera (ahí la fila 2 tiene 0).</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Cuando la izquierda es la identidad, la derecha ya es la inversa: solo se lee.</p><p class="nudge">✕ El método termina cuando la izquierda llega a la identidad; la respuesta espera del otro lado de la barra. Intenta de nuevo.</p></div>
       </div>
-      <div class="estep"><div class="oprow">R1 → R1 − 3·R2</div><p>A la fila 1 = (1, 3 | 1, 0) le resto 3 veces la fila 2 = (0, 1 | −2, 1):</p><p class="calc"><span class="rw">R1</span> 1−3·0=<b>1</b> <span class="sep">•</span> 3−3·1=<b>0</b> <span class="sep">•</span> 1−3·(−2)=<b>7</b> <span class="sep">•</span> 0−3·1=<b>−3</b></p><div class="fx" id="in2"></div></div>
-
-      <p class="idea" style="font-size:17px">La izquierda ya es la identidad, así que la <strong>derecha es la inversa</strong>: renglón (7, −3) y renglón (−2, 1).</p>
-      <p class="idea" style="font-size:17px">Fíjate en el orden: primero un cero <strong>abajo</strong>, luego limpiar <strong>arriba</strong>. Igual que resolver un sistema, pero arrastrando la identidad.</p>
-      <div class="estep"><div class="oprow">Comprobación: A por su inversa da I</div><div class="fx" id="inChk"></div></div>
-      <p class="calc"><span class="rw">c₁₁</span> 1·7=<b>7</b> <span class="sep">•</span> 3·(−2)=<b>−6</b> <span class="sep">•</span> suma=<b>1</b></p>
-      <p class="fx-note">Ese 1 es la esquina de arriba a la izquierda de la identidad. Haz las otras tres casillas y sale I completa: la inversa es correcta.</p>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Última idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>Cuándo existe la inversa</h3>
-      <p class="idea">¿Recuerdas la matriz que <strong>aplasta</strong>, como multiplicar por 0? Aquí es donde se delata.</p>
-      <p class="idea">Al reducir <strong>[A | I]</strong> pasa una de dos cosas:</p>
-      <ul class="fases">
-        <li>o la izquierda llega a la identidad — y la inversa <em>existe</em> y queda a la derecha —,</li>
-        <li>o en el camino aparece un <strong>renglón de puros ceros</strong> en la parte izquierda.</li>
-      </ul>
-      <p class="idea">Ese renglón de ceros es la huella del aplastón: una parte de la información se destruyó y ya no hay forma de llegar a la identidad.</p>
-      <p class="idea">La cuenta <strong>no se puede deshacer</strong>: no hay inversa.</p>
-      <p class="idea">A las matrices sin inversa se les llama <strong>singulares</strong> — "singular" en el sentido de rara, defectuosa: no tiene pareja que la deshaga.</p>
-      <p class="idea">Toca cada caso:</p>
-      <div class="viz">
-        <div class="viz-tabs" id="vizTabs">
-          <button class="viz-tab" data-case="existe">Sí existe</button>
-          <button class="viz-tab" data-case="singular">No existe</button>
-        </div>
-        <div class="viz-plane fx" id="vizPlane"></div>
-        <p class="viz-cap" id="vizCap"></p>
+    <section class="lesson" data-step="8">
+      <header class="lesson-head"><p class="micro">Microlección 8 de 8 · Tema: Matrices elementales</p><h2>Matrices elementales: cada movimiento es una matriz</h2><p class="goal">Meta: traducir una operación de renglón a su matriz elemental.</p></header>
+      <div class="sec">
+        <p class="idea lede">Última pieza: las <strong>matrices elementales</strong> — cada operación de renglón, convertida en matriz.</p>
+        <p class="idea">Ayer hiciste R2 → R2 − 2·R1 «a mano». La pregunta fina del curso: ¿y si esa jugada fuera, ella misma, una multiplicación?</p>
+        <p class="idea">Toma la identidad y hazle esa única operación:</p>
+        <div class="fx"><div class="matrix-form"><span>I =</span><span class="matrix" aria-label="Identidad de 2 por 2"><span>1</span><span>0</span><span>0</span><span>1</span></span><span>→</span><span>E =</span><span class="matrix" aria-label="Matriz elemental: renglones 1 0 y menos 2 1"><span>1</span><span>0</span><span>−2</span><span>1</span></span></div></div>
+        <p class="idea">Esa E es la jugada embotellada. Compruébalo: multiplícala por la A de ayer, renglón por columna:</p>
+        <div class="fx"><div class="matrix-form"><span>E·A =</span><span class="matrix" aria-label="Resultado: renglones 1 3 y 0 1"><span>1</span><span>3</span><span>0</span><span>1</span></span></div></div>
+        <p class="idea">La fila de abajo salió de −2·1 + 1·2 = 0 y −2·3 + 1·7 = 1: exactamente lo que dejó tu primer movimiento de ayer.</p>
+        <p class="idea key">Multiplicar por una matriz elemental (por la izquierda) <strong>ejecuta</strong> su operación de renglón.</p>
+        <p class="idea">Y con esto ya llegaste. Tu curso la define así:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 4.9</span>Una matriz cuadrada E de n×n es una <strong>matriz elemental</strong> si se puede obtener a partir de la matriz I<sub>n</sub> mediante una sola operación elemental por renglones.</p>
+        <p class="idea">La «sola operación» es cualquiera de las tres jugadas de Gauss que ya dominas:</p>
+        <div class="criteria"><div class="criterion"><b>1</b>Intercambiar dos renglones</div><div class="criterion"><b>2</b>Multiplicar un renglón por r ≠ 0</div><div class="criterion"><b>3</b>Sumar a un renglón un múltiplo de otro</div></div>
+        <p class="idea">Cada jugada se puede deshacer (¿restaste 2 veces? suma 2 veces) — así que cada elemental tiene inversa. Y de ahí el cierre de toda la unidad:</p>
+        <p class="fdef"><span class="flbl">Teoremas · Resumen del curso, Teos. 4.5 y 4.6</span>Toda matriz elemental es invertible, y el inverso de una matriz elemental es una matriz elemental. Una matriz es invertible si y solo si es producto de matrices elementales.</p>
+        <p class="idea">Léelo con lo que ya hiciste: ser invertible = poder fabricarse solo con jugadas de Gauss.</p>
+        <p class="idea">Por eso Gauss-Jordan encuentra toda inversa que existe — cada paso que diste era multiplicar por una elemental.</p>
       </div>
-      <p class="fx-note">La señal de que no hay inversa es siempre la misma: un renglón entero de ceros a la izquierda al reducir.</p>
-      <div class="check" data-kind="item" data-id="SINGchk" data-tema="existencia_inversa" data-level="juntos">
-        <div class="qtag">Te toca · decide</div>
-        <p class="q">Reduces [A | I] y en la parte izquierda te sale un renglón de puros ceros. ¿Qué concluyes?</p>
+      <div class="check challenge" data-kind="item" data-id="M8G" data-tema="matriz_elemental" data-level="guiado" data-module="8">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Lee la jugada.</strong> E = renglones (1, 0) y (−2, 1) se obtuvo de la identidad. ¿Con qué operación?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">A no tiene inversa: es singular</button>
-          <button class="opt" data-ok="0">La inversa es la propia identidad</button>
-          <button class="opt" data-ok="0">Hay que reordenar los renglones y volver a empezar</button>
+          <button class="opt" data-ok="1">R2 → R2 − 2·R1</button>
+          <button class="opt" data-ok="0">R1 → R1 − 2·R2</button>
+          <button class="opt" data-ok="0">R2 → −2·R2</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Un renglón de ceros a la izquierda significa que esa parte <strong>ya no puede</strong> llegar a la identidad. La matriz es singular: no existe inversa.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ La fila de abajo de I era (0, 1); restarle 2 veces (1, 0) deja (−2, 1).</p><p class="nudge">✕ Aplica cada opción a la identidad y mira cuál produce exactamente esa E. Intenta de nuevo.</p></div>
       </div>
+      <div class="check challenge" data-kind="item" data-id="M8S" data-tema="matriz_elemental" data-level="solo" data-module="8">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Embotella otra jugada.</strong> ¿Cuál es la matriz elemental de R1 → R1 + 5·R2, en tamaño 2×2?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Renglones (1, 5) y (0, 1)</button>
+          <button class="opt" data-ok="0">Renglones (1, 0) y (5, 1)</button>
+          <button class="opt" data-ok="0">Renglones (5, 0) y (0, 1)</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ A la fila (1, 0) le sumas 5 veces (0, 1): queda (1, 5). La otra fila no se toca.</p><p class="nudge">✕ Parte de la identidad y aplica la operación solo al renglón 1. Intenta de nuevo.</p></div>
+      </div>
+
+      <section class="finish">
+        <h3>Cierra sin mirar arriba</h3>
+        <p>Explica en voz alta esta cadena: matriz → suma y escalar → producto → propiedades → transpuesta → identidad e inversa → Gauss-Jordan → elementales.</p>
+        <p>Después responde: <strong>¿qué queda a la derecha al terminar de reducir [A | I], y qué señal delata a una matriz singular?</strong></p>
+        <p class="nota">¿Qué tan segura te sientes explicando estas ideas sin leer? 1 = nada · 5 = lo domino.</p>
+        <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
+        <button class="btn" id="makeReport">Generar reporte para el tutor</button>
+        <div class="report" id="reportSummary" aria-live="polite"></div>
+      </section>
+
+      <nav class="nav-lecs"><a href="L4_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L4_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
+
+      <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
-
-    <section class="sec">
-      <h3>Matrices con nombre propio</h3>
-      <p class="idea">Algunas matrices aparecen tanto que se ganaron nombre propio, y conviene reconocerlas de un vistazo.</p>
-      <p class="idea">Los tres nombres hablan de la <strong>forma</strong> de la tabla, siempre con la diagonal principal como referencia.</p>
-      <ul class="fases">
-        <li><strong>Diagonal</strong>: solo la diagonal principal puede tener números; todo lo demás es cero.</li>
-        <li><strong>Simétrica</strong>: la tabla es su propio espejo sobre la diagonal — la casilla a<sub>12</sub> es igual a la a<sub>21</sub>, la a<sub>13</sub> a la a<sub>31</sub>… o dicho corto, es igual a su transpuesta (A<sup>T</sup> = A).</li>
-        <li><strong>Triangular superior</strong>: los números forman un triángulo en la parte de arriba; debajo de la diagonal, puro cero — justo la "escalera" que te queda a media reducción en Gauss.</li>
-      </ul>
-      <div class="fx" id="specEx"></div>
-      <p class="fx-note">De izquierda a derecha: diagonal, simétrica, triangular superior.</p>
-      <p class="idea">Detente en la <strong>simétrica</strong>, que es la que más se usa.</p>
-      <p class="idea">Imagina un espejo apoyado sobre la diagonal principal.</p>
-      <p class="idea">La casilla a<sub>12</sub> (fila 1, columna 2) y su reflejo a<sub>21</sub> (fila 2, columna 1) guardan el <strong>mismo número</strong>.</p>
-      <div class="fx" id="symEx"></div>
-      <p class="fx-note">El 2 de arriba se refleja en el 2 de abajo; el 3 con el 3, el 6 con el 6. Doblada sobre la diagonal, la tabla cae exacta sobre sí misma.</p>
-      <div class="check" data-kind="item" data-id="SPECchk" data-tema="matrices_nombradas" data-level="guiado">
-        <div class="qtag">Te toca · reconoce</div>
-        <p class="q">¿Cuál de estas matrices es <strong>simétrica</strong>?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="sp_a"></button>
-          <button class="opt" data-ok="0" id="sp_b"></button>
-          <button class="opt" data-ok="0" id="sp_c"></button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Simétrica = igual a su transpuesta: al voltearla sobre la diagonal no cambia. La entrada (1,2) debe ser igual a la (2,1), la (1,3) a la (3,1), etc. La triangular tiene ceros abajo (no coincide con arriba) y la diagonal tiene ceros donde la otra no.</p></div>
-      </div>
-    </section>
-
-    <h2 class="modhead">Tu turno</h2>
-    <section class="practice">
-      <div class="phead"><h3>De guiado a solo</h3><p class="sub">Toca tu respuesta. Si fallas, vuelve a intentar. El apoyo se va retirando. · <span class="cont" id="cont"></span></p></div>
-
-      <div class="pitem" data-kind="item" data-id="P1" data-tema="producto_matrices" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">En este producto, ¿cuánto vale la casilla de arriba a la izquierda del resultado?</p>
-        <div class="fx" id="p1"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">11</button>
-          <button class="opt" data-ok="0">7</button>
-          <button class="opt" data-ok="0">13</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Empareja el <strong>primer renglón</strong> (2, 1) con la <strong>primera columna</strong> (4, 3): multiplica en pares y suma.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Fila 1 por columna 1: emparejas el primer renglón con la primera columna, multiplicas en pares y sumas.</p><div class="fx"><div class="sys"><span class="eq">(2)(4) + (1)(3) = 8 + 3 = 11</span></div></div></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="producto_matrices" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">En ese mismo producto, ¿cuánto vale la casilla de <strong>abajo a la derecha</strong>?</p>
-        <div class="fx" id="p2"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">25</button>
-          <button class="opt" data-ok="0">20</button>
-          <button class="opt" data-ok="0">15</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Abajo a la derecha es fila 2 (0, 5) contra columna 2 (1, 5).</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Fila 2, columna 2: (0)(1) + (5)(5) = 0 + 25 = 25. Cada casilla usa su propio renglón y su propia columna.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="dimensiones" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Quieres multiplicar una de tamaño <strong>3×2</strong> por otra de <strong>2×4</strong>, en ese orden. ¿El producto existe y de qué tamaño es?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Sí existe, y mide 3×4</button>
-          <button class="opt" data-ok="0">No existe: los tamaños no encajan</button>
-          <button class="opt" data-ok="0">Sí existe, y mide 2×2</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Los números de en medio (2 y 2) coinciden, así que existe. Los de los extremos, 3 y 4, dan el tamaño: 3×4.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="transpuesta" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">¿Cuál es la transpuesta de esta matriz?</p>
-        <div class="fx" id="p4"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="p4a"></button>
-          <button class="opt" data-ok="0" id="p4b"></button>
-          <button class="opt" data-ok="0" id="p4c"></button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>El <strong>primer renglón</strong> (2, 5, 1) pasa a ser la <strong>primera columna</strong>. Una de 2×3 se transpone a una de 3×2.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Cada renglón se vuelve columna: (2, 5, 1) pasa a ser la primera columna y (0, 3, 4) la segunda. El resultado mide 3×2.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="inversa_gauss_jordan" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Vas a invertir A = renglón (1, 4), renglón (3, 13). Ya pegaste la identidad.</p>
-        <p class="pstatement">El renglón 1 empieza con 1; quieres hacer cero la esquina de abajo a la izquierda (el 3). ¿Qué operación lo logra?</p>
-        <div class="fx" id="p5"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">R2 → R2 − 3·R1</button>
-          <button class="opt" data-ok="0">R2 → R2 + 3·R1</button>
-          <button class="opt" data-ok="0">R2 → R2 ÷ 3</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Arriba, en la primera columna, hay un 1; abajo un 3. ¿Qué múltiplo del renglón de arriba cancela el 3 de abajo? Trabajas sobre <strong>toda</strong> la fila, identidad incluida.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>El renglón 1 tiene un 1 en la primera columna; restar 3 veces ese renglón deja 3 − 3·1 = 0 abajo.</p><div class="fx"><div class="sys"><span class="eq">R2 − 3·R1: (3, 13 | 0, 1) → (0, 1 | −3, 1)</span></div></div></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P6" data-tema="inversa_gauss_jordan" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Seguiste reduciendo esa misma [A | I] hasta que la parte izquierda quedó como la identidad.</p>
-        <p class="pstatement">Esto es lo que te quedó. ¿Cuál es la inversa de A?</p>
-        <div class="fx" id="p6"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="p6a"></button>
-          <button class="opt" data-ok="0" id="p6b"></button>
-          <button class="opt" data-ok="0" id="p6c"></button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Cuando la izquierda ya es la identidad, la inversa es <strong>exactamente lo que quedó a la derecha</strong> de la barra. No hay que hacer más cuentas: solo leerla.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>La izquierda llegó a la identidad, así que la derecha es la inversa: el bloque a la derecha de la barra, renglón (13, −4), renglón (−3, 1).</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P7" data-tema="existencia_inversa" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Intentas invertir esta matriz por Gauss-Jordan y, al reducir, el segundo renglón se vuelve todo ceros a la izquierda. ¿Qué concluyes?</p>
-        <div class="fx" id="p7"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">No tiene inversa: es singular</button>
-          <button class="opt" data-ok="0">Su inversa es ella misma</button>
-          <button class="opt" data-ok="0">Hay que empezar de nuevo con otro orden de renglones</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Fíjate si un renglón es múltiplo del otro. Si lo es, al restar aparece un renglón de ceros.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>El segundo renglón (2, 6) es 2 veces el primero (1, 3), así que al reducir aparece un renglón de ceros a la izquierda. Eso ya no puede llegar a la identidad: no hay inversa.</p><div class="fx"><div class="sys"><span class="eq">2·(1, 3) = (2, 6)</span></div></div></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P8" data-tema="inversa_gauss_jordan" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Invierte esta matriz por Gauss-Jordan, tú sola de principio a fin.</p>
-        <p class="pstatement">Pega la identidad, reduce hasta que la izquierda sea la identidad y lee la inversa. ¿Cuál es la inversa de A?</p>
-        <div class="fx" id="p8"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="p8a"></button>
-          <button class="opt" data-ok="0" id="p8b"></button>
-          <button class="opt" data-ok="0" id="p8c"></button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Forma [A | I]. El renglón 1 ya empieza con 1: haz R2 → R2 − R1 para poner cero abajo a la izquierda. Luego, con el pivote de abajo, limpia el 2 de arriba: R1 → R1 − 2·R2. Lo que quede a la derecha de la barra es la inversa.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Partes de [A | I]. Tras R2 → R2 − R1 y luego R1 → R1 − 2·R2, la izquierda llega a la identidad y a la derecha queda la inversa, renglón (3, −2), renglón (−1, 1). Compruébalo: A por esa matriz da la identidad.</p><div class="fx" id="p8chk"></div></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P9" data-tema="modelado" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Volviendo al inicio: el <strong>combo A lleva 2 cafés y 1 pan</strong>, el <strong>combo B lleva 1 café y 3 panes</strong>.</p>
-        <p class="pstatement">En la tabla de recetas, cada renglón es un combo (café primero, pan después). ¿Cuál matriz de recetas es la correcta?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="p9a"></button>
-          <button class="opt" data-ok="0" id="p9b"></button>
-          <button class="opt" data-ok="0" id="p9c"></button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Renglón del combo A = (cafés de A, panes de A) = (2, 1). Renglón del combo B = (1, 3). Columna 1 = café, columna 2 = pan.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Combo A = (2, 1): 2 cafés, 1 pan. Combo B = (1, 3): 1 café, 3 panes. Cada número va en la columna de su ingrediente.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P10" data-tema="matrices_nombradas" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">¿Cuál de estas matrices es <strong>triangular superior</strong> (todo cero debajo de la diagonal)?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="p10a"></button>
-          <button class="opt" data-ok="0" id="p10b"></button>
-          <button class="opt" data-ok="0" id="p10c"></button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Mira solo lo que hay <strong>debajo</strong> de la diagonal principal: en una triangular superior todo eso es cero.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Triangular superior = ceros debajo de la diagonal. La diagonal y lo de arriba pueden ser cualquier cosa; lo de abajo debe ser todo cero.</p></div>
-      </div>
-    </section>
-
-    <div class="check" data-kind="recall" data-fid="F2_transpuesta_producto" data-tema="transpuesta">
-      <div class="qtag">Te toca · recuerda</div>
-      <p class="q">Al transponer un producto de matrices, ¿qué pasa con el orden?</p>
-      <div class="opts">
-        <button class="opt" data-ok="1">Se voltea el orden: la transpuesta de A·B es la transpuesta de B por la transpuesta de A</button>
-        <button class="opt" data-ok="0">Se mantiene el orden: transpuesta de A por transpuesta de B</button>
-        <button class="opt" data-ok="0">La transpuesta de un producto no está definida</button>
-      </div>
-      <div class="why"><span class="lbl">Por qué</span><p>La regla es que el orden se invierte:</p><div class="fx"><div class="sys"><span class="eq">(A·B)<sup>T</sup> = B<sup>T</sup>·A<sup>T</sup></span></div></div><p>La misma idea vale para la inversa de un producto.</p></div>
-    </div>
-
-    <section class="chuleta">
-      <h3>Para memorizar</h3>
-      <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
-      <ul>
-        <li><span class="ck">✓</span> Producto = renglón por columna: la casilla (i, j) usa el renglón i y la columna j.</li>
-        <li><span class="ck">✓</span> El producto existe solo si los tamaños de en medio coinciden; los extremos dan el resultado.</li>
-        <li><span class="ck">✓</span> El producto NO es conmutativo: A·B casi nunca es igual a B·A.</li>
-        <li><span class="ck">✓</span> Transpuesta = renglones a columnas; (A·B) transpuesta = B transpuesta · A transpuesta.</li>
-        <li><span class="ck">✓</span> Identidad = unos en la diagonal, ceros afuera. Es el 1: A·I = A.</li>
-        <li><span class="ck">✓</span> Inversa por Gauss-Jordan: reduce [A | I]; lo que queda a la derecha es la inversa.</li>
-        <li><span class="ck">✓</span> No hay inversa (singular) si al reducir aparece un renglón de ceros a la izquierda.</li>
-      </ul>
-    </section>
-
-    <section class="cierre">
-      <h3>¿Cómo te fue?</h3>
-      <p class="nota">Qué tan segura te sientes multiplicando matrices e invirtiendo por Gauss-Jordan ahora. 1 = nada · 5 = lo domino.</p>
-      <div class="escala" id="esc"></div>
-      <div id="reporte"></div>
-      <button class="btn" id="gen">Generar reporte para el tutor</button>
-    </section>
-
-    <nav class="nav-lecs"><a href="L4_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L4_cuadernillo-papel.html"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
-
-    <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 4</p></footer>
 
   </main>
+
+  <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 4</p></footer>
+
 </div>
 
 <script>
-"use strict";
-
-function mat(rows){
-  var coeffs = rows[0].length - 1;
-  var gtc = 'repeat('+coeffs+',auto) 16px auto';
-  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
-  for(var r=0;r<rows.length;r++){
-    var cells='';
-    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
-    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
-    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
-  }
-  return h+'</div><span class="brk brk-r"></span></div>';
-}
-function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
-
-// Matrices "planas" (sin barra de aumentada) se arman con matN().
-function matN(rows){
-  var cols = rows[0].length;
-  var gtc = 'repeat('+cols+',auto)';
-  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
-  for(var r=0;r<rows.length;r++){
-    var cells='';
-    for(var j=0;j<cols;j++) cells+='<span>'+rows[r][j]+'</span>';
-    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
-  }
-  return h+'</div><span class="brk brk-r"></span></div>';
-}
-function setN(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=matN(rows); }
-
-// [A | I] de 2×2: 4 columnas visibles, barra tras la 2ª.
-function aug4(rows){
-  var gtc='repeat(2,auto) 16px repeat(2,auto)';
-  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
-  for(var r=0;r<rows.length;r++){
-    var c='<span>'+rows[r][0]+'</span><span>'+rows[r][1]+'</span><span class="msep"></span><span>'+rows[r][2]+'</span><span>'+rows[r][3]+'</span>';
-    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+c+'</div>';
-  }
-  return h+'</div><span class="brk brk-r"></span></div>';
-}
-// junta dos matrices con un separador (o un signo · = →) entre ellas
-function pair(a,b,sym){
-  var mid = sym ? '<span style="display:inline-block;width:20px;text-align:center">'+sym+'</span>'
-               : '<span style="display:inline-block;width:14px"></span>';
-  return a + mid + b;
-}
-// tabla con rótulo arriba, para separar y nombrar dos tablas que NO se multiplican
-function capT(cap, m){
-  return '<div style="display:grid;gap:6px;justify-items:center">'
-    + '<span style="font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#C75D08">'+cap+'</span>'
-    + m + '</div>';
-}
-function capRow(inner){
-  return '<div style="display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start">'+inner+'</div>';
-}
-
-// ===== Empecemos por un problema: recetas × precios =====
-document.getElementById('prob0').innerHTML =
-  capRow(capT('Recetas', matN([["2","1"],["1","3"]])) + capT('Precios', matN([["30"],["20"]])));
-
-// ===== La idea =====
-document.getElementById('prodA').innerHTML =            // A (2×3) · B (3×2)
-  pair(matN([["1","2","0"],["3","−1","1"]]), matN([["2","1"],["0","−2"],["4","3"]]));
-document.getElementById('transEx').innerHTML =         // A (2×3)  →  Aᵀ (3×2)
-  pair(matN([["1","2","3"],["4","5","6"]]), matN([["1","4"],["2","5"],["3","6"]]), "→");
-setN('identEx',[["1","0","0"],["0","1","0"],["0","0","1"]]); // I₃
-// matrices especiales (diagonal · simétrica · triangular superior), lado a lado
-document.getElementById('specEx').innerHTML =
-  pair(pair(matN([["2","0","0"],["0","5","0"],["0","0","3"]]), matN([["1","2","3"],["2","5","6"],["3","6","9"]])),
-       matN([["1","2","3"],["0","1","4"],["0","0","1"]]));
-// micro-check: ¿cuál es simétrica?  (a: simétrica · b: triangular · c: diagonal con hueco)
-document.getElementById('sp_a').innerHTML = matN([["4","1","2"],["1","5","0"],["2","0","3"]]);
-document.getElementById('sp_b').innerHTML = matN([["4","1","2"],["0","5","6"],["0","0","3"]]);
-document.getElementById('sp_c').innerHTML = matN([["4","0","0"],["3","5","0"],["0","0","3"]]);
-// simétrica: micro-bloque del espejo sobre la diagonal (a₁₂=a₂₁, a₁₃=a₃₁, a₂₃=a₃₂)
-setN('symEx',[["1","2","3"],["2","5","6"],["3","6","9"]]);
-
-// ===== §5: el orden importa — dibujar A y B para el "compruébalo" =====
-document.getElementById('ordAB').innerHTML =
-  capRow(capT('A', matN([["1","1"],["0","1"]])) + capT('B', matN([["1","0"],["1","1"]])));
-
-// ===== Yo lo hago · contigo: producto 2×3 · 3×2 =====
-document.getElementById('pe0').innerHTML =
-  pair(matN([["1","2","0"],["3","−1","1"]]), matN([["2","1"],["0","−2"],["4","3"]]));
-setN('pe1',[["2","−3"],["10","8"]]);
-
-// ===== Sube el tamaño: inversa por Gauss-Jordan de A=[[1,3],[2,7]] =====
-document.getElementById('in0').innerHTML = aug4([["1","3","1","0"],["2","7","0","1"]]);
-document.getElementById('in1').innerHTML = aug4([["1","3","1","0"],["0","1","−2","1"]]);
-document.getElementById('in2').innerHTML = aug4([["1","0","7","−3"],["0","1","−2","1"]]);
-// comprobación A · A⁻¹ = I
-document.getElementById('inChk').innerHTML =
-  pair(pair(matN([["1","3"],["2","7"]]), matN([["7","−3"],["−2","1"]])), matN([["1","0"],["0","1"]]), "=");
-
-// ===== Práctica =====
-// P1 / P2: mismo producto [[2,1],[0,5]] · [[4,1],[3,5]] = [[11,7],[15,25]]
-document.getElementById('p1').innerHTML = pair(matN([["2","1"],["0","5"]]), matN([["4","1"],["3","5"]]));
-document.getElementById('p2').innerHTML = pair(matN([["2","1"],["0","5"]]), matN([["4","1"],["3","5"]]));
-// P4: transpuesta de [[2,5,1],[0,3,4]] → [[2,0],[5,3],[1,4]]
-setN('p4',[["2","5","1"],["0","3","4"]]);
-document.getElementById('p4a').innerHTML = matN([["2","0"],["5","3"],["1","4"]]);
-document.getElementById('p4b').innerHTML = matN([["2","5","1"],["0","3","4"]]);
-document.getElementById('p4c').innerHTML = matN([["1","4"],["5","3"],["2","0"]]);
-// P5 (guiado): [A|I] con A=[[1,4],[3,13]], antes de reducir → elegir R2−3·R1
-document.getElementById('p5').innerHTML = aug4([["1","4","1","0"],["3","13","0","1"]]);
-// P6 (juntos): esa misma [A|I] ya reducida → leer la inversa a la derecha (A⁻¹=[[13,−4],[−3,1]])
-document.getElementById('p6').innerHTML = aug4([["1","0","13","−4"],["0","1","−3","1"]]);
-document.getElementById('p6a').innerHTML = matN([["13","−4"],["−3","1"]]);
-document.getElementById('p6b').innerHTML = matN([["1","4"],["3","13"]]);
-document.getElementById('p6c').innerHTML = matN([["1","0"],["0","1"]]);
-// P7 (juntos): singular, renglón 2 = 2× renglón 1
-setN('p7',[["1","3"],["2","6"]]);
-// P8 (solo): inversión completa de A=[[1,2],[1,3]] → inversa [[3,−2],[−1,1]]
-setN('p8',[["1","2"],["1","3"]]);
-document.getElementById('p8a').innerHTML = matN([["3","−2"],["−1","1"]]);
-document.getElementById('p8b').innerHTML = matN([["1","2"],["1","3"]]);
-document.getElementById('p8c').innerHTML = matN([["3","2"],["1","1"]]);
-document.getElementById('p8chk').innerHTML =
-  pair(pair(matN([["1","2"],["1","3"]]), matN([["3","−2"],["−1","1"]])), matN([["1","0"],["0","1"]]), "=");
-// P9 (modelado): recetas de combos → [[2,1],[1,3]]
-document.getElementById('p9a').innerHTML = matN([["2","1"],["1","3"]]);
-document.getElementById('p9b').innerHTML = matN([["2","1"],["3","1"]]);
-document.getElementById('p9c').innerHTML = matN([["1","2"],["3","1"]]);
-// P10 (matrices nombradas): triangular superior
-document.getElementById('p10a').innerHTML = matN([["3","5","2"],["0","4","1"],["0","0","6"]]);
-document.getElementById('p10b').innerHTML = matN([["3","0","0"],["5","4","0"],["2","1","6"]]);
-document.getElementById('p10c').innerHTML = matN([["3","5","2"],["1","4","1"],["0","0","6"]]);
-
-// ===== visual con tabs: ¿existe la inversa? mostramos la [A|I] ya reducida en cada caso =====
-function drawInv(cse){
-  var html, cap;
-  if(cse==='existe'){
-    html = aug4([["1","0","7","−2"],["0","1","−3","1"]]);
-    cap='La parte izquierda llegó a la identidad: la matriz sí tiene inversa, y es lo que quedó a la derecha.';
-  } else {
-    html = aug4([["1","2","1","0"],["0","0","−1","1"]]);
-    cap='El segundo renglón se volvió cero a la izquierda (0 y 0). Ya no se puede llegar a la identidad: la matriz es singular, no tiene inversa.';
-  }
-  document.getElementById('vizPlane').innerHTML=html;
-  document.getElementById('vizCap').textContent=cap;
-}
-document.querySelectorAll('.viz-tab').forEach(function(b){
-  b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawInv(b.getAttribute('data-case')); };
-});
-(function(){ var f=document.querySelector('.viz-tab'); f.classList.add('active'); drawInv('existe'); })();
-
-// --- visual propio: el "dominó" de dimensiones (2×3 · 3×2 → 2×2) ---
 (function(){
-  var el=document.getElementById('dimViz'); if(!el) return;
-  function box(x,label,fill,stroke){
-    return '<rect x="'+x+'" y="34" width="86" height="52" rx="10" fill="'+fill+'" stroke="'+stroke+'" stroke-width="2.5"/>'+
-           '<text x="'+(x+43)+'" y="66" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="22" font-weight="800" fill="#181B22">'+label+'</text>';
-  }
-  var svg='<svg viewBox="0 0 380 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Compatibilidad de dimensiones para el producto de matrices">';
-  svg+=box(6,'2×3','#FFF3E7','#F5821F');
-  svg+='<text x="106" y="66" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="22" font-weight="800" fill="#334155">·</text>';
-  svg+=box(120,'3×2','#eef1fb','#283891');
-  svg+='<text x="230" y="66" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="22" font-weight="800" fill="#334155">=</text>';
-  svg+=box(250,'2×2','#fff','#334155');
-  svg+='<path d="M78 100 C 78 122, 150 122, 150 100" fill="none" stroke="#334155" stroke-width="2.5"/>';
-  svg+='<text x="114" y="140" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="13" font-weight="700" fill="#C75D08">3 = 3 → sí se puede</text>';
-  svg+='<text x="300" y="24" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif" font-size="12" font-weight="700" fill="#C75D08">extremos → tamaño</text>';
-  svg+='</svg>';
-  el.innerHTML=svg;
-})();
-
-// ===== instrumentación =====
-var session = {
-  fecha:new Date().toISOString().slice(0,10),
-  materia:"algebra_lineal", unidad:"U4_matricial", leccion:"L4_algebra-matricial",
-  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
-};
-var t0ms = Date.now();
-var TOT_EJ = document.querySelectorAll('[data-kind="item"]').length;
-function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.items.length+"/"+TOT_EJ+" ejercicios"; }
-
-document.querySelectorAll('[data-kind]').forEach(function(block){
-  var kind = block.getAttribute('data-kind');
-  var start = Date.now(), intentos = 0, done = false;
-  var why = block.querySelector('.why');
-  block.querySelectorAll('.opt').forEach(function(b){
-    b.onclick = function(){
-      if(done) return;
-      intentos++;
-      if(b.getAttribute('data-ok')==="1"){
-        done = true; b.classList.add('right');
-        if(why) why.classList.add('show');
-        var pit = block.closest('.pitem'); if(pit) pit.classList.add('solved');
-        if(kind==="recall"){
-          session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:(intentos===1?"de_memoria":"con_pista") });
-        } else {
-          session.items.push({ id:block.getAttribute('data-id'), tema:block.getAttribute('data-tema'),
-            nivel:(block.getAttribute('data-level')||"-"), intentos:intentos, correcto:true, tiempo_s:Math.round((Date.now()-start)/1000) });
-          updateCont();
-        }
-      } else {
-        b.classList.add('wrong'); b.disabled = true;
-        if(why){ why.classList.add('show','miss'); }
-      }
-    };
+  'use strict';
+  var KEY='valentina-algebra-u4-guia-micro';
+  var goals=[
+    'La matriz: leer tamaño y casillas sin confundir el orden.',
+    'Suma y escalar: operar casilla por casilla.',
+    'Producto: emparejar renglón con columna y sumar.',
+    'Propiedades: decidir cuándo existe el producto y qué tamaño deja.',
+    'Transpuesta: voltear renglones a columnas y el orden del producto.',
+    'Identidad e inversa: reconocer la tabla que deshace.',
+    'Gauss-Jordan: encontrar la inversa reduciendo [A | I].',
+    'Matrices elementales: ver cada operación de renglón como matriz.'
+  ];
+  var state={current:1,started:new Date().toISOString(),items:{},confidence:null};
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&saved.items){state=saved;}}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  function shuffle(box){var a=Array.prototype.slice.call(box.children);for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}for(var k=0;k<a.length;k++){box.appendChild(a[k]);}}
+  function markDone(){document.querySelectorAll('.step').forEach(function(btn){var m=btn.dataset.go;var cards=document.querySelectorAll('.challenge[data-module="'+m+'"]');var ids=Array.prototype.map.call(cards,function(x){return x.dataset.id;});btn.classList.toggle('is-done',ids.length>0&&ids.every(function(id){return state.items[id]&&state.items[id].correct;}));});}
+  function progress(){var total=document.querySelectorAll('.challenge').length;var done=Object.keys(state.items).filter(function(id){return state.items[id].correct;}).length;return {done:done,total:total};}
+  function go(n){n=Math.max(1,Math.min(8,Number(n)||1));state.current=n;save();
+    document.querySelectorAll('.lesson').forEach(function(x){x.classList.toggle('is-active',Number(x.dataset.step)===n);});
+    document.querySelectorAll('.step').forEach(function(x){x.setAttribute('aria-selected',String(Number(x.dataset.go)===n));});
+    document.getElementById('heroStep').textContent=n;
+    document.getElementById('heroGoal').textContent=goals[n-1];
+    window.scrollTo({top:0,behavior:'smooth'});}
+  document.querySelectorAll('.opts').forEach(shuffle);
+  document.querySelectorAll('.challenge').forEach(function(card){
+    var id=card.dataset.id;var fb=card.querySelector('.fb');var prev=state.items[id];
+    if(prev&&prev.correct){card.querySelectorAll('.opt').forEach(function(b){b.disabled=true;if(b.dataset.ok==='1')b.classList.add('right');});fb.className='fb show ok';}
+    card.querySelectorAll('.opt').forEach(function(btn){btn.addEventListener('click',function(){
+      if(state.items[id]&&state.items[id].correct)return;
+      var rec=state.items[id]||{attempts:0,correct:false,tema:card.dataset.tema,level:card.dataset.level,module:Number(card.dataset.module)};
+      rec.attempts+=1;
+      if(btn.dataset.ok==='1'){rec.correct=true;card.querySelectorAll('.opt').forEach(function(b){b.disabled=true;b.classList.remove('wrong');if(b.dataset.ok==='1')b.classList.add('right');});fb.className='fb show ok';}
+      else{btn.disabled=true;btn.classList.add('wrong');fb.className='fb show no';}
+      state.items[id]=rec;save();markDone();
+    });});
   });
-});
-
-var esc = document.getElementById('esc');
-[1,2,3,4,5].forEach(function(n){
-  var b=document.createElement('button'); b.textContent=n;
-  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
-  esc.appendChild(b);
-});
-
-function buildSummary(){
-  var c=session.items.filter(function(x){return x.correcto;}).length;
-  var trabas=session.items.filter(function(x){return x.intentos>1;}).map(function(x){return x.id;});
-  var rec=session.formulas.map(function(f){return f.id+": "+f.recall;});
-  var s="Resolvió "+c+"/"+TOT_EJ+" ejercicios. ";
-  s+= rec.length? ("Recall de fórmulas → "+rec.join(" · ")+". ") : "No hizo el recall de fórmulas. ";
-  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas. ";
-  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
-  return s;
-}
-document.getElementById('gen').onclick=function(){
-  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
-  session.resumen_legible=buildSummary();
-  var nombre=session.fecha+"_algebra_U4.json";
-  var json=JSON.stringify(session,null,2);
-  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
-  var recPills=session.formulas.map(function(f){return '<span class="pill">'+f.id+": "+f.recall+'</span>';}).join("")||'<span class="nota">— sin recall —</span>';
-  document.getElementById('reporte').innerHTML=
-    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
-    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
-    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT_EJ+'</strong> ejercicios · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
-    '<div>Fórmulas: '+recPills+'</div>'+
-    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
-    '<button class="btn ghost" id="cp">Copiar</button>'+
-    '<textarea id="ta" readonly>'+json+'</textarea>'+
-    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
-    '</div>';
-  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
-  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
-};
-updateCont();
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);});});
+  document.querySelectorAll('[data-next]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.next);});});
+  document.querySelectorAll('[data-prev]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.prev);});});
+  var mix={f:1,c:1};
+  function paintMix(){
+    var rows={1:'(1, 2, 0)',2:'(3, −1, 1)'};
+    var cols={1:'(2, 0, 4)',2:'(1, −2, 3)'};
+    var ops={'11':'1·2 + 2·0 + 0·4','12':'1·1 + 2·(−2) + 0·3','21':'3·2 + (−1)·0 + 1·4','22':'3·1 + (−1)·(−2) + 1·3'};
+    var res={'11':'2','12':'−3','21':'10','22':'8'};
+    var sub={1:'₁',2:'₂'};
+    var k=''+mix.f+mix.c;
+    document.getElementById('mixWords').textContent='c'+sub[mix.f]+sub[mix.c]+' = '+res[k];
+    document.getElementById('mixFormula').textContent='fila '+mix.f+' '+rows[mix.f]+' con columna '+mix.c+' '+cols[mix.c]+' → '+ops[k]+' = '+res[k];}
+  document.querySelectorAll('.pick').forEach(function(group){group.querySelectorAll('button').forEach(function(btn){btn.addEventListener('click',function(){
+    var key=group.dataset.mix;mix[key]=Number(btn.dataset.value);
+    group.querySelectorAll('button').forEach(function(x){x.classList.toggle('is-on',x===btn);});paintMix();});});});
+  document.querySelectorAll('[data-confidence]').forEach(function(btn){btn.addEventListener('click',function(){
+    state.confidence=Number(btn.dataset.confidence);save();
+    document.querySelectorAll('[data-confidence]').forEach(function(x){x.classList.toggle('sel',x===btn);});});
+    if(state.confidence===Number(btn.dataset.confidence))btn.classList.add('sel');});
+  document.getElementById('makeReport').addEventListener('click',function(){
+    var p=progress();
+    var weak=Object.keys(state.items).filter(function(id){return state.items[id].attempts>1;});
+    var report={fecha:new Date().toISOString().slice(0,10),materia:'algebra_lineal',unidad:'U4_algebra_de_matrices',leccion:'L4_algebra-matricial',inicio:state.started,
+      duracion_min:Math.max(1,Math.round((Date.now()-new Date(state.started).getTime())/60000)),
+      items:Object.keys(state.items).map(function(id){var x=state.items[id];return {id:id,tema:x.tema,nivel:x.level,modulo:x.module,intentos:x.attempts,correcto:x.correct};}),
+      autoconfianza:state.confidence,
+      resumen_legible:'Resolvió '+p.done+'/'+p.total+' actividades. Requirieron más de un intento: '+(weak.length?weak.join(', '):'ninguna')+'. Confianza: '+(state.confidence||'sin registrar')+'/5.'};
+    var blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=report.fecha+'_algebra_lineal_U4.json';a.click();URL.revokeObjectURL(url);
+    var box=document.getElementById('reportSummary');box.className='report show';box.innerHTML='<p><strong>Reporte listo.</strong> '+report.resumen_legible+'</p>';});
+  markDone();go(state.current||1);
+})();
 </script>
 </body>
 </html>

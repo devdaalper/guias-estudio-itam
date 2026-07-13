@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Álgebra Lineal · U6 — Diagonalización y valores propios</title>
+<title>Álgebra Lineal · U6 — Valores propios y diagonalización</title>
 <style>
   :root{
     --ink:#181B22; --orange:#F5821F; --orange-hover:#E56F0E; --deep:#C75D08;
@@ -32,114 +32,110 @@
   .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
   .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
   .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
-  .learn{margin:22px 0 0;display:grid;gap:10px}
-  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
-  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
-  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
-  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+  .today{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;margin-top:20px;padding:13px 16px;background:#fff;border:2px solid var(--ink);border-radius:14px}
+  .today .n{width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;display:grid;place-items:center}
+  .today p{margin:0}
+  .today b{font-weight:800}
+  .today small{display:block;color:var(--muted);font-size:15px}
 
-  main{display:grid;gap:16px;margin-top:22px}
-  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+  .route-label{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep);margin:20px 0 8px}
+  .route{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px}
+  .step{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 7px;background:#fff;border:2px solid var(--ink);border-radius:999px;cursor:pointer;font:inherit;font-weight:700;font-size:15px;color:var(--ink);transition:transform .1s}
+  .step .num{width:26px;height:26px;border-radius:50%;background:#eef1fb;color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:14px}
+  .step:hover{transform:translateY(-1px)}
+  .step[aria-selected="true"]{background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+  .step[aria-selected="true"] .num{background:#fff;color:var(--deep)}
+  .step.is-done{border-color:var(--green-deep)}
+  .step.is-done .num{background:var(--green);color:#fff}
 
-  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
-  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
-  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
-  .idea strong{font-weight:800}
+  main{display:grid;gap:16px;margin-top:6px}
+  .lesson{display:none}
+  .lesson.is-active{display:grid;gap:16px}
+  .lesson-head{margin-top:6px}
+  .micro{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .lesson-head h2{margin:.15em 0 .1em;font-size:clamp(23px,3.6vw,31px);letter-spacing:-.02em}
+  .goal{margin:0;color:var(--muted)}
 
-  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
-  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
-  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
-  .fases li{font-size:17px;line-height:1.5}
-  .fases em{font-style:normal;color:var(--deep);font-weight:700}
-  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
-  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
-  .calc b{color:var(--ink);font-weight:800}
-  .calc .sep{color:#c9c2b6;margin:0 5px}
-  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:22px 22px 24px;display:grid;gap:17px;box-shadow:var(--shadow)}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
+  .idea strong{font-weight:800;color:var(--ink)}
+  .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
+  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
+  .paso{color:var(--muted);font-size:16px}
+  .paso::before{content:"→ ";color:var(--orange);font-weight:800}
+
+  .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums;text-align:center}
   .sys .eq{white-space:nowrap}
-  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
-  .brk{width:10px;border:2.5px solid var(--ink)}
-  .brk-l{border-right:0;border-radius:5px 0 0 5px}
-  .brk-r{border-left:0;border-radius:0 5px 5px 0}
-  .cols{padding:8px 4px}
-  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
-  .mrow>span{text-align:right;min-width:24px}
-  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+  .unknown{color:var(--deep);font-weight:800}
+  .matrix-form{display:flex;align-items:center;gap:14px;justify-content:center;font-size:21px;flex-wrap:wrap}
+  .matrix{display:grid;grid-template-columns:repeat(2,minmax(26px,auto));gap:8px 16px;padding:6px 12px;border-left:3px solid var(--ink);border-right:3px solid var(--ink)}
+  .matrix.three{grid-template-columns:repeat(3,minmax(26px,auto))}
+  .matrix span{display:grid;place-items:center;min-height:30px;padding:0 4px;border-radius:6px}
+  .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
+  .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
+
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+
+  .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
+  .visual svg{display:block;width:100%;height:auto}
+  .visual figcaption{margin-top:8px;color:var(--muted);font-size:15px;text-align:center}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;color:var(--slate);font-size:15px}
+  .dot{display:inline-block;width:11px;height:11px;margin-right:5px;border-radius:50%;background:var(--orange)}
+  .dot.navy{background:var(--navy)}
+
+  .mixlab{display:grid;gap:14px;padding:16px;border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9}
+  .recipe{padding:12px;border:1.5px solid var(--line);border-radius:12px;background:#fff}
+  .recipe h4{margin:0 0 2px;font-size:17px}
+  .recipe p{margin:0 0 10px;font-size:15px;color:var(--muted)}
+  .pick{display:flex;flex-wrap:wrap;gap:7px}
+  .pick button{font:inherit;font-size:16px;font-weight:700;padding:8px 13px;background:#fff;border:2px solid var(--line);border-radius:9px;cursor:pointer;font-variant-numeric:tabular-nums}
+  .pick button:hover{border-color:var(--orange)}
+  .pick button.is-on{background:var(--orange);border-color:var(--ink);color:#fff}
+  .mix-result{padding:12px;background:var(--cream);border:1.5px solid var(--line);border-radius:12px;text-align:center}
+  .mix-result p{margin:0;font-size:15px;color:var(--slate)}
+  .mix-result strong{display:block;font-size:24px;color:var(--ink);font-variant-numeric:tabular-nums}
 
   .check{display:grid;gap:11px;padding:16px 18px;border:1.5px solid #cfd6f2;border-radius:12px;background:#eef1fb}
-  .check .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
-  .check .qtag::before{content:"✎ "}
-  .check .q{margin:0;font-weight:700;font-size:17px}
-
+  .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .qtag::before{content:"✎ "}
+  .q{margin:0;font-size:17px}
+  .q strong{font-weight:800}
   .opts{display:grid;gap:10px}
-  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s;min-width:0;overflow-wrap:anywhere}
   .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
-  .opt:disabled{cursor:default}
+  .opt:disabled{cursor:default;transform:none}
   .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
   .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .fb{display:none;border:1.5px solid;border-radius:10px;padding:11px 14px;font-size:17px}
+  .fb.show{display:block}
+  .fb.ok{border-color:#bfe6cd;background:#eef7f0}
+  .fb.no{border-color:#f0d6b8;background:#fdf3ea}
+  .fb p{margin:0}
+  .fb .okc,.fb .nudge{display:none}
+  .fb.ok .okc{display:block}
+  .fb.no .nudge{display:block}
 
-  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
-  .why.show{display:block}
-  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
-  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
-  .why.miss>.lbl{color:var(--deep)}
-  .why p{margin:0}
-
-  .ejemplo{border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9;padding:18px 20px;display:grid;gap:14px}
-  .estep{display:grid;gap:8px}
-  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
-  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
-
-  .practice{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
-  .practice .phead h3{margin:0;font-size:19px}
-  .practice .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
-  .pitem{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff;transition:border-color .2s,background .2s}
-  .pitem.solved{border-color:var(--green);background:#f3faf5}
-  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
-  .lvl.guiado{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
-  .lvl.juntos{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
-  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
-  .pstatement{margin:0;font-size:17px}
-  .aux summary{cursor:pointer;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;list-style:none;width:max-content;font-size:15px}
-  .aux summary::-webkit-details-marker{display:none}
-  .aux summary:hover{border-color:var(--navy);background:#f7f8fc}
-  .aux details[open] summary{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
-  .aux p{margin:8px 2px 0;font-size:16px;color:var(--slate)}
-
-  .viz{display:grid;gap:12px}
-  .viz-tabs{display:flex;gap:8px;flex-wrap:wrap}
-  .viz-tab{font:inherit;font-weight:700;font-size:15px;padding:9px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
-  .viz-tab:hover{border-color:var(--orange);transform:translateY(-1px)}
-  .viz-tab.active{border-color:var(--ink);background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
-  .viz-plane{padding:10px}
-  .viz-plane svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
-  .viz-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--slate)}
-  .viz-legend span{display:inline-flex;align-items:center;gap:7px}
-  .viz-legend i{width:18px;height:4px;border-radius:2px;display:inline-block}
-  .viz-cap{margin:0;font-size:17px;color:var(--slate);min-height:1.6em}
-
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
-
-  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
-  .cierre h3{margin:0;font-size:19px}
-  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
-  .escala button:hover{border-color:var(--orange)}
-  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
-  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .lesson-nav{display:flex;justify-content:space-between;gap:12px;margin-top:4px}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:12px 20px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;text-decoration:none;display:inline-block}
   .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
   .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
-  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
-  .nota{font-size:15px;color:var(--muted);margin-top:8px}
-  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
-  .cont{font-size:14px;color:var(--muted);font-weight:700}
-  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
+
+  .finish{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow);padding:20px 22px}
+  .finish h3{margin:0;font-size:19px}
+  .finish p{margin:0}
+  .nota{font-size:15px;color:var(--muted)}
+  .escala{display:flex;gap:10px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:52px;padding:13px 0;font-size:19px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .report{display:none;padding:13px 15px;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:12px}
+  .report.show{display:block}
+  .report p{margin:0}
+
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:10px}
   .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
@@ -150,18 +146,18 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*aire-matematico*/
-  .sec{gap:16px}
+  .sec{gap:17px}
   .idea{line-height:1.72}
-  .fx{margin:4px 0;justify-self:center}
-  .fases{gap:9px;margin:2px 0}
-  .ejemplo{gap:16px}
+  .fx{margin:8px 0;justify-self:center}
+  .visual{margin:6px 0}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
-  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  main,.lesson.is-active,.sec,.check,.opts,.finish{grid-template-columns:minmax(0,1fr)}
+  .sec,.check,.opts,.opt,.fx,.sys,.visual,.mixlab,.matrix-form,.criteria,.finish{min-width:0}
+  .fx,.sys,.visual,.mixlab{max-width:100%}
+  .idea,.q,.opt{overflow-wrap:anywhere}
+  @media(max-width:620px){.tag{display:none}}
+  @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -175,817 +171,458 @@
 
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 6</p>
-    <h1>Diagonalización y valores <mark>propios</mark></h1>
-    <p class="lead">El tema completo, de principio a fin. Aquí no se adivina: se recuerda la regla y se razona el paso. Todo a mano, con números limpios y sin calculadora.</p>
-    <div class="learn">
-      <h2>Al terminar vas a poder</h2>
-      <ol>
-        <li><span class="n">1</span> Entender qué es un valor y un vector propio</li>
-        <li><span class="n">2</span> Armar y resolver el polinomio característico</li>
-        <li><span class="n">3</span> Encontrar los vectores propios de cada valor</li>
-        <li><span class="n">4</span> Diagonalizar una matriz paso a paso</li>
-        <li><span class="n">5</span> Reconocer cuándo NO se puede diagonalizar</li>
-        <li><span class="n">6</span> Aplicarlo a cadenas de Markov y potencias</li>
-      </ol>
+    <h1>La máquina y sus <mark>direcciones propias</mark></h1>
+    <p class="lead">Una idea a la vez, sabiendo siempre a dónde vas: cada lección anuncia su concepto del temario y te lleva de una flecha en el plano hasta la diagonalización.</p>
+    <div class="today">
+      <span class="n" id="heroStep">1</span>
+      <p><b id="heroGoal">Reconocer la flecha que la máquina solo estira.</b><small>Avanza con libertad. Un error nunca bloquea el siguiente paso.</small></p>
     </div>
   </header>
 
+  <p class="route-label">Tu ruta · ocho ideas breves</p>
+  <nav class="route" role="tablist" aria-label="Ruta de microlecciones">
+    <button class="step" role="tab" data-go="1" aria-selected="true"><span class="num">1</span>Vector propio</button>
+    <button class="step" role="tab" data-go="2" aria-selected="false"><span class="num">2</span>Polinomio</button>
+    <button class="step" role="tab" data-go="3" aria-selected="false"><span class="num">3</span>Traza y det</button>
+    <button class="step" role="tab" data-go="4" aria-selected="false"><span class="num">4</span>Triangular</button>
+    <button class="step" role="tab" data-go="5" aria-selected="false"><span class="num">5</span>Hallar vectores</button>
+    <button class="step" role="tab" data-go="6" aria-selected="false"><span class="num">6</span>Diagonalizar</button>
+    <button class="step" role="tab" data-go="7" aria-selected="false"><span class="num">7</span>Defectuosa</button>
+    <button class="step" role="tab" data-go="8" aria-selected="false"><span class="num">8</span>Markov</button>
+  </nav>
+
   <main>
 
-    <h2 class="modhead">Empecemos por un problema</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Una ciudad y su suburbio se reparten un millón de habitantes.</p>
-      <p class="idea" style="font-size:17px">Cada año pasa lo mismo:</p>
-      <ul class="fases">
-        <li><strong>el 10% de la ciudad se muda al suburbio</strong>,</li>
-        <li>y <strong>el 20% del suburbio regresa a la ciudad</strong>.</li>
-      </ul>
-      <p class="idea" style="font-size:17px">Hoy están mitad y mitad: 500 mil y 500 mil. La regla del año:</p>
-      <div class="fx"><div class="sys"><span class="eq">Ciudad ← 0.9·Ciudad + 0.2·Suburbio</span><span class="eq">Suburbio ← 0.1·Ciudad + 0.8·Suburbio</span></div></div>
-      <p class="fx-note">La flecha ← se lee "el nuevo valor se calcula así".</p>
-      <p class="idea" style="font-size:17px">Esta regla es una <strong>máquina</strong>: le metes el reparto de este año y te devuelve el del siguiente.</p>
-      <p class="idea" style="font-size:17px">Hagámosla girar una vez (todo en miles):</p>
-      <p class="calc"><span class="rw">Año 1</span> ciudad: 0.9·500+0.2·500=450+100=<b>550</b> <span class="sep">•</span> suburbio: 0.1·500+0.8·500=50+400=<b>450</b></p>
-      <p class="idea" style="font-size:17px">Y así, año tras año.</p>
-      <p class="idea" style="font-size:17px">La pregunta del examen: <strong>¿en qué reparto se estabiliza la población con los años?</strong></p>
-      <p class="idea" style="font-size:17px">Repetir la cuenta cuarenta veces a mano no es un plan.</p>
-      <p class="idea" style="font-size:17px">Hay un atajo que da la respuesta <strong>de un solo golpe</strong>: encontrar las <strong>direcciones que esta máquina no tuerce</strong>. De eso trata la guía.</p>
-      <p class="idea" style="font-size:17px">Al final vas a resolver este reparto tú sola, en unos cuantos renglones.</p>
-    </section>
-
-    <h2 class="modhead">La idea</h2>
-
-    <section class="sec">
-      <h3>1 · La máquina que tuerce casi todas las flechas</h3>
-      <p class="idea">Recuerda: una matriz es una <strong>máquina</strong>. Le metes una flecha del plano —un vector— y te devuelve otra.</p>
-      <p class="idea">Esta es la máquina A de toda la guía:</p>
-      <div class="fx" id="checkIntro"></div>
-      <p class="idea">Métele (1, 0), la que apunta directo a la derecha:</p>
-      <p class="calc"><span class="rw">A·(1,0)</span> arriba: 2·1+1·0=<b>2</b> <span class="sep">•</span> abajo: 1·1+2·0=<b>1</b> <span class="sep">•</span> sale <b>(2, 1)</b></p>
-      <p class="idea">Entró a la derecha y salió en diagonal: la máquina la <strong>torció</strong>.</p>
-      <p class="idea">Y así con casi cualquier flecha: sale <strong>apuntando a otra parte</strong>. Ese es el comportamiento normal de una matriz.</p>
-    </section>
-
-    <section class="sec">
-      <h3>2 · Las flechas que salen derechas</h3>
-      <p class="idea">Ahora mete (1, 1), la diagonal perfecta:</p>
-      <p class="calc"><span class="rw">A·(1,1)</span> arriba: 2·1+1·1=<b>3</b> <span class="sep">•</span> abajo: 1·1+2·1=<b>3</b> <span class="sep">•</span> sale <b>(3, 3)</b></p>
-      <p class="idea">(3, 3) apunta <strong>hacia donde apuntaba (1, 1)</strong>: misma línea, solo que mide el triple.</p>
-      <div class="fx"><div class="sys"><span class="eq">(3, 3) = 3·(1, 1)</span></div></div>
-      <p class="idea">La máquina <strong>no torció esta flecha</strong>: solo la estiró, tres veces, sobre su propia dirección.</p>
-      <p class="idea">Esta máquina tiene otra dirección dócil. Mete (1, −1):</p>
-      <p class="calc"><span class="rw">A·(1,−1)</span> arriba: 2·1+1·(−1)=<b>1</b> <span class="sep">•</span> abajo: 1·1+2·(−1)=<b>−1</b> <span class="sep">•</span> sale <b>(1, −1)</b></p>
-      <p class="idea">Sale <strong>idéntica</strong>: estirada por 1.</p>
-      <p class="idea">Esas direcciones son oro: sobre ellas la máquina se porta como lo más simple que existe, <strong>multiplicar por un número</strong>.</p>
-      <p class="idea">Sus nombres:</p>
-      <ul class="fases">
-        <li>la flecha que la máquina no tuerce es un <strong>vector propio</strong> (propio = DE la máquina, su dirección preferida).</li>
-        <li>el número de veces que la estira es el <strong>valor propio</strong>, y se apunta con la letra griega <strong>λ</strong> ("lambda").</li>
-      </ul>
-      <p class="idea">Aquí (1, 1) es vector propio con λ = 3, y (1, −1) otro con λ = 1.</p>
-      <p class="idea">"La máquina devuelve la misma flecha, estirada λ veces" se escribe:</p>
-      <div class="fx"><div class="sys"><span class="eq">A·v = λ·v</span></div></div>
-      <p class="fx-note">A es la máquina, v el vector propio y λ el estiramiento. (La flecha cero no cuenta: sale en cero con cualquier máquina.)</p>
-      <div class="check" data-kind="item" data-id="C1def" data-tema="valor_vector_propio" data-level="guiado">
-        <div class="qtag">Te toca · decide</div>
-        <p class="q">Para esta máquina A, el vector v = (1, 1) se transforma en (3, 3). ¿Es vector propio y cuál es su valor propio?</p>
-        <div class="opts">
-          <button class="opt" data-ok="0">No es vector propio: cambió de (1, 1) a (3, 3)</button>
-          <button class="opt" data-ok="1">Sí es vector propio, con valor propio 3, porque (3, 3) es 3 veces (1, 1)</button>
-          <button class="opt" data-ok="0">Sí es vector propio, con valor propio 1, porque no giró</button>
+    <section class="lesson is-active" data-step="1">
+      <header class="lesson-head"><p class="micro">Microlección 1 de 8 · Tema: Valores y vectores propios</p><h2>Valor y vector propio: la flecha que no se tuerce</h2><p class="goal">Meta: reconocer cuándo la máquina solo estira una flecha.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy conoces al protagonista de toda la unidad: el <strong>vector propio</strong>, con su <strong>valor propio</strong>.</p>
+        <p class="idea">Recuerda de las unidades pasadas: una matriz es una <strong>máquina</strong>. Le metes una flecha del plano y te devuelve otra.</p>
+        <p class="idea">Esta es la máquina de casi toda la guía. La llamaremos A:</p>
+        <div class="fx"><div class="matrix-form"><span>A =</span><span class="matrix" aria-label="Matriz A: 2, 1, 1, 2"><span>2</span><span>1</span><span>1</span><span>2</span></span></div></div>
+        <p class="idea">Métele la flecha que apunta a la derecha, (1, 0):</p>
+        <div class="fx"><div class="sys"><span class="eq">A·(1, 0) = (2, 1)</span></div></div>
+        <p class="idea">Entró a la derecha y salió en diagonal: la máquina la <strong>torció</strong>. Eso le pasa a casi cualquier flecha.</p>
+        <p class="idea key">Pero unas pocas flechas salen <strong>derechas</strong>: apuntando a donde ya apuntaban, solo más largas o más cortas.</p>
+        <p class="idea">Pruébalo tú. Elige una flecha y mira qué devuelve A:</p>
+        <div class="mixlab" aria-label="Explorador de vectores propios">
+          <div class="recipe"><h4>Mete una flecha a la máquina A</h4><p>Elige una y observa si sale derecha o torcida.</p>
+            <div class="pick" data-mix="v"><button data-value="0">(1, 0)</button><button data-value="1" class="is-on">(1, 1)</button><button data-value="2">(1, −1)</button><button data-value="3">(2, 1)</button></div>
+          </div>
+          <div class="visual" id="eigenPlane"></div>
+          <div class="mix-result"><p>La máquina A devuelve</p><strong id="eigenOut">—</strong><p id="eigenVerdict">—</p></div>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>(3, 3) apunta en la <strong>misma dirección</strong> que (1, 1): no giró, solo se estiró. El factor de estiramiento es 3, así que ese es el valor propio. Que crezca no lo descalifica; lo que importa es que la dirección se conserve.</p></div>
+        <div class="legend"><span><i class="dot"></i>flecha v que metiste</span><span><i class="dot navy"></i>A·v que salió</span></div>
+        <p class="idea">Con (1, 1) la salida (3, 3) cae sobre la misma línea: la máquina no la torció, solo la estiró tres veces.</p>
+        <p class="idea">Esa flecha dócil tiene nombre, y el número que la estira, otro. Tu curso los define juntos:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 5.7</span>Sea A una matriz de n×n. Un número λ ∈ R es <strong>valor propio</strong> de A si existe un vector x ≠ 0 con <strong>A·x = λ·x</strong>; ese x es un <strong>vector propio</strong> asociado a λ.</p>
+        <p class="idea">Léela con lo que viste: x es la flecha que sale derecha (el vector propio) y λ es cuántas veces se estira (el valor propio). Para A, x = (1, 1) con λ = 3.</p>
+        <p class="idea paso">Asegura la pieza con los dos retos. Y en cuanto la tengas, seguimos con lo natural: en el examen no te regalan la flecha, así que hay que <strong>cazarla</strong>.</p>
       </div>
-    </section>
-
-    <section class="sec">
-      <h3>3 · Cómo se cazan: el polinomio característico</h3>
-      <p class="idea">En el examen nadie te regala la flecha: te dan la máquina y ya. Probar flechas al azar sería eterno.</p>
-      <p class="idea">El plan bueno va al revés: <strong>cazar primero el número λ</strong>, y con él, encontrar sus flechas.</p>
-      <p class="idea">Parte de la única pista que hay:</p>
-      <div class="fx"><div class="sys"><span class="eq">A·v = λ·v</span></div></div>
-      <p class="idea">Pasa todo a un lado. Para poder restar, λ se disfraza de máquina con <strong>I</strong>, la <strong>identidad</strong> (unos en la diagonal, ceros fuera): la máquina que no hace nada.</p>
-      <p class="idea">Así λ·v es lo mismo que (λI)·v, y la v se factoriza:</p>
-      <div class="fx"><div class="sys"><span class="eq">(A − λI)·v = 0</span></div></div>
-      <p class="idea">Buscamos una máquina, (A − λI), que <strong>aplaste una flecha no nula hasta el cero</strong>.</p>
-      <p class="idea">De la Unidad 5: una máquina aplasta así solo cuando su <strong>determinante vale 0</strong>. Esa es la condición que caza a λ:</p>
-      <div class="fx"><div class="sys"><span class="eq">det(A − λI) = 0</span></div></div>
-      <p class="fx-note">El determinante de una 2×2 es el producto de la diagonal principal menos el de la otra. Cuidado con los signos: restar un negativo suma.</p>
-      <p class="idea">Al desarrollar ese determinante queda una ecuación en λ: un <strong>polinomio</strong>, el <strong>polinomio característico</strong> de la matriz. Sus raíces son los valores propios.</p>
-      <p class="fx-note">Las <strong>raíces</strong> son los valores de λ que lo vuelven cero. Ej.: las de λ² − 5λ + 6 son 2 y 3.</p>
-      <p class="idea">Para las 2×2 hay un atajo. Primero un nombre: la <strong>traza</strong> es <strong>la suma de la diagonal</strong>.</p>
-      <p class="idea">En toda 2×2 el polinomio sale siempre con la misma forma:</p>
-      <div class="fx"><div class="sys"><span class="eq">λ² − (traza)·λ + (det) = 0</span></div></div>
-      <p class="idea">Y sus dos soluciones cumplen algo comodísimo:</p>
-      <ul class="fases">
-        <li><strong>suman la traza</strong>,</li>
-        <li>y <strong>multiplican el determinante</strong>.</li>
-      </ul>
-      <p class="idea">Es verificación gratis: sacas tus dos λ, sumas, multiplicas y compruebas sin rehacer nada.</p>
-      <div class="check" data-kind="recall" data-fid="F1_traza_det" data-tema="polinomio_caracteristico">
-        <div class="qtag">Te toca · recuerda</div>
-        <p class="q">Para una matriz 2×2, ¿qué relación cumplen siempre sus dos valores propios?</p>
+      <div class="check challenge" data-kind="item" data-id="M1G" data-tema="valor_vector_propio" data-level="guiado" data-module="1">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Lee el estiramiento.</strong> Para A, la flecha (1, 1) se transforma en (3, 3). ¿Es vector propio y cuál es su valor propio?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Suman la traza (la diagonal) y multiplican el determinante</button>
-          <button class="opt" data-ok="0">Suman el determinante y multiplican la traza</button>
-          <button class="opt" data-ok="0">Ambos son iguales al determinante</button>
+          <button class="opt" data-ok="0">No es vector propio: pasó de (1, 1) a (3, 3)</button>
+          <button class="opt" data-ok="1">Sí, con valor propio 3, porque (3, 3) es 3 veces (1, 1)</button>
+          <button class="opt" data-ok="0">Sí, con valor propio 1, porque no giró</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El polinomio de una 2×2 es <strong>λ² − (traza)λ + (det) = 0</strong>. Si sus raíces son λ₁ y λ₂, factoriza como (λ − λ₁)(λ − λ₂); al expandirlo, el número que acompaña a λ es la suma λ₁ + λ₂ y el término suelto es el producto λ₁·λ₂. Por eso suman la traza y multiplican el determinante: así verificas sin repetir toda la cuenta.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Misma dirección, estirada tres veces: es vector propio con λ = 3. Que crezca no lo descalifica.</p><p class="nudge">✕ Fíjate solo en la dirección: (3, 3) apunta igual que (1, 1). El factor que la estira es el valor propio. Intenta de nuevo.</p></div>
       </div>
+      <div class="check challenge" data-kind="item" data-id="M1S" data-tema="valor_vector_propio" data-level="solo" data-module="1">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Cambia los datos.</strong> Otra máquina M convierte la flecha (1, 2) en (5, 10). ¿Es vector propio y cuál es su valor propio?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Sí, con valor propio 5, porque (5, 10) es 5 veces (1, 2)</button>
+          <button class="opt" data-ok="0">No, porque las dos componentes cambiaron</button>
+          <button class="opt" data-ok="0">Sí, con valor propio 2, por la segunda componente</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ (5, 10) = 5·(1, 2): misma dirección, estirada 5 veces. Vector propio con λ = 5.</p><p class="nudge">✕ Pregúntate por cuánto hay que multiplicar (1, 2) para llegar a (5, 10). Ese único número es λ. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>4 · El atajo de las triangulares</h3>
-      <p class="idea">A veces la máquina <strong>regala</strong> los valores propios, sin polinomio. Mira esta:</p>
-      <div class="fx" id="triA"></div>
-      <p class="idea">Debajo de la diagonal, todo son ceros: una escalera de ceros. A una matriz así se le llama <strong>triangular</strong>.</p>
-      <p class="idea">Ármale su A − λI (resto λ a la diagonal) y saca el determinante:</p>
-      <div class="fx" id="triAlam"></div>
-      <p class="calc"><span class="rw">det</span> (2−λ)(5−λ) − 7·0 = <b>(2−λ)(5−λ)</b></p>
-      <p class="idea">Ese 0 de abajo borró el otro producto. Quedó <strong>solo la diagonal multiplicándose</strong>:</p>
-      <div class="fx"><div class="sys"><span class="eq">(2 − λ)(5 − λ) = 0</span></div></div>
-      <p class="idea">Un producto vale 0 cuando un factor es 0:</p>
-      <ul class="fases">
-        <li>2 − λ = 0 → <strong>λ = 2</strong>,</li>
-        <li>5 − λ = 0 → <strong>λ = 5</strong>.</li>
-      </ul>
-      <p class="idea">¡Son los dos números de la diagonal! Esa es la regla: <strong>en una triangular, los valores propios son la diagonal, tal cual</strong>. Se leen, no se calculan.</p>
-      <p class="idea">El ahorro crece con el tamaño. Esta es una <strong>3×3</strong>, también triangular:</p>
-      <div class="fx" id="tri3"></div>
-      <p class="idea">Una 3×3 normal pediría un polinomio de grado 3; al ser triangular, otra vez sale la pura diagonal:</p>
-      <div class="fx"><div class="sys"><span class="eq">(4 − λ)(6 − λ)(2 − λ) = 0</span></div></div>
-      <p class="idea">Sus valores propios son <strong>4, 6 y 2</strong> — la diagonal, sin resolver nada.</p>
-      <div class="check" data-kind="item" data-id="Ctri" data-tema="valores_propios" data-level="juntos">
-        <div class="qtag">Te toca · lee la diagonal</div>
-        <p class="q">Esta matriz también es triangular (ceros debajo de la diagonal). ¿Cuáles son sus valores propios?</p>
-        <div class="fx" id="triChk"></div>
+    <section class="lesson" data-step="2">
+      <header class="lesson-head"><p class="micro">Microlección 2 de 8 · Tema: Polinomio característico</p><h2>Polinomio característico: cómo cazar los valores propios</h2><p class="goal">Meta: escribir la ecuación que atrapa a todas las λ.</p></header>
+      <div class="sec">
+        <p class="idea lede">Ya sabes qué es un valor propio. Hoy aprendes a encontrarlos: el <strong>polinomio característico</strong>.</p>
+        <p class="idea">En el examen te dan la máquina y nada más. Probar flechas al azar sería eterno; el plan bueno va al revés: <strong>cazar primero el número λ</strong>.</p>
+        <p class="idea">Parte de la única pista que hay, A·v = λ·v, y pásala toda a un lado:</p>
+        <div class="fx"><div class="sys"><span class="eq">(A − λI)·v = 0</span></div></div>
+        <p class="idea">I es la <strong>identidad</strong> (unos en la diagonal, ceros fuera): sirve para restarle λ a la máquina sin cambiar su forma.</p>
+        <p class="idea">Buscas una máquina, (A − λI), que <strong>aplaste una flecha no nula hasta el cero</strong>.</p>
+        <p class="idea key">De la Unidad 5: una máquina aplasta así solo cuando su <strong>determinante vale 0</strong>. Esa es la condición que caza a λ.</p>
+        <div class="fx"><div class="sys"><span class="eq">det(A − λI) = 0</span></div></div>
+        <p class="idea">Al desarrollar ese determinante queda una ecuación en λ: un polinomio. Sus raíces son los valores propios. Así lo dice tu curso:</p>
+        <p class="fdef"><span class="flbl">Definición y teorema · Resumen del curso, Def. 5.8 y Teo. 5.7</span>El <strong>polinomio característico</strong> de una matriz A de n×n es f(λ) = det(λI − A), y la <strong>ecuación característica</strong> es f(λ) = 0. Los <strong>valores propios</strong> de A son las raíces de esa ecuación.</p>
+        <p class="idea">Léela de vuelta: «raíces» son los λ que vuelven cero la ecuación.</p>
+        <p class="idea">Para una 2×2, det(λI − A) da el mismo polinomio que det(A − λI); por eso en la práctica basta restar λ a la diagonal.</p>
+        <p class="idea paso">Fija la idea con los retos. Después viene el atajo: para las 2×2 ese polinomio siempre tiene la misma forma.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M2G" data-tema="polinomio_caracteristico" data-level="guiado" data-module="2">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>La condición.</strong> ¿Qué ecuación deben cumplir los valores propios λ de una matriz A?</p>
         <div class="opts">
+          <button class="opt" data-ok="1">det(A − λI) = 0</button>
+          <button class="opt" data-ok="0">det(A) = λ</button>
+          <button class="opt" data-ok="0">A + λI = 0</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Un valor propio hace que (A − λI) aplaste una flecha al cero, y eso ocurre justo cuando su determinante es 0.</p><p class="nudge">✕ El valor propio aparece dentro de un determinante igualado a cero, no en el determinante de A a secas. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M2S" data-tema="polinomio_caracteristico" data-level="solo" data-module="2">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Arma el determinante.</strong> Para esta máquina B ya restaste λ a la diagonal. ¿Cuál es det(B − λI)?</p>
+        <div class="fx"><div class="matrix-form"><span>B − λI =</span><span class="matrix" aria-label="Matriz B menos lambda I: 1 menos lambda, 4, 2, 3 menos lambda"><span>1−λ</span><span>4</span><span>2</span><span>3−λ</span></span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">(1 − λ)(3 − λ) − 8</button>
+          <button class="opt" data-ok="0">(1 − λ)(3 − λ) + 8</button>
+          <button class="opt" data-ok="0">(1 − λ)(3 − λ) − 4</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Diagonal principal por diagonal principal, menos la otra: (1 − λ)(3 − λ) − 4·2 = (1 − λ)(3 − λ) − 8.</p><p class="nudge">✕ El determinante 2×2 resta el producto de la otra diagonal, y 4·2 = 8. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
+    </section>
+
+    <section class="lesson" data-step="3">
+      <header class="lesson-head"><p class="micro">Microlección 3 de 8 · Tema: Traza y determinante</p><h2>El atajo de la 2×2: traza y determinante</h2><p class="goal">Meta: sacar las dos λ sin desarrollar el determinante.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy, un regalo para las matrices 2×2: sus valores propios salen con dos números que ya sabes calcular, la <strong>traza</strong> y el <strong>determinante</strong>.</p>
+        <p class="idea">La <strong>traza</strong> es la suma de la diagonal principal. El determinante ya lo conoces de la Unidad 5.</p>
+        <p class="idea">Al desarrollar det(A − λI) en cualquier 2×2, el polinomio siempre queda con la misma forma:</p>
+        <div class="fx"><div class="sys"><span class="eq">λ² − (traza)·λ + (det) = 0</span></div></div>
+        <p class="idea key">Y sus dos soluciones cumplen algo comodísimo: <strong>suman la traza</strong> y <strong>multiplican el determinante</strong>.</p>
+        <p class="idea">Con eso muchas veces adivinas las raíces de memoria. Míralo en A, con traza 4 y determinante 3:</p>
+        <div class="fx"><div class="sys"><span class="eq">λ² − 4λ + 3 = 0</span><span class="eq">λ = 3 y λ = 1</span></div></div>
+        <p class="idea">Dos números que sumen 4 y multipliquen 3: son 3 y 1. Esos son los valores propios de A.</p>
+        <p class="idea">Este atajo no está numerado en tu resumen, pero es como se usa en el curso:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>Para una matriz 2×2, el polinomio característico siempre es λ² − (traza)·λ + (det) = 0. Sus dos raíces <strong>suman la traza</strong> y <strong>multiplican el determinante</strong>.</p>
+        <p class="idea">Léelo de vuelta: la traza y el determinante te dan la suma y el producto de las λ; con eso salen las dos raíces, y de paso verificas gratis.</p>
+        <p class="idea paso">Dos retos para fijar el atajo. Luego verás máquinas que regalan sus valores propios sin ninguna cuenta.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M3G" data-tema="traza_determinante" data-level="guiado" data-module="3">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Arma el polinomio.</strong> La máquina A tiene traza 4 y determinante 3. ¿Cuál es su polinomio característico?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">λ² − 4λ + 3 = 0</button>
+          <button class="opt" data-ok="0">λ² + 4λ + 3 = 0</button>
+          <button class="opt" data-ok="0">λ² − 4λ − 3 = 0</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ La forma es λ² − (traza)λ + (det): con traza 4 y det 3 queda λ² − 4λ + 3.</p><p class="nudge">✕ La traza entra restando y el determinante sumando: λ² − (traza)λ + (det). Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M3S" data-tema="traza_determinante" data-level="solo" data-module="3">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Usa suma y producto.</strong> Esta máquina B tiene traza 9 y determinante 18. ¿Cuáles son sus valores propios?</p>
+        <div class="fx"><div class="matrix-form"><span>B =</span><span class="matrix" aria-label="Matriz B: 5, 2, 1, 4"><span>5</span><span>2</span><span>1</span><span>4</span></span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">3 y 6</button>
+          <button class="opt" data-ok="0">9 y 18</button>
+          <button class="opt" data-ok="0">4 y 5</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Buscas dos números que sumen 9 y multipliquen 18: 3 + 6 = 9 y 3·6 = 18.</p><p class="nudge">✕ La traza (9) es la suma y el determinante (18) el producto de las dos λ. Prueba parejas que cumplan las dos cosas. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
+    </section>
+
+    <section class="lesson" data-step="4">
+      <header class="lesson-head"><p class="micro">Microlección 4 de 8 · Tema: Matrices triangulares</p><h2>Matriz triangular: los valores propios se leen</h2><p class="goal">Meta: sacar las λ de una triangular sin ninguna cuenta.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy, el caso más fácil de todos: la <strong>matriz triangular</strong>, que regala sus valores propios.</p>
+        <p class="idea">Una matriz es <strong>triangular</strong> cuando de un lado de la diagonal todo son ceros. Mira esta:</p>
+        <div class="fx"><div class="matrix-form"><span>T =</span><span class="matrix" aria-label="Matriz triangular: 2, 7, 0, 5"><span>2</span><span>7</span><span>0</span><span>5</span></span></div></div>
+        <p class="idea">Ese 0 de abajo hace magia. Al armar det(T − λI), borra el producto de la otra diagonal y solo sobrevive la principal:</p>
+        <div class="fx"><div class="sys"><span class="eq">(2 − λ)(5 − λ) = 0</span></div></div>
+        <p class="idea">Un producto vale 0 cuando un factor es 0: λ = 2 o λ = 5. ¡Son los dos números de la diagonal!</p>
+        <p class="idea key">En una triangular, los valores propios son la diagonal, tal cual. Se leen, no se calculan.</p>
+        <p class="idea">El ahorro crece con el tamaño: una 3×3 normal pediría un polinomio de grado 3, pero si es triangular otra vez basta leer su diagonal.</p>
+        <p class="idea">Esta regla no está numerada en tu resumen; así se usa en el curso:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>Si A es <strong>triangular</strong> (todos los ceros a un lado de la diagonal principal), sus valores propios son exactamente los números de la <strong>diagonal principal</strong>.</p>
+        <p class="idea">Léelo de vuelta: no importa cuántos números haya arriba; los ceros de un lado dejan que solo la diagonal decida.</p>
+        <p class="idea paso">Practícalo con los retos. Luego, con los valores propios en la mano, iremos por sus flechas.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M4G" data-tema="triangular" data-level="guiado" data-module="4">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Lee la diagonal.</strong> La matriz T es triangular (cero debajo de la diagonal). ¿Cuáles son sus valores propios?</p>
+        <div class="fx"><div class="matrix-form"><span>T =</span><span class="matrix" aria-label="Matriz triangular: 2, 7, 0, 5"><span>2</span><span>7</span><span>0</span><span>5</span></span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">2 y 5 (los de la diagonal)</button>
+          <button class="opt" data-ok="0">Hay que resolver un polinomio</button>
+          <button class="opt" data-ok="0">7 y 0</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ En una triangular los valores propios son la diagonal principal: 2 y 5.</p><p class="nudge">✕ No mires el 7 de arriba ni el 0 de abajo: los valores propios son los números de la diagonal. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M4S" data-tema="triangular" data-level="solo" data-module="4">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Sube el tamaño.</strong> Esta 3×3 también es triangular (ceros bajo la diagonal). ¿Cuáles son sus valores propios?</p>
+        <div class="fx"><div class="matrix-form"><span>C =</span><span class="matrix three" aria-label="Matriz triangular 3 por 3: 3, 9, 1, 0, menos 2, 4, 0, 0, 6"><span>3</span><span>9</span><span>1</span><span>0</span><span>−2</span><span>4</span><span>0</span><span>0</span><span>6</span></span></div></div>
+        <div class="opts">
+          <button class="opt" data-ok="1">3, −2 y 6 (los de la diagonal)</button>
           <button class="opt" data-ok="0">Hay que resolver un polinomio de grado 3</button>
-          <button class="opt" data-ok="1">2, 7 y −3 (los de la diagonal)</button>
-          <button class="opt" data-ok="0">0, 0 y 0</button>
+          <button class="opt" data-ok="0">9, 1 y 4</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>En una matriz triangular los ceros de abajo hacen que el determinante quede solo la diagonal. Sus valores propios son directamente esos números: <strong>2, 7 y −3</strong>. Ni polinomio ni cuentas.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Los ceros de abajo dejan solo la diagonal: 3, −2 y 6. Sin polinomio.</p><p class="nudge">✕ La regla no cambia con el tamaño: los valores propios son los números de la diagonal principal. Intenta de nuevo.</p></div>
       </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>5 · Diagonalizar: mirar la máquina desde sus ejes</h3>
-      <p class="idea">Falta la jugada final, la que le da nombre al tema.</p>
-      <p class="idea">Una matriz <strong>diagonal</strong> solo tiene números en la diagonal y ceros en el resto.</p>
-      <p class="idea">Como máquina es la más fácil del universo: <strong>no mezcla nada</strong>. La que tiene 3 y 1 en la diagonal recibe (x, y) y devuelve (3x, 1y): cada número por su lado, sin cruces.</p>
-      <p class="idea">Ahora conecta todo. La máquina A parece complicada: mezcla y tuerce.</p>
-      <p class="idea">Pero le descubrimos dos direcciones donde es simplísima: sobre (1, 1) solo multiplica por 3, y sobre (1, −1) por 1.</p>
-      <p class="idea"><strong>Diagonalizar</strong> es cambiar el punto de vista: describir la máquina <strong>usando sus direcciones propias como ejes</strong>. Vista desde ahí, su tabla queda pura diagonal. De ahí el nombre.</p>
-      <p class="idea">La receta tiene dos cajas:</p>
-      <ul class="fases">
-        <li><strong>P</strong> junta los <strong>vectores propios como columnas</strong>,</li>
-        <li>y <strong>D</strong> lleva los <strong>valores propios en la diagonal</strong>, en el mismo orden.</li>
-      </ul>
-      <p class="idea">P⁻¹ es la inversa de P (la máquina de regreso, como en la Unidad 5). Para <strong>diagonalizar</strong> no necesitas calcularla: solo aparece si te piden reconstruir A o una potencia.</p>
-      <p class="idea">Con eso, la matriz se reescribe:</p>
-      <div class="fx" id="pdpIntro"></div>
-      <p class="idea">La jugada completa, en una línea:</p>
-      <div class="fx"><div class="sys"><span class="eq">A = P·D·P⁻¹</span></div></div>
-      <p class="idea">Léela de derecha a izquierda, como tres pasos sobre una flecha:</p>
-      <ul class="fases">
-        <li>P⁻¹ la <strong>traduce</strong> al idioma de los ejes propios,</li>
-        <li>D la <strong>estira</strong> (la parte fácil),</li>
-        <li>y P la <strong>regresa</strong> al idioma normal.</li>
-      </ul>
-      <p class="idea">La máquina complicada era una máquina simple mirada desde los ejes equivocados.</p>
-      <div class="check" data-kind="item" data-id="C3meta" data-tema="diagonalizacion" data-level="guiado">
-        <div class="qtag">Te toca · reconoce</div>
-        <p class="q">En A = P·D·P⁻¹, ¿qué guarda cada matriz?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">P tiene los vectores propios en sus columnas; D, los valores propios en la diagonal</button>
-          <button class="opt" data-ok="0">P tiene los valores propios en la diagonal; D, los vectores propios en columnas</button>
-          <button class="opt" data-ok="0">P y D son iguales, y P⁻¹ deshace la operación</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Cada columna de P es una dirección propia; D dice cuánto se estira <strong>en esa columna</strong>. El orden debe coincidir: la columna 1 de P va con el valor propio de la posición 1 de D.</p></div>
+    <section class="lesson" data-step="5">
+      <header class="lesson-head"><p class="micro">Microlección 5 de 8 · Tema: Cálculo de vectores propios</p><h2>Hallar vectores propios: una flecha por cada λ</h2><p class="goal">Meta: resolver (A − λI)v = 0 para cada valor propio.</p></header>
+      <div class="sec">
+        <p class="idea lede">Ya cazaste los valores propios. Hoy encuentras sus <strong>vectores propios</strong>: la flecha que va con cada λ.</p>
+        <p class="idea">La pista es la misma de siempre. Para cada λ, resuelve la máquina aplastadora igualada a cero:</p>
+        <div class="fx"><div class="sys"><span class="eq">(A − λI)·v = 0</span></div></div>
+        <p class="idea">Hazlo con A y su valor propio λ = 3. Le restas 3 a la diagonal:</p>
+        <div class="fx"><div class="matrix-form"><span>A − 3I =</span><span class="matrix" aria-label="A menos 3 I: menos 1, 1, 1, menos 1"><span>−1</span><span>1</span><span>1</span><span>−1</span></span></div></div>
+        <p class="idea">Los dos renglones dicen lo mismo: −x + y = 0, o sea y = x.</p>
+        <p class="idea key">Cualquier flecha con sus dos componentes iguales sirve; la más simple es (1, 1).</p>
+        <p class="idea">Compruébalo: A·(1, 1) = (3, 3) = 3·(1, 1). La flecha (1, 1) es el vector propio de λ = 3.</p>
+        <p class="idea">El método no está numerado aparte; sale directo de la Definición 5.7:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>Los <strong>vectores propios</strong> de un valor propio λ son las soluciones no nulas de (A − λI)·v = 0. Se resuelve ese sistema, una vez por cada λ.</p>
+        <p class="idea">Léelo de vuelta: cada λ abre su propio sistema homogéneo, y sus soluciones (menos la flecha cero) son las flechas que la máquina solo estira.</p>
+        <p class="idea paso">Dos retos para afinar el despeje. Después juntamos valores y vectores en la jugada que da nombre al tema.</p>
       </div>
-    </section>
-
-    <section class="sec">
-      <h3>6 · Cuando faltan direcciones: matrices defectuosas</h3>
-      <p class="idea">Queda el objetivo de la portada: reconocer cuándo una máquina <strong>no</strong> se puede diagonalizar.</p>
-      <p class="idea">P junta los vectores propios como columnas. Para una 2×2, P necesita <strong>2 columnas</strong>, o sea <strong>2 vectores propios</strong>.</p>
-      <p class="idea">Pero no cualquier par: deben apuntar en <strong>direcciones de verdad distintas</strong>. En la Unidad 2 eso se llamó <strong>independientes</strong> (ninguno es copia estirada del otro).</p>
-      <p class="idea">Antes, (1, 1) y (1, −1) eran independientes, y por eso P se llenó. La regla:</p>
-      <ul class="fases">
-        <li>para una 2×2 hacen falta <strong>2 vectores propios independientes</strong>,</li>
-        <li>y para una más grande, <strong>tantos como su tamaño</strong> (una 3×3 pide 3).</li>
-      </ul>
-      <p class="idea">¿Siempre salen los dos? No. Mira esta máquina:</p>
-      <div class="fx" id="defA"></div>
-      <p class="idea">Sácale el polinomio con la traza y el determinante:</p>
-      <p class="calc"><span class="rw">traza</span> 2+4=<b>6</b> <span class="sep">•</span> <span class="rw">det</span> 2·4−1·(−1)=8+1=<b>9</b></p>
-      <p class="fx-note">Cuidado con el signo: menos por menos suma, por eso 8 − (−1) = 9.</p>
-      <div class="fx"><div class="sys"><span class="eq">λ² − 6λ + 9 = 0</span></div></div>
-      <p class="idea">Dos números que sumen 6 y multipliquen 9: <strong>3 y 3</strong>.</p>
-      <div class="fx"><div class="sys"><span class="eq">(λ − 3)(λ − 3) = 0</span><span class="eq">(λ − 3)² = 0</span></div></div>
-      <p class="idea">λ = 3 aparece <strong>dos veces</strong>: se dice que tiene <strong>multiplicidad 2</strong> (cuántas veces se repite).</p>
-      <p class="idea">Un solo valor propio para las dos columnas. ¿Alcanzará para dar dos direcciones? Búscale sus flechas con (A − 3I)v = 0:</p>
-      <div class="fx" id="defA3I"></div>
-      <p class="idea">Los dos renglones dicen lo mismo: −x + y = 0, o sea y = x.</p>
-      <p class="calc"><span class="rw">A−3I</span> renglón: −x+y=0 <span class="sep">•</span> y=x <span class="sep">•</span> dirección: <b>(1, 1)</b></p>
-      <p class="idea">Solo sale <strong>una</strong> dirección, (1, 1). No hay una segunda distinta.</p>
-      <p class="idea">P necesita 2 columnas independientes y solo tenemos 1: esta matriz <strong>no se puede diagonalizar</strong>.</p>
-      <p class="idea">A una matriz así se le llama <strong>defectuosa</strong> (le falta algo, como un producto con defecto de fábrica).</p>
-      <p class="idea">Un matiz que el examen adora: repetido <strong>no</strong> siempre significa defectuosa. A veces un valor repetido sí da dos direcciones distintas y la matriz sí se diagonaliza; aquí solo trajo una.</p>
-      <div class="check" data-kind="item" data-id="Cdefect" data-tema="diagonalizabilidad" data-level="juntos">
-        <div class="qtag">Te toca · decide</div>
-        <p class="q">Una matriz 2×2 tiene un valor propio repetido que solo aporta la dirección (1, 0) — una sola. ¿Se puede diagonalizar?</p>
-        <div class="opts">
-          <button class="opt" data-ok="0">Sí: un valor propio repetido siempre alcanza para las dos columnas</button>
-          <button class="opt" data-ok="1">No: con una sola dirección, P se queda sin su segunda columna independiente</button>
-          <button class="opt" data-ok="0">Sí: se repite (1, 0) en las dos columnas de P</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Para diagonalizar una 2×2 hacen falta <strong>2 vectores propios independientes</strong>. Una sola dirección llena una columna, no dos; repetirla no da una columna nueva independiente. La matriz es <strong>defectuosa</strong>: no diagonalizable.</p></div>
-      </div>
-    </section>
-
-    <h2 class="modhead">Yo lo hago · contigo</h2>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Diagonalicemos de principio a fin la máquina A que ya conoces, ahora fingiendo que no sabemos nada de ella.</p>
-      <p class="idea" style="font-size:17px">No la mires nada más: en cada paso <strong>tú decides la operación</strong> y yo la aplico.</p>
-      <div class="estep"><div class="oprow">Matriz A</div><div class="fx" id="d0"></div></div>
-
-      <div class="check" data-kind="item" data-id="E1pred" data-tema="polinomio_caracteristico" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Primer objetivo: armar det(A − λI) = 0. ¿Cómo se construye esa matriz A − λI?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Le resto λ a cada número de la diagonal y dejo el resto igual</button>
-          <button class="opt" data-ok="0">Le resto λ a todas las entradas de la matriz</button>
-          <button class="opt" data-ok="0">Multiplico toda la matriz por λ</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>I es la identidad: solo tiene unos en la diagonal. Así que λI resta λ únicamente a la diagonal de A. Fuera de la diagonal, A no cambia.</p></div>
-      </div>
-      <div class="estep"><div class="oprow">Paso 1 · A − λI</div><p>Resto λ a la diagonal (2 y 2) y dejo los 1 fuera de ella:</p><p class="calc"><span class="rw">A−λI</span> diag: 2−λ <span class="sep">•</span> 2−λ <span class="sep">•</span> fuera: 1 y 1 quedan igual</p><div class="fx" id="d1lambda"></div></div>
-
-      <div class="check" data-kind="item" data-id="E2pred" data-tema="polinomio_caracteristico" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Para una 2×2, el determinante es “producto de la diagonal menos producto de la otra diagonal”. ¿Cuál es det(A − λI)?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">(2 − λ)(2 − λ) − (1)(1)</button>
-          <button class="opt" data-ok="0">(2 − λ)(2 − λ) + (1)(1)</button>
-          <button class="opt" data-ok="0">(2 − λ) − (2 − λ) − (1)(1)</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>La diagonal principal es (2 − λ) y (2 − λ); la otra diagonal, 1 y 1. El determinante 2×2 es el producto de la primera menos el producto de la segunda.</p></div>
-      </div>
-      <div class="estep"><div class="oprow">Paso 2 · desarrollar el determinante</div><p>Expando (2 − λ)(2 − λ) = 4 − 4λ + λ², y le resto 1·1 = 1:</p><p class="calc"><span class="rw">det</span> (2−λ)²=λ²−4λ+<b>4</b> <span class="sep">•</span> −(1)(1)=<b>−1</b> <span class="sep">•</span> total: <b>λ²−4λ+3</b></p><div class="fx"><div class="sys"><span class="eq">λ² − 4λ + 3 = 0</span></div></div></div>
-
-      <div class="check" data-kind="item" data-id="E3pred" data-tema="valores_propios" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Quedó “λ² − 4λ + 3 = 0”. Sin fórmula general, ¿en qué dos números lo factorizas?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">λ = 1 y λ = 3, porque suman 4 y multiplican 3</button>
-          <button class="opt" data-ok="0">λ = 2 y λ = 2, porque es la diagonal</button>
-          <button class="opt" data-ok="0">λ = −1 y λ = −3, por los signos del polinomio</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Busco dos números que sumen 4 (la traza) y multipliquen 3 (el determinante): son 1 y 3. Factoriza como (λ − 1)(λ − 3) = 0.</p></div>
-      </div>
-      <div class="estep"><div class="oprow">Paso 3 · valores propios</div><p>Compruebo con el atajo: 1 + 3 = 4 = traza, y 1·3 = 3 = det. Cuadra:</p><p class="calc"><span class="rw">λ</span> suma: 1+3=<b>4</b> <span class="sep">•</span> producto: 1·3=<b>3</b> <span class="sep">•</span> valores propios: <b>3 y 1</b></p></div>
-
-      <div class="check" data-kind="item" data-id="E4pred" data-tema="vectores_propios" data-level="juntos">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Ahora el vector propio de λ = 3. Resuelvo (A − 3I)v = 0: la matriz baja a “−x + y = 0”. ¿Qué vector cumple?</p>
+      <div class="check challenge" data-kind="item" data-id="M5G" data-tema="vectores_propios" data-level="guiado" data-module="5">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Despeja el renglón.</strong> Para A y λ = 3, el sistema (A − 3I)v = 0 baja a −x + y = 0. ¿Qué vector propio cumple?</p>
         <div class="opts">
           <button class="opt" data-ok="1">(1, 1), porque −x + y = 0 significa x = y</button>
           <button class="opt" data-ok="0">(1, −1), porque los signos se alternan</button>
           <button class="opt" data-ok="0">(3, 0), porque el valor propio es 3</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>“−x + y = 0” es lo mismo que y = x. Cualquier vector con las dos componentes iguales sirve; el más simple es (1, 1).</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ −x + y = 0 es lo mismo que y = x: las dos componentes iguales. La más simple es (1, 1).</p><p class="nudge">✕ Despeja: −x + y = 0 deja y = x. Busca una flecha con sus dos componentes iguales. Intenta de nuevo.</p></div>
       </div>
-      <div class="estep"><div class="oprow">Paso 4 · vector propio de λ = 3</div><p>Resto 3 a la diagonal de A y leo la ecuación del renglón:</p><p class="calc"><span class="rw">A−3I</span> 2−3=<b>−1</b> <span class="sep">•</span> renglón: −x+y=0 <span class="sep">•</span> x=y → <b>v = (1, 1)</b></p><div class="fx" id="d3"></div></div>
-
-      <div class="check" data-kind="item" data-id="E5pred" data-tema="vectores_propios" data-level="juntos">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Falta el vector propio de λ = 1. Resto 1 a la diagonal y el renglón baja a “x + y = 0”. ¿Qué vector cumple?</p>
+      <div class="check challenge" data-kind="item" data-id="M5S" data-tema="vectores_propios" data-level="solo" data-module="5">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Otra máquina.</strong> Para esta B con λ = 3, el sistema baja a −2x + y = 0. ¿Qué vector propio cumple?</p>
+        <div class="fx"><div class="matrix-form"><span>B =</span><span class="matrix" aria-label="Matriz B: 1, 1, 2, 2"><span>1</span><span>1</span><span>2</span><span>2</span></span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="0">(1, 1), porque repite el del otro valor propio</button>
-          <button class="opt" data-ok="1">(1, −1), porque x + y = 0 significa x = −y</button>
-          <button class="opt" data-ok="0">(1, 0), porque solo importa la primera componente</button>
+          <button class="opt" data-ok="1">(1, 2), porque −2x + y = 0 significa y = 2x</button>
+          <button class="opt" data-ok="0">(2, 1), porque el 2 va primero</button>
+          <button class="opt" data-ok="0">(1, −2), por el signo menos</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>“x + y = 0” es lo mismo que y = −x. Las dos componentes son opuestas; el más simple es (1, −1). Ojo: no puede ser (1, 1), que ya es el vector de λ = 3.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ −2x + y = 0 da y = 2x. Con x = 1 sale (1, 2), y B·(1, 2) = (3, 6) = 3·(1, 2).</p><p class="nudge">✕ Despeja y en términos de x: −2x + y = 0 deja y = 2x. Toma x = 1 y lee y. Intenta de nuevo.</p></div>
       </div>
-      <div class="estep"><div class="oprow">Paso 5 · vector propio de λ = 1</div><p>Ahora resto 1 a la diagonal. El renglón queda “x + y = 0”, o sea x = −y:</p><p class="calc"><span class="rw">A−I</span> 2−1=<b>1</b> <span class="sep">•</span> renglón: x+y=0 <span class="sep">•</span> x=−y → <b>v = (1, −1)</b></p><div class="fx" id="dEig1"></div></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
+    </section>
 
-      <div class="check" data-kind="item" data-id="E6pred" data-tema="diagonalizacion" data-level="juntos">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Ya tienes los pares (λ = 3, v = (1, 1)) y (λ = 1, v = (1, −1)). ¿Cómo quedan P y D?</p>
+    <section class="lesson" data-step="6">
+      <header class="lesson-head"><p class="micro">Microlección 6 de 8 · Tema: Diagonalización</p><h2>Diagonalizar: mirar la máquina desde sus ejes</h2><p class="goal">Meta: armar A = P·D·P⁻¹ con vectores y valores propios.</p></header>
+      <div class="sec">
+        <p class="idea lede">Con valores y vectores propios en la mano, llega la jugada que da nombre al tema: la <strong>diagonalización</strong>.</p>
+        <p class="idea">Una matriz <strong>diagonal</strong> solo tiene números en la diagonal y ceros en el resto. Como máquina es la más fácil: <strong>no mezcla nada</strong>.</p>
+        <p class="idea">La máquina A sí mezcla y tuerce. Pero le descubrimos dos direcciones donde es simplísima: sobre (1, 1) multiplica por 3, sobre (1, −1) por 1.</p>
+        <p class="idea key"><strong>Diagonalizar</strong> es describir A usando sus direcciones propias como ejes. Vista desde ahí, su tabla queda pura diagonal.</p>
+        <p class="idea">La receta tiene dos cajas:</p>
+        <div class="fx"><div class="matrix-form"><span>P =</span><span class="matrix" aria-label="Matriz P: 1, 1, 1, menos 1"><span>1</span><span>1</span><span>1</span><span>−1</span></span><span>D =</span><span class="matrix" aria-label="Matriz D: 3, 0, 0, 1"><span>3</span><span>0</span><span>0</span><span>1</span></span></div></div>
+        <p class="idea">P junta los <strong>vectores propios como columnas</strong>; D lleva los <strong>valores propios en la diagonal</strong>, en el mismo orden.</p>
+        <p class="idea">Con eso, la máquina se reescribe en una línea (P⁻¹ es la inversa de P, la máquina de regreso):</p>
+        <div class="fx"><div class="sys"><span class="eq">A = P·D·P⁻¹</span></div></div>
+        <p class="idea">Esto no está numerado en tu resumen; así se enuncia en el curso:</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>Una matriz A de n×n es <strong>diagonalizable</strong> si A = P·D·P⁻¹, donde las columnas de P son n vectores propios independientes y D es diagonal con los valores propios correspondientes, en el mismo orden.</p>
+        <p class="idea">Léelo de vuelta: cada columna de P es una dirección propia y D dice cuánto se estira en ella. La columna 1 de P va con el valor propio de la posición 1 de D.</p>
+        <p class="idea paso">Arma P y D en los retos. Después, la pregunta incómoda: ¿siempre se puede diagonalizar?</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M6G" data-tema="diagonalizacion" data-level="guiado" data-module="6">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Coloca cada cosa.</strong> Tienes los pares (λ = 3, v = (1, 1)) y (λ = 1, v = (1, −1)). ¿Cómo quedan P y D?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">P con (1, 1) y (1, −1) como columnas; D con 3 y 1 en la diagonal, en ese mismo orden</button>
+          <button class="opt" data-ok="1">P con (1, 1) y (1, −1) como columnas; D con 3 y 1 en la diagonal, en ese orden</button>
           <button class="opt" data-ok="0">P con 3 y 1 en la diagonal; D con los vectores como columnas</button>
           <button class="opt" data-ok="0">P con los vectores como renglones; D con 3 y 1 en una esquina</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Los vectores propios van en las <strong>columnas</strong> de P. En D, cada valor propio se coloca alineado con la columna de su vector: el 3 va con la columna (1, 1), el 1 con la columna (1, −1).</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Vectores en las columnas de P; valores en la diagonal de D, alineados: el 3 con (1, 1), el 1 con (1, −1).</p><p class="nudge">✕ Los vectores propios van en las columnas de P, no los valores. D es la diagonal. Intenta de nuevo.</p></div>
       </div>
-      <div class="estep"><div class="oprow">Paso 6 · armar P y D</div><p>Coloco cada vector propio como columna de P y su valor propio en la posición correspondiente de D:</p><div class="fx" id="dPD"></div></div>
-      <p class="idea" style="font-size:17px">Listo:</p>
-      <div class="fx"><div class="sys"><span class="eq">A = P·D·P⁻¹</span></div></div>
-      <p class="idea" style="font-size:17px">Cada columna de P apunta en una dirección propia y D dice cuánto se estira en cada una: por <strong>3</strong> y por <strong>1</strong>.</p>
-      <p class="idea" style="font-size:17px">Fíjate en el orden que seguiste:</p>
-      <ul class="fases">
-        <li>polinomio,</li>
-        <li>valores propios,</li>
-        <li>un vector por valor,</li>
-        <li>armar P y D.</li>
-      </ul>
-      <p class="idea" style="font-size:17px">Ese es todo el método.</p>
+      <div class="check challenge" data-kind="item" data-id="M6S" data-tema="diagonalizacion" data-level="solo" data-module="6">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Nuevos pares.</strong> Ahora tienes (λ = 4, v = (2, 1)) y (λ = −1, v = (1, 3)). ¿Cómo quedan P y D?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">P con (2, 1) y (1, 3) como columnas; D con 4 y −1 en la diagonal, en ese orden</button>
+          <button class="opt" data-ok="0">P con 4 y −1 en la diagonal; D con (2, 1) y (1, 3) como columnas</button>
+          <button class="opt" data-ok="0">P con 4 y (2, 1) en la primera columna; D con −1 y (1, 3)</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Mismo molde: columnas de P son los vectores; D es la diagonal con 4 y −1, alineados con su columna.</p><p class="nudge">✕ No cambia el molde: los vectores propios llenan las columnas de P y los valores propios la diagonal de D. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
 
-    <h2 class="modhead">Sube el tamaño · la ciudad y el suburbio</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Volvamos al problema del inicio. Antes, dos nombres que el examen usa.</p>
-      <p class="idea" style="font-size:17px">A una regla de mudanzas así —porcentajes fijos donde <strong>cada columna suma 1</strong>, porque nadie aparece ni desaparece— se le llama <strong>cadena de Markov</strong> (por Andréi Márkov).</p>
-      <p class="idea" style="font-size:17px">Su matriz es la <strong>matriz de transición</strong>, y por costumbre se escribe con la letra P. Ojo: otra P, no la de los vectores propios.</p>
-      <p class="idea" style="font-size:17px">Al reparto que ya no cambia de un año al otro se le llama <strong>estado estable</strong>.</p>
-      <p class="idea" style="font-size:17px">Míralo con tus ojos nuevos: si un reparto ya no cambia, la máquina lo devuelve <strong>idéntico</strong>. Idéntico = estirado por 1. ¡El estado estable es un <strong>vector propio con λ = 1</strong>!</p>
-      <p class="idea" style="font-size:17px">Y en Markov ese λ = 1 nunca falla: como cada columna suma 1, siempre existe un reparto de equilibrio.</p>
-      <p class="idea" style="font-size:17px">El salto de esta sección no es que la matriz crezca: es que <strong>los números traen decimales</strong> y solo nos interesa ese vector. Se hace en <strong>dos fases</strong>:</p>
-      <ul class="fases">
-        <li><strong>Fase 1 — los valores propios:</strong> <em>λ = 1</em> viene garantizado; el otro sale con la traza, sin polinomio.</li>
-        <li><strong>Fase 2 — el vector propio de λ = 1:</strong> resolver (P − I)v = 0; ese vector, en proporciones, es el reparto de equilibrio.</li>
-      </ul>
-      <div class="estep"><div class="oprow">Matriz de transición P</div><p>90% de la ciudad se queda, 10% se va; 20% del suburbio regresa, 80% se queda. Cada columna suma 1:</p><div class="fx" id="m0"></div></div>
-
-      <div class="check" data-kind="item" data-id="M1pred" data-tema="markov" data-level="juntos">
-        <div class="qtag">Te toca · decide la fase</div>
-        <p class="q">Fase 1. Uno de los valores propios es λ = 1 (siempre, en Markov). La traza es 0.9 + 0.8 = 1.7. ¿Cuál es el otro valor propio?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">0.7, porque los dos suman la traza y uno ya es 1</button>
-          <button class="opt" data-ok="0">1.7, porque ese es el total de la traza</button>
-          <button class="opt" data-ok="0">0.5, porque hoy hay medio y medio</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Los dos valores propios suman la traza (1.7). Si uno es 1, el otro es 1.7 − 1 = 0.7. No hizo falta armar el polinomio.</p></div>
+    <section class="lesson" data-step="7">
+      <header class="lesson-head"><p class="micro">Microlección 7 de 8 · Tema: Matrices defectuosas</p><h2>Matriz defectuosa: cuando faltan direcciones</h2><p class="goal">Meta: reconocer cuándo NO se puede diagonalizar.</p></header>
+      <div class="sec">
+        <p class="idea lede">No toda máquina se diagonaliza. Hoy conoces a la que no puede: la <strong>matriz defectuosa</strong>.</p>
+        <p class="idea">P junta los vectores propios como columnas. Para una 2×2, P necesita <strong>2 columnas</strong> con direcciones de verdad distintas (en la Unidad 2, independientes).</p>
+        <p class="idea">¿Siempre salen las dos? No. Mira esta máquina:</p>
+        <div class="fx"><div class="matrix-form"><span>A =</span><span class="matrix" aria-label="Matriz A: 2, 1, menos 1, 4"><span>2</span><span>1</span><span>−1</span><span>4</span></span></div></div>
+        <p class="idea">Traza 6 y determinante 9, así que el polinomio es λ² − 6λ + 9 = (λ − 3)².</p>
+        <div class="fx"><div class="sys"><span class="eq">(λ − 3)² = 0</span><span class="eq">λ = 3 (repetido)</span></div></div>
+        <p class="idea">λ = 3 aparece <strong>dos veces</strong>: se dice que tiene <strong>multiplicidad 2</strong> (cuántas veces se repite).</p>
+        <p class="idea">Búscale sus flechas con (A − 3I)v = 0: los renglones dan −x + y = 0, o sea la única dirección (1, 1).</p>
+        <p class="idea key">Un solo vector propio para dos columnas: P se queda sin su segunda columna. Esta matriz <strong>no se puede diagonalizar</strong>.</p>
+        <p class="idea">Así se enuncia en el curso (sin número en tu resumen):</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>A es <strong>diagonalizable</strong> solo si reúne tantos vectores propios independientes como su tamaño. Si un valor propio repetido no aporta suficientes direcciones, A es <strong>defectuosa</strong> y no se puede diagonalizar.</p>
+        <p class="idea">Un matiz que el examen adora: repetido <strong>no</strong> siempre significa defectuosa. A veces un valor repetido sí da dos direcciones distintas; aquí solo trajo una.</p>
+        <p class="idea paso">Confirma la idea en los retos. Cerramos volviendo al problema que abre la unidad: las cadenas de Markov.</p>
       </div>
-      <div class="estep"><div class="oprow">Fase 1 · valores propios</div><p>Uso traza = suma de valores propios para despejar el segundo:</p><p class="calc"><span class="rw">λ</span> traza: 0.9+0.8=<b>1.7</b> <span class="sep">•</span> λ₁=1 <span class="sep">•</span> λ₂: 1.7−1=<b>0.7</b></p><div class="fx"><div class="sys"><span class="eq">λ₁ = 1</span><span class="eq">λ₂ = 0.7</span></div></div></div>
-
-      <div class="estep"><div class="oprow">Fase 2 · P − I</div><p>Empieza la búsqueda del estado estable: resto 1 a la diagonal de P:</p><p class="calc"><span class="rw">P−I</span> 0.9−1=<b>−0.1</b> <span class="sep">•</span> 0.8−1=<b>−0.2</b> <span class="sep">•</span> fuera de la diagonal: 0.2 y 0.1</p><div class="fx" id="m1"></div></div>
-
-      <div class="check" data-kind="item" data-id="M2pred" data-tema="markov" data-level="juntos">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">El primer renglón de P − I da “−0.1x + 0.2y = 0”. Multiplicando por 10 queda “−x + 2y = 0”. ¿Qué vector propio sale?</p>
+      <div class="check challenge" data-kind="item" data-id="M7G" data-tema="diagonalizabilidad" data-level="guiado" data-module="7">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Cuenta direcciones.</strong> La matriz A de arriba tiene λ = 3 repetido y solo aporta la dirección (1, 1) — una sola. ¿Se puede diagonalizar?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">(2, 1), porque −x + 2y = 0 significa x = 2y</button>
-          <button class="opt" data-ok="0">(1, 2), porque x aparece primero</button>
-          <button class="opt" data-ok="0">(1, −2), por el signo menos</button>
+          <button class="opt" data-ok="0">Sí: un valor propio repetido siempre alcanza para las dos columnas</button>
+          <button class="opt" data-ok="1">No: con una sola dirección, P se queda sin su segunda columna independiente</button>
+          <button class="opt" data-ok="0">Sí: se repite (1, 1) en las dos columnas de P</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>“−x + 2y = 0” es lo mismo que x = 2y. Tomando y = 1 sale x = 2, o sea (2, 1). Ese vector apunta al reparto de equilibrio.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Una 2×2 pide 2 direcciones independientes; aquí solo hay una, así que P no se llena: es defectuosa.</p><p class="nudge">✕ Repetir la misma flecha no da una columna nueva independiente. Con una sola dirección, P queda incompleta. Intenta de nuevo.</p></div>
       </div>
-      <div class="estep"><div class="oprow">Fase 2 · estado estable</div><p>Despejo el renglón y llevo el vector a proporciones que sumen 1:</p><p class="calc"><span class="rw">v</span> −x+2y=0 → x=2y <span class="sep">•</span> vector: (2, 1) <span class="sep">•</span> proporción: <b>2/3</b> y <b>1/3</b></p></div>
-      <p class="fx-note">¿De dónde salen 2/3 y 1/3? El vector (2, 1) marca las proporciones al repartir entre el total. Sumo las partes: 2 + 1 = 3; cada una entre 3 → 2/3 para la ciudad y 1/3 para el suburbio.</p>
-      <p class="idea" style="font-size:17px">Como el otro valor propio (0.7) es menor que 1, su parte se <strong>encoge</strong> año con año hasta desaparecer.</p>
-      <p class="idea" style="font-size:17px">Sin importar el reparto inicial, la población tiende al estado estable: <strong>2/3 en la ciudad, 1/3 en el suburbio</strong>.</p>
-      <p class="idea" style="font-size:17px">Ese es el problema del inicio, resuelto de un solo golpe con el valor propio 1.</p>
+      <div class="check challenge" data-kind="item" data-id="M7S" data-tema="diagonalizabilidad" data-level="solo" data-module="7">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Sube el tamaño.</strong> Una matriz 3×3 solo logra reunir 2 vectores propios independientes. ¿Se puede diagonalizar?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">No: una 3×3 necesita 3 vectores propios independientes y solo hay 2</button>
+          <button class="opt" data-ok="0">Sí: con 2 vectores independientes siempre basta</button>
+          <button class="opt" data-ok="0">Sí: toda matriz cuadrada se diagonaliza</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Hacen falta tantos vectores independientes como el tamaño: una 3×3 pide 3. Con 2, P queda incompleta.</p><p class="nudge">✕ La regla escala con el tamaño: una 3×3 necesita 3 columnas independientes para P. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Última idea →</button></div>
     </section>
 
-    <section class="sec">
-      <h3>Míralo: las direcciones que la máquina no tuerce</h3>
-      <p class="idea">Un vector propio es una <strong>flecha que la máquina solo estira</strong>, sin cambiarle la dirección. Una flecha cualquiera sí sale torcida.</p>
-      <p class="idea">Compara los dos casos con la matriz A de toda la guía:</p>
-      <div class="viz">
-        <div class="viz-tabs" id="vizTabs">
-          <button class="viz-tab" data-case="propio">Vector propio</button>
-          <button class="viz-tab" data-case="otro">Vector cualquiera</button>
-        </div>
-        <div class="viz-plane fx" id="vizPlane"></div>
-        <div class="viz-legend"><span><i style="background:#F5821F"></i>Vector v</span><span><i style="background:#283891"></i>A·v (transformado)</span></div>
-        <p class="viz-cap" id="vizCap"></p>
+    <section class="lesson" data-step="8">
+      <header class="lesson-head"><p class="micro">Microlección 8 de 8 · Tema: Cadenas de Markov</p><h2>Cadena de Markov: el estado estable</h2><p class="goal">Meta: ver el reparto de equilibrio como vector propio de λ = 1.</p></header>
+      <div class="sec">
+        <p class="idea lede">Cerramos con la aplicación estrella del tema: la <strong>cadena de Markov</strong> y su <strong>estado estable</strong>.</p>
+        <p class="idea">Imagina una ciudad y su suburbio. Cada año el 10% de la ciudad se muda y el 20% del suburbio regresa. La regla es una máquina:</p>
+        <div class="fx"><div class="matrix-form"><span>P =</span><span class="matrix" aria-label="Matriz P: 0.9, 0.2, 0.1, 0.8"><span>0.9</span><span>0.2</span><span>0.1</span><span>0.8</span></span></div></div>
+        <p class="idea">Cada columna suma 1 (nadie aparece ni desaparece). A una regla así se le llama <strong>cadena de Markov</strong>, y a P su <strong>matriz de transición</strong>.</p>
+        <p class="idea">Al reparto que ya no cambia de un año al otro se le llama <strong>estado estable</strong>. Míralo con tus ojos nuevos:</p>
+        <p class="idea key">Si un reparto no cambia, la máquina lo devuelve idéntico. Idéntico = estirado por 1: el estado estable es un <strong>vector propio con λ = 1</strong>.</p>
+        <p class="idea">Y en Markov ese λ = 1 nunca falla: como cada columna suma 1, siempre existe un reparto de equilibrio.</p>
+        <p class="idea">Así se enuncia en el curso (sin número en tu resumen):</p>
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>En una <strong>cadena de Markov</strong> (matriz de columnas que suman 1) siempre hay λ = 1. Su vector propio, escrito en proporciones que suman 1, es el <strong>estado estable</strong> al que tiende la población.</p>
+        <p class="idea">Léelo de vuelta: para hallar el equilibrio resuelves (P − I)v = 0 y repartes el vector en proporciones. El otro valor propio, menor que 1, se encoge y desaparece.</p>
+        <p class="idea paso">Ciérralo con los dos retos y termina la ruta.</p>
       </div>
-    </section>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Un último regalo de la diagonalización: <strong>potencias de una matriz</strong>.</p>
-      <p class="idea" style="font-size:17px">A² significa aplicar la máquina dos veces seguidas (A·A), y A¹⁰, diez veces: una pila de multiplicaciones de matrices, brutal a mano.</p>
-      <p class="idea" style="font-size:17px">Pero escribe A·A con la receta:</p>
-      <div class="fx"><div class="sys"><span class="eq">A·A = P·D·P⁻¹·P·D·P⁻¹</span></div></div>
-      <p class="idea" style="font-size:17px">Justo en medio queda P⁻¹·P — la traducción de regreso seguida de la de ida, que juntas <strong>no hacen nada</strong> — y se cancela. Sobra:</p>
-      <div class="fx"><div class="sys"><span class="eq">P·D²·P⁻¹</span></div></div>
-      <p class="idea" style="font-size:17px">Lo mismo pasa a cualquier potencia: lo único que de verdad se eleva es la diagonal, que son números sueltos:</p>
-      <div class="fx"><div class="sys"><span class="eq">Aⁿ = P·Dⁿ·P⁻¹</span></div></div>
-      <div class="estep"><div class="oprow">A² con la diagonal</div><p>Para la A del ejemplo (valores propios 3 y 1), elevo solo la diagonal de D al cuadrado:</p><p class="calc"><span class="rw">D²</span> 3²=<b>9</b> <span class="sep">•</span> 1²=<b>1</b> <span class="sep">•</span> reconstruyo con P y P⁻¹</p><div class="fx" id="pow2"></div></div>
-      <p class="fx-note">Se verifica multiplicando A·A directo: da lo mismo. La diagonalización convierte una potencia de matriz en una potencia de números.</p>
-    </section>
-
-    <h2 class="modhead">Tu turno</h2>
-    <section class="practice">
-      <div class="phead"><h3>De guiado a solo</h3><p class="sub">Toca tu respuesta. Si fallas, vuelve a intentar. El apoyo se va retirando. · <span class="cont" id="cont"></span></p></div>
-
-      <div class="pitem" data-kind="item" data-id="P1" data-tema="polinomio_caracteristico" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Para esta matriz, ¿cuál es su polinomio característico?</p>
-        <div class="fx" id="p1"></div>
+      <div class="check challenge" data-kind="item" data-id="M8G" data-tema="markov" data-level="guiado" data-module="8">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Identifica el valor propio.</strong> Un reparto de Markov que ya no cambia cumple P·v = v. ¿A qué valor propio corresponde?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">λ² − 9λ + 20 = 0</button>
-          <button class="opt" data-ok="0">λ² + 9λ + 20 = 0</button>
-          <button class="opt" data-ok="0">λ² − 9λ − 20 = 0</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>El polinomio es λ² − (traza)λ + (det). La traza es la suma de la diagonal; el determinante, el producto de la diagonal menos el de la otra.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Traza = 6 + 3 = 9 y det = 6·3 − (−1)·2 = 18 + 2 = 20. Entonces λ² − 9λ + 20, que factoriza en (λ − 4)(λ − 5).</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="valores_propios" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Esta matriz es triangular (ceros bajo la diagonal). ¿Cuáles son sus valores propios?</p>
-        <div class="fx" id="p2"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">5, −1 y 3 (los de la diagonal)</button>
-          <button class="opt" data-ok="0">0, 0 y 0</button>
-          <button class="opt" data-ok="0">Hay que resolver un polinomio de grado 3</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>En una matriz triangular los valores propios son directamente los de la <strong>diagonal</strong>. Ni cuentas: se leen.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3a" data-tema="diagonalizacion" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Ya sabemos que λ = 3 tiene vector propio (1, 1) y λ = 1 tiene vector propio (1, −1). Para armar A = P·D·P⁻¹, ¿cómo quedan P y D?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">P con los vectores (1, 1) y (1, −1) como columnas; D con 3 y 1 en la diagonal, en ese mismo orden</button>
-          <button class="opt" data-ok="0">P con 3 y 1 en la diagonal; D con los vectores (1, 1) y (1, −1) como columnas</button>
-          <button class="opt" data-ok="0">P con los vectores como renglones; D con 3 y 1 sumados en una esquina</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Los vectores propios van en las <strong>columnas</strong> de P. En D, cada valor propio se coloca en la diagonal, alineado con la columna de su vector.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>La columna 1 de P es (1, 1) y le corresponde el 3 en la posición 1 de D; la columna 2 es (1, −1) y le corresponde el 1. El orden debe coincidir entre P y D.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="vectores_propios" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Para esta matriz, el valor propio λ = 2 lleva a resolver (A − 2I)v = 0, que da la ecuación “−2x + 2y = 0”. ¿Cuál es un vector propio?</p>
-        <div class="fx" id="p3"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">(1, 1)</button>
-          <button class="opt" data-ok="0">(2, 0)</button>
-          <button class="opt" data-ok="0">(1, −1)</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Despeja la ecuación: “−2x + 2y = 0” deja y en términos de x. El vector propio es cualquier (x, y) que la cumpla, salvo (0, 0).</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>“−2x + 2y = 0” significa x = y. Cualquier múltiplo de (1, 1) sirve; (1, −1) daría x = −y, que no cumple.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P4a" data-tema="polinomio_caracteristico" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Empieza aquí la diagonalización completa de esta matriz. Primero, ¿cuál es su polinomio característico?</p>
-        <div class="fx" id="p4a"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">λ² − 7λ + 10 = 0</button>
-          <button class="opt" data-ok="0">λ² + 7λ + 10 = 0</button>
-          <button class="opt" data-ok="0">λ² − 7λ − 10 = 0</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>El polinomio es λ² − (traza)λ + (det). La traza es 4 + 3; el determinante, 4·3 − 1·2.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Traza = 4 + 3 = 7 y det = 4·3 − 1·2 = 12 − 2 = 10. Entonces λ² − 7λ + 10, que factoriza en (λ − 5)(λ − 2): valores propios <strong>5</strong> y <strong>2</strong>.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P4b" data-tema="vectores_propios" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Sigamos con la misma matriz. Ya tienes los valores propios 5 y 2.</p>
-        <p class="pstatement">Para λ = 2, resolver (A − 2I)v = 0 lleva a la ecuación “2x + y = 0”. ¿Cuál es un vector propio de λ = 2?</p>
-        <div class="fx" id="p4b"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">(1, −2)</button>
-          <button class="opt" data-ok="0">(1, 1)</button>
-          <button class="opt" data-ok="0">(2, 1)</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>“2x + y = 0” deja y = −2x. Toma x = 1 y lee qué vale y.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>“2x + y = 0” da y = −2x. Con x = 1 sale (1, −2). Y para λ = 5 la ecuación es −x + y = 0, con vector propio (1, 1).</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P4c" data-tema="diagonalizacion" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Ahora sola, de principio a fin. Diagonaliza esta matriz nueva.</p>
-        <p class="pstatement">Arma su polinomio característico, saca los valores propios, halla los vectores propios y escribe A = P·D·P⁻¹. ¿Cuáles son P y D?</p>
-        <div class="fx" id="p4c"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="p4cA"></button>
-          <button class="opt" data-ok="0" id="p4cB"></button>
-          <button class="opt" data-ok="0" id="p4cC"></button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Polinomio: traza = 5 + 2 = 7, det = 5·2 − 2·2 = 6, así que λ² − 7λ + 6, que factoriza en (λ − 6)(λ − 1): valores propios <strong>6 y 1</strong> (no la diagonal 5 y 2). Vectores: para λ = 6, (A − 6I)v = 0 da −x + 2y = 0, o sea x = 2y → (2, 1); para λ = 1, (A − I)v = 0 da 4x + 2y = 0, o sea y = −2x → (1, −2). P lleva esos vectores como columnas y D los valores propios en el mismo orden: 6 con la primera columna, 1 con la segunda.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P3b" data-tema="diagonalizabilidad" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Para armar P en una matriz 2×2 hacen falta 2 vectores propios independientes (uno por columna).</p>
-        <p class="pstatement">Si una matriz 2×2 solo logra reunir 1 vector propio independiente, ¿qué pasa con P?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">P queda incompleta: falta una columna, así que la matriz no se puede diagonalizar</button>
-          <button class="opt" data-ok="0">P se completa repitiendo el mismo vector en las dos columnas</button>
-          <button class="opt" data-ok="0">No importa: P siempre se puede armar con un solo vector</button>
-        </div>
-        <div class="aux"><details><summary>Pista</summary><p>Cada columna de P debe ser un vector propio <strong>independiente</strong> de los demás. Cuenta cuántos consigues y compáralo con el tamaño de la matriz.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Necesitas tantos vectores propios independientes como el tamaño de la matriz (aquí, 2). Repetir el mismo vector no da una columna nueva independiente, así que P no se llena y la matriz es <strong>defectuosa</strong>: no diagonalizable.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="diagonalizabilidad" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Esta matriz tiene un valor propio repetido (λ = 3 dos veces) pero solo una dirección propia. ¿Se puede diagonalizar?</p>
-        <div class="fx" id="p4"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">No, porque faltan vectores propios independientes para llenar P</button>
-          <button class="opt" data-ok="0">Sí, porque toda matriz cuadrada se diagonaliza</button>
-          <button class="opt" data-ok="0">Sí, porque tiene un valor propio real</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Para diagonalizar una 2×2 necesitas <strong>2 vectores propios independientes</strong>. Si un valor repetido solo aporta uno, P no se puede armar: la matriz es defectuosa.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="markov" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">En una cadena de Markov, la población tiende con los años a un reparto fijo que ya no cambia.</p>
-        <p class="pstatement">¿A qué valor propio corresponde ese estado estable?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">Al valor propio igual a 1</button>
+          <button class="opt" data-ok="1">A λ = 1, porque P·v = v es P·v = 1·v</button>
           <button class="opt" data-ok="0">Al valor propio más grande, sea cual sea</button>
-          <button class="opt" data-ok="0">Al valor propio igual a 0</button>
+          <button class="opt" data-ok="0">A λ = 0, porque el reparto no crece</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El estado estable cumple P·v = v, es decir P·v = 1·v: es el vector propio de <strong>λ = 1</strong>. Los demás valores propios (menores que 1) se encogen y desaparecen.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ P·v = v es lo mismo que P·v = 1·v: el estado estable es el vector propio de λ = 1.</p><p class="nudge">✕ Reescribe P·v = v como P·v = 1·v: el número que estira la flecha es 1. Intenta de nuevo.</p></div>
       </div>
-
-      <div class="pitem" data-kind="item" data-id="P6" data-tema="potencias" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Con A = P·D·P⁻¹, elevar A a una potencia solo eleva la diagonal de D.</p>
-        <p class="pstatement">Una matriz tiene valores propios 3 y 1. ¿Qué diagonal tiene D³ (la que sirve para calcular A³)?</p>
-        <div class="fx" id="p6"></div>
+      <div class="check challenge" data-kind="item" data-id="M8S" data-tema="markov" data-level="solo" data-module="8">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Nueva cadena.</strong> Para esta Q de Markov, buscar el estado estable con (Q − I)v = 0 baja a −2x + 3y = 0. ¿Qué vector propio lo da?</p>
+        <div class="fx"><div class="matrix-form"><span>Q =</span><span class="matrix" aria-label="Matriz Q: 0.8, 0.3, 0.2, 0.7"><span>0.8</span><span>0.3</span><span>0.2</span><span>0.7</span></span></div></div>
         <div class="opts">
-          <button class="opt" data-ok="1">27 y 1</button>
-          <button class="opt" data-ok="0">9 y 1</button>
-          <button class="opt" data-ok="0">3 y 3</button>
+          <button class="opt" data-ok="1">(3, 2), porque −2x + 3y = 0 significa x = (3/2)y</button>
+          <button class="opt" data-ok="0">(2, 3), porque el 2 va primero</button>
+          <button class="opt" data-ok="0">(3, −2), por el signo menos</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Aⁿ = P·Dⁿ·P⁻¹, y Dⁿ solo eleva cada valor de la diagonal. Eleva 3 y 1 al cubo.</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>Dⁿ eleva cada entrada de la diagonal: 3³ = 27 y 1³ = 1. Por eso una potencia de matriz se vuelve una potencia de números: esa es la ganancia de diagonalizar.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ −2x + 3y = 0 da x = (3/2)y. Con y = 2 sale (3, 2), y Q·(3, 2) = (3, 2) = 1·(3, 2).</p><p class="nudge">✕ Despeja x: −2x + 3y = 0 deja x = (3/2)y. Elige y = 2 para que las dos entradas sean enteras. Intenta de nuevo.</p></div>
       </div>
+
+      <section class="finish">
+        <h3>Cierra sin mirar arriba</h3>
+        <p>Explica en voz alta esta cadena: valor propio → polinomio característico → traza y determinante → vector propio → diagonalizar A = P·D·P⁻¹.</p>
+        <p>Después responde: <strong>¿por qué el estado estable de una cadena de Markov es el vector propio de λ = 1?</strong></p>
+        <p class="nota">¿Qué tan segura te sientes hallando valores y vectores propios y diagonalizando? 1 = nada · 5 = lo domino.</p>
+        <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
+        <button class="btn" id="makeReport">Generar reporte para el tutor</button>
+        <div class="report" id="reportSummary" aria-live="polite"></div>
+      </section>
+
+      <nav class="nav-lecs"><a href="L6_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L6_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
+
+      <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
-
-    <div class="check" data-kind="recall" data-fid="F2_diagonalizar" data-tema="diagonalizacion">
-      <div class="qtag">Te toca · recuerda</div>
-      <p class="q">Ya tienes valores y vectores propios. ¿Cómo se arma exactamente A = P·D·P⁻¹?</p>
-      <div class="opts">
-        <button class="opt" data-ok="1">P lleva los vectores propios como columnas; D, los valores propios en la diagonal, en el mismo orden</button>
-        <button class="opt" data-ok="0">P lleva los valores propios en la diagonal; D, los vectores propios como columnas</button>
-        <button class="opt" data-ok="0">P y D son las mismas y basta con invertir A</button>
-      </div>
-      <div class="why"><span class="lbl">Por qué</span><p>Cada columna de P es una dirección propia y D dice cuánto se estira <strong>en esa columna</strong>. El orden debe coincidir: la columna 1 de P va con el valor propio de la posición 1 de D.</p></div>
-    </div>
-
-    <section class="chuleta">
-      <h3>Para memorizar</h3>
-      <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
-      <ul>
-        <li><span class="ck">✓</span> Vector y valor propio: A·v = λ·v (la matriz solo estira a v, no lo gira).</li>
-        <li><span class="ck">✓</span> Valores propios: raíces de det(A − λI) = 0.</li>
-        <li><span class="ck">✓</span> Atajo 2×2: λ² − (traza)λ + (det) = 0. Suman traza, multiplican det.</li>
-        <li><span class="ck">✓</span> Triangular: los valores propios son la diagonal, directo.</li>
-        <li><span class="ck">✓</span> Vectores propios: resuelve (A − λI)v = 0 para cada λ.</li>
-        <li><span class="ck">✓</span> Diagonalizar: A = P·D·P⁻¹, con vectores propios en columnas de P y valores propios en D.</li>
-        <li><span class="ck">✓</span> No siempre se puede: hacen falta n vectores propios independientes.</li>
-        <li><span class="ck">✓</span> Markov: el estado estable es el vector propio de λ = 1.</li>
-      </ul>
-    </section>
-
-    <section class="cierre">
-      <h3>¿Cómo te fue?</h3>
-      <p class="nota">Qué tan segura te sientes diagonalizando y hallando valores propios ahora. 1 = nada · 5 = lo domino.</p>
-      <div class="escala" id="esc"></div>
-      <div id="reporte"></div>
-      <button class="btn" id="gen">Generar reporte para el tutor</button>
-    </section>
-
-    <nav class="nav-lecs"><a href="L6_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L6_cuadernillo-papel.html"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
-
-    <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 6</p></footer>
 
   </main>
+
+  <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 6</p></footer>
+
 </div>
 
 <script>
-"use strict";
-
-function mat(rows){
-  var coeffs = rows[0].length - 1;
-  var gtc = 'repeat('+coeffs+',auto) 16px auto';
-  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
-  for(var r=0;r<rows.length;r++){
-    var cells='';
-    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
-    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
-    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
-  }
-  return h+'</div><span class="brk brk-r"></span></div>';
-}
-function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
-
-// La idea: matrices SIN barra separadora (usamos mat con 1 columna extra = última columna real)
-// Para matrices cuadradas de coeficientes preferimos mostrar sin barra: construimos con matSq.
-function matSq(rows){
-  var n=rows[0].length;
-  var gtc='repeat('+n+',auto)';
-  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
-  for(var r=0;r<rows.length;r++){
-    var cells='';
-    for(var j=0;j<n;j++) cells+='<span>'+rows[r][j]+'</span>';
-    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
-  }
-  return h+'</div><span class="brk brk-r"></span></div>';
-}
-function setSq(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=matSq(rows); }
-
-// ---- La idea ----
-// checkIntro: A = [[2,1],[1,2]]
-setSq('checkIntro',[["2","1"],["1","2"]]);
-// pdpIntro: A = P D P^-1  (mostramos las tres matrices etiquetadas)
-document.getElementById('pdpIntro').innerHTML =
-  '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:21px">'+
-  matSq([["2","1"],["1","2"]])+'<span>=</span>'+
-  matSq([["1","1"],["1","−1"]])+
-  matSq([["3","0"],["0","1"]])+
-  matSq([["½","½"],["½","−½"]])+
-  '</div>'+
-  '<p class="fx-note" style="margin-top:8px">A = P·D·P⁻¹. Columnas de P: los vectores propios (1, 1) y (1, −1). Diagonal de D: los valores propios 3 y 1.</p>';
-
-// ---- La idea · triangulares (sección 4) ----
-setSq('triA',[["2","7"],["0","5"]]);
-setSq('triAlam',[["2−λ","7"],["0","5−λ"]]);
-setSq('tri3',[["4","2","1"],["0","6","3"],["0","0","2"]]);
-setSq('triChk',[["2","5","1"],["0","7","4"],["0","0","−3"]]);
-
-// ---- La idea · defectuosas (sección 6) ----
-setSq('defA',[["2","1"],["−1","4"]]);
-setSq('defA3I',[["−1","1"],["−1","1"]]);
-
-// ---- Yo lo hago · contigo: diagonalización de A=[[2,1],[1,2]] ----
-setSq('d0',[["2","1"],["1","2"]]);
-// A − λI = [[2−λ, 1],[1, 2−λ]] (forma simbólica)
-setSq('d1lambda',[["2−λ","1"],["1","2−λ"]]);
-// vector propio λ=3: (A-3I)=[[-1,1],[1,-1]]
-setSq('d3',[["−1","1"],["1","−1"]]);
-// vector propio λ=1: (A-1I)=[[1,1],[1,1]]
-setSq('dEig1',[["1","1"],["1","1"]]);
-// P y D
-document.getElementById('dPD').innerHTML =
-  '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:21px">'+
-  '<span style="font-weight:700">P =</span>'+matSq([["1","1"],["1","−1"]])+
-  '<span style="font-weight:700">D =</span>'+matSq([["3","0"],["0","1"]])+
-  '</div>';
-
-// ---- Markov: P=[[0.9,0.2],[0.1,0.8]] ----
-setSq('m0',[["0.9","0.2"],["0.1","0.8"]]);
-// (P-I) = [[-0.1,0.2],[0.1,-0.2]]
-setSq('m1',[["−0.1","0.2"],["0.1","−0.2"]]);
-
-// ---- potencias: A^2 = [[5,4],[4,5]] ----
-setSq('pow2',[["5","4"],["4","5"]]);
-
-// ---- práctica ----
-setSq('p1',[["6","−1"],["2","3"]]);           // traza 9, det 20
-setSq('p2',[["5","2","7"],["0","−1","4"],["0","0","3"]]); // triangular
-setSq('p3',[["0","2"],["2","0"]]);            // λ=2 → −2x+2y=0 → vector (1,1)
-setSq('p4',[["3","1"],["0","3"]]);            // defectuosa
-
-// ---- rampa de diagonalización completa: A=[[4,1],[2,3]] (traza 7, det 10 → λ=5,2) ----
-setSq('p4a',[["4","1"],["2","3"]]);           // polinomio: λ²−7λ+10
-setSq('p4b',[["4","1"],["2","3"]]);           // vector de λ=2: 2x+y=0 → (1,−2); λ=5 → (1,1)
-// P4c ejecución completa sobre A=[[5,2],[2,2]] (traza 7, det 6 → λ=6,1; vectores (2,1) y (1,−2))
-setSq('p4c',[["5","2"],["2","2"]]);
-// Correcta: P=[[2,1],[1,−2]], D=[[6,0],[0,1]]
-function pdOption(P, D){
-  return '<span style="display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap">'+
-    '<span style="font-weight:700">P =</span>'+matSq(P)+
-    '<span style="font-weight:700">D =</span>'+matSq(D)+'</span>';
-}
-document.getElementById('p4cA').innerHTML = pdOption([["2","1"],["1","−2"]],[["6","0"],["0","1"]]);
-// distractor: usa la diagonal (5,2) como valores propios en vez de armar el polinomio
-document.getElementById('p4cB').innerHTML = pdOption([["2","1"],["1","−2"]],[["5","0"],["0","2"]]);
-// distractor: lee las columnas de A como si fueran los vectores propios, sin resolver (A−λI)v=0
-document.getElementById('p4cC').innerHTML = pdOption([["5","2"],["2","2"]],[["6","0"],["0","1"]]);
-
-// ---- potencias: valores propios 3 y 1 → D³ diagonal 27 y 1 ----
-setSq('p6',[["3","0"],["0","1"]]);            // D con λ=3 y λ=1
-
-// ===== visual: el sistema como dos rectas =====
-function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
-function clip(a,b,c){
-  var pts=[], E=1e-9;
-  if(Math.abs(b)>E){ [-1,5].forEach(function(x){ var y=(c-a*x)/b; if(y>=-1-E&&y<=5+E) pts.push([x,y]); }); }
-  if(Math.abs(a)>E){ [-1,5].forEach(function(y){ var x=(c-b*y)/a; if(x>=-1-E&&x<=5+E) pts.push([x,y]); }); }
-  var u=[]; pts.forEach(function(p){ if(!u.some(function(q){return Math.abs(q[0]-p[0])<1e-6&&Math.abs(q[1]-p[1])<1e-6;})) u.push(p); });
-  return u.slice(0,2);
-}
-function lineSVG(a,b,c,color,dash){
-  var e=clip(a,b,c); if(e.length<2) return '';
-  var p0=PT(e[0][0],e[0][1]), p1=PT(e[1][0],e[1][1]);
-  return '<line x1="'+p0[0]+'" y1="'+p0[1]+'" x2="'+p1[0]+'" y2="'+p1[1]+'" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"'+(dash?' stroke-dasharray="8 7"':'')+'/>';
-}
-var VG='', VA='';
 (function(){
-  for(var g=-1; g<=5; g++){
-    var a=PT(g,-1), b=PT(g,5), c=PT(-1,g), d=PT(5,g);
-    VG+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/>'+'<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';
-  }
-  var x0=PT(-1,0), x1=PT(5,0), y0=PT(0,-1), y1=PT(0,5);
-  VA='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/>'+'<line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';
-})();
-function arrow(x,y,color,dash){
-  var o=PT(0,0), p=PT(x,y);
-  var ang=Math.atan2(p[1]-o[1], p[0]-o[0]);
-  var ah=11, aw=0.42;
-  var t1=[p[0]-ah*Math.cos(ang-aw), p[1]-ah*Math.sin(ang-aw)];
-  var t2=[p[0]-ah*Math.cos(ang+aw), p[1]-ah*Math.sin(ang+aw)];
-  return '<line x1="'+o[0]+'" y1="'+o[1]+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"'+(dash?' stroke-dasharray="7 6"':'')+'/>'+
-    '<polygon points="'+p[0]+','+p[1]+' '+t1[0]+','+t1[1]+' '+t2[0]+','+t2[1]+'" fill="'+color+'"/>';
-}
-function drawPlane(cse){
-  var L, cap;
-  if(cse==='propio'){
-    // v=(1,1) es vector propio; A·v = (3,3): misma dirección, estirado 3 veces
-    L=arrow(3,3,'#283891')+arrow(1,1,'#F5821F');
-    cap='v = (1, 1) es vector propio. La matriz lo devuelve como (3, 3): misma dirección, solo estirado 3 veces (su valor propio).';
-  } else {
-    // v=(2,0) no propio; A·v = (4,2): otra dirección (gira)
-    L=arrow(4,2,'#283891')+arrow(2,0,'#F5821F');
-    cap='v = (2, 0) no es vector propio. La matriz lo devuelve como (4, 2): cambió de dirección. Aquí sí hay giro.';
-  }
-  document.getElementById('vizPlane').innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plano cartesiano con un vector y su transformado">'+VG+VA+L+'</svg>';
-  document.getElementById('vizCap').textContent=cap;
-}
-document.querySelectorAll('.viz-tab').forEach(function(b){
-  b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawPlane(b.getAttribute('data-case')); };
-});
-(function(){ var f=document.querySelector('.viz-tab'); f.classList.add('active'); drawPlane('propio'); })();
-
-// ===== instrumentación =====
-var session = {
-  fecha:new Date().toISOString().slice(0,10),
-  materia:"algebra_lineal", unidad:"U6_diagonalizacion", leccion:"L6_diagonalizacion",
-  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
-};
-var t0ms = Date.now();
-var TOT_EJ = document.querySelectorAll('[data-kind="item"]').length;
-function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.items.length+"/"+TOT_EJ+" ejercicios"; }
-
-document.querySelectorAll('[data-kind]').forEach(function(block){
-  var kind = block.getAttribute('data-kind');
-  var start = Date.now(), intentos = 0, done = false;
-  var why = block.querySelector('.why');
-  block.querySelectorAll('.opt').forEach(function(b){
-    b.onclick = function(){
-      if(done) return;
-      intentos++;
-      if(b.getAttribute('data-ok')==="1"){
-        done = true; b.classList.add('right');
-        if(why) why.classList.add('show');
-        var pit = block.closest('.pitem'); if(pit) pit.classList.add('solved');
-        if(kind==="recall"){
-          session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:(intentos===1?"de_memoria":"con_pista") });
-        } else {
-          session.items.push({ id:block.getAttribute('data-id'), tema:block.getAttribute('data-tema'),
-            nivel:(block.getAttribute('data-level')||"-"), intentos:intentos, correcto:true, tiempo_s:Math.round((Date.now()-start)/1000) });
-          updateCont();
-        }
-      } else {
-        b.classList.add('wrong'); b.disabled = true;
-        if(why){ why.classList.add('show','miss'); }
-      }
-    };
+  'use strict';
+  var KEY='valentina-algebra-u6-guia-micro';
+  var goals=[
+    'Valor y vector propio: reconocer la flecha que la máquina solo estira.',
+    'Polinomio característico: la ecuación que atrapa los valores propios.',
+    'Traza y determinante: el atajo de la 2×2 para sacar las dos λ.',
+    'Matriz triangular: leer los valores propios en la diagonal.',
+    'Vectores propios: resolver (A − λI)v = 0 para cada λ.',
+    'Diagonalización: armar A = P·D·P⁻¹.',
+    'Matriz defectuosa: reconocer cuándo NO se puede diagonalizar.',
+    'Cadena de Markov: el estado estable es el vector propio de λ = 1.'
+  ];
+  var state={current:1,started:new Date().toISOString(),items:{},confidence:null};
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&saved.items){state=saved;}}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  function shuffle(box){var a=Array.prototype.slice.call(box.children);for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}for(var k=0;k<a.length;k++){box.appendChild(a[k]);}}
+  function markDone(){document.querySelectorAll('.step').forEach(function(btn){var m=btn.dataset.go;var cards=document.querySelectorAll('.challenge[data-module="'+m+'"]');var ids=Array.prototype.map.call(cards,function(x){return x.dataset.id;});btn.classList.toggle('is-done',ids.length>0&&ids.every(function(id){return state.items[id]&&state.items[id].correct;}));});}
+  function progress(){var total=document.querySelectorAll('.challenge').length;var done=Object.keys(state.items).filter(function(id){return state.items[id].correct;}).length;return {done:done,total:total};}
+  function go(n){n=Math.max(1,Math.min(8,Number(n)||1));state.current=n;save();
+    document.querySelectorAll('.lesson').forEach(function(x){x.classList.toggle('is-active',Number(x.dataset.step)===n);});
+    document.querySelectorAll('.step').forEach(function(x){x.setAttribute('aria-selected',String(Number(x.dataset.go)===n));});
+    document.getElementById('heroStep').textContent=n;
+    document.getElementById('heroGoal').textContent=goals[n-1];
+    window.scrollTo({top:0,behavior:'smooth'});}
+  document.querySelectorAll('.opts').forEach(shuffle);
+  document.querySelectorAll('.challenge').forEach(function(card){
+    var id=card.dataset.id;var fb=card.querySelector('.fb');var prev=state.items[id];
+    if(prev&&prev.correct){card.querySelectorAll('.opt').forEach(function(b){b.disabled=true;if(b.dataset.ok==='1')b.classList.add('right');});fb.className='fb show ok';}
+    card.querySelectorAll('.opt').forEach(function(btn){btn.addEventListener('click',function(){
+      if(state.items[id]&&state.items[id].correct)return;
+      var rec=state.items[id]||{attempts:0,correct:false,tema:card.dataset.tema,level:card.dataset.level,module:Number(card.dataset.module)};
+      rec.attempts+=1;
+      if(btn.dataset.ok==='1'){rec.correct=true;card.querySelectorAll('.opt').forEach(function(b){b.disabled=true;b.classList.remove('wrong');if(b.dataset.ok==='1')b.classList.add('right');});fb.className='fb show ok';}
+      else{btn.disabled=true;btn.classList.add('wrong');fb.className='fb show no';}
+      state.items[id]=rec;save();markDone();
+    });});
   });
-});
-
-var esc = document.getElementById('esc');
-[1,2,3,4,5].forEach(function(n){
-  var b=document.createElement('button'); b.textContent=n;
-  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
-  esc.appendChild(b);
-});
-
-function buildSummary(){
-  var c=session.items.filter(function(x){return x.correcto;}).length;
-  var trabas=session.items.filter(function(x){return x.intentos>1;}).map(function(x){return x.id;});
-  var rec=session.formulas.map(function(f){return f.id+": "+f.recall;});
-  var s="Resolvió "+c+"/"+TOT_EJ+" ejercicios. ";
-  s+= rec.length? ("Recall de fórmulas → "+rec.join(" · ")+". ") : "No hizo el recall de fórmulas. ";
-  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas. ";
-  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
-  return s;
-}
-document.getElementById('gen').onclick=function(){
-  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
-  session.resumen_legible=buildSummary();
-  var nombre=session.fecha+"_algebra_U6.json";
-  var json=JSON.stringify(session,null,2);
-  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
-  var recPills=session.formulas.map(function(f){return '<span class="pill">'+f.id+": "+f.recall+'</span>';}).join("")||'<span class="nota">— sin recall —</span>';
-  document.getElementById('reporte').innerHTML=
-    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
-    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
-    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT_EJ+'</strong> ejercicios · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
-    '<div>Fórmulas: '+recPills+'</div>'+
-    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
-    '<button class="btn ghost" id="cp">Copiar</button>'+
-    '<textarea id="ta" readonly>'+json+'</textarea>'+
-    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
-    '</div>';
-  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
-  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
-};
-updateCont();
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);});});
+  document.querySelectorAll('[data-next]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.next);});});
+  document.querySelectorAll('[data-prev]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.prev);});});
+  // ---- widget: explorador de vectores propios (Microlección 1) ----
+  var EA=[[2,1],[1,2]];
+  var EV=[[1,0],[1,1],[1,-1],[2,1]];
+  var mix={v:1};
+  function ept(x,y){return [30+(x+1)*40, 270-(y+1)*40];}
+  var EGRID=(function(){var g='';for(var i=-1;i<=5;i++){var a=ept(i,-1),b=ept(i,5),c=ept(-1,i),d=ept(5,i);g+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/><line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';}var x0=ept(-1,0),x1=ept(5,0),y0=ept(0,-1),y1=ept(0,5);g+='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/><line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';return g;})();
+  function earrow(x,y,color){var o=ept(0,0),p=ept(x,y);var ang=Math.atan2(p[1]-o[1],p[0]-o[0]);var ah=11,aw=0.42;var t1=[p[0]-ah*Math.cos(ang-aw),p[1]-ah*Math.sin(ang-aw)];var t2=[p[0]-ah*Math.cos(ang+aw),p[1]-ah*Math.sin(ang+aw)];return '<line x1="'+o[0]+'" y1="'+o[1]+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"/><polygon points="'+p[0]+','+p[1]+' '+t1[0]+','+t1[1]+' '+t2[0]+','+t2[1]+'" fill="'+color+'"/>';}
+  function paintMix(){
+    var v=EV[mix.v];var av=[EA[0][0]*v[0]+EA[0][1]*v[1],EA[1][0]*v[0]+EA[1][1]*v[1]];
+    var cross=v[0]*av[1]-v[1]*av[0];var isEig=(cross===0);
+    var lam=isEig?(v[0]!==0?av[0]/v[0]:av[1]/v[1]):null;
+    var fmt=function(p){return '('+p[0]+', '+p[1]+')';};
+    var out=document.getElementById('eigenOut');if(out)out.textContent=fmt(av);
+    var plane=document.getElementById('eigenPlane');
+    if(plane)plane.innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plano con la flecha elegida y su transformada por A">'+EGRID+earrow(av[0],av[1],'#283891')+earrow(v[0],v[1],'#F5821F')+'</svg>';
+    var vd=document.getElementById('eigenVerdict');
+    if(vd){if(isEig){vd.textContent='Salió derecha: misma dirección que '+fmt(v)+', estirada '+lam+(lam===1?' vez':' veces')+'. Es vector propio, con λ = '+lam+'.';}else{vd.textContent='Salió torcida: '+fmt(av)+' apunta a otra dirección. No es vector propio.';}}
+  }
+  document.querySelectorAll('.pick').forEach(function(group){group.querySelectorAll('button').forEach(function(btn){btn.addEventListener('click',function(){
+    var key=group.dataset.mix;mix[key]=Number(btn.dataset.value);
+    group.querySelectorAll('button').forEach(function(x){x.classList.toggle('is-on',x===btn);});paintMix();});});});
+  paintMix();
+  document.querySelectorAll('[data-confidence]').forEach(function(btn){btn.addEventListener('click',function(){
+    state.confidence=Number(btn.dataset.confidence);save();
+    document.querySelectorAll('[data-confidence]').forEach(function(x){x.classList.toggle('sel',x===btn);});});
+    if(state.confidence===Number(btn.dataset.confidence))btn.classList.add('sel');});
+  document.getElementById('makeReport').addEventListener('click',function(){
+    var p=progress();
+    var weak=Object.keys(state.items).filter(function(id){return state.items[id].attempts>1;});
+    var report={fecha:new Date().toISOString().slice(0,10),materia:'algebra_lineal',unidad:'U6_diagonalizacion',leccion:'L6_diagonalizacion',inicio:state.started,
+      duracion_min:Math.max(1,Math.round((Date.now()-new Date(state.started).getTime())/60000)),
+      items:Object.keys(state.items).map(function(id){var x=state.items[id];return {id:id,tema:x.tema,nivel:x.level,modulo:x.module,intentos:x.attempts,correcto:x.correct};}),
+      autoconfianza:state.confidence,
+      resumen_legible:'Resolvió '+p.done+'/'+p.total+' actividades. Requirieron más de un intento: '+(weak.length?weak.join(', '):'ninguna')+'. Confianza: '+(state.confidence||'sin registrar')+'/5.'};
+    var blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=report.fecha+'_algebra_lineal_U6.json';a.click();URL.revokeObjectURL(url);
+    var box=document.getElementById('reportSummary');box.className='report show';box.innerHTML='<p><strong>Reporte listo.</strong> '+report.resumen_legible+'</p>';});
+  markDone();go(state.current||1);
+})();
 </script>
 </body>
 </html>

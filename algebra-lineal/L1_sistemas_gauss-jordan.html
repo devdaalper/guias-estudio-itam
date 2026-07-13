@@ -32,114 +32,118 @@
   .hero h1{font-size:clamp(27px,4.6vw,44px);letter-spacing:-.035em;line-height:1.05;margin:.18em 0 .12em;max-width:22ch}
   .hero h1 mark{background:var(--orange);color:#fff;padding:0 .12em;border-radius:8px}
   .lead{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:62ch;margin:.2em 0 0}
-  .learn{margin:22px 0 0;display:grid;gap:10px}
-  .learn h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:0}
-  .learn ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 18px}
-  @media(max-width:600px){.learn ol{grid-template-columns:1fr}}
-  .learn li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .learn li .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
+  .today{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;margin-top:20px;padding:13px 16px;background:#fff;border:2px solid var(--ink);border-radius:14px}
+  .today .n{width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;display:grid;place-items:center}
+  .today p{margin:0}
+  .today b{font-weight:800}
+  .today small{display:block;color:var(--muted);font-size:15px}
 
-  main{display:grid;gap:16px;margin-top:22px}
-  h2.modhead{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin:18px 0 -6px}
+  .route-label{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep);margin:20px 0 8px}
+  .route{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px}
+  .step{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 7px;background:#fff;border:2px solid var(--ink);border-radius:999px;cursor:pointer;font:inherit;font-weight:700;font-size:15px;color:var(--ink);transition:transform .1s}
+  .step .num{width:26px;height:26px;border-radius:50%;background:#eef1fb;color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:14px}
+  .step:hover{transform:translateY(-1px)}
+  .step[aria-selected="true"]{background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
+  .step[aria-selected="true"] .num{background:#fff;color:var(--deep)}
+  .step.is-done{border-color:var(--green-deep)}
+  .step.is-done .num{background:var(--green);color:#fff}
 
-  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
-  .sec h3{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:-.02em}
-  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.62;max-width:64ch}
-  .idea strong{font-weight:800}
+  main{display:grid;gap:16px;margin-top:6px}
+  .lesson{display:none}
+  .lesson.is-active{display:grid;gap:16px}
+  .lesson-head{margin-top:6px}
+  .micro{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin:0}
+  .lesson-head h2{margin:.15em 0 .1em;font-size:clamp(23px,3.6vw,31px);letter-spacing:-.02em}
+  .goal{margin:0;color:var(--muted)}
 
-  .fx{justify-self:start;max-width:100%;overflow-x:auto;padding:14px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
-  .fx-note{margin:0;font-size:15px;color:var(--muted);max-width:60ch;line-height:1.5}
-  .fases{margin:0;padding-left:20px;display:grid;gap:8px}
-  .fases li{font-size:17px;line-height:1.5}
-  .fases em{font-style:normal;color:var(--deep);font-weight:700}
-  .calc{font-size:15px;color:var(--slate);background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:2px 0 0;line-height:1.95;min-width:0}
-  .calc .rw{font-weight:800;color:var(--deep);margin-right:4px}
-  .calc b{color:var(--ink);font-weight:800}
-  .calc .sep{color:#c9c2b6;margin:0 5px}
-  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
+  .sec{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:22px 22px 24px;display:grid;gap:17px;box-shadow:var(--shadow)}
+  .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
+  .idea strong{font-weight:800;color:var(--ink)}
+  .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
+  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
+  .paso{color:var(--muted);font-size:16px}
+  .paso::before{content:"→ ";color:var(--orange);font-weight:800}
+
+  .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
+  .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums;text-align:center}
   .sys .eq{white-space:nowrap}
-  .mtx{display:inline-flex;align-items:stretch;gap:6px;font-variant-numeric:tabular-nums;font-size:21px}
-  .brk{width:10px;border:2.5px solid var(--ink)}
-  .brk-l{border-right:0;border-radius:5px 0 0 5px}
-  .brk-r{border-left:0;border-radius:0 5px 5px 0}
-  .cols{padding:8px 4px}
-  .mrow{display:grid;align-items:center;column-gap:16px;min-height:30px}
-  .mrow>span{text-align:right;min-width:24px}
-  .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
+  .unknown{color:var(--deep);font-weight:800}
+  .matrix-form{display:flex;align-items:center;gap:14px;justify-content:center;font-size:21px}
+  .matrix{display:grid;grid-template-columns:repeat(2,minmax(26px,auto));gap:8px 16px;padding:6px 12px;border-left:3px solid var(--ink);border-right:3px solid var(--ink)}
+  .matrix.three{grid-template-columns:repeat(3,minmax(26px,auto))}
+  .matrix span{display:grid;place-items:center;min-height:30px;padding:0 4px;border-radius:6px}
+  .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
+  .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
+
+  .name-card{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:14px 16px;background:var(--cream);border:2px dashed var(--deep);border-radius:14px}
+  .name-card .stamp{padding:4px 10px;background:var(--ink);color:#fff;border-radius:999px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+  .name-card p{margin:2px 0 0}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+
+  .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
+  .visual svg{display:block;width:100%;height:auto}
+  .visual figcaption{margin-top:8px;color:var(--muted);font-size:15px;text-align:center}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;color:var(--slate);font-size:15px}
+  .dot{display:inline-block;width:11px;height:11px;margin-right:5px;border-radius:50%;background:var(--orange)}
+  .dot.green{background:var(--green-deep)}
+
+  .criteria{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .criterion{padding:12px 10px;background:#fff;border:2px solid var(--ink);border-radius:12px;text-align:center;font-weight:700;font-size:15px;line-height:1.35}
+  .criterion b{display:block;color:var(--deep);font-size:24px}
+
+  .mixlab{display:grid;gap:14px;padding:16px;border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9}
+  .mix-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .recipe{padding:12px;border:1.5px solid var(--line);border-radius:12px;background:#fff}
+  .recipe h4{margin:0 0 2px;font-size:17px}
+  .recipe p{margin:0 0 10px;font-size:15px;color:var(--muted)}
+  .pick{display:flex;flex-wrap:wrap;gap:7px}
+  .pick button{font:inherit;font-size:15px;font-weight:700;padding:8px 11px;background:#fff;border:2px solid var(--line);border-radius:9px;cursor:pointer}
+  .pick button:hover{border-color:var(--orange)}
+  .pick button.is-on{background:var(--orange);border-color:var(--ink);color:#fff}
+  .mix-result{padding:12px;background:var(--cream);border:1.5px solid var(--line);border-radius:12px;text-align:center}
+  .mix-result p{margin:0;font-size:15px;color:var(--slate)}
+  .mix-result strong{display:block;font-size:21px;color:var(--ink)}
 
   .check{display:grid;gap:11px;padding:16px 18px;border:1.5px solid #cfd6f2;border-radius:12px;background:#eef1fb}
-  .check .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
-  .check .qtag::before{content:"✎ "}
-  .check .q{margin:0;font-weight:700;font-size:17px}
-
+  .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
+  .qtag::before{content:"✎ "}
+  .q{margin:0;font-size:17px}
+  .q strong{font-weight:800}
   .opts{display:grid;gap:10px}
-  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
+  .opt{font:inherit;text-align:left;font-weight:600;font-size:17px;padding:12px 16px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s;min-width:0;overflow-wrap:anywhere}
   .opt:hover{border-color:var(--orange);transform:translateY(-1px)}
-  .opt:disabled{cursor:default}
+  .opt:disabled{cursor:default;transform:none}
   .opt.right{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
   .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
+  .fb{display:none;border:1.5px solid;border-radius:10px;padding:11px 14px;font-size:17px}
+  .fb.show{display:block}
+  .fb.ok{border-color:#bfe6cd;background:#eef7f0}
+  .fb.no{border-color:#f0d6b8;background:#fdf3ea}
+  .fb p{margin:0}
+  .fb .okc,.fb .nudge{display:none}
+  .fb.ok .okc{display:block}
+  .fb.no .nudge{display:block}
 
-  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
-  .why.show{display:block}
-  .why.miss{border-color:#f0d6b8;background:#fdf3ea}
-  .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
-  .why.miss>.lbl{color:var(--deep)}
-  .why p{margin:0}
-
-  .ejemplo{border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9;padding:18px 20px;display:grid;gap:14px}
-  .estep{display:grid;gap:8px}
-  .estep .oprow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:16px;background:#eef1fb;border:1px solid #cfd6f2;border-radius:8px;padding:5px 12px;justify-self:start}
-  .estep p{margin:0;font-size:16px;color:var(--slate);line-height:1.55}
-
-  .practice{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow)}
-  .practice .phead h3{margin:0;font-size:19px}
-  .practice .phead .sub{margin:2px 0 0;color:var(--muted);font-size:15px}
-  .pitem{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:11px;background:#fff;transition:border-color .2s,background .2s}
-  .pitem.solved{border-color:var(--green);background:#f3faf5}
-  .lvl{justify-self:start;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 11px;border:1.5px solid}
-  .lvl.guiado{color:var(--navy);background:#e9ecf9;border-color:#c7cef0}
-  .lvl.juntos{color:var(--deep);background:var(--cream);border-color:#f0d6b8}
-  .lvl.solo{color:var(--green-deep);background:var(--green-tint);border-color:#bfe6cd}
-  .pstatement{margin:0;font-size:17px}
-  .aux summary{cursor:pointer;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;list-style:none;width:max-content;font-size:15px}
-  .aux summary::-webkit-details-marker{display:none}
-  .aux summary:hover{border-color:var(--navy);background:#f7f8fc}
-  .aux details[open] summary{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
-  .aux p{margin:8px 2px 0;font-size:16px;color:var(--slate)}
-
-  .viz{display:grid;gap:12px}
-  .viz-tabs{display:flex;gap:8px;flex-wrap:wrap}
-  .viz-tab{font:inherit;font-weight:700;font-size:15px;padding:9px 15px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:transform .1s,border-color .1s}
-  .viz-tab:hover{border-color:var(--orange);transform:translateY(-1px)}
-  .viz-tab.active{border-color:var(--ink);background:var(--orange);color:#fff;box-shadow:2px 2px 0 var(--ink)}
-  .viz-plane{padding:10px}
-  .viz-plane svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
-  .viz-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;font-weight:600;color:var(--slate)}
-  .viz-legend span{display:inline-flex;align-items:center;gap:7px}
-  .viz-legend i{width:18px;height:4px;border-radius:2px;display:inline-block}
-  .viz-cap{margin:0;font-size:17px;color:var(--slate);min-height:1.6em}
-
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
-
-  .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
-  .cierre h3{margin:0;font-size:19px}
-  .escala{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-  .escala button{flex:1;min-width:54px;padding:14px 0;font-size:20px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
-  .escala button:hover{border-color:var(--orange)}
-  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
-  .btn{font:inherit;font-weight:800;font-size:17px;padding:13px 24px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;margin-top:16px;display:inline-block;text-decoration:none}
+  .lesson-nav{display:flex;justify-content:space-between;gap:12px;margin-top:4px}
+  .btn{font:inherit;font-weight:800;font-size:17px;padding:12px 20px;border:2px solid var(--ink);border-radius:12px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .1s,box-shadow .1s;text-decoration:none;display:inline-block}
   .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
   .btn.ghost{background:#fff;color:var(--ink);box-shadow:none;font-weight:700}
-  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:Menlo,ui-monospace,monospace;font-size:13px;margin-top:10px}
-  .nota{font-size:15px;color:var(--muted);margin-top:8px}
-  .pill{display:inline-block;background:#e9ecf9;color:var(--navy);border-radius:999px;padding:3px 11px;font-size:14px;font-weight:700;margin:3px 4px 0 0}
-  .cont{font-size:14px;color:var(--muted);font-weight:700}
-  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
+
+  .finish{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow);padding:20px 22px}
+  .finish h3{margin:0;font-size:19px}
+  .finish p{margin:0}
+  .nota{font-size:15px;color:var(--muted)}
+  .escala{display:flex;gap:10px;flex-wrap:wrap}
+  .escala button{flex:1;min-width:52px;padding:13px 0;font-size:19px;border:2px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-weight:700}
+  .escala button:hover{border-color:var(--orange)}
+  .escala button.sel{border-color:var(--navy);background:#eef1fb;color:var(--navy)}
+  .report{display:none;padding:13px 15px;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:12px}
+  .report.show{display:block}
+  .report p{margin:0}
+
+  .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:10px}
   .nav-lecs a{flex:1;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
@@ -150,18 +154,19 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*aire-matematico*/
-  .sec{gap:16px}
+  .sec{gap:17px}
   .idea{line-height:1.72}
-  .fx{margin:4px 0;justify-self:center}
-  .fases{gap:9px;margin:2px 0}
-  .ejemplo{gap:16px}
+  .fx{margin:8px 0;justify-self:center}
+  .visual{margin:6px 0}
+  .name-card{margin-top:6px}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
-  @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  main,.lesson.is-active,.sec,.check,.opts,.finish{grid-template-columns:minmax(0,1fr)}
+  .sec,.check,.opts,.opt,.fx,.sys,.visual,.mixlab,.mix-grid,.criteria,.finish,.name-card{min-width:0}
+  .fx,.sys,.visual,.mixlab{max-width:100%}
+  .idea,.q,.opt{overflow-wrap:anywhere}
+  @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
+  @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -175,567 +180,606 @@
 
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 1</p>
-    <h1>Sistemas de ecuaciones y <mark>Gauss-Jordan</mark></h1>
-    <p class="lead">El tema completo, de principio a fin. Aquí no se adivina: se recuerda la regla y se razona el paso. Todo a mano, sin calculadora.</p>
-    <div class="learn">
-      <h2>Al terminar vas a poder</h2>
-      <ol>
-        <li><span class="n">1</span> Escribir un sistema como matriz aumentada</li>
-        <li><span class="n">2</span> Usar las 3 operaciones de renglón</li>
-        <li><span class="n">3</span> Reconocer la forma reducida (RREF)</li>
-        <li><span class="n">4</span> Resolver por Gauss-Jordan (2×2 y 3×3)</li>
-        <li><span class="n">5</span> Clasificar: una, ninguna o infinitas</li>
-        <li><span class="n">6</span> Escribir la solución general con variable libre</li>
-      </ol>
+    <h1>De dos tickets a <mark>Gauss-Jordan</mark></h1>
+    <p class="lead">Una idea a la vez, sabiendo siempre a dónde vas: cada lección anuncia su concepto del temario y te lleva de lo cotidiano hasta su definición formal.</p>
+    <div class="today">
+      <span class="n" id="heroStep">1</span>
+      <p><b id="heroGoal">Sistema lineal: reconocer ecuaciones que deben cumplirse a la vez.</b><small>Avanza con libertad. Un error nunca bloquea el siguiente paso.</small></p>
     </div>
   </header>
 
+  <p class="route-label">Tu ruta · ocho ideas breves</p>
+  <nav class="route" role="tablist" aria-label="Ruta de microlecciones">
+    <button class="step" role="tab" data-go="1" aria-selected="true"><span class="num">1</span>Sistema lineal</button>
+    <button class="step" role="tab" data-go="2" aria-selected="false"><span class="num">2</span>Conjunto solución</button>
+    <button class="step" role="tab" data-go="3" aria-selected="false"><span class="num">3</span>Matriz aumentada</button>
+    <button class="step" role="tab" data-go="4" aria-selected="false"><span class="num">4</span>Operaciones elementales</button>
+    <button class="step" role="tab" data-go="5" aria-selected="false"><span class="num">5</span>Escalonada</button>
+    <button class="step" role="tab" data-go="6" aria-selected="false"><span class="num">6</span>Escalonada reducida</button>
+    <button class="step" role="tab" data-go="7" aria-selected="false"><span class="num">7</span>Gauss-Jordan</button>
+    <button class="step" role="tab" data-go="8" aria-selected="false"><span class="num">8</span>Variables libres</button>
+  </nav>
+
   <main>
 
-    <h2 class="modhead">Empecemos por un problema</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">En una cafetería, <strong>2 cafés y 3 jugos cuestan $13</strong>. Y <strong>1 café y 2 jugos cuestan $8</strong>. ¿Cuánto cuesta cada uno?</p>
-      <p class="idea" style="font-size:17px">Para no escribir frases completas, abreviemos: llamemos <strong>c</strong> a lo que cuesta un café y <strong>j</strong> a lo que cuesta un jugo.</p>
-      <p class="idea" style="font-size:17px">Son números que todavía no conocemos — y a un número desconocido se le llama <strong>incógnita</strong>.</p>
-      <p class="idea" style="font-size:17px">Con esas letras, las dos frases del problema quedan así de cortas:</p>
-      <div class="fx"><div class="sys"><span class="eq">2c + 3j = 13</span><span class="eq">1c + 2j = 8</span></div></div>
-      <p class="idea" style="font-size:17px">Lee la primera en voz alta: "dos cafés más tres jugos cuestan trece". Es la misma frase de arriba, en versión corta.</p>
-      <p class="idea" style="font-size:17px">Y como las dos deben cumplirse <strong>a la vez</strong> (la cafetería cobra los mismos precios en los dos tickets), al par se le llama un <strong>sistema de ecuaciones</strong>.</p>
-      <p class="idea" style="font-size:17px">Con dos incógnitas quizá lo saques tanteando. Pero con tres o cuatro, el tanteo se derrumba.</p>
-      <p class="idea" style="font-size:17px">Necesitamos un método que <strong>siempre</strong> funcione y que se haga <strong>a mano, sin calculadora</strong>.</p>
-      <p class="idea" style="font-size:17px">Ese método se llama <strong>Gauss-Jordan</strong> y es el tema de esta guía: para el final vas a resolver justo este problema tú sola.</p>
-    </section>
-
-    <h2 class="modhead">La idea</h2>
-
-    <section class="sec">
-      <h3>1 · De ecuaciones a una tabla de números</h3>
-      <p class="idea">Piensa en cómo anota el mesero los pedidos. No escribe "la mesa cinco quiere dos cafés y tres jugos, y son trece pesos".</p>
-      <p class="idea">Hace una <strong>tabla</strong>, con una columna para los cafés, otra para los jugos y otra para el total.</p>
-      <p class="idea">Las palabras estorban; los números en orden bastan.</p>
-      <p class="idea">Con las ecuaciones haremos exactamente eso: <strong>quitar el ruido</strong> —las letras, los signos de más, el igual— y quedarnos solo con los números, cada uno en su lugar.</p>
-      <p class="idea">Mira este sistema y, debajo, su tabla:</p>
-      <div class="fx"><div class="sys"><span class="eq">x + 2y = 5</span><span class="eq">3x − y = 1</span></div></div>
-      <div class="fx" id="mtxIntro"></div>
-      <p class="idea">Aprende a leerla, porque vamos a vivir en ella:</p>
-      <ul class="fases">
-        <li>Cada <strong>renglón</strong> (línea horizontal) es una ecuación: el primero guarda 1, 2 y 5, que es x + 2y = 5 sin adornos.</li>
-        <li>Cada <strong>columna</strong> (línea vertical) es una incógnita: la primera columna (el 1 y el 3) tiene los números que acompañan a x; la segunda (el 2 y el −1), los que acompañan a y.</li>
-        <li>La <strong>barra vertical</strong> hace el papel del signo "=", y a su derecha viven los resultados: 5 y 1.</li>
-      </ul>
-      <p class="idea">Dos detalles que atrapan a todo el mundo:</p>
-      <ul class="fases">
-        <li>Cuando la letra va <strong>sola</strong>, como la x de la primera ecuación, su número es un <strong>1 invisible</strong> — y en la tabla ese 1 sí se escribe.</li>
-        <li>Cuando la letra lleva signo de <strong>menos</strong>, como −y, su número entra <strong>negativo</strong>: −1.</li>
-      </ul>
-      <p class="idea">Ahora los nombres:</p>
-      <ul class="fases">
-        <li>A una tabla de números como esta se le llama <strong>matriz</strong>.</li>
-        <li>A los números que acompañan a las letras se les llama <strong>coeficientes</strong>.</li>
-        <li>Y como a la tabla de coeficientes le <strong>aumentamos</strong> una columna extra —la de los resultados—, el nombre completo es <strong>matriz aumentada</strong>.</li>
-      </ul>
-      <p class="idea">El plan de toda la unidad cabe en una frase: resolver el sistema será <strong>simplificar</strong> esta tabla hasta poder <strong>leer</strong> la respuesta directamente.</p>
-      <p class="idea">Antes de seguir, comprueba que ya la lees bien:</p>
-      <div class="check" data-kind="item" data-id="MAchk" data-tema="matriz_aumentada" data-level="guiado">
-        <div class="qtag">Te toca · reconoce</div>
-        <p class="q">¿Cuál matriz aumentada corresponde a este sistema?</p>
-        <div class="fx"><div class="sys"><span class="eq">2x − y = 3</span><span class="eq">x + 4y = 5</span></div></div>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="ma_a"></button>
-          <button class="opt" data-ok="0" id="ma_b"></button>
-          <button class="opt" data-ok="0" id="ma_c"></button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El coeficiente de y en la primera ecuación es <strong>−1</strong> (por el signo menos). Las columnas van en orden x, y, y la barra guarda los resultados 3 y 5.</p></div>
+    <section class="lesson is-active" data-step="1">
+      <header class="lesson-head"><p class="micro">Microlección 1 de 8 · Tema: Sistemas de ecuaciones lineales</p><h2>Sistema lineal: dos condiciones a la vez</h2><p class="goal">Meta: reconocer un sistema y sus incógnitas en un problema real.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy conoces el objeto que gobierna toda la unidad: el <strong>sistema lineal</strong>.</p>
+        <p class="idea">El nombre suena a laboratorio, pero nace en una cafetería. Mira estos dos tickets de la misma mañana:</p>
+        <figure class="visual">
+          <svg viewBox="0 0 560 250" role="img" aria-label="Dos tickets de la misma cafetería con totales 13 y 8 pesos">
+            <rect x="18" y="24" width="252" height="200" rx="16" fill="#FFF3E7" stroke="#181B22" stroke-width="3"/>
+            <text x="144" y="58" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">TICKET 1</text>
+            <circle cx="64" cy="102" r="24" fill="#F5821F"/><text x="64" y="110" text-anchor="middle" font-size="22" font-weight="800" fill="white">2</text>
+            <text x="98" y="109" font-size="17" fill="#334155">cafés</text>
+            <circle cx="64" cy="156" r="24" fill="#283891"/><text x="64" y="164" text-anchor="middle" font-size="22" font-weight="800" fill="white">3</text>
+            <text x="98" y="163" font-size="17" fill="#334155">jugos</text>
+            <text x="144" y="208" text-anchor="middle" font-size="20" font-weight="800" fill="#C75D08">pagaron $13</text>
+            <rect x="290" y="24" width="252" height="200" rx="16" fill="white" stroke="#181B22" stroke-width="3"/>
+            <text x="416" y="58" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">TICKET 2</text>
+            <circle cx="336" cy="102" r="24" fill="#F5821F"/><text x="336" y="110" text-anchor="middle" font-size="22" font-weight="800" fill="white">1</text>
+            <text x="370" y="109" font-size="17" fill="#334155">café</text>
+            <circle cx="336" cy="156" r="24" fill="#283891"/><text x="336" y="164" text-anchor="middle" font-size="22" font-weight="800" fill="white">2</text>
+            <text x="370" y="163" font-size="17" fill="#334155">jugos</text>
+            <text x="416" y="208" text-anchor="middle" font-size="20" font-weight="800" fill="#C75D08">pagaron $8</text>
+          </svg>
+          <figcaption>Mismos precios en las dos compras: dos pistas sobre los mismos dos números.</figcaption>
+        </figure>
+        <p class="idea">Nadie anotó cuánto cuesta cada cosa. Solo quedaron los totales — y la pregunta: ¿cuánto vale un café y cuánto un jugo?</p>
+        <p class="idea">Para hablar en corto, llama <strong>c</strong> al precio del café y <strong>j</strong> al del jugo. Son números que todavía no conoces, y a un número desconocido se le llama <strong>incógnita</strong>.</p>
+        <p class="idea">Con esas letras, cada ticket se vuelve una frase corta:</p>
+        <div class="fx"><div class="sys"><span class="eq">2c + 3j = 13</span><span class="eq">1c + 2j = 8</span></div></div>
+        <p class="idea">Lee la primera en voz alta: «dos cafés más tres jugos cuestan trece pesos». Es el ticket 1 sin palabras.</p>
+        <p class="idea">A una frase así —letras multiplicadas por números y sumadas— se le llama <strong>ecuación lineal</strong>.</p>
+        <p class="idea key">Y el detalle que lo cambia todo: la cafetería cobra los mismos precios en los dos tickets. Las dos ecuaciones deben cumplirse <strong>a la vez</strong>.</p>
+        <p class="idea">Un paquete de ecuaciones que se exigen juntas: eso es un sistema.</p>
+        <p class="idea">Con dos incógnitas quizá lo saques tanteando; con cuatro o cinco, el tanteo se derrumba — por eso esta unidad construye un método que nunca falla.</p>
+        <p class="idea">Y con esto ya llegaste al primer nombre del temario. Tu curso lo define así:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 1.1</span>Un <strong>sistema lineal</strong> de m ecuaciones con n incógnitas es un conjunto de m ecuaciones lineales, cada una con n incógnitas; las x<sub>i</sub> son las incógnitas o variables de decisión y las b<sub>j</sub> son las constantes.</p>
+        <p class="idea">Léela con tus tickets: aquí m = 2 (dos ecuaciones) y n = 2 (café y jugo).</p>
+        <p class="idea">Las incógnitas que el curso llama x<sub>1</sub> y x<sub>2</sub> son tus letras c y j, y las constantes son los totales 13 y 8.</p>
+        <p class="idea paso">Asegura la idea con los dos retos de abajo.</p>
+        <p class="idea paso">Y en cuanto la tengas, viene la pregunta natural: ¿qué significa exactamente <strong>resolver</strong> este paquete?</p>
       </div>
-    </section>
-
-    <section class="sec">
-      <h3>2 · Las 3 movidas permitidas</h3>
-      <p class="idea">Queremos transformar la tabla en tablas cada vez más simples <strong>sin cambiar la respuesta</strong> del problema. ¿Qué movidas son legales?</p>
-      <p class="idea">La clave está en recordar qué es cada renglón: <strong>una ecuación disfrazada</strong>, un hecho verdadero sobre los precios.</p>
-      <p class="idea">Todo lo que puedas hacer con hechos verdaderos sin romperlos, lo puedes hacer con los renglones.</p>
-      <p class="idea">Y resulta que hay exactamente tres movidas así.</p>
-      <p class="idea"><strong>Movida 1: intercambiar dos renglones.</strong> Es cambiar el orden en que anotas los pedidos.</p>
-      <p class="idea">Da igual apuntar primero el de la mesa 1 o el de la mesa 2. La información es la misma.</p>
-      <p class="idea"><strong>Movida 2: multiplicar un renglón por un número (que no sea cero).</strong></p>
-      <p class="idea">Si 1 café y 2 jugos cuestan $8, entonces el doble de ese pedido —2 cafés y 4 jugos— cuesta $16. Mismo hecho, dicho al doble.</p>
-      <p class="idea">¿Y por qué se prohíbe el cero? Porque multiplicar todo por cero deja el renglón en "0 = 0": cierto, pero vacío.</p>
-      <p class="idea">Sería <strong>borrar</strong> ese pedido del ticket, y lo borrado no se recupera.</p>
-      <p class="idea"><strong>Movida 3: sumar a un renglón un múltiplo de otro.</strong> Junta dos hechos para fabricar un tercero.</p>
-      <p class="idea">Si un pedido cuesta $13 y otro cuesta $8, llevarte los dos juntos cuesta $21 — y las cantidades de café y de jugo también se suman.</p>
-      <p class="idea">El hecho nuevo sigue siendo verdadero.</p>
-      <p class="idea">Con restas funciona igual, y esta movida es la estrella del método: restando el múltiplo adecuado vas a <strong>fabricar ceros</strong> justo donde los números estorban.</p>
-      <p class="idea">Fíjate en lo que las tres comparten: <strong>se pueden deshacer</strong>.</p>
-      <ul class="fases">
-        <li>Si intercambiaste, vuelve a intercambiar.</li>
-        <li>Si multiplicaste por 2, divide entre 2.</li>
-        <li>Si sumaste, resta.</li>
-      </ul>
-      <p class="idea">Como ningún paso pierde ni inventa información, la tabla cambia de cara pero <strong>sus soluciones son siempre las mismas</strong>.</p>
-      <p class="idea">A estas tres movidas se les llama <strong>operaciones elementales de renglón</strong>, y son las únicas herramientas que el método usa. ¿Te quedaron?</p>
-      <div class="check" data-kind="recall" data-fid="F1_operaciones_renglon" data-tema="operaciones_elementales">
-        <div class="qtag">Te toca · recuerda</div>
-        <p class="q">¿Cuál de estas SÍ es el conjunto correcto de operaciones de renglón?</p>
+      <div class="check challenge" data-kind="item" data-id="M1G" data-tema="sistema_lineal" data-level="guiado" data-module="1">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Lee el paquete.</strong> En el sistema de la cafetería, ¿qué exige que las dos ecuaciones formen un sistema?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Intercambiar dos renglones · multiplicar un renglón por un número distinto de cero · sumar a un renglón un múltiplo de otro</button>
-          <button class="opt" data-ok="0">Intercambiar dos columnas · multiplicar un renglón por cualquier número · sumar dos renglones</button>
-          <button class="opt" data-ok="0">Multiplicar un renglón por cero · intercambiar renglones · restar una constante a todos</button>
+          <button class="opt" data-ok="1">Que la misma pareja de precios cumpla las dos a la vez</button>
+          <button class="opt" data-ok="0">Que cada ticket tenga su propio precio del café</button>
+          <button class="opt" data-ok="0">Que baste con resolver la primera ecuación</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Esas tres no cambian las soluciones. Multiplicar por <strong>cero</strong> borra información (no se vale) y las <strong>columnas</strong> nunca se tocan.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Un sistema es un paquete: los mismos precios deben funcionar en los dos tickets.</p><p class="nudge">✕ Piensa quién cobró los dos tickets: ¿pueden usar precios distintos? Intenta de nuevo.</p></div>
       </div>
-    </section>
-
-    <section class="sec">
-      <h3>3 · La meta: una tabla que se lee sola</h3>
-      <p class="idea">Ya sabes mover. Falta saber <strong>hacia dónde</strong>.</p>
-      <p class="idea">¿Cuál sería la tabla perfecta, la que ya no necesita ningún trabajo? Una que diga directamente "la primera incógnita vale tanto; la segunda, tanto". Así:</p>
-      <div class="fx" id="rrefEx"></div>
-      <p class="idea">Léela con lo que ya sabes. El primer renglón dice "1 por la primera incógnita, más 0 por la segunda, igual a 4"; el segundo hace lo mismo con la y. Es decir:</p>
-      <div class="fx"><div class="sys"><span class="eq">x = 4</span><span class="eq">y = −1</span></div></div>
-      <p class="idea">Sin acompañantes. Nada que despejar, nada que tantear: <strong>la respuesta se lee sola</strong>. Esa es la meta de todo el método.</p>
-      <p class="idea">Mira la forma de esa tabla ganadora: cada incógnita tiene un <strong>1</strong>, y en el resto de su columna hay puros <strong>ceros</strong>.</p>
-      <p class="idea">Ese 1 especial tiene nombre: <strong>pivote</strong>. Se llama así porque es un <strong>punto de apoyo</strong> — como el pie fijo sobre el que gira un jugador de básquet.</p>
-      <p class="idea">Apoyada en ese 1, vas a limpiar (hacer cero) todo lo demás de su columna.</p>
-      <p class="idea">Y la tabla completa también tiene nombre: cuando ya no se puede simplificar más, se dice que está en <strong>forma reducida</strong>.</p>
-      <p class="idea">El nombre largo del libro es <strong>forma escalonada reducida</strong>, o RREF: "escalonada" porque los pivotes van bajando de izquierda a derecha, como escalones.</p>
-      <p class="idea">En cuanto tu tabla llega ahí, terminaste: la solución está escrita después de la barra.</p>
-      <div class="check" data-kind="item" data-id="RREFchk" data-tema="forma_reducida" data-level="guiado">
-        <div class="qtag">Te toca · reconoce</div>
-        <p class="q">¿Cuál de estas matrices YA está en forma reducida?</p>
+      <div class="check challenge" data-kind="item" data-id="M1S" data-tema="sistema_lineal" data-level="solo" data-module="1">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Cambia de tienda.</strong> En una papelería, 3 lápices y 1 cuaderno cuestan $25; y 2 lápices y 2 cuadernos cuestan $30. Con L y C como precios, ¿cuál es el sistema?</p>
         <div class="opts">
-          <button class="opt" data-ok="1" id="rr_a"></button>
-          <button class="opt" data-ok="0" id="rr_b"></button>
-          <button class="opt" data-ok="0" id="rr_c"></button>
+          <button class="opt" data-ok="1">3L + 1C = 25 y 2L + 2C = 30</button>
+          <button class="opt" data-ok="0">3L + 1C = 30 y 2L + 2C = 25</button>
+          <button class="opt" data-ok="0">1L + 3C = 25 y 2L + 2C = 30</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>En la reducida cada pivote es un <strong>1</strong> y es el <strong>único</strong> número no nulo de su columna. Si arriba del 1 todavía queda algo, o el pivote no es 1, aún no terminas.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Cada ticket se traduce tal cual: 3 lápices y 1 cuaderno dan 25; 2 y 2 dan 30.</p><p class="nudge">✕ Traduce ticket por ticket: el número junto a L cuenta lápices y el total va después del igual.</p></div>
       </div>
+      <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
-    <h2 class="modhead">Yo lo hago · contigo</h2>
+    <section class="lesson" data-step="2">
+      <header class="lesson-head"><p class="micro">Microlección 2 de 8 · Tema: Soluciones y consistencia</p><h2>Conjunto solución: una, ninguna o infinitas</h2><p class="goal">Meta: clasificar un sistema por el tamaño de su conjunto solución.</p></header>
+      <div class="sec">
+        <p class="idea lede">Ya sabes qué es un sistema. Hoy le pones nombre a lo que buscas: el <strong>conjunto solución</strong>.</p>
+        <p class="idea">Resolver la cafetería es encontrar la pareja de precios que cumple los dos tickets a la vez. Prueba una candidata: café a $2, jugo a $3.</p>
+        <div class="fx"><div class="sys"><span class="eq">2·2 + 3·3 = 13 ✓</span><span class="eq">1·2 + 2·3 = 8 ✓</span></div></div>
+        <p class="idea">Cuatro más nueve dan trece; dos más seis dan ocho. Las dos se cumplen: la pareja (2, 3) es una <strong>solución</strong>.</p>
+        <p class="idea">Y el conjunto de <strong>todas</strong> las parejas que lo logran —aquí, solo esa— es el conjunto solución del sistema.</p>
+        <p class="idea">¿Puede haber más de una? ¿O ninguna? Para verlo conviene dibujar: con dos incógnitas, las parejas que cumplen una ecuación forman una <strong>recta</strong>.</p>
+        <p class="idea">Resolver es buscar los puntos comunes a las dos rectas — y dos rectas solo saben hacer tres cosas:</p>
+        <figure class="visual">
+          <svg viewBox="0 0 640 246" role="img" aria-label="Tres pares de rectas: se cruzan en un punto, son paralelas o son la misma recta">
+            <rect x="14" y="20" width="194" height="186" rx="14" fill="white" stroke="#181B22" stroke-width="3"/>
+            <text x="111" y="48" text-anchor="middle" font-size="16" font-weight="800" fill="#181B22">SE CRUZAN</text>
+            <path d="M30 185L190 75" stroke="#F5821F" stroke-width="5"/>
+            <path d="M30 75L190 185" stroke="#283891" stroke-width="5"/>
+            <circle cx="110" cy="130" r="11" fill="none" stroke="#F5821F" stroke-width="2.5"/><circle cx="110" cy="130" r="6" fill="#181B22"/>
+            <text x="111" y="232" text-anchor="middle" font-size="15" fill="#475569">una solución</text>
+            <rect x="223" y="20" width="194" height="186" rx="14" fill="white" stroke="#181B22" stroke-width="3"/>
+            <text x="320" y="48" text-anchor="middle" font-size="16" font-weight="800" fill="#181B22">PARALELAS</text>
+            <path d="M238 170L402 90" stroke="#F5821F" stroke-width="5"/>
+            <path d="M238 122L402 42" stroke="#283891" stroke-width="5"/>
+            <text x="320" y="232" text-anchor="middle" font-size="15" fill="#475569">ninguna solución</text>
+            <rect x="432" y="20" width="194" height="186" rx="14" fill="white" stroke="#181B22" stroke-width="3"/>
+            <text x="529" y="48" text-anchor="middle" font-size="16" font-weight="800" fill="#181B22">LA MISMA RECTA</text>
+            <path d="M447 170L616 70" stroke="#F5821F" stroke-width="7"/>
+            <path d="M447 170L616 70" stroke="#283891" stroke-width="3" stroke-dasharray="10 8"/>
+            <text x="529" y="232" text-anchor="middle" font-size="15" fill="#475569">infinitas soluciones</text>
+          </svg>
+          <figcaption>Dos rectas solo pueden cruzarse en un punto, no tocarse nunca o ser la misma.</figcaption>
+        </figure>
+        <p class="idea">Lee el dibujo de izquierda a derecha: se cruzan en un punto (una solución), corren paralelas (ninguna) o son la misma recta (infinitas).</p>
+        <p class="idea key">No existe un cuarto caso: un sistema lineal tiene <strong>una, ninguna o infinitas</strong> soluciones. Jamás exactamente dos.</p>
+        <p class="idea">Cada caso tiene su nombre oficial. Tu curso los reparte así:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 1.2, 1.3 y 1.4</span>La solución de un sistema lineal, o <strong>conjunto solución</strong>, es el conjunto formado por todos los puntos (x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>) que cumplen las m ecuaciones simultáneamente. El sistema es <strong>consistente</strong> si su conjunto solución es no vacío; de lo contrario es <strong>inconsistente</strong>. Un consistente es <strong>determinado</strong> si el conjunto consta de un solo elemento y, en caso contrario, <strong>consistente indeterminado</strong>.</p>
+        <p class="idea">Tradúcelo con los dibujos: consistente = existe al menos un punto común (una o infinitas); inconsistente = paralelas, conjunto vacío.</p>
+        <p class="idea">Y dentro de los consistentes: determinado = exactamente un punto; indeterminado = infinitas.</p>
+        <p class="idea paso">Dos retos para fijar los nombres.</p>
+        <p class="idea paso">Clasificar ya está; falta <strong>calcular</strong>. Y para calcular a mano, el primer paso es quitarle el ruido al sistema: convertirlo en una tabla.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M2G" data-tema="conjunto_solucion" data-level="guiado" data-module="2">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Comprueba la candidata.</strong> ¿Por qué (2, 3) es solución del sistema de la cafetería?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Porque cumple las dos ecuaciones a la vez</button>
+          <button class="opt" data-ok="0">Porque cumple al menos una de las dos</button>
+          <button class="opt" data-ok="0">Porque el 2 y el 3 aparecen en los tickets</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ 2·2 + 3·3 = 13 y 1·2 + 2·3 = 8: las dos se cumplen con la misma pareja.</p><p class="nudge">✕ Cumplir una sola no basta: la pareja debe funcionar en los dos tickets. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M2S" data-tema="consistencia" data-level="solo" data-module="2">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Clasifica sin dibujar.</strong> El sistema x + y = 4 y x + y = 6, ¿cómo se clasifica?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Inconsistente: ninguna pareja suma 4 y 6 a la vez</button>
+          <button class="opt" data-ok="0">Determinado: la solución es (4, 6)</button>
+          <button class="opt" data-ok="0">Indeterminado: cualquier pareja funciona</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ La misma suma no puede valer 4 y 6 al mismo tiempo: conjunto vacío, rectas paralelas.</p><p class="nudge">✕ Pregunta si una misma pareja puede cumplir las dos ecuaciones al mismo tiempo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
+    </section>
 
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Ya tienes las tres piezas: la tabla, las tres movidas y la meta. Toca usarlas juntas.</p>
-      <p class="idea" style="font-size:17px">Reduzcamos la matriz del sistema del escalón 1:</p>
-      <div class="fx"><div class="sys"><span class="eq">x + 2y = 5</span><span class="eq">3x − y = 1</span></div></div>
-      <p class="idea" style="font-size:17px">No la mires nada más: en cada paso <strong>tú eliges la operación</strong> y yo la aplico.</p>
-      <div class="fx" id="e0"></div>
+    <section class="lesson" data-step="3">
+      <header class="lesson-head"><p class="micro">Microlección 3 de 8 · Tema: Representación matricial</p><h2>Matriz aumentada: el sistema sin ruido</h2><p class="goal">Meta: pasar de las ecuaciones a la tabla y de la tabla a las ecuaciones.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy el sistema cambia de ropa: se convierte en la <strong>matriz aumentada</strong>.</p>
+        <p class="idea">Piensa cómo anota el mesero los pedidos. No escribe «la mesa cinco quiere dos cafés y tres jugos, y son trece pesos»: hace una tabla.</p>
+        <p class="idea">Las palabras estorban; los números en orden bastan.</p>
+        <p class="idea">Con las ecuaciones haremos lo mismo — quitar letras, signos de más y el igual, y quedarnos con los números, cada uno en su lugar. Trabajemos con este sistema:</p>
+        <div class="fx"><div class="sys"><span class="eq">x + 2y = 5</span><span class="eq">3x − y = 1</span></div></div>
+        <p class="idea">Cada número viaja a su celda. Mira el traslado:</p>
+        <figure class="visual">
+          <svg viewBox="0 0 620 250" role="img" aria-label="Las dos ecuaciones se convierten en la matriz aumentada">
+            <defs><marker id="arrL3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#181B22"/></marker></defs>
+            <text x="36" y="112" font-size="23" fill="#181B22"><tspan fill="#C75D08" font-weight="800">1</tspan>x + <tspan fill="#283891" font-weight="800">2</tspan>y = <tspan fill="#1C7A3A" font-weight="800">5</tspan></text>
+            <text x="36" y="172" font-size="23" fill="#181B22"><tspan fill="#C75D08" font-weight="800">3</tspan>x <tspan fill="#283891" font-weight="800">−1</tspan>y = <tspan fill="#1C7A3A" font-weight="800">1</tspan></text>
+            <path d="M232 132H296" stroke="#181B22" stroke-width="4" marker-end="url(#arrL3)"/>
+            <text x="392" y="48" text-anchor="middle" font-size="14" font-weight="800" fill="#C75D08">x</text>
+            <text x="442" y="48" text-anchor="middle" font-size="14" font-weight="800" fill="#283891">y</text>
+            <text x="512" y="48" text-anchor="middle" font-size="14" font-weight="800" fill="#1C7A3A">resultado</text>
+            <path d="M352 58H340V202H352" fill="none" stroke="#181B22" stroke-width="4"/>
+            <path d="M548 58H560V202H548" fill="none" stroke="#181B22" stroke-width="4"/>
+            <line x1="474" y1="66" x2="474" y2="194" stroke="#181B22" stroke-width="2.5"/>
+            <text x="392" y="123" text-anchor="middle" font-size="26" font-weight="800" fill="#C75D08">1</text>
+            <text x="442" y="123" text-anchor="middle" font-size="26" font-weight="800" fill="#283891">2</text>
+            <text x="512" y="123" text-anchor="middle" font-size="26" font-weight="800" fill="#1C7A3A">5</text>
+            <text x="392" y="183" text-anchor="middle" font-size="26" font-weight="800" fill="#C75D08">3</text>
+            <text x="442" y="183" text-anchor="middle" font-size="26" font-weight="800" fill="#283891">−1</text>
+            <text x="512" y="183" text-anchor="middle" font-size="26" font-weight="800" fill="#1C7A3A">1</text>
+          </svg>
+          <figcaption>Cada número conserva su lugar: renglón = ecuación, columna = incógnita, y la barra hace de igual.</figcaption>
+        </figure>
+        <p class="idea">Lee la tabla con calma: cada <strong>renglón</strong> es una ecuación; cada <strong>columna</strong> es una incógnita — la primera guarda los números de x y la segunda los de y.</p>
+        <p class="idea">La barra separa los resultados.</p>
+        <p class="idea">Primer detalle que atrapa a todo el mundo: cuando la letra va sola, como la x de arriba, su número es un <strong>1 invisible</strong> — y en la tabla ese 1 sí se escribe.</p>
+        <p class="idea">Segundo: si la letra lleva signo de menos, como −y, su número entra <strong>negativo</strong>: −1.</p>
+        <p class="idea key">La tabla no pierde nada: guarda el sistema completo, listo para trabajarse sin arrastrar letras.</p>
+        <p class="idea">Y con esto ya llegaste a los nombres. Tu curso los define así:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 1.7 y 1.8</span>La matriz A que guarda la información de los coeficientes del sistema se denomina la <strong>matriz de coeficientes</strong>; la que además guarda las constantes b<sub>i</sub> se denomina la <strong>matriz aumentada</strong> del sistema.</p>
+        <p class="idea">Léelo de vuelta: «coeficientes» son los números que acompañan a las letras (1, 2, 3 y −1).</p>
+        <p class="idea">Y «aumentada» porque a esa tabla se le agrega una columna extra — la de los resultados 5 y 1.</p>
+        <p class="idea paso">Dos retos para dominar la traducción en los dos sentidos.</p>
+        <p class="idea paso">Ya vives en la tabla. Lo que sigue: las únicas tres movidas legales para transformarla.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M3G" data-tema="matriz_aumentada" data-level="guiado" data-module="3">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Lee la tabla.</strong> En la matriz con renglones [1, 2 | 5] y [3, −1 | 1], ¿qué guarda el renglón 2?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">La ecuación 3x − y = 1</button>
+          <button class="opt" data-ok="0">La incógnita y completa</button>
+          <button class="opt" data-ok="0">Los resultados 5 y 1</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Renglón = ecuación: 3 con la x, −1 con la y, y el 1 después de la barra.</p><p class="nudge">✕ Recorre el renglón de izquierda a derecha y devuélvele sus letras. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M3S" data-tema="matriz_aumentada" data-level="solo" data-module="3">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Traduce un sistema nuevo.</strong> ¿Cuál es la matriz aumentada de 4x − y = 7 y x + 5y = 2?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Renglones [4, −1 | 7] y [1, 5 | 2]</button>
+          <button class="opt" data-ok="0">Renglones [4, 1 | 7] y [1, 5 | 2]</button>
+          <button class="opt" data-ok="0">Renglones [−1, 4 | 7] y [5, 1 | 2]</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ La y de la primera ecuación entra negativa (−1) y la x sola vale 1.</p><p class="nudge">✕ Cuida el signo de −y y el 1 invisible de la x sola. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
+    </section>
 
-      <div class="check" data-kind="item" data-id="E1pred" data-tema="gauss_jordan" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Primer objetivo: hacer <strong>cero</strong> la x del renglón 2 (abajo hay un 3, arriba un 1). ¿Qué operación lo logra?</p>
+    <section class="lesson" data-step="4">
+      <header class="lesson-head"><p class="micro">Microlección 4 de 8 · Tema: Operaciones elementales</p><h2>Operaciones elementales: las tres movidas legales</h2><p class="goal">Meta: usar las tres movidas sabiendo por qué no cambian las soluciones.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy recibes la caja de herramientas completa: las tres <strong>operaciones elementales</strong> por renglón.</p>
+        <p class="idea">Queremos transformar la tabla en versiones cada vez más simples <strong>sin cambiar la respuesta</strong> del problema. ¿Qué movidas son legales?</p>
+        <p class="idea">La clave es recordar qué es cada renglón: una ecuación disfrazada — un hecho verdadero sobre los precios.</p>
+        <p class="idea"><strong>Movida 1: intercambiar dos renglones.</strong> Es cambiar el orden de los tickets en el clavo. La información es la misma.</p>
+        <p class="idea"><strong>Movida 2: multiplicar un renglón por un número distinto de cero.</strong></p>
+        <p class="idea">Si 1 café y 2 jugos cuestan $8, el pedido doble —2 cafés y 4 jugos— cuesta $16. Mismo hecho, dicho al doble.</p>
+        <p class="idea">¿Por qué se prohíbe el cero? Multiplicar todo por cero deja el renglón en 0 = 0: cierto, pero vacío. Sería borrar el ticket, y lo borrado no se recupera.</p>
+        <p class="idea"><strong>Movida 3: sumarle a un renglón un múltiplo de otro.</strong> Dos pedidos juntos cuestan la suma de los dos — el hecho nuevo sigue siendo verdadero.</p>
+        <p class="idea">Con restas funciona igual, y así se fabrican los ceros que pronto vamos a necesitar.</p>
+        <p class="idea key">Las tres comparten un secreto: <strong>se pueden deshacer</strong>. Nada se pierde, nada se inventa — por eso las soluciones no cambian.</p>
+        <p class="idea">No me creas: compruébalo tú. Elige una movida y un punto a prueba, y mira si el veredicto cambia:</p>
+        <div class="mixlab" aria-label="Laboratorio de movidas legales">
+          <div class="mix-grid">
+            <div class="recipe"><h4>La movida</h4><p>Transforma el sistema x + 2y = 5 · 3x − y = 1</p><div class="pick" data-mix="a"><button data-value="0" class="is-on">Tal cual</button><button data-value="1">R1 ↔ R2</button><button data-value="2">R2 → 2·R2</button><button data-value="3">R2 → R2 − 3·R1</button></div></div>
+            <div class="recipe"><h4>El punto a prueba</h4><p>¿Sobrevive la solución? ¿Revive un fracaso?</p><div class="pick" data-mix="b"><button data-value="0" class="is-on">(1, 2)</button><button data-value="1">(3, 1)</button><button data-value="2">(5, 0)</button></div></div>
+          </div>
+          <div class="mix-result"><p id="mixSys">x + 2y = 5  ·  3x − y = 1</p><strong id="mixWords">(1, 2) cumple las dos ecuaciones</strong><p id="mixFormula">Ecuación 1: da 5, pide 5 ✓ · Ecuación 2: da 1, pide 1 ✓</p></div>
+        </div>
+        <p class="idea">¿Notaste? (1, 2) cumple con cualquier movida; (3, 1) y (5, 0) fallan con cualquiera. Las movidas cambian la cara del sistema, nunca a los ganadores.</p>
+        <p class="idea">Fíjate además en (3, 1): cumple la primera ecuación y aun así no es solución — un sistema exige las dos, como viste en la lección 2.</p>
+        <p class="idea">A los sistemas que comparten soluciones tu curso les da nombre, y a las movidas también:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 1.6 y 1.9</span>Dos sistemas son <strong>equivalentes</strong> si tienen el mismo conjunto solución. Existen tres <strong>operaciones elementales por renglón</strong> que mantienen la equivalencia: (i) intercambiar el renglón i con el renglón k; (ii) multiplicar el renglón i por una constante c ≠ 0; (iii) sumarle al renglón i c veces el renglón k.</p>
+        <p class="idea">Ahí están tus tres movidas, numeradas. En tareas y examen las verás en símbolos: R<sub>1</sub> ↔ R<sub>2</sub>, R<sub>2</sub> → 2·R<sub>2</sub>, R<sub>2</sub> → R<sub>2</sub> − 3·R<sub>1</sub> — la flecha se lee «el renglón se reemplaza por».</p>
+        <p class="idea paso">Dos retos para asegurar la caja de herramientas.</p>
+        <p class="idea paso">Herramientas listas. Falta saber hacia dónde empujar la tabla: una forma con nombre de escalera.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M4G" data-tema="operaciones_elementales" data-level="guiado" data-module="4">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Ponle nombre.</strong> Del ticket «1 café y 2 jugos cuestan $8» concluiste que 2 cafés y 4 jugos cuestan $16. ¿Qué operación elemental usaste?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Multiplicar un renglón por 2</button>
+          <button class="opt" data-ok="0">Intercambiar dos renglones</button>
+          <button class="opt" data-ok="0">Sumarle a un renglón un múltiplo de otro</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Todo el renglón se multiplicó por la misma constante: 1, 2 y 8 se volvieron 2, 4 y 16.</p><p class="nudge">✕ Mira qué le pasó a cada número del ticket: todos crecieron por igual. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M4S" data-tema="operaciones_elementales" data-level="solo" data-module="4">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Detecta la trampa.</strong> ¿Cuál de estas movidas NO es una operación elemental válida?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Multiplicar el renglón 2 por cero</button>
+          <button class="opt" data-ok="0">Intercambiar el renglón 1 con el renglón 3</button>
+          <button class="opt" data-ok="0">Sumarle al renglón 2 el triple del renglón 1</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Multiplicar por cero deja el renglón en 0 = 0 y esa información no se recupera.</p><p class="nudge">✕ Busca la movida que destruye información en vez de transformarla. Intenta de nuevo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
+    </section>
+
+    <section class="lesson" data-step="5">
+      <header class="lesson-head"><p class="micro">Microlección 5 de 8 · Tema: Matriz escalonada</p><h2>Matriz escalonada: la escalera de pivotes</h2><p class="goal">Meta: reconocer una matriz escalonada y señalar sus 1-pivote.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy conoces la primera meta visual del método: la <strong>matriz escalonada</strong>.</p>
+        <p class="idea">Ya puedes mover renglones. La pregunta ahora es hacia dónde: ¿cómo se ve una tabla «ordenada»?</p>
+        <p class="idea">Así se ve. Esta matriz de tres renglones ya pasó por varias movidas, y quedó peinada:</p>
+        <figure class="visual">
+          <svg viewBox="0 0 560 260" role="img" aria-label="Matriz escalonada de tres renglones con sus tres 1-pivote y la escalera dibujada">
+            <text x="152" y="38" text-anchor="middle" font-size="14" font-weight="800" fill="#1C7A3A">1-pivote</text>
+            <path d="M152 44V58" stroke="#1C7A3A" stroke-width="2"/>
+            <path d="M120 50H106V242H120" fill="none" stroke="#181B22" stroke-width="4"/>
+            <path d="M452 50H466V242H452" fill="none" stroke="#181B22" stroke-width="4"/>
+            <line x1="336" y1="58" x2="336" y2="234" stroke="#181B22" stroke-width="2.5"/>
+            <circle cx="152" cy="82" r="20" fill="#E6F5EC" stroke="#1C7A3A" stroke-width="2.5"/>
+            <circle cx="224" cy="144" r="20" fill="#E6F5EC" stroke="#1C7A3A" stroke-width="2.5"/>
+            <circle cx="296" cy="206" r="20" fill="#E6F5EC" stroke="#1C7A3A" stroke-width="2.5"/>
+            <text x="152" y="90" text-anchor="middle" font-size="24" font-weight="700" fill="#181B22">1</text>
+            <text x="224" y="90" text-anchor="middle" font-size="24" font-weight="700" fill="#181B22">1</text>
+            <text x="296" y="90" text-anchor="middle" font-size="24" font-weight="700" fill="#181B22">1</text>
+            <text x="396" y="90" text-anchor="middle" font-size="24" font-weight="700" fill="#181B22">6</text>
+            <text x="152" y="152" text-anchor="middle" font-size="24" font-weight="700" fill="#94A3B8">0</text>
+            <text x="224" y="152" text-anchor="middle" font-size="24" font-weight="700" fill="#181B22">1</text>
+            <text x="296" y="152" text-anchor="middle" font-size="24" font-weight="700" fill="#181B22">0</text>
+            <text x="396" y="152" text-anchor="middle" font-size="24" font-weight="700" fill="#181B22">2</text>
+            <text x="152" y="214" text-anchor="middle" font-size="24" font-weight="700" fill="#94A3B8">0</text>
+            <text x="224" y="214" text-anchor="middle" font-size="24" font-weight="700" fill="#94A3B8">0</text>
+            <text x="296" y="214" text-anchor="middle" font-size="24" font-weight="700" fill="#181B22">1</text>
+            <text x="396" y="214" text-anchor="middle" font-size="24" font-weight="700" fill="#181B22">3</text>
+            <path d="M126 108H186V170H258V232H330" fill="none" stroke="#F5821F" stroke-width="4.5"/>
+          </svg>
+          <figcaption>Cada renglón arranca con un 1 más adentro que el de arriba; bajo la escalera naranja, puros ceros.</figcaption>
+        </figure>
+        <p class="idea">Mira lo que la figura enseña: cada renglón arranca con un <strong>1</strong>, y cada arranque queda más a la derecha que el del renglón de arriba. Dibuja la frontera y aparece una <strong>escalera</strong>.</p>
+        <p class="idea">Ese 1 con el que arranca cada renglón se llama <strong>1-pivote</strong>.</p>
+        <p class="idea">«Pivote» porque es un punto de apoyo: sobre él se apoya el método para limpiar su columna, como el pie fijo de un jugador de básquet.</p>
+        <p class="idea key">Escalonada = pivotes en escalera: cada 1-pivote más a la derecha que el de arriba, y lo nulo hundido al fondo.</p>
+        <p class="idea">Esa imagen es, requisito por requisito, la definición de tu curso:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 1.10</span>Una matriz es <strong>escalonada</strong> si: el primer elemento de cada renglón no nulo es un número 1, que se llama <strong>1-pivote</strong>; todo 1-pivote se encuentra a la derecha de los 1-pivote de renglones por encima de él; y si hay renglones nulos, están en la parte inferior de la matriz.</p>
+        <p class="idea">Léela con la figura: «primer elemento… es un 1» son los círculos verdes; «a la derecha de» es la escalera que baja.</p>
+        <p class="idea">Y «renglones nulos abajo» es el fondo reservado para los renglones de puros ceros.</p>
+        <p class="idea paso">Dos retos para entrenar el ojo.</p>
+        <p class="idea paso">La escalera ordena, pero todavía no se lee sola: arriba de los pivotes queda basura. Limpiarla produce la forma final — la de la próxima lección.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M5G" data-tema="escalonada" data-level="guiado" data-module="5">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Señala los pivotes.</strong> En la matriz de la escalera —renglones [1, 1, 1 | 6], [0, 1, 0 | 2] y [0, 0, 1 | 3]—, ¿cuáles son los 1-pivote?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">El primer 1 de cada renglón: columnas 1, 2 y 3</button>
+          <button class="opt" data-ok="0">Los números después de la barra: 6, 2 y 3</button>
+          <button class="opt" data-ok="0">Solo el 1 del primer renglón</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Cada renglón arranca con su 1, y cada arranque queda más a la derecha que el de arriba.</p><p class="nudge">✕ El pivote es el primer número no nulo de cada renglón, no el resultado. Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M5S" data-tema="escalonada" data-level="solo" data-module="5">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Matriz nueva.</strong> ¿Cuál de estas está escalonada?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Renglones [1, 4 | 6] y [0, 1 | 3]</button>
+          <button class="opt" data-ok="0">Renglones [0, 1 | 3] y [1, 4 | 6]</button>
+          <button class="opt" data-ok="0">Renglones [2, 4 | 6] y [0, 1 | 3]</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Arranques en 1 y el pivote de abajo más a la derecha que el de arriba.</p><p class="nudge">✕ Revisa dos cosas: que cada arranque sea un 1 y que la escalera baje hacia la derecha.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
+    </section>
+
+    <section class="lesson" data-step="6">
+      <header class="lesson-head"><p class="micro">Microlección 6 de 8 · Tema: Matriz escalonada reducida</p><h2>Escalonada reducida: la tabla que se lee sola</h2><p class="goal">Meta: distinguir una escalonada de una escalonada reducida.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy llegas a la meta final del tablero: la matriz <strong>escalonada reducida</strong>.</p>
+        <p class="idea">La escalera ordena, pero no siempre basta. Mira esta escalonada de cerca:</p>
+        <div class="fx"><div class="matrix-form"><span>E =</span><span class="matrix three" aria-label="Matriz escalonada con renglones 1 2 5 y 0 1 2"><span>1</span><span>2</span><span style="border-left:2.5px solid #181B22;border-radius:0;padding-left:14px">5</span><span>0</span><span>1</span><span style="border-left:2.5px solid #181B22;border-radius:0;padding-left:14px">2</span></span></div></div>
+        <p class="idea">El renglón 2 ya dice algo hermoso: y = 2. Pero el renglón 1 todavía dice x + 2y = 5 — la x viene acompañada y no puedes leer su valor directo.</p>
+        <p class="idea">El estorbo es ese 2 <strong>arriba</strong> del pivote de la segunda columna. Límpialo (la próxima lección te enseña cómo) y queda:</p>
+        <div class="fx"><div class="matrix-form"><span>R =</span><span class="matrix three" aria-label="Matriz escalonada reducida con renglones 1 0 1 y 0 1 2"><span class="pivot">1</span><span>0</span><span style="border-left:2.5px solid #181B22;border-radius:0;padding-left:14px">1</span><span>0</span><span class="pivot">1</span><span style="border-left:2.5px solid #181B22;border-radius:0;padding-left:14px">2</span></span></div></div>
+        <p class="idea">Devuélvele las letras: el renglón 1 dice x = 1 y el renglón 2 dice y = 2. Nada que despejar, nada que tantear:</p>
+        <div class="fx"><div class="sys"><span class="eq">x = 1</span><span class="eq">y = 2</span></div></div>
+        <p class="idea key">Reducida = escalonada y, además, cada pivote es el único número no nulo de su columna.</p>
+        <p class="idea">Esa tabla ya no se puede simplificar más: <strong>se lee sola</strong>.</p>
+        <p class="idea">La definición del curso agrega exactamente una condición a la de ayer:</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 1.11</span>Una matriz es <strong>escalonada reducida</strong> si además de ser escalonada, por encima de todo 1-pivote solo hay elementos que valen cero.</p>
+        <p class="idea">La diferencia cabe en una palabra: «encima». La escalonada garantiza ceros debajo de los pivotes; la reducida también los exige arriba.</p>
+        <p class="idea paso">Dos retos para afilar la diferencia.</p>
+        <p class="idea paso">Objeto listo, meta clara. Solo falta el camino que lleva cualquier tabla hasta aquí — y ese camino lleva nombre propio.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M6G" data-tema="escalonada_reducida" data-level="guiado" data-module="6">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Encuentra el estorbo.</strong> ¿Por qué la matriz E —renglones [1, 2 | 5] y [0, 1 | 2]— NO es reducida todavía?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">Arriba del pivote de la columna 2 hay un 2 en vez de un 0</button>
+          <button class="opt" data-ok="0">Porque el 5 debería ser 0</button>
+          <button class="opt" data-ok="0">Porque le falta un renglón</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Es escalonada, pero ese 2 encima del pivote impide leer la x directo.</p><p class="nudge">✕ Revisa la columna de cada pivote: ¿qué hay encima de cada 1? Intenta de nuevo.</p></div>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M6S" data-tema="escalonada_reducida" data-level="solo" data-module="6">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Lee una reducida nueva.</strong> La matriz reducida con renglones [1, 0 | 6] y [0, 1 | −2], ¿qué solución anuncia?</p>
+        <div class="opts">
+          <button class="opt" data-ok="1">x = 6 y y = −2</button>
+          <button class="opt" data-ok="0">x = 1 y y = 1</button>
+          <button class="opt" data-ok="0">x = 6 y y = 2</button>
+        </div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Renglón 1: x = 6. Renglón 2: y = −2. Se lee sola.</p><p class="nudge">✕ Devuélvele las letras a cada renglón y lee después de la barra, con su signo.</p></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
+    </section>
+
+    <section class="lesson" data-step="7">
+      <header class="lesson-head"><p class="micro">Microlección 7 de 8 · Tema: Método de Gauss-Jordan</p><h2>Gauss-Jordan: el plan que siempre llega</h2><p class="goal">Meta: seguir el plan del método en un sistema 2×2 completo.</p></header>
+      <div class="sec">
+        <p class="idea lede">Hoy juntas todas las piezas en el protagonista de la unidad: el método de <strong>Gauss-Jordan</strong>.</p>
+        <p class="idea">Tienes la tabla (lección 3), las tres movidas (lección 4) y la meta (lección 6). Gauss-Jordan es el orden inteligente para usarlas: nunca improvisa y siempre llega.</p>
+        <p class="idea">Mira primero el viaje completo en un mapa — nuestro sistema de siempre, de la tabla inicial a la reducida:</p>
+        <figure class="visual">
+          <svg viewBox="0 0 710 190" role="img" aria-label="Las cuatro etapas de Gauss-Jordan sobre la matriz del sistema">
+            <defs><marker id="arrGJ" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#181B22"/></marker></defs>
+            <g transform="translate(8 0)">
+              <path d="M14 40H6V152H14" fill="none" stroke="#181B22" stroke-width="3"/><path d="M126 40H134V152H126" fill="none" stroke="#181B22" stroke-width="3"/>
+              <line x1="86" y1="48" x2="86" y2="146" stroke="#181B22" stroke-width="2"/>
+              <text x="34" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text><text x="68" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">2</text><text x="107" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">5</text>
+              <text x="34" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">3</text><text x="68" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">−1</text><text x="107" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text>
+              <circle cx="34" cy="121" r="15" fill="none" stroke="#CF2E2E" stroke-width="2.5"/>
+            </g>
+            <path d="M148 96H186" stroke="#181B22" stroke-width="3.5" marker-end="url(#arrGJ)"/>
+            <text x="168" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#283891">R2 − 3·R1</text>
+            <g transform="translate(192 0)">
+              <path d="M14 40H6V152H14" fill="none" stroke="#181B22" stroke-width="3"/><path d="M126 40H134V152H126" fill="none" stroke="#181B22" stroke-width="3"/>
+              <line x1="86" y1="48" x2="86" y2="146" stroke="#181B22" stroke-width="2"/>
+              <text x="34" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text><text x="68" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">2</text><text x="107" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">5</text>
+              <text x="34" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">0</text><text x="68" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">−7</text><text x="107" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">−14</text>
+              <circle cx="68" cy="121" r="15" fill="none" stroke="#C75D08" stroke-width="2.5"/>
+            </g>
+            <path d="M332 96H370" stroke="#181B22" stroke-width="3.5" marker-end="url(#arrGJ)"/>
+            <text x="352" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#283891">R2 ÷ (−7)</text>
+            <g transform="translate(376 0)">
+              <path d="M14 40H6V152H14" fill="none" stroke="#181B22" stroke-width="3"/><path d="M126 40H134V152H126" fill="none" stroke="#181B22" stroke-width="3"/>
+              <line x1="86" y1="48" x2="86" y2="146" stroke="#181B22" stroke-width="2"/>
+              <text x="34" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text><text x="68" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">2</text><text x="107" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">5</text>
+              <text x="34" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">0</text><text x="68" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text><text x="107" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">2</text>
+              <circle cx="68" cy="71" r="15" fill="none" stroke="#CF2E2E" stroke-width="2.5"/>
+            </g>
+            <path d="M516 96H554" stroke="#181B22" stroke-width="3.5" marker-end="url(#arrGJ)"/>
+            <text x="536" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#283891">R1 − 2·R2</text>
+            <g transform="translate(560 0)">
+              <path d="M14 40H6V152H14" fill="none" stroke="#181B22" stroke-width="3"/><path d="M126 40H134V152H126" fill="none" stroke="#181B22" stroke-width="3"/>
+              <line x1="86" y1="48" x2="86" y2="146" stroke="#181B22" stroke-width="2"/>
+              <circle cx="34" cy="71" r="15" fill="#E6F5EC" stroke="#1C7A3A" stroke-width="2.5"/><circle cx="68" cy="121" r="15" fill="#E6F5EC" stroke="#1C7A3A" stroke-width="2.5"/>
+              <text x="34" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text><text x="68" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">0</text><text x="107" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text>
+              <text x="34" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">0</text><text x="68" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text><text x="107" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">2</text>
+            </g>
+          </svg>
+          <figcaption>Un cero abajo, el pivote en 1, limpiar arriba: tres movidas y la tabla se lee sola.</figcaption>
+        </figure>
+        <p class="idea">Ahora camina cada flecha con la aritmética a la vista. Primer objetivo: un <strong>cero abajo</strong> del primer pivote.</p>
+        <p class="idea">El 3 estorba; réstale al renglón 2 tres veces el renglón 1, celda por celda:</p>
+        <div class="fx"><div class="sys"><span class="eq">3 − 3·1 = 0</span><span class="eq">−1 − 3·2 = −7</span><span class="eq">1 − 3·5 = −14</span></div></div>
+        <p class="idea">Segundo objetivo: el <strong>pivote en 1</strong>. El renglón 2 quedó diciendo −7y = −14; divídelo entre −7:</p>
+        <div class="fx"><div class="sys"><span class="eq">−7 ÷ (−7) = 1</span><span class="eq">−14 ÷ (−7) = 2</span></div></div>
+        <p class="idea">Tercer objetivo: <strong>limpiar arriba</strong>. El renglón 2 ya es «y = 2»; réstaselo dos veces al renglón 1 para cancelar su 2:</p>
+        <div class="fx"><div class="sys"><span class="eq">2 − 2·1 = 0</span><span class="eq">5 − 2·2 = 1</span></div></div>
+        <p class="idea">Llegaste a la última matriz del mapa — la reducida — y se lee sola: x = 1, y = 2. Compruébalo en el sistema original: 1 + 2·2 = 5 y 3·1 − 2 = 1.</p>
+        <p class="idea key">El plan es siempre el mismo: ceros abajo, pivote en 1, limpiar arriba.</p>
+        <p class="idea">En matrices grandes solo se repite columna por columna — primero bajas toda la escalera, luego subes limpiando.</p>
+        <p class="idea">Y tu curso te garantiza el final del viaje con su primer teorema:</p>
+        <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teorema 1.1</span>El resultado de aplicar el método de <strong>Gauss-Jordan</strong> a una matriz aumentada es una matriz escalonada reducida.</p>
+        <p class="idea">Léelo como promesa: no importa qué tan enredado empiece el sistema, el método siempre termina en la tabla que se lee sola.</p>
+        <p class="idea paso">El plan se entiende aquí; la velocidad se gana en papel. Los 3×3 completos, con su bajada y su subida, te esperan en el cuadernillo de esta unidad.</p>
+        <p class="idea paso">Queda una sola destreza: leer la respuesta cuando la tabla no dice simplemente «x vale tanto».</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M7G" data-tema="gauss_jordan" data-level="guiado" data-module="7">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Decide el paso.</strong> En la matriz con renglones [1, 2 | 5] y [3, −1 | 1], ¿qué operación hace cero el 3 del renglón 2?</p>
         <div class="opts">
           <button class="opt" data-ok="1">R2 → R2 − 3·R1</button>
           <button class="opt" data-ok="0">R2 → R2 + 3·R1</button>
           <button class="opt" data-ok="0">R1 → R1 − 3·R2</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Arriba la x vale 1; restar 3 veces ese renglón deja 3 − 3·1 = 0.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Arriba la x vale 1; restar 3 veces ese renglón deja 3 − 3·1 = 0.</p><p class="nudge">✕ El pivote de apoyo vive en el renglón 1. Calcula 3 − 3·1 y 3 + 3·1, y compara.</p></div>
       </div>
-      <div class="estep"><div class="oprow">R2 → R2 − 3·R1</div><p>Tomo el renglón 2 = [3, −1, 1] y le resto 3 veces el renglón 1 = [1, 2, 5], celda por celda:</p><p class="calc"><span class="rw">R2</span> 3−3·1=<b>0</b> <span class="sep">•</span> −1−3·2=<b>−7</b> <span class="sep">•</span> 1−3·5=<b>−14</b></p><div class="fx" id="e1"></div></div>
-
-      <div class="check" data-kind="item" data-id="EJpred" data-tema="gauss_jordan" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">El renglón 2 quedó como “−7 por y, igual a −14”. Para tener un pivote limpio, ¿cuál es el siguiente movimiento?</p>
+      <div class="check challenge" data-kind="item" data-id="M7S" data-tema="gauss_jordan" data-level="solo" data-module="7">
+        <div class="qtag">Ahora tú · sin copiar</div>
+        <p class="q"><strong>Sistema nuevo.</strong> En la matriz con renglones [1, 3 | 8] y [4, 5 | 12], ¿qué operación hace cero el 4 del renglón 2?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Dividir el renglón 2 entre −7, para que el coeficiente de y sea 1</button>
-          <button class="opt" data-ok="0">Multiplicar el renglón 2 por −7</button>
-          <button class="opt" data-ok="0">Intercambiar el renglón 1 y el renglón 2</button>
+          <button class="opt" data-ok="1">R2 → R2 − 4·R1</button>
+          <button class="opt" data-ok="0">R2 → R2 − 3·R1</button>
+          <button class="opt" data-ok="0">R2 → R2 + 4·R1</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Buscamos un 1 limpio en la posición de y. Dividir entre −7 lo logra.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ 4 − 4·1 = 0: el múltiplo correcto es justo el número que quieres borrar.</p><p class="nudge">✕ Abajo hay un 4 y arriba un 1: ¿cuántas veces restas el renglón 1 para llegar a cero?</p></div>
       </div>
-      <div class="estep"><div class="oprow">R2 → R2 ÷ (−7)</div><p>Divido cada número del renglón 2 = [0, −7, −14] entre −7 para que el pivote sea 1:</p><p class="calc"><span class="rw">R2</span> 0÷(−7)=<b>0</b> <span class="sep">•</span> −7÷(−7)=<b>1</b> <span class="sep">•</span> −14÷(−7)=<b>2</b></p><div class="fx" id="e2"></div></div>
-
-      <div class="check" data-kind="item" data-id="E3pred" data-tema="gauss_jordan" data-level="guiado">
-        <div class="qtag">Te toca · decide el paso</div>
-        <p class="q">Ya tienes <strong>y = 2</strong> abajo. Pero el renglón 1 todavía trae una y (un 2). ¿Qué operación la limpia sin dañar la x?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">R1 → R1 − 2·R2</button>
-          <button class="opt" data-ok="0">R1 → R1 + 2·R2</button>
-          <button class="opt" data-ok="0">R2 → R2 − 2·R1</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El renglón 2 ya es “y = 2”. Restarlo dos veces al renglón 1 cancela el 2 de la y, y no toca la x (ahí el renglón 2 tiene 0).</p></div>
-      </div>
-      <div class="estep"><div class="oprow">R1 → R1 − 2·R2</div><p>El renglón 2 ya es [0, 1, 2]. Al renglón 1 = [1, 2, 5] le resto 2 veces ese renglón:</p><p class="calc"><span class="rw">R1</span> 1−2·0=<b>1</b> <span class="sep">•</span> 2−2·1=<b>0</b> <span class="sep">•</span> 5−2·2=<b>1</b></p><div class="fx" id="e3"></div></div>
-
-      <p class="idea" style="font-size:17px">Se lee sola:</p>
-      <div class="fx"><div class="sys"><span class="eq">x = 1</span><span class="eq">y = 2</span></div></div>
-      <p class="idea" style="font-size:17px">Fíjate en el orden que seguiste:</p>
-      <ul class="fases">
-        <li>primero, un cero <strong>abajo</strong>;</li>
-        <li>luego, el pivote en <strong>1</strong>;</li>
-        <li>al final, limpiar <strong>arriba</strong>.</li>
-      </ul>
-      <p class="idea" style="font-size:17px">Ese es todo el método.</p>
-      <p class="fx-note">Con esto ya puedes resolver el café y el jugo del inicio (sale café = 2, jugo = 3). Hazlo en papel para comprobar que el método ya es tuyo.</p>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Última idea →</button></div>
     </section>
 
-    <h2 class="modhead">Sube el tamaño · el 3×3 en dos fases</h2>
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">El 2×2 casi salió de un tiro. Con <strong>3×3</strong> hay demasiado que limpiar a la vez, así que se hace en <strong>dos fases ordenadas</strong>:</p>
-      <ul class="fases">
-        <li><strong>Fase 1 — baja:</strong> haz ceros <em>debajo</em> de cada pivote, de izquierda a derecha, hasta dejar una escalera.</li>
-        <li><strong>Fase 2 — sube:</strong> con los pivotes ya en 1, limpia lo que quede <em>arriba</em> de ellos.</li>
-      </ul>
-      <p class="idea" style="font-size:17px">El sistema:</p>
-      <div class="fx"><div class="sys"><span class="eq">x + y + z = 6</span><span class="eq">x − y + z = 2</span><span class="eq">2x + y − z = 1</span></div></div>
-      <div class="estep"><div class="oprow">Matriz inicial</div><div class="fx" id="t0"></div></div>
-
-      <div class="check" data-kind="item" data-id="T1pred" data-tema="gauss_jordan" data-level="juntos">
-        <div class="qtag">Te toca · decide la fase</div>
-        <p class="q">Empieza la <strong>Fase 1 (baja)</strong>. ¿Qué renglón usas como herramienta para hacer cero las x de los renglones 2 y 3?</p>
+    <section class="lesson" data-step="8">
+      <header class="lesson-head"><p class="micro">Microlección 8 de 8 · Tema: Variables libres y determinadas</p><h2>Variables libres: leer cualquier final</h2><p class="goal">Meta: leer la solución de una reducida en los tres casos posibles.</p></header>
+      <div class="sec">
+        <p class="idea lede">Última pieza: leer lo que Gauss-Jordan te entrega — pivotes, <strong>variables libres</strong> y renglones imposibles.</p>
+        <p class="idea">La lección 2 prometió tres finales: una, ninguna o infinitas soluciones. La tabla reducida delata cada uno a simple vista.</p>
+        <p class="idea">El final feliz ya lo viste: cada columna con su pivote, y lees x = 1, y = 2 directo.</p>
+        <p class="idea">Ahora reduce este sistema, donde la segunda ecuación es el doble de la primera:</p>
+        <div class="fx"><div class="sys"><span class="eq">x + 2y = 4</span><span class="eq">2x + 4y = 8</span></div></div>
+        <p class="idea">Aplica el plan: réstale al renglón 2 dos veces el renglón 1… y el renglón entero se vacía:</p>
+        <div class="fx"><div class="sys"><span class="eq">2 − 2·1 = 0</span><span class="eq">4 − 2·2 = 0</span><span class="eq">8 − 2·4 = 0</span></div></div>
+        <div class="fx"><div class="matrix-form"><span class="matrix three" aria-label="Matriz reducida con renglones 1 2 4 y 0 0 0"><span class="pivot">1</span><span class="free">2</span><span style="border-left:2.5px solid #181B22;border-radius:0;padding-left:14px">4</span><span>0</span><span>0</span><span style="border-left:2.5px solid #181B22;border-radius:0;padding-left:14px">0</span></span></div></div>
+        <div class="legend"><span><i class="dot green"></i>columna con pivote: x</span><span><i class="dot"></i>columna sin pivote: y</span></div>
+        <p class="idea">El renglón de puros ceros dice 0 = 0: cierto, pero vacío — esa ecuación estaba repetida. Y la columna de y se quedó <strong>sin pivote</strong>: ningún renglón manda sobre y.</p>
+        <p class="idea">Como nadie manda sobre ella, la eliges tú: y puede valer lo que quieras. Por eso se llama <strong>libre</strong>, y se le da una letra comodín: y = t.</p>
+        <p class="idea">La x sí tiene pivote: despéjala del renglón 1, que dice x + 2y = 4, y escribe la solución general:</p>
+        <div class="fx"><div class="sys"><span class="eq">x = 4 − 2<span class="unknown">t</span></span><span class="eq">y = <span class="unknown">t</span></span></div></div>
+        <p class="idea">Cada valor de t regala una solución: con t = 0 sale (4, 0); con t = 1 sale (2, 1). Infinitas — y todas salen de la misma fórmula.</p>
+        <p class="idea key">El tercer final también se delata solo: si algún renglón queda [0, 0 | 5], está diciendo 0 = 5 — imposible. Sistema <strong>inconsistente</strong>, sin solución.</p>
+        <div class="criteria"><div class="criterion"><b>1</b>Única: cada columna con pivote</div><div class="criterion"><b>∞</b>Infinitas: columna sin pivote</div><div class="criterion"><b>0</b>Ninguna: renglón 0 = número</div></div>
+        <p class="idea">Los nombres de este final abierto vienen en el mismo teorema de la lección pasada:</p>
+        <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teorema 1.1</span>Para los sistemas consistentes, al aplicarles Gauss-Jordan las variables (columnas) que no tienen 1-pivote se suelen considerar <strong>libres</strong>, y aquellas con 1-pivote se consideran variables <strong>determinadas</strong>.</p>
+        <p class="idea">Léelo de vuelta: determinada = con pivote, la tabla fija su valor; libre = sin pivote, tú eliges — y las determinadas se acomodan alrededor de tu elección.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M8G" data-tema="variables_libres" data-level="guiado" data-module="8">
+        <div class="qtag">Compruébalo · guiado</div>
+        <p class="q"><strong>Identifica a la libre.</strong> En la reducida con renglones [1, 2 | 4] y [0, 0 | 0] (columnas x, y), ¿cuál variable es libre?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">El renglón 1: su x ya es 1, así que R2 → R2 − R1 y R3 → R3 − 2·R1</button>
-          <button class="opt" data-ok="0">El renglón 3, porque tiene el número más grande</button>
-          <button class="opt" data-ok="0">Ninguno; primero divido todo entre 6</button>
+          <button class="opt" data-ok="1">y: su columna se quedó sin pivote</button>
+          <button class="opt" data-ok="0">x: aparece primero</button>
+          <button class="opt" data-ok="0">Ninguna: hay dos renglones</button>
         </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El pivote de la primera columna es el 1 del renglón 1. Con él se hacen cero las x de abajo: siempre se baja desde el pivote de arriba.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Solo la columna de x tiene pivote; sobre y ningún renglón manda, así que la eliges tú.</p><p class="nudge">✕ Busca columna por columna quién tiene 1-pivote y quién no. Intenta de nuevo.</p></div>
       </div>
-
-      <div class="estep"><div class="oprow">Fase 1 · R2 → R2 − R1</div><p>Hago cero la x del renglón 2. R2 = [1, −1, 1, 2] menos R1 = [1, 1, 1, 6]:</p><p class="calc"><span class="rw">R2</span> 1−1=<b>0</b> <span class="sep">•</span> −1−1=<b>−2</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 2−6=<b>−4</b></p><div class="fx" id="t1a"></div></div>
-      <div class="estep"><div class="oprow">Fase 1 · R3 → R3 − 2·R1</div><p>Ahora la x del renglón 3. R3 = [2, 1, −1, 1] menos 2 veces R1:</p><p class="calc"><span class="rw">R3</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·1=<b>−1</b> <span class="sep">•</span> −1−2·1=<b>−3</b> <span class="sep">•</span> 1−2·6=<b>−11</b></p><div class="fx" id="t1b"></div></div>
-      <div class="estep"><div class="oprow">Fase 1 · R2 → R2 ÷ (−2)</div><p>Pongo el pivote de y en 1. Divido R2 = [0, −2, 0, −4] entre −2:</p><p class="calc"><span class="rw">R2</span> 0÷(−2)=<b>0</b> <span class="sep">•</span> −2÷(−2)=<b>1</b> <span class="sep">•</span> 0÷(−2)=<b>0</b> <span class="sep">•</span> −4÷(−2)=<b>2</b></p><div class="fx" id="t2a"></div></div>
-      <div class="estep"><div class="oprow">Fase 1 · R3 → R3 + R2</div><p>Con ese pivote hago cero la y del renglón 3. R3 = [0, −1, −3, −11] más R2 = [0, 1, 0, 2]:</p><p class="calc"><span class="rw">R3</span> 0+0=<b>0</b> <span class="sep">•</span> −1+1=<b>0</b> <span class="sep">•</span> −3+0=<b>−3</b> <span class="sep">•</span> −11+2=<b>−9</b></p><div class="fx" id="t2b"></div></div>
-      <div class="estep"><div class="oprow">Fase 1 · R3 → R3 ÷ (−3)</div><p>Fin de la bajada: pivote de z en 1. Divido R3 = [0, 0, −3, −9] entre −3:</p><p class="calc"><span class="rw">R3</span> 0÷(−3)=<b>0</b> <span class="sep">•</span> 0÷(−3)=<b>0</b> <span class="sep">•</span> −3÷(−3)=<b>1</b> <span class="sep">•</span> −9÷(−3)=<b>3</b></p><div class="fx" id="t3"></div></div>
-      <div class="estep"><div class="oprow">Fase 2 · R1 → R1 − R2</div><p>Empieza la subida: limpio la y del renglón 1. R1 = [1, 1, 1, 6] menos R2 = [0, 1, 0, 2]:</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 1−0=<b>1</b> <span class="sep">•</span> 6−2=<b>4</b></p><div class="fx" id="t4a"></div></div>
-      <div class="estep"><div class="oprow">Fase 2 · R1 → R1 − R3</div><p>Ahora la z del renglón 1. R1 = [1, 0, 1, 4] menos R3 = [0, 0, 1, 3]:</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 0−0=<b>0</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 4−3=<b>1</b></p><div class="fx" id="t4b"></div></div>
-      <p class="idea" style="font-size:17px">Llegamos a la forma reducida, y se lee sola:</p>
-      <div class="fx"><div class="sys"><span class="eq">x = 1</span><span class="eq">y = 2</span><span class="eq">z = 3</span></div></div>
-      <p class="idea" style="font-size:17px">Mismo método del 2×2, solo que primero <strong>bajas</strong> y luego <strong>subes</strong>.</p>
-    </section>
-
-    <section class="sec">
-      <h3>Míralo: cada ecuación es una recta</h3>
-      <p class="idea">Antes de seguir, una imagen que explica mucho. Toma una sola ecuación con dos incógnitas:</p>
-      <div class="fx"><div class="sys"><span class="eq">x + y = 4</span></div></div>
-      <p class="idea">Ella sola tiene <strong>muchísimas</strong> respuestas posibles:</p>
-      <ul class="fases">
-        <li>x = 1 con y = 3,</li>
-        <li>x = 2 con y = 2,</li>
-        <li>x = 0 con y = 4…</li>
-        <li>incluso x = 1.5 con y = 2.5.</li>
-      </ul>
-      <p class="idea">Cualquier pareja que sume 4 le sirve.</p>
-      <p class="idea">Si marcas cada pareja como un punto en una cuadrícula (x pasos a la derecha, y pasos hacia arriba), todos esos puntos quedan formados en fila: dibujan una <strong>recta</strong>.</p>
-      <p class="idea">Por eso, con dos incógnitas, <strong>cada ecuación es una recta</strong>.</p>
-      <p class="idea">Un sistema trae dos ecuaciones: dos rectas. Resolverlo es encontrar la pareja que cumple <strong>las dos a la vez</strong> — el punto que está en <strong>ambas</strong> rectas, o sea, <strong>donde se cruzan</strong>.</p>
-      <p class="idea">Y dos rectas solo pueden hacer tres cosas entre sí. Toca cada caso:</p>
-      <div class="viz">
-        <div class="viz-tabs" id="vizTabs">
-          <button class="viz-tab" data-case="una">Una solución</button>
-          <button class="viz-tab" data-case="ninguna">Ninguna</button>
-          <button class="viz-tab" data-case="infinitas">Infinitas</button>
-        </div>
-        <div class="viz-plane fx" id="vizPlane"></div>
-        <div class="viz-legend"><span><i style="background:#F5821F"></i>Ecuación 1</span><span><i style="background:#283891"></i>Ecuación 2</span></div>
-        <p class="viz-cap" id="vizCap"></p>
-      </div>
-      <p class="idea">La tabla delata cada caso cuando reduces:</p>
-      <ul class="fases">
-        <li><strong>Una solución:</strong> cada incógnita consigue su pivote y lees los valores.</li>
-        <li><strong>Ninguna:</strong> aparece un renglón como "0 0 | 3", que leído dice "0 = 3" — imposible; ninguna pareja puede cumplirlo.</li>
-        <li><strong>Infinitas:</strong> un renglón se vuelve de <strong>puros ceros</strong> ("0 = 0": cierto, pero no dice nada — era una ecuación repetida) y a alguna incógnita ya no le alcanza pivote.</li>
-      </ul>
-      <p class="idea">De este último caso nos ocupamos ahora.</p>
-    </section>
-
-    <section class="ejemplo">
-      <p class="idea" style="font-size:17px">Queda una pregunta muy práctica: si las soluciones son <strong>infinitas</strong>, ¿qué escribes en el examen? Una lista infinita no cabe en ninguna hoja.</p>
-      <p class="idea" style="font-size:17px">Lo que se entrega es una <strong>fórmula</strong>: una receta que, cada vez que le das un número, te devuelve una solución completa.</p>
-      <p class="idea" style="font-size:17px">Míralo con este sistema:</p>
-      <div class="fx"><div class="sys"><span class="eq">x + y + z = 4</span><span class="eq">2x + y − z = 5</span></div></div>
-      <p class="idea" style="font-size:17px">Son <strong>tres incógnitas</strong> pero solo <strong>dos ecuaciones</strong>: dos pistas no alcanzan para amarrar tres números, así que va a sobrar libertad. Reduzcamos para verlo:</p>
-      <div class="estep"><div class="oprow">Matriz inicial</div><div class="fx" id="f0"></div></div>
-      <div class="estep"><div class="oprow">R2 → R2 − 2·R1</div><p>Hago cero la x del renglón 2. R2 = [2, 1, −1, 5] menos 2 veces R1 = [1, 1, 1, 4]:</p><p class="calc"><span class="rw">R2</span> 2−2·1=<b>0</b> <span class="sep">•</span> 1−2·1=<b>−1</b> <span class="sep">•</span> −1−2·1=<b>−3</b> <span class="sep">•</span> 5−2·4=<b>−3</b></p><div class="fx" id="fA"></div></div>
-      <div class="estep"><div class="oprow">R2 → R2 · (−1)</div><p>Dejo el pivote de y en 1 multiplicando todo el renglón por −1:</p><p class="calc"><span class="rw">R2</span> 0·(−1)=<b>0</b> <span class="sep">•</span> −1·(−1)=<b>1</b> <span class="sep">•</span> −3·(−1)=<b>3</b> <span class="sep">•</span> −3·(−1)=<b>3</b></p><div class="fx" id="fB"></div></div>
-      <div class="estep"><div class="oprow">R1 → R1 − R2</div><p>Limpio la y del renglón 1. R1 = [1, 1, 1, 4] menos R2 = [0, 1, 3, 3]:</p><p class="calc"><span class="rw">R1</span> 1−0=<b>1</b> <span class="sep">•</span> 1−1=<b>0</b> <span class="sep">•</span> 1−3=<b>−2</b> <span class="sep">•</span> 4−3=<b>1</b></p><div class="fx" id="f1"></div></div>
-      <p class="fx-note">Ya está reducida: x y y tienen su pivote… pero la columna de z se quedó <strong>sin pivote</strong>. Ningún renglón dice "z vale tanto": sobre z, la tabla no manda.</p>
-      <p class="idea" style="font-size:17px">Como nadie manda sobre z, <strong>la eliges tú</strong>: z puede valer 0, 1, −5, lo que quieras, y las otras dos se acomodan.</p>
-      <p class="idea" style="font-size:17px">Por eso a z se le llama <strong>variable libre</strong> — libre porque tú la escoges.</p>
-      <p class="idea" style="font-size:17px">Y para no casarnos con un valor, le ponemos una letra comodín: <strong>z = t</strong>. A esa letra que significa "el valor que tú elijas" se le llama <strong>parámetro</strong>.</p>
-      <p class="idea" style="font-size:17px">Despejando cada pivote, la solución general queda:</p>
-      <div class="fx"><div class="sys"><span class="eq">x = 1 + 2t</span><span class="eq">y = 3 − 3t</span><span class="eq">z = t</span></div></div>
-      <p class="fx-note">Pruébala: con t = 0 sale (1, 3, 0); con t = 1 sale (3, 0, 1). Cada valor de t da una solución distinta — por eso son infinitas, pero todas salen de la misma fórmula.</p>
-    </section>
-
-    <h2 class="modhead">Tu turno</h2>
-    <section class="practice">
-      <div class="phead"><h3>De guiado a solo</h3><p class="sub">Toca tu respuesta. Si fallas, vuelve a intentar. El apoyo se va retirando. · <span class="cont" id="cont"></span></p></div>
-
-      <div class="pitem" data-kind="item" data-id="P1" data-tema="gauss_jordan" data-level="guiado">
-        <span class="lvl guiado">Guiado</span>
-        <p class="pstatement">Quieres que la x del renglón 2 se vuelva cero. ¿Qué operación lo logra?</p>
-        <div class="fx" id="p1"></div>
+      <div class="check challenge" data-kind="item" data-id="M8S" data-tema="variables_libres" data-level="solo" data-module="8">
+        <div class="qtag">Ahora tú · transferencia</div>
+        <p class="q"><strong>Lee otro final.</strong> Tras reducir, aparece el renglón [0, 0 | 5]. ¿Qué concluyes?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Restar 3 veces el renglón 1 al renglón 2</button>
-          <button class="opt" data-ok="0">Sumar 3 veces el renglón 1 al renglón 2</button>
-          <button class="opt" data-ok="0">Restar 3 veces el renglón 2 al renglón 1</button>
+          <button class="opt" data-ok="1">El sistema es inconsistente: ese renglón exige 0 = 5</button>
+          <button class="opt" data-ok="0">y = 5 y x queda libre</button>
+          <button class="opt" data-ok="0">Hay infinitas soluciones</button>
         </div>
-        <div class="aux"><details><summary>Pista</summary><p>Mira el coeficiente de x: arriba hay un 1, abajo un 3. ¿Qué múltiplo del de arriba cancela el de abajo?</p></details></div>
-        <div class="why"><span class="lbl">Por qué</span><p>El renglón 1 tiene un 1 en x; restar 3 veces ese renglón hace 3 − 3 = 0.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Cero por x más cero por y jamás dará 5: ninguna pareja puede cumplirlo.</p><p class="nudge">✕ Devuélvele las letras al renglón: 0·x + 0·y = 5. ¿Alguna pareja lo logra?</p></div>
       </div>
 
-      <div class="pitem" data-kind="item" data-id="P2" data-tema="clasificacion" data-level="juntos">
-        <span class="lvl juntos">Juntos</span>
-        <p class="pstatement">Esta matriz ya está reducida. ¿Cuántas soluciones tiene el sistema?</p>
-        <div class="fx" id="p2"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">Una sola</button>
-          <button class="opt" data-ok="0">Ninguna</button>
-          <button class="opt" data-ok="0">Infinitas</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Cada variable tiene su pivote y no hay renglón imposible: solución única.</p></div>
-      </div>
+      <section class="finish">
+        <h3>Cierra sin mirar arriba</h3>
+        <p>Explica en voz alta esta cadena: sistema → matriz aumentada → operaciones elementales → escalonada → reducida → leer la solución.</p>
+        <p>Después responde: <strong>¿cómo delata la tabla a un sistema sin solución y a uno con infinitas?</strong></p>
+        <p class="nota">¿Qué tan segura te sientes explicando estas ideas sin leer? 1 = nada · 5 = lo domino.</p>
+        <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
+        <button class="btn" id="makeReport">Generar reporte para el tutor</button>
+        <div class="report" id="reportSummary" aria-live="polite"></div>
+      </section>
 
-      <div class="pitem" data-kind="item" data-id="P3" data-tema="clasificacion" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">¿Qué tipo de sistema es este?</p>
-        <div class="fx" id="p3"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">Sin solución</button>
-          <button class="opt" data-ok="0">Solución única</button>
-          <button class="opt" data-ok="0">Infinitas soluciones</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>El último renglón dice “cero igual a tres”, imposible: el sistema no tiene solución.</p></div>
-      </div>
+      <nav class="nav-lecs"><a href="L1_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L1_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
-      <div class="pitem" data-kind="item" data-id="P4" data-tema="variable_libre" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Esta matriz reducida tiene 3 columnas de variables. ¿Cuántas variables libres hay?</p>
-        <div class="fx" id="p4"></div>
-        <div class="opts">
-          <button class="opt" data-ok="1">Una (la tercera columna no tiene pivote)</button>
-          <button class="opt" data-ok="0">Ninguna</button>
-          <button class="opt" data-ok="0">Dos</button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>Hay pivotes en las dos primeras columnas, pero la tercera no tiene: esa variable queda libre → infinitas soluciones.</p></div>
-      </div>
-
-      <div class="pitem" data-kind="item" data-id="P5" data-tema="modelado" data-level="solo">
-        <span class="lvl solo">Solo</span>
-        <p class="pstatement">Nuevo problema: <strong>3 boletos de adulto y 2 de niño cuestan $34</strong>; <strong>1 de adulto y 4 de niño cuestan $28</strong>.</p>
-        <p class="pstatement">¿Cuál matriz aumentada lo modela? (adulto = primera columna, niño = segunda)</p>
-        <div class="opts">
-          <button class="opt" data-ok="1" id="p5a"></button>
-          <button class="opt" data-ok="0" id="p5b"></button>
-          <button class="opt" data-ok="0" id="p5c"></button>
-        </div>
-        <div class="why"><span class="lbl">Por qué</span><p>“3 adultos y 2 niños = 34” es el renglón 3, 2, 34; “1 adulto y 4 niños = 28” es el renglón 1, 4, 28. Cada número va en la columna de su incógnita.</p></div>
-      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
-
-    <div class="check" data-kind="recall" data-fid="F2_inconsistente" data-tema="consistencia">
-      <div class="qtag">Te toca · recuerda</div>
-      <p class="q">¿Cómo se reconoce en la matriz un sistema que NO tiene solución?</p>
-      <div class="opts">
-        <button class="opt" data-ok="1">Aparece un renglón de ceros a la izquierda con un número distinto de cero a la derecha</button>
-        <button class="opt" data-ok="0">Aparece un renglón de puros ceros, incluida la derecha</button>
-        <button class="opt" data-ok="0">Hay más ecuaciones que incógnitas</button>
-      </div>
-      <div class="why"><span class="lbl">Por qué</span><p>Ese renglón dice “cero igual a un número distinto de cero”, imposible. El renglón de <strong>puros</strong> ceros es otra cosa: solo sobra una ecuación.</p></div>
-    </div>
-
-    <section class="chuleta">
-      <h3>Para memorizar</h3>
-      <p class="sub">En el examen no hay formulario. Esto se aprende de memoria, con la práctica.</p>
-      <ul>
-        <li><span class="ck">✓</span> Las 3 operaciones de renglón: intercambiar, multiplicar por un número distinto de cero, sumar un múltiplo de otro.</li>
-        <li><span class="ck">✓</span> Meta = forma reducida: un 1 (pivote) solo en su columna por cada variable.</li>
-        <li><span class="ck">✓</span> Método: primero baja haciendo ceros, luego sube limpiando.</li>
-        <li><span class="ck">✓</span> Una solución: cada variable tiene pivote.</li>
-        <li><span class="ck">✓</span> Ninguna: aparece “cero = número distinto de cero”.</li>
-        <li><span class="ck">✓</span> Infinitas: hay variable libre (columna sin pivote) → solución con parámetro t.</li>
-      </ul>
-    </section>
-
-    <section class="cierre">
-      <h3>¿Cómo te fue?</h3>
-      <p class="nota">Qué tan segura te sientes resolviendo sistemas por Gauss-Jordan ahora. 1 = nada · 5 = lo domino.</p>
-      <div class="escala" id="esc"></div>
-      <div id="reporte"></div>
-      <button class="btn" id="gen">Generar reporte para el tutor</button>
-    </section>
-
-    <nav class="nav-lecs"><a href="L1_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L1_cuadernillo-papel.html"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
-
-    <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 1</p></footer>
 
   </main>
+
+  <footer><p>aprueba<b>.net</b> · Guía de estudio · Álgebra Lineal · Unidad 1</p></footer>
+
 </div>
 
 <script>
-"use strict";
-
-function mat(rows){
-  var coeffs = rows[0].length - 1;
-  var gtc = 'repeat('+coeffs+',auto) 16px auto';
-  var h='<div class="mtx"><span class="brk brk-l"></span><div class="cols">';
-  for(var r=0;r<rows.length;r++){
-    var cells='';
-    for(var j=0;j<coeffs;j++) cells+='<span>'+rows[r][j]+'</span>';
-    cells+='<span class="msep"></span><span>'+rows[r][coeffs]+'</span>';
-    h+='<div class="mrow" style="grid-template-columns:'+gtc+'">'+cells+'</div>';
-  }
-  return h+'</div><span class="brk brk-r"></span></div>';
-}
-function set(id, rows){ var el=document.getElementById(id); if(el) el.innerHTML=mat(rows); }
-
-set('mtxIntro',[["1","2","5"],["3","−1","1"]]);
-set('rrefEx',[["1","0","4"],["0","1","−1"]]);
-// micro-checks de reconocimiento (La idea)
-set('ma_a',[["2","−1","3"],["1","4","5"]]);
-set('ma_b',[["2","1","3"],["1","4","5"]]);
-set('ma_c',[["2","−1","3"],["4","1","5"]]);
-set('rr_a',[["1","0","3"],["0","1","2"]]);
-set('rr_b',[["1","2","3"],["0","1","2"]]);
-set('rr_c',[["2","0","4"],["0","1","2"]]);
-// 2x2 (co-producido)
-set('e0',[["1","2","5"],["3","−1","1"]]);
-set('e1',[["1","2","5"],["0","−7","−14"]]);
-set('e2',[["1","2","5"],["0","1","2"]]);
-set('e3',[["1","0","1"],["0","1","2"]]);
-// 3x3 (paso a paso, una operación por matriz)
-set('t0',[["1","1","1","6"],["1","−1","1","2"],["2","1","−1","1"]]);
-set('t1a',[["1","1","1","6"],["0","−2","0","−4"],["2","1","−1","1"]]);
-set('t1b',[["1","1","1","6"],["0","−2","0","−4"],["0","−1","−3","−11"]]);
-set('t2a',[["1","1","1","6"],["0","1","0","2"],["0","−1","−3","−11"]]);
-set('t2b',[["1","1","1","6"],["0","1","0","2"],["0","0","−3","−9"]]);
-set('t3',[["1","1","1","6"],["0","1","0","2"],["0","0","1","3"]]);
-set('t4a',[["1","0","1","4"],["0","1","0","2"],["0","0","1","3"]]);
-set('t4b',[["1","0","0","1"],["0","1","0","2"],["0","0","1","3"]]);
-// infinitas (paso a paso)
-set('f0',[["1","1","1","4"],["2","1","−1","5"]]);
-set('fA',[["1","1","1","4"],["0","−1","−3","−3"]]);
-set('fB',[["1","1","1","4"],["0","1","3","3"]]);
-set('f1',[["1","0","−2","1"],["0","1","3","3"]]);
-// práctica
-set('p1',[["1","2","5"],["3","−1","1"]]);
-set('p2',[["1","0","3"],["0","1","−1"]]);
-set('p3',[["1","2","4"],["0","0","3"]]);
-set('p4',[["1","0","−2","1"],["0","1","3","3"]]);
-// opciones-matriz del modelado (P5)
-document.getElementById('p5a').innerHTML = mat([["3","2","34"],["1","4","28"]]);
-document.getElementById('p5b').innerHTML = mat([["3","2","28"],["1","4","34"]]);
-document.getElementById('p5c').innerHTML = mat([["2","3","34"],["4","1","28"]]);
-
-// ===== visual: el sistema como dos rectas =====
-function PT(x,y){ return [30+(x+1)*40, 270-(y+1)*40]; }
-function clip(a,b,c){
-  var pts=[], E=1e-9;
-  if(Math.abs(b)>E){ [-1,5].forEach(function(x){ var y=(c-a*x)/b; if(y>=-1-E&&y<=5+E) pts.push([x,y]); }); }
-  if(Math.abs(a)>E){ [-1,5].forEach(function(y){ var x=(c-b*y)/a; if(x>=-1-E&&x<=5+E) pts.push([x,y]); }); }
-  var u=[]; pts.forEach(function(p){ if(!u.some(function(q){return Math.abs(q[0]-p[0])<1e-6&&Math.abs(q[1]-p[1])<1e-6;})) u.push(p); });
-  return u.slice(0,2);
-}
-function lineSVG(a,b,c,color,dash){
-  var e=clip(a,b,c); if(e.length<2) return '';
-  var p0=PT(e[0][0],e[0][1]), p1=PT(e[1][0],e[1][1]);
-  return '<line x1="'+p0[0]+'" y1="'+p0[1]+'" x2="'+p1[0]+'" y2="'+p1[1]+'" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"'+(dash?' stroke-dasharray="8 7"':'')+'/>';
-}
-var VG='', VA='';
 (function(){
-  for(var g=-1; g<=5; g++){
-    var a=PT(g,-1), b=PT(g,5), c=PT(-1,g), d=PT(5,g);
-    VG+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#eef0f2"/>'+'<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+d[0]+'" y2="'+d[1]+'" stroke="#eef0f2"/>';
-  }
-  var x0=PT(-1,0), x1=PT(5,0), y0=PT(0,-1), y1=PT(0,5);
-  VA='<line x1="'+x0[0]+'" y1="'+x0[1]+'" x2="'+x1[0]+'" y2="'+x1[1]+'" stroke="#181B22" stroke-width="1.5"/>'+'<line x1="'+y0[0]+'" y1="'+y0[1]+'" x2="'+y1[0]+'" y2="'+y1[1]+'" stroke="#181B22" stroke-width="1.5"/>';
-})();
-function drawPlane(cse){
-  var L, cap;
-  if(cse==='una'){
-    L=lineSVG(1,2,5,'#F5821F')+lineSVG(3,-1,1,'#283891');
-    var dp=PT(1,2);
-    L+='<circle cx="'+dp[0]+'" cy="'+dp[1]+'" r="11" fill="none" stroke="#F5821F" stroke-width="2.5"/><circle cx="'+dp[0]+'" cy="'+dp[1]+'" r="6.5" fill="#181B22"/>';
-    cap='Las dos rectas se cruzan en un punto. Ese punto —x = 1, y = 2— es la única solución.';
-  } else if(cse==='ninguna'){
-    L=lineSVG(1,2,5,'#F5821F')+lineSVG(1,2,8,'#283891');
-    cap='Las rectas son paralelas: nunca se cruzan. El sistema no tiene solución.';
-  } else {
-    L=lineSVG(1,2,5,'#F5821F')+lineSVG(2,4,10,'#283891',true);
-    cap='Las dos ecuaciones son la misma recta. Coinciden en todos sus puntos: infinitas soluciones.';
-  }
-  document.getElementById('vizPlane').innerHTML='<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plano cartesiano con dos rectas">'+VG+VA+L+'</svg>';
-  document.getElementById('vizCap').textContent=cap;
-}
-document.querySelectorAll('.viz-tab').forEach(function(b){
-  b.onclick=function(){ document.querySelectorAll('.viz-tab').forEach(function(x){x.classList.remove('active');}); b.classList.add('active'); drawPlane(b.getAttribute('data-case')); };
-});
-(function(){ var f=document.querySelector('.viz-tab'); f.classList.add('active'); drawPlane('una'); })();
-
-// ===== instrumentación =====
-var session = {
-  fecha:new Date().toISOString().slice(0,10),
-  materia:"algebra_lineal", unidad:"U1_sistemas", leccion:"L1_sistemas_gauss-jordan",
-  duracion_min:0, items:[], formulas:[], autoconfianza:null, resumen_legible:""
-};
-var t0ms = Date.now();
-var TOT_EJ = document.querySelectorAll('[data-kind="item"]').length;
-function updateCont(){ var c=document.getElementById('cont'); if(c) c.textContent = session.items.length+"/"+TOT_EJ+" ejercicios"; }
-
-document.querySelectorAll('[data-kind]').forEach(function(block){
-  var kind = block.getAttribute('data-kind');
-  var start = Date.now(), intentos = 0, done = false;
-  var why = block.querySelector('.why');
-  block.querySelectorAll('.opt').forEach(function(b){
-    b.onclick = function(){
-      if(done) return;
-      intentos++;
-      if(b.getAttribute('data-ok')==="1"){
-        done = true; b.classList.add('right');
-        if(why) why.classList.add('show');
-        var pit = block.closest('.pitem'); if(pit) pit.classList.add('solved');
-        if(kind==="recall"){
-          session.formulas.push({ id:block.getAttribute('data-fid'), tema:block.getAttribute('data-tema'), recall:(intentos===1?"de_memoria":"con_pista") });
-        } else {
-          session.items.push({ id:block.getAttribute('data-id'), tema:block.getAttribute('data-tema'),
-            nivel:(block.getAttribute('data-level')||"-"), intentos:intentos, correcto:true, tiempo_s:Math.round((Date.now()-start)/1000) });
-          updateCont();
-        }
-      } else {
-        b.classList.add('wrong'); b.disabled = true;
-        if(why){ why.classList.add('show','miss'); }
-      }
-    };
+  'use strict';
+  var KEY='valentina-algebra-u1-guia-micro';
+  var goals=[
+    'Sistema lineal: reconocer ecuaciones que deben cumplirse a la vez.',
+    'Conjunto solución: clasificar una, ninguna o infinitas.',
+    'Matriz aumentada: pasar del sistema a la tabla de números.',
+    'Operaciones elementales: tres movidas que no cambian la solución.',
+    'Matriz escalonada: reconocer la escalera y sus 1-pivote.',
+    'Escalonada reducida: la tabla que se lee sola.',
+    'Gauss-Jordan: el plan que lleva cualquier tabla a la reducida.',
+    'Variables libres: leer pivotes, libres y renglones imposibles.'
+  ];
+  var state={current:1,started:new Date().toISOString(),items:{},confidence:null};
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&saved.items){state=saved;}}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  function shuffle(box){var a=Array.prototype.slice.call(box.children);for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}for(var k=0;k<a.length;k++){box.appendChild(a[k]);}}
+  function markDone(){document.querySelectorAll('.step').forEach(function(btn){var m=btn.dataset.go;var cards=document.querySelectorAll('.challenge[data-module="'+m+'"]');var ids=Array.prototype.map.call(cards,function(x){return x.dataset.id;});btn.classList.toggle('is-done',ids.length>0&&ids.every(function(id){return state.items[id]&&state.items[id].correct;}));});}
+  function progress(){var total=document.querySelectorAll('.challenge').length;var done=Object.keys(state.items).filter(function(id){return state.items[id].correct;}).length;return {done:done,total:total};}
+  function go(n){n=Math.max(1,Math.min(8,Number(n)||1));state.current=n;save();
+    document.querySelectorAll('.lesson').forEach(function(x){x.classList.toggle('is-active',Number(x.dataset.step)===n);});
+    document.querySelectorAll('.step').forEach(function(x){x.setAttribute('aria-selected',String(Number(x.dataset.go)===n));});
+    document.getElementById('heroStep').textContent=n;
+    document.getElementById('heroGoal').textContent=goals[n-1];
+    window.scrollTo({top:0,behavior:'smooth'});}
+  document.querySelectorAll('.opts').forEach(shuffle);
+  document.querySelectorAll('.challenge').forEach(function(card){
+    var id=card.dataset.id;var fb=card.querySelector('.fb');var prev=state.items[id];
+    if(prev&&prev.correct){card.querySelectorAll('.opt').forEach(function(b){b.disabled=true;if(b.dataset.ok==='1')b.classList.add('right');});fb.className='fb show ok';}
+    card.querySelectorAll('.opt').forEach(function(btn){btn.addEventListener('click',function(){
+      if(state.items[id]&&state.items[id].correct)return;
+      var rec=state.items[id]||{attempts:0,correct:false,tema:card.dataset.tema,level:card.dataset.level,module:Number(card.dataset.module)};
+      rec.attempts+=1;
+      if(btn.dataset.ok==='1'){rec.correct=true;card.querySelectorAll('.opt').forEach(function(b){b.disabled=true;b.classList.remove('wrong');if(b.dataset.ok==='1')b.classList.add('right');});fb.className='fb show ok';}
+      else{btn.disabled=true;btn.classList.add('wrong');fb.className='fb show no';}
+      state.items[id]=rec;save();markDone();
+    });});
   });
-});
-
-var esc = document.getElementById('esc');
-[1,2,3,4,5].forEach(function(n){
-  var b=document.createElement('button'); b.textContent=n;
-  b.onclick=function(){ session.autoconfianza=n; esc.querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); };
-  esc.appendChild(b);
-});
-
-function buildSummary(){
-  var c=session.items.filter(function(x){return x.correcto;}).length;
-  var trabas=session.items.filter(function(x){return x.intentos>1;}).map(function(x){return x.id;});
-  var rec=session.formulas.map(function(f){return f.id+": "+f.recall;});
-  var s="Resolvió "+c+"/"+TOT_EJ+" ejercicios. ";
-  s+= rec.length? ("Recall de fórmulas → "+rec.join(" · ")+". ") : "No hizo el recall de fórmulas. ";
-  s+= trabas.length? ("Se trabó en: "+trabas.join(", ")+". ") : "Sin trabas. ";
-  s+="Autoconfianza: "+(session.autoconfianza||"—")+"/5.";
-  return s;
-}
-document.getElementById('gen').onclick=function(){
-  session.duracion_min=Math.max(1,Math.round((Date.now()-t0ms)/60000));
-  session.resumen_legible=buildSummary();
-  var nombre=session.fecha+"_algebra_U1.json";
-  var json=JSON.stringify(session,null,2);
-  var url=URL.createObjectURL(new Blob([json],{type:"application/json"}));
-  var recPills=session.formulas.map(function(f){return '<span class="pill">'+f.id+": "+f.recall+'</span>';}).join("")||'<span class="nota">— sin recall —</span>';
-  document.getElementById('reporte').innerHTML=
-    '<div style="border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9;padding:16px;margin-top:14px;text-align:left">'+
-    '<div style="font-weight:800;color:var(--green-deep);font-size:18px">Reporte listo</div>'+
-    '<div style="margin:8px 0;font-size:17px"><strong>'+session.items.length+'/'+TOT_EJ+'</strong> ejercicios · <strong>'+session.duracion_min+' min</strong> · confianza <strong>'+(session.autoconfianza||"—")+'/5</strong></div>'+
-    '<div>Fórmulas: '+recPills+'</div>'+
-    '<a class="btn" download="'+nombre+'" href="'+url+'">Descargar ('+nombre+')</a> '+
-    '<button class="btn ghost" id="cp">Copiar</button>'+
-    '<textarea id="ta" readonly>'+json+'</textarea>'+
-    '<p class="nota">El tutor coloca este archivo en expediente/sesiones/. Sin escaneos, sin audio.</p>'+
-    '</div>';
-  document.getElementById('cp').onclick=function(){var ta=document.getElementById('ta');ta.select();try{navigator.clipboard.writeText(ta.value);this.textContent="¡Copiado!";}catch(e){document.execCommand("copy");}};
-  document.getElementById('reporte').scrollIntoView({behavior:"smooth",block:"nearest"});
-};
-updateCont();
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);});});
+  document.querySelectorAll('[data-next]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.next);});});
+  document.querySelectorAll('[data-prev]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.prev);});});
+  var mix={a:0,b:0};
+  var OPS=[
+    {s:'x + 2y = 5  ·  3x − y = 1', e1:[1,2,5], e2:[3,-1,1]},
+    {s:'3x − y = 1  ·  x + 2y = 5', e1:[3,-1,1], e2:[1,2,5]},
+    {s:'x + 2y = 5  ·  6x − 2y = 2', e1:[1,2,5], e2:[6,-2,2]},
+    {s:'x + 2y = 5  ·  −7y = −14', e1:[1,2,5], e2:[0,-7,-14]}
+  ];
+  var PTS=[[1,2],[3,1],[5,0]];
+  function signo(n){return String(n).replace('-','−');}
+  function paintMix(){var op=OPS[mix.a], p=PTS[mix.b];
+    var l1=op.e1[0]*p[0]+op.e1[1]*p[1], l2=op.e2[0]*p[0]+op.e2[1]*p[1];
+    var ok1=(l1===op.e1[2]), ok2=(l2===op.e2[2]);
+    document.getElementById('mixSys').textContent=op.s;
+    document.getElementById('mixWords').textContent='('+p[0]+', '+p[1]+') '+((ok1&&ok2)?'cumple las dos ecuaciones':'no cumple las dos');
+    document.getElementById('mixFormula').textContent='Ecuación 1: da '+signo(l1)+', pide '+signo(op.e1[2])+(ok1?' ✓':' ✕')+' · Ecuación 2: da '+signo(l2)+', pide '+signo(op.e2[2])+(ok2?' ✓':' ✕');}
+  document.querySelectorAll('.pick').forEach(function(group){group.querySelectorAll('button').forEach(function(btn){btn.addEventListener('click',function(){
+    var key=group.dataset.mix;mix[key]=Number(btn.dataset.value);
+    group.querySelectorAll('button').forEach(function(x){x.classList.toggle('is-on',x===btn);});paintMix();});});});
+  document.querySelectorAll('[data-confidence]').forEach(function(btn){btn.addEventListener('click',function(){
+    state.confidence=Number(btn.dataset.confidence);save();
+    document.querySelectorAll('[data-confidence]').forEach(function(x){x.classList.toggle('sel',x===btn);});});
+    if(state.confidence===Number(btn.dataset.confidence))btn.classList.add('sel');});
+  document.getElementById('makeReport').addEventListener('click',function(){
+    var p=progress();
+    var weak=Object.keys(state.items).filter(function(id){return state.items[id].attempts>1;});
+    var report={fecha:new Date().toISOString().slice(0,10),materia:'algebra_lineal',unidad:'U1_sistemas',leccion:'L1_sistemas_gauss-jordan',inicio:state.started,
+      duracion_min:Math.max(1,Math.round((Date.now()-new Date(state.started).getTime())/60000)),
+      items:Object.keys(state.items).map(function(id){var x=state.items[id];return {id:id,tema:x.tema,nivel:x.level,modulo:x.module,intentos:x.attempts,correcto:x.correct};}),
+      autoconfianza:state.confidence,
+      resumen_legible:'Resolvió '+p.done+'/'+p.total+' actividades. Requirieron más de un intento: '+(weak.length?weak.join(', '):'ninguna')+'. Confianza: '+(state.confidence||'sin registrar')+'/5.'};
+    var blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=report.fecha+'_algebra_lineal_U1.json';a.click();URL.revokeObjectURL(url);
+    var box=document.getElementById('reportSummary');box.className='report show';box.innerHTML='<p><strong>Reporte listo.</strong> '+report.resumen_legible+'</p>';});
+  markDone();go(state.current||1);
+})();
 </script>
 </body>
 </html>
