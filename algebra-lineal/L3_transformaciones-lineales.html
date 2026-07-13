@@ -150,6 +150,29 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*practica*/
+  .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
+  .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
+  .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
+  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .p-res{background:var(--green-tint);color:var(--green-deep)}
+  .p-res b{color:var(--green-deep)}
+  .p-gui{background:var(--cream);color:var(--deep)}
+  .p-gui b{color:var(--deep)}
+  .p-ex{background:var(--red-tint);color:#a01243}
+  .p-ex b{color:#a01243}
+  .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
+  .prob-q strong{font-weight:800}
+  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prob .check{background:#fff;border-color:var(--line)}
+  .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
+  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl b{color:var(--ink);font-weight:800}
+  .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
+  .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
   .sec{gap:17px}
   .idea{line-height:1.72}
@@ -257,6 +280,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Antes de la flecha está el dominio (entran tres números); después, el codominio (salen dos).</p><p class="nudge">✕ Los numeritos no son potencias: cuentan cuántos números lleva cada lista. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas como en un examen: leer qué entra y qué sale, y aplicar la regla. El primero lo armamos juntos; en los siguientes te suelto de a poco.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Aplica la regla</strong> T(x, y) = (2x, x + y) al punto (3, 5).</p>
+          <div class="work"><p class="wl">Sustituyo x = 3, y = 5 en cada entrada.</p><p class="wl">Primera: 2·3 = <b>6</b>. Segunda: 3 + 5 = <b>8</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M1P1" data-tema="transformacion" data-level="resuelto" data-module="1">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Entonces, ¿qué vector entrega T en (3, 5)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(6, 8)</button>
+              <button class="opt" data-ok="0">(5, 8)</button>
+              <button class="opt" data-ok="0">(8, 6)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada entrada con su cuenta: 2·3 = 6 y 3 + 5 = 8. Da (6, 8).</p><p class="nudge">✕ La primera entrada dobla; la segunda suma. No cambies el orden. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M1P2" data-tema="notacion" data-level="guiado" data-module="1">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Una máquina se presenta como T: R⁴ → R². ¿Qué te dice esa línea?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Entran listas de cuatro números (dominio R⁴) y salen listas de dos (codominio R²)</button>
+              <button class="opt" data-ok="0">Entran listas de dos números y salen listas de cuatro</button>
+              <button class="opt" data-ok="0">Eleva a la cuarta la entrada y al cuadrado la salida</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Antes de la flecha, el dominio (entran 4 números); después, el codominio (salen 2).</p><p class="nudge">✕ Pista: los numeritos cuentan cuántos números lleva cada lista, no son potencias. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="transformacion" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea T: R³ → R² con T(x, y, z) = (x − z, 2y). Halla T(1, 4, 3).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(−2, 8)</button>
+              <button class="opt" data-ok="0">(4, 8)</button>
+              <button class="opt" data-ok="0">(−2, 4)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Sustituyes en orden: x − z = 1 − 3 = −2; 2y = 2·4 = 8. Da (−2, 8).</p><p class="nudge">✕ Respeta el signo de x − z y dobla la y. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
@@ -315,6 +384,52 @@
           <button class="opt" data-ok="0">Sí: toda regla escrita con x e y es lineal</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ T(2, 0) = (2, 5), y el doble es (4, 10). Pero T(4, 0) = (4, 5). No coinciden: no es lineal.</p><p class="nudge">✕ Calcula los dos caminos por separado: primero T y luego el doble, y al revés. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas sobre las dos jugadas de la linealidad. Vamos del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Comprueba la suma</strong> para T(x, y) = (2x, x + y) con u = (1, 2) y v = (3, 1).</p>
+          <div class="work"><p class="wl">Camino 1 — sumo y transformo: u + v = (4, 3), y T(4, 3) = (2·4, 4 + 3) = <b>(8, 7)</b>.</p><p class="wl">Camino 2 — transformo cada uno: T(u) = (2, 3) y T(v) = (6, 4).</p></div>
+          <div class="check challenge" data-kind="item" data-id="M2P1" data-tema="linealidad" data-level="resuelto" data-module="2">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Falta cerrar el camino 2. ¿Cuánto vale T(u) + T(v)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(8, 7)</button>
+              <button class="opt" data-ok="0">(7, 8)</button>
+              <button class="opt" data-ok="0">(12, 12)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Sumas entrada por entrada: 2 + 6 = 8 y 3 + 4 = 7. Da (8, 7), igual que el camino 1.</p><p class="nudge">✕ Suma las imágenes componente a componente, sin multiplicarlas ni cruzar el orden. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M2P2" data-tema="linealidad" data-level="guiado" data-module="2">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>¿Cuál de estas máquinas NO respeta las dos jugadas?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">T(x, y) = (x<sup>2</sup>, y): el cuadrado hace que 2·u dé el cuádruple, no el doble</button>
+              <button class="opt" data-ok="0">T(x, y) = (3x, −y)</button>
+              <button class="opt" data-ok="0">T(x, y) = (y, x)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Con u = (1, 0): T(2·u) = T(2, 0) = (4, 0), pero 2·T(u) = 2·(1, 0) = (2, 0). El cuadrado los separa.</p><p class="nudge">✕ Pista: busca la regla que eleva al cuadrado; esa rompe el estiramiento. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="linealidad" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea L: R² → R² con L(x, y) = (x, y + 4). Verifica la suma con u = (1, 1) y v = (2, 3): ¿es lineal?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">No: L(u + v) = (3, 8) pero L(u) + L(v) = (3, 12)</button>
+              <button class="opt" data-ok="0">Sí: los dos caminos dan (3, 8)</button>
+              <button class="opt" data-ok="0">Sí: el término +4 no afecta la suma</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Sumar primero: L(3, 4) = (3, 8). Transformar y sumar: (1, 5) + (2, 7) = (3, 12). El +4 se contó dos veces.</p><p class="nudge">✕ Suma primero y transforma; luego transforma cada uno y suma. Compara. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
@@ -379,6 +494,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Con x = 0: 0 − 4 = −4; con y = 0: 2·0 = 0. Sale (−4, 0) y eso la descarta.</p><p class="nudge">✕ Sustituye x = 0 y y = 0 en cada entrada de la regla, y recuerda qué decide el filtro. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas con el filtro del cero. El primero lo resolvemos juntos; luego avanzas tú.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Aplica el filtro del cero</strong> a T(x, y) = (2x − 3, y).</p>
+          <div class="work"><p class="wl">Meto (0, 0): primera entrada 2·0 − 3 = <b>−3</b>; segunda entrada = <b>0</b>.</p><p class="wl">Sale (−3, 0): el cero <b>se movió</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M3P1" data-tema="filtro_cero" data-level="resuelto" data-module="3">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">El cero aterrizó en (−3, 0). ¿Qué concluyes?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">No es lineal: movió el cero</button>
+              <button class="opt" data-ok="0">Es lineal: pasó la prueba</button>
+              <button class="opt" data-ok="0">El filtro no decide nada aquí</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Una lineal deja el (0, 0) fijo. Como salió (−3, 0), queda descartada.</p><p class="nudge">✕ El filtro descarta cuando el cero se mueve, y aquí se movió. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M3P2" data-tema="filtro_cero" data-level="guiado" data-module="3">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>¿Cuál regla sobrevive al filtro del cero (sin que eso la apruebe)?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">T(x, y) = (x − y, 3x): al meter (0, 0) da (0, 0)</button>
+              <button class="opt" data-ok="0">T(x, y) = (x, y + 2): da (0, 2)</button>
+              <button class="opt" data-ok="0">T(x, y) = (x + y, 5): da (0, 5)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (0 − 0, 3·0) = (0, 0): deja el cero fijo, así que el filtro no la descarta. Pasarlo no la aprueba.</p><p class="nudge">✕ Pista: mete (0, 0) en cada una; la que da (0, 0) es la que sobrevive. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="filtro_cero" data-level="examen" data-module="3">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea L: R³ → R² con L(x, y, z) = (x + y − 2, z). Decide si puede ser lineal con la prueba más rápida.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">No: L(0, 0, 0) = (−2, 0) ≠ (0, 0), falla L(0) = 0</button>
+              <button class="opt" data-ok="0">Sí: solo tiene sumas y restas de las variables</button>
+              <button class="opt" data-ok="0">Sí: la segunda entrada z sí es lineal</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ L(0, 0, 0) = (0 + 0 − 2, 0) = (−2, 0). Como L(0) ≠ 0, no es lineal.</p><p class="nudge">✕ Sustituye el vector cero del dominio y compáralo con el cero del codominio. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -434,6 +595,52 @@
           <button class="opt" data-ok="0">(0, −2)</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ La segunda columna es T(0, 1): 0 − 2·1 = −2 y 4·0 = 0. Da (−2, 0).</p><p class="nudge">✕ Sustituye x = 0, y = 1 en cada entrada de la regla, en ese orden. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para armar la matriz canónica, columna por columna. Del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Arma la matriz canónica</strong> de T(x, y) = (x + y, 3x − y).</p>
+          <div class="work"><p class="wl">Primera columna, T(1, 0): (1 + 0, 3·1 − 0) = <b>(1, 3)</b>.</p><p class="wl">Segunda columna, T(0, 1): (0 + 1, 3·0 − 1) = <b>(1, −1)</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M4P1" data-tema="matriz_canonica" data-level="resuelto" data-module="4">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cómo queda la matriz, columna a columna?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Columnas (1, 3) y (1, −1)</button>
+              <button class="opt" data-ok="0">Columnas (1, 3) y (−1, 1)</button>
+              <button class="opt" data-ok="0">Renglones (1, 3) y (1, −1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada respuesta es una columna, en orden: (1, 3) y luego (1, −1).</p><p class="nudge">✕ Las imágenes se guardan como columnas, no como renglones, y sin cambiar el orden. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M4P2" data-tema="matriz_canonica" data-level="guiado" data-module="4">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Para T(x, y) = (3x + y, x − 5y), ¿cuál es la segunda columna de su matriz canónica?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(1, −5)</button>
+              <button class="opt" data-ok="0">(3, 1)</button>
+              <button class="opt" data-ok="0">(1, 5)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La segunda columna es T(0, 1): 3·0 + 1 = 1 y 0 − 5·1 = −5. Da (1, −5).</p><p class="nudge">✕ Pista: la segunda columna sale de meter (0, 1); cuida el signo del −5y. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="matriz_canonica" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea T: R³ → R² con T(x, y, z) = (x + 2y − z, x + 3y + z). ¿Cuáles son las columnas de su matriz canónica?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(1, 1), (2, 3) y (−1, 1)</button>
+              <button class="opt" data-ok="0">(1, 2, −1) y (1, 3, 1)</button>
+              <button class="opt" data-ok="0">(1, 1), (2, 3) y (1, 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Son T(1,0,0) = (1, 1), T(0,1,0) = (2, 3) y T(0,0,1) = (−1, 1): tres columnas.</p><p class="nudge">✕ Cada columna es T de un vector canónico; la tercera sale de (0, 0, 1). Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
@@ -497,6 +704,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ 1 + (−1) = 0 y 2·1 + 2·(−1) = 0: las dos salidas se apagan.</p><p class="nudge">✕ Sustituye cada pareja y exige que las dos componentes de la salida den cero. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para cazar el núcleo: lo que cada máquina aplasta al cero. Empezamos juntos.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Halla el núcleo</strong> de T(x, y) = (2x, 0).</p>
+          <div class="work"><p class="wl">Pido salida cero: primera entrada 2x = 0 obliga <b>x = 0</b>.</p><p class="wl">La segunda entrada es 0 siempre: no restringe la y, que queda <b>libre</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M5P1" data-tema="nucleo" data-level="resuelto" data-module="5">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Con x = 0 forzada y la y libre, ¿qué figura es el núcleo?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">El eje y: todos los puntos (0, y)</button>
+              <button class="opt" data-ok="0">Solo el punto (0, 0)</button>
+              <button class="opt" data-ok="0">El eje x: los puntos (x, 0)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Solo importa 2x = 0, que fija x = 0; la y queda libre. Es el eje y.</p><p class="nudge">✕ Iguala cada salida a cero: 2x = 0 fija x, la segunda no toca la y. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M5P2" data-tema="nucleo" data-level="guiado" data-module="5">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Para T(x, y) = (x + y, x + y), ¿cuál punto está en el núcleo?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(2, −2)</button>
+              <button class="opt" data-ok="0">(2, 2)</button>
+              <button class="opt" data-ok="0">(1, 0)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2 + (−2) = 0, y las dos salidas usan esa misma suma: T(2, −2) = (0, 0).</p><p class="nudge">✕ Pista: el núcleo pide x + y = 0. ¿Cuál pareja lo cumple? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="nucleo" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea T: R³ → R³ con T(x, y, z) = (x, y, 0). Describe su núcleo (espacio nulo).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">El eje z: los puntos (0, 0, z)</button>
+              <button class="opt" data-ok="0">Solo (0, 0, 0)</button>
+              <button class="opt" data-ok="0">Todo el plano xy</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ x = 0 y y = 0 quedan forzadas; la z no aparece en la salida, así que queda libre: eje z.</p><p class="nudge">✕ Iguala cada componente de la salida a cero y mira cuál variable queda sin restricción. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
     </section>
 
@@ -552,6 +805,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Las columnas son dependientes: generan una sola dirección, como en la Unidad 2.</p><p class="nudge">✕ Antes de contar columnas, revisa si una es múltiplo de la otra. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas sobre la imagen: el catálogo de lo que una máquina alcanza. Del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>¿Qué tan grande es la imagen</strong> de una T con columnas (1, 2) y (3, 6)?</p>
+          <div class="work"><p class="wl">Reviso si una columna es múltiplo de la otra: (3, 6) = 3·(1, 2). <b>Sí lo es</b>.</p><p class="wl">Entonces las dos apuntan a la <b>misma dirección</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="imagen" data-level="resuelto" data-module="6">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Las dos columnas apuntan igual. ¿Qué es la imagen?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Una recta (una sola dirección)</button>
+              <button class="opt" data-ok="0">Todo R² (son dos columnas)</button>
+              <button class="opt" data-ok="0">Solo el punto (0, 0)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (3, 6) = 3·(1, 2): columnas dependientes generan una sola recta.</p><p class="nudge">✕ Antes de contar columnas, revisa si una es múltiplo de la otra. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="imagen" data-level="guiado" data-module="6">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Para A con columnas (1, 0) y (1, 2), ¿cuál es la imagen en R²?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Todo R²: las columnas apuntan a dos direcciones distintas</button>
+              <button class="opt" data-ok="0">Una recta: dos columnas siempre dan una recta</button>
+              <button class="opt" data-ok="0">Solo el eje x</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (1, 2) no es múltiplo de (1, 0): dos direcciones independientes llenan el plano.</p><p class="nudge">✕ Pista: ¿es (1, 2) un múltiplo de (1, 0)? Si no, abren una segunda dirección. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="imagen" data-level="examen" data-module="6">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea L: R³ → R² con matriz canónica de columnas (1, 0), (0, 1) y (2, 3). ¿Cuál es su imagen (el rango de L)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Todo R²: (1, 0) y (0, 1) ya generan el plano</button>
+              <button class="opt" data-ok="0">Una recta</button>
+              <button class="opt" data-ok="0">R³: hay tres columnas</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Con (1, 0) y (0, 1) entre las columnas, el generado ya es todo R²; la tercera no agrega dimensión.</p><p class="nudge">✕ Busca si dos columnas ya llenan el plano; las demás no suben la dimensión. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Última pareja de ideas →</button></div>
     </section>
 
@@ -599,6 +898,52 @@
           <button class="opt" data-ok="0">2</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ rango + nulidad = 5, así que rango = 5 − 2 = 3.</p><p class="nudge">✕ Los dos números deben sumar la dimensión del dominio. Despeja con cuidado.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas de rango y nulidad, la cuenta que siempre cierra. Empezamos juntos.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Halla rango y nulidad</strong> de T(x, y, z) = (x + y + z, 2x + 2y + 2z).</p>
+          <div class="work"><p class="wl">La matriz tiene renglones [1, 1, 1] y [2, 2, 2]; el segundo es el doble del primero.</p><p class="wl">R2 → R2 − 2·R1 anula el renglón 2: sobrevive <b>1 pivote</b> de 3 columnas.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="rango_nulidad" data-level="resuelto" data-module="7">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Con 1 pivote y 3 columnas, ¿cuánto valen rango y nulidad?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Rango 1, nulidad 2</button>
+              <button class="opt" data-ok="0">Rango 2, nulidad 1</button>
+              <button class="opt" data-ok="0">Rango 3, nulidad 0</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 1 pivote → rango 1. Por rango-nulidad, nulidad = 3 − 1 = 2.</p><p class="nudge">✕ El rango cuenta pivotes; la nulidad es columnas − rango = 3 − 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="rango_nulidad" data-level="guiado" data-module="7">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Una T sale de un dominio de dimensión 4 y su rango es 3. ¿Cuál es la nulidad?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">1</button>
+              <button class="opt" data-ok="0">7</button>
+              <button class="opt" data-ok="0">3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ rango + nulidad = 4, así que nulidad = 4 − 3 = 1.</p><p class="nudge">✕ Pista: los dos números suman la dimensión del dominio (4). Despeja la nulidad. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="rango_nulidad" data-level="examen" data-module="7">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A la matriz canónica de L: R³ → R², ya reducida a renglones [1, 0, −5] y [0, 1, 2]. Da rango y nulidad de L.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Rango 2, nulidad 1</button>
+              <button class="opt" data-ok="0">Rango 3, nulidad 0</button>
+              <button class="opt" data-ok="0">Rango 1, nulidad 2</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Pivotes en las columnas 1 y 2 → rango 2; la columna 3 queda libre → nulidad 1. Suman 3.</p><p class="nudge">✕ Cuenta pivotes para el rango y columnas libres para la nulidad. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Última idea →</button></div>
     </section>
@@ -681,6 +1026,52 @@
 
       <nav class="nav-lecs"><a href="L3_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L3_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para ponerle apellido a la máquina con dos números. Del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Clasifica</strong> una T: R³ → R³ con rango 3 y nulidad 0.</p>
+          <div class="work"><p class="wl">Nulidad 0 → el núcleo es solo {0} → <b>inyectiva</b>.</p><p class="wl">Rango 3 = dimensión del codominio (3) → <b>suprayectiva</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M8P1" data-tema="clasificacion" data-level="resuelto" data-module="8">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Cumple las dos. ¿Cuál es su apellido?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Biyectiva</button>
+              <button class="opt" data-ok="0">Solo suprayectiva</button>
+              <button class="opt" data-ok="0">Ni inyectiva ni suprayectiva</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Inyectiva (nulidad 0) y suprayectiva (rango 3 = codominio): las dos juntas dan biyectiva.</p><p class="nudge">✕ Inyectiva por nulidad 0 y suprayectiva por rango = codominio: ambas → biyectiva. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M8P2" data-tema="clasificacion" data-level="guiado" data-module="8">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Una T va de un dominio de dimensión 2 a uno de dimensión 4. ¿Qué NUNCA podrá ser?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Suprayectiva: su rango llega a lo más a 2 y el codominio pide 4</button>
+              <button class="opt" data-ok="0">Inyectiva: siempre repetirá salidas</button>
+              <button class="opt" data-ok="0">Lineal</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Con 2 columnas el rango no pasa de 2, menor que 4, así que jamás llena el codominio.</p><p class="nudge">✕ Pista: el rango no supera el número de columnas (2). Compáralo con la dimensión 4 del codominio. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="clasificacion" data-level="examen" data-module="8">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea L: R³ → R³ lineal con nulidad 1. Clasifícala: inyectiva, suprayectiva, biyectiva o ninguna.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Ninguna: ni inyectiva ni suprayectiva</button>
+              <button class="opt" data-ok="0">Biyectiva</button>
+              <button class="opt" data-ok="0">Suprayectiva pero no inyectiva</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Nulidad 1 &gt; 0 → no inyectiva; rango = 3 − 1 = 2 &lt; 3 → no suprayectiva.</p><p class="nudge">✕ Saca el rango con rango-nulidad (3 − 1) y compáralo con el codominio; revisa también la nulidad. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 

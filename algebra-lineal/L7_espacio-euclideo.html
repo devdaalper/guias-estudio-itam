@@ -150,6 +150,29 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*practica*/
+  .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
+  .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
+  .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
+  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .p-res{background:var(--green-tint);color:var(--green-deep)}
+  .p-res b{color:var(--green-deep)}
+  .p-gui{background:var(--cream);color:var(--deep)}
+  .p-gui b{color:var(--deep)}
+  .p-ex{background:var(--red-tint);color:#a01243}
+  .p-ex b{color:#a01243}
+  .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
+  .prob-q strong{font-weight:800}
+  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prob .check{background:#fff;border-color:var(--line)}
+  .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
+  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl b{color:var(--ink);font-weight:800}
+  .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
+  .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
   .sec{gap:17px}
   .idea{line-height:1.72}
@@ -251,6 +274,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ √(25 + 144) = √169 = 13, ahora es el triángulo 5-12-13.</p><p class="nudge">✕ 5<sup>2</sup> = 25 y 12<sup>2</sup> = 144; suma y saca la raíz, no te quedes en 169. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para medir flechas. El primero lo armamos juntos; en los siguientes te suelto de a poco.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Mide la flecha</strong> (6, 8): eleva al cuadrado, suma y saca raíz.</p>
+          <div class="work"><p class="wl">Elevo cada coordenada: 6<sup>2</sup> = <b>36</b> y 8<sup>2</sup> = <b>64</b>.</p><p class="wl">Sumo los cuadrados: 36 + 64 = <b>100</b>. Falta un paso.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M1P1" data-tema="norma" data-level="resuelto" data-module="1">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">La suma de cuadrados es 100. ¿Cuánto vale ‖(6, 8)‖?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">10</button>
+              <button class="opt" data-ok="0">100</button>
+              <button class="opt" data-ok="0">14</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ √100 = 10: el triángulo 6-8-10. La suma de cuadrados es el largo al cuadrado, no el largo.</p><p class="nudge">✕ Todavía falta la raíz: 100 es ‖v‖<sup>2</sup>, no la norma. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M1P2" data-tema="norma" data-level="guiado" data-module="1">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Cambia los números.</strong> ¿Cuánto vale ‖(8, 15)‖?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">17</button>
+              <button class="opt" data-ok="0">23</button>
+              <button class="opt" data-ok="0">289</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ √(64 + 225) = √289 = 17, el triángulo 8-15-17.</p><p class="nudge">✕ Pista: 8<sup>2</sup> = 64 y 15<sup>2</sup> = 225; suma y saca la raíz de 289, no te quedes en 289. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="norma" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Indica cuál vector es unitario, es decir cumple ‖v‖ = 1.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(3/5, 4/5)</button>
+              <button class="opt" data-ok="0">(3, 4)</button>
+              <button class="opt" data-ok="0">(1, 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (3/5)<sup>2</sup> + (4/5)<sup>2</sup> = 9/25 + 16/25 = 1, así que su norma es √1 = 1.</p><p class="nudge">✕ (3, 4) mide 5 y (1, 1) mide √2; solo uno tiene norma 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
@@ -308,6 +377,52 @@
           <button class="opt" data-ok="0">100</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Resta: (10 − 2, 9 − 3) = (8, 6); ‖(8, 6)‖ = √(64 + 36) = √100 = 10.</p><p class="nudge">✕ Primero resta los puntos, luego saca la norma de la diferencia. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para medir qué tan lejos queda un punto de otro. Del acompañado al examen: resta y mide.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Mide entre dos puntos:</strong> A = (1, 2) y B = (4, 6).</p>
+          <div class="work"><p class="wl">Resta llegada menos salida: (4 − 1, 6 − 2) = <b>(3, 4)</b>.</p><p class="wl">Mide esa flecha: √(3<sup>2</sup> + 4<sup>2</sup>) = √(9 + 16) = <b>√25</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M2P1" data-tema="distancia" data-level="resuelto" data-module="2">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Llegaste a √25. ¿Cuál es la distancia de A a B?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">5</button>
+              <button class="opt" data-ok="0">25</button>
+              <button class="opt" data-ok="0">7</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ √25 = 5. Restaste los puntos y mediste la diferencia (3, 4).</p><p class="nudge">✕ 25 es la suma de cuadrados; falta la raíz para llegar al largo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M2P2" data-tema="distancia" data-level="guiado" data-module="2">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Cambia los puntos.</strong> ¿Qué distancia hay de (1, 1) a (13, 6)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">13</button>
+              <button class="opt" data-ok="0">17</button>
+              <button class="opt" data-ok="0">169</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Resta: (13 − 1, 6 − 1) = (12, 5); ‖(12, 5)‖ = √(144 + 25) = √169 = 13.</p><p class="nudge">✕ Pista: primero la diferencia (12, 5); luego saca la norma, no sumes 12 + 5. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="distancia" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean p = (2, −1) y q = (−1, 3) en R<sup>2</sup>. Calcula d(p, q) = ‖p − q‖.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">5</button>
+              <button class="opt" data-ok="0">7</button>
+              <button class="opt" data-ok="0">25</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ p − q = (2 − (−1), −1 − 3) = (3, −4); ‖(3, −4)‖ = √(9 + 16) = √25 = 5.</p><p class="nudge">✕ Cuida los signos de la resta: da (3, −4), y su norma no es 3 + 4. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
@@ -367,6 +482,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ (5)(1) + (−2)(3) = 5 − 6 = −1. Negativo: tiran a lados opuestos.</p><p class="nudge">✕ Suma los dos productos y respeta el signo de (−2)(3). Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres productos punto, del guiado al examen. Multiplica coordenada con coordenada, suma, y cuida los signos.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Multiplica y suma:</strong> (4, −1) · (2, 5).</p>
+          <div class="work"><p class="wl">Primera con primera: (4)(2) = <b>8</b>.</p><p class="wl">Segunda con segunda: (−1)(5) = <b>−5</b>. Ahora súmalas.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M3P1" data-tema="producto_punto" data-level="resuelto" data-module="3">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Tienes 8 y −5. ¿Cuánto vale (4, −1) · (2, 5)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">3</button>
+              <button class="opt" data-ok="0">13</button>
+              <button class="opt" data-ok="0">(8, −5)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 8 + (−5) = 3. Da un número, nunca una flecha.</p><p class="nudge">✕ Suma respetando el signo: 8 − 5, no 8 + 5. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M3P2" data-tema="producto_punto" data-level="guiado" data-module="3">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Cambia los números.</strong> ¿Cuánto vale (3, 6) · (2, −1)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">0</button>
+              <button class="opt" data-ok="0">12</button>
+              <button class="opt" data-ok="0">(6, −6)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (3)(2) + (6)(−1) = 6 − 6 = 0. Ese cero anuncia una esquina perfecta.</p><p class="nudge">✕ Pista: la segunda parte es (6)(−1) = −6; súmala, no la ignores. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="producto_punto" data-level="examen" data-module="3">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Con u = (7, −3) y v = (2, 4), calcula u · v.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2</button>
+              <button class="opt" data-ok="0">26</button>
+              <button class="opt" data-ok="0">(14, −12)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (7)(2) + (−3)(4) = 14 − 12 = 2.</p><p class="nudge">✕ El segundo producto es −12; al sumar da 14 − 12, no 14 + 12. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -421,6 +582,52 @@
           <button class="opt" data-ok="0">(4, 2)</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ (2)(1) + (1)(−2) = 2 − 2 = 0: perpendiculares.</p><p class="nudge">✕ Busca la pareja cuyo producto punto con (2, 1) dé cero. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para detectar la esquina perfecta sin dibujar. Multiplica, suma, y busca el cero.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>¿Son ortogonales</strong> (5, 2) y (−2, 5)? Prueba con el producto punto.</p>
+          <div class="work"><p class="wl">Primera con primera: (5)(−2) = <b>−10</b>.</p><p class="wl">Segunda con segunda: (2)(5) = <b>10</b>. Súmalas y lee el resultado.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M4P1" data-tema="ortogonalidad" data-level="resuelto" data-module="4">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Tienes −10 y 10. ¿Cuánto da el producto punto y qué concluyes?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">0: son ortogonales</button>
+              <button class="opt" data-ok="0">20: no son ortogonales</button>
+              <button class="opt" data-ok="0">0: son paralelos</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ −10 + 10 = 0: producto punto cero es esquina perfecta, (5, 2) ⊥ (−2, 5).</p><p class="nudge">✕ El cero marca perpendicularidad, no paralelismo; y la suma es −10 + 10, no 10 + 10. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M4P2" data-tema="ortogonalidad" data-level="guiado" data-module="4">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Encuentra la perpendicular.</strong> ¿Cuál vector es ortogonal a (3, 1)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(1, −3)</button>
+              <button class="opt" data-ok="0">(3, 1)</button>
+              <button class="opt" data-ok="0">(6, 2)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (3)(1) + (1)(−3) = 3 − 3 = 0: perpendiculares.</p><p class="nudge">✕ Pista: busca la pareja cuyo producto punto con (3, 1) dé cero. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="ortogonalidad" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Halla a tal que (a, 6) ⊥ (2, −3), es decir (a, 6) · (2, −3) = 0.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">a = 9</button>
+              <button class="opt" data-ok="0">a = −9</button>
+              <button class="opt" data-ok="0">a = 4</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (a)(2) + (6)(−3) = 2a − 18 = 0, así que a = 9.</p><p class="nudge">✕ Plantea 2a − 18 = 0 y despeja; con a = −9 daría −36, no cero. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
@@ -480,6 +687,52 @@
           <button class="opt" data-ok="0">0°</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ u · v = (1)(2) + (1)(−2) = 0, así que cos θ = 0 y θ = 90°.</p><p class="nudge">✕ Calcula u · v primero; si da cero, el ángulo es 90°. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres ángulos con el coseno, del guiado al examen. Producto punto arriba, las dos normas abajo, y divide.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Halla el ángulo</strong> entre u = (3, 3) y v = (3, 0) con el coseno.</p>
+          <div class="work"><p class="wl">Producto punto: (3)(3) + (3)(0) = <b>9</b>.</p><p class="wl">Las dos normas: ‖u‖ = √18 = <b>3√2</b>, ‖v‖ = <b>3</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M5P1" data-tema="angulo" data-level="resuelto" data-module="5">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Divide: cos θ = 9 / (3√2 · 3). ¿Cuánto vale y qué ángulo es?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">cos θ = 1/√2, θ = 45°</button>
+              <button class="opt" data-ok="0">cos θ = 1, θ = 0°</button>
+              <button class="opt" data-ok="0">cos θ = 0, θ = 90°</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 9 / (9√2) = 1/√2, que corresponde a 45°.</p><p class="nudge">✕ Abajo va 3√2 · 3 = 9√2; al dividir 9 entre 9√2 queda 1/√2. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M5P2" data-tema="angulo" data-level="guiado" data-module="5">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Empieza por el producto punto.</strong> ¿Qué ángulo forman u = (2, 0) y v = (0, 5)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">90°</button>
+              <button class="opt" data-ok="0">0°</button>
+              <button class="opt" data-ok="0">45°</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ u · v = (2)(0) + (0)(5) = 0, así que cos θ = 0 y θ = 90°.</p><p class="nudge">✕ Pista: calcula u · v primero; si da cero, el ángulo es 90°. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="angulo" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Con u = (3, 0) y v = (5, 0), halla el ángulo θ entre ellos.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">0°</button>
+              <button class="opt" data-ok="0">90°</button>
+              <button class="opt" data-ok="0">45°</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ u · v = 15, ‖u‖ = 3, ‖v‖ = 5; cos θ = 15/(3 · 5) = 1, así que θ = 0°: misma dirección.</p><p class="nudge">✕ Los dos apuntan sobre el mismo eje; su coseno da 1, no 0. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
     </section>
@@ -544,6 +797,52 @@
           <button class="opt" data-ok="0">(1, 2)</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ u · v = 7 + 8 = 15, v · v = 1 + 4 = 5, factor = 3; 3 · (1, 2) = (3, 6).</p><p class="nudge">✕ Divide u · v entre v · v y escala v con ese factor. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres proyecciones en tres pasos, del acompañado al examen: dos productos punto, un factor, y escalas v.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Proyecta</strong> u = (3, 1) sobre v = (1, 1).</p>
+          <div class="work"><p class="wl">Los dos productos punto: u · v = (3)(1) + (1)(1) = <b>4</b>, v · v = (1)(1) + (1)(1) = <b>2</b>.</p><p class="wl">El factor divide arriba entre abajo: 4 / 2 = <b>2</b>. Ahora escala v.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="proyeccion" data-level="resuelto" data-module="6">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">El factor es 2 y v = (1, 1). ¿Cuál es la proyección?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(2, 2)</button>
+              <button class="opt" data-ok="0">(4, 4)</button>
+              <button class="opt" data-ok="0">(3, 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2 · (1, 1) = (2, 2). El factor escala a v, no a u.</p><p class="nudge">✕ Ya dividiste: el factor es 2, no 4; multiplícalo por v. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="proyeccion" data-level="guiado" data-module="6">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Otra sombra.</strong> Proyecta u = (5, 5) sobre v = (3, 1). ¿Cuál es la proyección?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(6, 2)</button>
+              <button class="opt" data-ok="0">(10, 10)</button>
+              <button class="opt" data-ok="0">(3, 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ u · v = 15 + 5 = 20, v · v = 9 + 1 = 10, factor = 2; 2 · (3, 1) = (6, 2).</p><p class="nudge">✕ Pista: el factor 20/10 = 2 escala a v = (3, 1), no a u. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="proyeccion" data-level="examen" data-module="6">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Con u = (1, 7) y v = (1, 1), calcula proy<sub>v</sub>(u).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(4, 4)</button>
+              <button class="opt" data-ok="0">(8, 8)</button>
+              <button class="opt" data-ok="0">(1, 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ u · v = 1 + 7 = 8, v · v = 2, factor = 4; 4 · (1, 1) = (4, 4).</p><p class="nudge">✕ Falta dividir: el factor es 8/2 = 4, no 8. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Última idea →</button></div>
     </section>
@@ -626,6 +925,52 @@
 
       <nav class="nav-lecs"><a href="L7_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L7_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para enderezar bases torcidas, del guiado al examen: la primera se queda, a la segunda le restas su sombra.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Endereza</strong> v<sub>1</sub> = (2, 0) y v<sub>2</sub> = (3, 3): toma u<sub>1</sub> = v<sub>1</sub> y quítale a v<sub>2</sub> su sombra.</p>
+          <div class="work"><p class="wl">Factor: (v<sub>2</sub> · u<sub>1</sub>) / (u<sub>1</sub> · u<sub>1</sub>) = 6 / 4 = <b>3/2</b>.</p><p class="wl">Sombra: (3/2) · (2, 0) = <b>(3, 0)</b>. Réstala a v<sub>2</sub>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="gram_schmidt" data-level="resuelto" data-module="7">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">La sombra es (3, 0). ¿Cuál es u<sub>2</sub> = v<sub>2</sub> − sombra?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(0, 3)</button>
+              <button class="opt" data-ok="0">(6, 3)</button>
+              <button class="opt" data-ok="0">(0, 6)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (3, 3) − (3, 0) = (0, 3), y (2, 0) · (0, 3) = 0: quedó ortogonal.</p><p class="nudge">✕ El paso es restar, no sumar: (3, 3) − (3, 0). Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="gram_schmidt" data-level="guiado" data-module="7">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Cambia los vectores.</strong> Con v<sub>1</sub> = (4, 0) y v<sub>2</sub> = (1, 5), toma u<sub>1</sub> = v<sub>1</sub> y halla u<sub>2</sub>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(0, 5)</button>
+              <button class="opt" data-ok="0">(5, 5)</button>
+              <button class="opt" data-ok="0">(0, 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ factor = 4/16 = 1/4, sombra = (1, 0), u<sub>2</sub> = (1, 5) − (1, 0) = (0, 5).</p><p class="nudge">✕ Pista: la sombra es (1/4) · (4, 0) = (1, 0); réstala a v<sub>2</sub>. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="gram_schmidt" data-level="examen" data-module="7">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Aplica Gram-Schmidt a v<sub>1</sub> = (1, 0) y v<sub>2</sub> = (6, 2): con u<sub>1</sub> = v<sub>1</sub>, da u<sub>2</sub> ortogonal a u<sub>1</sub>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(0, 2)</button>
+              <button class="opt" data-ok="0">(6, 0)</button>
+              <button class="opt" data-ok="0">(6, 2)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ factor = 6/1 = 6, sombra = (6, 0), u<sub>2</sub> = (6, 2) − (6, 0) = (0, 2).</p><p class="nudge">✕ (6, 0) es solo la sombra; falta restarla a v<sub>2</sub>. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="L7_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 

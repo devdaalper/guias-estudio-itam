@@ -150,6 +150,29 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*practica*/
+  .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
+  .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
+  .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
+  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .p-res{background:var(--green-tint);color:var(--green-deep)}
+  .p-res b{color:var(--green-deep)}
+  .p-gui{background:var(--cream);color:var(--deep)}
+  .p-gui b{color:var(--deep)}
+  .p-ex{background:var(--red-tint);color:#a01243}
+  .p-ex b{color:#a01243}
+  .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
+  .prob-q strong{font-weight:800}
+  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prob .check{background:#fff;border-color:var(--line)}
+  .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
+  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl b{color:var(--ink);font-weight:800}
+  .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
+  .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
   .sec{gap:17px}
   .idea{line-height:1.72}
@@ -260,6 +283,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Tamaño 4×4, y como 4 = 4, es cuadrada. Los números de adentro no importan para eso.</p><p class="nudge">✕ El tamaño se escribe renglones × columnas, y «cuadrada» solo compara esos dos números. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Localizar casillas y describir el tamaño, que es justo lo que pide el examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Sea A de 2×3</strong> con renglones (5, 8, 2) y (7, 1, 4). Localiza a<sub>23</sub>.</p>
+          <div class="work"><p class="wl">El primer subíndice es la fila; el segundo, la columna.</p><p class="wl">Vas a la fila 2, columna 3, y ahí queda <b>4</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M1P1" data-tema="lectura_matriz" data-level="resuelto" data-module="1">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Qué número guarda a<sub>23</sub>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">4</button>
+              <button class="opt" data-ok="0">2</button>
+              <button class="opt" data-ok="0">8</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Fila 2, columna 3: el 4. Fila primero, columna después.</p><p class="nudge">✕ El primer numerito es la fila; el segundo, la columna. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M1P2" data-tema="lectura_matriz" data-level="guiado" data-module="1">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Cambia los datos.</strong> B tiene renglones (8, 1), (0, 5) y (6, 2). ¿Qué número es b<sub>31</sub>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">6</button>
+              <button class="opt" data-ok="0">1</button>
+              <button class="opt" data-ok="0">2</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Fila 3, columna 1: el 6.</p><p class="nudge">✕ Pista: baja hasta la fila 3 y quédate en la columna 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="lectura_matriz" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A = (a<sub>ij</sub>) de 3×3 con a<sub>ij</sub> = 0 para todo i ≠ j, y a<sub>11</sub> = 2, a<sub>22</sub> = 5, a<sub>33</sub> = 7. ¿Cuánto vale a<sub>21</sub>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">0, porque la fila 2 y la columna 1 no coinciden</button>
+              <button class="opt" data-ok="0">5, es la segunda entrada de la diagonal</button>
+              <button class="opt" data-ok="0">No se sabe sin ver toda la tabla</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ En a<sub>21</sub> hay i = 2, j = 1: como i ≠ j, la regla la deja en 0.</p><p class="nudge">✕ La condición a<sub>ij</sub> = 0 para i ≠ j apaga toda casilla fuera de la diagonal. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
@@ -305,6 +374,52 @@
           <button class="opt" data-ok="0">Renglones (10, 2) y (0, 8)</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ El 2 entra a las cuatro casillas: 10, 4, 0 y 8.</p><p class="nudge">✕ Multiplicar por escalar no es sumar 2: es multiplicar cada casilla por 2, sin saltarse ninguna. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Suma y escalar, casilla por casilla: los cimientos de todo lo que sigue.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Calcula 3·A</strong> con A de renglones (2, 4) y (1, 0).</p>
+          <div class="work"><p class="wl">El escalar entra a cada casilla: arriba, 3·2 = <b>6</b> y 3·4 = <b>12</b>.</p><p class="wl">Abajo, 3·1 = <b>3</b> y 3·0 = <b>0</b>. Ninguna se salva.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M2P1" data-tema="suma_escalar" data-level="resuelto" data-module="2">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto vale la casilla de la fila 2, columna 1 de 3·A?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">3</button>
+              <button class="opt" data-ok="0">4</button>
+              <button class="opt" data-ok="0">1</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 3·1 = 3: el escalar multiplica, no suma.</p><p class="nudge">✕ Multiplica esa casilla por 3; no le sumes 3. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M2P2" data-tema="suma_escalar" data-level="guiado" data-module="2">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Suma gemelas.</strong> Con A = renglones (4, 1), (2, 5) y B = renglones (3, 0), (1, 2), ¿cuánto vale A + B en la fila 2, columna 2?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">7</button>
+              <button class="opt" data-ok="0">3</button>
+              <button class="opt" data-ok="0">10</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 5 + 2 = 7: cada casilla con su gemela.</p><p class="nudge">✕ Pista: suma solo la fila 2, columna 2 de cada tabla. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="suma_escalar" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean A = renglones (1, 3), (0, 2) y B = renglones (1, 4), (2, 0). Para C = 2A − B, halla c<sub>11</sub>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">1</button>
+              <button class="opt" data-ok="0">3</button>
+              <button class="opt" data-ok="0">0</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ c<sub>11</sub> = 2·1 − 1 = 1: escalas y luego restas gemelas.</p><p class="nudge">✕ Aplica el 2 a a<sub>11</sub> y luego resta b<sub>11</sub>: 2·1 − 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
@@ -357,6 +472,52 @@
           <button class="opt" data-ok="0">3 + 1 = 4</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Cada número con su pareja de la misma posición: 6 + 5 = 11.</p><p class="nudge">✕ El primero va con el primero y el segundo con el segundo; no cruces parejas ni olvides multiplicar. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">La cuenta de la caja, renglón contra columna, ahora con puros números.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Multiplica A·B</strong> con A = renglones (2, 1), (0, 5) y B = renglones (4, 1), (3, 5).</p>
+          <div class="work"><p class="wl">Casilla de arriba a la izquierda: renglón 1 de A, (2, 1), contra columna 1 de B, (4, 3).</p><p class="wl">En pares y sumando: 2·4 = <b>8</b>, 1·3 = <b>3</b>, total <b>11</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M3P1" data-tema="producto_matrices" data-level="resuelto" data-module="3">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto vale esa casilla de arriba a la izquierda?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">11</button>
+              <button class="opt" data-ok="0">10</button>
+              <button class="opt" data-ok="0">8</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2·4 + 1·3 = 8 + 3 = 11.</p><p class="nudge">✕ Empareja (2, 1) con la columna (4, 3), en pares, y suma. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M3P2" data-tema="producto_matrices" data-level="guiado" data-module="3">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Otra casilla.</strong> Emparejas el renglón (3, 2) con la columna (1, 5). ¿Cuánto vale?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">13</button>
+              <button class="opt" data-ok="0">17</button>
+              <button class="opt" data-ok="0">5</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 3·1 + 2·5 = 3 + 10 = 13.</p><p class="nudge">✕ Pista: primero con primero, segundo con segundo, sin cruzar. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="producto_matrices" data-level="examen" data-module="3">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean A = renglones (1, 2), (3, 0) y B = renglones (4, 1), (2, 5). Calcula la entrada (A·B)<sub>11</sub>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">8</button>
+              <button class="opt" data-ok="0">6</button>
+              <button class="opt" data-ok="0">10</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Renglón 1 (1, 2) por columna 1 (4, 2): 1·4 + 2·2 = 8.</p><p class="nudge">✕ Baja por la columna 1 de B, (4, 2); no leas su renglón. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
@@ -417,6 +578,52 @@
           <button class="opt" data-ok="0">Sí, y el resultado mide 2×2</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Medios iguales (2 = 2): existe. Extremos 4 y 5: tamaño 4×5.</p><p class="nudge">✕ Escribe 4×2 por 2×5 y compara solo los números de en medio; los extremos dan el tamaño. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Decidir si el producto existe, qué tamaño deja y por qué el orden no se voltea.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>¿Existe</strong> el producto de una 3×2 por una 2×4? Si sí, ¿de qué tamaño?</p>
+          <div class="work"><p class="wl">Escribe los tamaños seguidos: 3×2 por 2×4. Los de en medio, 2 y 2, coinciden: <b>sí existe</b>.</p><p class="wl">Los de los extremos, 3 y 4, dan el tamaño.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M4P1" data-tema="propiedades_producto" data-level="resuelto" data-module="4">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto mide el producto?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">3×4</button>
+              <button class="opt" data-ok="0">2×2</button>
+              <button class="opt" data-ok="0">4×3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Medios iguales (2 = 2): existe. Extremos 3 y 4: mide 3×4.</p><p class="nudge">✕ Los extremos dan el tamaño, en su orden: primero el 3, luego el 4. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M4P2" data-tema="propiedades_producto" data-level="guiado" data-module="4">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Decide.</strong> ¿Puedes multiplicar una de 5×3 por una de 2×6, en ese orden?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">No: los de en medio (3 y 2) no coinciden</button>
+              <button class="opt" data-ok="0">Sí, y mide 5×6</button>
+              <button class="opt" data-ok="0">Sí, y mide 3×2</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ En medio quedan 3 y 2: distintos, así que el producto no existe.</p><p class="nudge">✕ Pista: compara solo los dos números de en medio. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="propiedades_producto" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean A, B, C matrices de n×n. ¿Cuál igualdad NO se cumple en general?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">A·B = B·A</button>
+              <button class="opt" data-ok="0">(A·B)·C = A·(B·C)</button>
+              <button class="opt" data-ok="0">A·(B + C) = A·B + A·C</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El producto no es conmutativo: A·B = B·A falla en general. Las otras dos sí valen.</p><p class="nudge">✕ Asociar y repartir sobre la suma siempre valen; lo que falla es voltear el orden. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
@@ -488,6 +695,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ El renglón (7, 0) quedó de pie como primera columna, y el (2, 5) como segunda.</p><p class="nudge">✕ Pon cada renglón de pie: el primero pasa a ser la columna 1 y el segundo la columna 2. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Voltear la tabla y, la trampa de examen, voltear el orden al transponer un producto.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Transpón</strong> A = renglones (2, 5, 1) y (0, 3, 4).</p>
+          <div class="work"><p class="wl">Cada renglón se pone de pie como columna, en el mismo orden.</p><p class="wl">Renglón 1 (2, 5, 1) → columna 1. Renglón 2 (0, 3, 4) → columna 2. A<sup>T</sup> mide 3×2.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M5P1" data-tema="transpuesta" data-level="resuelto" data-module="5">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuál es la primera columna de A<sup>T</sup>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(2, 5, 1)</button>
+              <button class="opt" data-ok="0">(0, 3, 4)</button>
+              <button class="opt" data-ok="0">(2, 0)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El renglón 1 completo, (2, 5, 1), se para como columna 1.</p><p class="nudge">✕ Toma el renglón 1 de A y escríbelo de arriba abajo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M5P2" data-tema="transpuesta" data-level="guiado" data-module="5">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Voltea.</strong> C = renglones (6, 1), (3, 8). ¿Cuál es C<sup>T</sup>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Renglones (6, 3), (1, 8)</button>
+              <button class="opt" data-ok="0">Renglones (6, 1), (3, 8)</button>
+              <button class="opt" data-ok="0">Renglones (8, 3), (1, 6)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La casilla (1, 2) y la (2, 1) se intercambian: el 1 y el 3 cambian de lugar.</p><p class="nudge">✕ Pista: la diagonal (6 y 8) no se mueve; solo se cruzan el 1 y el 3. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="transpuesta" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean A, B matrices de n×n. ¿A qué es igual (A·B)<sup>T</sup>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">B<sup>T</sup>·A<sup>T</sup></button>
+              <button class="opt" data-ok="0">A<sup>T</sup>·B<sup>T</sup></button>
+              <button class="opt" data-ok="0">A·B</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Transponer un producto voltea el orden: primero B<sup>T</sup>, después A<sup>T</sup>.</p><p class="nudge">✕ Como los calcetines y zapatos: para deshacer, empiezas por lo último. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
     </section>
 
@@ -548,6 +801,52 @@
           <button class="opt" data-ok="0">El producto de dos invertibles puede no tener inversa</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Como con la transpuesta: para deshacer la secuencia, se deshace primero lo último.</p><p class="nudge">✕ Piensa en calcetines y zapatos: ¿qué te quitas primero para deshacer el proceso? Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">La tabla que deshace, cómo comprobarla y cuándo una matriz no se puede deshacer.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Comprueba</strong> que B = renglones (3, −2), (−1, 1) deshace a A = renglones (1, 2), (1, 3).</p>
+          <div class="work"><p class="wl">La prueba es A·B = I. Casilla de arriba a la izquierda: renglón (1, 2) por columna (3, −1).</p><p class="wl">En pares: 1·3 = <b>3</b>, 2·(−1) = <b>−2</b>, suma <b>1</b>: la esquina de I.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="inversa_concepto" data-level="resuelto" data-module="6">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto da 1·3 + 2·(−1)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">1</button>
+              <button class="opt" data-ok="0">5</button>
+              <button class="opt" data-ok="0">−1</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 3 + (−2) = 1: justo el 1 de la esquina de la identidad.</p><p class="nudge">✕ Cuida el signo: 2·(−1) es −2, no +2. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="inversa_concepto" data-level="guiado" data-module="6">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>¿Tiene inversa?</strong> M = renglones (1, 3), (2, 6).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">No: (2, 6) es 2 veces (1, 3), así que es singular</button>
+              <button class="opt" data-ok="0">Sí: toda matriz cuadrada tiene inversa</button>
+              <button class="opt" data-ok="0">No se sabe sin calcular la inversa</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Un renglón es múltiplo del otro: al reducir aparece un renglón de ceros. Es singular.</p><p class="nudge">✕ Pista: ¿es un renglón un múltiplo exacto del otro? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="inversa_concepto" data-level="examen" data-module="6">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean A, B no singulares. ¿A qué es igual (A·B)<sup>−1</sup>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">B<sup>−1</sup>·A<sup>−1</sup></button>
+              <button class="opt" data-ok="0">A<sup>−1</sup>·B<sup>−1</sup></button>
+              <button class="opt" data-ok="0">A·B nunca es invertible</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Deshacer un producto voltea el orden: primero B<sup>−1</sup>, después A<sup>−1</sup>.</p><p class="nudge">✕ Igual que la transpuesta de un producto: el orden se invierte. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
@@ -614,6 +913,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Cuando la izquierda es la identidad, la derecha ya es la inversa: solo se lee.</p><p class="nudge">✕ El método termina cuando la izquierda llega a la identidad; la respuesta espera del otro lado de la barra. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Encontrar la inversa reduciendo [A | I]: lo que de verdad cae en el examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Invierte</strong> A = renglones (1, 4), (3, 13) por Gauss-Jordan.</p>
+          <div class="work"><p class="wl">Pego la identidad: [A | I] = (1, 4 | 1, 0) y (3, 13 | 0, 1).</p><p class="wl">R2 → R2 − 3·R1 da (0, 1 | −3, 1). Luego R1 → R1 − 4·R2 da (1, 0 | 13, −4).</p></div>
+          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="inversa_gauss_jordan" data-level="resuelto" data-module="7">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">La izquierda ya es la identidad. ¿Cuál es A<sup>−1</sup>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Renglones (13, −4), (−3, 1)</button>
+              <button class="opt" data-ok="0">Renglones (1, 0), (0, 1)</button>
+              <button class="opt" data-ok="0">Renglones (1, 4), (3, 13)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cuando la izquierda es I, la inversa es lo que quedó a la derecha: (13, −4), (−3, 1).</p><p class="nudge">✕ La respuesta espera del otro lado de la barra, no en la identidad. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="inversa_gauss_jordan" data-level="guiado" data-module="7">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Elige el paso.</strong> En [A | I] con A = renglones (1, 5), (2, 11), ¿qué operación hace cero el 2 de abajo a la izquierda?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">R2 → R2 − 2·R1</button>
+              <button class="opt" data-ok="0">R2 → R2 + 2·R1</button>
+              <button class="opt" data-ok="0">R1 → R1 − 2·R2</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Arriba hay un 1: restar 2 veces esa fila deja 2 − 2·1 = 0.</p><p class="nudge">✕ Pista: el pivote de arriba vale 1; ¿qué múltiplo cancela el 2? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="inversa_gauss_jordan" data-level="examen" data-module="7">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Halla A<sup>−1</sup> para A = renglones (1, 2), (1, 3).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Renglones (3, −2), (−1, 1)</button>
+              <button class="opt" data-ok="0">Renglones (3, 2), (1, 1)</button>
+              <button class="opt" data-ok="0">Renglones (1, 2), (1, 3)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ A<sup>−1</sup> = (3, −2), (−1, 1). Compruébalo: A·A<sup>−1</sup> da la identidad.</p><p class="nudge">✕ En 2×2 no basta reacomodar: los términos fuera de la diagonal cambian de signo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Última idea →</button></div>
     </section>
 
@@ -670,6 +1015,52 @@
 
       <nav class="nav-lecs"><a href="L4_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L4_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Cada operación de renglón, embotellada en su propia matriz elemental.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Embotella</strong> la operación R2 → R2 − 4·R1 en una matriz elemental de 2×2.</p>
+          <div class="work"><p class="wl">Parte de I = (1, 0), (0, 1) y aplica la operación solo al renglón 2.</p><p class="wl">R2 − 4·R1: (0, 1) − 4·(1, 0) = (<b>−4</b>, <b>1</b>). El renglón 1 no se toca.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M8P1" data-tema="matriz_elemental" data-level="resuelto" data-module="8">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuál es la matriz elemental E?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Renglones (1, 0), (−4, 1)</button>
+              <button class="opt" data-ok="0">Renglones (1, −4), (0, 1)</button>
+              <button class="opt" data-ok="0">Renglones (−4, 0), (0, 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ E = (1, 0), (−4, 1): la jugada quedó grabada en el renglón 2.</p><p class="nudge">✕ La operación toca el renglón 2, no el 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M8P2" data-tema="matriz_elemental" data-level="guiado" data-module="8">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Embotella otra.</strong> ¿Cuál es la matriz elemental de R1 → R1 + 3·R2, en 2×2?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Renglones (1, 3), (0, 1)</button>
+              <button class="opt" data-ok="0">Renglones (1, 0), (3, 1)</button>
+              <button class="opt" data-ok="0">Renglones (3, 0), (0, 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ A (1, 0) le sumas 3 veces (0, 1): queda (1, 3). El renglón 2 no cambia.</p><p class="nudge">✕ Pista: la operación toca el renglón 1; parte de la identidad. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="matriz_elemental" data-level="examen" data-module="8">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>La matriz elemental E = renglones (1, 0), (−5, 1) ejecuta R2 → R2 − 5·R1. ¿Cuál es E<sup>−1</sup>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Renglones (1, 0), (5, 1)</button>
+              <button class="opt" data-ok="0">Renglones (1, 0), (−5, 1)</button>
+              <button class="opt" data-ok="0">Renglones (−1, 0), (0, −1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ E<sup>−1</sup> deshace la jugada: si restaste 5 veces, ahora sumas. Da (1, 0), (5, 1).</p><p class="nudge">✕ La inversa de una elemental deshace su operación: R2 → R2 + 5·R1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 

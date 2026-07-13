@@ -150,6 +150,29 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*practica*/
+  .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
+  .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
+  .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
+  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .p-res{background:var(--green-tint);color:var(--green-deep)}
+  .p-res b{color:var(--green-deep)}
+  .p-gui{background:var(--cream);color:var(--deep)}
+  .p-gui b{color:var(--deep)}
+  .p-ex{background:var(--red-tint);color:#a01243}
+  .p-ex b{color:#a01243}
+  .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
+  .prob-q strong{font-weight:800}
+  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prob .check{background:#fff;border-color:var(--line)}
+  .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
+  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl b{color:var(--ink);font-weight:800}
+  .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
+  .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
   .sec{gap:17px}
   .idea{line-height:1.72}
@@ -257,6 +280,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Pones n = 4: 2·4 − 1 = 8 − 1 = 7.</p><p class="nudge">✕ Sustituye n = 4 en 2n − 1 y haz la resta al final. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para leer el término que vive en un lugar de la fila. El primero lo armamos juntos; en los siguientes te suelto de a poco.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Abre sobres.</strong> Con la regla a<sub>n</sub> = 2n + 3, ¿qué trae el sobre 3?</p>
+          <div class="work"><p class="wl">Sustituyes el lugar en la regla: sobre 1 da 2·1 + 3 = <b>5</b>.</p><p class="wl">Sobre 2 da 2·2 + 3 = <b>7</b>. Solo falta poner n = 3.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M1P1" data-tema="sucesion" data-level="resuelto" data-module="1">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Pones n = 3 en 2n + 3. ¿Cuánto vale a<sub>3</sub>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">9</button>
+              <button class="opt" data-ok="0">8</button>
+              <button class="opt" data-ok="0">11</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Pones n = 3: 2·3 + 3 = 6 + 3 = 9.</p><p class="nudge">✕ Multiplica primero 2·3 y luego suma el 3. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M1P2" data-tema="sucesion" data-level="guiado" data-module="1">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Otra regla.</strong> Con a<sub>n</sub> = n ⁄ (2n − 1), ¿qué trae el sobre 3?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">3 ⁄ 5</button>
+              <button class="opt" data-ok="0">½</button>
+              <button class="opt" data-ok="0">1 ⁄ 5</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Pones n = 3: arriba 3, abajo 2·3 − 1 = 5. El término es 3 ⁄ 5.</p><p class="nudge">✕ Pista: sustituye n = 3; el denominador es 2n − 1, no 2n. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="sucesion" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea (a<sub>n</sub>) con a<sub>n</sub> = (n + 1) ⁄ n<sup>2</sup>. Calcula a<sub>3</sub>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">4 ⁄ 9</button>
+              <button class="opt" data-ok="0">2 ⁄ 3</button>
+              <button class="opt" data-ok="0">4 ⁄ 3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Pones n = 3: arriba 3 + 1 = 4, abajo 3<sup>2</sup> = 9. Da 4 ⁄ 9.</p><p class="nudge">✕ Eleva al cuadrado el denominador: 3<sup>2</sup> = 9, no 3·2. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
@@ -314,6 +383,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Grados iguales: el límite es 3 ⁄ 6 = ½. El + 2 y el − 1 son migajas.</p><p class="nudge">✕ Toma solo los coeficientes de n: 3 arriba, 6 abajo. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres límites de sucesiones sin tabular sobres. Recuerda: en un cociente de polinomios mandan los términos de mayor grado.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Lee el rumbo.</strong> ¿A qué número tiende a<sub>n</sub> = (5n − 2) ⁄ (2n + 7)?</p>
+          <div class="work"><p class="wl">Arriba y abajo el grado es <b>1</b>: manda el cociente de coeficientes de n.</p><p class="wl">El −2 y el +7 son migajas frente a los términos con n.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M2P1" data-tema="limite_sucesion" data-level="resuelto" data-module="2">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Tomas solo 5n ⁄ 2n. ¿Cuál es el límite?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">5 ⁄ 2</button>
+              <button class="opt" data-ok="0">0</button>
+              <button class="opt" data-ok="0">Infinito</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Grados iguales: 5n ⁄ 2n = 5 ⁄ 2. Las migajas no cuentan.</p><p class="nudge">✕ Con grados iguales, el límite es el cociente de coeficientes de n. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M2P2" data-tema="limite_sucesion" data-level="guiado" data-module="2">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Ojo con los grados.</strong> ¿Hacia qué valor tiende a<sub>n</sub> = (3n + 4) ⁄ (n<sup>2</sup> + 1)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">A 0</button>
+              <button class="opt" data-ok="0">A 3</button>
+              <button class="opt" data-ok="0">A infinito</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Abajo el grado es 2 y arriba 1: el denominador se dispara y la fracción se aplasta a 0.</p><p class="nudge">✕ Pista: el grado de abajo (2) supera al de arriba (1). ¿Quién gana la carrera? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="limite_sucesion" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Calcula lím<sub>n→∞</sub> (4n<sup>2</sup> − 1) ⁄ (2n<sup>2</sup> + n).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2</button>
+              <button class="opt" data-ok="0">0</button>
+              <button class="opt" data-ok="0">Infinito</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Grados iguales (2 y 2): manda 4n<sup>2</sup> ⁄ 2n<sup>2</sup> = 2.</p><p class="nudge">✕ Toma los términos de mayor grado, los de n<sup>2</sup>: 4 arriba, 2 abajo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
 
@@ -369,6 +484,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ S<sub>2</sub> suma los dos primeros: ½ + ¼ = ¾.</p><p class="nudge">✕ La suma parcial S<sub>2</sub> junta solo el primer y el segundo término. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas de sumas parciales: el marcador tras vaciar unos cuantos sobres, no el total final.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Lee el marcador.</strong> Con los términos 1, ½, ¼, ⅛…, calcula la suma parcial S<sub>3</sub>.</p>
+          <div class="work"><p class="wl">S<sub>3</sub> junta los tres primeros: 1 + ½ + ¼.</p><p class="wl">Vas por pasos: 1 + ½ = <b>3 ⁄ 2</b>. Solo falta sumar ¼.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M3P1" data-tema="serie_sumas_parciales" data-level="resuelto" data-module="3">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Ya llevas 3 ⁄ 2. ¿Cuánto vale 3 ⁄ 2 + ¼?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">7 ⁄ 4</button>
+              <button class="opt" data-ok="0">⅞</button>
+              <button class="opt" data-ok="0">2</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 3 ⁄ 2 = 6 ⁄ 4, y 6 ⁄ 4 + 1 ⁄ 4 = 7 ⁄ 4.</p><p class="nudge">✕ Escribe 3 ⁄ 2 como 6 ⁄ 4 y suma cuartos con cuartos. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M3P2" data-tema="serie_sumas_parciales" data-level="guiado" data-module="3">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Con signos.</strong> Con los términos 3, −1, 4…, ¿cuánto vale la suma parcial S<sub>2</sub>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2</button>
+              <button class="opt" data-ok="0">4</button>
+              <button class="opt" data-ok="0">3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ S<sub>2</sub> junta solo los dos primeros: 3 + (−1) = 2.</p><p class="nudge">✕ Pista: S<sub>2</sub> suma el primer y el segundo término; no metas el tercero. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="serie_sumas_parciales" data-level="examen" data-module="3">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea S<sub>n</sub> la suma parcial de ∑ a<sub>n</sub> con a<sub>n</sub> = 1 ⁄ 2<sup>n</sup>. Se tiene S<sub>1</sub> = ½, S<sub>2</sub> = ¾, S<sub>3</sub> = ⅞. ¿A qué valor tiende S<sub>n</sub>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">A 1</button>
+              <button class="opt" data-ok="0">A infinito</button>
+              <button class="opt" data-ok="0">A ½</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Las sumas ½, ¾, ⅞… se acercan a 1 sin tocarlo: la serie converge a 1.</p><p class="nudge">✕ Mira a qué número se arriman ½, ¾, ⅞…: cada vez les falta la mitad. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -418,6 +579,52 @@
           <button class="opt" data-ok="0">Diverge: no tiene suma finita</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Como | ½ | &lt; 1 converge. Suma = 2 ⁄ (1 − ½) = 2 ⁄ ½ = 4.</p><p class="nudge">✕ El denominador es 1 − r = ½; dividir 2 entre ½ es multiplicar por 2. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres geométricas. El método: identificar a y r, verificar | r | &lt; 1 y aplicar a ⁄ (1 − r).</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Cierra la suma.</strong> Una geométrica tiene primer término a = 4 y razón r = ⅓. ¿Cuánto suma?</p>
+          <div class="work"><p class="wl">Verificas | ⅓ | &lt; 1: converge. Aplicas a ⁄ (1 − r).</p><p class="wl">El denominador es 1 − ⅓ = <b>2 ⁄ 3</b>. Falta dividir 4 entre 2 ⁄ 3.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M4P1" data-tema="serie_geometrica" data-level="resuelto" data-module="4">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto vale 4 ⁄ (2 ⁄ 3)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">6</button>
+              <button class="opt" data-ok="0">4 ⁄ 3</button>
+              <button class="opt" data-ok="0">12</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Dividir 4 entre 2 ⁄ 3 es multiplicar 4 por 3 ⁄ 2: 4 · 3 ⁄ 2 = 6.</p><p class="nudge">✕ Para dividir entre 2 ⁄ 3, multiplica por su recíproco 3 ⁄ 2. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M4P2" data-tema="serie_geometrica" data-level="guiado" data-module="4">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Cuidado con la razón.</strong> ¿Qué pasa con la geométrica de primer término 5 y razón 4 ⁄ 3?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Diverge: no cumple | r | &lt; 1</button>
+              <button class="opt" data-ok="0">Suma 5 ⁄ (1 − 4 ⁄ 3) = −15</button>
+              <button class="opt" data-ok="0">Suma 5, como toda geométrica</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Como r = 4 ⁄ 3 &gt; 1 los términos crecen: la serie diverge y no hay suma finita.</p><p class="nudge">✕ Pista: la fórmula a ⁄ (1 − r) solo sirve si | r | &lt; 1. ¿Lo cumple 4 ⁄ 3? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="serie_geometrica" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Calcula ∑<sub>n=0</sub><sup>∞</sup> (2 ⁄ 5)<sup>n</sup>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">5 ⁄ 3</button>
+              <button class="opt" data-ok="0">3 ⁄ 5</button>
+              <button class="opt" data-ok="0">2 ⁄ 5</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Es geométrica con a = 1 y r = 2 ⁄ 5. Suma = 1 ⁄ (1 − 2 ⁄ 5) = 1 ⁄ (3 ⁄ 5) = 5 ⁄ 3.</p><p class="nudge">✕ Empieza en n = 0, así que a = 1; el denominador es 1 − 2 ⁄ 5 = 3 ⁄ 5. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
@@ -473,6 +680,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ 3n ⁄ (n + 2) → 3 (grados iguales), y 3 no es 0: diverge.</p><p class="nudge">✕ Primero calcula el límite del término. Si no es 0, la serie no tiene opción. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres usos del filtro de un segundo. Recuerda la dirección: si a<sub>n</sub> no tiende a 0, diverge; si tiende a 0, el filtro no decide.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Aplica el filtro.</strong> ¿Qué dice el criterio del término n-ésimo sobre ∑ (2n + 3) ⁄ (n + 1)?</p>
+          <div class="work"><p class="wl">Primero, el límite del término: grados iguales, manda 2n ⁄ n = <b>2</b>.</p><p class="wl">El término tiende a 2, y 2 no es 0.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M5P1" data-tema="termino_nesimo" data-level="resuelto" data-module="5">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">El término tiende a 2, no a 0. ¿Qué concluyes?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Diverge</button>
+              <button class="opt" data-ok="0">Converge a 2</button>
+              <button class="opt" data-ok="0">El filtro no decide</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Si a<sub>n</sub> no tiende a 0, la serie diverge de inmediato. El 2 es el límite del término, no una suma.</p><p class="nudge">✕ El límite del término no es 0, así que la serie no tiene opción de estabilizarse. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M5P2" data-tema="termino_nesimo" data-level="guiado" data-module="5">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Otro término.</strong> ¿Qué dice el filtro sobre ∑ n ⁄ (2n + 1)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Diverge: el término tiende a ½, no a 0</button>
+              <button class="opt" data-ok="0">Converge a ½</button>
+              <button class="opt" data-ok="0">El filtro no decide nada aquí</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ n ⁄ (2n + 1) → ½ (grados iguales), y ½ no es 0: diverge.</p><p class="nudge">✕ Pista: calcula primero el límite del término, n ⁄ 2n. ¿Es 0? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="termino_nesimo" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Aplica el criterio del término n-ésimo a ∑ 1 ⁄ n. ¿Qué concluyes?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Nada: como el término tiende a 0, el criterio no decide</button>
+              <button class="opt" data-ok="0">Converge, porque el término tiende a 0</button>
+              <button class="opt" data-ok="0">Diverge, porque el término tiende a 0</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El filtro solo concluye divergencia cuando el término no tiende a 0. Aquí 1 ⁄ n → 0, así que no decide (hace falta otro criterio).</p><p class="nudge">✕ Este criterio nunca prueba convergencia; con límite 0 se queda mudo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
     </section>
 
@@ -512,6 +765,52 @@
           <button class="opt" data-ok="0">No decide: el límite es 1</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ 2 ⁄ (n + 1) → 0 cuando n crece. Como L = 0 &lt; 1, converge.</p><p class="nudge">✕ El denominador n + 1 se dispara mientras el 2 queda fijo: la fracción tiende a 0. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres veces el criterio de la razón: arma y simplifica a<sub>n+1</sub> ⁄ a<sub>n</sub>, tómale el límite L y decide (L &lt; 1 converge, L &gt; 1 diverge).</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Con potencia.</strong> Aplica el criterio de la razón a a<sub>n</sub> = n ⁄ 3<sup>n</sup>.</p>
+          <div class="work"><p class="wl">Armas a<sub>n+1</sub> ⁄ a<sub>n</sub> y cancelas 3<sup>n</sup> ⁄ 3<sup>n+1</sup> = <b>⅓</b>.</p><p class="wl">Queda (n + 1) ⁄ (3n). Falta tomarle el límite.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="criterio_razon" data-level="resuelto" data-module="6">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Toma el límite de (n + 1) ⁄ (3n). ¿Cuánto da L y qué concluyes?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">L = ⅓ &lt; 1: converge</button>
+              <button class="opt" data-ok="0">L = 3 &gt; 1: diverge</button>
+              <button class="opt" data-ok="0">L = 1: no decide</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Por los términos de mayor grado, (n + 1) ⁄ (3n) → n ⁄ 3n = ⅓. Como ⅓ &lt; 1, converge.</p><p class="nudge">✕ Toma solo los términos de mayor grado: n ⁄ 3n. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="criterio_razon" data-level="guiado" data-module="6">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Con factorial.</strong> Para a<sub>n</sub> = 3<sup>n</sup> ⁄ n! el cociente a<sub>n+1</sub> ⁄ a<sub>n</sub> = 3 ⁄ (n + 1). ¿Qué hace la serie?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Converge: el límite es 0, y 0 &lt; 1</button>
+              <button class="opt" data-ok="0">Diverge: el límite es 3, y 3 &gt; 1</button>
+              <button class="opt" data-ok="0">No decide: el límite es 1</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 3 ⁄ (n + 1) → 0 cuando n crece. Como L = 0 &lt; 1, converge.</p><p class="nudge">✕ Pista: el denominador n + 1 se dispara y el 3 queda fijo. ¿A qué tiende la fracción? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="criterio_razon" data-level="examen" data-module="6">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Aplica el criterio de la razón a ∑ n! ⁄ 2<sup>n</sup>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Diverge: L tiende a infinito, mayor que 1</button>
+              <button class="opt" data-ok="0">Converge: L = ½ &lt; 1</button>
+              <button class="opt" data-ok="0">No decide: L = 1</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ a<sub>n+1</sub> ⁄ a<sub>n</sub> = (n + 1)! ⁄ n! · 2<sup>n</sup> ⁄ 2<sup>n+1</sup> = (n + 1) ⁄ 2 → ∞. Como L &gt; 1, diverge.</p><p class="nudge">✕ (n + 1)! ⁄ n! = n + 1 crece sin freno; el ½ de las potencias no lo frena. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
@@ -566,6 +865,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ n<sup>2</sup> + 3 &gt; n<sup>2</sup>, así que cada término es menor que 1 ⁄ n<sup>2</sup>. Bajo una que converge, converge.</p><p class="nudge">✕ Si quedas por debajo de una serie que converge, tú también convergen. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres comparaciones con p-series. Recuerda: ∑ 1 ⁄ n<sup>p</sup> converge si p &gt; 1 y diverge si p ≤ 1.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Atrapa por arriba.</strong> Decide ∑ 1 ⁄ (n<sup>3</sup> + 2), de términos positivos.</p>
+          <div class="work"><p class="wl">Como n<sup>3</sup> + 2 &gt; n<sup>3</sup>, cada término cumple 1 ⁄ (n<sup>3</sup> + 2) &lt; <b>1 ⁄ n<sup>3</sup></b>.</p><p class="wl">La referencia ∑ 1 ⁄ n<sup>3</sup> es una p-serie con p = 3.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="comparacion" data-level="resuelto" data-module="7">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">∑ 1 ⁄ n<sup>3</sup> tiene p = 3 &gt; 1, así que converge. ¿Qué concluyes de tu serie?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Converge: queda atrapada bajo una que converge</button>
+              <button class="opt" data-ok="0">Diverge: tiene infinitos términos</button>
+              <button class="opt" data-ok="0">No se puede decidir por comparación</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada término es menor que 1 ⁄ n<sup>3</sup>, y esa p-serie (p = 3) converge: tu serie converge.</p><p class="nudge">✕ Si quedas por debajo de una que converge, tú también convergen. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="comparacion" data-level="guiado" data-module="7">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Atrapa por abajo.</strong> Cada término de ∑ 1 ⁄ (2n − 1) es mayor que 1 ⁄ (2n), y ∑ 1 ⁄ (2n) diverge. ¿Qué concluyes?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Diverge: queda por encima de una que diverge</button>
+              <button class="opt" data-ok="0">Converge: se parece a ∑ 1 ⁄ n<sup>2</sup></button>
+              <button class="opt" data-ok="0">Converge: sus términos tienden a 0</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∑ 1 ⁄ (2n) es la armónica por ½: diverge. Tu serie es mayor término a término, así que también diverge.</p><p class="nudge">✕ Pista: si estás por encima de una que diverge, no hay techo que te frene. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="comparacion" data-level="examen" data-module="7">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Decide la convergencia de ∑ 1 ⁄ √n.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Diverge: es p-serie con p = ½ ≤ 1</button>
+              <button class="opt" data-ok="0">Converge: es p-serie con p = ½</button>
+              <button class="opt" data-ok="0">Converge: sus términos tienden a 0</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ √n = n<sup>1/2</sup>, así que p = ½ ≤ 1: la p-serie diverge. Que los términos tiendan a 0 no basta.</p><p class="nudge">✕ Escribe √n como n<sup>1/2</sup> y compara p con 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Siguiente idea →</button></div>
     </section>
 
@@ -614,6 +959,52 @@
           <button class="opt" data-ok="0">Diverge, porque los signos alternan</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Al quitar signos queda 1 + ½ + ¼ + ⅛ + …, geométrica con | r | = ½ &lt; 1: converge. Es absoluta.</p><p class="nudge">✕ Vuélvela positiva: los tamaños se encogen a la mitad cada vez. ¿Esa geométrica converge? Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres series alternadas. La prueba es la misma: quita los signos y mira si esa versión positiva converge.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Quita los signos.</strong> Clasifica 1 − ¼ + ⅑ − 1⁄16 + … (tamaños 1 ⁄ n<sup>2</sup>).</p>
+          <div class="work"><p class="wl">Por Leibniz: los tamaños 1 ⁄ n<sup>2</sup> decrecen a 0, así que <b>converge</b>.</p><p class="wl">Ahora la vuelves positiva: queda ∑ 1 ⁄ n<sup>2</sup>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M8P1" data-tema="series_alternadas" data-level="resuelto" data-module="8">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">∑ 1 ⁄ n<sup>2</sup> es la p-serie con p = 2, que converge. ¿Cómo converge la alternada?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Absolutamente</button>
+              <button class="opt" data-ok="0">Condicionalmente</button>
+              <button class="opt" data-ok="0">Diverge</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Al quitar signos queda ∑ 1 ⁄ n<sup>2</sup>, que converge (p = 2): la convergencia es absoluta.</p><p class="nudge">✕ Si la versión positiva también converge, la convergencia es absoluta. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M8P2" data-tema="series_alternadas" data-level="guiado" data-module="8">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Otra alternada.</strong> Clasifica ∑ (−1)<sup>n</sup> ⁄ √n, con tamaños 1 ⁄ √n.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Condicionalmente: su versión positiva ∑ 1 ⁄ √n (p = ½) diverge</button>
+              <button class="opt" data-ok="0">Absolutamente: su versión positiva converge</button>
+              <button class="opt" data-ok="0">Diverge: los signos alternan</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 1 ⁄ √n decrece a 0 (Leibniz converge), pero ∑ 1 ⁄ √n es p-serie con p = ½: diverge. Es condicional.</p><p class="nudge">✕ Pista: quita los signos y queda ∑ 1 ⁄ √n, con p = ½. ¿Esa converge? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="series_alternadas" data-level="examen" data-module="8">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Decide ∑ (−1)<sup>n</sup> · n ⁄ (n + 1).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Diverge: sus términos no tienden a 0</button>
+              <button class="opt" data-ok="0">Converge condicionalmente por Leibniz</button>
+              <button class="opt" data-ok="0">Converge absolutamente</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ n ⁄ (n + 1) → 1, así que los términos no tienden a 0: la serie diverge. Leibniz exige tamaños que decrezcan a 0.</p><p class="nudge">✕ Que los signos alternen no basta: primero revisa si el tamaño del término tiende a 0. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn" data-next="9">Última idea →</button></div>
     </section>
@@ -686,6 +1077,52 @@
 
       <nav class="nav-lecs"><a href="C1_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C1_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres cierres de la unidad: la máquina 1 ⁄ (1 − x), un coeficiente de Taylor y el radio de convergencia.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Usa la máquina.</strong> Con 1 ⁄ (1 − x), ¿cuánto suma 1 + ½ + ¼ + ⅛ + … (o sea x = ½)?</p>
+          <div class="work"><p class="wl">Compruebas | x | &lt; 1: con x = ½ sirve.</p><p class="wl">El denominador es 1 − ½ = <b>½</b>. Falta dividir 1 entre ½.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M9P1" data-tema="serie_potencias" data-level="resuelto" data-module="9">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto vale 1 ⁄ (1 − ½)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2</button>
+              <button class="opt" data-ok="0">½</button>
+              <button class="opt" data-ok="0">1</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El denominador es 1 − ½ = ½, y 1 ⁄ ½ = 2.</p><p class="nudge">✕ Dividir 1 entre ½ es multiplicar por 2. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M9P2" data-tema="serie_potencias" data-level="guiado" data-module="9">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Coeficiente de Taylor.</strong> En la serie de e<sup>x</sup> en 0, el coeficiente de x<sup>n</sup> es 1 ⁄ n!. ¿Cuál es el término que acompaña a x<sup>3</sup>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x<sup>3</sup> ⁄ 6</button>
+              <button class="opt" data-ok="0">x<sup>3</sup> ⁄ 3</button>
+              <button class="opt" data-ok="0">x<sup>3</sup></button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 3! = 3 · 2 · 1 = 6, así que el término de x<sup>3</sup> es x<sup>3</sup> ⁄ 6.</p><p class="nudge">✕ Pista: n! con n = 3 es 3 · 2 · 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M9P3" data-tema="serie_potencias" data-level="examen" data-module="9">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>La serie de potencias ∑<sub>n=0</sub><sup>∞</sup> x<sup>n</sup> converge para | x | &lt; 1. ¿Cuál es su radio de convergencia R?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">R = 1</button>
+              <button class="opt" data-ok="0">R = 0</button>
+              <button class="opt" data-ok="0">R = ∞</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El intervalo va de −1 a 1; el radio es la distancia del centro 0 a cada extremo: R = 1.</p><p class="nudge">✕ El radio es la mitad del ancho del intervalo (−1, 1). Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="8">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 

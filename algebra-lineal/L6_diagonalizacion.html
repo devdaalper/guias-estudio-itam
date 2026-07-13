@@ -145,6 +145,29 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*practica*/
+  .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
+  .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
+  .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
+  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .p-res{background:var(--green-tint);color:var(--green-deep)}
+  .p-res b{color:var(--green-deep)}
+  .p-gui{background:var(--cream);color:var(--deep)}
+  .p-gui b{color:var(--deep)}
+  .p-ex{background:var(--red-tint);color:#a01243}
+  .p-ex b{color:#a01243}
+  .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
+  .prob-q strong{font-weight:800}
+  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prob .check{background:#fff;border-color:var(--line)}
+  .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
+  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl b{color:var(--ink);font-weight:800}
+  .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
+  .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
   .sec{gap:17px}
   .idea{line-height:1.72}
@@ -239,6 +262,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ (5, 10) = 5·(1, 2): misma dirección, estirada 5 veces. Vector propio con λ = 5.</p><p class="nudge">✕ Pregúntate por cuánto hay que multiplicar (1, 2) para llegar a (5, 10). Ese único número es λ. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para reconocer la flecha que la máquina solo estira. Del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>¿Es (2, 3) vector propio</strong> de una máquina que lo manda a (6, 9)? ¿Con qué valor propio?</p>
+          <div class="work"><p class="wl">Es propio si la salida apunta a la misma dirección: la salida es un <b>múltiplo</b> de la entrada.</p><p class="wl">Divide entrada por entrada: 6 ÷ 2 = <b>3</b> y 9 ÷ 3 = <b>3</b>. El mismo factor en las dos.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M1P1" data-tema="valor_vector_propio" data-level="resuelto" data-module="1">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">El factor es el mismo (3) en las dos entradas. ¿Es vector propio y con qué λ?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Sí, con λ = 3</button>
+              <button class="opt" data-ok="0">No, porque las dos entradas cambiaron</button>
+              <button class="opt" data-ok="0">Sí, con λ = 6</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (6, 9) = 3·(2, 3): misma dirección, estirada 3 veces. Vector propio con λ = 3.</p><p class="nudge">✕ Un múltiplo del vector sigue siendo vector propio; el factor común es λ. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M1P2" data-tema="valor_vector_propio" data-level="guiado" data-module="1">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Una máquina manda (2, 5) a (10, 25).</strong> ¿Es vector propio y con qué valor propio?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Sí, con λ = 5, porque (10, 25) = 5·(2, 5)</button>
+              <button class="opt" data-ok="0">No, porque los dos números crecieron</button>
+              <button class="opt" data-ok="0">Sí, con λ = 2, por la primera entrada</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 10 ÷ 2 = 5 y 25 ÷ 5 = 5: mismo factor. Vector propio con λ = 5.</p><p class="nudge">✕ Pista: ¿por cuánto multiplicas (2, 5) para llegar a (10, 25)? Ese único número es λ. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="valor_vector_propio" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A con A·x = λ·x, x ≠ 0. Si A·(3, 1) = (−6, −2), ¿cuál es el valor propio λ?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">λ = −2, porque (−6, −2) = −2·(3, 1)</button>
+              <button class="opt" data-ok="0">λ = −6, la primera entrada de la salida</button>
+              <button class="opt" data-ok="0">No es vector propio: la salida es negativa</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (−6, −2) = −2·(3, 1): el factor es −2, aunque sea negativo. λ = −2.</p><p class="nudge">✕ El valor propio puede ser negativo; busca el factor común: −6 ÷ 3 y −2 ÷ 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
@@ -280,6 +349,55 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Diagonal principal por diagonal principal, menos la otra: (1 − λ)(3 − λ) − 4·2 = (1 − λ)(3 − λ) − 8.</p><p class="nudge">✕ El determinante 2×2 resta el producto de la otra diagonal, y 4·2 = 8. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para armar det(A − λI). Del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Arma el determinante</strong> de esta matriz, a la que ya le restaste λ a la diagonal.</p>
+          <div class="fx"><div class="matrix-form"><span>B − λI =</span><span class="matrix" aria-label="B menos lambda I: 2 menos lambda, 3, 1, 4 menos lambda"><span>2−λ</span><span>3</span><span>1</span><span>4−λ</span></span></div></div>
+          <div class="work"><p class="wl">El determinante 2×2 es diagonal principal por diagonal principal, menos la otra.</p><p class="wl">Principal: (2 − λ)(4 − λ). Otra diagonal: 3·1 = <b>3</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M2P1" data-tema="polinomio_caracteristico" data-level="resuelto" data-module="2">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto queda det(B − λI)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(2 − λ)(4 − λ) − 3</button>
+              <button class="opt" data-ok="0">(2 − λ)(4 − λ) + 3</button>
+              <button class="opt" data-ok="0">(2 − λ)(4 − λ) − 7</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Producto de la diagonal principal menos 3·1: (2 − λ)(4 − λ) − 3.</p><p class="nudge">✕ El determinante resta el producto de la otra diagonal (3·1 = 3), no lo suma. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M2P2" data-tema="polinomio_caracteristico" data-level="guiado" data-module="2">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Resta λ a la diagonal de C y arma det(C − λI).</strong></p>
+            <div class="fx"><div class="matrix-form"><span>C =</span><span class="matrix" aria-label="Matriz C: 3, 2, 4, 1"><span>3</span><span>2</span><span>4</span><span>1</span></span></div></div>
+            <div class="opts">
+              <button class="opt" data-ok="1">(3 − λ)(1 − λ) − 8</button>
+              <button class="opt" data-ok="0">(3 − λ)(1 − λ) + 8</button>
+              <button class="opt" data-ok="0">(3 − λ)(1 − λ) − 6</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Diagonal (3 − λ)(1 − λ) menos la otra 2·4 = 8: (3 − λ)(1 − λ) − 8.</p><p class="nudge">✕ Pista: resta λ solo a la diagonal (3 y 1) y quita el producto 2·4. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="polinomio_caracteristico" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Desarrolla la ecuación característica det(A − λI) = 0 de esta matriz.</p>
+            <div class="fx"><div class="matrix-form"><span>A =</span><span class="matrix" aria-label="Matriz A: 0, 2, 3, 1"><span>0</span><span>2</span><span>3</span><span>1</span></span></div></div>
+            <div class="opts">
+              <button class="opt" data-ok="1">λ² − λ − 6 = 0</button>
+              <button class="opt" data-ok="0">λ² + λ − 6 = 0</button>
+              <button class="opt" data-ok="0">λ² − λ + 6 = 0</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Traza 0 + 1 = 1 y det 0·1 − 2·3 = −6: λ² − (1)λ + (−6) = λ² − λ − 6.</p><p class="nudge">✕ La forma es λ² − (traza)λ + (det); aquí traza = 1 y det = −6. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
 
@@ -319,6 +437,53 @@
           <button class="opt" data-ok="0">4 y 5</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Buscas dos números que sumen 9 y multipliquen 18: 3 + 6 = 9 y 3·6 = 18.</p><p class="nudge">✕ La traza (9) es la suma y el determinante (18) el producto de las dos λ. Prueba parejas que cumplan las dos cosas. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas con el atajo de la 2×2: traza y determinante.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Una 2×2 tiene traza 7 y determinante 12.</strong> Halla sus valores propios.</p>
+          <div class="work"><p class="wl">Las dos λ <b>suman la traza</b> (7) y <b>multiplican el determinante</b> (12).</p><p class="wl">Parejas que multiplican 12: 3·4, 2·6, 1·12. La que suma 7 es <b>3 y 4</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M3P1" data-tema="traza_determinante" data-level="resuelto" data-module="3">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuáles son los valores propios?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">3 y 4</button>
+              <button class="opt" data-ok="0">7 y 12</button>
+              <button class="opt" data-ok="0">2 y 6</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 3 + 4 = 7 (traza) y 3·4 = 12 (det). Valores propios 3 y 4.</p><p class="nudge">✕ Deben sumar 7 y multiplicar 12 a la vez: 2·6 = 12 pero suma 8. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M3P2" data-tema="traza_determinante" data-level="guiado" data-module="3">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Usa traza y determinante</strong> para sacar los valores propios de B.</p>
+            <div class="fx"><div class="matrix-form"><span>B =</span><span class="matrix" aria-label="Matriz B: 4, 1, 2, 3"><span>4</span><span>1</span><span>2</span><span>3</span></span></div></div>
+            <div class="opts">
+              <button class="opt" data-ok="1">2 y 5</button>
+              <button class="opt" data-ok="0">7 y 10</button>
+              <button class="opt" data-ok="0">4 y 3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Traza 4 + 3 = 7 y det 4·3 − 1·2 = 10. Dos números que suman 7 y multiplican 10: 2 y 5.</p><p class="nudge">✕ Pista: traza = suma y det = producto. ¿Qué pareja suma 7 y multiplica 10? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="traza_determinante" data-level="examen" data-module="3">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A con traza(A) = −1 y det(A) = −6. Halla los valores propios de A.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2 y −3</button>
+              <button class="opt" data-ok="0">−2 y 3</button>
+              <button class="opt" data-ok="0">1 y −6</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Suman −1 y multiplican −6: 2 + (−3) = −1 y 2·(−3) = −6. Son 2 y −3.</p><p class="nudge">✕ Cuida los signos: la suma es −1 y el producto −6. Prueba 2 y −3. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
@@ -361,6 +526,54 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Los ceros de abajo dejan solo la diagonal: 3, −2 y 6. Sin polinomio.</p><p class="nudge">✕ La regla no cambia con el tamaño: los valores propios son los números de la diagonal principal. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas donde la matriz triangular regala sus valores propios.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Lee los valores propios</strong> de esta matriz triangular T.</p>
+          <div class="fx"><div class="matrix-form"><span>T =</span><span class="matrix" aria-label="Matriz triangular T: 3, 8, 0, menos 2"><span>3</span><span>8</span><span>0</span><span>−2</span></span></div></div>
+          <div class="work"><p class="wl">El 0 debajo de la diagonal borra el otro producto: det(T − λI) = (3 − λ)(−2 − λ).</p><p class="wl">Un producto vale 0 cuando un factor es 0: los valores propios son la <b>diagonal</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M4P1" data-tema="triangular" data-level="resuelto" data-module="4">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuáles son los valores propios de T?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">3 y −2</button>
+              <button class="opt" data-ok="0">3 y 8</button>
+              <button class="opt" data-ok="0">Hay que resolver un polinomio</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ En una triangular los valores propios son la diagonal: 3 y −2.</p><p class="nudge">✕ No mires el 8 de arriba; la diagonal manda: 3 y −2. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M4P2" data-tema="triangular" data-level="guiado" data-module="4">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Esta 3×3 es triangular</strong> (ceros bajo la diagonal). Da sus valores propios.</p>
+            <div class="fx"><div class="matrix-form"><span>C =</span><span class="matrix three" aria-label="Matriz triangular 3 por 3: 5, 1, 9, 0, 4, 2, 0, 0, menos 3"><span>5</span><span>1</span><span>9</span><span>0</span><span>4</span><span>2</span><span>0</span><span>0</span><span>−3</span></span></div></div>
+            <div class="opts">
+              <button class="opt" data-ok="1">5, 4 y −3</button>
+              <button class="opt" data-ok="0">1, 9 y 2</button>
+              <button class="opt" data-ok="0">Hay que resolver un polinomio de grado 3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Los ceros de abajo dejan solo la diagonal: 5, 4 y −3.</p><p class="nudge">✕ Pista: la regla no cambia con el tamaño; lee la diagonal principal. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="triangular" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A triangular inferior con diagonal (−1, 0, 7). Da todos sus valores propios.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">−1, 0 y 7</button>
+              <button class="opt" data-ok="0">Solo −1 y 7; el 0 no cuenta</button>
+              <button class="opt" data-ok="0">Hay que desarrollar det(λI − A)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La diagonal completa son los valores propios: −1, 0 y 7. El 0 sí cuenta (A es singular).</p><p class="nudge">✕ El 0 en la diagonal también es un valor propio válido: significa det(A) = 0. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
 
@@ -400,6 +613,53 @@
           <button class="opt" data-ok="0">(1, −2), por el signo menos</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ −2x + y = 0 da y = 2x. Con x = 1 sale (1, 2), y B·(1, 2) = (3, 6) = 3·(1, 2).</p><p class="nudge">✕ Despeja y en términos de x: −2x + y = 0 deja y = 2x. Toma x = 1 y lee y. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para despejar la flecha de cada λ con (A − λI)v = 0.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Para una máquina y su λ,</strong> el sistema (A − λI)v = 0 baja al renglón −3x + y = 0. Halla un vector propio.</p>
+          <div class="work"><p class="wl">Despeja: −3x + y = 0 deja <b>y = 3x</b>.</p><p class="wl">Elige el x más simple, x = 1, y lee y: <b>y = 3</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M5P1" data-tema="vectores_propios" data-level="resuelto" data-module="5">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Qué vector propio cumple −3x + y = 0?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(1, 3)</button>
+              <button class="opt" data-ok="0">(3, 1)</button>
+              <button class="opt" data-ok="0">(1, −3)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ y = 3x; con x = 1 queda (1, 3).</p><p class="nudge">✕ Despeja y en términos de x: −3x + y = 0 da y = 3x, no y = −3x. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M5P2" data-tema="vectores_propios" data-level="guiado" data-module="5">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Para B con λ = 2,</strong> el sistema (B − 2I)v = 0 baja a x + y = 0. Halla un vector propio.</p>
+            <div class="fx"><div class="matrix-form"><span>B =</span><span class="matrix" aria-label="Matriz B: 4, 2, 1, 3"><span>4</span><span>2</span><span>1</span><span>3</span></span></div></div>
+            <div class="opts">
+              <button class="opt" data-ok="1">(1, −1)</button>
+              <button class="opt" data-ok="0">(1, 1)</button>
+              <button class="opt" data-ok="0">(2, 2)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ x + y = 0 da y = −x; con x = 1 sale (1, −1). Y B·(1, −1) = (2, −2) = 2·(1, −1).</p><p class="nudge">✕ Pista: x + y = 0 significa y = −x, entradas opuestas. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="vectores_propios" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Al resolver (A − λI)v = 0 para cierto λ, queda el renglón 3x − 2y = 0. Da un vector propio con entradas enteras.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(2, 3)</button>
+              <button class="opt" data-ok="0">(3, 2)</button>
+              <button class="opt" data-ok="0">(2, −3)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 3x − 2y = 0 da y = (3/2)x; con x = 2 las entradas son enteras: (2, 3).</p><p class="nudge">✕ Despeja: 3x − 2y = 0 deja y = (3/2)x. Toma x = 2 para que y sea entero. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
     </section>
@@ -441,6 +701,53 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Mismo molde: columnas de P son los vectores; D es la diagonal con 4 y −1, alineados con su columna.</p><p class="nudge">✕ No cambia el molde: los vectores propios llenan las columnas de P y los valores propios la diagonal de D. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para armar A = P·D·P⁻¹ con vectores y valores propios.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Tienes los pares</strong> (λ = 2, v = (1, 1)) y (λ = 5, v = (3, 1)). Arma P y D.</p>
+          <div class="work"><p class="wl">Los vectores propios van en las <b>columnas de P</b>: primera columna (1, 1), segunda (3, 1).</p><p class="wl">Los valores van en la <b>diagonal de D</b>, alineados: 2 con (1, 1) y 5 con (3, 1).</p></div>
+          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="diagonalizacion" data-level="resuelto" data-module="6">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cómo quedan P y D?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">P con columnas (1, 1) y (3, 1); D diagonal 2 y 5, en ese orden</button>
+              <button class="opt" data-ok="0">P diagonal 2 y 5; D con los vectores como columnas</button>
+              <button class="opt" data-ok="0">P con los vectores como renglones; D diagonal 2 y 5</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Vectores en columnas de P; valores en la diagonal de D, alineados: 2 con (1, 1), 5 con (3, 1).</p><p class="nudge">✕ Los vectores propios llenan las columnas de P, no la diagonal. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="diagonalizacion" data-level="guiado" data-module="6">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Diagonalizaste una matriz</strong> y salieron los pares (λ = 6, v = (2, 1)) y (λ = 1, v = (1, −2)). Arma P y D.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">P con columnas (2, 1) y (1, −2); D diagonal 6 y 1, en ese orden</button>
+              <button class="opt" data-ok="0">P diagonal 6 y 1; D con los vectores como columnas</button>
+              <button class="opt" data-ok="0">P con 6 y (2, 1) en la primera columna</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Mismo molde: columnas de P son (2, 1) y (1, −2); D lleva 6 y 1 alineados con su columna.</p><p class="nudge">✕ Pista: vectores → columnas de P; valores → diagonal de D, en el mismo orden. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="diagonalizacion" data-level="examen" data-module="6">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A = P·D·P⁻¹ con D = diag(7, −2) y las columnas de P iguales a (1, 2) y (3, −1), en ese orden.</p>
+            <p class="prob-q">¿Qué pareja (valor propio, vector propio) es correcta?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">λ = 7 con (1, 2), y λ = −2 con (3, −1)</button>
+              <button class="opt" data-ok="0">λ = 7 con (3, −1), y λ = −2 con (1, 2)</button>
+              <button class="opt" data-ok="0">λ = 1 con (1, 2), porque es la primera columna</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada columna de P va con el valor en la misma posición de D: (1, 2) con 7 y (3, −1) con −2.</p><p class="nudge">✕ La columna 1 de P se empareja con la posición 1 de D. No cruces el orden. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
 
@@ -480,6 +787,54 @@
           <button class="opt" data-ok="0">Sí: toda matriz cuadrada se diagonaliza</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Hacen falta tantos vectores independientes como el tamaño: una 3×3 pide 3. Con 2, P queda incompleta.</p><p class="nudge">✕ La regla escala con el tamaño: una 3×3 necesita 3 columnas independientes para P. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para decidir cuándo una matriz NO se puede diagonalizar.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>¿Se puede diagonalizar</strong> esta matriz A?</p>
+          <div class="fx"><div class="matrix-form"><span>A =</span><span class="matrix" aria-label="Matriz A: 4, 1, menos 1, 2"><span>4</span><span>1</span><span>−1</span><span>2</span></span></div></div>
+          <div class="work"><p class="wl">Traza 4 + 2 = 6 y det 4·2 − 1·(−1) = 8 + 1 = <b>9</b>: el polinomio es λ² − 6λ + 9 = (λ − 3)².</p><p class="wl">λ = 3 <b>repetido</b>. (A − 3I)v = 0 da x + y = 0: una sola dirección, (1, −1).</p></div>
+          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="diagonalizabilidad" data-level="resuelto" data-module="7">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Un valor repetido con una sola dirección: ¿se puede diagonalizar?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">No: falta una segunda dirección independiente para P</button>
+              <button class="opt" data-ok="0">Sí: el valor repetido llena las dos columnas</button>
+              <button class="opt" data-ok="0">Sí: se repite (1, −1) en las dos columnas</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Una 2×2 pide 2 direcciones independientes; aquí solo hay una. A es defectuosa.</p><p class="nudge">✕ Repetir la misma flecha no da una columna nueva independiente. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="diagonalizabilidad" data-level="guiado" data-module="7">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Una 3×3 tiene λ = 2 repetido tres veces,</strong> pero solo reúne 2 vectores propios independientes. ¿Se puede diagonalizar?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">No: una 3×3 necesita 3 direcciones independientes y solo hay 2</button>
+              <button class="opt" data-ok="0">Sí: con 2 vectores independientes siempre basta</button>
+              <button class="opt" data-ok="0">Sí: todo valor repetido se diagonaliza</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Hacen falta tantas direcciones independientes como el tamaño: una 3×3 pide 3. Con 2, P queda incompleta.</p><p class="nudge">✕ Pista: cuenta direcciones independientes y compáralas con el tamaño (3). Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="diagonalizabilidad" data-level="examen" data-module="7">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A de 2×2 con un único valor propio λ = 5 de multiplicidad 2, y su espacio propio tiene dimensión 2.</p>
+            <p class="prob-q">¿Es A diagonalizable?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Sí: aporta 2 vectores propios independientes, suficientes para P</button>
+              <button class="opt" data-ok="0">No: todo valor propio repetido hace defectuosa la matriz</button>
+              <button class="opt" data-ok="0">No se puede saber sin la matriz</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La dimensión del espacio propio (2) iguala la multiplicidad (2): hay 2 direcciones independientes. Sí es diagonalizable.</p><p class="nudge">✕ Repetido no implica defectuosa: si el espacio propio da tantas direcciones como la multiplicidad, sí se diagonaliza. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Última idea →</button></div>
     </section>
@@ -533,6 +888,55 @@
 
       <nav class="nav-lecs"><a href="L6_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L6_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas con el estado estable como vector propio de λ = 1.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Halla el estado estable</strong> de esta cadena de Markov P.</p>
+          <div class="fx"><div class="matrix-form"><span>P =</span><span class="matrix" aria-label="Matriz P de Markov: 0.7, 0.4, 0.3, 0.6"><span>0.7</span><span>0.4</span><span>0.3</span><span>0.6</span></span></div></div>
+          <div class="work"><p class="wl">El estado estable es el vector propio de λ = 1: resuelve (P − I)v = 0.</p><p class="wl">P − I deja el renglón −0.3x + 0.4y = 0; por 10: −3x + 4y = 0, o sea <b>x = (4/3)y</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M8P1" data-tema="markov" data-level="resuelto" data-module="8">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Qué vector propio (entradas enteras) da el estado estable?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(4, 3)</button>
+              <button class="opt" data-ok="0">(3, 4)</button>
+              <button class="opt" data-ok="0">(4, −3)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ x = (4/3)y; con y = 3 sale (4, 3). Y P·(4, 3) = (4, 3) = 1·(4, 3).</p><p class="nudge">✕ Despeja x: −3x + 4y = 0 da x = (4/3)y. Toma y = 3 para enteros. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M8P2" data-tema="markov" data-level="guiado" data-module="8">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Para esta cadena Q,</strong> buscar el estado estable con (Q − I)v = 0 baja a −x + 6y = 0. Halla el vector propio.</p>
+            <div class="fx"><div class="matrix-form"><span>Q =</span><span class="matrix" aria-label="Matriz Q de Markov: 0.9, 0.6, 0.1, 0.4"><span>0.9</span><span>0.6</span><span>0.1</span><span>0.4</span></span></div></div>
+            <div class="opts">
+              <button class="opt" data-ok="1">(6, 1)</button>
+              <button class="opt" data-ok="0">(1, 6)</button>
+              <button class="opt" data-ok="0">(6, −1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ −x + 6y = 0 da x = 6y; con y = 1 sale (6, 1). Y Q·(6, 1) = (6, 1).</p><p class="nudge">✕ Pista: −x + 6y = 0 significa x = 6y. Toma y = 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="markov" data-level="examen" data-module="8">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea P una matriz de transición de Markov 2×2 con traza(P) = 1.5, y λ = 1 es valor propio.</p>
+            <p class="prob-q">Halla el otro valor propio y di cuál domina el estado estable.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">El otro es 0.5; domina λ = 1, y su vector propio es el estado estable</button>
+              <button class="opt" data-ok="0">El otro es 1.5; domina él sobre λ = 1</button>
+              <button class="opt" data-ok="0">El otro es 0.5; domina 0.5 con los años</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Los dos suman la traza: 1.5 − 1 = 0.5. Como 0.5 &lt; 1, se encoge; el estado estable es el vector propio de λ = 1.</p><p class="nudge">✕ La suma de valores propios es la traza (1.5); resta el 1. El valor menor que 1 se encoge. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="L6_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 

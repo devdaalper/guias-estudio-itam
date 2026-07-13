@@ -150,6 +150,29 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*practica*/
+  .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
+  .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
+  .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
+  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .p-res{background:var(--green-tint);color:var(--green-deep)}
+  .p-res b{color:var(--green-deep)}
+  .p-gui{background:var(--cream);color:var(--deep)}
+  .p-gui b{color:var(--deep)}
+  .p-ex{background:var(--red-tint);color:#a01243}
+  .p-ex b{color:#a01243}
+  .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
+  .prob-q strong{font-weight:800}
+  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prob .check{background:#fff;border-color:var(--line)}
+  .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
+  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl b{color:var(--ink);font-weight:800}
+  .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
+  .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
   .sec{gap:17px}
   .idea{line-height:1.72}
@@ -244,6 +267,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Nadie cerca llega a 12: P es el más alto de su zona, un máximo local.</p><p class="nudge">✕ Todos los vecinos quedan por debajo de P; eso lo pone en lo alto. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas de leer un terreno: cima o hoyo. El primero lo armamos juntos; en los siguientes te suelto de a poco.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Lee el mapa.</strong> El punto P mide 7 y sus vecinos cercanos miden 4, 5, 6 y 3. ¿P es cima o hoyo?</p>
+          <div class="work"><p class="wl">Compara P con cada vecino: 7 &gt; 4, 7 &gt; 5, 7 &gt; 6 y 7 &gt; 3.</p><p class="wl">Nadie cerca supera a P, así que P es el <b>más alto</b> de su zona.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M1P1" data-tema="extremos_locales" data-level="resuelto" data-module="1">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Si nadie cerca llega a 7, ¿qué es P?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Un máximo local</button>
+              <button class="opt" data-ok="0">Un mínimo local</button>
+              <button class="opt" data-ok="0">Ni cima ni hoyo</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ P supera a todos sus vecinos: es la cima de su zona, un máximo local.</p><p class="nudge">✕ Si P está por encima de todos, está arriba, no abajo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M1P2" data-tema="extremos_locales" data-level="guiado" data-module="1">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Otro punto.</strong> El punto Q mide 2 y sus vecinos cercanos miden 5, 8, 6 y 9. ¿Qué es Q?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Un mínimo local</button>
+              <button class="opt" data-ok="0">Un máximo local</button>
+              <button class="opt" data-ok="0">Ni cima ni hoyo</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Todos los vecinos superan a Q (2 es el menor): Q está en el fondo, un mínimo local.</p><p class="nudge">✕ Pista: si todos los vecinos son mayores que Q, Q queda por debajo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="extremos_locales" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Si f(a, b) ≥ f(x, y) para todo (x, y) cercano a (a, b), clasifica (a, b).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Máximo local</button>
+              <button class="opt" data-ok="0">Mínimo local</button>
+              <button class="opt" data-ok="0">Punto silla</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ f(a, b) ≥ todo lo cercano dice «nadie cerca es más alto»: es un máximo local.</p><p class="nudge">✕ El signo ≥ pone a (a, b) por encima de sus vecinos. ¿Arriba o abajo? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
@@ -289,6 +358,52 @@
           <button class="opt" data-ok="0">(6, 0)</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ 2x − 6 = 0 da x = 3, y 2y = 0 da y = 0: único punto llano, (3, 0).</p><p class="nudge">✕ Despeja cada ecuación por separado: 2x = 6 y 2y = 0. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas de hallar el punto llano: parciales a cero. Vamos del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Halla el punto crítico</strong> de f = x<sup>2</sup> + 2x + y<sup>2</sup> − 8y.</p>
+          <div class="work"><p class="wl">f<sub>x</sub> = 2x + 2, a cero: 2x + 2 = 0 → 2x = −2 → <b>x = −1</b>.</p><p class="wl">f<sub>y</sub> = 2y − 8, a cero: 2y − 8 = 0 → 2y = 8 → <b>y = 4</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M2P1" data-tema="punto_critico" data-level="resuelto" data-module="2">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Juntas las dos coordenadas. ¿Cuál es el punto crítico?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(−1, 4)</button>
+              <button class="opt" data-ok="0">(1, 4)</button>
+              <button class="opt" data-ok="0">(−1, 8)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ x = −1 e y = 4 dan el único punto llano: (−1, 4).</p><p class="nudge">✕ Cuida los signos: 2x = −2 da x = −1, y 2y = 8 da y = 4. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M2P2" data-tema="punto_critico" data-level="guiado" data-module="2">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Cambia la función.</strong> Para f = x<sup>2</sup> − 10x + y<sup>2</sup> + 4y, de f<sub>x</sub> = 2x − 10 = 0 y f<sub>y</sub> = 2y + 4 = 0, ¿cuál es el punto crítico?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(5, −2)</button>
+              <button class="opt" data-ok="0">(−5, 2)</button>
+              <button class="opt" data-ok="0">(10, −4)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2x = 10 da x = 5, y 2y = −4 da y = −2: el punto es (5, −2).</p><p class="nudge">✕ Pista: despeja cada ecuación por separado, 2x = 10 y 2y = −4, y divide entre 2. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="punto_critico" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Resuelve ∇f = 0 para f(x, y) = x<sup>2</sup> + y<sup>2</sup> − 8x + 2y.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(4, −1)</button>
+              <button class="opt" data-ok="0">(−4, 1)</button>
+              <button class="opt" data-ok="0">(8, −2)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ f<sub>x</sub> = 2x − 8 = 0 da x = 4; f<sub>y</sub> = 2y + 2 = 0 da y = −1. Punto (4, −1).</p><p class="nudge">✕ Iguala cada parcial a cero: 2x − 8 = 0 y 2y + 2 = 0, y despeja. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
@@ -342,6 +457,53 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Sube por unas direcciones y baja por otras: ni cima ni hoyo, es un punto silla.</p><p class="nudge">✕ Una cima baja hacia todos lados y un hoyo sube hacia todos; aquí hace las dos cosas. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas de reconocer el llano que engaña. El primero lo probamos con números; luego te suelto.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Ponlo a prueba.</strong> El origen (0, 0) es punto crítico de f = x·y. ¿Es cima, hoyo o silla?</p>
+          <div class="work"><p class="wl">Sobre la diagonal, en (1, 1): f = 1·1 = <b>1</b>, mayor que f(0, 0) = 0.</p><p class="wl">Sobre la otra diagonal, en (1, −1): f = 1·(−1) = <b>−1</b>, menor que 0.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M3P1" data-tema="punto_silla" data-level="resuelto" data-module="3">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Cerca del origen f sube en una dirección y baja en otra. ¿Qué es (0, 0)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Un punto silla</button>
+              <button class="opt" data-ok="0">Un mínimo local</button>
+              <button class="opt" data-ok="0">Un máximo local</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Valores mayores y menores que 0 en toda vecindad: ni cima ni hoyo, un punto silla.</p><p class="nudge">✕ Un hoyo solo sube alrededor y una cima solo baja; aquí pasan las dos cosas. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M3P2" data-tema="punto_silla" data-level="guiado" data-module="3">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>El paso de montaña.</strong> Lo más alto si cruzas de valle a valle, lo más bajo si vas de cumbre a cumbre. ¿Qué punto crítico es?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Un punto silla</button>
+              <button class="opt" data-ok="0">Un máximo local</button>
+              <button class="opt" data-ok="0">Un mínimo local</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Máximo por una dirección y mínimo por la otra: es el paso de montaña, un punto silla.</p><p class="nudge">✕ Pista: un mismo punto que es cima para uno y fondo para otro no puede ser ni máximo ni mínimo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="punto_silla" data-level="examen" data-module="3">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>En (a, b) se cumple ∇f = 0 y en toda vecindad f toma valores mayores y menores que f(a, b).</p>
+            <p class="prob-q">Clasifica (a, b).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Punto silla</button>
+              <button class="opt" data-ok="0">Máximo local</button>
+              <button class="opt" data-ok="0">Mínimo local</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Es punto crítico (∇f = 0) pero con valores por arriba y por abajo cerca: un punto silla.</p><p class="nudge">✕ Un máximo solo tiene valores menores cerca y un mínimo solo mayores; aquí hay de ambos. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -382,6 +544,52 @@
           <button class="opt" data-ok="0">6</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Derivas f<sub>x</sub> = 2x + 3y respecto a y: el 2x desaparece y el 3y deja 3.</p><p class="nudge">✕ Toma f<sub>x</sub> = 2x + 3y y derívala respecto a y, tratando x como constante. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas de llenar la tabla 2×2 con las segundas derivadas. El primero lo armamos juntos.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Arma la hessiana</strong> de f = x<sup>2</sup> + xy + 2y<sup>2</sup>.</p>
+          <div class="work"><p class="wl">Primeras: f<sub>x</sub> = <b>2x + y</b> y f<sub>y</sub> = <b>x + 4y</b>.</p><p class="wl">Segundas: f<sub>xx</sub> = <b>2</b>, f<sub>yy</sub> = <b>4</b>, y la cruzada f<sub>xy</sub> deriva f<sub>x</sub> = 2x + y respecto a y.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M4P1" data-tema="hessiana" data-level="resuelto" data-module="4">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Ya tienes f<sub>x</sub> = 2x + y. ¿Cuánto valen f<sub>xx</sub>, f<sub>yy</sub> y f<sub>xy</sub>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">f<sub>xx</sub> = 2, f<sub>yy</sub> = 4, f<sub>xy</sub> = 1</button>
+              <button class="opt" data-ok="0">f<sub>xx</sub> = 2, f<sub>yy</sub> = 4, f<sub>xy</sub> = 0</button>
+              <button class="opt" data-ok="0">f<sub>xx</sub> = 2, f<sub>yy</sub> = 2, f<sub>xy</sub> = 1</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Derivar 2x + y respecto a y deja 1: la cruzada no es cero por el término xy.</p><p class="nudge">✕ El término xy sí aporta a la cruzada: deriva 2x + y respecto a y. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M4P2" data-tema="hessiana" data-level="guiado" data-module="4">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Calcula la cruzada.</strong> Para f = 3x<sup>2</sup> + 5xy − y<sup>2</sup> se tiene f<sub>x</sub> = 6x + 5y. ¿Cuánto vale f<sub>xy</sub>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">5</button>
+              <button class="opt" data-ok="0">6</button>
+              <button class="opt" data-ok="0">0</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Derivas f<sub>x</sub> = 6x + 5y respecto a y: el 6x desaparece y el 5y deja 5.</p><p class="nudge">✕ Pista: toma f<sub>x</sub> = 6x + 5y y deriva respecto a y, con x constante. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="hessiana" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Para f(x, y) = x<sup>3</sup> + 2x<sup>2</sup>y + y<sup>2</sup>, da la entrada f<sub>xy</sub> de la hessiana.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">4x</button>
+              <button class="opt" data-ok="0">6x + 4y</button>
+              <button class="opt" data-ok="0">4y</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ f<sub>x</sub> = 3x<sup>2</sup> + 4xy; derivada respecto a y da f<sub>xy</sub> = 4x.</p><p class="nudge">✕ 6x + 4y es f<sub>xx</sub>. Deriva f<sub>x</sub> = 3x<sup>2</sup> + 4xy respecto a y. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
@@ -430,6 +638,52 @@
           <button class="opt" data-ok="0">El criterio no decide</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ D = −5 &lt; 0: veredicto de punto silla, directo, sin mirar f<sub>xx</sub>.</p><p class="nudge">✕ D negativo es el caso claro de la silla; el «no decide» es solo cuando D = 0. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas de leer el veredicto: calcula D y clasifica. El primero lo hacemos juntos.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Clasifica el punto crítico</strong> con f<sub>xx</sub> = −2, f<sub>yy</sub> = −2 y f<sub>xy</sub> = 0.</p>
+          <div class="work"><p class="wl">Multiplico la diagonal: f<sub>xx</sub> · f<sub>yy</sub> = (−2)(−2) = <b>4</b>.</p><p class="wl">Resto la torsión: D = 4 − 0<sup>2</sup> = <b>4</b> &gt; 0. Falta mirar el signo de f<sub>xx</sub>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M5P1" data-tema="criterio_segunda_derivada" data-level="resuelto" data-module="5">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">D = 4 &gt; 0, así que es cima o hoyo. Con f<sub>xx</sub> = −2 &lt; 0, ¿cuál es?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Un máximo local</button>
+              <button class="opt" data-ok="0">Un mínimo local</button>
+              <button class="opt" data-ok="0">Un punto silla</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ D &gt; 0 descarta la silla; f<sub>xx</sub> &lt; 0 curva hacia abajo: máximo local.</p><p class="nudge">✕ El signo de f<sub>xx</sub> desempata: negativo abre hacia abajo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M5P2" data-tema="criterio_segunda_derivada" data-level="guiado" data-module="5">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Cambia los números.</strong> En un punto crítico, f<sub>xx</sub> = 3, f<sub>yy</sub> = 3 y f<sub>xy</sub> = 2. Calcula D y clasifica.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">D = 5 &gt; 0 y f<sub>xx</sub> &gt; 0 → mínimo</button>
+              <button class="opt" data-ok="0">D = 5 &gt; 0 y f<sub>xx</sub> &gt; 0 → máximo</button>
+              <button class="opt" data-ok="0">D = 13 &gt; 0 → mínimo</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ D = (3)(3) − 2<sup>2</sup> = 9 − 4 = 5 &gt; 0, y f<sub>xx</sub> &gt; 0 da mínimo.</p><p class="nudge">✕ Pista: D = f<sub>xx</sub>·f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup> = 9 − 4; luego f<sub>xx</sub> &gt; 0 desempata. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="criterio_segunda_derivada" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>En un punto crítico, f<sub>xx</sub> = 1, f<sub>yy</sub> = 4, f<sub>xy</sub> = 3. Aplica D = f<sub>xx</sub>f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">D = −5 &lt; 0 → punto silla</button>
+              <button class="opt" data-ok="0">D = −5, pero f<sub>xx</sub> &gt; 0 → mínimo</button>
+              <button class="opt" data-ok="0">D = 13 &gt; 0 → mínimo</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ D = (1)(4) − 3<sup>2</sup> = 4 − 9 = −5 &lt; 0: veredicto de punto silla, sin mirar f<sub>xx</sub>.</p><p class="nudge">✕ Con D &lt; 0 el veredicto es silla directo; el signo de f<sub>xx</sub> solo importa si D &gt; 0. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
     </section>
@@ -487,6 +741,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Componente a componente: y = λ·3 = 3λ y x = λ·1 = λ.</p><p class="nudge">✕ Iguala la primera de ∇f con λ por la primera de ∇g, y lo mismo con la segunda. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas de armar la condición ∇f = λ∇g. El primero lo montamos juntos, componente a componente.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Arma la condición.</strong> Optimizas f = x·y sujeto a g: x + 3y = 12.</p>
+          <div class="work"><p class="wl">Gradientes: ∇f = (y, x) y ∇g = (1, 3).</p><p class="wl">Igualo ∇f = λ∇g componente a componente: primera con primera, segunda con segunda.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="lagrange" data-level="resuelto" data-module="6">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">De ∇f = λ∇g con ∇f = (y, x) y ∇g = (1, 3), ¿qué dos ecuaciones salen?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">y = λ y x = 3λ</button>
+              <button class="opt" data-ok="0">y = 3λ y x = λ</button>
+              <button class="opt" data-ok="0">x·y = λ</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Componente a componente: y = λ·1 = λ y x = λ·3 = 3λ.</p><p class="nudge">✕ La primera de ∇f va con la primera de ∇g (que es 1), no con la segunda. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="lagrange" data-level="guiado" data-module="6">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Minimizas</strong> f = x<sup>2</sup> + y<sup>2</sup> sujeto a x + 2y = 5. Con ∇f = (2x, 2y) y ∇g = (1, 2), ¿qué ecuaciones da ∇f = λ∇g?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2x = λ y 2y = 2λ</button>
+              <button class="opt" data-ok="0">2x = 2λ y 2y = λ</button>
+              <button class="opt" data-ok="0">x<sup>2</sup> + y<sup>2</sup> = λ</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Iguala la primera de ∇f con λ·1 = λ y la segunda con λ·2 = 2λ.</p><p class="nudge">✕ Pista: primera de ∇f con la primera de ∇g (1), segunda con la segunda (2). Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="lagrange" data-level="examen" data-module="6">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Al optimizar f sujeta a g = k, ¿qué relación cumplen los gradientes ∇f y ∇g en el óptimo?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Son paralelos: ∇f = λ∇g</button>
+              <button class="opt" data-ok="0">Son perpendiculares: ∇f · ∇g = 0</button>
+              <button class="opt" data-ok="0">Los dos valen cero</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ En el óptimo la curva de nivel roza el sendero: ∇f y ∇g quedan alineados, ∇f = λ∇g.</p><p class="nudge">✕ En el óptimo los gradientes se alinean, no se cruzan en ángulo recto ni se apagan. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Última idea →</button></div>
     </section>
 
@@ -543,6 +843,52 @@
 
       <nav class="nav-lecs"><a href="C5_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C5_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas de armar y resolver el sistema completo. El primero lo resolvemos paso a paso.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Resuelve por Lagrange.</strong> Minimiza f = x<sup>2</sup> + y<sup>2</sup> sujeto a x + 2y = 5. El sistema es 2x = λ, 2y = 2λ, x + 2y = 5.</p>
+          <div class="work"><p class="wl">De 2x = λ y 2y = 2λ: sustituyo λ = 2x, así 2y = 2(2x) = 4x, o sea <b>y = 2x</b>.</p><p class="wl">Meto y = 2x en x + 2y = 5: x + 4x = 5x = 5, entonces <b>x = 1</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="lagrange" data-level="resuelto" data-module="7">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Con x = 1 e y = 2x, ¿cuál es el punto óptimo (x, y)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(1, 2)</button>
+              <button class="opt" data-ok="0">(2, 1)</button>
+              <button class="opt" data-ok="0">(5, 0)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ x = 1 e y = 2·1 = 2. Cumple la restricción: 1 + 2·2 = 5. Punto (1, 2).</p><p class="nudge">✕ Como y = 2x y x = 1, la segunda coordenada es 2, no 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="lagrange" data-level="guiado" data-module="7">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Resuelve el sistema.</strong> De y = λ, x = λ y x + y = 8, ¿cuánto valen x e y?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x = 4, y = 4</button>
+              <button class="opt" data-ok="0">x = 8, y = 0</button>
+              <button class="opt" data-ok="0">x = 2, y = 6</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ x = y = λ, así que x = y; en x + y = 8 queda 2x = 8, x = 4 e y = 4.</p><p class="nudge">✕ Pista: como ambos valen λ, son iguales; mételo en x + y = 8. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="lagrange" data-level="examen" data-module="7">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Maximiza f = x·y sujeto a 2x + y = 8. Con ∇f = (y, x) y ∇g = (2, 1), resuelve por Lagrange.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x = 2, y = 4 (producto 8)</button>
+              <button class="opt" data-ok="0">x = 3, y = 2 (producto 6)</button>
+              <button class="opt" data-ok="0">x = 4, y = 0 (producto 0)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ y = 2λ y x = λ dan y = 2x; en 2x + y = 8 queda 4x = 8, x = 2 e y = 4.</p><p class="nudge">✕ (3, 2) cumple la restricción pero no ∇f = λ∇g: primero saca y = 2x. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 

@@ -150,6 +150,29 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*practica*/
+  .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
+  .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
+  .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
+  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .p-res{background:var(--green-tint);color:var(--green-deep)}
+  .p-res b{color:var(--green-deep)}
+  .p-gui{background:var(--cream);color:var(--deep)}
+  .p-gui b{color:var(--deep)}
+  .p-ex{background:var(--red-tint);color:#a01243}
+  .p-ex b{color:#a01243}
+  .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
+  .prob-q strong{font-weight:800}
+  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prob .check{background:#fff;border-color:var(--line)}
+  .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
+  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl b{color:var(--ink);font-weight:800}
+  .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
+  .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
   .sec{gap:17px}
   .idea{line-height:1.72}
@@ -257,6 +280,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ x<sup>3</sup> deriva a 3x<sup>2</sup>; en 4xy la y es constante, así que 4xy deriva a 4y.</p><p class="nudge">✕ Al derivar 4xy respecto a x, la y se queda como factor. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas de parciales, del acompañado al examen. En el primero damos el paso juntos; luego te vas soltando.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Deriva respecto a x</strong> la función f(x, y) = 3x<sup>2</sup> y + y<sup>3</sup>.</p>
+          <div class="work"><p class="wl">Congelas la y. El término 3x<sup>2</sup> y: deriva 3x<sup>2</sup> → 6x, y la y multiplica, así que queda <b>6xy</b>.</p><p class="wl">El término y<sup>3</sup> no tiene x: al caminar al este es constante y da <b>0</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M1P1" data-tema="derivadas_parciales" data-level="resuelto" data-module="1">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Entonces, ¿cuánto vale ∂f/∂x?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">∂f/∂x = 6xy</button>
+              <button class="opt" data-ok="0">∂f/∂x = 6xy + 3y<sup>2</sup></button>
+              <button class="opt" data-ok="0">∂f/∂x = 6x + 3y<sup>2</sup></button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 3x<sup>2</sup> y → 6xy y y<sup>3</sup> → 0: la parcial es 6xy.</p><p class="nudge">✕ El término y<sup>3</sup> no depende de x: su parcial es 0, no 3y<sup>2</sup>. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M1P2" data-tema="derivadas_parciales" data-level="guiado" data-module="1">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Para g(x, y) = x<sup>2</sup> y + 5y<sup>2</sup>, ¿cuál es la parcial respecto a y?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">∂g/∂y = x<sup>2</sup> + 10y</button>
+              <button class="opt" data-ok="0">∂g/∂y = 2xy + 10y</button>
+              <button class="opt" data-ok="0">∂g/∂y = x<sup>2</sup> + 5y</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Con la x congelada: x<sup>2</sup> y → x<sup>2</sup> y 5y<sup>2</sup> → 10y.</p><p class="nudge">✕ Pista: la x no se toca (es constante); deriva solo lo que lleva y. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="derivadas_parciales" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Calcula ∂f/∂x para f(x, y) = x<sup>3</sup> + 4xy<sup>2</sup>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">3x<sup>2</sup> + 4y<sup>2</sup></button>
+              <button class="opt" data-ok="0">3x<sup>2</sup> + 8xy</button>
+              <button class="opt" data-ok="0">3x<sup>2</sup> + 4y</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ x<sup>3</sup> → 3x<sup>2</sup> y 4xy<sup>2</sup> → 4y<sup>2</sup> (la y<sup>2</sup> no se deriva): 3x<sup>2</sup> + 4y<sup>2</sup>.</p><p class="nudge">✕ Al derivar 4xy<sup>2</sup> por x, la y<sup>2</sup> se queda igual como factor. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
@@ -320,6 +389,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ ∂g/∂x = 2x + y = 5 y ∂g/∂y = x = 2: el gradiente es (5, 2).</p><p class="nudge">✕ En ∂g/∂x, la y de xy suma; en ∂g/∂y solo queda la x. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres gradientes, cada vez con menos apoyo: arma las dos parciales, evalúa en el punto y ordénalas en la flecha.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Arma el gradiente</strong> de f(x, y) = x<sup>2</sup> + 3xy en el punto (1, 2).</p>
+          <div class="work"><p class="wl">Primero las dos parciales: ∂f/∂x = 2x + 3y y ∂f/∂y = <b>3x</b>.</p><p class="wl">En (1, 2): ∂f/∂x = 2 + 6 = <b>8</b> y ∂f/∂y = 3·1 = <b>3</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M2P1" data-tema="gradiente" data-level="resuelto" data-module="2">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuál es el gradiente ∇f(1, 2)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(8, 3)</button>
+              <button class="opt" data-ok="0">(3, 8)</button>
+              <button class="opt" data-ok="0">(8, 6)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Primer lugar la parcial en x (8), segundo la parcial en y (3): (8, 3).</p><p class="nudge">✕ No cruces: el primer número es ∂f/∂x, el segundo ∂f/∂y. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M2P2" data-tema="gradiente" data-level="guiado" data-module="2">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Para g(x, y) = x<sup>2</sup> y, ¿cuánto vale ∇g(2, 3)?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(12, 4)</button>
+              <button class="opt" data-ok="0">(4, 12)</button>
+              <button class="opt" data-ok="0">(12, 9)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∂g/∂x = 2xy = 12 y ∂g/∂y = x<sup>2</sup> = 4: el gradiente es (12, 4).</p><p class="nudge">✕ Pista: ∂g/∂x = 2xy (la y es factor) y ∂g/∂y = x<sup>2</sup>. Evalúa en (2, 3). Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="gradiente" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x, y) = x<sup>2</sup> + y<sup>2</sup>. Halla ∇f(3, 1).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(6, 2)</button>
+              <button class="opt" data-ok="0">(2, 6)</button>
+              <button class="opt" data-ok="0">(9, 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∇f = (2x, 2y); en (3, 1) da (6, 2).</p><p class="nudge">✕ El gradiente son las parciales (2x, 2y), no los valores x<sup>2</sup>, y<sup>2</sup>. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
 
@@ -371,6 +486,52 @@
           <button class="opt" data-ok="0">z = 6 + 3x + 2y</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ ∂f/∂x = y = 3 va con (x − 2); ∂f/∂y = x = 2 va con (y − 3).</p><p class="nudge">✕ Cada pendiente acompaña al desplazamiento de su propia variable. No los cambies. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres planos tangentes en aumento de dificultad: altura, pendientes y desplazamientos, cada pieza en su lugar.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Arma el plano tangente</strong> a f(x, y) = x<sup>2</sup> + y<sup>2</sup> en el punto (1, 1).</p>
+          <div class="work"><p class="wl">Altura: f(1, 1) = 1 + 1 = <b>2</b>. Pendientes: ∂f/∂x = 2x = <b>2</b> y ∂f/∂y = 2y = <b>2</b>.</p><p class="wl">Cada pendiente acompaña al desplazamiento de su variable: (x − 1) y (y − 1).</p></div>
+          <div class="check challenge" data-kind="item" data-id="M3P1" data-tema="plano_tangente" data-level="resuelto" data-module="3">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuál plano tangente reúne las tres piezas?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">z = 2 + 2(x − 1) + 2(y − 1)</button>
+              <button class="opt" data-ok="0">z = 2 + 2x + 2y</button>
+              <button class="opt" data-ok="0">z = 2(x − 1) + 2(y − 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Altura 2, más 2(x − 1), más 2(y − 1): las tres piezas.</p><p class="nudge">✕ Usa los desplazamientos (x − 1), (y − 1) y no olvides la altura. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M3P2" data-tema="plano_tangente" data-level="guiado" data-module="3">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Una superficie mide 4 en (2, 1), con pendientes 3 y 5 ahí. ¿Cuál plano tangente está bien armado?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">z = 4 + 3(x − 2) + 5(y − 1)</button>
+              <button class="opt" data-ok="0">z = 4 + 5(x − 2) + 3(y − 1)</button>
+              <button class="opt" data-ok="0">z = 4 + 3x + 5y</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Altura 4, pendiente 3 por (x − 2) y pendiente 5 por (y − 1).</p><p class="nudge">✕ Pista: cada pendiente va con el desplazamiento de su propia variable. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="plano_tangente" data-level="examen" data-module="3">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Halla el plano tangente a z = xy en el punto (3, 2).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">z = 6 + 2(x − 3) + 3(y − 2)</button>
+              <button class="opt" data-ok="0">z = 6 + 3(x − 3) + 2(y − 2)</button>
+              <button class="opt" data-ok="0">z = 6 + 2x + 3y</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ f(3, 2) = 6; ∂f/∂x = y = 2 va con (x − 3) y ∂f/∂y = x = 3 va con (y − 2).</p><p class="nudge">✕ Ojo: para f = xy, ∂f/∂x = y (aquí 2), no x. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
@@ -428,6 +589,52 @@
           <button class="opt" data-ok="0">t<sup>2</sup> + 2t</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ (y)(1) + (x)(2t) = t<sup>2</sup> + 2t<sup>2</sup> = 3t<sup>2</sup>. Sustituyendo: f = t<sup>3</sup>, df/dt = 3t<sup>2</sup>.</p><p class="nudge">✕ ∂f/∂x = y, ∂f/∂y = x; dx/dt = 1, dy/dt = 2t. Arma la suma. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres veces la regla de la cadena, soltándote de a poco: junta las piezas, suma los caminos y deja todo en t.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Aplica la cadena</strong> a f(x, y) = x<sup>2</sup> + y<sup>2</sup> con x = t, y = t<sup>3</sup>.</p>
+          <div class="work"><p class="wl">Piezas: ∂f/∂x = 2x, ∂f/∂y = 2y; dx/dt = 1, dy/dt = <b>3t<sup>2</sup></b>.</p><p class="wl">Suma de caminos: (2x)(1) + (2y)(3t<sup>2</sup>) = 2x + 6yt<sup>2</sup>. Con x = t, y = t<sup>3</sup>: <b>2t + 6t<sup>5</sup></b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M4P1" data-tema="regla_cadena" data-level="resuelto" data-module="4">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Verifica sustituyendo primero: si f = t<sup>2</sup> + t<sup>6</sup>, ¿cuál es df/dt?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2t + 6t<sup>5</sup></button>
+              <button class="opt" data-ok="0">2t + 6t<sup>6</sup></button>
+              <button class="opt" data-ok="0">2 + 6t<sup>5</sup></button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ f = t<sup>2</sup> + t<sup>6</sup> deriva a 2t + 6t<sup>5</sup>: coincide con la cadena.</p><p class="nudge">✕ Deriva t<sup>6</sup> con la regla de potencia: 6t<sup>5</sup>, no 6t<sup>6</sup>. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M4P2" data-tema="regla_cadena" data-level="guiado" data-module="4">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Para f(x, y) = x<sup>2</sup> y con x = t, y = t<sup>2</sup>, ¿cuánto vale df/dt en términos de t?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">4t<sup>3</sup></button>
+              <button class="opt" data-ok="0">3t<sup>2</sup></button>
+              <button class="opt" data-ok="0">2t<sup>3</sup></button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (2xy)(1) + (x<sup>2</sup>)(2t) = 2t<sup>3</sup> + 2t<sup>3</sup> = 4t<sup>3</sup>. Sustituyendo: f = t<sup>4</sup>, df/dt = 4t<sup>3</sup>.</p><p class="nudge">✕ Pista: ∂f/∂x = 2xy, ∂f/∂y = x<sup>2</sup>, dy/dt = 2t. Suma los dos caminos. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="regla_cadena" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Con f(x, y) = x + y<sup>2</sup>, x = t<sup>2</sup>, y = t, calcula df/dt en términos de t.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">4t</button>
+              <button class="opt" data-ok="0">2t + 1</button>
+              <button class="opt" data-ok="0">2t</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (1)(2t) + (2y)(1) = 2t + 2t = 4t. Sustituyendo: f = 2t<sup>2</sup>, df/dt = 4t.</p><p class="nudge">✕ Cada parcial se multiplica por la derivada de su variable en t; no olvides dx/dt = 2t. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
@@ -487,6 +694,52 @@
           <button class="opt" data-ok="0">6/5</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ ∇f(1, 1) = (2, 1) y u = (3/5, 4/5): 2·(3/5) + 1·(4/5) = 6/5 + 4/5 = 2.</p><p class="nudge">✕ El gradiente es (2x, 1) = (2, 1). Normaliza (3, 4) a (3/5, 4/5) y haz el producto punto. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres derivadas direccionales: gradiente, rumbo unitario y producto punto. Recuerda normalizar antes de operar.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Derivada direccional</strong> de f(x, y) = x<sup>2</sup> + y<sup>2</sup> en (1, 2), hacia (4, 3).</p>
+          <div class="work"><p class="wl">Gradiente: ∇f = (2x, 2y); en (1, 2) da <b>(2, 4)</b>.</p><p class="wl">Rumbo unitario: (4, 3) mide √(16 + 9) = √25 = 5, así que u = <b>(4/5, 3/5)</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M5P1" data-tema="derivada_direccional" data-level="resuelto" data-module="5">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Ahora el producto punto (2, 4) · (4/5, 3/5). ¿Cuánto da D<sub>u</sub>f?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">4</button>
+              <button class="opt" data-ok="0">20</button>
+              <button class="opt" data-ok="0">6</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2·(4/5) + 4·(3/5) = 8/5 + 12/5 = 20/5 = 4.</p><p class="nudge">✕ Multiplica cada coordenada con la del rumbo <strong>unitario</strong>; si sale 20, usaste (4, 3) sin normalizar. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M5P2" data-tema="derivada_direccional" data-level="guiado" data-module="5">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Para f(x, y) = xy en (1, 2), hacia (3, 4), ¿cuánto vale la derivada direccional?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2</button>
+              <button class="opt" data-ok="0">10</button>
+              <button class="opt" data-ok="0">3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∇f(1, 2) = (2, 1) y u = (3/5, 4/5): 2·(3/5) + 1·(4/5) = 10/5 = 2.</p><p class="nudge">✕ Pista: ∇f = (y, x); normaliza (3, 4) a (3/5, 4/5) y haz el producto punto. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="derivada_direccional" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sobre f(x, y) = x<sup>2</sup> + y<sup>2</sup>, ¿en qué dirección crece más rápido en (3, 4) y cuál es esa tasa máxima?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Hacia (6, 8), con tasa máxima 10</button>
+              <button class="opt" data-ok="0">Hacia (3, 4), con tasa máxima 5</button>
+              <button class="opt" data-ok="0">Hacia (6, 8), con tasa máxima 14</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La subida máxima va por ∇f(3, 4) = (6, 8), y su tasa es |∇f| = √(36 + 64) = 10.</p><p class="nudge">✕ La dirección es el gradiente y la tasa máxima es su longitud (Pitágoras), no la suma. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
     </section>
@@ -549,6 +802,52 @@
           <button class="opt" data-ok="0">6x</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ ∂f/∂x = 3x<sup>2</sup> y, y al derivar otra vez por x queda 6xy.</p><p class="nudge">✕ 3x<sup>2</sup> y es solo la primera parcial; deriva una vez más, sin soltar la y. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres derivadas de orden superior: deriva una parcial otra vez y comprueba que el orden no cambia el resultado.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Deriva dos veces por x</strong> la función f(x, y) = x<sup>2</sup> y<sup>3</sup>.</p>
+          <div class="work"><p class="wl">Primera parcial por x: ∂f/∂x = <b>2xy<sup>3</sup></b> (la y<sup>3</sup> es factor constante).</p><p class="wl">Derivas otra vez por x, con la y<sup>3</sup> congelada: la x desaparece.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="orden_superior" data-level="resuelto" data-module="6">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto vale ∂<sup>2</sup>f/∂x<sup>2</sup>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2y<sup>3</sup></button>
+              <button class="opt" data-ok="0">2xy<sup>3</sup></button>
+              <button class="opt" data-ok="0">6x<sup>2</sup> y<sup>2</sup></button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∂f/∂x = 2xy<sup>3</sup> y al derivar de nuevo por x queda 2y<sup>3</sup>.</p><p class="nudge">✕ 2xy<sup>3</sup> es la primera parcial; deriva una vez más por x. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="orden_superior" data-level="guiado" data-module="6">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Para f = x<sup>2</sup> y, la cruzada ∂<sup>2</sup>f/∂x∂y (deriva por x, luego por y). ¿Cuánto vale?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2x</button>
+              <button class="opt" data-ok="0">2xy</button>
+              <button class="opt" data-ok="0">x<sup>2</sup></button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∂f/∂x = 2xy y al derivar por y queda 2x. Por Clairaut, ∂<sup>2</sup>f/∂y∂x da lo mismo.</p><p class="nudge">✕ Pista: primero ∂/∂x = 2xy; ahora deriva eso por y (la x es factor). Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="orden_superior" data-level="examen" data-module="6">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Para f(x, y) = x<sup>3</sup> + xy<sup>2</sup>, calcula ∂<sup>2</sup>f/∂x<sup>2</sup>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">6x</button>
+              <button class="opt" data-ok="0">6x + 2y</button>
+              <button class="opt" data-ok="0">3x<sup>2</sup> + y<sup>2</sup></button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∂f/∂x = 3x<sup>2</sup> + y<sup>2</sup>; derivando otra vez por x: 6x (la y<sup>2</sup> es constante, da 0).</p><p class="nudge">✕ Al derivar y<sup>2</sup> respecto a x da 0, no 2y. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Última idea →</button></div>
     </section>
@@ -627,6 +926,53 @@
 
       <nav class="nav-lecs"><a href="C4_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C4_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres preguntas para separar derivable de diferenciable sin confundirlas, de lo acompañado a la voz de examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Derivable no es diferenciable.</strong> Repasa qué pide cada palabra.</p>
+          <div class="work"><p class="wl">Existen las dos parciales → f es <b>derivable</b>: dos direcciones bien medidas.</p><p class="wl">El plano tangente se pega en <b>todas</b> las direcciones → f es <b>diferenciable</b>: más fuerte.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="diferenciabilidad" data-level="resuelto" data-module="7">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Si en un punto existen ∂f/∂x y ∂f/∂y, ¿f es automáticamente diferenciable ahí?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">No: además el plano tangente debe aproximar bien en todas las direcciones</button>
+              <button class="opt" data-ok="0">Sí: existir las dos parciales ya la hace diferenciable</button>
+              <button class="opt" data-ok="0">No: falta que las parciales valgan cero</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Derivable mira dos direcciones; diferenciable pide que el plano se pegue en todas.</p><p class="nudge">✕ Hay funciones con las dos parciales que no son diferenciables. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="diferenciabilidad" data-level="guiado" data-module="7">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>¿Qué garantiza que f sea diferenciable en un punto sin revisar cada dirección?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Que sus parciales sean continuas cerca del punto</button>
+              <button class="opt" data-ok="0">Que exista al menos una parcial</button>
+              <button class="opt" data-ok="0">Que f valga cero en el punto</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Si las parciales son continuas cerca del punto, la diferenciabilidad queda garantizada.</p><p class="nudge">✕ Pista: no basta con que exista una parcial; piensa en la continuidad de ambas. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="diferenciabilidad" data-level="examen" data-module="7">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Un terreno tiene sus dos parciales en (0, 0), pero en una diagonal cae en un pliegue y el plano no se pega ahí.</p>
+            <p class="prob-q">¿Cómo es f en (0, 0)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Derivable pero no diferenciable</button>
+              <button class="opt" data-ok="0">Diferenciable, porque las parciales existen</button>
+              <button class="opt" data-ok="0">Ni derivable ni diferenciable</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Las parciales existen (derivable), pero el plano falla en la diagonal (no diferenciable).</p><p class="nudge">✕ Tener las dos parciales ya la hace derivable; el pliegue rompe solo la diferenciabilidad. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 

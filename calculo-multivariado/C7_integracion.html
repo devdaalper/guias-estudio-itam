@@ -150,6 +150,29 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*practica*/
+  .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
+  .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
+  .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
+  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .p-res{background:var(--green-tint);color:var(--green-deep)}
+  .p-res b{color:var(--green-deep)}
+  .p-gui{background:var(--cream);color:var(--deep)}
+  .p-gui b{color:var(--deep)}
+  .p-ex{background:var(--red-tint);color:#a01243}
+  .p-ex b{color:#a01243}
+  .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
+  .prob-q strong{font-weight:800}
+  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prob .check{background:#fff;border-color:var(--line)}
+  .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
+  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl b{color:var(--ink);font-weight:800}
+  .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
+  .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
   .sec{gap:17px}
   .idea{line-height:1.72}
@@ -254,6 +277,53 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ La doble suma columnitas: 1 + 2 + 2 + 3 = 8.</p><p class="nudge">✕ No es el área ni el producto: suma las alturas de las cuatro columnitas. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Qué suma la integral doble y por qué con f = 1 sale el área. El primero lo armamos juntos; en los siguientes te suelto de a poco.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Aproxima el volumen.</strong> Un piso de 2 × 2 se parte en 4 baldosas de 1 × 1. Sobre ellas el terreno mide 2, 3, 3 y 4 de alto.</p>
+          <div class="work"><p class="wl">Cada baldosa mide 1 de área, así que cada columnita aporta <b>justo su altura</b>.</p><p class="wl">Falta sumar las cuatro: 2 + 3 + 3 + 4.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M1P1" data-tema="integral_doble" data-level="resuelto" data-module="1">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto da esa suma?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">12, sumando las cuatro alturas</button>
+              <button class="opt" data-ok="0">4, que es el área del piso</button>
+              <button class="opt" data-ok="0">72, multiplicando las cuatro alturas</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La doble suma las columnitas: 2 + 3 + 3 + 4 = 12.</p><p class="nudge">✕ No es el área ni el producto: suma las cuatro alturas. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M1P2" data-tema="integral_doble" data-level="guiado" data-module="1">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>¿Cuánto vale ∬ 1 dA sobre un rectángulo de base 3 y altura 4?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">12, porque ∬ 1 dA da el área: 3 · 4</button>
+              <button class="opt" data-ok="0">7, sumando 3 + 4</button>
+              <button class="opt" data-ok="0">1, porque la función vale 1</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Con f = 1 la doble suma los dA y da el área: 3 · 4 = 12.</p><p class="nudge">✕ Pista: ∬ 1 dA es el área de la región, base por altura. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="integral_doble" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea R el rectángulo [0, 2] × [0, 5] del plano.</p>
+            <p class="q">Evalúa ∬<sub>R</sub> dA.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">10, el área de R: 2 · 5</button>
+              <button class="opt" data-ok="0">14, su perímetro: 2 · (2 + 5)</button>
+              <button class="opt" data-ok="0">7, la suma 2 + 5</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∬<sub>R</sub> dA es el área: 2 · 5 = 10.</p><p class="nudge">✕ ∬ dA da área, no perímetro. Multiplica los lados. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
@@ -312,6 +382,53 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ La antiderivada de la constante 3 es 3y; evaluada de 0 a 2 da 6.</p><p class="nudge">✕ Antideriva primero (3 → 3y) y evalúa arriba menos abajo. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">El motor de la iterada: antiderivar y evaluar el corchete arriba menos abajo. Primero contigo, después vas soltándote.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Calcula ∫<sub>1</sub><sup>3</sup> x dx</strong> con la receta del corchete.</p>
+          <div class="work"><p class="wl">La antiderivada de x es <b>x²/2</b> (sube el exponente y divide).</p><p class="wl">Evalúa arriba menos abajo: 3²/2 − 1²/2 = 9/2 − 1/2.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M2P1" data-tema="integral_iterada" data-level="resuelto" data-module="2">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto vale 9/2 − 1/2?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">4</button>
+              <button class="opt" data-ok="0">9/2, olvidando restar el límite de abajo</button>
+              <button class="opt" data-ok="0">5, sumando en vez de restar</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 9/2 − 1/2 = 8/2 = 4. El corchete siempre resta abajo del arriba.</p><p class="nudge">✕ Resta (no sumes) y no olvides el límite de abajo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M2P2" data-tema="integral_iterada" data-level="guiado" data-module="2">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Con la misma receta, ¿cuánto vale ∫<sub>0</sub><sup>4</sup> 2 dy?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">8, porque la antiderivada de 2 es 2y y [ 2y ]<sub>0</sub><sup>4</sup> = 8</button>
+              <button class="opt" data-ok="0">2, la constante no cambia al integrar</button>
+              <button class="opt" data-ok="0">6, sumando 2 + 4</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La antiderivada de la constante 2 es 2y; de 0 a 4 da 8.</p><p class="nudge">✕ Pista: antideriva primero (2 → 2y) y evalúa arriba menos abajo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="integral_iterada" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Resuelve la iterada ∫<sub>0</sub><sup>3</sup> ∫<sub>0</sub><sup>2</sup> x dx dy, de adentro hacia afuera.</p>
+            <p class="q">¿Cuál es su valor?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">6</button>
+              <button class="opt" data-ok="0">2, olvidando integrar la de afuera</button>
+              <button class="opt" data-ok="0">12, sin dividir entre 2 al integrar x</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Por dentro ∫<sub>0</sub><sup>2</sup> x dx = 2; por fuera ∫<sub>0</sub><sup>3</sup> 2 dy = 6.</p><p class="nudge">✕ Resuelve las dos: la de adentro da una constante y la de afuera la integra. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
 
@@ -369,6 +486,53 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ En dy dx: ∫<sub>0</sub><sup>3</sup> y dy = 9/2, por 2 da 9. En dx dy: ∫<sub>0</sub><sup>2</sup> y dx = 2y, e ∫<sub>0</sub><sup>3</sup> 2y dy = 9. Iguales.</p><p class="nudge">✕ Integra un orden completo: primero por dentro, luego por fuera. Cuidado con el 1/2 de la potencia. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Fubini en acción: en un rectángulo el orden es libre y el total no cambia. Empezamos juntos y terminas sin ayuda.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Sobre el rectángulo 0 ≤ x ≤ 2, 0 ≤ y ≤ 3, integra f = x.</strong> Por Fubini eliges el orden.</p>
+          <div class="work"><p class="wl">En dy dx, por dentro ∫<sub>0</sub><sup>3</sup> x dy = <b>3x</b> (x es constante en y).</p><p class="wl">Por fuera ∫<sub>0</sub><sup>2</sup> 3x dx = [ 3x²/2 ]<sub>0</sub><sup>2</sup> = <b>6</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M3P1" data-tema="fubini" data-level="resuelto" data-module="3">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Por el otro orden (dx dy), ¿da lo mismo?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Sí, 6: Fubini garantiza el mismo total</button>
+              <button class="opt" data-ok="0">No: al cambiar el orden cambia el resultado</button>
+              <button class="opt" data-ok="0">Sí, pero solo si la región crece</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Los dos órdenes dan 6. Sobre un rectángulo, Fubini deja elegir el que convenga.</p><p class="nudge">✕ En un rectángulo el orden nunca cambia el total. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M3P2" data-tema="fubini" data-level="guiado" data-module="3">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Sobre el mismo rectángulo 0 ≤ x ≤ 2, 0 ≤ y ≤ 3, ¿cuánto vale ∬ y dA?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">9</button>
+              <button class="opt" data-ok="0">6</button>
+              <button class="opt" data-ok="0">18</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ En dx dy: ∫<sub>0</sub><sup>2</sup> y dx = 2y, e ∫<sub>0</sub><sup>3</sup> 2y dy = 9. Igual en el otro orden.</p><p class="nudge">✕ Pista: integra un orden completo y cuida el 1/2 de la potencia. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="fubini" data-level="examen" data-module="3">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Te dan ∬<sub>R</sub> f dy dx sobre el rectángulo R = [a, b] × [c, d], con f continua.</p>
+            <p class="q">¿Puedes reescribirla como ∫<sub>c</sub><sup>d</sup> ∫<sub>a</sub><sup>b</sup> f dx dy sin tocar los límites?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Sí: en un rectángulo Fubini permite intercambiar el orden</button>
+              <button class="opt" data-ok="0">No: al invertir siempre cambian los límites</button>
+              <button class="opt" data-ok="0">Solo si f no depende de y</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Rectángulo + f continua = Fubini: los cuatro límites son constantes y se copian.</p><p class="nudge">✕ En un rectángulo los límites no dependen de la otra variable. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -424,6 +588,53 @@
           <button class="opt" data-ok="0">x de 0 a 2 por fuera; y de 0 a 2 por dentro</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Afuera x entre las constantes 0 y 2; adentro y hasta la curva 2x.</p><p class="nudge">✕ El límite de afuera debe ser constante y el de adentro puede depender de x. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Armar límites tipo I y tipo II sin confundir cuál depende de cuál. El primero lo hacemos juntos; luego te suelto.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Arma los límites tipo I del triángulo</strong> con esquinas (0, 0), (1, 0) y (1, 1). Su borde inclinado es y = x.</p>
+          <div class="work"><p class="wl">Por fuera, x corre entre las constantes <b>0 y 1</b>.</p><p class="wl">Por dentro, para cada x, y sube de 0 hasta la diagonal <b>y = x</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M4P1" data-tema="region_general" data-level="resuelto" data-module="4">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuál es el planteo correcto?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x de 0 a 1 por fuera; y de 0 a x por dentro</button>
+              <button class="opt" data-ok="0">x de 0 a x por fuera; y de 0 a 1 por dentro</button>
+              <button class="opt" data-ok="0">x de 0 a 1 por fuera; y de 0 a 1 por dentro</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Afuera x entre las constantes 0 y 1; adentro y de 0 hasta la curva y = x.</p><p class="nudge">✕ El límite de afuera debe ser constante, no depender de x. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M4P2" data-tema="region_general" data-level="guiado" data-module="4">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Región: para cada x entre 0 y 3, y sube de 0 a x². ¿Cuál es su planteo tipo I?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x de 0 a 3 por fuera; y de 0 a x² por dentro</button>
+              <button class="opt" data-ok="0">x de 0 a x² por fuera; y de 0 a 3 por dentro</button>
+              <button class="opt" data-ok="0">x de 0 a 3 por fuera; y de 0 a 3 por dentro</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Afuera x entre las constantes 0 y 3; adentro y hasta la curva x².</p><p class="nudge">✕ Pista: afuera constante, adentro puede depender de x. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="region_general" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Un compañero plantea ∫<sub>0</sub><sup>y</sup> ∫<sub>0</sub><sup>1</sup> f dy dx para una región del plano.</p>
+            <p class="q">¿Qué está mal en ese planteo?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">La de afuera va de 0 a y: depende de la variable de adentro, y eso no se permite</button>
+              <button class="opt" data-ok="0">Nada: es un planteo válido de tipo I</button>
+              <button class="opt" data-ok="0">El orden dy dx nunca se puede usar</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Los límites de afuera son siempre constantes; una y suelta al final no tiene valor.</p><p class="nudge">✕ Fíjate si el límite de afuera es constante o no. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
@@ -482,6 +693,53 @@
           <button class="opt" data-ok="0">y de 0 a x por fuera; x de 0 a 1 por dentro</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Para cada y, x va de la recta x = y hasta x = 1. La región es la misma.</p><p class="nudge">✕ Fija una y y mira entre qué valores corre x en el triángulo. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Invertir el orden: la misma región descrita al revés. Primero contigo, después sin ayuda como en el examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Invierte el orden.</strong> La región entre y = x² y y = x viene como dy dx: x de 0 a 1, y de x² a x.</p>
+          <div class="work"><p class="wl">Despeja x en cada frontera: de y = x² sale <b>x = √y</b>; de y = x sale <b>x = y</b>.</p><p class="wl">En 0 ≤ y ≤ 1 se cumple y ≤ √y, así que x cruza de x = y a x = √y.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M5P1" data-tema="cambio_orden" data-level="resuelto" data-module="5">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuál es el orden invertido dx dy?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">y de 0 a 1 por fuera; x de y a √y por dentro</button>
+              <button class="opt" data-ok="0">y de 0 a 1 por fuera; x de √y a y por dentro</button>
+              <button class="opt" data-ok="0">x de 0 a 1 por fuera; y de x² a x por dentro</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Para cada y, x va de la recta x = y a la parábola x = √y.</p><p class="nudge">✕ La recta x = y queda a la izquierda; el menor va abajo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M5P2" data-tema="cambio_orden" data-level="guiado" data-module="5">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>El triángulo 0 ≤ y ≤ x ≤ 1 viene como x de 0 a 1, y de 0 a x. Inviértelo a dx dy.</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">y de 0 a 1 por fuera; x de y a 1 por dentro</button>
+              <button class="opt" data-ok="0">y de 0 a 1 por fuera; x de 0 a y por dentro</button>
+              <button class="opt" data-ok="0">y de 0 a x por fuera; x de 0 a 1 por dentro</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Para cada y, x va de la recta x = y hasta x = 1. Misma región.</p><p class="nudge">✕ Pista: fija una y y mira entre qué valores corre x en el triángulo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="cambio_orden" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Aparece ∫<sub>0</sub><sup>1</sup> ∫<sub>y</sub><sup>1</sup> f(x, y) dx dy y te piden invertir el orden a dy dx.</p>
+            <p class="q">¿Qué límites quedan?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x de 0 a 1 por fuera; y de 0 a x por dentro</button>
+              <button class="opt" data-ok="0">x de 0 a 1 por fuera; y de x a 1 por dentro</button>
+              <button class="opt" data-ok="0">x de y a 1 por fuera; y de 0 a 1 por dentro</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La región es el triángulo 0 ≤ y ≤ x ≤ 1; por columnas, x de 0 a 1 y y de 0 a x.</p><p class="nudge">✕ Dibuja x = y: para una x fija, y va de 0 a esa recta. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
     </section>
@@ -554,6 +812,53 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ ∫<sub>0</sub><sup>4</sup> r dr = 8, por 2π da 16π = π·4².</p><p class="nudge">✕ Integra r de 0 a 4 (no olvides el factor r) y multiplica por 2π. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Cambiar a polares con el jacobiano r y calcular áreas de discos. Empezamos juntos y terminas sin ayuda.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Área del disco de radio 1 en polares:</strong> r de 0 a 1, θ de 0 a 2π. Recuerda dA = r dr dθ.</p>
+          <div class="work"><p class="wl">Por dentro ∫<sub>0</sub><sup>1</sup> r dr = [ r²/2 ]<sub>0</sub><sup>1</sup> = <b>1/2</b> (no olvides el factor r).</p><p class="wl">Por fuera ∫<sub>0</sub><sup>2π</sup> (1/2) dθ = (1/2)(2π).</p></div>
+          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="cambio_variable" data-level="resuelto" data-module="6">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto da (1/2)(2π)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">π</button>
+              <button class="opt" data-ok="0">2π, olvidando el factor r</button>
+              <button class="opt" data-ok="0">1/2, sin integrar en θ</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (1/2)(2π) = π, el área del disco unitario. El factor r no es opcional.</p><p class="nudge">✕ Multiplica 1/2 por 2π; no olvides el factor r del jacobiano. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="cambio_variable" data-level="guiado" data-module="6">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Con dA = r dr dθ, ¿cuánto vale el área del disco de radio 3 (r de 0 a 3, θ de 0 a 2π)?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">9π</button>
+              <button class="opt" data-ok="0">6π, si olvidas el factor r</button>
+              <button class="opt" data-ok="0">18π, si usas r² por error</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∫<sub>0</sub><sup>3</sup> r dr = 9/2; por 2π da 9π = π · 3².</p><p class="nudge">✕ Pista: integra r (no 1 ni r²) de 0 a 3 y multiplica por 2π. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="cambio_variable" data-level="examen" data-module="6">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Un examen pide ∬<sub>D</sub> dA con D el disco r ≤ 5, escrito en polares.</p>
+            <p class="q">¿Cuál integral y valor son correctos?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>5</sup> r dr dθ = 25π</button>
+              <button class="opt" data-ok="0">∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>5</sup> dr dθ = 10π</button>
+              <button class="opt" data-ok="0">∫<sub>0</sub><sup>2π</sup> ∫<sub>0</sub><sup>5</sup> r² dr dθ</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Con el jacobiano r: 2π · (5²/2) = 25π = π · 5².</p><p class="nudge">✕ El elemento en polares lleva el factor r; sin él el número sale mal. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
 
@@ -607,6 +912,53 @@
           <button class="opt" data-ok="0">6, el área de una cara</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Con f = 1 la triple da el volumen: 2 · 2 · 3 = 12.</p><p class="nudge">✕ El volumen de una caja es el producto de sus tres lados. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Plantear triples y leer el dV; con f = 1 sale el volumen. El primero lo armamos juntos; luego te suelto de a poco.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>El volumen de la caja 0 ≤ x ≤ 1, 0 ≤ y ≤ 2, 0 ≤ z ≤ 4 es ∭ 1 dV.</strong> Resuélvela de adentro hacia afuera.</p>
+          <div class="work"><p class="wl">Con f = 1 y cajitas dV = dx dy dz, cada integral aporta el largo de su lado.</p><p class="wl">El volumen es el producto de los tres lados: 1 · 2 · 4.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="integral_triple" data-level="resuelto" data-module="7">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto da 1 · 2 · 4?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">8, el producto de los tres lados</button>
+              <button class="opt" data-ok="0">7, sumando los tres lados</button>
+              <button class="opt" data-ok="0">2, el área de la base 1 · 2</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Con f = 1 la triple da el volumen: 1 · 2 · 4 = 8.</p><p class="nudge">✕ El volumen es el producto de los tres lados, no la suma ni una cara. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="integral_triple" data-level="guiado" data-module="7">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>El volumen de la caja 0 ≤ x ≤ 2, 0 ≤ y ≤ 2, 0 ≤ z ≤ 5 es ∭ 1 dV. ¿Cuánto vale?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">20, el producto 2 · 2 · 5</button>
+              <button class="opt" data-ok="0">9, sumando 2 + 2 + 5</button>
+              <button class="opt" data-ok="0">10, solo una cara 2 · 5</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Con f = 1: 2 · 2 · 5 = 20.</p><p class="nudge">✕ Pista: multiplica los tres lados, no los sumes. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="integral_triple" data-level="examen" data-module="7">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea E la caja [0, 3] × [0, 3] × [0, 2].</p>
+            <p class="q">Evalúa ∭<sub>E</sub> dV.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">18, el volumen 3 · 3 · 2</button>
+              <button class="opt" data-ok="0">8, la suma de los lados</button>
+              <button class="opt" data-ok="0">9, una cara 3 · 3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∭<sub>E</sub> dV es el volumen: 3 · 3 · 2 = 18.</p><p class="nudge">✕ Multiplica los tres lados de la caja. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C7_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Última idea →</button></div>
     </section>
@@ -683,6 +1035,53 @@
 
       <nav class="nav-lecs"><a href="C7_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C7_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Los dos jacobianos del espacio: r en cilíndricas y ρ²·sen φ en esféricas. Cierras la unidad tú sola.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Volumen de la esfera de radio 1 en esféricas:</strong> ρ de 0 a 1, φ de 0 a π, θ de 0 a 2π. Los tres factores se separan.</p>
+          <div class="work"><p class="wl">∫<sub>0</sub><sup>1</sup> ρ² dρ = <b>1/3</b>, ∫<sub>0</sub><sup>π</sup> sen φ dφ = <b>2</b>, ∫<sub>0</sub><sup>2π</sup> dθ = <b>2π</b>.</p><p class="wl">Multiplica los tres: (1/3) · 2 · 2π.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M8P1" data-tema="coordenadas_3d" data-level="resuelto" data-module="8">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">¿Cuánto da (1/3) · 2 · 2π?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">4π/3</button>
+              <button class="opt" data-ok="0">2π/3, si olvidas el factor 2 de la integral en φ</button>
+              <button class="opt" data-ok="0">4π, si no divides ρ² entre 3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (1/3) · 2 · 2π = 4π/3, justo (4/3)π con R = 1.</p><p class="nudge">✕ Multiplica los tres factores: 1/3, 2 y 2π. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M8P2" data-tema="coordenadas_3d" data-level="guiado" data-module="8">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Con dV = ρ²·sen φ dρ dφ dθ, el volumen de la esfera de radio 3 (ρ de 0 a 3, φ de 0 a π, θ de 0 a 2π). ¿Cuánto da?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">36π</button>
+              <button class="opt" data-ok="0">18π, si te falta el factor 2 de la integral en φ</button>
+              <button class="opt" data-ok="0">108π, si no divides ρ³ entre 3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∫<sub>0</sub><sup>3</sup> ρ² dρ = 9; por 2 y por 2π da 36π = (4/3)π · 3³.</p><p class="nudge">✕ Pista: separa los tres factores; el de ρ usa ρ³/3 hasta 3. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="coordenadas_3d" data-level="examen" data-module="8">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Volumen del cilindro de radio 1 y altura 6 en cilíndricas, con dV = r dz dr dθ.</p>
+            <p class="q">¿Cuánto da?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">6π, que es π · R² · h = π · 1² · 6</button>
+              <button class="opt" data-ok="0">12π, si olvidas el factor r</button>
+              <button class="opt" data-ok="0">4π, si usas r² en vez de r</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Con el factor r: 2π · (1/2) · 6 = 6π = π · 1² · 6.</p><p class="nudge">✕ El jacobiano de cilíndricas es r, no 1 ni r². Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C7_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 

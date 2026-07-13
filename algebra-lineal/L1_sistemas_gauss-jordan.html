@@ -153,6 +153,29 @@
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
+  /*practica*/
+  .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
+  .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
+  .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
+  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .p-res{background:var(--green-tint);color:var(--green-deep)}
+  .p-res b{color:var(--green-deep)}
+  .p-gui{background:var(--cream);color:var(--deep)}
+  .p-gui b{color:var(--deep)}
+  .p-ex{background:var(--red-tint);color:#a01243}
+  .p-ex b{color:#a01243}
+  .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
+  .prob-q strong{font-weight:800}
+  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prob .check{background:#fff;border-color:var(--line)}
+  .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
+  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl b{color:var(--ink);font-weight:800}
+  .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
+  .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
   .sec{gap:17px}
   .idea{line-height:1.72}
@@ -262,6 +285,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Cada nota se traduce tal cual: 3 lápices y 1 cuaderno dan 25; 2 y 2 dan 30.</p><p class="nudge">✕ Traduce nota por nota: el número junto a L cuenta lápices y el total va después del igual.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para plantear un sistema. El primero lo armamos juntos; en los siguientes te voy soltando de a poco.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Traduce las notas.</strong> Dos panes y un jugo cuestan $22; un pan y un jugo cuestan $14. Con p y j como precios.</p>
+          <div class="work"><p class="wl">Traduce nota por nota: dos panes y un jugo dan <b>2p + j = 22</b>.</p><p class="wl">El jugo va solo: su coeficiente es un <b>1 invisible</b>. Segunda nota: <b>p + j = 14</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M1P1" data-tema="sistema_modelado" data-level="resuelto" data-module="1">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Entonces, ¿cuál sistema traduce las dos notas?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2p + j = 22 y p + j = 14</button>
+              <button class="opt" data-ok="0">2p + j = 14 y p + j = 22</button>
+              <button class="opt" data-ok="0">2p + 2j = 22 y p + j = 14</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada nota se vuelve una ecuación con su total, y el jugo solo lleva su 1 invisible.</p><p class="nudge">✕ Empareja cada nota con su total; no cruces el 22 con el 14. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M1P2" data-tema="sistema_tamano" data-level="guiado" data-module="1">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>En el sistema 3x + 2y − z = 5 y x − y = 4</strong>, ¿cuántas ecuaciones (m) y cuántas incógnitas (n) hay?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">m = 2 ecuaciones y n = 3 incógnitas</button>
+              <button class="opt" data-ok="0">m = 3 ecuaciones y n = 2 incógnitas</button>
+              <button class="opt" data-ok="0">m = 2 ecuaciones y n = 2 incógnitas</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Dos renglones son dos ecuaciones (m = 2); las letras distintas x, y, z son tres incógnitas (n = 3).</p><p class="nudge">✕ Pista: m cuenta ecuaciones (renglones); n cuenta letras distintas. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="sistema_modelado" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Plantea el sistema lineal: 3 boletos de adulto y 2 de niño cuestan $34; 1 de adulto y 4 de niño cuestan $28. Usa a y n.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">3a + 2n = 34 y a + 4n = 28</button>
+              <button class="opt" data-ok="0">2a + 3n = 34 y 4a + n = 28</button>
+              <button class="opt" data-ok="0">3a + 2n = 28 y a + 4n = 34</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada compra es una ecuación: 3 adultos y 2 niños dan 34; 1 adulto y 4 niños dan 28.</p><p class="nudge">✕ Coloca cada cantidad junto a su incógnita y cada total tras su igual. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
 
@@ -324,6 +393,52 @@
           <button class="opt" data-ok="0">Indeterminado: cualquier pareja funciona</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ La misma suma no puede valer 4 y 6 al mismo tiempo: conjunto vacío, rectas paralelas.</p><p class="nudge">✕ Pregunta si una misma pareja puede cumplir las dos ecuaciones al mismo tiempo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas sobre soluciones y consistencia. Vamos del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>¿Es (3, 1) solución</strong> del sistema 2x + y = 7 y x − y = 2?</p>
+          <div class="work"><p class="wl">Prueba la primera: 2·3 + 1 = 6 + 1 = <b>7</b> ✓, justo lo que pide.</p><p class="wl">Prueba la segunda: 3 − 1 = <b>2</b> ✓. Las dos se cumplen con la misma pareja.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M2P1" data-tema="conjunto_solucion" data-level="resuelto" data-module="2">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Entonces, ¿(3, 1) es solución del sistema?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Sí: cumple las dos ecuaciones a la vez</button>
+              <button class="opt" data-ok="0">No: solo cumple la primera</button>
+              <button class="opt" data-ok="0">No se puede saber sin dibujar</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2·3 + 1 = 7 y 3 − 1 = 2: la misma pareja satisface ambas, así que sí es solución.</p><p class="nudge">✕ Una solución debe cumplir las dos; revisa que ninguna falle. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M2P2" data-tema="consistencia" data-level="guiado" data-module="2">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Clasifica</strong> el sistema x + y = 5 y 2x + 2y = 10.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Consistente indeterminado: infinitas soluciones</button>
+              <button class="opt" data-ok="0">Inconsistente: ninguna solución</button>
+              <button class="opt" data-ok="0">Consistente determinado: una sola solución</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La segunda ecuación es 2 veces la primera: misma recta, infinitas soluciones comunes.</p><p class="nudge">✕ Pista: ¿es 2x + 2y = 10 un múltiplo de x + y = 5? Si sí, son la misma recta. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="consistencia" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Un sistema lineal consistente, ¿cuántas soluciones puede tener exactamente?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Una o infinitas</button>
+              <button class="opt" data-ok="0">Siempre exactamente una</button>
+              <button class="opt" data-ok="0">Cualquier cantidad, incluso exactamente dos</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Consistente = conjunto no vacío: determinado (una) o indeterminado (infinitas). Nunca exactamente dos.</p><p class="nudge">✕ Recuerda los tres finales posibles: una, ninguna o infinitas. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
     </section>
@@ -390,6 +505,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ La y de la primera ecuación entra negativa (−1) y la x sola vale 1.</p><p class="nudge">✕ Cuida el signo de −y y el 1 invisible de la x sola. Intenta de nuevo.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para pasar del sistema a la tabla y de vuelta. Vamos del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Arma la matriz aumentada</strong> del sistema 2x + 3y = 13 y x + 2y = 8.</p>
+          <div class="work"><p class="wl">Primer renglón: los coeficientes 2 y 3, y el total tras la barra: <b>[2, 3 | 13]</b>.</p><p class="wl">Segundo renglón: la x sola vale 1, así que <b>[1, 2 | 8]</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M3P1" data-tema="matriz_aumentada" data-level="resuelto" data-module="3">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Entonces, ¿cuál es la matriz aumentada completa?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Renglones [2, 3 | 13] y [1, 2 | 8]</button>
+              <button class="opt" data-ok="0">Renglones [2, 3 | 13] y [2, 2 | 8]</button>
+              <button class="opt" data-ok="0">Renglones [13, 2, 3] y [8, 1, 2]</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada renglón guarda su ecuación: coeficientes a la izquierda y el total tras la barra.</p><p class="nudge">✕ La x sola vale 1, no 2, y los totales van al final. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M3P2" data-tema="matriz_aumentada" data-level="guiado" data-module="3">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>¿Cuál es el renglón</strong> de la ecuación 3x − y = 7 en la matriz aumentada?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">[3, −1 | 7]</button>
+              <button class="opt" data-ok="0">[3, 1 | 7]</button>
+              <button class="opt" data-ok="0">[3, 0 | 7]</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La −y entra con su signo: coeficiente −1. El renglón queda [3, −1 | 7].</p><p class="nudge">✕ Pista: −y significa coeficiente −1, no 1 ni 0. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="matriz_aumentada" data-level="examen" data-module="3">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>La matriz aumentada tiene renglón 1 igual a [1, 0, −2 | 3] (incógnitas x, y, z). Escribe su primera ecuación.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x − 2z = 3</button>
+              <button class="opt" data-ok="0">x + 2z = 3</button>
+              <button class="opt" data-ok="0">x − 2y = 3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 1·x + 0·y + (−2)·z = 3: el 0 borra la y y queda x − 2z = 3.</p><p class="nudge">✕ Devuélvele su letra a cada columna, con signo; el 0 hace desaparecer la suya. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -441,6 +602,52 @@
           <button class="opt" data-ok="0">Sumarle al renglón 2 el triple del renglón 1</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Multiplicar por cero deja el renglón en 0 = 0 y esa información no se recupera.</p><p class="nudge">✕ Busca la movida que destruye información en vez de transformarla. Intenta de nuevo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas con las tres movidas legales. Vamos del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Aplica R2 → R2 − 2·R1</strong> con R1 = [1, 3 | 5] y R2 = [2, 1 | 4].</p>
+          <div class="work"><p class="wl">Resta celda por celda: 2 − 2·1 = <b>0</b>; 1 − 2·3 = <b>−5</b>.</p><p class="wl">Y el total: 4 − 2·5 = <b>−6</b>. El renglón 1 no se toca.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M4P1" data-tema="operaciones_elementales" data-level="resuelto" data-module="4">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Entonces, ¿cuál es el nuevo renglón 2?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">[0, −5 | −6]</button>
+              <button class="opt" data-ok="0">[0, −5 | −6] pero cambiando también R1</button>
+              <button class="opt" data-ok="0">[0, 5 | 6]</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2 − 2 = 0, 1 − 6 = −5, 4 − 10 = −6: el renglón 2 queda [0, −5 | −6] y R1 intacto.</p><p class="nudge">✕ Resta 2 veces cada número de R1 y cuida los signos. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M4P2" data-tema="operaciones_elementales" data-level="guiado" data-module="4">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>¿Cuál de estas movidas NO es válida</strong> porque puede cambiar las soluciones?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Sumarle a un renglón un múltiplo de una columna</button>
+              <button class="opt" data-ok="0">Intercambiar el renglón 1 con el renglón 2</button>
+              <button class="opt" data-ok="0">Multiplicar el renglón 2 por 5</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Las operaciones elementales son por renglón; las columnas jamás se combinan.</p><p class="nudge">✕ Pista: las tres movidas legales trabajan renglones, nunca columnas. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="operaciones_elementales" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sobre R1 = [2, 4 | 6] y R2 = [1, 1 | 2], aplica R1 → R1 − 2·R2. ¿Qué renglón 1 resulta?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">[0, 2 | 2]</button>
+              <button class="opt" data-ok="0">[0, 2 | 4]</button>
+              <button class="opt" data-ok="0">[4, 6 | 10]</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2 − 2·1 = 0, 4 − 2·1 = 2, 6 − 2·2 = 2: el renglón 1 queda [0, 2 | 2].</p><p class="nudge">✕ Resta 2 veces cada entrada de R2, incluido el total. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
     </section>
@@ -508,6 +715,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Arranques en 1 y el pivote de abajo más a la derecha que el de arriba.</p><p class="nudge">✕ Revisa dos cosas: que cada arranque sea un 1 y que la escalera baje hacia la derecha.</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para entrenar el ojo con la escalera de pivotes. Vamos del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Cuenta los 1-pivote</strong> de la matriz con renglones [1, 4, 2 | 7], [0, 1, 3 | 5] y [0, 0, 0 | 0].</p>
+          <div class="work"><p class="wl">Renglón 1 arranca con un 1: <b>pivote</b>. Renglón 2 arranca con un 1: <b>pivote</b>.</p><p class="wl">Renglón 3 es de puros ceros: <b>no aporta pivote</b> y va al fondo.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M5P1" data-tema="escalonada" data-level="resuelto" data-module="5">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Entonces, ¿cuántos 1-pivote tiene la matriz?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Dos</button>
+              <button class="opt" data-ok="0">Tres</button>
+              <button class="opt" data-ok="0">Uno</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Solo los dos renglones no nulos aportan un 1-pivote; el renglón de ceros no cuenta.</p><p class="nudge">✕ Un renglón de puros ceros no tiene 1-pivote. Cuenta solo los no nulos. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M5P2" data-tema="escalonada" data-level="guiado" data-module="5">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>¿Cuál está escalonada?</strong></p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Renglones [1, 2 | 3] y [0, 1 | 4]</button>
+              <button class="opt" data-ok="0">Renglones [1, 2 | 3] y [1, 0 | 4]</button>
+              <button class="opt" data-ok="0">Renglones [0, 1 | 3] y [1, 2 | 4]</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada renglón arranca en 1 y el pivote de abajo cae más a la derecha que el de arriba.</p><p class="nudge">✕ Pista: el pivote del renglón de abajo debe quedar más a la derecha. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="escalonada" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>¿Cuál de estas matrices está en forma escalonada?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">[1, 3, 0 | 2], [0, 0, 1 | 5] y [0, 0, 0 | 0]</button>
+              <button class="opt" data-ok="0">[1, 3, 0 | 2], [0, 0, 0 | 0] y [0, 0, 1 | 5]</button>
+              <button class="opt" data-ok="0">[0, 0, 0 | 0], [1, 3, 0 | 2] y [0, 0, 1 | 5]</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Pivotes en escalera (columnas 1 y 3) y el renglón nulo hasta el fondo: es escalonada.</p><p class="nudge">✕ Los renglones de puros ceros deben ir abajo del todo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
     </section>
 
@@ -549,6 +802,52 @@
           <button class="opt" data-ok="0">x = 6 y y = 2</button>
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Renglón 1: x = 6. Renglón 2: y = −2. Se lee sola.</p><p class="nudge">✕ Devuélvele las letras a cada renglón y lee después de la barra, con su signo.</p></div>
+      </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas sobre la tabla que se lee sola. Vamos del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Lee la solución</strong> de la matriz reducida con renglones [1, 0 | 7] y [0, 1 | −3].</p>
+          <div class="work"><p class="wl">Devuélvele letras: el renglón 1 dice <b>x = 7</b>.</p><p class="wl">El renglón 2 dice <b>y = −3</b>, con su signo. Nada que despejar.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="escalonada_reducida" data-level="resuelto" data-module="6">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Entonces, ¿qué solución anuncia la tabla?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x = 7 y y = −3</button>
+              <button class="opt" data-ok="0">x = 7 y y = 3</button>
+              <button class="opt" data-ok="0">x = 1 y y = 1</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada pivote deja su variable sola: x = 7 y y = −3, leído tras la barra con su signo.</p><p class="nudge">✕ No pierdas el signo del −3 al leer el segundo renglón. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="escalonada_reducida" data-level="guiado" data-module="6">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>¿Cuál está reducida</strong> (no solo escalonada)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Renglones [1, 0 | 5] y [0, 1 | 2]</button>
+              <button class="opt" data-ok="0">Renglones [1, 3 | 5] y [0, 1 | 2]</button>
+              <button class="opt" data-ok="0">Renglones [1, 0 | 5] y [0, 2 | 2]</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Reducida: cada pivote es 1 y arriba de él solo hay ceros. Aquí se cumple.</p><p class="nudge">✕ Pista: revisa que arriba de cada pivote haya un 0 y que el pivote valga 1. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="escalonada_reducida" data-level="examen" data-module="6">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>La matriz escalonada reducida [1, 0, 0 | 2], [0, 1, 0 | −1], [0, 0, 1 | 5] (incógnitas x, y, z). Da la solución.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(x, y, z) = (2, −1, 5)</button>
+              <button class="opt" data-ok="0">(x, y, z) = (2, 1, 5)</button>
+              <button class="opt" data-ok="0">(x, y, z) = (−1, 2, 5)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada renglón fija su variable: x = 2, y = −1, z = 5. Se lee sola, con el signo del −1.</p><p class="nudge">✕ Lee cada renglón en orden y respeta el signo de la segunda entrada. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
@@ -635,6 +934,52 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ 4 − 4·1 = 0: el múltiplo correcto es justo el número que quieres borrar.</p><p class="nudge">✕ Abajo hay un 4 y arriba un 1: ¿cuántas veces restas el renglón 1 para llegar a cero?</p></div>
       </div>
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para recorrer el método con la aritmética a la vista. Vamos del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Primer paso de Gauss-Jordan</strong> sobre [1, 2 | 5] y [3, −1 | 1]: haz cero el 3 del renglón 2.</p>
+          <div class="work"><p class="wl">Réstale al renglón 2 tres veces el renglón 1: 3 − 3·1 = <b>0</b>; −1 − 3·2 = <b>−7</b>.</p><p class="wl">Y el total: 1 − 3·5 = <b>−14</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="gauss_jordan" data-level="resuelto" data-module="7">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Tras R2 → R2 − 3·R1, ¿cuál es el nuevo renglón 2?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">[0, −7 | −14]</button>
+              <button class="opt" data-ok="0">[0, 7 | 14]</button>
+              <button class="opt" data-ok="0">[0, −7 | 14]</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 3 − 3 = 0, −1 − 6 = −7, 1 − 15 = −14: el renglón 2 queda [0, −7 | −14].</p><p class="nudge">✕ Cuida los signos: 1 − 15 da −14, no 14. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="gauss_jordan" data-level="guiado" data-module="7">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>El renglón 2 quedó [0, −7 | −14].</strong> ¿Qué operación deja su pivote en 1?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">R2 → R2 ÷ (−7), que da [0, 1 | 2]</button>
+              <button class="opt" data-ok="0">R2 → R2 · (−7)</button>
+              <button class="opt" data-ok="0">R2 → R2 ÷ 7, que da [0, −1 | −2]</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Dividir entre el propio pivote lo vuelve 1: −7 ÷ (−7) = 1 y −14 ÷ (−7) = 2.</p><p class="nudge">✕ Pista: divide entre el número del pivote (−7), no entre 7. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="gauss_jordan" data-level="examen" data-module="7">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Resuelve por Gauss-Jordan el sistema x + 4y = 9 y 2x + 3y = 8.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x = 1, y = 2</button>
+              <button class="opt" data-ok="0">x = 2, y = 1</button>
+              <button class="opt" data-ok="0">x = 9, y = 8</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ R2 − 2·R1 da [0, −5 | −10]; ÷(−5) da y = 2; y limpiando, x = 1. Comprueba: 1 + 8 = 9 y 2 + 6 = 8.</p><p class="nudge">✕ Haz cero la x de abajo, deja el pivote de y en 1 y limpia arriba. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Última idea →</button></div>
     </section>
 
@@ -694,6 +1039,52 @@
 
       <nav class="nav-lecs"><a href="L1_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L1_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
+      <div class="practica">
+        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-intro">Tres problemas para leer cualquier final: única, infinita o imposible. Vamos del acompañado al examen.</p>
+        <div class="prob">
+          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
+          <p class="prob-q"><strong>Lee la solución general.</strong> La reducida [1, 0, −2 | 1] y [0, 1, 3 | 3] (incógnitas x, y, z) deja a z sin pivote.</p>
+          <div class="work"><p class="wl">z no tiene pivote: es <b>libre</b>, ponle z = t. Renglón 1: x − 2t = 1 da <b>x = 1 + 2t</b>.</p><p class="wl">Renglón 2: y + 3t = 3 da <b>y = 3 − 3t</b>.</p></div>
+          <div class="check challenge" data-kind="item" data-id="M8P1" data-tema="variables_libres" data-level="resuelto" data-module="8">
+            <div class="qtag">Da el paso que falta</div>
+            <p class="q">Entonces, ¿cuál es la solución general?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x = 1 + 2t, y = 3 − 3t, z = t</button>
+              <button class="opt" data-ok="0">x = 1 − 2t, y = 3 + 3t, z = t</button>
+              <button class="opt" data-ok="0">x = 1, y = 3, z = 0</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Con z = t, despejas x = 1 + 2t y y = 3 − 3t. Cada t da una solución distinta: infinitas.</p><p class="nudge">✕ Pasa el término con t al otro lado con su signo cambiado. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
+          <div class="check challenge" data-kind="item" data-id="M8P2" data-tema="variables_libres" data-level="guiado" data-module="8">
+            <div class="qtag">Tú, con una pista</div>
+            <p class="q"><strong>Una reducida de un sistema con 4 incógnitas tiene 3 pivotes.</strong> ¿Cuántas variables libres hay?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Una</button>
+              <button class="opt" data-ok="0">Tres</button>
+              <button class="opt" data-ok="0">Ninguna</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Libres = incógnitas sin pivote = 4 − 3 = 1.</p><p class="nudge">✕ Pista: resta las columnas con pivote del total de incógnitas. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="variables_libres" data-level="examen" data-module="8">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Al aplicar Gauss-Jordan a [A | b] aparece el renglón [0, 0, 0 | 2]. ¿Qué concluyes del sistema?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Es inconsistente: no tiene solución</button>
+              <button class="opt" data-ok="0">Tiene infinitas soluciones</button>
+              <button class="opt" data-ok="0">Tiene solución única</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Ese renglón dice 0 = 2, imposible: el conjunto solución es vacío, sistema inconsistente.</p><p class="nudge">✕ Devuélvele las letras: 0·x + 0·y + 0·z = 2. ¿Alguna terna lo cumple? Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 
