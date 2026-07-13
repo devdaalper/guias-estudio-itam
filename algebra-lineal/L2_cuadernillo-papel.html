@@ -63,12 +63,12 @@
   .mrow>span{text-align:right;min-width:24px}
   .msep{justify-self:center;width:0;height:24px;border-left:2px solid var(--ink);min-width:0}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--red);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--red);font-weight:800;position:absolute;left:0;top:1px}
 
   /* ===== cuadernillo de papel ===== */
   .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
@@ -134,11 +134,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
   .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
   .nav-lecs a{flex:1;min-width:0;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
@@ -468,15 +468,15 @@
           <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>La notación se lee así: V son <strong>todos los puntos (x, y, z) de R³ cuyas coordenadas cumplen 4x − 2y + 2z = 0</strong>. Es un plano que pasa por el origen → su dimensión es 2. Ser base de V exige tres cosas: los vectores viven <strong>dentro</strong> de V, son <strong>l.i.</strong> y <strong>generan</strong> V. No es "base de R³": es base de ese plano.</p></div>
           <div class="estep"><div class="oprow">Paso 1 · simplifica la ecuación</div><p>Divido entre 2 (misma ecuación, mismo plano):</p>
             <p class="calc">4x − 2y + 2z = 0  ⟺  2x − y + z = 0</p></div>
-          <div class="estep"><div class="oprow">Paso 2 · (a) checa las tres condiciones</div><p>¿Están en V? Sustituyo en 2x − y + z:</p>
+          <div class="estep"><div class="oprow">Paso 2 · (a) revisa las tres condiciones</div><p>¿Están en V? Sustituyo en 2x − y + z:</p>
             <p class="calc">(1, 0, −2): 2(1) − 0 + (−2) = 0 ✓ · (0, 1, 1): 0 − 1 + 1 = 0 ✓</p>
             <p>¿L.i.? Ninguno es múltiplo del otro (mira la primera componente: 1 contra 0). ¿Generan V? De la ecuación, todo punto de V cumple z = −2x + y, y:</p>
             <p class="calc">x·(1, 0, −2) + y·(0, 1, 1) = (x, y, −2x + y) = (x, y, z)</p>
             <p>Cualquier punto de V es combinación de B₁ → <strong>(a) es VERDADERA</strong>: B₁ es base de V.</p></div>
-          <div class="estep"><div class="oprow">Paso 3 · (b) el vector fuera del plano</div><p>Checo si (1, 1, 0) está en V:</p>
+          <div class="estep"><div class="oprow">Paso 3 · (b) el vector fuera del plano</div><p>Compruebo si (1, 1, 0) está en V:</p>
             <p class="calc">(1, 1, 0): 2(1) − 1 + 0 = 1 ≠ 0</p>
             <p>No cumple la ecuación → (1, 1, 0) ∉ V. Un vector fuera de V no puede ir en una base de V (aunque B₂ sí es l.i., no genera a V: genera otro plano) → <strong>(b) es FALSA</strong>.</p></div>
-          <p class="verdict">(a) V: están en V, son l.i. y generan. · (b) F: (1, 1, 0) no cumple la ecuación de V. <strong>El error que cuesta puntos:</strong> checar solo l.i. y olvidar verificar que cada vector esté DENTRO del subespacio — es la trampa exacta de la tarea del curso.</p>
+          <p class="verdict">(a) V: están en V, son l.i. y generan. · (b) F: (1, 1, 0) no cumple la ecuación de V. <strong>El error que cuesta puntos:</strong> verificar solo l.i. y olvidar verificar que cada vector esté DENTRO del subespacio — es la trampa exacta de la tarea del curso.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
@@ -565,7 +565,7 @@
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>Errores típicos que cuestan puntos</h3>
       <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
       <ul>

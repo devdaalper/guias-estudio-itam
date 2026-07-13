@@ -212,7 +212,7 @@
         <div class="fx"><div class="sys"><span class="eq">2 · 3 = <strong>6</strong></span></div></div>
         <figure class="visual">
           <svg viewBox="0 0 520 230" role="img" aria-label="Caminar al este mientras la posición al norte queda congelada">
-            <defs><marker id="arrE" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#F5821F"/></marker></defs>
+            <defs><marker id="arrE" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#F5821F"/></marker></defs>
             <g stroke="#E1E5EA"><path d="M70 40V200M140 40V200M210 40V200M280 40V200M350 40V200M420 40V200"/><path d="M60 70H470M60 110H470M60 150H470M60 190H470"/></g>
             <path d="M60 200H470M70 210V40" stroke="#64748B" stroke-width="2"/>
             <text x="452" y="222" font-size="14" fill="#475569">este (x)</text>
@@ -220,8 +220,8 @@
             <path d="M140 110H360" stroke="#283891" stroke-width="2" stroke-dasharray="7 6"/>
             <text x="250" y="100" text-anchor="middle" font-size="15" fill="#283891">y congelada en 4</text>
             <circle cx="210" cy="110" r="6" fill="#181B22"/>
-            <path d="M210 110L355 110" stroke="#F5821F" stroke-width="7" marker-end="url(#arrE)"/>
-            <text x="285" y="132" text-anchor="middle" font-size="15" fill="#C75D08">caminas solo al este</text>
+            <path d="M210 110L355 110" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrE)"/>
+            <text x="283" y="140" text-anchor="middle" font-size="15" fill="#C75D08">caminas solo al este</text>
           </svg>
           <figcaption>Al caminar al este, la posición al norte no cambia: solo la x se mueve.</figcaption>
         </figure>
@@ -271,15 +271,15 @@
         <p class="idea">El rumbo perfecto mezcla las dos <strong>en proporción a lo que cada una gana</strong>: justo la flecha (4, 10), la de las dos parciales.</p>
         <figure class="visual">
           <svg viewBox="0 0 520 260" role="img" aria-label="Las dos parciales se juntan en una sola flecha, el gradiente">
-            <defs><marker id="arrG1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#F5821F"/></marker><marker id="arrG2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#283891"/></marker><marker id="arrG3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1C7A3A"/></marker></defs>
+            <defs><marker id="arrG1" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#F5821F"/></marker><marker id="arrG2" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#283891"/></marker><marker id="arrG3" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#1C7A3A"/></marker></defs>
             <g stroke="#E1E5EA"><path d="M90 40V220M150 40V220M210 40V220M270 40V220"/><path d="M90 60H330M90 100H330M90 140H330M90 180H330"/></g>
             <path d="M90 220H340M90 220V30" stroke="#64748B" stroke-width="2"/>
             <circle cx="90" cy="220" r="5" fill="#181B22"/>
-            <path d="M90 220L210 220" stroke="#F5821F" stroke-width="7" marker-end="url(#arrG1)"/>
+            <path d="M90 220L210 220" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrG1)"/>
             <text x="150" y="242" text-anchor="middle" font-size="14" fill="#C75D08">este: 4</text>
-            <path d="M90 220L90 70" stroke="#283891" stroke-width="7" marker-end="url(#arrG2)"/>
+            <path d="M90 220L90 70" stroke="#283891" stroke-width="3.5" marker-end="url(#arrG2)"/>
             <text x="40" y="140" text-anchor="middle" font-size="14" fill="#283891">norte: 10</text>
-            <path d="M90 220L210 70" stroke="#1C7A3A" stroke-width="7" marker-end="url(#arrG3)"/>
+            <path d="M90 220L210 70" stroke="#1C7A3A" stroke-width="3.5" marker-end="url(#arrG3)"/>
             <text x="222" y="86" font-size="15" font-weight="800" fill="#1C7A3A">∇f = (4, 10)</text>
           </svg>
           <figcaption>La flecha del gradiente mezcla las dos pendientes en proporción a lo que cada una gana.</figcaption>
@@ -442,12 +442,12 @@
         <p class="idea key">Así que el rumbo que más sube cruza la curva en ángulo recto: por eso el <strong>gradiente sale perpendicular</strong> a la curva de nivel.</p>
         <figure class="visual">
           <svg viewBox="0 0 520 250" role="img" aria-label="El gradiente sale perpendicular a la curva de nivel, apuntando cuesta arriba">
-            <defs><marker id="arrD" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#F5821F"/></marker></defs>
+            <defs><marker id="arrD" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#F5821F"/></marker></defs>
             <circle cx="220" cy="130" r="50" fill="none" stroke="#c9d0ee" stroke-width="2"/>
             <circle cx="220" cy="130" r="85" fill="none" stroke="#283891" stroke-width="3"/>
             <circle cx="220" cy="130" r="120" fill="none" stroke="#c9d0ee" stroke-width="2"/>
             <circle cx="280" cy="70" r="6" fill="#181B22"/>
-            <path d="M280 70L330 20" stroke="#F5821F" stroke-width="7" marker-end="url(#arrD)"/>
+            <path d="M280 70L330 20" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrD)"/>
             <text x="336" y="20" font-size="15" font-weight="800" fill="#C75D08">∇f</text>
             <text x="330" y="150" font-size="15" fill="#283891">curvas de nivel</text>
             <text x="150" y="238" font-size="14" fill="#475569">misma altura sobre cada círculo</text>
@@ -563,25 +563,25 @@
         <p class="idea key">Cuando el plano se pega en todas las direcciones cercanas, f es <strong>diferenciable</strong>: más fuerte que derivable.</p>
         <figure class="visual">
           <svg viewBox="0 0 560 230" role="img" aria-label="Derivable mira dos direcciones; diferenciable, todas">
-            <defs><marker id="arrX" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#283891"/></marker></defs>
+            <defs><marker id="arrXo" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0L11 4L0 8Z" fill="#F5821F"/></marker><marker id="arrXb" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0L11 4L0 8Z" fill="#283891"/></marker></defs>
             <rect x="15" y="20" width="255" height="195" rx="16" fill="#fff" stroke="#181B22" stroke-width="3"/>
             <text x="142" y="50" text-anchor="middle" font-size="17" font-weight="800" fill="#181B22">DERIVABLE</text>
             <text x="142" y="72" text-anchor="middle" font-size="14" fill="#475569">solo dos direcciones</text>
             <circle cx="142" cy="145" r="6" fill="#181B22"/>
-            <path d="M142 145L222 145" stroke="#F5821F" stroke-width="6" marker-end="url(#arrX)"/>
-            <path d="M142 145L142 82" stroke="#F5821F" stroke-width="6" marker-end="url(#arrX)"/>
+            <path d="M142 145L222 145" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrXo)"/>
+            <path d="M142 145L142 82" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrXo)"/>
             <rect x="290" y="20" width="255" height="195" rx="16" fill="#fff" stroke="#181B22" stroke-width="3"/>
             <text x="417" y="50" text-anchor="middle" font-size="17" font-weight="800" fill="#181B22">DIFERENCIABLE</text>
             <text x="417" y="72" text-anchor="middle" font-size="14" fill="#475569">todas las direcciones</text>
             <circle cx="417" cy="145" r="6" fill="#181B22"/>
-            <path d="M417 145L479 145" stroke="#283891" stroke-width="4" marker-end="url(#arrX)"/>
-            <path d="M417 145L461 101" stroke="#283891" stroke-width="4" marker-end="url(#arrX)"/>
-            <path d="M417 145L417 83" stroke="#283891" stroke-width="4" marker-end="url(#arrX)"/>
-            <path d="M417 145L373 101" stroke="#283891" stroke-width="4" marker-end="url(#arrX)"/>
-            <path d="M417 145L355 145" stroke="#283891" stroke-width="4" marker-end="url(#arrX)"/>
-            <path d="M417 145L373 189" stroke="#283891" stroke-width="4" marker-end="url(#arrX)"/>
-            <path d="M417 145L417 207" stroke="#283891" stroke-width="4" marker-end="url(#arrX)"/>
-            <path d="M417 145L461 189" stroke="#283891" stroke-width="4" marker-end="url(#arrX)"/>
+            <path d="M417 145L479 145" stroke="#283891" stroke-width="2.5" marker-end="url(#arrXb)"/>
+            <path d="M417 145L461 101" stroke="#283891" stroke-width="2.5" marker-end="url(#arrXb)"/>
+            <path d="M417 145L417 83" stroke="#283891" stroke-width="2.5" marker-end="url(#arrXb)"/>
+            <path d="M417 145L373 101" stroke="#283891" stroke-width="2.5" marker-end="url(#arrXb)"/>
+            <path d="M417 145L355 145" stroke="#283891" stroke-width="2.5" marker-end="url(#arrXb)"/>
+            <path d="M417 145L373 189" stroke="#283891" stroke-width="2.5" marker-end="url(#arrXb)"/>
+            <path d="M417 145L417 207" stroke="#283891" stroke-width="2.5" marker-end="url(#arrXb)"/>
+            <path d="M417 145L461 189" stroke="#283891" stroke-width="2.5" marker-end="url(#arrXb)"/>
           </svg>
           <figcaption>Derivable mide dos rumbos; diferenciable, el abanico entero.</figcaption>
         </figure>

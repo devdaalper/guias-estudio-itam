@@ -180,7 +180,7 @@
 
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 1</p>
-    <h1>De dos tickets a <mark>Gauss-Jordan</mark></h1>
+    <h1>De dos notas a <mark>Gauss-Jordan</mark></h1>
     <p class="lead">Una idea a la vez, sabiendo siempre a dónde vas: cada lección anuncia su concepto del temario y te lleva de lo cotidiano hasta su definición formal.</p>
     <div class="today">
       <span class="n" id="heroStep">1</span>
@@ -206,18 +206,18 @@
       <header class="lesson-head"><p class="micro">Microlección 1 de 8 · Tema: Sistemas de ecuaciones lineales</p><h2>Sistema lineal: dos condiciones a la vez</h2><p class="goal">Meta: reconocer un sistema y sus incógnitas en un problema real.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy conoces el objeto que gobierna toda la unidad: el <strong>sistema lineal</strong>.</p>
-        <p class="idea">El nombre suena a laboratorio, pero nace en una cafetería. Mira estos dos tickets de la misma mañana:</p>
+        <p class="idea">El nombre suena a laboratorio, pero nace en una cafetería. Mira estas dos notas de la misma mañana:</p>
         <figure class="visual">
-          <svg viewBox="0 0 560 250" role="img" aria-label="Dos tickets de la misma cafetería con totales 13 y 8 pesos">
+          <svg viewBox="0 0 560 250" role="img" aria-label="Dos notas de la misma cafetería con totales 13 y 8 pesos">
             <rect x="18" y="24" width="252" height="200" rx="16" fill="#FFF3E7" stroke="#181B22" stroke-width="3"/>
-            <text x="144" y="58" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">TICKET 1</text>
+            <text x="144" y="58" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">NOTA 1</text>
             <circle cx="64" cy="102" r="24" fill="#F5821F"/><text x="64" y="110" text-anchor="middle" font-size="22" font-weight="800" fill="white">2</text>
             <text x="98" y="109" font-size="17" fill="#334155">cafés</text>
             <circle cx="64" cy="156" r="24" fill="#283891"/><text x="64" y="164" text-anchor="middle" font-size="22" font-weight="800" fill="white">3</text>
             <text x="98" y="163" font-size="17" fill="#334155">jugos</text>
             <text x="144" y="208" text-anchor="middle" font-size="20" font-weight="800" fill="#C75D08">pagaron $13</text>
             <rect x="290" y="24" width="252" height="200" rx="16" fill="white" stroke="#181B22" stroke-width="3"/>
-            <text x="416" y="58" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">TICKET 2</text>
+            <text x="416" y="58" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">NOTA 2</text>
             <circle cx="336" cy="102" r="24" fill="#F5821F"/><text x="336" y="110" text-anchor="middle" font-size="22" font-weight="800" fill="white">1</text>
             <text x="370" y="109" font-size="17" fill="#334155">café</text>
             <circle cx="336" cy="156" r="24" fill="#283891"/><text x="336" y="164" text-anchor="middle" font-size="22" font-weight="800" fill="white">2</text>
@@ -228,16 +228,16 @@
         </figure>
         <p class="idea">Nadie anotó cuánto cuesta cada cosa. Solo quedaron los totales — y la pregunta: ¿cuánto vale un café y cuánto un jugo?</p>
         <p class="idea">Para hablar en corto, llama <strong>c</strong> al precio del café y <strong>j</strong> al del jugo. Son números que todavía no conoces, y a un número desconocido se le llama <strong>incógnita</strong>.</p>
-        <p class="idea">Con esas letras, cada ticket se vuelve una frase corta:</p>
+        <p class="idea">Con esas letras, cada nota se vuelve una frase corta:</p>
         <div class="fx"><div class="sys"><span class="eq">2c + 3j = 13</span><span class="eq">1c + 2j = 8</span></div></div>
-        <p class="idea">Lee la primera en voz alta: «dos cafés más tres jugos cuestan trece pesos». Es el ticket 1 sin palabras.</p>
+        <p class="idea">Lee la primera en voz alta: «dos cafés más tres jugos cuestan trece pesos». Es la nota 1 sin palabras.</p>
         <p class="idea">A una frase así —letras multiplicadas por números y sumadas— se le llama <strong>ecuación lineal</strong>.</p>
-        <p class="idea key">Y el detalle que lo cambia todo: la cafetería cobra los mismos precios en los dos tickets. Las dos ecuaciones deben cumplirse <strong>a la vez</strong>.</p>
+        <p class="idea key">Y el detalle que lo cambia todo: la cafetería cobra los mismos precios en las dos notas. Las dos ecuaciones deben cumplirse <strong>a la vez</strong>.</p>
         <p class="idea">Un paquete de ecuaciones que se exigen juntas: eso es un sistema.</p>
         <p class="idea">Con dos incógnitas quizá lo saques tanteando; con cuatro o cinco, el tanteo se derrumba — por eso esta unidad construye un método que nunca falla.</p>
         <p class="idea">Y con esto ya llegaste al primer nombre del temario. Tu curso lo define así:</p>
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 1.1</span>Un <strong>sistema lineal</strong> de m ecuaciones con n incógnitas es un conjunto de m ecuaciones lineales, cada una con n incógnitas; las x<sub>i</sub> son las incógnitas o variables de decisión y las b<sub>j</sub> son las constantes.</p>
-        <p class="idea">Léela con tus tickets: aquí m = 2 (dos ecuaciones) y n = 2 (café y jugo).</p>
+        <p class="idea">Léela con tus notas: aquí m = 2 (dos ecuaciones) y n = 2 (café y jugo).</p>
         <p class="idea">Las incógnitas que el curso llama x<sub>1</sub> y x<sub>2</sub> son tus letras c y j, y las constantes son los totales 13 y 8.</p>
         <p class="idea paso">Asegura la idea con los dos retos de abajo.</p>
         <p class="idea paso">Y en cuanto la tengas, viene la pregunta natural: ¿qué significa exactamente <strong>resolver</strong> este paquete?</p>
@@ -247,10 +247,10 @@
         <p class="q"><strong>Lee el paquete.</strong> En el sistema de la cafetería, ¿qué exige que las dos ecuaciones formen un sistema?</p>
         <div class="opts">
           <button class="opt" data-ok="1">Que la misma pareja de precios cumpla las dos a la vez</button>
-          <button class="opt" data-ok="0">Que cada ticket tenga su propio precio del café</button>
+          <button class="opt" data-ok="0">Que cada nota tenga su propio precio del café</button>
           <button class="opt" data-ok="0">Que baste con resolver la primera ecuación</button>
         </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ Un sistema es un paquete: los mismos precios deben funcionar en los dos tickets.</p><p class="nudge">✕ Piensa quién cobró los dos tickets: ¿pueden usar precios distintos? Intenta de nuevo.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Un sistema es un paquete: los mismos precios deben funcionar en las dos notas.</p><p class="nudge">✕ Piensa quién cobró las dos notas: ¿pueden usar precios distintos? Intenta de nuevo.</p></div>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1S" data-tema="sistema_lineal" data-level="solo" data-module="1">
         <div class="qtag">Ahora tú · sin copiar</div>
@@ -260,7 +260,7 @@
           <button class="opt" data-ok="0">3L + 1C = 30 y 2L + 2C = 25</button>
           <button class="opt" data-ok="0">1L + 3C = 25 y 2L + 2C = 30</button>
         </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ Cada ticket se traduce tal cual: 3 lápices y 1 cuaderno dan 25; 2 y 2 dan 30.</p><p class="nudge">✕ Traduce ticket por ticket: el número junto a L cuenta lápices y el total va después del igual.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Cada nota se traduce tal cual: 3 lápices y 1 cuaderno dan 25; 2 y 2 dan 30.</p><p class="nudge">✕ Traduce nota por nota: el número junto a L cuenta lápices y el total va después del igual.</p></div>
       </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
     </section>
@@ -269,7 +269,7 @@
       <header class="lesson-head"><p class="micro">Microlección 2 de 8 · Tema: Soluciones y consistencia</p><h2>Conjunto solución: una, ninguna o infinitas</h2><p class="goal">Meta: clasificar un sistema por el tamaño de su conjunto solución.</p></header>
       <div class="sec">
         <p class="idea lede">Ya sabes qué es un sistema. Hoy le pones nombre a lo que buscas: el <strong>conjunto solución</strong>.</p>
-        <p class="idea">Resolver la cafetería es encontrar la pareja de precios que cumple los dos tickets a la vez. Prueba una candidata: café a $2, jugo a $3.</p>
+        <p class="idea">Resolver la cafetería es encontrar la pareja de precios que cumple las dos notas a la vez. Prueba una candidata: café a $2, jugo a $3.</p>
         <div class="fx"><div class="sys"><span class="eq">2·2 + 3·3 = 13 ✓</span><span class="eq">1·2 + 2·3 = 8 ✓</span></div></div>
         <p class="idea">Cuatro más nueve dan trece; dos más seis dan ocho. Las dos se cumplen: la pareja (2, 3) es una <strong>solución</strong>.</p>
         <p class="idea">Y el conjunto de <strong>todas</strong> las parejas que lo logran —aquí, solo esa— es el conjunto solución del sistema.</p>
@@ -311,9 +311,9 @@
         <div class="opts">
           <button class="opt" data-ok="1">Porque cumple las dos ecuaciones a la vez</button>
           <button class="opt" data-ok="0">Porque cumple al menos una de las dos</button>
-          <button class="opt" data-ok="0">Porque el 2 y el 3 aparecen en los tickets</button>
+          <button class="opt" data-ok="0">Porque el 2 y el 3 aparecen en las notas</button>
         </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ 2·2 + 3·3 = 13 y 1·2 + 2·3 = 8: las dos se cumplen con la misma pareja.</p><p class="nudge">✕ Cumplir una sola no basta: la pareja debe funcionar en los dos tickets. Intenta de nuevo.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ 2·2 + 3·3 = 13 y 1·2 + 2·3 = 8: las dos se cumplen con la misma pareja.</p><p class="nudge">✕ Cumplir una sola no basta: la pareja debe funcionar en las dos notas. Intenta de nuevo.</p></div>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2S" data-tema="consistencia" data-level="solo" data-module="2">
         <div class="qtag">Ahora tú · sin copiar</div>
@@ -332,7 +332,7 @@
       <header class="lesson-head"><p class="micro">Microlección 3 de 8 · Tema: Representación matricial</p><h2>Matriz aumentada: el sistema sin ruido</h2><p class="goal">Meta: pasar de las ecuaciones a la tabla y de la tabla a las ecuaciones.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy el sistema cambia de ropa: se convierte en la <strong>matriz aumentada</strong>.</p>
-        <p class="idea">Piensa cómo anota el mesero los pedidos. No escribe «la mesa cinco quiere dos cafés y tres jugos, y son trece pesos»: hace una tabla.</p>
+        <p class="idea">Piensa cómo se anotan los pedidos en un restaurante. Nadie escribe «la mesa cinco quiere dos cafés y tres jugos, y son trece pesos»: se hace una tabla.</p>
         <p class="idea">Las palabras estorban; los números en orden bastan.</p>
         <p class="idea">Con las ecuaciones haremos lo mismo — quitar letras, signos de más y el igual, y quedarnos con los números, cada uno en su lugar. Trabajemos con este sistema:</p>
         <div class="fx"><div class="sys"><span class="eq">x + 2y = 5</span><span class="eq">3x − y = 1</span></div></div>
@@ -399,10 +399,10 @@
         <p class="idea lede">Hoy recibes la caja de herramientas completa: las tres <strong>operaciones elementales</strong> por renglón.</p>
         <p class="idea">Queremos transformar la tabla en versiones cada vez más simples <strong>sin cambiar la respuesta</strong> del problema. ¿Qué movidas son legales?</p>
         <p class="idea">La clave es recordar qué es cada renglón: una ecuación disfrazada — un hecho verdadero sobre los precios.</p>
-        <p class="idea"><strong>Movida 1: intercambiar dos renglones.</strong> Es cambiar el orden de los tickets en el clavo. La información es la misma.</p>
+        <p class="idea"><strong>Movida 1: intercambiar dos renglones.</strong> Es cambiar el orden de los recibos apilados. La información es la misma.</p>
         <p class="idea"><strong>Movida 2: multiplicar un renglón por un número distinto de cero.</strong></p>
         <p class="idea">Si 1 café y 2 jugos cuestan $8, el pedido doble —2 cafés y 4 jugos— cuesta $16. Mismo hecho, dicho al doble.</p>
-        <p class="idea">¿Por qué se prohíbe el cero? Multiplicar todo por cero deja el renglón en 0 = 0: cierto, pero vacío. Sería borrar el ticket, y lo borrado no se recupera.</p>
+        <p class="idea">¿Por qué se prohíbe el cero? Multiplicar todo por cero deja el renglón en 0 = 0: cierto, pero vacío. Sería borrar la nota, y lo borrado no se recupera.</p>
         <p class="idea"><strong>Movida 3: sumarle a un renglón un múltiplo de otro.</strong> Dos pedidos juntos cuestan la suma de los dos — el hecho nuevo sigue siendo verdadero.</p>
         <p class="idea">Con restas funciona igual, y así se fabrican los ceros que pronto vamos a necesitar.</p>
         <p class="idea key">Las tres comparten un secreto: <strong>se pueden deshacer</strong>. Nada se pierde, nada se inventa — por eso las soluciones no cambian.</p>
@@ -424,13 +424,13 @@
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="operaciones_elementales" data-level="guiado" data-module="4">
         <div class="qtag">Compruébalo · guiado</div>
-        <p class="q"><strong>Ponle nombre.</strong> Del ticket «1 café y 2 jugos cuestan $8» concluiste que 2 cafés y 4 jugos cuestan $16. ¿Qué operación elemental usaste?</p>
+        <p class="q"><strong>Ponle nombre.</strong> De la nota «1 café y 2 jugos cuestan $8» concluiste que 2 cafés y 4 jugos cuestan $16. ¿Qué operación elemental usaste?</p>
         <div class="opts">
           <button class="opt" data-ok="1">Multiplicar un renglón por 2</button>
           <button class="opt" data-ok="0">Intercambiar dos renglones</button>
           <button class="opt" data-ok="0">Sumarle a un renglón un múltiplo de otro</button>
         </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ Todo el renglón se multiplicó por la misma constante: 1, 2 y 8 se volvieron 2, 4 y 16.</p><p class="nudge">✕ Mira qué le pasó a cada número del ticket: todos crecieron por igual. Intenta de nuevo.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Todo el renglón se multiplicó por la misma constante: 1, 2 y 8 se volvieron 2, 4 y 16.</p><p class="nudge">✕ Mira qué le pasó a cada número de la nota: todos crecieron por igual. Intenta de nuevo.</p></div>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4S" data-tema="operaciones_elementales" data-level="solo" data-module="4">
         <div class="qtag">Ahora tú · sin copiar</div>
@@ -479,7 +479,7 @@
         </figure>
         <p class="idea">Mira lo que la figura enseña: cada renglón arranca con un <strong>1</strong>, y cada arranque queda más a la derecha que el del renglón de arriba. Dibuja la frontera y aparece una <strong>escalera</strong>.</p>
         <p class="idea">Ese 1 con el que arranca cada renglón se llama <strong>1-pivote</strong>.</p>
-        <p class="idea">«Pivote» porque es un punto de apoyo: sobre él se apoya el método para limpiar su columna, como el pie fijo de un jugador de básquet.</p>
+        <p class="idea">«Pivote» porque es un punto de apoyo: sobre él se apoya el método para limpiar su columna, como el pie fijo de un jugador de baloncesto.</p>
         <p class="idea key">Escalonada = pivotes en escalera: cada 1-pivote más a la derecha que el de arriba, y lo nulo hundido al fondo.</p>
         <p class="idea">Esa imagen es, requisito por requisito, la definición de tu curso:</p>
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 1.10</span>Una matriz es <strong>escalonada</strong> si: el primer elemento de cada renglón no nulo es un número 1, que se llama <strong>1-pivote</strong>; todo 1-pivote se encuentra a la derecha de los 1-pivote de renglones por encima de él; y si hay renglones nulos, están en la parte inferior de la matriz.</p>
@@ -560,36 +560,36 @@
         <p class="idea">Tienes la tabla (lección 3), las tres movidas (lección 4) y la meta (lección 6). Gauss-Jordan es el orden inteligente para usarlas: nunca improvisa y siempre llega.</p>
         <p class="idea">Mira primero el viaje completo en un mapa — nuestro sistema de siempre, de la tabla inicial a la reducida:</p>
         <figure class="visual">
-          <svg viewBox="0 0 710 190" role="img" aria-label="Las cuatro etapas de Gauss-Jordan sobre la matriz del sistema">
+          <svg viewBox="0 28 380 338" role="img" aria-label="Las cuatro etapas de Gauss-Jordan sobre la matriz del sistema, en dos filas de dos matrices">
             <defs><marker id="arrGJ" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#181B22"/></marker></defs>
-            <g transform="translate(8 0)">
+            <g transform="translate(4 8)">
               <path d="M14 40H6V152H14" fill="none" stroke="#181B22" stroke-width="3"/><path d="M126 40H134V152H126" fill="none" stroke="#181B22" stroke-width="3"/>
               <line x1="86" y1="48" x2="86" y2="146" stroke="#181B22" stroke-width="2"/>
               <text x="34" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text><text x="68" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">2</text><text x="107" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">5</text>
               <text x="34" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">3</text><text x="68" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">−1</text><text x="107" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text>
               <circle cx="34" cy="121" r="15" fill="none" stroke="#CF2E2E" stroke-width="2.5"/>
             </g>
-            <path d="M148 96H186" stroke="#181B22" stroke-width="3.5" marker-end="url(#arrGJ)"/>
-            <text x="168" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#283891">R2 − 3·R1</text>
-            <g transform="translate(192 0)">
+            <path d="M152 104H206" stroke="#181B22" stroke-width="3.5" marker-end="url(#arrGJ)"/>
+            <text x="178" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#283891">R2 − 3·R1</text>
+            <g transform="translate(214 8)">
               <path d="M14 40H6V152H14" fill="none" stroke="#181B22" stroke-width="3"/><path d="M126 40H134V152H126" fill="none" stroke="#181B22" stroke-width="3"/>
               <line x1="86" y1="48" x2="86" y2="146" stroke="#181B22" stroke-width="2"/>
               <text x="34" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text><text x="68" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">2</text><text x="107" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">5</text>
               <text x="34" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">0</text><text x="68" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">−7</text><text x="107" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">−14</text>
               <circle cx="68" cy="121" r="15" fill="none" stroke="#C75D08" stroke-width="2.5"/>
             </g>
-            <path d="M332 96H370" stroke="#181B22" stroke-width="3.5" marker-end="url(#arrGJ)"/>
-            <text x="352" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#283891">R2 ÷ (−7)</text>
-            <g transform="translate(376 0)">
+            <path d="M284 164V196H74V236" fill="none" stroke="#181B22" stroke-width="3.5" marker-end="url(#arrGJ)"/>
+            <text x="179" y="188" text-anchor="middle" font-size="14" font-weight="700" fill="#283891">R2 ÷ (−7)</text>
+            <g transform="translate(4 200)">
               <path d="M14 40H6V152H14" fill="none" stroke="#181B22" stroke-width="3"/><path d="M126 40H134V152H126" fill="none" stroke="#181B22" stroke-width="3"/>
               <line x1="86" y1="48" x2="86" y2="146" stroke="#181B22" stroke-width="2"/>
               <text x="34" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text><text x="68" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">2</text><text x="107" y="78" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">5</text>
               <text x="34" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">0</text><text x="68" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">1</text><text x="107" y="128" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">2</text>
               <circle cx="68" cy="71" r="15" fill="none" stroke="#CF2E2E" stroke-width="2.5"/>
             </g>
-            <path d="M516 96H554" stroke="#181B22" stroke-width="3.5" marker-end="url(#arrGJ)"/>
-            <text x="536" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#283891">R1 − 2·R2</text>
-            <g transform="translate(560 0)">
+            <path d="M152 296H206" stroke="#181B22" stroke-width="3.5" marker-end="url(#arrGJ)"/>
+            <text x="178" y="282" text-anchor="middle" font-size="14" font-weight="700" fill="#283891">R1 − 2·R2</text>
+            <g transform="translate(214 200)">
               <path d="M14 40H6V152H14" fill="none" stroke="#181B22" stroke-width="3"/><path d="M126 40H134V152H126" fill="none" stroke="#181B22" stroke-width="3"/>
               <line x1="86" y1="48" x2="86" y2="146" stroke="#181B22" stroke-width="2"/>
               <circle cx="34" cy="71" r="15" fill="#E6F5EC" stroke="#1C7A3A" stroke-width="2.5"/><circle cx="68" cy="121" r="15" fill="#E6F5EC" stroke="#1C7A3A" stroke-width="2.5"/>

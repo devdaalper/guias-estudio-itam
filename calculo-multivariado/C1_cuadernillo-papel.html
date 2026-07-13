@@ -59,12 +59,12 @@
   .sys{display:grid;gap:6px;font-size:21px;font-variant-numeric:tabular-nums}
   .sys .eq{white-space:nowrap}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--red);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--red);font-weight:800;position:absolute;left:0;top:1px}
 
   /* ===== cuadernillo de papel ===== */
   .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
@@ -136,11 +136,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
   .autotest{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow);grid-template-columns:minmax(0,1fr);min-width:0}
   .autotest .intro{margin:0;font-size:16px;color:var(--slate)}
@@ -251,7 +251,7 @@
           <div class="estep"><div class="oprow">Evalúo las potencias en x = 1/2</div><p>Sustituyo x = <sup>1</sup>⁄<sub>2</sub> en cada potencia, una a la vez:</p><p class="calc"><span class="rw">x<sup>2</sup></span> (<sup>1</sup>⁄<sub>2</sub>)<sup>2</sup>=<b><sup>1</sup>⁄<sub>4</sub></b> <span class="sep">•</span> <span class="rw">x<sup>3</sup></span> (<sup>1</sup>⁄<sub>2</sub>)<sup>3</sup>=<b><sup>1</sup>⁄<sub>8</sub></b></p></div>
           <div class="estep"><div class="oprow">Formo cada término</div><p>Divido cada potencia entre su factorial:</p><p class="calc"><span class="rw">t<sub>2</sub></span> (<sup>1</sup>⁄<sub>4</sub>)÷2=<b><sup>1</sup>⁄<sub>8</sub></b> <span class="sep">•</span> <span class="rw">t<sub>3</sub></span> (<sup>1</sup>⁄<sub>8</sub>)÷6=<b><sup>1</sup>⁄<sub>48</sub></b></p></div>
           <div class="estep"><div class="oprow">Sumo los cuatro términos</div><p>Uso denominador común 48 para sumar sin calculadora:</p><p class="calc"><span class="rw">S</span> 1+<sup>1</sup>⁄<sub>2</sub>+<sup>1</sup>⁄<sub>8</sub>+<sup>1</sup>⁄<sub>48</sub>=<sup>48</sup>⁄<sub>48</sub>+<sup>24</sup>⁄<sub>48</sub>+<sup>6</sup>⁄<sub>48</sub>+<sup>1</sup>⁄<sub>48</sub>=<b><sup>79</sup>⁄<sub>48</sub></b></p><div class="fx"><div class="sys"><span class="eq">e<sup>0.5</sup> ≈ <sup>79</sup>⁄<sub>48</sub> ≈ 1.6458</span></div></div></div>
-          <p class="verdict"><strong>e<sup>0.5</sup> ≈ <sup>79</sup>⁄<sub>48</sub> ≈ 1.646.</strong> El valor real es 1.6487, así que con solo cuatro términos ya pegamos a dos decimales. Cerca de x = 0 la serie de Taylor aproxima muy rápido; con más términos, más precisión.</p>
+          <p class="verdict"><strong>e<sup>0.5</sup> ≈ <sup>79</sup>⁄<sub>48</sub> ≈ 1.646.</strong> El valor real es 1.6487, así que con solo cuatro términos ya acertamos a dos decimales. Cerca de x = 0 la serie de Taylor aproxima muy rápido; con más términos, más precisión.</p>
         </div>
       </details>
       <div class="report"><span class="rlabel">¿Cómo te fue? (márcalo)</span><div class="rbtns"></div></div>
@@ -572,7 +572,7 @@
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>Errores típicos que cuestan puntos</h3>
       <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
       <ul>

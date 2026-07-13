@@ -93,12 +93,12 @@
   .selfrep.locked button.sel{opacity:1}
   .drill.answered{border-style:solid;border-color:var(--green)}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -120,11 +120,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
   .nav-lecs{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
   .nav-lecs a{flex:1;min-width:0;max-width:48%;text-decoration:none;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;background:#fff;color:var(--ink);transition:transform .1s,box-shadow .1s}
@@ -146,7 +146,7 @@
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 2 · Teoría formal</p>
     <h1>Definiciones y <mark>teoremas</mark> para memorizar</h1>
-    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un ejercicio de memoria: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
     <div class="learn">
       <h2>Vas a poder enunciar de memoria</h2>
       <ol>
@@ -165,7 +165,7 @@
   <main>
 
     <p class="idea" style="margin-top:4px">
-      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>ejercicio de memoria</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
     </p>
 
     <h2 class="modhead">Subespacio</h2>
@@ -186,7 +186,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Las condiciones 2 y 3 dicen que S es cerrado bajo <strong>combinaciones lineales</strong>. La condición 1 no es redundante como suele creerse: descarta el <strong>conjunto vacío</strong> y sirve como test rápido de descarte. De hecho, si S ≠ ∅ y es cerrado bajo escalar, tomar c = 0 ya obliga a 0 ∈ S; por eso muchos textos piden 1 explícitamente para no depender de que S sea no vacío.</p></div>
         <div class="drill" data-kind="recall" data-fid="F1_def_subespacio" data-tema="subespacio">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia las 3 condiciones exactas para que S ⊆ Rⁿ sea subespacio. Dilas antes de revelar.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -219,7 +219,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El generado es «todo lo alcanzable» combinando esos vectores. Preguntar si w ∈ gen{v₁, …, v<sub>k</sub>} equivale a preguntar si el sistema con columnas v₁, …, v<sub>k</sub> y término independiente w es <strong>consistente</strong>.</p></div>
         <div class="drill" data-kind="recall" data-fid="F2_def_generado" data-tema="generado">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define con precisión gen{v₁, …, v<sub>k</sub>}. Usa notación de conjunto.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -247,7 +247,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Contiene al 0 (todos los escalares en cero). La suma de dos combinaciones lineales es otra combinación lineal, y un escalar por una combinación lineal vuelve a ser combinación lineal: cierra bajo suma y bajo escalar. Cumple las 3 condiciones, luego es subespacio.</p></div>
         <div class="drill" data-kind="recall" data-fid="F3_teo_gen_subespacio" data-tema="generado">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el teorema sobre el generado y da la idea de su demostración (tres cierres).</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -279,7 +279,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La palabra clave es <strong>única</strong>: no basta con que la trivial funcione (siempre funciona). Independencia = la trivial es la <em>única</em>. Equivalente operativo: al poner los vectores en columnas y reducir, hay un <strong>pivote en cada columna</strong> (ninguna variable libre en el homogéneo).</p></div>
         <div class="drill" data-kind="recall" data-fid="F4_def_independencia" data-tema="independencia">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Da la definición formal de independencia lineal. Cuida decir «única solución trivial», no solo «la trivial funciona».</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -313,7 +313,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Generar sin independencia es sobrar vectores; ser independiente sin generar es faltar. La base es el punto justo: el <strong>mínimo</strong> conjunto que genera S. Consecuencia clave: <strong>todo</strong> vector de S se escribe de forma <strong>única</strong> como combinación lineal de la base.</p></div>
         <div class="drill" data-kind="recall" data-fid="F5_def_base" data-tema="base">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define «base de S» con sus dos condiciones exactas.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -341,7 +341,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es el teorema que <em>legitima</em> hablar de «la» dimensión: sin él, «dimensión» dependería de qué base elijas. Se apoya en el lema de reemplazo (Steinitz): un conjunto independiente nunca puede tener más vectores que uno generador. Como dos bases son ambas independientes y generadoras, se acotan mutuamente y quedan del mismo tamaño.</p></div>
         <div class="drill" data-kind="recall" data-fid="F6_teo_dim_bien_definida" data-tema="dimension">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué garantiza que dim(S) esté «bien definida»? Enúncialo.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -371,7 +371,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Cada pivote marca una columna que <em>no</em> es combinación de las anteriores; las columnas sin pivote sí lo son (sobran). Por eso las columnas pivote son independientes y generan lo mismo: son una base, y su cantidad —el rango— es la dimensión.</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_teo_dim_pivotes" data-tema="dimension">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Relaciona dimensión del generado, pivotes y rango. ¿Qué columnas forman la base?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -403,7 +403,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Nul(A) es el conjunto solución del sistema <strong>homogéneo</strong> A·x = 0; contiene siempre al 0 (por eso el homogéneo nunca es inconsistente), y si A·u = 0 y A·v = 0 entonces A·(u + v) = 0 y A·(c·u) = 0: cierra bajo suma y escalar, luego es subespacio.</p></div>
         <div class="drill" data-kind="recall" data-fid="F8_def_espacio_nulo" data-tema="espacio_nulo">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define Nul(A) en notación de conjunto y di por qué es subespacio y qué es la nulidad.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -433,7 +433,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Al reducir A, cada columna cae en exactamente una de dos clases: con pivote (aporta al rango) o libre (aporta una variable libre, es decir un vector director del espacio nulo). Como cada columna es de una sola clase, pivotes + libres = n. De ahí la fórmula.</p></div>
         <div class="drill" data-kind="recall" data-fid="F9_teo_rango_nulidad" data-tema="rango_nulidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el teorema rango + nulidad, diciendo qué cuenta cada término y contra qué n se suma.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -463,7 +463,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Un homogéneo siempre pasa por el origen (x = 0 lo resuelve), así que su solución es un subespacio puro, sin traslación. Los w<sub>i</sub> son independientes por construcción (cada uno lleva un 1 en «su» variable libre y 0 en las demás), y generan todas las soluciones: son base, y su cantidad es la nulidad.</p></div>
         <div class="drill" data-kind="recall" data-fid="F10_forma_parametrica" data-tema="espacio_nulo">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Describe cómo se obtiene la forma paramétrica de A·x = 0 y qué son los vectores director.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -494,7 +494,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>En Rⁿ, dim = n. Un conjunto independiente de tamaño n <em>ya</em> alcanza el máximo de vectores independientes posibles, así que no puede faltarle nada por generar: genera todo Rⁿ. Es el atajo estrella de examen: con la dimensión correcta, <strong>basta probar una</strong> de las dos condiciones (independencia o generación), la otra sale gratis.</p></div>
         <div class="drill" data-kind="recall" data-fid="F11_teo_n_indep_base" data-tema="teoremas_nucleares">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el teorema: ¿qué basta para que n vectores en Rⁿ sean base? Di las dos versiones.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -528,7 +528,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Ningún conjunto independiente en Rⁿ puede superar n vectores (más columnas que renglones ⇒ hay variable libre ⇒ dependientes). Por eso la dimensión de cualquier subespacio está topada por n, y solo Rⁿ entero llega al tope.</p></div>
         <div class="drill" data-kind="recall" data-fid="F12_teo_cotas_dimension" data-tema="teoremas_nucleares">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Entre qué valores está dim(S) para S ⊆ Rⁿ, y qué pasa con más de n vectores?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -545,7 +545,7 @@
       </div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>La ficha de memoria</h3>
       <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
       <ul>
@@ -564,7 +564,7 @@
     </section>
 
     <section class="cierre">
-      <h3>¿Cómo te fue con el recall?</h3>
+      <h3>¿Cómo te fue enunciando de memoria?</h3>
       <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
       <div class="escala" id="esc"></div>
       <div id="reporte"></div>

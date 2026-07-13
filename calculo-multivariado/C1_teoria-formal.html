@@ -93,12 +93,12 @@
   .selfrep.locked button.sel{opacity:1}
   .drill.answered{border-style:solid;border-color:var(--green)}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -126,11 +126,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -146,7 +146,7 @@
   <header class="hero">
     <p class="kick">Cálculo Multivariado · Unidad 1 · Teoría formal</p>
     <h1>Sucesiones y <mark>series</mark> para memorizar</h1>
-    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un ejercicio de memoria: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
     <div class="learn">
       <h2>Vas a poder enunciar de memoria</h2>
       <ol>
@@ -167,7 +167,7 @@
   <main>
 
     <p class="idea" style="margin-top:4px">
-      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>ejercicio de memoria</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
     </p>
 
     <h2 class="modhead">Sucesión: límite y convergencia</h2>
@@ -185,7 +185,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Cuando n es enorme, el término de mayor grado domina y el resto se vuelve despreciable. Por eso lím (2n + 1)/(n + 3) = 2/1 = 2: arriba y abajo el grado es 1, y manda el cociente de coeficientes de n.</p></div>
         <div class="drill" data-kind="recall" data-fid="F1_def_limite_sucesion" data-tema="limite_sucesion">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define «sucesión» y qué significa que converja a L. Da la regla práctica del cociente de polinomios (grados iguales, abajo gana, arriba gana).</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -215,7 +215,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La convergencia de una serie es, por definición, la convergencia de sus sumas parciales, no de sus términos. Por eso la sucesión y la serie son cosas distintas: la sucesión 1/n → 0, pero la serie ∑ 1/n (la armónica) diverge.</p></div>
         <div class="drill" data-kind="recall" data-fid="F2_def_serie_suma_parcial" data-tema="serie">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué es la suma parcial S<sub>n</sub>? ¿Cuándo converge una serie y qué es su suma? Di la diferencia entre sucesión y serie.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -246,7 +246,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Sirve como filtro de un vistazo: si los términos no se apagan, la suma no puede estabilizarse y diverge. Pero el recíproco falla: la armónica ∑ 1/n tiene términos que van a 0 y aun así diverge. Por eso «→ 0» descarta, pero no confirma.</p></div>
         <div class="drill" data-kind="recall" data-fid="F3_teo_termino_nesimo" data-tema="termino_nesimo">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el criterio del término n-ésimo. ¿Por qué es necesario pero no suficiente? Da el contraejemplo.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -277,7 +277,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Con | r | &lt; 1 los términos se encogen y la suma parcial S<sub>n</sub> = a(1 − r<sup>n</sup>)/(1 − r) tiende a a/(1 − r) porque r<sup>n</sup> → 0. El denominador es 1 <strong>menos</strong> r, no 1 más r. Cuidado: aplicar la fórmula con | r | ≥ 1 da un número «sin sentido» (trampa clásica).</p></div>
         <div class="drill" data-kind="recall" data-fid="F4_teo_serie_geometrica" data-tema="serie_geometrica">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia la serie geométrica: cuándo converge y cuál es su suma. No olvides la condición sobre r.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -310,7 +310,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El cociente a<sub>n+1</sub>/a<sub>n</sub> mide la «razón local» entre términos consecutivos: si a la larga es menor que 1, la serie se comporta como una geométrica que encoge, y converge. Brilla con <strong>factoriales y potencias</strong> porque se cancelan solos al dividir. En L = 1 el criterio queda mudo: ni encoge ni crece con firmeza.</p></div>
         <div class="drill" data-kind="recall" data-fid="F5_teo_criterio_razon" data-tema="criterio_razon">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el criterio de la razón: qué cociente calculas, cuál es L y qué decides en cada caso (L &lt; 1, &gt; 1, = 1).</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -341,7 +341,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La frontera está justo en p = 1: exponentes mayores que 1 hacen que los términos decrezcan lo bastante rápido como para sumar finito; en p = 1 el decrecimiento es demasiado lento y la suma se escapa. La armónica es el ejemplo canónico de serie que diverge aunque 1/n → 0.</p></div>
         <div class="drill" data-kind="recall" data-fid="F6_teo_p_serie" data-tema="p_serie">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Da el criterio de la p-serie (para qué p converge y para cuáles diverge) y los dos casos de referencia: armónica y ∑ 1/n².</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -374,7 +374,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Si tus términos quedan «atrapados» por debajo de una serie que suma finito, tu suma también es finita; si quedan por encima de una que se dispara, la tuya se dispara con ella. La clave del método es <strong>elegir bien la referencia</strong> (típicamente una geométrica o una p-serie). No sirve al revés: ser menor que una que diverge no dice nada.</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_teo_comparacion" data-tema="comparacion">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el criterio de comparación directa (con 0 ≤ a<sub>n</sub> ≤ b<sub>n</sub>): las dos conclusiones válidas. Resúmelo en una frase.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -404,7 +404,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>En una alternada los términos que decrecen a 0 se van cancelando de a pares, y la suma parcial oscila cada vez menos hacia un límite. El ejemplo clave es ∑ (−1)<sup>n+1</sup>/n: converge por Leibniz, pero al volverla positiva es la armónica (diverge), así que su convergencia es <strong>condicional</strong>, no absoluta.</p></div>
         <div class="drill" data-kind="recall" data-fid="F8_teo_alternadas_leibniz" data-tema="alternadas">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el criterio de Leibniz (dos condiciones) y distingue convergencia absoluta de condicional. Da el ejemplo condicional.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -436,7 +436,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es la serie geométrica de razón r = x: converge exactamente cuando | x | &lt; 1, y su suma a/(1 − r) con a = 1 da 1/(1 − x). Sirve como molde: sustituyendo x por otra expresión (por ejemplo, evaluando en x = 1/4) se suman muchas series numéricas de un golpe.</p></div>
         <div class="drill" data-kind="recall" data-fid="F9_metodo_geometrica_en_x" data-tema="serie_potencias">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe la serie geométrica en x y su suma, con el rango de x donde vale. ¿Cuál es su radio de convergencia?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -464,9 +464,9 @@
             <span class="eq">Con infinitos términos, la serie es <strong>exactamente</strong> e<sup>x</sup>. Recuerda 0! = 1, 1! = 1, 2! = 2, 3! = 6, 4! = 24.</span>
           </div>
         </div>
-        <div class="porque"><span class="lbl">Por qué</span><p>Cada derivada de e<sup>x</sup> en 0 vale 1, y el coeficiente de Taylor de x<sup>n</sup> es (n-ésima derivada en 0)/n! = 1/n!. Cuantos más términos tomes, mejor aproximas; cerca de x = 0 pocos términos ya pegan muy bien. El factorial en el denominador es lo que hace que la serie converja para todo x.</p></div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Cada derivada de e<sup>x</sup> en 0 vale 1, y el coeficiente de Taylor de x<sup>n</sup> es (n-ésima derivada en 0)/n! = 1/n!. Cuantos más términos tomes, mejor aproximas; cerca de x = 0 pocos términos ya aproximan muy bien. El factorial en el denominador es lo que hace que la serie converja para todo x.</p></div>
         <div class="drill" data-kind="recall" data-fid="F10_metodo_taylor_ex" data-tema="taylor">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe el polinomio de Taylor de e<sup>x</sup> en 0: ¿cuál es el coeficiente de x<sup>n</sup> y cuáles son los primeros términos?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -483,7 +483,7 @@
       </div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>La ficha de memoria</h3>
       <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
       <ul>
@@ -501,7 +501,7 @@
     </section>
 
     <section class="cierre">
-      <h3>¿Cómo te fue con el recall?</h3>
+      <h3>¿Cómo te fue enunciando de memoria?</h3>
       <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y criterios de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
       <div class="escala" id="esc"></div>
       <div id="reporte"></div>

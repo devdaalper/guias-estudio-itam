@@ -101,12 +101,12 @@
   .selfrep.locked button.sel{opacity:1}
   .drill.answered{border-style:solid;border-color:var(--green)}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -134,11 +134,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -154,7 +154,7 @@
   <header class="hero">
     <p class="kick">Cálculo Multivariado · Unidad 6 · Teoría formal</p>
     <h1>Función <mark>implícita</mark> e inversa para memorizar</h1>
-    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen —hipótesis y conclusión completas—, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen —hipótesis y conclusión completas—, el porqué breve, y un ejercicio de memoria: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
     <div class="learn">
       <h2>Vas a poder enunciar de memoria</h2>
       <ol>
@@ -173,7 +173,7 @@
   <main>
 
     <p class="idea" style="margin-top:4px">
-      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir, con sus <strong>hipótesis</strong> y su <strong>conclusión</strong>. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir, con sus <strong>hipótesis</strong> y su <strong>conclusión</strong>. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>ejercicio de memoria</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
     </p>
 
     <h2 class="modhead">Función implícita: la ecuación F = 0</h2>
@@ -190,7 +190,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La circunferencia x² + y² = 25 no es función de x (a x = 3 le tocan y = 4 y y = −4), pero alrededor de (3, 4) sí es un trocito que es función. Por eso todo el capítulo es <strong>local</strong>: cerca del punto, no en toda la curva.</p></div>
         <div class="drill" data-kind="recall" data-fid="F1_def_funcion_implicita" data-tema="funcion_implicita">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define «F(x, y) = 0 define implícitamente a y como función de x cerca de (a, b)». Recalca la palabra «localmente».</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -222,7 +222,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Con varias entradas y varias salidas la «derivada» ya no es un número: es la matriz que reúne <strong>cómo cada salida responde a cada entrada</strong>. Es la mejor aproximación lineal de T cerca del punto, igual que f′(a) lo era en una variable.</p></div>
         <div class="drill" data-kind="recall" data-fid="F2_def_matriz_jacobiana" data-tema="jacobiano">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué es la matriz jacobiana de T: (x, y) → (u, v)? Di qué va en cada fila y en cada columna, y su tamaño.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -252,7 +252,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El determinante de la aproximación lineal J es cuánto estira o encoge áreas la transformación cerca del punto. Su signo dice si conserva o invierte la orientación. Por eso aparece como factor en el cambio de variable de las integrales múltiples (dx dy → |det J| du dv).</p></div>
         <div class="drill" data-kind="recall" data-fid="F3_def_determinante_jacobiano" data-tema="jacobiano">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define el determinante jacobiano 2×2 (fórmula diagonal menos antidiagonal) y di qué mide geométricamente.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -289,7 +289,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La hipótesis clave es F<sub>y</sub> ≠ 0: es la que aparece en el <strong>denominador</strong> de la fórmula. Si F<sub>y</sub> fuera 0, la división no existe y no se puede despejar y. La fórmula sale de derivar F(x, f(x)) = 0 con la regla de la cadena: F<sub>x</sub> + F<sub>y</sub>·y′ = 0.</p></div>
         <div class="drill" data-kind="recall" data-fid="F4_teo_implicita_2var" data-tema="teorema_funcion_implicita">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el teorema de la función implícita en 2 variables: las dos hipótesis, la conclusión y la fórmula dy/dx.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -320,7 +320,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es el mismo teorema un piso arriba: la variable que despejas (z) manda, y su parcial F<sub>z</sub> va en el denominador de <strong>ambas</strong> fórmulas —por eso la hipótesis es F<sub>z</sub> ≠ 0—. Salen dos parciales porque ahora hay dos entradas (x y y), pero cada una sigue la misma receta «−parcial de arriba entre F<sub>z</sub>».</p></div>
         <div class="drill" data-kind="recall" data-fid="F5_teo_implicita_3var" data-tema="derivacion_implicita_3var">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el teorema con F(x, y, z) = 0: hipótesis (cuál parcial ≠ 0), qué queda como función y las dos parciales.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -353,7 +353,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El error número uno del tema es <strong>olvidar el y′</strong> al derivar un término con y. Como y depende de x, cada aparición de y arrastra su derivada interna; sin ese y′ el despeje sale con la fórmula equivocada. Este método da lo mismo que dy/dx = −F<sub>x</sub>/F<sub>y</sub>: son dos caminos al mismo resultado.</p></div>
         <div class="drill" data-kind="recall" data-fid="F6_metodo_derivacion_implicita" data-tema="derivacion_implicita">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Describe cómo se deriva implícitamente y cuál es el error que más cuesta caro al hacerlo.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -384,7 +384,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La pendiente de la inversa es el <strong>recíproco</strong> de la pendiente de f. Cuidado con <strong>dónde se evalúa</strong>: f′ se calcula en <strong>a</strong> (el de entrada, con f(a) = b), no en b. El error típico es evaluar f′ en b. La condición f′(a) ≠ 0 evita dividir entre cero.</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_teo_inversa_escalar" data-tema="funcion_inversa">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia la derivada de la inversa escalar: fórmula, dónde se evalúa f′ y la condición sobre f′(a).</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -413,7 +413,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es la contraparte de (f⁻¹)′(b) = 1/f′(a): donde el número f′(a) se volvía su recíproco 1/f′(a), la matriz J se vuelve su <strong>inversa</strong> J⁻¹. Y donde antes hacía falta f′(a) ≠ 0, ahora hace falta <strong>det J ≠ 0</strong> —la misma condición que garantiza que J tenga inversa—. Si det J = 0, la transformación aplasta áreas y no se puede deshacer.</p></div>
         <div class="drill" data-kind="recall" data-fid="F8_teo_inversa_matricial" data-tema="funcion_inversa">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el teorema de la función inversa matricial: qué condición pide, qué garantiza y en qué se convierte J.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -442,7 +442,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es el mismo espíritu que F<sub>y</sub> ≠ 0 en el caso implícito. El determinante es el factor de área: si vale 0, la transformación colapsa un pedazo del plano (aplasta áreas) y no hay forma de recuperar la entrada a partir de la salida. Ojo: el teorema da una condición <em>suficiente</em>; det J = 0 no prueba por sí solo que no exista inversa, solo que el teorema no la asegura.</p></div>
         <div class="drill" data-kind="recall" data-fid="F9_cor_jacobiano_inversa" data-tema="jacobiano">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Di qué se concluye si el determinante jacobiano es distinto de cero, y qué pasa si vale cero.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -459,7 +459,7 @@
       </div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>La ficha de memoria</h3>
       <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, con hipótesis y conclusión.</p>
       <ul>
@@ -476,7 +476,7 @@
     </section>
 
     <section class="cierre">
-      <h3>¿Cómo te fue con el recall?</h3>
+      <h3>¿Cómo te fue enunciando de memoria?</h3>
       <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
       <div class="escala" id="esc"></div>
       <div id="reporte"></div>

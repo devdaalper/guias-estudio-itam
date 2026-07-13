@@ -209,10 +209,10 @@
         <p class="idea">El mapa funciona igual. «3 al este y 4 al norte» es la lista (3, 4): un <strong>lugar</strong>, o el <strong>viaje</strong> desde el origen.</p>
         <figure class="visual">
           <svg viewBox="0 0 300 250" role="img" aria-label="La lista 3,4 como un punto y como una flecha en el plano">
-            <defs><marker id="arrc1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#F5821F"/></marker></defs>
+            <defs><marker id="arrc1" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#F5821F"/></marker></defs>
             <g stroke="#eef0f2"><path d="M60 210V40M100 210V40M140 210V40M180 210V40M220 210V40"/><path d="M40 210H240M40 170H240M40 130H240M40 90H240M40 50H240"/></g>
             <path d="M40 210H250M40 210V30" stroke="#64748B" stroke-width="2"/>
-            <path d="M40 210L160 50" stroke="#F5821F" stroke-width="6" marker-end="url(#arrc1)"/>
+            <path d="M40 210L160 50" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrc1)"/>
             <circle cx="160" cy="50" r="6" fill="#181B22"/>
             <text x="168" y="46" font-size="17" font-weight="800" fill="#C75D08">(3, 4)</text>
             <text x="120" y="150" font-size="14" fill="#475569">3 al este · 4 al norte</text>
@@ -315,7 +315,7 @@
         <p class="idea">¿El total? Emparejas dato con dato, multiplicas y sumas.</p>
         <div class="fx"><div class="sys"><span class="eq">2·30 + 3·20 = 60 + 60 = 120</span></div></div>
         <figure class="visual">
-          <svg viewBox="0 0 320 190" role="img" aria-label="Dos listas emparejadas componente con componente que dan un número">
+          <svg viewBox="0 0 380 190" role="img" aria-label="Dos listas emparejadas componente con componente que dan un número">
             <rect x="20" y="30" width="90" height="130" rx="12" fill="#FFF3E7" stroke="#181B22" stroke-width="2.5"/>
             <text x="65" y="55" text-anchor="middle" font-size="14" font-weight="800" fill="#181B22">compras</text>
             <text x="65" y="92" text-anchor="middle" font-size="20" fill="#334155">2</text>
@@ -376,13 +376,13 @@
         <p class="idea">Las flechas son <strong>perpendiculares</strong>; los libros dicen <strong>ortogonales</strong>. Míralo con el par que ya te dio cero:</p>
         <figure class="visual">
           <svg viewBox="0 0 300 240" role="img" aria-label="Dos flechas perpendiculares desde el origen con marca de ángulo recto">
-            <path d="M40 200H270M40 200V20" stroke="#64748B" stroke-width="2"/>
-            <defs><marker id="arrc4o" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#F5821F"/></marker><marker id="arrc4b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#283891"/></marker></defs>
-            <path d="M40 200L200 120" stroke="#F5821F" stroke-width="7" marker-end="url(#arrc4o)"/>
-            <path d="M40 200L120 40" stroke="#283891" stroke-width="7" marker-end="url(#arrc4b)"/>
-            <path d="M63 189L74 211L52 222" fill="none" stroke="#181B22" stroke-width="2"/>
-            <text x="196" y="112" font-size="18" font-weight="800" fill="#C75D08">u</text>
-            <text x="126" y="46" font-size="18" font-weight="800" fill="#283891">v</text>
+            <path d="M20 200H285M150 200V20" stroke="#64748B" stroke-width="2"/>
+            <defs><marker id="arrc4o" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#F5821F"/></marker><marker id="arrc4b" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#283891"/></marker></defs>
+            <path d="M150 200L224 126" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrc4o)"/>
+            <path d="M150 200L76 126" stroke="#283891" stroke-width="3.5" marker-end="url(#arrc4b)"/>
+            <path d="M166 184L150 169L134 184" fill="none" stroke="#181B22" stroke-width="2"/>
+            <text x="230" y="122" font-size="18" font-weight="800" fill="#C75D08">u</text>
+            <text x="58" y="122" font-size="18" font-weight="800" fill="#283891">v</text>
           </svg>
           <figcaption>El cuadrito marca el ángulo recto: cuando u·v = 0, las flechas se cruzan a 90°.</figcaption>
         </figure>
@@ -436,11 +436,11 @@
         <figure class="visual">
           <svg viewBox="0 0 300 230" role="img" aria-label="Dos flechas paralelas, una el doble de la otra">
             <path d="M40 200H270M40 200V20" stroke="#64748B" stroke-width="2"/>
-            <defs><marker id="arrc5b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#283891"/></marker><marker id="arrc5o" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#F5821F"/></marker></defs>
-            <path d="M40 200L220 50" stroke="#283891" stroke-width="6" marker-end="url(#arrc5b)"/>
-            <path d="M40 200L130 125" stroke="#F5821F" stroke-width="8" marker-end="url(#arrc5o)"/>
-            <text x="118" y="120" font-size="18" font-weight="800" fill="#C75D08">u</text>
-            <text x="214" y="46" font-size="18" font-weight="800" fill="#283891">v = 2u</text>
+            <defs><marker id="arrc5b" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#283891"/></marker><marker id="arrc5o" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#F5821F"/></marker></defs>
+            <path d="M35 194L215 44" stroke="#283891" stroke-width="3.5" marker-end="url(#arrc5b)"/>
+            <path d="M45 206L135 131" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrc5o)"/>
+            <text x="142" y="138" font-size="18" font-weight="800" fill="#C75D08">u</text>
+            <text x="112" y="58" font-size="18" font-weight="800" fill="#283891">v = 2u</text>
           </svg>
           <figcaption>Cuando v es múltiplo de u (misma dirección), el tope se toca: |u·v| = |u||v|.</figcaption>
         </figure>
@@ -485,12 +485,12 @@
         <figure class="visual">
           <svg viewBox="0 0 300 240" role="img" aria-label="Un punto con su radio y su ángulo medido desde el eje horizontal">
             <path d="M40 200H270M150 220V20" stroke="#64748B" stroke-width="2"/>
-            <defs><marker id="arrc6" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#F5821F"/></marker></defs>
+            <defs><marker id="arrc6" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#F5821F"/></marker></defs>
             <path d="M180 200 A30 30 0 0 0 100 150" fill="none" stroke="#283891" stroke-width="2.5"/>
-            <path d="M150 200L100 100" stroke="#F5821F" stroke-width="6" marker-end="url(#arrc6)"/>
+            <path d="M150 200L100 100" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrc6)"/>
             <circle cx="100" cy="100" r="6" fill="#181B22"/>
             <text x="70" y="96" font-size="17" font-weight="800" fill="#181B22">(−1, 1)</text>
-            <text x="112" y="150" font-size="16" font-weight="800" fill="#C75D08">r</text>
+            <text x="132" y="150" font-size="16" font-weight="800" fill="#C75D08">r</text>
             <text x="158" y="176" font-size="16" font-weight="800" fill="#283891">θ</text>
           </svg>
           <figcaption>El punto (−1, 1) tiene radio r = √2 y ángulo θ = 135°, en el segundo cuadrante.</figcaption>
@@ -537,11 +537,11 @@
           <svg viewBox="0 0 300 200" role="img" aria-label="Una recta con su punto de paso y su vector director">
             <path d="M20 170H285M60 195V25" stroke="#64748B" stroke-width="2"/>
             <path d="M30 40L275 175" stroke="#1C7A3A" stroke-width="3" stroke-dasharray="9 7"/>
-            <defs><marker id="arrc7" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#F5821F"/></marker></defs>
+            <defs><marker id="arrc7" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#F5821F"/></marker></defs>
             <circle cx="120" cy="90" r="6" fill="#181B22"/>
             <text x="70" y="86" font-size="15" font-weight="800" fill="#181B22">(1, 2)</text>
-            <path d="M120 90L200 133" stroke="#F5821F" stroke-width="6" marker-end="url(#arrc7)"/>
-            <text x="176" y="120" font-size="15" font-weight="800" fill="#C75D08">(3, −1)</text>
+            <path d="M120 90L200 133" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrc7)"/>
+            <text x="168" y="150" font-size="15" font-weight="800" fill="#C75D08">(3, −1)</text>
           </svg>
           <figcaption>La recta es el punto de paso (1, 2) más el rumbo (3, −1) tomado t veces.</figcaption>
         </figure>

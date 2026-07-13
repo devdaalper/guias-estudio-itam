@@ -202,7 +202,7 @@
       <div class="sec">
         <p class="idea lede">Hoy conoces la primera herramienta de la unidad: la <strong>norma</strong>, el largo de una flecha.</p>
         <p class="idea">En la Unidad 2 las flechas se estiraban y se sumaban, pero nadie dijo cuánto <strong>miden</strong>. Empecemos por ahí.</p>
-        <p class="idea">En un mapa cuadriculado caminas <strong>3 cuadras a la derecha y 4 al frente</strong>. Esa es la flecha (3, 4).</p>
+        <p class="idea">En un mapa cuadriculado caminas <strong>3 calles a la derecha y 4 al frente</strong>. Esa es la flecha (3, 4).</p>
         <p class="idea">¿Y si cruzaras en diagonal, directo del inicio al final? ¿Cuánto mide ese atajo?</p>
         <p class="idea">Los tramos 3 y 4 forman una <strong>esquina de 90°</strong>, y el atajo es el lado inclinado. Eso es <strong>Pitágoras</strong>.</p>
         <figure class="visual">
@@ -380,11 +380,11 @@
         <figure class="visual">
           <svg viewBox="0 0 260 200" role="img" aria-label="Dos vectores perpendiculares desde un origen común, con marca de ángulo recto">
             <defs>
-              <marker id="o4a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#C75D08"/></marker>
-              <marker id="o4b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#283891"/></marker>
+              <marker id="o4a" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0,0 L11,4 L0,8 Z" fill="#C75D08"/></marker>
+              <marker id="o4b" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0,0 L11,4 L0,8 Z" fill="#283891"/></marker>
             </defs>
-            <line x1="60" y1="110" x2="114" y2="56" stroke="#C75D08" stroke-width="4.5" stroke-linecap="round" marker-end="url(#o4a)"/>
-            <line x1="60" y1="110" x2="114" y2="164" stroke="#283891" stroke-width="4.5" stroke-linecap="round" marker-end="url(#o4b)"/>
+            <line x1="60" y1="110" x2="114" y2="56" stroke="#C75D08" stroke-width="3.5" stroke-linecap="round" marker-end="url(#o4a)"/>
+            <line x1="60" y1="110" x2="114" y2="164" stroke="#283891" stroke-width="3.5" stroke-linecap="round" marker-end="url(#o4b)"/>
             <polyline points="71,99 81,110 71,121" fill="none" stroke="#181B22" stroke-width="1.5"/>
             <circle cx="60" cy="110" r="4" fill="#181B22"/>
             <text x="120" y="52" font-size="15" font-weight="800" fill="#C75D08">u</text>
@@ -523,7 +523,7 @@
         </figure>
         <p class="idea key">Lo que sobra al restar la proyección, u − proy, es <strong>perpendicular</strong> a v: la distancia más corta a la recta.</p>
         <div class="fx"><div class="sys"><span class="eq">u − proy = (2, 4) − (3, 3) = (−1, 1)</span><span class="eq">(−1, 1) · (1, 1) = 0</span></div></div>
-        <p class="idea paso">Haz los retos. Y en la última lección, esta sombra se vuelve una máquina para <strong>enderezar</strong> bases chuecas.</p>
+        <p class="idea paso">Haz los retos. Y en la última lección, esta sombra se vuelve una máquina para <strong>enderezar</strong> bases torcidas.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M6G" data-tema="proyeccion" data-level="guiado" data-module="6">
         <div class="qtag">Compruébalo · guiado</div>
@@ -549,16 +549,16 @@
     </section>
 
     <section class="lesson" data-step="7">
-      <header class="lesson-head"><p class="micro">Microlección 7 de 7 · Tema: Ortogonalización de Gram-Schmidt</p><h2>Gram-Schmidt: enderezar una base chueca</h2><p class="goal">Meta: volver ortogonal un par de vectores proyectando y restando.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 7 de 7 · Tema: Ortogonalización de Gram-Schmidt</p><h2>Gram-Schmidt: enderezar una base torcida</h2><p class="goal">Meta: volver ortogonal un par de vectores proyectando y restando.</p></header>
       <div class="sec">
-        <p class="idea lede">Última pieza: <strong>Gram-Schmidt</strong>, la receta para enderezar una base chueca.</p>
-        <p class="idea">Compara dos hojas: una cuadriculada (líneas en esquina perfecta) y una rayada a mano (chueca).</p>
+        <p class="idea lede">Última pieza: <strong>Gram-Schmidt</strong>, la receta para enderezar una base torcida.</p>
+        <p class="idea">Compara dos hojas: una cuadriculada (líneas en esquina perfecta) y una rayada a mano (torcida).</p>
         <p class="idea">En las dos ubicas puntos, pero la cuadriculada es más cómoda.</p>
-        <p class="idea">Con las <strong>bases</strong> de la Unidad 2 pasa igual: una base <strong>ortogonal</strong> —todas en esquina perfecta— es mucho mejor que una chueca.</p>
-        <p class="idea">¿Y si la tuya vino chueca? La <strong>sombra</strong> de una flecha sobre otra es justo lo que las hace chuecas. Entonces: a la segunda réstale su sombra sobre la primera.</p>
+        <p class="idea">Con las <strong>bases</strong> de la Unidad 2 pasa igual: una base <strong>ortogonal</strong> —todas en esquina perfecta— es mucho mejor que una torcida.</p>
+        <p class="idea">¿Y si la tuya vino torcida? La <strong>sombra</strong> de una flecha sobre otra es justo lo que las hace torcidas. Entonces: a la segunda réstale su sombra sobre la primera.</p>
         <p class="idea key">Lo que queda ya no avanza en esa dirección: quedó en <strong>esquina perfecta</strong>. Eso es todo Gram-Schmidt: proyectar y restar.</p>
         <p class="idea">Con dos reglas: la primera flecha se queda como está; a la segunda le restas su sombra sobre la primera. Hagámoslo.</p>
-        <p class="idea">Enderecemos v<sub>1</sub> = (3, 0) y v<sub>2</sub> = (2, 2). Su producto punto da 6, no cero: están chuecas.</p>
+        <p class="idea">Enderecemos v<sub>1</sub> = (3, 0) y v<sub>2</sub> = (2, 2). Su producto punto da 6, no cero: están torcidas.</p>
         <div class="fx"><div class="sys"><span class="eq">v<sub>1</sub> · v<sub>2</sub> = (3)(2) + (0)(2) = 6</span></div></div>
         <p class="idea">La primera se queda: u<sub>1</sub> = (3, 0). A la segunda le restamos su sombra sobre u<sub>1</sub>.</p>
         <div class="fx"><div class="sys"><span class="eq">factor = (v<sub>2</sub> · u<sub>1</sub>) / (u<sub>1</sub> · u<sub>1</sub>) = 6 / 9 = 2/3</span><span class="eq">proy = (2/3) · (3, 0) = (2, 0)</span></div></div>
@@ -581,7 +581,7 @@
             <text x="94" y="168" font-size="13" font-weight="800" fill="#181B22">sombra</text>
             <text x="138" y="112" font-size="14" font-weight="800" fill="#1C7A3A">u₂</text>
           </svg>
-          <figcaption>v<sub>2</sub> viene chueca; réstale su sombra sobre v<sub>1</sub> y queda u<sub>2</sub>, perpendicular.</figcaption>
+          <figcaption>v<sub>2</sub> viene torcida; réstale su sombra sobre v<sub>1</sub> y queda u<sub>2</sub>, perpendicular.</figcaption>
         </figure>
         <p class="idea">Compruebo que ya son perpendiculares:</p>
         <div class="fx"><div class="sys"><span class="eq">u<sub>1</sub> · u<sub>2</sub> = (3)(0) + (0)(2) = 0</span></div></div>
@@ -646,7 +646,7 @@
     'Ortogonalidad: reconocer la esquina perfecta con u · v = 0.',
     'Ángulo: leer el ángulo entre dos vectores con el coseno.',
     'Proyección: hallar la sombra y el punto más cercano.',
-    'Gram-Schmidt: enderezar una base chueca proyectando y restando.'
+    'Gram-Schmidt: enderezar una base torcida proyectando y restando.'
   ];
   var state={current:1,started:new Date().toISOString(),items:{},confidence:null};
   try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&saved.items){state=saved;}}catch(e){}

@@ -233,7 +233,7 @@
         <p class="idea">Y con esto ya llegaste. Una ecuación que, cerca de un punto, deja a una variable como función de la otra: eso es una <strong>función implícita</strong>.</p>
         <p class="idea">Tu curso lo plantea así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.1</span>Una ecuación F(x, y) = 0 define a y como <strong>función implícita</strong> de x cerca de un punto cuando, en un entorno de ese punto, a cada x le corresponde un único y que cumple la ecuación.</p>
-        <p class="idea">Léela con lo que ya tienes: «F(x, y) = 0» es la ecuación amarrada, y «cerca de un punto» es la letra chica — la función vive en un trozo, no en la curva entera.</p>
+        <p class="idea">Léela con lo que ya tienes: «F(x, y) = 0» es la ecuación amarrada, y «cerca de un punto» es la letra pequeña — la función vive en un trozo, no en la curva entera.</p>
         <p class="idea paso">Asegura la pieza con los dos retos de abajo. Y en cuanto la tengas, seguimos con lo natural: si hay una función escondida, querrás su <strong>pendiente</strong> — sin despejarla.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="funcion_implicita" data-level="guiado" data-module="1">
@@ -373,16 +373,16 @@
     </section>
 
     <section class="lesson" data-step="4">
-      <header class="lesson-head"><p class="micro">Microlección 4 de 6 · Tema: Teorema de la función inversa</p><h2>Función inversa: la pendiente en reversa</h2><p class="goal">Meta: derivar la inversa sin despejarla, con (f⁻¹)′(b) = 1/f′(a).</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 4 de 6 · Tema: Teorema de la función inversa</p><h2>Función inversa: la pendiente al revés</h2><p class="goal">Meta: derivar la inversa sin despejarla, con (f⁻¹)′(b) = 1/f′(a).</p></header>
       <div class="sec">
         <p class="idea lede">Cambiamos de pregunta, misma familia. Hoy: la <strong>función inversa</strong> y su pendiente.</p>
-        <p class="idea">Una función es una máquina: entra a, sale b. A veces la necesitas <strong>en reversa</strong>: conoces la salida y quieres recuperar la entrada.</p>
-        <p class="idea">La máquina que pasa kilómetros a metros (por 1000) tiene por reversa la que pasa metros a kilómetros (entre 1000).</p>
-        <p class="idea">A esa reversa se le llama la <strong>inversa</strong> de f, y se escribe <strong>f⁻¹</strong>. Ese −1 no es un exponente: es el letrero de «en reversa».</p>
+        <p class="idea">Una función es una máquina: entra a, sale b. A veces la necesitas <strong>al revés</strong>: conoces la salida y quieres recuperar la entrada.</p>
+        <p class="idea">La máquina que pasa kilómetros a metros (por 1000) tiene por vuelta al revés la que pasa metros a kilómetros (entre 1000).</p>
+        <p class="idea">A esa vuelta al revés se le llama la <strong>inversa</strong> de f, y se escribe <strong>f⁻¹</strong>. Ese −1 no es un exponente: es el letrero de «al revés».</p>
         <p class="idea">¿Siempre se puede deshacer? No. Si cerca de a la máquina está <strong>plana</strong> (f′(a) = 0), dos entradas vecinas dan casi la misma salida y ya no sabes de cuál veniste.</p>
         <p class="idea key">En cambio, si <strong>f′(a) ≠ 0</strong>, sí se deshace. Es la gemela de F<sub>y</sub> ≠ 0 de la lección 2.</p>
-        <p class="idea">¿Y qué pendiente tiene la reversa? Con números chicos:</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x) = 3x  →  pendiente 3</span><span class="eq">reversa  →  pendiente 1/3</span></div></div>
+        <p class="idea">¿Y qué pendiente tiene esa vuelta al revés? Con números chicos:</p>
+        <div class="fx"><div class="sys"><span class="eq">f(x) = 3x  →  pendiente 3</span><span class="eq">al revés  →  pendiente 1/3</span></div></div>
         <figure class="visual">
           <svg viewBox="0 0 520 250" role="img" aria-label="Una recta empinada y su inversa suave, reflejadas en la diagonal">
             <line x1="60" y1="210" x2="500" y2="210" stroke="#64748B" stroke-width="2"/>
@@ -493,11 +493,11 @@
           </svg>
           <figcaption>Factor distinto de cero conserva área y se puede revertir; factor 0 aplasta y no.</figcaption>
         </figure>
-        <p class="idea">Factor 0: el plano queda espachurrado sobre una raya, y dos puntos separados caen encima uno del otro — la misma trampa que la máquina plana con f′ = 0.</p>
+        <p class="idea">Factor 0: el plano queda aplastado sobre una raya, y dos puntos separados caen encima uno del otro — la misma trampa que la máquina plana con f′ = 0.</p>
         <p class="idea">De álgebra lineal, ese factor de área es justo el <strong>determinante</strong> de J. Para una tabla 2×2 se saca con «diagonal menos antidiagonal»:</p>
         <div class="fx"><div class="matrix-form"><span>J =</span><span class="matrix" aria-label="Matriz de ejemplo dos por dos"><span>2</span><span>1</span><span>3</span><span>4</span></span></div></div>
         <div class="fx"><div class="sys"><span class="eq">det = 2·4 − 1·3</span><span class="eq">= 8 − 3 = 5</span></div></div>
-        <p class="idea key">A ese determinante se le llama <strong>el jacobiano</strong>. Su «distinto de cero» decide si hay reversa.</p>
+        <p class="idea key">A ese determinante se le llama <strong>el jacobiano</strong>. Su «distinto de cero» decide si hay inversa.</p>
         <p class="idea">Cierra el paralelo con las otras dos condiciones de la unidad:</p>
         <div class="fx"><div class="sys"><span class="eq">f′(a) ≠ 0  →  la máquina de un número se deshace</span><span class="eq">F<sub>y</sub> ≠ 0  →  la y escondida se despeja</span><span class="eq">det(J) ≠ 0  →  la transformación se revierte</span></div></div>
         <p class="idea">Todo junto es el <strong>teorema de la función inversa</strong>. Tu curso lo enuncia así:</p>
@@ -555,7 +555,7 @@
     'Función implícita: reconocer la función escondida cerca de un punto.',
     'Derivada implícita: sacar la pendiente sin despejar la y.',
     'Tres variables: derivar z como función de (x, y).',
-    'Función inversa: hallar la pendiente de la máquina en reversa.',
+    'Función inversa: hallar la pendiente de la máquina al revés.',
     'Matriz jacobiana: acomodar las cuatro parciales en una tabla.',
     'Jacobiano: leer si la transformación se puede deshacer.'
   ];

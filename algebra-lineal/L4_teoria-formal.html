@@ -103,12 +103,12 @@
   .mrow>span{text-align:right;min-width:22px}
   .msep{justify-self:center;width:0;height:22px;border-left:2px solid var(--ink);min-width:0}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -136,11 +136,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -156,7 +156,7 @@
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 4 · Teoría formal</p>
     <h1>Álgebra <mark>matricial</mark> para memorizar</h1>
-    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un ejercicio de memoria: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
     <div class="learn">
       <h2>Vas a poder enunciar de memoria</h2>
       <ol>
@@ -175,7 +175,7 @@
   <main>
 
     <p class="idea" style="margin-top:4px">
-      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>ejercicio de memoria</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
     </p>
 
     <h2 class="modhead">Operaciones básicas con matrices</h2>
@@ -193,7 +193,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Suma y escalar sí son «entrada por entrada»; el que <strong>no</strong> lo es (y es el error clásico) es el <strong>producto</strong>. Que la suma exija mismo tamaño es lo que vuelve al conjunto de matrices m×n un espacio vectorial: se comportan como vectores con dos índices.</p></div>
         <div class="drill" data-kind="recall" data-fid="F1_def_suma_escalar" data-tema="operaciones_basicas">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Cómo se define la suma de matrices y el múltiplo escalar? ¿Qué condición pide la suma?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -225,7 +225,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El producto <strong>no</strong> es entrada por entrada: cada casilla es un producto punto entre un renglón y una columna. Por eso el número de columnas de A (p) debe igualar el número de renglones de B (p): sin esa coincidencia no hay pares que sumar.</p></div>
         <div class="drill" data-kind="recall" data-fid="F2_def_producto_ij" data-tema="producto_matrices">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe la fórmula de la entrada c<sub>ij</sub> del producto A·B. Di qué renglón y qué columna usa.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -254,7 +254,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Si las de en medio no coinciden, un renglón de A y una columna de B tienen distinta cantidad de números y no se pueden emparejar: el producto ni siquiera existe. Por eso A·B puede existir y B·A no.</p></div>
         <div class="drill" data-kind="recall" data-fid="F3_regla_dimensiones" data-tema="dimensiones">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Cuándo está definido A·B y qué tamaño tiene? Enuncia la regla de dimensiones.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -289,7 +289,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El producto hereda asociatividad y distributividad de que cada entrada es una suma de productos de números. Pero la conmutatividad se pierde: incluso cuando A·B y B·A existen y son del mismo tamaño, casi nunca coinciden, porque emparejan renglones y columnas distintos.</p></div>
         <div class="drill" data-kind="recall" data-fid="F4_teo_propiedades_producto" data-tema="producto_matrices">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia las propiedades del producto (asociativo, distributivo, neutro) y las tres cosas que NO se cumplen.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -320,7 +320,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Transponer es reflejar sobre la diagonal principal: la entrada (i, j) va a la posición (j, i). Por eso una matriz de m×n pasa a n×m. La diagonal queda fija; solo se intercambia lo de fuera.</p></div>
         <div class="drill" data-kind="recall" data-fid="F5_def_transpuesta" data-tema="transpuesta">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define la transpuesta con la fórmula de entradas. ¿Qué tamaño tiene y cuánto vale (Aᵀ)ᵀ?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -352,7 +352,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La regla clave es la 3: al transponer un producto, los factores se voltean. Suma y escalar sí conservan el orden; el producto no, porque para que Bᵀ·Aᵀ esté definido los tamaños obligan a ese orden. Es la misma inversión que aparece en la inversa de un producto.</p></div>
         <div class="drill" data-kind="recall" data-fid="F6_teo_transpuesta_producto" data-tema="transpuesta">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Da las reglas de la transpuesta para suma, escalar y producto. ¿Qué pasa con el orden en (A·B)ᵀ?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -383,7 +383,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La identidad hace en las matrices lo que el número 1 hace en los reales: multiplicar por ella no cambia nada. Es la referencia para definir la inversa: A⁻¹ es la que devuelve la identidad al multiplicar por A.</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_def_identidad" data-tema="identidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define la matriz identidad por sus entradas y di qué propiedad la caracteriza en el producto.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -415,7 +415,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La condición de simétrica es un espejo: la entrada (1,2) coincide con la (2,1), la (1,3) con la (3,1). La triangular superior tiene ceros abajo, así que no coincide con lo de arriba y en general no es simétrica. La diagonal es a la vez triangular superior e inferior.</p></div>
         <div class="drill" data-kind="recall" data-fid="F8_def_matrices_nombradas" data-tema="matrices_nombradas">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define diagonal, simétrica y triangular superior por sus entradas. ¿Qué relación cumple una simétrica con su transpuesta?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -447,7 +447,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La inversa «deshace» a A: aplicar A y luego A⁻¹ deja todo igual, porque el producto da la identidad. Es única porque si B y C cumplieran ambas, entonces B = B·I = B·(A·C) = (B·A)·C = I·C = C.</p></div>
         <div class="drill" data-kind="recall" data-fid="F9_def_inversa" data-tema="inversa">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define matriz invertible y su inversa. ¿Qué dos productos deben dar la identidad y es única?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -477,7 +477,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Se verifica multiplicando: (A·B)·(B⁻¹·A⁻¹) = A·(B·B⁻¹)·A⁻¹ = A·I·A⁻¹ = I. El orden se invierte por la misma razón que en la transpuesta: para «deshacer» A·B hay que soltar primero lo último que se aplicó, B.</p></div>
         <div class="drill" data-kind="recall" data-fid="F10_teo_inversa_producto" data-tema="inversa">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Da la fórmula de (A·B)⁻¹ y de (Aᵀ)⁻¹. ¿Por qué se invierte el orden en el producto?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -507,7 +507,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Cada operación de renglón equivale a multiplicar por la izquierda por una matriz elemental E. Reducir A a I significa E<sub>k</sub>…E<sub>1</sub>·A = I, así que E<sub>k</sub>…E<sub>1</sub> = A⁻¹; y esas mismas operaciones, aplicadas a I, la convierten en A⁻¹. Por eso arrastramos la identidad al lado.</p></div>
         <div class="drill" data-kind="recall" data-fid="F11_metodo_inversa_gj" data-tema="inversa_gauss_jordan">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Describe el método de Gauss-Jordan para hallar A⁻¹. ¿Qué bloque formas y dónde queda la inversa?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -536,7 +536,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Si falta un pivote, un renglón de la izquierda se vuelve todo ceros: esa fila no puede convertirse en una fila de la identidad. Rango &lt; n significa columnas dependientes, y una matriz con columnas dependientes no puede deshacer nada: colapsa información, así que no hay inversa.</p></div>
         <div class="drill" data-kind="recall" data-fid="F12_teo_singular" data-tema="existencia_inversa">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Da el criterio de existencia de la inversa (con rango y con RREF) y la señal de que A es singular al reducir [A | I].</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -553,7 +553,7 @@
       </div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>La ficha de memoria</h3>
       <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
       <ul>
@@ -572,7 +572,7 @@
     </section>
 
     <section class="cierre">
-      <h3>¿Cómo te fue con el recall?</h3>
+      <h3>¿Cómo te fue enunciando de memoria?</h3>
       <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
       <div class="escala" id="esc"></div>
       <div id="reporte"></div>

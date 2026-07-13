@@ -93,12 +93,12 @@
   .selfrep.locked button.sel{opacity:1}
   .drill.answered{border-style:solid;border-color:var(--green)}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -126,11 +126,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -146,7 +146,7 @@
   <header class="hero">
     <p class="kick">Cálculo Multivariado · Unidad 4 · Teoría formal</p>
     <h1>Diferenciación: parciales, <mark>gradiente</mark> y cadena para memorizar</h1>
-    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un ejercicio de memoria: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
     <div class="learn">
       <h2>Vas a poder enunciar de memoria</h2>
       <ol>
@@ -165,7 +165,7 @@
   <main>
 
     <p class="idea" style="margin-top:4px">
-      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>ejercicio de memoria</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
     </p>
 
     <h2 class="modhead">Derivadas parciales</h2>
@@ -184,7 +184,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La parcial respecto a x es la derivada ordinaria de la función de <strong>una</strong> variable que se obtiene al <strong>fijar</strong> y = b. Por eso «congelas la otra variable»: la definición como límite solo mueve x, deja y quieta. Mide la pendiente de f a lo largo del eje x.</p></div>
         <div class="drill" data-kind="recall" data-fid="F1_def_parcial_limite" data-tema="derivadas_parciales">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe la derivada parcial ∂f/∂x (a, b) como límite. ¿Qué regla práctica se sigue de ahí?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -219,7 +219,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>En el parcial real este disfraz aparece <strong>sin avisar</strong>: el enunciado te da dos o tres límites de este tipo como «datos» y el problema entero depende de traducirlos. Si los reconoces, cada límite es una parcial servida en bandeja; si no, el problema no arranca.</p></div>
         <div class="drill" data-kind="recall" data-fid="F1b_traductor_examen" data-tema="derivadas_parciales">
-          <div class="qtag">Recall · traduce como en el examen</div>
+          <div class="qtag">De memoria · traduce como en el examen</div>
           <p class="q">Traduce: lím<sub>h→0</sub> [f(3, −1 + h) − f(3, −1)] / h. ¿Qué parcial es, en qué punto? Y si el enunciado dice que ese límite vale 3, ¿qué dato tienes ya?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -251,7 +251,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Cada parcial vuelve a ser una función de x e y, así que se puede volver a derivar. En la notación de subíndice f<sub>xy</sub> el orden se lee de <strong>izquierda a derecha</strong> (primero x); en la de ∂, de <strong>derecha a izquierda</strong>. Es la fuente típica de confusión: memoriza que el subíndice va en el orden en que derivas.</p></div>
         <div class="drill" data-kind="recall" data-fid="F2_notacion_orden_superior" data-tema="orden_superior">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Distingue parcial pura de cruzada y explica cómo se lee el orden en f<sub>xy</sub> frente a ∂<sup>2</sup>f/∂y∂x.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -280,7 +280,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es el <strong>teorema de Clairaut (Schwarz)</strong>: para funciones «normales» (parciales continuas) el <strong>orden de derivación no importa</strong>. Por eso puedes derivar primero por x o primero por y y llegar al mismo resultado. Solo falla en funciones patológicas donde la continuidad se rompe.</p></div>
         <div class="drill" data-kind="recall" data-fid="F3_teo_clairaut" data-tema="orden_superior">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el teorema de Clairaut: qué hipótesis pide y qué concluye sobre las cruzadas.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -312,7 +312,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Guardar las parciales en un <strong>vector</strong> (no sumarlas) conserva la <strong>dirección</strong>: por eso ∇f tiene sentido y magnitud. Sumarlas daría un número y se perdería la dirección, que es justo la información valiosa. El gradiente organiza toda la derivada de primer orden en un solo objeto.</p></div>
         <div class="drill" data-kind="recall" data-fid="F4_def_gradiente" data-tema="gradiente">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define el gradiente ∇f de una función de varias variables. ¿Por qué es un vector y no un número?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -345,7 +345,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La derivada direccional es D<sub>u</sub>f = ∇f · u = ‖∇f‖ cos θ, máxima cuando θ = 0, es decir cuando u apunta como ∇f. A lo largo de la curva de nivel f no cambia, así que la direccional ahí es 0; por el producto punto, eso obliga a que ∇f sea perpendicular a esa dirección.</p></div>
         <div class="drill" data-kind="recall" data-fid="F5_teo_gradiente_geometria" data-tema="gradiente">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Da las dos propiedades geométricas del gradiente (dirección/longitud y perpendicularidad). ¿Y el máximo descenso?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -377,7 +377,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Tres piezas: la <strong>altura</strong> f(x<sub>0</sub>, y<sub>0</sub>) fija dónde toca el plano, y cada <strong>parcial</strong> multiplica el desplazamiento de <strong>su</strong> variable (x − x<sub>0</sub>) y (y − y<sub>0</sub>). Sin la altura el plano no toca la superficie; sin los desplazamientos no comparte pendiente. Cada parcial debe ir con el desplazamiento de su propia variable, nunca cruzados.</p></div>
         <div class="drill" data-kind="recall" data-fid="F6_plano_tangente" data-tema="plano_tangente">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe la fórmula completa del plano tangente a z = f(x, y) en (x<sub>0</sub>, y<sub>0</sub>). Nombra las tres piezas.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -408,7 +408,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Ser <strong>derivable</strong> solo mira dos direcciones (los ejes). Ser <strong>diferenciable</strong> es más fuerte: el plano tangente debe aproximar a f en <strong>todas</strong> las direcciones, con error que va a cero más rápido que la distancia. Hay funciones con ambas parciales que no son diferenciables (ni siquiera continuas); por eso derivable no implica diferenciable.</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_def_diferenciable" data-tema="diferenciabilidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Distingue «derivable» de «diferenciable». ¿Cuál implica cuál, y por qué existir las parciales no basta?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -437,7 +437,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es el criterio <strong>práctico</strong> de diferenciabilidad: verificar el límite de la definición es tedioso, pero comprobar que las parciales son continuas (polinomios, exponenciales, senos… lo son donde están definidos) es directo. Da la implicación que la definición no garantiza: continuidad de las parciales ⇒ diferenciable.</p></div>
         <div class="drill" data-kind="recall" data-fid="F8_teo_C1_diferenciable" data-tema="diferenciabilidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué condición sobre las parciales garantiza que f es diferenciable? ¿Qué es una función C<sup>1</sup>?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -469,7 +469,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Cada variable es un <strong>camino</strong> por el que t llega a f; se <strong>suman</strong> las contribuciones de todos los caminos, y cada contribución es la parcial <strong>por</strong> el ritmo de cambio de esa variable en t. Multiplicar las parciales entre sí, o sumar solo los ritmos, no es la regla. Es exactamente ∇f punto el vector velocidad.</p></div>
         <div class="drill" data-kind="recall" data-fid="F9_cadena_una_variable" data-tema="regla_cadena">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe dz/dt para z = f(x, y) con x = x(t), y = y(t). ¿Qué se suma y qué se multiplica?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -500,7 +500,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es la misma idea de «sumar caminos», pero ahora hay <strong>una ecuación por cada variable independiente</strong> (s y t). Para ∂z/∂s solo cuentan los caminos que pasan por s; las derivadas dentro de esos caminos son <strong>parciales</strong> (no ordinarias), porque x e y dependen de más de una variable. El diagrama de árbol evita olvidar un camino.</p></div>
         <div class="drill" data-kind="recall" data-fid="F10_cadena_varias_variables" data-tema="regla_cadena">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe ∂z/∂s para z = f(x, y) con x = x(s, t), y = y(s, t). ¿Cómo evitas olvidar un camino?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -533,7 +533,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es la pendiente de f en <strong>cualquier</strong> dirección, no solo en los ejes (las parciales son los casos u = (1,0) y u = (0,1)). Se <strong>normaliza</strong> u para que la respuesta mida pendiente pura: un vector más largo inflaría el producto punto sin cambiar la dirección. El gradiente <strong>no</strong> es unitario.</p></div>
         <div class="drill" data-kind="recall" data-fid="F11_def_direccional" data-tema="derivada_direccional">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Da la fórmula de la derivada direccional con el gradiente. ¿Qué condición debe cumplir u y qué haces si no la cumple?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -566,7 +566,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Todo sale de D<sub>u</sub>f = ‖∇f‖ cos θ: cos θ vive entre −1 y 1, así que la direccional queda acotada entre −‖∇f‖ y +‖∇f‖. Esto <strong>demuestra</strong> por qué el gradiente es la dirección de máximo ascenso y su longitud la tasa máxima: son el caso θ = 0 de esta fórmula.</p></div>
         <div class="drill" data-kind="recall" data-fid="F12_teo_max_direccional" data-tema="derivada_direccional">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">A partir de D<sub>u</sub>f = ‖∇f‖ cos θ, da el valor máximo, el mínimo y cuándo la direccional es cero.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -583,7 +583,7 @@
       </div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>La ficha de memoria</h3>
       <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
       <ul>
@@ -601,7 +601,7 @@
     </section>
 
     <section class="cierre">
-      <h3>¿Cómo te fue con el recall?</h3>
+      <h3>¿Cómo te fue enunciando de memoria?</h3>
       <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
       <div class="escala" id="esc"></div>
       <div id="reporte"></div>

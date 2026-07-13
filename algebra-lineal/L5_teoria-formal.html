@@ -102,12 +102,12 @@
   .mrow{display:grid;align-items:center;column-gap:16px;min-height:28px}
   .mrow>span{text-align:right;min-width:22px}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -135,11 +135,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -155,7 +155,7 @@
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 5 · Teoría formal</p>
     <h1>Determinantes, cofactores y <mark>Cramer</mark> para memorizar</h1>
-    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un ejercicio de memoria: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
     <div class="learn">
       <h2>Vas a poder enunciar de memoria</h2>
       <ol>
@@ -176,7 +176,7 @@
   <main>
 
     <p class="idea" style="margin-top:4px">
-      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>ejercicio de memoria</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
     </p>
 
     <h2 class="modhead">Qué es el determinante</h2>
@@ -192,9 +192,9 @@
             <span class="eq">Se escribe con <strong>barras verticales</strong> |A|, no con corchetes (que denotan la matriz misma).</span>
           </div>
         </div>
-        <div class="porque"><span class="lbl">Por qué</span><p>Ese número codifica de un tiro tres cosas: si A es invertible, si el sistema A·x = b tiene solución única, y cuánto «estira o encoge» el espacio (área/volumen con signo). La restricción a cuadradas no es un capricho: la expansión por cofactores necesita el mismo número de renglones que de columnas.</p></div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Ese número codifica de una sola vez tres cosas: si A es invertible, si el sistema A·x = b tiene solución única, y cuánto «estira o encoge» el espacio (área/volumen con signo). La restricción a cuadradas no es un capricho: la expansión por cofactores necesita el mismo número de renglones que de columnas.</p></div>
         <div class="drill" data-kind="recall" data-fid="F1_def_determinante" data-tema="determinante_definicion">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué es el determinante, a qué matrices se les asigna y cómo se denota? Dilo antes de revelar.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -226,7 +226,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es el caso base de toda la teoría: el 3×3 y superiores se reducen a sumar 2×2. El error típico es escribir a·b − c·d (mezclar entradas del mismo renglón) o poner un + en medio. Repite la regla como «diagonal menos antidiagonal».</p></div>
         <div class="drill" data-kind="recall" data-fid="F2_det_2x2" data-tema="determinante_2x2">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe la fórmula del determinante de una 2×2 con renglones (a, b) y (c, d).</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -258,7 +258,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El menor «reduce» el tamaño en uno; el signo alterna para que las cancelaciones den un valor bien definido, invariante del renglón que elijas. Truco: la casilla (1,1) siempre es +, y de ahí alternas. Nunca amarres el signo al valor de la entrada.</p></div>
         <div class="drill" data-kind="recall" data-fid="F3_def_menor_cofactor" data-tema="cofactores">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define menor M<sub>ij</sub> y cofactor C<sub>ij</sub>. ¿De qué depende el signo y qué tablero forma?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -288,7 +288,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Como el valor no depende de la fila elegida, conviene desarrollar por el renglón o columna con <strong>más ceros</strong>: cada entrada 0 anula su término (0 × cofactor = 0) y te ahorra calcular ese menor. Un 3×3 con dos ceros en una línea colapsa a un solo 2×2.</p></div>
         <div class="drill" data-kind="recall" data-fid="F4_teo_laplace" data-tema="cofactores">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia la expansión por cofactores (Laplace) y la regla práctica para elegir el renglón o columna.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -320,7 +320,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Desarrollando por cofactores por la columna (o renglón) del lado de los ceros, en cada paso solo sobrevive la entrada diagonal; el resto se anula. Ojo: en el 2×2 se <strong>resta</strong> la antidiagonal, pero en una triangular la antidiagonal ya es cero, así que solo queda <strong>multiplicar</strong> la diagonal.</p></div>
         <div class="drill" data-kind="recall" data-fid="F5_teo_triangular" data-tema="propiedades">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Cuál es el determinante de una matriz triangular? ¿Cuánto vale det(I)?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -354,7 +354,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Todos estos casos significan que los renglones son <strong>linealmente dependientes</strong>: geométricamente, los vectores no encierran área/volumen (se aplanan), así que el «volumen con signo» es cero. Detectar esto de vista evita la cuenta completa: si dos renglones son proporcionales, ya sabes que det = 0.</p></div>
         <div class="drill" data-kind="recall" data-fid="F6_teo_det_cero" data-tema="propiedades">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Lista los casos en que det = 0 de vista. ¿Qué tienen en común?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -387,7 +387,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La operación 3 es la útil: permite crear ceros sin alterar el valor, ideal para llevar la matriz a triangular y leer el determinante como producto de la diagonal. Cuidado con la 2 al «sacar factor común»: si factorizas c de un renglón, el determinante queda multiplicado por c (o dividido, según cómo lo escribas).</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_teo_operaciones" data-tema="propiedades">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Cómo cambia el determinante al intercambiar renglones, escalar un renglón por c, y sumar un múltiplo de otro?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -422,7 +422,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>det(A<sup>T</sup>) = det(A) es lo que justifica poder desarrollar por columnas igual que por renglones. La regla c<sup>n</sup> viene de que escalar toda la matriz por c es escalar sus n renglones, y cada uno aporta un factor c. El error clásico es «repartir» el determinante sobre una suma: no se puede.</p></div>
         <div class="drill" data-kind="recall" data-fid="F8_teo_producto_transpuesta" data-tema="propiedades">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia det(A·B), det(A<sup>T</sup>), det(A<sup>−1</sup>) y det(c·A). ¿Vale det(A + B) = det(A) + det(B)?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -454,7 +454,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Este es el puente entre determinantes y todo lo anterior del curso. det(A) = 0 significa renglones dependientes: la matriz «colapsa» dimensión y no se puede deshacer (no hay inversa). Un det negativo está perfecto: la matriz sí se invierte (el signo solo indica que invierte la orientación).</p></div>
         <div class="drill" data-kind="recall" data-fid="F9_teo_invertibilidad" data-tema="invertibilidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Da el criterio de invertibilidad con el determinante y tres condiciones equivalentes.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -484,7 +484,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Cramer da cada incógnita como cociente de determinantes, sin reducir la matriz. Requisito duro: <strong>det(A) ≠ 0</strong> (si es 0 no hay solución única y la regla no aplica). Reemplazas <strong>la columna de la incógnita que buscas</strong>, no un renglón; ese es el error frecuente.</p></div>
         <div class="drill" data-kind="recall" data-fid="F10_teo_cramer" data-tema="regla_de_cramer">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia la regla de Cramer: fórmula de x<sub>i</sub>, qué es A<sub>i</sub> y qué condición se necesita.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -516,7 +516,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>En 2×2 es rapidísimo: intercambia la diagonal principal, niega la otra, divide entre el determinante. En 3×3 la adjunta pide 9 cofactores + transponer, así que casi siempre conviene invertir por Gauss-Jordan; la fórmula por adjunta es teórica y útil en 2×2. El factor 1÷det exige otra vez det(A) ≠ 0.</p></div>
         <div class="drill" data-kind="recall" data-fid="F11_metodo_adjunta" data-tema="adjunta_inversa">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe A<sup>−1</sup> por adjunta y qué es adj(A). ¿Cuál es el truco de la adjunta en 2×2?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -548,7 +548,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Esta lectura amarra todo: «det = 0 ⇒ no invertible» es lo mismo que «los vectores se aplanan, pierden dimensión». Por eso det mide cuánto una transformación lineal escala áreas/volúmenes. Para el terreno del ejemplo, lados (3, 1) y (1, 2): área = |3·2 − 1·1| = 5.</p></div>
         <div class="drill" data-kind="recall" data-fid="F12_teo_geometria" data-tema="determinante_geometria">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué mide |det| en 2×2 y en 3×3? ¿Qué indica el signo y qué significa det = 0 geométricamente?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -565,7 +565,7 @@
       </div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>La ficha de memoria</h3>
       <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
       <ul>
@@ -585,7 +585,7 @@
     </section>
 
     <section class="cierre">
-      <h3>¿Cómo te fue con el recall?</h3>
+      <h3>¿Cómo te fue enunciando de memoria?</h3>
       <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
       <div class="escala" id="esc"></div>
       <div id="reporte"></div>

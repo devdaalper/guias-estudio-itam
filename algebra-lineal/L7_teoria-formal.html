@@ -93,12 +93,12 @@
   .selfrep.locked button.sel{opacity:1}
   .drill.answered{border-style:solid;border-color:var(--green)}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -126,11 +126,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -146,7 +146,7 @@
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 7 · Teoría formal</p>
     <h1>R<sup>n</sup> euclídeo y <mark>ortogonalidad</mark> para memorizar</h1>
-    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un ejercicio de memoria: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
     <div class="learn">
       <h2>Vas a poder enunciar de memoria</h2>
       <ol>
@@ -166,7 +166,7 @@
   <main>
 
     <p class="idea" style="margin-top:4px">
-      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>ejercicio de memoria</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
     </p>
 
     <h2 class="modhead">Producto interno y sus axiomas</h2>
@@ -184,7 +184,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El producto interno es la única operación de esta unidad que sale de la nada: todo lo demás (norma, distancia, ángulo, ortogonalidad, proyección) se define <strong>a partir de él</strong>. Por eso vale la pena tener grabada su forma exacta: multiplicar coordenada con coordenada y sumar.</p></div>
         <div class="drill" data-kind="recall" data-fid="F1_def_producto_interno" data-tema="producto_interno">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define ⟨u, v⟩ en R<sup>n</sup> por coordenadas y en forma matricial. ¿Qué tipo de objeto devuelve?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -218,7 +218,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Los axiomas 2 y 3 juntos dicen que es <strong>lineal en cada entrada</strong> (bilineal), y con la simetría queda lineal también en la segunda. La <strong>positividad</strong> (axioma 4) es la que permite definir la norma: sin ella, √⟨u, u⟩ ni siquiera existiría. Estos cuatro son la <em>definición general</em> de producto interno; el producto punto es el ejemplo estándar en R<sup>n</sup>.</p></div>
         <div class="drill" data-kind="recall" data-fid="F2_axiomas_producto_interno" data-tema="producto_interno">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia los cuatro axiomas del producto interno. No olvides el «si y solo si u = 0» de la positividad.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -250,7 +250,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La norma es la generalización del teorema de Pitágoras a n dimensiones: la longitud del vector es la raíz de la suma de cuadrados de sus componentes. La positividad del producto interno garantiza que ⟨v, v⟩ ≥ 0, así que la raíz siempre existe. La suma de cuadrados <em>sin</em> raíz es ‖v‖<sup>2</sup>, no la longitud.</p></div>
         <div class="drill" data-kind="recall" data-fid="F3_def_norma" data-tema="norma">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define ‖v‖ a partir del producto interno. ¿Qué es un vector unitario y cómo se normaliza?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -283,7 +283,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>En la homogeneidad aparece el <strong>valor absoluto</strong> |c|, no c: escalar por −3 triplica la longitud, no la vuelve negativa (la longitud nunca es negativa). La desigualdad triangular dice que ir de A a C directo nunca es más largo que pasar por B; es la propiedad que hace de la norma una verdadera «medida de distancia».</p></div>
         <div class="drill" data-kind="recall" data-fid="F4_propiedades_norma" data-tema="norma">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia las tres propiedades de la norma. ¿Por qué en la homogeneidad va |c| y no c?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -313,7 +313,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La distancia no es una operación nueva: es la <strong>norma del vector que va de v a u</strong>. En R<sup>2</sup> y R<sup>3</sup> reproduce la fórmula de distancia de siempre. Como ‖u − v‖ = ‖v − u‖ (la norma no ve el sentido), la distancia es automáticamente simétrica.</p></div>
         <div class="drill" data-kind="recall" data-fid="F5_def_distancia" data-tema="distancia">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define d(u, v) en términos de la norma. ¿Cuándo vale 0 y por qué es simétrica?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -345,7 +345,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es la desigualdad que <em>legitima</em> la definición de ángulo: garantiza que el cociente ⟨u, v⟩ / (‖u‖‖v‖) siempre cae en el intervalo [−1, 1], que es justo el rango del coseno. Sin Cauchy-Schwarz, «cos θ» podría salirse de [−1, 1] y no correspondería a ningún ángulo real.</p></div>
         <div class="drill" data-kind="recall" data-fid="F6_teo_cauchy_schwarz" data-tema="cauchy_schwarz">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia la desigualdad de Cauchy-Schwarz y di exactamente cuándo hay igualdad.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -375,7 +375,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El signo del producto interno ya dice el tipo de ángulo: ⟨u, v⟩ &gt; 0 ⇒ agudo, ⟨u, v⟩ &lt; 0 ⇒ obtuso, ⟨u, v⟩ = 0 ⇒ recto. El ángulo se define <strong>sin dibujar</strong>: es puro cociente de números. Que θ ∈ [0, π] evita ambigüedad de sentido.</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_def_angulo" data-tema="angulo">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe la fórmula de cos θ. ¿Qué garantiza que el cociente sea un coseno válido y qué dice su signo?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -407,7 +407,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Sale directo del ángulo: si ⟨u, v⟩ = 0 y ambos son no nulos, cos θ = 0, o sea θ = 90°. La ortogonalidad se decide con <strong>un solo número</strong> (el producto interno), sin trazar nada. Que 0 sea ortogonal a todo se debe a que ⟨0, v⟩ = 0 siempre.</p></div>
         <div class="drill" data-kind="recall" data-fid="F8_def_ortogonalidad" data-tema="ortogonalidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Da la definición formal de u ⊥ v. ¿Qué vector es ortogonal a todos?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -436,7 +436,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Al desarrollar, ‖u + v‖<sup>2</sup> = ⟨u+v, u+v⟩ = ‖u‖<sup>2</sup> + 2⟨u, v⟩ + ‖v‖<sup>2</sup>. El término cruzado 2⟨u, v⟩ <strong>desaparece exactamente cuando ⟨u, v⟩ = 0</strong>, es decir, cuando u ⊥ v. Es el Pitágoras de siempre, escrito con normas.</p></div>
         <div class="drill" data-kind="recall" data-fid="F9_teo_pitagoras" data-tema="ortogonalidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el Pitágoras vectorial y explica de dónde sale (desarrolla ‖u + v‖<sup>2</sup>).</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -468,7 +468,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p><strong>Teorema clave:</strong> todo conjunto ortogonal de vectores no nulos es <strong>linealmente independiente</strong>. Por eso una base ortonormal es lo más cómodo que hay: las coordenadas de cualquier vector x en una base ortonormal {v<sub>i</sub>} se leen directo con productos internos, x = ∑ ⟨x, v<sub>i</sub>⟩·v<sub>i</sub>, sin resolver ningún sistema.</p></div>
         <div class="drill" data-kind="recall" data-fid="F10_def_ortonormal" data-tema="ortonormal">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Distingue conjunto ortogonal de ortonormal con la condición δ<sub>ij</sub>. ¿Qué propiedad clave tienen (respecto a independencia)?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -500,7 +500,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El denominador es <strong>⟨v, v⟩ = ‖v‖<sup>2</sup></strong>, el vector <em>sobre el que proyectas</em> consigo mismo, no ⟨u, u⟩. La proyección es el <strong>punto de la recta generada por v más cercano a u</strong>: por eso el resto z cae perpendicular. Si v es unitario, el denominador es 1 y proy<sub>v</sub>(u) = ⟨u, v⟩·v.</p></div>
         <div class="drill" data-kind="recall" data-fid="F11_metodo_proyeccion" data-tema="proyeccion">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe proy<sub>v</sub>(u). ¿Qué va en el denominador y qué propiedad tiene el resto u − proy<sub>v</sub>(u)?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -530,7 +530,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Por Pitágoras, ‖u − w‖<sup>2</sup> = ‖u − p‖<sup>2</sup> + ‖p − w‖<sup>2</sup> (el error u − p es ⊥ a W, y p − w vive en W). El segundo término solo suma, así que la distancia es mínima cuando p − w = 0, es decir, w = p. Cuando A·x = b no tiene solución, se proyecta b sobre el espacio columna de A y se resuelve ese sistema aproximado.</p></div>
         <div class="drill" data-kind="recall" data-fid="F12_teo_mejor_aproximacion" data-tema="mejor_aproximacion">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el teorema de la mejor aproximación y su conexión con mínimos cuadrados.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -567,7 +567,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La idea es la de la proyección: a cada nuevo vector se le quita todo lo que «apunta hacia» los ya ortogonalizados, y lo que sobra es perpendicular a todos ellos. Se resta sobre los w<sub>j</sub> (los ya ortogonales), no sobre los v<sub>j</sub> originales. El proceso conserva el subespacio generado: span{w<sub>i</sub>} = span{v<sub>i</sub>}.</p></div>
         <div class="drill" data-kind="recall" data-fid="F13_metodo_gram_schmidt" data-tema="gram_schmidt">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Describe el paso general de Gram-Schmidt w<sub>k</sub> = … ¿Sobre qué vectores se resta y cómo se pasa a ortonormal?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -597,7 +597,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Basta pedir ortogonalidad contra una <strong>base</strong> de W (no contra todos sus vectores). Si W es el espacio fila de una matriz A, entonces W<sup>⊥</sup> es exactamente el <strong>espacio nulo</strong> de A: por eso resolver A·x = 0 da una base de W<sup>⊥</sup>. La suma directa R<sup>n</sup> = W ⊕ W<sup>⊥</sup> es lo que permite descomponer cualquier vector en su proyección sobre W más el resto perpendicular.</p></div>
         <div class="drill" data-kind="recall" data-fid="F14_def_complemento_ortogonal" data-tema="complemento_ortogonal">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define W<sup>⊥</sup> con notación de conjunto. Di la relación de dimensiones y con qué espacio de una matriz coincide.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -614,7 +614,7 @@
       </div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>La ficha de memoria</h3>
       <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
       <ul>
@@ -635,7 +635,7 @@
     </section>
 
     <section class="cierre">
-      <h3>¿Cómo te fue con el recall?</h3>
+      <h3>¿Cómo te fue enunciando de memoria?</h3>
       <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
       <div class="escala" id="esc"></div>
       <div id="reporte"></div>

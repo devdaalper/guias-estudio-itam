@@ -94,12 +94,12 @@
   .selfrep.locked button.sel{opacity:1}
   .drill.answered{border-style:solid;border-color:var(--green)}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -127,11 +127,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -147,7 +147,7 @@
   <header class="hero">
     <p class="kick">Cálculo Multivariado · Unidad 2 · Teoría formal</p>
     <h1>El espacio <mark>Rⁿ</mark> para memorizar</h1>
-    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae la definición o fórmula exacta tal como cae en examen, el porqué breve, y un drill de recall: la enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae la definición o fórmula exacta tal como cae en examen, el porqué breve, y un ejercicio de memoria: la enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
     <div class="learn">
       <h2>Vas a poder enunciar de memoria</h2>
       <ol>
@@ -166,7 +166,7 @@
   <main>
 
     <p class="idea" style="margin-top:4px">
-      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>ejercicio de memoria</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
     </p>
 
     <h2 class="modhead">El espacio Rⁿ y sus operaciones</h2>
@@ -184,7 +184,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Todo el cálculo de varias variables vive en Rⁿ. Definir las operaciones coordenada por coordenada es lo que hace que sumar y escalar funcionen igual en R², R³ o R⁵, aunque ya no haya dibujo posible. La lista es la que carga la información; el «punto» y el «vector» son dos lecturas de la misma lista.</p></div>
         <div class="drill" data-kind="recall" data-fid="F1_def_Rn_operaciones" data-tema="espacio_Rn">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué es Rⁿ y cómo se definen la suma y el producto por escalar? Dilo antes de revelar.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -216,7 +216,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La raíz es lo que convierte la suma de cuadrados en una longitud: sin ella tendrías la longitud <em>al cuadrado</em>. El error clásico es sumar directo las componentes (5 + 12 = 17 en vez de √(25 + 144) = 13). La propiedad |c·v| = |c|·|v| explica por qué escalar por c estira la flecha por el factor |c|.</p></div>
         <div class="drill" data-kind="recall" data-fid="F2_def_norma" data-tema="norma">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe la fórmula de la norma |v| en Rⁿ y una de sus propiedades. No olvides la raíz.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -246,7 +246,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La diferencia u − v es el vector que va de v a u; su longitud es cuánto los separa. Por eso el método siempre es en dos pasos: <strong>restar</strong> y luego <strong>normar</strong>. El signo de la resta no importa: al elevar al cuadrado desaparece, así que d(u, v) = d(v, u).</p></div>
         <div class="drill" data-kind="recall" data-fid="F3_def_distancia" data-tema="distancia">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Cómo se define la distancia entre dos puntos de Rⁿ? Di el orden de los dos pasos.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -278,7 +278,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Que dé un escalar es lo que lo distingue de otras operaciones: mide <em>alineación</em> entre los vectores, no produce una tercera flecha. La identidad u·u = |u|<sup>2</sup> es el puente entre producto punto y norma: la norma es la raíz del producto punto de un vector consigo mismo.</p></div>
         <div class="drill" data-kind="recall" data-fid="F4_def_producto_punto" data-tema="producto_punto">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define el producto punto u·v y di qué tipo de objeto devuelve. ¿Cuánto vale u·u?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -308,7 +308,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Esta fórmula es la que permite medir ángulos sin transportador ni dibujo, con puros números: se calculan producto punto y las dos normas, y se despeja el coseno. Como |u| y |v| nunca son cero para vectores no nulos, la única manera de que u·v = 0 es cos θ = 0: de ahí la regla de oro de la ortogonalidad. El signo del producto punto delata si el ángulo es agudo (positivo) u obtuso (negativo).</p></div>
         <div class="drill" data-kind="recall" data-fid="F5_formula_angulo" data-tema="angulo">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe la fórmula que liga producto punto y ángulo, y el criterio de ortogonalidad.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -340,7 +340,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es lo que garantiza que cos θ = (u·v)÷(|u||v|) quede siempre entre −1 y 1: si el producto punto pudiera superar al producto de las normas, el «coseno» se saldría del rango y el ángulo no existiría. La igualdad significa cos θ = ±1, o sea vectores alineados (θ = 0° o 180°).</p></div>
         <div class="drill" data-kind="recall" data-fid="F6_teo_cauchy_schwarz" data-tema="cauchy_schwarz">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia la desigualdad de Cauchy-Schwarz y cuándo se da la igualdad.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -370,7 +370,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es el hecho geométrico de que «el lado recto es el más corto»: ir directo de un punto a otro nunca es más largo que dar un rodeo. Se deduce de Cauchy-Schwarz. Cuidado con el error frecuente: la norma de una suma <em>no</em> es la suma de las normas; en general es menor.</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_teo_triangular" data-tema="desigualdad_triangular">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia la desigualdad triangular. ¿Es |u + v| igual a |u| + |v|?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -402,7 +402,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El radio es simplemente la norma del punto, por eso nunca es negativo. La trampa está en el ángulo: tan θ = y/x da dos ángulos posibles que difieren en 180°, y solo el cuadrante de (x, y) decide cuál es el correcto. Ejemplo: (−1, 1) cae en el segundo cuadrante, así que θ = 135°, no 45°.</p></div>
         <div class="drill" data-kind="recall" data-fid="F8_formula_polares" data-tema="polares">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe las cuatro relaciones de coordenadas polares (ida y vuelta). ¿Qué decide el ángulo θ?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -434,7 +434,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>En la recta, la dirección es siempre el vector que <em>multiplica al parámetro t</em>; el punto de paso va suelto. En el plano, la información clave no es una dirección dentro de él, sino la normal: identificar n = (a, b, c) es leer los coeficientes de x, y, z (sin el lado derecho d y respetando los signos).</p></div>
         <div class="drill" data-kind="recall" data-fid="F9_def_recta_plano" data-tema="recta_plano">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Cómo se describe una recta (punto + dirección) y un plano? ¿Dónde está el vector normal en ax + by + cz = d?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -464,7 +464,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Todo se juega en el <strong>signo</strong> de la desigualdad. El &lt; estricto deja fuera los puntos con distancia exactamente r (la orilla): abierto. El ≤ los incluye: cerrado. Ejemplo: el punto de la frontera con |x − a| = r pertenece a la bola cerrada pero no a la abierta. Nota: abierto y cerrado no son opuestos exactos, un conjunto puede no ser ni uno ni otro.</p></div>
         <div class="drill" data-kind="recall" data-fid="F10_def_abierto_cerrado" data-tema="conjuntos">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define bola abierta y distingue conjunto abierto de cerrado. ¿En qué se ve la diferencia?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -481,7 +481,7 @@
       </div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>La ficha de memoria</h3>
       <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
       <ul>
@@ -499,7 +499,7 @@
     </section>
 
     <section class="cierre">
-      <h3>¿Cómo te fue con el recall?</h3>
+      <h3>¿Cómo te fue enunciando de memoria?</h3>
       <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y fórmulas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
       <div class="escala" id="esc"></div>
       <div id="reporte"></div>

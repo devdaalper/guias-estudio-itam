@@ -326,26 +326,26 @@
         <p class="idea">Sale de la jugada que acabas de verificar. En la Unidad 2, peso 0 significa «no usas nada»: 0·u = (0, 0).</p>
         <p class="idea">Y una máquina que respeta estiramientos respeta también el peso 0: transformar «nada» produce «nada». El origen queda clavado en su sitio:</p>
         <div class="fx"><div class="sys"><span class="eq">T(0, 0) = (0, 0)</span></div></div>
-        <p class="idea">Tiene sentido físico: la fotocopiadora amplía desde su esquina fija; un tornamesa gira sobre su centro. Ese punto no se mueve.</p>
+        <p class="idea">Tiene sentido físico: la fotocopiadora amplía desde su esquina fija; un tocadiscos gira sobre su centro. Ese punto no se mueve.</p>
         <p class="idea key">El detector: mete (0, 0) a la regla. Si no sale (0, 0), <strong>no es lineal</strong> — descartada al instante.</p>
         <p class="idea">Mira caer a la del paso a la derecha:</p>
         <div class="fx"><div class="sys"><span class="eq">T(x, y) = (x + 1, y)</span><span class="eq">T(0, 0) = (1, 0)</span></div></div>
         <p class="idea">Movió el cero: fuera.</p>
         <figure class="visual">
           <svg viewBox="0 0 620 280" role="img" aria-label="Una máquina lineal deja el origen fijo y una no lineal lo mueve">
-            <defs><marker id="mkL3o" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#F5821F"/></marker><marker id="mkL3r" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#CF2E2E"/></marker></defs>
+            <defs><marker id="mkL3o" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="11" refX="11" refY="5.5" orient="auto"><path d="M0 0L13 5.5L0 11Z" fill="#F5821F"/></marker><marker id="mkL3r" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="11" refX="11" refY="5.5" orient="auto"><path d="M0 0L13 5.5L0 11Z" fill="#CF2E2E"/></marker></defs>
             <rect x="16" y="20" width="280" height="230" rx="16" fill="white" stroke="#181B22" stroke-width="3"/>
             <text x="156" y="50" text-anchor="middle" font-size="17" font-weight="800" fill="#181B22">EL CERO SE QUEDA</text>
             <path d="M45 210H270M70 235V70" stroke="#64748B" stroke-width="2"/>
-            <path d="M70 210L190 130" stroke="#F5821F" stroke-width="6" marker-end="url(#mkL3o)"/>
-            <path d="M70 210L250 90" stroke="#F5821F" stroke-width="4" stroke-dasharray="8 7" marker-end="url(#mkL3o)"/>
+            <path d="M70 210L190 130" stroke="#F5821F" stroke-width="3.5" marker-end="url(#mkL3o)"/>
+            <path d="M70 210L250 90" stroke="#F5821F" stroke-width="3" stroke-dasharray="8 7" marker-end="url(#mkL3o)"/>
             <circle cx="70" cy="210" r="7" fill="#1C7A3A"/>
             <text x="88" y="240" font-size="15" font-weight="700" fill="#1C7A3A">T(0, 0) = (0, 0)</text>
             <rect x="324" y="20" width="280" height="230" rx="16" fill="white" stroke="#181B22" stroke-width="3"/>
             <text x="464" y="50" text-anchor="middle" font-size="17" font-weight="800" fill="#181B22">EL CERO SE MUEVE</text>
             <path d="M353 210H578M378 235V70" stroke="#64748B" stroke-width="2"/>
             <circle cx="378" cy="210" r="7" fill="#181B22"/>
-            <path d="M392 210H460" stroke="#CF2E2E" stroke-width="5" marker-end="url(#mkL3r)"/>
+            <path d="M392 210H460" stroke="#CF2E2E" stroke-width="3.5" marker-end="url(#mkL3r)"/>
             <circle cx="478" cy="210" r="7" fill="#CF2E2E"/>
             <text x="396" y="240" font-size="15" font-weight="700" fill="#CF2E2E">T(0, 0) = (1, 0)</text>
           </svg>
@@ -451,16 +451,16 @@
         <p class="idea key">Todo punto de la forma (0, y) cae en (0, 0): <strong>el eje vertical entero queda aplastado</strong> en un solo punto.</p>
         <figure class="visual">
           <svg viewBox="0 0 560 260" role="img" aria-label="La máquina sombra deja caer los puntos al piso y aplasta el eje vertical en el cero">
-            <defs><marker id="mkL5a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C75D08"/></marker><marker id="mkL5b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#94A3B8"/></marker></defs>
+            <defs><marker id="mkL5a" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="10" refX="10" refY="5" orient="auto"><path d="M0 0L12 5L0 10Z" fill="#C75D08"/></marker><marker id="mkL5b" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="10" refX="10" refY="5" orient="auto"><path d="M0 0L12 5L0 10Z" fill="#94A3B8"/></marker></defs>
             <path d="M60 210H520" stroke="#64748B" stroke-width="3"/>
-            <path d="M100 35V208" stroke="#F5821F" stroke-width="7"/>
-            <text x="120" y="44" font-size="15" font-weight="700" fill="#C75D08">el eje y completo cae al (0, 0)</text>
+            <path d="M100 40V208" stroke="#F5821F" stroke-width="6"/>
+            <text x="72" y="32" font-size="14" font-weight="700" fill="#C75D08">el eje y completo cae al (0, 0)</text>
             <circle cx="100" cy="85" r="7" fill="#283891"/>
             <text x="118" y="80" font-size="17" font-weight="700" fill="#283891">(0, 4)</text>
-            <path d="M114 95L114 192" stroke="#C75D08" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#mkL5a)"/>
+            <path d="M114 96L114 194" stroke="#C75D08" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#mkL5a)"/>
             <circle cx="330" cy="70" r="7" fill="#334155"/>
             <text x="348" y="65" font-size="17" font-weight="700" fill="#334155">(3, 5)</text>
-            <path d="M330 85V194" stroke="#94A3B8" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#mkL5b)"/>
+            <path d="M330 85V196" stroke="#94A3B8" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#mkL5b)"/>
             <circle cx="330" cy="210" r="6" fill="#1C7A3A"/>
             <text x="348" y="238" font-size="16" font-weight="700" fill="#1C7A3A">(3, 0)</text>
             <circle cx="100" cy="210" r="9" fill="#1C7A3A"/>
@@ -509,16 +509,16 @@
         <div class="fx"><div class="sys"><span class="eq">T(5, 2) = (5, 0)</span></div></div>
         <p class="idea">¿Puede entregar (2, 3)? Jamás — ninguna sombra flota fuera del piso. Su catálogo completo es el eje x: los puntos (x, 0). Una recta.</p>
         <figure class="visual">
-          <svg viewBox="0 0 560 260" role="img" aria-label="El catálogo de la máquina sombra es el piso, los puntos de la forma x coma cero">
-            <path d="M100 35V208" stroke="#CBD5E1" stroke-width="3"/>
-            <path d="M60 210H520" stroke="#1C7A3A" stroke-width="7"/>
-            <circle cx="180" cy="210" r="6" fill="#1C7A3A"/>
-            <circle cx="330" cy="210" r="6" fill="#1C7A3A"/>
-            <circle cx="450" cy="210" r="6" fill="#1C7A3A"/>
-            <text x="290" y="242" text-anchor="middle" font-size="16" font-weight="800" fill="#1C7A3A">catálogo: todos los (x, 0)</text>
-            <circle cx="260" cy="90" r="8" fill="#fff" stroke="#CF2E2E" stroke-width="3"/>
-            <path d="M246 76L274 104M274 76L246 104" stroke="#CF2E2E" stroke-width="3"/>
-            <text x="286" y="96" font-size="16" font-weight="700" fill="#CF2E2E">(2, 3) jamás sale</text>
+          <svg viewBox="0 0 560 190" role="img" aria-label="El catálogo de la máquina sombra es el piso, los puntos de la forma x coma cero">
+            <path d="M100 36V138" stroke="#CBD5E1" stroke-width="3"/>
+            <path d="M60 140H520" stroke="#1C7A3A" stroke-width="7"/>
+            <circle cx="180" cy="140" r="6" fill="#1C7A3A"/>
+            <circle cx="330" cy="140" r="6" fill="#1C7A3A"/>
+            <circle cx="450" cy="140" r="6" fill="#1C7A3A"/>
+            <text x="290" y="172" text-anchor="middle" font-size="16" font-weight="800" fill="#1C7A3A">catálogo: todos los (x, 0)</text>
+            <circle cx="260" cy="74" r="8" fill="#fff" stroke="#CF2E2E" stroke-width="3"/>
+            <path d="M246 60L274 88M274 60L246 88" stroke="#CF2E2E" stroke-width="3"/>
+            <text x="286" y="80" font-size="16" font-weight="700" fill="#CF2E2E">(2, 3) jamás sale</text>
           </svg>
           <figcaption>Todas las salidas viven en el piso. La imagen de la sombra es esa recta — y (2, 3) no está en el catálogo.</figcaption>
         </figure>
@@ -616,13 +616,13 @@
         <p class="idea">Y la que cumple las dos es <strong>biyectiva</strong>: cada salida viene de exactamente una entrada.</p>
         <figure class="visual">
           <svg viewBox="0 0 620 250" role="img" aria-label="Dos preguntas para clasificar: si repite salidas y si llena el codominio">
-            <defs><marker id="mkL8" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#F5821F"/></marker></defs>
+            <defs><marker id="mkL8" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="11" refX="11" refY="5.5" orient="auto"><path d="M0 0L13 5.5L0 11Z" fill="#F5821F"/></marker></defs>
             <rect x="15" y="20" width="280" height="200" rx="16" fill="white" stroke="#181B22" stroke-width="3"/>
             <text x="155" y="50" text-anchor="middle" font-size="16" font-weight="800" fill="#181B22">¿REPITE SALIDAS?</text>
             <text x="55" y="98" font-size="18" fill="#334155">(3, 1)</text>
             <text x="55" y="152" font-size="18" fill="#334155">(3, 8)</text>
-            <path d="M118 92L205 116" stroke="#F5821F" stroke-width="4" marker-end="url(#mkL8)"/>
-            <path d="M118 146L205 124" stroke="#F5821F" stroke-width="4" marker-end="url(#mkL8)"/>
+            <path d="M118 92L205 116" stroke="#F5821F" stroke-width="3.5" marker-end="url(#mkL8)"/>
+            <path d="M118 146L205 124" stroke="#F5821F" stroke-width="3.5" marker-end="url(#mkL8)"/>
             <text x="220" y="127" font-size="18" font-weight="800" fill="#C75D08">(3, 0)</text>
             <text x="155" y="198" text-anchor="middle" font-size="15" font-weight="700" fill="#CF2E2E">repite → no inyectiva</text>
             <rect x="325" y="20" width="280" height="200" rx="16" fill="white" stroke="#181B22" stroke-width="3"/>
@@ -638,7 +638,7 @@
         <p class="idea">Pásale las dos preguntas a la T de la lección pasada — rango 2, nulidad 1, codominio de dimensión 2:</p>
         <div class="fx"><div class="sys"><span class="eq">rango 2 = codominio 2</span><span class="eq">→ suprayectiva</span><span class="eq">nulidad 1 &gt; 0</span><span class="eq">→ no inyectiva</span></div></div>
         <p class="idea">Suprayectiva pero no inyectiva — y sin las dos, no hay biyectiva.</p>
-        <p class="idea key">Atajos de tu resumen: dominio más chico que el codominio (n &lt; m) → nunca suprayectiva (Teo. 3.3).</p>
+        <p class="idea key">Atajos de tu resumen: dominio más pequeño que el codominio (n &lt; m) → nunca suprayectiva (Teo. 3.3).</p>
         <p class="idea">Dominio más grande (n &gt; m) → nunca inyectiva (Cor. 3.4).</p>
         <p class="idea">Las tres etiquetas, tal como las enuncia tu curso:</p>
         <p class="fdef"><span class="flbl">Definiciones · Resumen del curso, Defs. 3.9, 3.7 y 3.10</span>L es <strong>inyectiva</strong> si L(u) = L(w) implica u = w. Es <strong>suprayectiva</strong> si rango(L) = R<sup>m</sup> — su catálogo llena el codominio. Es <strong>biyectiva</strong> si es inyectiva y suprayectiva.</p>

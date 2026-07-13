@@ -53,12 +53,12 @@
   .sys .eq{white-space:nowrap}
   .intg{font-size:22px}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--red);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--red);font-weight:800;position:absolute;left:0;top:1px}
 
   /* ===== cuadernillo de papel ===== */
   .prob{border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;display:grid;gap:13px;box-shadow:var(--shadow)}
@@ -134,11 +134,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
   .autotest{display:grid;gap:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:20px 22px;box-shadow:var(--shadow);grid-template-columns:minmax(0,1fr);min-width:0}
   .autotest .intro{margin:0;font-size:16px;color:var(--slate)}
@@ -491,7 +491,7 @@
           <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>Es el problema de siempre, al revés: no te piden calcular la integral — te dicen cuánto vale (30) y la incógnita es la constante a que vive dentro del integrando. R = [0, 2] × [0, 3] se lee: x va de 0 a 2, y va de 0 a 3. Plan: integro como siempre arrastrando la a como si fuera un número, el resultado queda en función de a, lo igualo a 30 y despejo.</p></div>
           <div class="estep"><div class="oprow">Paso 1 · integro por dentro (en y), con la a a cuestas</div><p>Con x constante, la primitiva de (ax + y²) respecto a y es ax·y + y³/3. La evalúo entre y = 0 y y = 3:</p><p class="calc"><span class="rw">en y=3</span> ax·3 + 3³/3 = 3ax + 27/3 = <b>3ax + 9</b> <span class="sep">•</span> <span class="rw">en y=0</span> <b>0</b> <span class="sep">•</span> queda <b>3ax + 9</b></p></div>
           <div class="estep"><div class="oprow">Paso 2 · integro por fuera (en x)</div><p>La primitiva de (3ax + 9) respecto a x es 3a·x²/2 + 9x. La evalúo entre x = 0 y x = 2:</p><p class="calc"><span class="rw">en x=2</span> 3a·2²/2 + 9·2 = 3a·2 + 18 = <b>6a + 18</b> <span class="sep">•</span> <span class="rw">en x=0</span> <b>0</b> <span class="sep">•</span> queda <b>6a + 18</b></p></div>
-          <div class="estep"><div class="oprow">Paso 3 · igualo al dato y despejo</div><p>El enunciado dice que esa integral vale 30. Igualo, resuelvo la ecuación en a y compruebo sustituyendo de vuelta:</p><p class="calc"><span class="rw">ecuación</span> 6a + 18 = 30 <span class="sep">•</span> 6a = 12 <span class="sep">•</span> a = <b>2</b> <span class="sep">•</span> <span class="rw">checo</span> 6·2 + 18 = <b>30</b> ✓</p></div>
+          <div class="estep"><div class="oprow">Paso 3 · igualo al dato y despejo</div><p>El enunciado dice que esa integral vale 30. Igualo, resuelvo la ecuación en a y compruebo sustituyendo de vuelta:</p><p class="calc"><span class="rw">ecuación</span> 6a + 18 = 30 <span class="sep">•</span> 6a = 12 <span class="sep">•</span> a = <b>2</b> <span class="sep">•</span> <span class="rw">compruebo</span> 6·2 + 18 = <b>30</b> ✓</p></div>
           <p class="verdict">a = <strong>2</strong>. El error que cuesta puntos: tratar la a como si fuera variable de integración. La a es un número fijo: viaja intacta por las dos integrales y solo al final, con la ecuación armada, se despeja.</p>
         </div>
       </details>
@@ -583,7 +583,7 @@
       <details class="sol"><summary><span class="chev">▸</span> Ver solución paso a paso</summary>
         <div class="solbody">
           <div class="estep"><div class="oprow">Paso 0 · traducir el enunciado</div><p>«Región acotada por dos curvas» = la zona encerrada entre ellas. Aquí nadie te da los límites: los fabricas tú. Plan encadenado: (1) intersecciones — dónde se cierran las curvas; (2) quién va arriba entre esas x; (3) plantear tipo I e integrar de adentro hacia afuera.</p></div>
-          <div class="estep"><div class="oprow">Paso 1 · intersecciones de las curvas</div><p>Igualo las dos curvas y resuelvo. Verifico que los puntos cierren en ambas:</p><p class="calc"><span class="rw">igualo</span> x² = 2x <span class="sep">•</span> x² − 2x = 0 <span class="sep">•</span> x(x − 2) = 0 <span class="sep">•</span> x = <b>0</b> o x = <b>2</b> <span class="sep">•</span> <span class="rw">checo x=2</span> x² = 4 y 2x = 4 ✓ → puntos <b>(0, 0)</b> y <b>(2, 4)</b></p></div>
+          <div class="estep"><div class="oprow">Paso 1 · intersecciones de las curvas</div><p>Igualo las dos curvas y resuelvo. Verifico que los puntos cierren en ambas:</p><p class="calc"><span class="rw">igualo</span> x² = 2x <span class="sep">•</span> x² − 2x = 0 <span class="sep">•</span> x(x − 2) = 0 <span class="sep">•</span> x = <b>0</b> o x = <b>2</b> <span class="sep">•</span> <span class="rw">compruebo x=2</span> x² = 4 y 2x = 4 ✓ → puntos <b>(0, 0)</b> y <b>(2, 4)</b></p></div>
           <div class="estep"><div class="oprow">Paso 2 · quién va arriba y límites tipo I</div><p>Pruebo un punto intermedio, x = 1: la recta da 2x = 2 y la parábola da x² = 1. La recta va arriba en todo el intervalo. Entonces: y de x² (abajo) a 2x (arriba); x de 0 a 2.</p><div class="fx"><div class="sys intg"><span class="eq">∫<sub>0</sub><sup>2</sup> ∫<sub>x²</sub><sup>2x</sup> x dy dx</span></div></div></div>
           <div class="estep"><div class="oprow">Paso 3 · integro por dentro (en y)</div><p>Con x constante, x es constante frente a y: integrar es multiplicar por el largo del intervalo.</p><p class="calc"><span class="rw">interior</span> x·(2x − x²) = <b>2x² − x³</b></p></div>
           <div class="estep"><div class="oprow">Paso 4 · integro por fuera (en x)</div><p>La primitiva de (2x² − x³) es 2x³/3 − x⁴/4. La evalúo entre x = 0 y x = 2:</p><p class="calc"><span class="rw">en x=2</span> 2·8/3 − 16/4 = 16/3 − 4 = 16/3 − 12/3 = <b>4/3</b> <span class="sep">•</span> <span class="rw">en x=0</span> <b>0</b> <span class="sep">•</span> resta = <b>4/3</b></p></div>
@@ -594,7 +594,7 @@
       <div class="report"><span class="rlabel">¿Cómo te fue?</span><div class="rbtns"></div></div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>Errores típicos que cuestan puntos</h3>
       <p class="sub">Lo que más se penaliza en este parcial. Revísalo antes de entregar.</p>
       <ul>

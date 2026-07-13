@@ -93,12 +93,12 @@
   .selfrep.locked button.sel{opacity:1}
   .drill.answered{border-style:solid;border-color:var(--green)}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -126,11 +126,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -146,7 +146,7 @@
   <header class="hero">
     <p class="kick">Cálculo Multivariado · Unidad 3 · Teoría formal</p>
     <h1>Funciones de <mark>varias variables</mark> para memorizar</h1>
-    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un ejercicio de memoria: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
     <div class="learn">
       <h2>Vas a poder enunciar de memoria</h2>
       <ol>
@@ -165,7 +165,7 @@
   <main>
 
     <p class="idea" style="margin-top:4px">
-      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>ejercicio de memoria</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
     </p>
 
     <h2 class="modhead">Función, dominio e imagen</h2>
@@ -182,7 +182,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La palabra clave es <strong>único</strong>: si una entrada pudiera producir dos salidas, no sería función. La entrada es un punto de R<sup>n</sup> (una pareja cuando n = 2); la salida es siempre un solo número real (por eso es «con valores en R»).</p></div>
         <div class="drill" data-kind="recall" data-fid="F1_def_funcion_varias_variables" data-tema="funcion">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define f : D → R con D ⊆ R<sup>n</sup>. ¿Qué es la entrada, qué es la salida y qué palabra no puede faltar?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -212,7 +212,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Son tres conjuntos que viven en dimensiones distintas: el dominio en el plano (R<sup>2</sup>), la imagen en la recta (R), y la gráfica en el espacio (R<sup>3</sup>). Confundirlos es el error clásico: la imagen NO es un conjunto de parejas, son las alturas.</p></div>
         <div class="drill" data-kind="recall" data-fid="F2_def_dominio_imagen_grafica" data-tema="dominio_imagen">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define dominio, imagen y gráfica de z = f(x, y). ¿En qué espacio vive cada uno?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -245,7 +245,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Son las mismas tres de una variable, y ninguna otra cosa restringe. El signo de x, de y o del resultado no prohíbe nada por sí solo. Ojo con el ≥ de la raíz frente al &gt; del logaritmo: la raíz sí admite el 0 (√0 = 0), el logaritmo no (ln 0 no existe).</p></div>
         <div class="drill" data-kind="recall" data-fid="F3_regla_restricciones_dominio" data-tema="dominio">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia las 3 restricciones del dominio. Cuida el símbolo exacto: ≠ 0, ≥ 0 o &gt; 0 en cada una.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -277,7 +277,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es la idea del mapa topográfico: cada línea une los puntos a la misma altura. El nivel <strong>vive en el dominio</strong> (el plano para dos variables), no en la gráfica 3D. Si ningún punto satisface f = k, el conjunto de nivel es vacío (∅).</p></div>
         <div class="drill" data-kind="recall" data-fid="F4_def_conjunto_nivel" data-tema="curvas_nivel">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define conjunto de nivel k. ¿Cuándo es «curva» y cuándo «superficie»? ¿En qué espacio vive?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -310,7 +310,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>x² + y² es la distancia al origen al cuadrado, y una distancia nunca es negativa: por eso k &lt; 0 no tiene solución. Este patrón cae siempre: reconocer x² + y² = k como círculo de radio √k ahorra media página de cuentas.</p></div>
         <div class="drill" data-kind="recall" data-fid="F5_caso_niveles_circulo" data-tema="curvas_nivel">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Describe la curva de nivel k de x² + y² en los tres casos: k &gt; 0, k = 0 y k &lt; 0.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -342,7 +342,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La diferencia con una variable está en el «acercarse»: aquí la distancia al punto es la del plano, √((x−a)²+(y−b)²), y ese entorno es un <strong>disco</strong> completo. Por eso el acercamiento no es por izquierda/derecha, sino por <strong>todas las direcciones a la vez</strong>. El 0 &lt; … excluye el punto mismo: el valor en (a, b) no importa para el límite.</p></div>
         <div class="drill" data-kind="recall" data-fid="F6_def_limite_epsilon_delta" data-tema="limites">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia la definición ε–δ del límite doble. ¿Qué papel juega la distancia del plano y por qué se pide 0 &lt; distancia?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -370,7 +370,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es el teorema que <em>legitima</em> el método de los caminos. Como el límite (si existe) tiene que ser el mismo por todas las direcciones, basta hallar <strong>dos</strong> trayectorias con valores distintos para concluir que no existe. La contradicción con la unicidad es lo que cierra la prueba.</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_teo_unicidad_limite" data-tema="limites">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia la unicidad del límite doble. ¿Qué método adversarial habilita este teorema?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -400,7 +400,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es la unicidad usada al revés: dos valores distintos por dos caminos contradicen que haya un solo límite. <strong>Atención al alcance</strong>: este criterio solo sirve para <em>negar</em>. Que muchos caminos coincidan NO prueba que el límite exista; para afirmarlo hace falta polares o el sándwich.</p></div>
         <div class="drill" data-kind="recall" data-fid="F8_criterio_dos_caminos" data-tema="limites">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el criterio de los dos caminos. ¿Qué basta encontrar y para qué sirve (y para qué NO sirve)?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -429,7 +429,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>El truco funciona porque x² + y² = r² <strong>colapsa la distancia en una sola variable</strong>, r. Si sobrevive un factor r<sup>p</sup> (p &gt; 0) multiplicando algo acotado, r<sup>p</sup> → 0 arrastra todo a 0. Clave: el resultado debe quedar <strong>independiente de θ</strong>; si el ángulo no se va, el límite podría no existir.</p></div>
         <div class="drill" data-kind="recall" data-fid="F9_metodo_polares" data-tema="limites_polares">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe el cambio a polares y la condición para concluir que el límite en el origen es 0. ¿Qué patrón lo dispara?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -459,7 +459,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Si f queda <em>atrapada</em> entre dos funciones que van al mismo sitio, no le queda otra que ir ahí también. En polares es el remate: cuando f = r<sup>p</sup>·g(θ) con | g | ≤ M, se tiene | f | ≤ M·r<sup>p</sup>, y como M·r<sup>p</sup> → 0, el sándwich fuerza el límite a 0.</p></div>
         <div class="drill" data-kind="recall" data-fid="F10_teo_sandwich" data-tema="limites">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el teorema del sándwich para límites dobles y su versión con | f − L | ≤ φ. ¿Cómo remata en polares?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -495,7 +495,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>La condición 3 es la que se olvida: no basta que existan valor y límite, tienen que ser <strong>iguales</strong>. Si el límite es 0 pero a la función la definieron con 5 en el punto, hay un <strong>salto</strong>: es discontinua. En funciones a trozos, el origen es justo donde hay que revisar las tres.</p></div>
         <div class="drill" data-kind="recall" data-fid="F11_def_continuidad_punto" data-tema="continuidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia las 3 condiciones de continuidad en (a, b). ¿Cuál se olvida más y qué pasa si falla?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -525,7 +525,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Este teorema es lo que evita usar ε–δ cada vez: como los polinomios son continuos y la continuidad se hereda por suma, producto, cociente y composición, casi toda función «de fórmula» es continua salvo donde se rompe (denominador 0, radicando negativo, etc.). Los problemas interesantes de límite viven justo en esos puntos frontera.</p></div>
         <div class="drill" data-kind="recall" data-fid="F12_teo_algebra_continuidad" data-tema="continuidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué operaciones preservan la continuidad? Enuncia también la composición y la consecuencia sobre polinomios.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -542,7 +542,7 @@
       </div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>La ficha de memoria</h3>
       <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
       <ul>
@@ -562,7 +562,7 @@
     </section>
 
     <section class="cierre">
-      <h3>¿Cómo te fue con el recall?</h3>
+      <h3>¿Cómo te fue enunciando de memoria?</h3>
       <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
       <div class="escala" id="esc"></div>
       <div id="reporte"></div>

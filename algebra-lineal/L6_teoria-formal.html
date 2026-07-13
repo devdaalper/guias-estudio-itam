@@ -102,12 +102,12 @@
   .mrow{display:grid;align-items:center;column-gap:16px;min-height:28px}
   .mrow>span{text-align:right;min-width:22px}
 
-  .chuleta{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
-  .chuleta h3{margin:0 0 2px;font-size:19px}
-  .chuleta .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
-  .chuleta ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-  .chuleta li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
-  .chuleta li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
+  .ficha-memo{border:2px dashed var(--deep);border-radius:16px;background:var(--cream);padding:20px 22px}
+  .ficha-memo h3{margin:0 0 2px;font-size:19px}
+  .ficha-memo .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .ficha-memo ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .ficha-memo li{display:flex;gap:9px;align-items:flex-start;font-size:17px}
+  .ficha-memo li .ck{color:var(--green-deep);font-weight:800;position:absolute;left:0;top:1px}
 
   .cierre{border:2px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:22px}
   .cierre h3{margin:0;font-size:19px}
@@ -135,11 +135,11 @@
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
   /*hardening-360*/
-  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
-  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.chuleta,.chuleta li,.check li,.sec li,.ejemplo li{min-width:0}
-  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.chuleta li,.check li{max-width:100%;min-width:0}
-  .chuleta li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
-  .chuleta li{display:block;position:relative;padding-left:27px;min-width:0}
+  main,.sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo ul,.check ul,.check ol,.ejemplo ul,.sec ul,.sec ol{grid-template-columns:minmax(0,1fr)}
+  .sec,.ejemplo,.check,.practice,.pitem,.opts,.estep,.cierre,.ficha-memo,.ficha-memo li,.check li,.sec li,.ejemplo li{min-width:0}
+  .fx,.sys,.calc,.mtx,.viz,.viz-plane,.ficha-memo li,.check li{max-width:100%;min-width:0}
+  .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
+  .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
 </style>
 </head>
@@ -155,7 +155,7 @@
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 6 · Teoría formal</p>
     <h1>Valores propios y <mark>diagonalización</mark> para memorizar</h1>
-    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un drill de recall: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
+    <p class="lead">Esta no es la guía de entender: es la ficha de rigor. Cada tarjeta trae el enunciado exacto tal como cae en examen, el porqué breve, y un ejercicio de memoria: lo enuncias de memoria, revelas y te autoreportas. En el ITAM no hay formulario.</p>
     <div class="learn">
       <h2>Vas a poder enunciar de memoria</h2>
       <ol>
@@ -176,7 +176,7 @@
   <main>
 
     <p class="idea" style="margin-top:4px">
-      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>drill</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
+      <strong>Cómo usar cada tarjeta.</strong> Primero lee el <strong>enunciado formal</strong> (bloque enmarcado): esa es la redacción que debes poder reproducir. Después el <strong>por qué</strong> te da la justificación breve para que no memorices a ciegas. Al final, el <strong>ejercicio de memoria</strong>: tápalo mentalmente, enúncialo tú, pulsa <em>Revelar</em> y márcate honesta: <strong>de memoria</strong>, <strong>con pista</strong> o <strong>falla</strong>. Esos tres botones alimentan el reporte del tutor.
     </p>
 
     <h2 class="modhead">Valor propio y vector propio</h2>
@@ -194,7 +194,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>A·v = λ·v dice que la matriz <strong>no gira</strong> a v: solo lo estira o encoge por el factor λ (o lo invierte si λ &lt; 0). Se exige v ≠ 0 porque A·0 = λ·0 se cumple con cualquier λ y no diría nada. En cambio λ = 0 significa A·v = 0 con v ≠ 0: hay vector propio, y A es singular.</p></div>
         <div class="drill" data-kind="recall" data-fid="F1_def_valor_vector_propio" data-tema="valor_vector_propio">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define valor propio y vector propio de A. ¿Qué vector queda excluido y qué escalar sí se permite?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -224,7 +224,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Reescribir A·v = λ·v como (A − λI)·v = 0 muestra que los vectores propios de λ son exactamente el núcleo de A − λI. Al añadir el 0, ese conjunto cierra bajo suma y escalares, por eso es un subespacio: cualquier combinación de vectores propios de un mismo λ vuelve a ser vector propio de λ.</p></div>
         <div class="drill" data-kind="recall" data-fid="F2_def_espacio_propio" data-tema="espacio_propio">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué es el espacio propio E<sub>λ</sub>, con qué núcleo coincide y qué mide su dimensión?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -256,7 +256,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>A·v = λ·v equivale a (A − λI)·v = 0 con v ≠ 0. Que ese sistema tenga solución no trivial es lo mismo que A − λI sea singular, y una matriz es singular exactamente cuando su determinante vale 0. Por eso los valores propios son las raíces de det(A − λI).</p></div>
         <div class="drill" data-kind="recall" data-fid="F3_teo_polinomio_caracteristico" data-tema="polinomio_caracteristico">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Cómo se encuentran los valores propios de A? Enuncia la ecuación y de dónde sale.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -287,7 +287,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es Vieta aplicado a un polinomio de grado 2: para λ² − sλ + p, las raíces suman s y multiplican p. En general, para n×n la suma de todos los valores propios es tr(A) y su producto es det(A); el caso 2×2 es el atajo que ahorra desarrollar el determinante y sirve para verificar tus raíces.</p></div>
         <div class="drill" data-kind="recall" data-fid="F4_teo_traza_det_2x2" data-tema="polinomio_caracteristico">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Escribe el polinomio característico de una 2×2 con traza y determinante. ¿Qué cumplen la suma y el producto de las raíces?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -315,7 +315,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>A − λI también es triangular, y el determinante de una triangular es el producto de su diagonal: det(A − λI) = (a<sub>11</sub> − λ)(a<sub>22</sub> − λ)…(a<sub>nn</sub> − λ). Sus raíces son directamente a<sub>11</sub>, …, a<sub>nn</sub>. Ojo: es válido para la diagonal, no para la antidiagonal.</p></div>
         <div class="drill" data-kind="recall" data-fid="F5_atajo_triangular" data-tema="valores_propios">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Si A es triangular, ¿cuáles son sus valores propios y por qué salen directo?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -347,7 +347,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Es la misma condición A·v = λ·v reescrita. Como A − λI es singular (por eso λ es valor propio), el sistema homogéneo tiene infinitas soluciones: al menos una variable libre. Cada variable libre aporta un vector propio independiente, y todos ellos generan E<sub>λ</sub>.</p></div>
         <div class="drill" data-kind="recall" data-fid="F6_metodo_vectores_propios" data-tema="vectores_propios">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Dado un valor propio λ, ¿qué sistema resuelves para hallar sus vectores propios y qué le da a cada uno?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -380,7 +380,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Cada valor propio tiene al menos un vector propio (geométrica ≥ 1), pero no puede haber más direcciones propias independientes que la multiplicidad de la raíz (geométrica ≤ algebraica). Cuando <strong>coinciden</strong> las dos para todo λ, la matriz reúne suficientes vectores propios y se diagonaliza; cuando la geométrica se queda corta, la matriz es <strong>defectuosa</strong>.</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_def_multiplicidades" data-tema="multiplicidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Define multiplicidad algebraica y geométrica de λ. ¿Qué desigualdad las relaciona siempre?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -408,7 +408,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Vectores propios de valores propios distintos «viven en direcciones que la matriz estira por factores distintos», y eso impide que uno sea combinación de los demás. Es la razón de fondo por la que una n×n con n valores propios distintos siempre se diagonaliza: ya trae n vectores propios independientes garantizados.</p></div>
         <div class="drill" data-kind="recall" data-fid="F8_teo_distintos_independientes" data-tema="independencia">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el teorema sobre vectores propios de valores propios distintos. ¿Qué garantiza para diagonalizar?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -440,7 +440,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>De A = P·D·P⁻¹ se sigue A·P = P·D. Columna a columna, eso dice A·p<sub>k</sub> = d<sub>k</sub>·p<sub>k</sub>: cada columna p<sub>k</sub> de P es vector propio con valor propio d<sub>k</sub>. Por eso el orden debe coincidir. Diagonalizar es cambiar a la base de los vectores propios, donde la matriz solo escala en cada eje.</p></div>
         <div class="drill" data-kind="recall" data-fid="F9_def_diagonalizable" data-tema="diagonalizacion">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué significa que A sea diagonalizable? Escribe la factorización y di qué guarda P, qué guarda D y en qué orden.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -469,7 +469,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>P⁻¹ existe si y solo si sus n columnas son independientes; esas columnas son los vectores propios. Si algún valor propio repetido no aporta tantos vectores independientes como su multiplicidad algebraica (geométrica &lt; algebraica), faltan columnas y P no se completa: la matriz es <strong>defectuosa</strong>, no diagonalizable. Ejemplo típico: [[3,1],[0,3]], que repite λ = 3 pero solo da una dirección propia.</p></div>
         <div class="drill" data-kind="recall" data-fid="F10_teo_criterio_diagonalizable" data-tema="diagonalizabilidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Enuncia el criterio exacto para que A (n×n) sea diagonalizable, en sus dos formas equivalentes.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -498,7 +498,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>n valores propios distintos ⇒ n vectores propios de valores distintos ⇒ independientes (teorema anterior) ⇒ base de vectores propios ⇒ diagonalizable. Que sea solo suficiente se ve con I: repite λ = 1 pero todo Rⁿ es su espacio propio, así que sobran vectores independientes.</p></div>
         <div class="drill" data-kind="recall" data-fid="F11_cor_distintos_diagonalizable" data-tema="diagonalizabilidad">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué garantiza tener n valores propios distintos? ¿Es necesario o solo suficiente para diagonalizar? Da un contraejemplo.</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -530,7 +530,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Al multiplicar Aⁿ = (P·D·P⁻¹)(P·D·P⁻¹)…, cada P⁻¹·P interior se cancela como identidad y quedan solo las D en medio: P·Dⁿ·P⁻¹. Elevar una diagonal es trivial porque no hay mezcla entre filas: cada eje se escala por su λ, y hacerlo n veces da λ<sup>n</sup>. Así una potencia de matriz se vuelve una potencia de números.</p></div>
         <div class="drill" data-kind="recall" data-fid="F12_teo_potencias" data-tema="potencias">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">Con A = P·D·P⁻¹, escribe Aⁿ. ¿Cómo se calcula Dⁿ y por qué se cancela lo de en medio?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -560,7 +560,7 @@
         </div>
         <div class="porque"><span class="lbl">Por qué</span><p>Como cada columna de P suma 1, el vector de unos es vector propio por la izquierda de λ = 1, y eso fuerza a λ = 1 a ser valor propio. Los otros valores propios (menores que 1 en valor absoluto) se encogen al elevar la matriz año tras año y desaparecen; solo sobrevive la componente de λ = 1, que es el reparto de equilibrio.</p></div>
         <div class="drill" data-kind="recall" data-fid="F13_teo_markov" data-tema="markov">
-          <div class="qtag">Recall · enuncia de memoria</div>
+          <div class="qtag">De memoria · enúncialo</div>
           <p class="q">¿Qué valor propio tiene siempre una matriz de Markov y qué es el estado estable? ¿Qué ecuación lo da?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
@@ -577,7 +577,7 @@
       </div>
     </section>
 
-    <section class="chuleta">
+    <section class="ficha-memo">
       <h3>La ficha de memoria</h3>
       <p class="sub">En el examen no hay formulario. Esto es lo que debes poder escribir de memoria, palabra por palabra.</p>
       <ul>
@@ -597,7 +597,7 @@
     </section>
 
     <section class="cierre">
-      <h3>¿Cómo te fue con el recall?</h3>
+      <h3>¿Cómo te fue enunciando de memoria?</h3>
       <p class="nota">Qué tan segura te sientes de poder enunciar estas definiciones y teoremas de memoria en el examen. 1 = nada · 5 = las escribo sin dudar. · <span class="cont" id="cont"></span></p>
       <div class="escala" id="esc"></div>
       <div id="reporte"></div>
