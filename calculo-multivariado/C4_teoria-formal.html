@@ -63,10 +63,10 @@
   .stmt .eq{white-space:normal;font-variant-numeric:tabular-nums}
   .stmt .lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:2px}
   .cond{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
-  .cond li{display:flex;gap:10px;align-items:flex-start;font-size:clamp(16px,1.8vw,18px)}
+  .cond li{display:flex;gap:10px;align-items:flex-start;font-size:clamp(17px,1.8vw,18px)}
   .cond li .k{flex:0 0 auto;width:24px;height:24px;border-radius:7px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
 
-  .porque{border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .porque{border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
   .porque .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
   .porque p{margin:0;line-height:1.55}
 
@@ -75,7 +75,7 @@
   .drill .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
   .drill .qtag::before{content:"⟲ "}
   .drill .q{margin:0;font-weight:700;font-size:17px}
-  .drill .revealbtn{font:inherit;font-weight:800;font-size:16px;padding:11px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer;justify-self:start;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
+  .drill .revealbtn{font:inherit;font-weight:800;font-size:17px;padding:11px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer;justify-self:start;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
   .drill .revealbtn:hover{transform:translate(-1px,-1px)}
   .drill .answer{display:none;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:13px 16px}
   .drill .answer.show{display:block}
@@ -121,7 +121,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
@@ -132,6 +132,7 @@
   .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
   .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -395,25 +396,25 @@
     </section>
 
     <section class="card">
-      <div class="head"><span class="badge def">Definición</span><h3>Diferenciable vs. derivable</h3></div>
+      <div class="head"><span class="badge def">Definición</span><h3>Diferenciabilidad vs. existencia de parciales</h3></div>
       <div class="body">
         <div class="fx">
           <div class="stmt">
             <span class="lbl">Enunciado formal</span>
-            <span class="eq">f es <strong>derivable</strong> en (a, b) si <strong>existen</strong> ahí sus parciales ∂f/∂x y ∂f/∂y.</span>
+            <span class="eq">Que <strong>existan las parciales</strong> en (a, b) significa que están definidos ∂f/∂x y ∂f/∂y en ese punto.</span>
             <span class="eq">f es <strong>diferenciable</strong> en (a, b) si el plano tangente L la <strong>aproxima bien</strong> en todas las direcciones, es decir</span>
             <span class="eq">lím<sub>(x,y)→(a,b)</sub> [ f(x, y) − L(x, y) ] / ‖(x, y) − (a, b)‖ = 0.</span>
-            <span class="eq"><strong>Diferenciable ⇒ derivable, pero no al revés:</strong> que existan las parciales <strong>no basta</strong> para ser diferenciable.</span>
+            <span class="eq"><strong>Diferenciable ⇒ existen las parciales, pero no al revés:</strong> tener ambas parciales <strong>no basta</strong> para ser diferenciable.</span>
           </div>
         </div>
-        <div class="porque"><span class="lbl">Por qué</span><p>Ser <strong>derivable</strong> solo mira dos direcciones (los ejes). Ser <strong>diferenciable</strong> es más fuerte: el plano tangente debe aproximar a f en <strong>todas</strong> las direcciones, con error que va a cero más rápido que la distancia. Hay funciones con ambas parciales que no son diferenciables (ni siquiera continuas); por eso derivable no implica diferenciable.</p></div>
+        <div class="porque"><span class="lbl">Por qué</span><p>Las <strong>parciales</strong> solo miran dos direcciones (los ejes). Ser <strong>diferenciable</strong> es más fuerte: una aproximación lineal debe controlar <strong>todas</strong> las direcciones, con error que va a cero más rápido que la distancia. Hay funciones con ambas parciales que no son diferenciables.</p></div>
         <div class="drill" data-kind="recall" data-fid="F7_def_diferenciable" data-tema="diferenciabilidad">
           <div class="qtag">De memoria · enúncialo</div>
-          <p class="q">Distingue «derivable» de «diferenciable». ¿Cuál implica cuál, y por qué existir las parciales no basta?</p>
+          <p class="q">Distingue «tener parciales» de «ser diferenciable». ¿Cuál condición implica cuál, y por qué la existencia de parciales no basta?</p>
           <button class="revealbtn" type="button">Revelar respuesta</button>
           <div class="answer">
             <span class="lbl">Respuesta</span>
-            <div class="stmt"><span class="eq">Derivable = existen las parciales (dos direcciones). Diferenciable = el plano tangente aproxima bien en TODAS las direcciones (error/distancia → 0). Diferenciable ⇒ derivable, no al revés.</span></div>
+            <div class="stmt"><span class="eq">Tener parciales = existen las pendientes de los ejes. Diferenciable = una aproximación lineal funciona en TODAS las direcciones (error/distancia → 0). Diferenciable ⇒ existen las parciales, no al revés.</span></div>
           </div>
           <div class="selfrep">
             <span class="srtag">¿Cómo te salió?</span>
@@ -591,7 +592,7 @@
         <li><span class="ck">✓</span> Cruzadas iguales (Clairaut) si f<sub>xy</sub>, f<sub>yx</sub> son continuas: f<sub>xy</sub> = f<sub>yx</sub>. El orden no importa.</li>
         <li><span class="ck">✓</span> Gradiente ∇f = (∂f/∂x, ∂f/∂y): apunta al máximo crecimiento, ‖∇f‖ es la tasa, ⊥ a la curva de nivel. Descenso: −∇f.</li>
         <li><span class="ck">✓</span> Plano tangente: z = f(x<sub>0</sub>, y<sub>0</sub>) + ∂f/∂x·(x − x<sub>0</sub>) + ∂f/∂y·(y − y<sub>0</sub>). Es la linealización.</li>
-        <li><span class="ck">✓</span> Derivable = existen las parciales. Diferenciable = el plano tangente aproxima bien en todas las direcciones. Diferenciable ⇒ derivable, no al revés.</li>
+        <li><span class="ck">✓</span> Tener parciales controla los ejes. Diferenciable = una aproximación lineal funciona en todas las direcciones. Diferenciable ⇒ existen las parciales, no al revés.</li>
         <li><span class="ck">✓</span> Parciales continuas (C<sup>1</sup>) ⇒ diferenciable ⇒ continua.</li>
         <li><span class="ck">✓</span> Cadena (1 var): dz/dt = (∂f/∂x)(dx/dt) + (∂f/∂y)(dy/dt) = ∇f · (dx/dt, dy/dt).</li>
         <li><span class="ck">✓</span> Cadena (varias): ∂z/∂s = (∂f/∂x)(∂x/∂s) + (∂f/∂y)(∂y/∂s). Una por variable independiente; suma todos los caminos.</li>

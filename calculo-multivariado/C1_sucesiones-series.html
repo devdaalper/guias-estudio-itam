@@ -60,8 +60,8 @@
   .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
   .idea strong{font-weight:800;color:var(--ink)}
   .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
-  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
-  .paso{color:var(--muted);font-size:16px}
+  .key{border:1.5px solid #f0d6b8;background:var(--cream);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:650}.key::before{content:"Idea clave";display:block;margin-bottom:4px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep)}
+  .paso{color:var(--muted);font-size:17px}
   .paso::before{content:"→ ";color:var(--orange);font-weight:800}
 
   .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
@@ -75,8 +75,8 @@
   .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
   .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
 
-  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
-  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -145,7 +145,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -154,10 +154,10 @@
   .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
   .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
   .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
-  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .practica-intro{margin:0;font-size:17px;color:var(--slate);line-height:1.6;max-width:62ch}
   .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
-  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
-  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px}
   .p-res{background:var(--green-tint);color:var(--green-deep)}
   .p-res b{color:var(--green-deep)}
   .p-gui{background:var(--cream);color:var(--deep)}
@@ -166,11 +166,13 @@
   .p-ex b{color:#a01243}
   .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
   .prob-q strong{font-weight:800}
-  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prof{display:block;margin-bottom:6px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
   .prob .check{background:#fff;border-color:var(--line)}
   .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
-  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl{margin:0;font-size:17px;color:var(--slate)}
   .work .wl b{color:var(--ink);font-weight:800}
+  .checkpoint{border-style:solid;border-color:var(--navy);background:#eef1fb;box-shadow:none}
+  .checkpoint .prob{background:#fff;border-color:#cfd6f2}
   .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
   .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
@@ -186,6 +188,7 @@
   @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -207,23 +210,26 @@
     </div>
   </header>
 
-  <p class="route-label">Tu ruta · nueve ideas breves</p>
+  <p class="route-label">Tu ruta · doce ideas breves</p>
   <nav class="route" role="tablist" aria-label="Ruta de microlecciones">
     <button class="step" role="tab" data-go="1" aria-selected="true"><span class="num">1</span>Sucesión</button>
     <button class="step" role="tab" data-go="2" aria-selected="false"><span class="num">2</span>Límite</button>
     <button class="step" role="tab" data-go="3" aria-selected="false"><span class="num">3</span>Serie</button>
     <button class="step" role="tab" data-go="4" aria-selected="false"><span class="num">4</span>Serie geométrica</button>
     <button class="step" role="tab" data-go="5" aria-selected="false"><span class="num">5</span>Término n-ésimo</button>
-    <button class="step" role="tab" data-go="6" aria-selected="false"><span class="num">6</span>Criterio de la razón</button>
+    <button class="step" role="tab" data-go="6" aria-selected="false"><span class="num">6</span>Razón</button>
     <button class="step" role="tab" data-go="7" aria-selected="false"><span class="num">7</span>Comparación</button>
-    <button class="step" role="tab" data-go="8" aria-selected="false"><span class="num">8</span>Series alternadas</button>
-    <button class="step" role="tab" data-go="9" aria-selected="false"><span class="num">9</span>Series de potencias</button>
+    <button class="step" role="tab" data-go="8" aria-selected="false"><span class="num">8</span>Integral</button>
+    <button class="step" role="tab" data-go="9" aria-selected="false"><span class="num">9</span>Raíz</button>
+    <button class="step" role="tab" data-go="10" aria-selected="false"><span class="num">10</span>Series alternadas</button>
+    <button class="step" role="tab" data-go="11" aria-selected="false"><span class="num">11</span>Reordenamiento</button>
+    <button class="step" role="tab" data-go="12" aria-selected="false"><span class="num">12</span>Series de potencias</button>
   </nav>
 
   <main>
 
     <section class="lesson is-active" data-step="1">
-      <header class="lesson-head"><p class="micro">Microlección 1 de 9 · Tema: Sucesiones</p><h2>La sucesión: una fila infinita con su regla</h2><p class="goal">Meta: leer el número que vive en cualquier lugar de la fila.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 1 de 12 · Tema: Sucesiones</p><h2>La sucesión: una fila infinita con su regla</h2><p class="goal">Meta: leer el número que vive en cualquier lugar de la fila.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy conoces el primer objeto del curso: la <strong>sucesión</strong>.</p>
         <p class="idea">Suena técnica, pero cabe en una imagen simple. Vamos a construirla con calma.</p>
@@ -258,7 +264,6 @@
         <p class="idea">Y con esto ya llegaste. Esa fila completa —una lista infinita y ordenada de números— es una <strong>sucesión</strong>. Tu curso lo dice así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 1.1</span>Una <strong>sucesión</strong> real asigna a cada lugar n = 1, 2, 3, … un número a<sub>n</sub>. La lista completa se escribe (a<sub>n</sub>), y la fórmula que produce cada a<sub>n</sub> es su <strong>término general</strong>.</p>
         <p class="idea">Léela de vuelta: los «lugares» son tus sobres numerados, y el «término general» es la regla que llena cada uno.</p>
-        <p class="idea paso">Asegura la pieza con los dos retos de abajo. En cuanto la tengas, seguimos con lo natural: si tienes la fila, la pregunta es a dónde <strong>se dirige</strong>.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="sucesion" data-level="guiado" data-module="1">
         <div class="qtag">Compruébalo · guiado</div>
@@ -282,7 +287,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas para leer el término que vive en un lugar de la fila. El primero lo armamos juntos; en los siguientes te suelto de a poco.</p>
+        <p class="practica-intro">Dos problemas para leer el término que vive en un lugar de la fila. El primero lo armamos juntos; el apoyo disminuye en los siguientes.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Abre sobres.</strong> Con la regla a<sub>n</sub> = 2n + 3, ¿qué trae el sobre 3?</p>
@@ -311,26 +316,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Pones n = 3: arriba 3, abajo 2·3 − 1 = 5. El término es 3 ⁄ 5.</p><p class="nudge">✕ Pista: sustituye n = 3; el denominador es 2n − 1, no 2n. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="sucesion" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea (a<sub>n</sub>) con a<sub>n</sub> = (n + 1) ⁄ n<sup>2</sup>. Calcula a<sub>3</sub>.</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">4 ⁄ 9</button>
-              <button class="opt" data-ok="0">2 ⁄ 3</button>
-              <button class="opt" data-ok="0">4 ⁄ 3</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Pones n = 3: arriba 3 + 1 = 4, abajo 3<sup>2</sup> = 9. Da 4 ⁄ 9.</p><p class="nudge">✕ Eleva al cuadrado el denominador: 3<sup>2</sup> = 9, no 3·2. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
+      <div class="lesson-nav"><span></span><button class="btn" data-next="2">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="2">
-      <header class="lesson-head"><p class="micro">Microlección 2 de 9 · Tema: Convergencia de sucesiones</p><h2>El límite: a qué valor se pega la fila</h2><p class="goal">Meta: decir a qué número tiende una sucesión sin tabular sobres.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 2 de 12 · Tema: Convergencia de sucesiones</p><h2>El límite: a qué valor se pega la fila</h2><p class="goal">Meta: decir a qué número tiende una sucesión sin tabular sobres.</p></header>
       <div class="sec">
         <p class="idea lede">Ya tienes la fila. Hoy la pregunta central: ¿a dónde <strong>se dirige</strong>? Su <strong>límite</strong>.</p>
         <p class="idea">Camina la sucesión anterior mirando sus números como decimales:</p>
@@ -361,7 +354,6 @@
         <div class="fx"><div class="sys"><span class="eq">lím (2n + 1) ⁄ (n + 3) = 2 ⁄ 1 = 2</span></div></div>
         <p class="idea">Ya con las palabras del puente, tu curso enuncia el límite así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 1.1</span>La sucesión (a<sub>n</sub>) <strong>converge</strong> a L si sus términos se acercan a L tanto como quieras al crecer n; se escribe lím<sub>n→∞</sub> a<sub>n</sub> = L. Si ningún L funciona, la sucesión <strong>diverge</strong>.</p>
-        <p class="idea paso">Practica el ojo con los retos. Después damos el gran salto de la unidad: de <strong>mirar</strong> la fila a <strong>sumarla</strong>.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="limite_sucesion" data-level="guiado" data-module="2">
         <div class="qtag">Compruébalo · guiado</div>
@@ -414,26 +406,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Abajo el grado es 2 y arriba 1: el denominador se dispara y la fracción se aplasta a 0.</p><p class="nudge">✕ Pista: el grado de abajo (2) supera al de arriba (1). ¿Quién gana la carrera? Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="limite_sucesion" data-level="examen" data-module="2">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Calcula lím<sub>n→∞</sub> (4n<sup>2</sup> − 1) ⁄ (2n<sup>2</sup> + n).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">2</button>
-              <button class="opt" data-ok="0">0</button>
-              <button class="opt" data-ok="0">Infinito</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Grados iguales (2 y 2): manda 4n<sup>2</sup> ⁄ 2n<sup>2</sup> = 2.</p><p class="nudge">✕ Toma los términos de mayor grado, los de n<sup>2</sup>: 4 arriba, 2 abajo. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="3">
-      <header class="lesson-head"><p class="micro">Microlección 3 de 9 · Tema: Series y sumas parciales</p><h2>La serie: ahora sumamos la fila</h2><p class="goal">Meta: distinguir la lista de números de su total acumulado.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 3 de 12 · Tema: Series y sumas parciales</p><h2>La serie: ahora sumamos la fila</h2><p class="goal">Meta: distinguir la lista de números de su total acumulado.</p></header>
       <div class="sec">
         <p class="idea lede">Hasta aquí solo <strong>mirábamos</strong> los sobres. Hoy los <strong>vaciamos</strong>: nace la <strong>serie</strong>.</p>
         <p class="idea">Imagina una alcancía con un <strong>marcador</strong> del total. Vacías el sobre 1 y se actualiza; vacías el 2 y se actualiza; y así, sin saltarte ninguno.</p>
@@ -462,7 +442,6 @@
         <p class="idea">Ese número al que se estabiliza el marcador tiene nombre. Tu curso lo enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 1.2</span>La <strong>serie</strong> de (a<sub>n</sub>) es ∑<sub>n=1</sub><sup>∞</sup> a<sub>n</sub>. Su <strong>suma parcial</strong> es S<sub>n</sub> = a<sub>1</sub> + a<sub>2</sub> + … + a<sub>n</sub>. La serie <strong>converge</strong> a S cuando la sucesión S<sub>n</sub> converge a S; si no, <strong>diverge</strong>.</p>
         <p class="idea">Léela de vuelta: la sucesión a<sub>n</sub> es la fila de sobres; la serie ∑ a<sub>n</sub> es el marcador de la alcancía. No son lo mismo.</p>
-        <p class="idea paso">Fija la diferencia con los retos. Luego atacamos la serie más importante del curso: la que sí se cierra de un golpe.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="serie_sumas_parciales" data-level="guiado" data-module="3">
         <div class="qtag">Compruébalo · guiado</div>
@@ -486,7 +465,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas de sumas parciales: el marcador tras vaciar unos cuantos sobres, no el total final.</p>
+        <p class="practica-intro">Dos problemas de sumas parciales: el marcador tras vaciar unos cuantos sobres, no el total final.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Lee el marcador.</strong> Con los términos 1, ½, ¼, ⅛…, calcula la suma parcial S<sub>3</sub>.</p>
@@ -515,8 +494,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ S<sub>2</sub> junta solo los dos primeros: 3 + (−1) = 2.</p><p class="nudge">✕ Pista: S<sub>2</sub> suma el primer y el segundo término; no metas el tercero. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="3">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 1–3</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
           <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="serie_sumas_parciales" data-level="examen" data-module="3">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Sea S<sub>n</sub> la suma parcial de ∑ a<sub>n</sub> con a<sub>n</sub> = 1 ⁄ 2<sup>n</sup>. Se tiene S<sub>1</sub> = ½, S<sub>2</sub> = ¾, S<sub>3</sub> = ⅞. ¿A qué valor tiende S<sub>n</sub>?</p>
@@ -528,13 +513,38 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Las sumas ½, ¾, ⅞… se acercan a 1 sin tocarlo: la serie converge a 1.</p><p class="nudge">✕ Mira a qué número se arriman ½, ¾, ⅞…: cada vez les falta la mitad. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="limite_sucesion" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Calcula lím<sub>n→∞</sub> (4n<sup>2</sup> − 1) ⁄ (2n<sup>2</sup> + n).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">2</button>
+              <button class="opt" data-ok="0">0</button>
+              <button class="opt" data-ok="0">Infinito</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Grados iguales (2 y 2): manda 4n<sup>2</sup> ⁄ 2n<sup>2</sup> = 2.</p><p class="nudge">✕ Toma los términos de mayor grado, los de n<sup>2</sup>: 4 arriba, 2 abajo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="sucesion" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea (a<sub>n</sub>) con a<sub>n</sub> = (n + 1) ⁄ n<sup>2</sup>. Calcula a<sub>3</sub>.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">4 ⁄ 9</button>
+              <button class="opt" data-ok="0">2 ⁄ 3</button>
+              <button class="opt" data-ok="0">4 ⁄ 3</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Pones n = 3: arriba 3 + 1 = 4, abajo 3<sup>2</sup> = 9. Da 4 ⁄ 9.</p><p class="nudge">✕ Eleva al cuadrado el denominador: 3<sup>2</sup> = 9, no 3·2. Intenta de nuevo.</p></div>
+          </div>
+        </div>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="4">
-      <header class="lesson-head"><p class="micro">Microlección 4 de 9 · Tema: Series geométricas</p><h2>La serie geométrica: sumar de un golpe</h2><p class="goal">Meta: reconocer una geométrica y sumarla cuando converge.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 4 de 12 · Tema: Series geométricas</p><h2>La serie geométrica: sumar de un golpe</h2><p class="goal">Meta: reconocer una geométrica y sumarla cuando converge.</p></header>
       <div class="sec">
         <p class="idea lede">Ya sabes armar una serie. Hoy la más importante del curso: la <strong>geométrica</strong>.</p>
         <p class="idea">Vuelve a la fila que se encoge: 1, ½, ¼, ⅛… La regla es <strong>cada sobre trae la mitad del anterior</strong>.</p>
@@ -558,7 +568,6 @@
         <p class="idea">Ese 1 − r es justo lo que quedó al restar. Ya con las manos en la masa, tu curso lo enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 1.2</span>La <strong>serie geométrica</strong> a + a·r + a·r<sup>2</sup> + … <strong>converge</strong> exactamente cuando | r | &lt; 1, y entonces su suma vale a ⁄ (1 − r).</p>
         <p class="idea paso">El método en tres pasos: identificar a y r, verificar | r | &lt; 1, aplicar a ⁄ (1 − r).</p>
-        <p class="idea paso">Asegúralo con los retos. Luego empezamos con los <strong>criterios</strong>: reglas para decidir sin sumar.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="serie_geometrica" data-level="guiado" data-module="4">
         <div class="qtag">Compruébalo · guiado</div>
@@ -626,11 +635,11 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="5">
-      <header class="lesson-head"><p class="micro">Microlección 5 de 9 · Tema: Criterios de convergencia</p><h2>El término n-ésimo: el filtro de un segundo</h2><p class="goal">Meta: descartar una serie de un vistazo cuando no puede converger.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 5 de 12 · Tema: Criterios de convergencia</p><h2>El término n-ésimo: el filtro de un segundo</h2><p class="goal">Meta: descartar una serie de un vistazo cuando no puede converger.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy tu primer <strong>criterio</strong>, el más rápido de todos: el del <strong>término n-ésimo</strong>.</p>
         <p class="idea">Antes de cualquier criterio fino, un vistazo de sentido común.</p>
@@ -658,7 +667,6 @@
         <p class="idea">Ojo con la dirección: es un requisito de entrada, <strong>no</strong> una garantía. Que los sobres se encojan no asegura que el total se estabilice.</p>
         <p class="idea">Tu curso lo enuncia con esa advertencia incluida:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 1.3</span><strong>Criterio del término n-ésimo.</strong> Si a<sub>n</sub> no tiende a 0, la serie ∑ a<sub>n</sub> <strong>diverge</strong>. Cuidado con la dirección: que a<sub>n</sub> → 0 es necesario, pero <strong>no</strong> garantiza que la serie converja.</p>
-        <p class="idea paso">Estrena el filtro con los retos. Después, un criterio que sí decide cuando aparecen factoriales.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="termino_nesimo" data-level="guiado" data-module="5">
         <div class="qtag">Compruébalo · guiado</div>
@@ -711,26 +719,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ n ⁄ (2n + 1) → ½ (grados iguales), y ½ no es 0: diverge.</p><p class="nudge">✕ Pista: calcula primero el límite del término, n ⁄ 2n. ¿Es 0? Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="termino_nesimo" data-level="examen" data-module="5">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Aplica el criterio del término n-ésimo a ∑ 1 ⁄ n. ¿Qué concluyes?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">Nada: como el término tiende a 0, el criterio no decide</button>
-              <button class="opt" data-ok="0">Converge, porque el término tiende a 0</button>
-              <button class="opt" data-ok="0">Diverge, porque el término tiende a 0</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ El filtro solo concluye divergencia cuando el término no tiende a 0. Aquí 1 ⁄ n → 0, así que no decide (hace falta otro criterio).</p><p class="nudge">✕ Este criterio nunca prueba convergencia; con límite 0 se queda mudo. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="6">
-      <header class="lesson-head"><p class="micro">Microlección 6 de 9 · Tema: Criterios de convergencia</p><h2>El criterio de la razón: el rey con factoriales</h2><p class="goal">Meta: decidir con el límite del cociente entre dos términos seguidos.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 6 de 12 · Tema: Criterios de convergencia</p><h2>El criterio de la razón: el rey con factoriales</h2><p class="goal">Meta: decidir con el límite del cociente entre dos términos seguidos.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy el criterio estrella para factoriales y potencias: el de la <strong>razón</strong> (D'Alembert).</p>
         <p class="idea">La geométrica salió fácil porque el cociente entre un sobre y el anterior era <strong>siempre el mismo</strong>.</p>
@@ -812,11 +808,28 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
+      <div class="practica checkpoint" data-checkpoint="6">
+        <p class="practica-head">Repaso acumulativo <span>· idea 5</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="termino_nesimo" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Aplica el criterio del término n-ésimo a ∑ 1 ⁄ n. ¿Qué concluyes?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Nada: como el término tiende a 0, el criterio no decide</button>
+              <button class="opt" data-ok="0">Converge, porque el término tiende a 0</button>
+              <button class="opt" data-ok="0">Diverge, porque el término tiende a 0</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El filtro solo concluye divergencia cuando el término no tiende a 0. Aquí 1 ⁄ n → 0, así que no decide (hace falta otro criterio).</p><p class="nudge">✕ Este criterio nunca prueba convergencia; con límite 0 se queda mudo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="7">
-      <header class="lesson-head"><p class="micro">Microlección 7 de 9 · Tema: Criterios de convergencia</p><h2>La comparación: atrapar bajo un techo conocido</h2><p class="goal">Meta: decidir una serie comparándola con una referencia de memoria.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 7 de 12 · Tema: Criterios de convergencia</p><h2>La comparación: atrapar bajo un techo conocido</h2><p class="goal">Meta: decidir una serie comparándola con una referencia de memoria.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy ni hace falta calcular: basta <strong>comparar</strong> con una serie que ya conoces.</p>
         <p class="idea">Imagina que una amiga vacía su fila junto a ti y que <strong>cada sobre tuyo trae menos que el suyo</strong> (todo positivo).</p>
@@ -843,7 +856,6 @@
         <p class="idea">La armónica sorprende: sus sobres se encogen a 0, pero <strong>demasiado despacio</strong>, y el marcador rebasa cualquier número.</p>
         <p class="idea">Es la prueba prometida de que términos que tienden a 0 <strong>no</strong> garantizan nada. Tu curso reúne todo así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 1.3</span><strong>Criterio de comparación</strong> (términos positivos). Si 0 ≤ a<sub>n</sub> ≤ b<sub>n</sub> y ∑ b<sub>n</sub> converge, entonces ∑ a<sub>n</sub> converge. La <strong>p-serie</strong> ∑ 1 ⁄ n<sup>p</sup> converge si p &gt; 1 y diverge si p ≤ 1 (con p = 1 es la <strong>armónica</strong>).</p>
-        <p class="idea paso">Elige bien la referencia y deja que atrape a tu serie. Practica con los retos.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7G" data-tema="comparacion" data-level="guiado" data-module="7">
         <div class="qtag">Compruébalo · guiado</div>
@@ -911,11 +923,47 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="8">
-      <header class="lesson-head"><p class="micro">Microlección 8 de 9 · Tema: Convergencia absoluta y condicional</p><h2>Series alternadas: cuando los signos van y vienen</h2><p class="goal">Meta: distinguir convergencia absoluta de condicional en una alternada.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 8 de 12 · Tema: Criterio de la integral: comparar suma y área</p><h2>Criterio de la integral: comparar suma y área</h2><p class="goal">Meta: decidir convergencia con una integral impropia</p></header>
+      <div class="sec">
+        <p class="idea lede">Una serie positiva junta muchas alturas. La integral junta el área continua que pasa junto a ellas.</p>
+        <figure class="visual">
+          <svg viewBox="0 0 620 235" role="img" aria-label="Barras decrecientes acompañadas por una curva continua">
+            <path d="M55 194H580M75 30V194" fill="none" stroke="#181B22" stroke-width="3"/>
+            <path d="M78 44 C145 92 225 126 575 181" fill="none" stroke="#C75D08" stroke-width="5"/>
+            <g fill="#E6F5EC" stroke="#1C7A3A" stroke-width="2"><rect x="105" y="80" width="58" height="114"/><rect x="163" y="109" width="58" height="85"/><rect x="221" y="126" width="58" height="68"/><rect x="279" y="139" width="58" height="55"/><rect x="337" y="148" width="58" height="46"/></g>
+            <text x="325" y="225" text-anchor="middle" font-size="26" fill="#334155">la suma y el área siguen la misma cola</text>
+          </svg>
+          <figcaption>Si las barras bajan sin saltos extraños, la integral permite estudiar la misma cola.</figcaption>
+        </figure>
+        <p class="idea">La comparación funciona cuando f es positiva, continua y decreciente, y a<sub>n</sub> = f(n).</p>
+        <div class="fx"><div class="sys"><span class="eq">∑ a<sub>n</sub> converge</span><span class="eq">⇔</span><span class="eq">∫ f(x) dx converge</span></div></div>
+        <p class="fdef"><span class="flbl">Criterio · temario oficial, unidad 1</span>La serie y la integral impropia tienen el mismo comportamiento de convergencia. No tienen que dar el mismo valor.</p>
+      </div>
+      <div class="check challenge" data-kind="item" data-id="M8G" data-tema="criterio_integral" data-level="guiado" data-module="8"><div class="qtag">Compruébalo</div><p class="q">Para a<sub>n</sub> = 1/n<sup>2</sup>, ¿qué integral debes revisar?</p><div class="opts"><button class="opt" data-ok="1">∫<sub>1</sub><sup>∞</sup> 1/x<sup>2</sup> dx</button><button class="opt" data-ok="0">∫<sub>1</sub><sup>∞</sup> x<sup>2</sup> dx</button><button class="opt" data-ok="0">∫<sub>1</sub><sup>∞</sup> 1/x dx</button></div><div class="fb"><p class="okc">✓ Cambia n por x y conserva la expresión: f(x) = 1/x².</p><p class="nudge">✕ La función continua debe coincidir con a<sub>n</sub> en los enteros.</p></div></div>
+      <div class="check challenge" data-kind="item" data-id="M8S" data-tema="criterio_integral" data-level="solo" data-module="8"><div class="qtag">Ahora tú</div><p class="q">Si ∫<sub>2</sub><sup>∞</sup> 1/(x ln x) dx diverge, ¿qué ocurre con ∑ 1/(n ln n)?</p><div class="opts"><button class="opt" data-ok="0">Converge al mismo número que la integral</button><button class="opt" data-ok="1">Diverge</button><button class="opt" data-ok="0">No se puede usar porque los términos son positivos</button></div><div class="fb"><p class="okc">✓ El criterio transfiere el comportamiento: integral divergente, serie divergente.</p><p class="nudge">✕ La función es positiva, continua y decreciente desde n = 2.</p></div></div>
+      <div class="practica"><p class="practica-head">Practica aquí mismo <span>· de reconocer a decidir</span></p><p class="practica-intro">Tres aplicaciones breves del criterio de la integral.</p>
+        <div class="prob"><div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div><div class="check challenge" data-kind="item" data-id="M8P1" data-tema="criterio_integral" data-level="resuelto" data-module="8"><div class="qtag">Da el paso que falta</div><p class="q">¿Qué tres condiciones debes revisar antes de aplicar el criterio?</p><div class="opts"><button class="opt" data-ok="1">Positiva, continua y decreciente</button><button class="opt" data-ok="0">Positiva, acotada y periódica</button><button class="opt" data-ok="0">Continua, creciente y negativa</button></div><div class="fb"><p class="okc">✓ La comparación necesita una función positiva, continua y decreciente.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div>
+        <div class="prob"><div class="plevel p-gui"><b>2</b> Guiado · con una pista</div><div class="check challenge" data-kind="item" data-id="M8P2" data-tema="criterio_integral" data-level="guiado" data-module="8"><div class="qtag">Da el paso que falta</div><p class="q">La integral ∫₁∞ 1/x³ dx converge. ¿Qué concluyes sobre ∑ 1/n³?</p><div class="opts"><button class="opt" data-ok="1">Converge</button><button class="opt" data-ok="0">Diverge</button><button class="opt" data-ok="0">Vale exactamente lo mismo que la integral</button></div><div class="fb"><p class="okc">✓ Serie e integral comparten convergencia, aunque sus valores no sean iguales.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div>
+        <div class="prob"><div class="plevel p-ex"><b>3</b> Como en tu examen</div><div class="check challenge" data-kind="item" data-id="M8P3" data-tema="criterio_integral" data-level="examen" data-module="8"><div class="qtag">Sin ayuda</div><p class="q">¿Qué afirma correctamente el criterio de la integral?</p><div class="opts"><button class="opt" data-ok="1">La serie y la integral convergen o divergen juntas</button><button class="opt" data-ok="0">La serie siempre tiene la misma suma que la integral</button><button class="opt" data-ok="0">Solo funciona con series alternadas</button></div><div class="fb"><p class="okc">✓ El criterio compara comportamiento, no igualdad de valores.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn" data-next="9">Siguiente →</button></div>
+    </section>
+
+    <section class="lesson" data-step="9">
+      <header class="lesson-head"><p class="micro">Microlección 9 de 12 · Tema: Criterio de la raíz: mirar el crecimiento escondido</p><h2>Criterio de la raíz: mirar el crecimiento escondido</h2><p class="goal">Meta: decidir con la raíz n-ésima de cada término</p></header>
+      <div class="sec"><p class="idea lede">Cuando un término tiene potencias elevadas a n, la raíz n-ésima quita esa capa y deja visible su tamaño de fondo.</p><div class="fx"><div class="sys"><span class="eq">L = lim √[n]{|a<sub>n</sub>|}</span><span class="eq">L &lt; 1 → converge absolutamente</span><span class="eq">L &gt; 1 → diverge</span><span class="eq">L = 1 → no decide</span></div></div><p class="idea">Por ejemplo, en a<sub>n</sub> = (2/5)<sup>n</sup>, la raíz n-ésima deja 2/5. Como es menor que 1, la serie converge.</p><p class="fdef"><span class="flbl">Criterio · temario oficial, unidad 1</span>El criterio de la raíz estudia el límite de √[n]{|a<sub>n</sub>|}. El caso L = 1 es inconcluso: hace falta otro criterio.</p></div>
+      <div class="check challenge" data-kind="item" data-id="M9G" data-tema="criterio_raiz" data-level="guiado" data-module="9"><div class="qtag">Compruébalo</div><p class="q">Para a<sub>n</sub> = (3/4)<sup>n</sup>, ¿qué queda después de tomar la raíz n-ésima?</p><div class="opts"><button class="opt" data-ok="1">3/4</button><button class="opt" data-ok="0">n·3/4</button><button class="opt" data-ok="0">(3/4)<sup>n²</sup></button></div><div class="fb"><p class="okc">✓ La raíz n-ésima cancela la potencia n.</p><p class="nudge">✕ Piensa en √[n]{bⁿ} = |b|.</p></div></div>
+      <div class="check challenge" data-kind="item" data-id="M9S" data-tema="criterio_raiz" data-level="solo" data-module="9"><div class="qtag">Ahora tú</div><p class="q">Si el límite de la raíz vale 1, ¿cuál es el veredicto?</p><div class="opts"><button class="opt" data-ok="0">Converge</button><button class="opt" data-ok="0">Diverge</button><button class="opt" data-ok="1">El criterio no decide</button></div><div class="fb"><p class="okc">✓ L = 1 obliga a cambiar de criterio.</p><p class="nudge">✕ Los veredictos automáticos solo ocurren por debajo o por encima de 1.</p></div></div>
+      <div class="practica"><p class="practica-head">Practica aquí mismo <span>· del cálculo al veredicto</span></p><p class="practica-intro">Tres series donde la raíz n-ésima revela el tamaño de fondo.</p><div class="prob"><div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div><div class="check challenge" data-kind="item" data-id="M9P1" data-tema="criterio_raiz" data-level="resuelto" data-module="9"><div class="qtag">Da el paso que falta</div><p class="q">Si L = 0.2, ¿qué concluyes?</p><div class="opts"><button class="opt" data-ok="1">Convergencia absoluta</button><button class="opt" data-ok="0">Divergencia</button><button class="opt" data-ok="0">El criterio no decide</button></div><div class="fb"><p class="okc">✓ 0.2 es menor que 1.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-gui"><b>2</b> Guiado · con una pista</div><div class="check challenge" data-kind="item" data-id="M9P2" data-tema="criterio_raiz" data-level="guiado" data-module="9"><div class="qtag">Da el paso que falta</div><p class="q">Para aₙ = (5/2)ⁿ, la raíz da 5/2. ¿Qué ocurre?</p><div class="opts"><button class="opt" data-ok="1">La serie diverge</button><button class="opt" data-ok="0">La serie converge</button><button class="opt" data-ok="0">El criterio no decide</button></div><div class="fb"><p class="okc">✓ 5/2 es mayor que 1.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-ex"><b>3</b> Como en tu examen</div><div class="check challenge" data-kind="item" data-id="M9P3" data-tema="criterio_raiz" data-level="examen" data-module="9"><div class="qtag">Sin ayuda</div><p class="q">Para aₙ = 1/n, la raíz n-ésima tiende a 1. ¿Qué concluye este criterio?</p><div class="opts"><button class="opt" data-ok="1">No decide</button><button class="opt" data-ok="0">Converge</button><button class="opt" data-ok="0">Diverge</button></div><div class="fb"><p class="okc">✓ El caso L = 1 es inconcluso, aunque otro criterio pueda decidir la serie.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="8">← Anterior</button><button class="btn" data-next="10">Siguiente →</button></div>
+    </section>
+
+    <section class="lesson" data-step="10">
+      <header class="lesson-head"><p class="micro">Microlección 10 de 12 · Tema: Convergencia absoluta y condicional</p><h2>Series alternadas: cuando los signos van y vienen</h2><p class="goal">Meta: distinguir convergencia absoluta de condicional en una alternada.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy el último criterio: para signos que alternan, el de <strong>Leibniz</strong>.</p>
         <p class="idea">Queda un caso: sobres que alternan <strong>ingreso y gasto</strong> (+, −, +, −). El marcador sube, baja, sube, baja.</p>
@@ -940,7 +988,7 @@
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 1.3 y 1.4</span><strong>Criterio de Leibniz.</strong> Una serie alternada cuyos términos decrecen a 0 <strong>converge</strong>. Y una serie es <strong>absolutamente convergente</strong> si ∑ | a<sub>n</sub> | converge; si converge pero ∑ | a<sub>n</sub> | diverge, es <strong>condicionalmente convergente</strong>.</p>
         <p class="idea paso">La prueba es siempre la misma: quita los signos y mira si esa versión positiva converge. Ensáyalo con los retos.</p>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M8G" data-tema="series_alternadas" data-level="guiado" data-module="8">
+      <div class="check challenge" data-kind="item" data-id="M10G" data-tema="series_alternadas" data-level="guiado" data-module="10">
         <div class="qtag">Compruébalo · guiado</div>
         <p class="q"><strong>El ejemplo estrella.</strong> ¿Cómo converge 1 − ½ + ⅓ − ¼ + …?</p>
         <div class="opts">
@@ -950,7 +998,7 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ 1 ⁄ n decrece a 0 (Leibniz converge), pero al quitar signos es la armónica, que diverge: condicional.</p><p class="nudge">✕ Quita los signos: queda la armónica. ¿Esa converge? Intenta de nuevo.</p></div>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M8S" data-tema="series_alternadas" data-level="solo" data-module="8">
+      <div class="check challenge" data-kind="item" data-id="M10S" data-tema="series_alternadas" data-level="solo" data-module="10">
         <div class="qtag">Ahora tú · sin copiar</div>
         <p class="q"><strong>Quita los signos.</strong> La serie 1 − ½ + ¼ − ⅛ + … alterna con tamaños 1, ½, ¼, ⅛. ¿Cómo converge?</p>
         <div class="opts">
@@ -967,7 +1015,7 @@
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Quita los signos.</strong> Clasifica 1 − ¼ + ⅑ − 1⁄16 + … (tamaños 1 ⁄ n<sup>2</sup>).</p>
           <div class="work"><p class="wl">Por Leibniz: los tamaños 1 ⁄ n<sup>2</sup> decrecen a 0, así que <b>converge</b>.</p><p class="wl">Ahora la vuelves positiva: queda ∑ 1 ⁄ n<sup>2</sup>.</p></div>
-          <div class="check challenge" data-kind="item" data-id="M8P1" data-tema="series_alternadas" data-level="resuelto" data-module="8">
+          <div class="check challenge" data-kind="item" data-id="M10P1" data-tema="series_alternadas" data-level="resuelto" data-module="10">
             <div class="qtag">Da el paso que falta</div>
             <p class="q">∑ 1 ⁄ n<sup>2</sup> es la p-serie con p = 2, que converge. ¿Cómo converge la alternada?</p>
             <div class="opts">
@@ -980,7 +1028,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
-          <div class="check challenge" data-kind="item" data-id="M8P2" data-tema="series_alternadas" data-level="guiado" data-module="8">
+          <div class="check challenge" data-kind="item" data-id="M10P2" data-tema="series_alternadas" data-level="guiado" data-module="10">
             <div class="qtag">Tú, con una pista</div>
             <p class="q"><strong>Otra alternada.</strong> Clasifica ∑ (−1)<sup>n</sup> ⁄ √n, con tamaños 1 ⁄ √n.</p>
             <div class="opts">
@@ -993,7 +1041,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="series_alternadas" data-level="examen" data-module="8">
+          <div class="check challenge" data-kind="item" data-id="M10P3" data-tema="series_alternadas" data-level="examen" data-module="10">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Decide ∑ (−1)<sup>n</sup> · n ⁄ (n + 1).</p>
             <div class="opts">
@@ -1006,11 +1054,20 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn" data-next="9">Última idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="9">← Anterior</button><button class="btn" data-next="11">Siguiente →</button></div>
     </section>
 
-    <section class="lesson" data-step="9">
-      <header class="lesson-head"><p class="micro">Microlección 9 de 9 · Tema: Series de potencias y Taylor</p><h2>Series de potencias: cuando la razón es una letra</h2><p class="goal">Meta: leer una serie de potencias como una función y su radio.</p></header>
+    <section class="lesson" data-step="11">
+      <header class="lesson-head"><p class="micro">Microlección 11 de 12 · Tema: Reordenar una serie: cuándo el orden importa</p><h2>Reordenar una serie: cuándo el orden importa</h2><p class="goal">Meta: distinguir series que conservan su suma al reordenarse</p></header>
+      <div class="sec"><p class="idea lede">En una suma finita puedes cambiar el orden sin problema. En una suma infinita, el tipo de convergencia decide si eso sigue siendo seguro.</p><figure class="visual"><svg viewBox="0 0 620 210" role="img" aria-label="Dos filas con los mismos términos en distinto orden"><g font-size="26" font-weight="700" text-anchor="middle"><g fill="#283891"><text x="90" y="70">+1</text><text x="200" y="70">−½</text><text x="310" y="70">+⅓</text><text x="420" y="70">−¼</text><text x="530" y="70">…</text></g><path d="M90 105C150 160 250 160 310 105M310 105C365 160 470 160 530 105" fill="none" stroke="#F5821F" stroke-width="5"/><g fill="#C75D08"><text x="90" y="195">+1</text><text x="200" y="195">+⅓</text><text x="310" y="195">−½</text><text x="420" y="195">−¼</text><text x="530" y="195">…</text></g></g></svg><figcaption>Los términos son los mismos; solo cambia el orden.</figcaption></figure><div class="fx"><div class="sys"><span class="eq">convergencia absoluta → el orden no cambia la suma</span><span class="eq">convergencia condicional → el orden puede cambiarla</span></div></div><p class="fdef"><span class="flbl">Propiedad · temario oficial, unidad 1</span>Una serie absolutamente convergente puede reordenarse sin alterar su suma. En una serie condicionalmente convergente, reordenar puede cambiar el resultado.</p></div>
+      <div class="check challenge" data-kind="item" data-id="M11G" data-tema="reordenamiento" data-level="guiado" data-module="11"><div class="qtag">Compruébalo</div><p class="q">Una serie converge absolutamente. Si intercambias el orden de sus términos, ¿qué ocurre?</p><div class="opts"><button class="opt" data-ok="1">Conserva la misma suma</button><button class="opt" data-ok="0">Siempre diverge</button><button class="opt" data-ok="0">Cambia de signo</button></div><div class="fb"><p class="okc">✓ La convergencia absoluta protege la suma frente a reordenamientos.</p><p class="nudge">✕ La condición importante es que también converja la serie de valores absolutos.</p></div></div>
+      <div class="check challenge" data-kind="item" data-id="M11S" data-tema="reordenamiento" data-level="solo" data-module="11"><div class="qtag">Ahora tú</div><p class="q">Una serie converge, pero la serie de valores absolutos diverge. ¿Es seguro reordenarla?</p><div class="opts"><button class="opt" data-ok="0">Sí, toda suma permite cualquier orden</button><button class="opt" data-ok="1">No: es condicional y el resultado puede cambiar</button><button class="opt" data-ok="0">Sí, si todos los términos son positivos</button></div><div class="fb"><p class="okc">✓ Convergencia condicional significa que el orden sí puede importar.</p><p class="nudge">✕ Primero clasifica: converge sin hacerlo absolutamente.</p></div></div>
+      <div class="practica"><p class="practica-head">Practica aquí mismo <span>· clasifica antes de decidir</span></p><p class="practica-intro">Tres decisiones sobre el efecto de cambiar el orden.</p><div class="prob"><div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div><div class="check challenge" data-kind="item" data-id="M11P1" data-tema="reordenamiento" data-level="resuelto" data-module="11"><div class="qtag">Da el paso que falta</div><p class="q">∑ 1/n² converge absolutamente. ¿Se puede reordenar sin cambiar su suma?</p><div class="opts"><button class="opt" data-ok="1">Sí</button><button class="opt" data-ok="0">No</button><button class="opt" data-ok="0">Solo si se invierten todos los términos</button></div><div class="fb"><p class="okc">✓ La convergencia absoluta conserva la suma.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-gui"><b>2</b> Guiado · con una pista</div><div class="check challenge" data-kind="item" data-id="M11P2" data-tema="reordenamiento" data-level="guiado" data-module="11"><div class="qtag">Da el paso que falta</div><p class="q">La serie armónica alternada converge condicionalmente. ¿Qué riesgo tiene reordenarla?</p><div class="opts"><button class="opt" data-ok="1">Puede cambiar la suma</button><button class="opt" data-ok="0">Ninguno: conserva siempre la suma</button><button class="opt" data-ok="0">Se vuelve una serie finita</button></div><div class="fb"><p class="okc">✓ Las series condicionales son sensibles al orden.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-ex"><b>3</b> Como en tu examen</div><div class="check challenge" data-kind="item" data-id="M11P3" data-tema="reordenamiento" data-level="examen" data-module="11"><div class="qtag">Sin ayuda</div><p class="q">¿Qué dato basta para garantizar invariancia ante reordenamientos?</p><div class="opts"><button class="opt" data-ok="1">Que ∑|aₙ| converja</button><button class="opt" data-ok="0">Que aₙ tienda a cero</button><button class="opt" data-ok="0">Que los términos alternen</button></div><div class="fb"><p class="okc">✓ La garantía es la convergencia absoluta.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="10">← Anterior</button><button class="btn" data-next="12">Siguiente →</button></div>
+    </section>
+
+    <section class="lesson" data-step="12">
+      <header class="lesson-head"><p class="micro">Microlección 12 de 12 · Tema: Series de potencias y Taylor</p><h2>Series de potencias: cuando la razón es una letra</h2><p class="goal">Meta: leer una serie de potencias como una función y su radio.</p></header>
       <div class="sec">
         <p class="idea lede">Cierras la unidad con el puente al resto del cálculo: la <strong>serie de potencias</strong>.</p>
         <p class="idea">En la geométrica la razón era un número fijo. Ahora pon en su lugar una <strong>letra</strong>, x:</p>
@@ -1042,9 +1099,8 @@
         <p class="idea">Parte de una función conocida y la imita cerca de un punto quedándose con unos cuantos términos de su serie de potencias.</p>
         <p class="idea">Ya con la máquina en la cabeza, tu curso enuncia ambos nombres así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 1.5 y 1.6</span>Una <strong>serie de potencias</strong> centrada en 0 es ∑ c<sub>n</sub> x<sup>n</sup>; converge para | x | &lt; R, su <strong>radio de convergencia</strong>. El <strong>polinomio de Taylor</strong> de una función f la imita cerca de un punto quedándose con los primeros términos de su serie de potencias.</p>
-        <p class="idea paso">La construcción completa de polinomios de Taylor (coeficientes, e<sup>x</sup> término a término) la trabajas en la Teoría y el Cuadernillo. Aquí basta ver la idea. Cierra con los retos.</p>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M9G" data-tema="serie_potencias" data-level="guiado" data-module="9">
+      <div class="check challenge" data-kind="item" data-id="M12G" data-tema="serie_potencias" data-level="guiado" data-module="12">
         <div class="qtag">Compruébalo · guiado</div>
         <p class="q"><strong>Usa la máquina.</strong> Con 1 ⁄ (1 − x), ¿cuánto suma 1 + ¼ + 1⁄16 + 1⁄64 + … (o sea x = ¼)?</p>
         <div class="opts">
@@ -1054,7 +1110,7 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Con x = ¼ (cumple | x | &lt; 1): 1 ⁄ (1 − ¼) = 1 ⁄ ¾ = 4⁄3.</p><p class="nudge">✕ El denominador es 1 − x = ¾; dividir 1 entre ¾ es multiplicar por 4⁄3. Intenta de nuevo.</p></div>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M9S" data-tema="serie_potencias" data-level="solo" data-module="9">
+      <div class="check challenge" data-kind="item" data-id="M12S" data-tema="serie_potencias" data-level="solo" data-module="12">
         <div class="qtag">Ahora tú · sin copiar</div>
         <p class="q"><strong>Otra x.</strong> Con la misma máquina, ¿cuánto suma 1 + ⅓ + ⅑ + 1⁄27 + … (o sea x = ⅓)?</p>
         <div class="opts">
@@ -1065,17 +1121,9 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ Con x = ⅓: 1 ⁄ (1 − ⅓) = 1 ⁄ ⅔ = 3⁄2.</p><p class="nudge">✕ El denominador es 1 − ⅓ = ⅔; dividir 1 entre ⅔ es multiplicar por 3⁄2. Intenta de nuevo.</p></div>
       </div>
 
-      <section class="finish">
-        <h3>Cierra sin mirar arriba</h3>
-        <p>Explica en voz alta esta cadena: sucesión → límite → serie → geométrica → criterios (n-ésimo, razón, comparación, Leibniz).</p>
-        <p>Después responde: <strong>¿qué criterio usas si aparece un factorial, y cuál usas para descartar de un vistazo?</strong></p>
-        <p class="nota">¿Qué tan segura te sientes explicando estas ideas sin leer? 1 = nada · 5 = lo domino.</p>
-        <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
-        <button class="btn" id="makeReport">Generar reporte para el tutor</button>
-        <div class="report" id="reportSummary" aria-live="polite"></div>
-      </section>
+      
 
-      <nav class="nav-lecs"><a href="C1_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C1_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
+      
 
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
@@ -1084,7 +1132,7 @@
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Usa la máquina.</strong> Con 1 ⁄ (1 − x), ¿cuánto suma 1 + ½ + ¼ + ⅛ + … (o sea x = ½)?</p>
           <div class="work"><p class="wl">Compruebas | x | &lt; 1: con x = ½ sirve.</p><p class="wl">El denominador es 1 − ½ = <b>½</b>. Falta dividir 1 entre ½.</p></div>
-          <div class="check challenge" data-kind="item" data-id="M9P1" data-tema="serie_potencias" data-level="resuelto" data-module="9">
+          <div class="check challenge" data-kind="item" data-id="M12P1" data-tema="serie_potencias" data-level="resuelto" data-module="12">
             <div class="qtag">Da el paso que falta</div>
             <p class="q">¿Cuánto vale 1 ⁄ (1 − ½)?</p>
             <div class="opts">
@@ -1097,7 +1145,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
-          <div class="check challenge" data-kind="item" data-id="M9P2" data-tema="serie_potencias" data-level="guiado" data-module="9">
+          <div class="check challenge" data-kind="item" data-id="M12P2" data-tema="serie_potencias" data-level="guiado" data-module="12">
             <div class="qtag">Tú, con una pista</div>
             <p class="q"><strong>Coeficiente de Taylor.</strong> En la serie de e<sup>x</sup> en 0, el coeficiente de x<sup>n</sup> es 1 ⁄ n!. ¿Cuál es el término que acompaña a x<sup>3</sup>?</p>
             <div class="opts">
@@ -1110,7 +1158,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M9P3" data-tema="serie_potencias" data-level="examen" data-module="9">
+          <div class="check challenge" data-kind="item" data-id="M12P3" data-tema="serie_potencias" data-level="examen" data-module="12">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>La serie de potencias ∑<sub>n=0</sub><sup>∞</sup> x<sup>n</sup> converge para | x | &lt; 1. ¿Cuál es su radio de convergencia R?</p>
             <div class="opts">
@@ -1123,7 +1171,18 @@
         </div>
         <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C1_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="8">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
+      <section class="finish">
+        <h3>Cierra sin mirar arriba</h3>
+        <p>Explica en voz alta esta cadena: sucesión → límite → serie → geométrica → criterios de convergencia.</p>
+        <p>Después responde: <strong>¿cuándo usarías razón, raíz o integral, y qué cambia si la convergencia es condicional?</strong></p>
+        <p class="nota">¿Qué tan segura te sientes explicando estas ideas sin leer? 1 = nada · 5 = lo domino.</p>
+        <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
+        <button class="btn" id="makeReport">Generar reporte para el tutor</button>
+        <div class="report" id="reportSummary" aria-live="polite"></div>
+      </section>
+
+      <nav class="nav-lecs"><a href="C1_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C1_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="11">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 
   </main>
@@ -1135,17 +1194,20 @@
 <script>
 (function(){
   'use strict';
-  var KEY='valentina-calculo-u1-guia-micro';
+  var KEY='valentina-calculo-u1-guia-micro-cobertura-20260715';
   var goals=[
     'Sucesión: leer una fila infinita de números y su regla.',
     'Límite: descubrir a qué valor se pega la sucesión.',
     'Serie: pasar de mirar la fila a sumarla, término a término.',
-    'Serie geométrica: sumar de un golpe cuando la razón es fija.',
-    'Término n-ésimo: descartar de un vistazo lo que no puede converger.',
+    'Serie geométrica: sumar cuando la razón es fija.',
+    'Término n-ésimo: descartar lo que no puede converger.',
     'Criterio de la razón: decidir con el cociente entre términos.',
-    'Comparación: atrapar tu serie bajo una referencia conocida.',
-    'Series alternadas: decidir convergencia absoluta o condicional.',
-    'Series de potencias: cuando la razón es una letra y la serie es una función.'
+    'Comparación: atrapar una serie bajo una referencia conocida.',
+    'Criterio de la integral: comparar la cola con un área impropia.',
+    'Criterio de la raíz: descubrir el crecimiento que esconden las potencias.',
+    'Series alternadas: distinguir convergencia absoluta y condicional.',
+    'Reordenamiento: saber cuándo cambiar el orden conserva la suma.',
+    'Series de potencias: convertir una serie en una función.'
   ];
   var state={current:1,started:new Date().toISOString(),items:{},confidence:null};
   try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&saved.items){state=saved;}}catch(e){}
@@ -1153,7 +1215,7 @@
   function shuffle(box){var a=Array.prototype.slice.call(box.children);for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}for(var k=0;k<a.length;k++){box.appendChild(a[k]);}}
   function markDone(){document.querySelectorAll('.step').forEach(function(btn){var m=btn.dataset.go;var cards=document.querySelectorAll('.challenge[data-module="'+m+'"]');var ids=Array.prototype.map.call(cards,function(x){return x.dataset.id;});btn.classList.toggle('is-done',ids.length>0&&ids.every(function(id){return state.items[id]&&state.items[id].correct;}));});}
   function progress(){var total=document.querySelectorAll('.challenge').length;var done=Object.keys(state.items).filter(function(id){return state.items[id].correct;}).length;return {done:done,total:total};}
-  function go(n){n=Math.max(1,Math.min(9,Number(n)||1));state.current=n;save();
+  function go(n){n=Math.max(1,Math.min(12,Number(n)||1));state.current=n;save();
     document.querySelectorAll('.lesson').forEach(function(x){x.classList.toggle('is-active',Number(x.dataset.step)===n);});
     document.querySelectorAll('.step').forEach(function(x){x.setAttribute('aria-selected',String(Number(x.dataset.go)===n));});
     document.getElementById('heroStep').textContent=n;

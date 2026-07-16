@@ -60,8 +60,8 @@
   .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
   .idea strong{font-weight:800;color:var(--ink)}
   .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
-  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
-  .paso{color:var(--muted);font-size:16px}
+  .key{border:1.5px solid #f0d6b8;background:var(--cream);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:650}.key::before{content:"Idea clave";display:block;margin-bottom:4px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep)}
+  .paso{color:var(--muted);font-size:17px}
   .paso::before{content:"→ ";color:var(--orange);font-weight:800}
 
   .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
@@ -75,8 +75,8 @@
   .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
   .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
 
-  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
-  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -145,7 +145,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -154,10 +154,10 @@
   .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
   .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
   .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
-  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .practica-intro{margin:0;font-size:17px;color:var(--slate);line-height:1.6;max-width:62ch}
   .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
-  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
-  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px}
   .p-res{background:var(--green-tint);color:var(--green-deep)}
   .p-res b{color:var(--green-deep)}
   .p-gui{background:var(--cream);color:var(--deep)}
@@ -166,11 +166,13 @@
   .p-ex b{color:#a01243}
   .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
   .prob-q strong{font-weight:800}
-  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prof{display:block;margin-bottom:6px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
   .prob .check{background:#fff;border-color:var(--line)}
   .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
-  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl{margin:0;font-size:17px;color:var(--slate)}
   .work .wl b{color:var(--ink);font-weight:800}
+  .checkpoint{border-style:solid;border-color:var(--navy);background:#eef1fb;box-shadow:none}
+  .checkpoint .prob{background:#fff;border-color:#cfd6f2}
   .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
   .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
@@ -186,6 +188,7 @@
   @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -258,7 +261,6 @@
         <p class="idea">Y con esto ya llegaste. Una máquina que a cada vector de entrada le asigna un vector de salida: eso es una transformación. Tu curso lo dice así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>Una <strong>transformación</strong> T de R<sup>n</sup> a R<sup>m</sup> es una función que asigna a cada vector u ∈ R<sup>n</sup> un único vector T(u) ∈ R<sup>m</sup>. Se escribe <strong>T: R<sup>n</sup> → R<sup>m</sup></strong>.</p>
         <p class="idea">Léela con lo que ya tienes: la «función» es tu máquina, «único» dice que cada entrada tiene una sola salida, y la n y la m cuentan los números de cada lista.</p>
-        <p class="idea paso">Asegura la lectura con los dos retos. Después viene la pregunta que organiza la unidad: ¿qué máquinas se llevan bien con las jugadas de la Unidad 2?</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="transformacion" data-level="guiado" data-module="1">
         <div class="qtag">Compruébalo · guiado</div>
@@ -282,7 +284,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas como en un examen: leer qué entra y qué sale, y aplicar la regla. El primero lo armamos juntos; en los siguientes te suelto de a poco.</p>
+        <p class="practica-intro">Dos problemas como en un examen: leer qué entra y qué sale, y aplicar la regla. El primero lo armamos juntos; el apoyo disminuye en los siguientes.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Aplica la regla</strong> T(x, y) = (2x, x + y) al punto (3, 5).</p>
@@ -311,19 +313,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Antes de la flecha, el dominio (entran 4 números); después, el codominio (salen 2).</p><p class="nudge">✕ Pista: los numeritos cuentan cuántos números lleva cada lista, no son potencias. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="transformacion" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea T: R³ → R² con T(x, y, z) = (x − z, 2y). Halla T(1, 4, 3).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">(−2, 8)</button>
-              <button class="opt" data-ok="0">(4, 8)</button>
-              <button class="opt" data-ok="0">(−2, 4)</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Sustituyes en orden: x − z = 1 − 3 = −2; 2y = 2·4 = 8. Da (−2, 8).</p><p class="nudge">✕ Respeta el signo de x − z y dobla la y. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
@@ -363,7 +353,6 @@
         <p class="idea">Y así llegaste a la definición que gobierna toda la unidad. Tu curso la enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 3.1</span>Una <strong>transformación lineal</strong> L de R<sup>n</sup> a R<sup>m</sup> es una función que asigna a cada u ∈ R<sup>n</sup> un único vector L(u) ∈ R<sup>m</sup> y cumple: (i) L(u + v) = L(u) + L(v) para cada u, v ∈ R<sup>n</sup>; (ii) L(k·u) = k·L(u) para cada u ∈ R<sup>n</sup> y k ∈ R.</p>
         <p class="idea">Léela por partes: la (i) es «sumar antes o después da igual»; la (ii) es «estirar antes o después da igual». La k es el escalar — tu «peso» de la Unidad 2.</p>
-        <p class="idea paso">Dos retos abajo. Y en la próxima lección, un regalo de esta definición: una prueba de un solo paso para descartar impostoras.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="linealidad" data-level="guiado" data-module="2">
         <div class="qtag">Compruébalo · guiado</div>
@@ -472,7 +461,6 @@
         <p class="idea">Esta propiedad no trae número en tu resumen, pero tu curso la usa a cada rato. Enunciada en corto:</p>
         <p class="fdef"><span class="flbl">Propiedad · Así se enuncia en tu curso</span>Si L es una transformación lineal, entonces <strong>L(0) = 0</strong>: el vector cero del dominio va al vector cero del codominio. Una regla que no cumple L(0) = 0 no puede ser lineal.</p>
         <p class="idea">El primer 0 es el vector cero del dominio; el segundo, el del codominio. Es la única prueba de un solo paso en la unidad: úsala siempre primero.</p>
-        <p class="idea paso">Afila el detector con los dos retos. Con las lineales ya identificadas, lo que sigue es conocerlas por dentro: toda la máquina cabe en una tabla de números.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="filtro_cero" data-level="guiado" data-module="3">
         <div class="qtag">Compruébalo · guiado</div>
@@ -496,7 +484,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas con el filtro del cero. El primero lo resolvemos juntos; luego avanzas tú.</p>
+        <p class="practica-intro">Dos problemas con el filtro del cero. El primero lo resolvemos juntos; luego avanzas tú.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Aplica el filtro del cero</strong> a T(x, y) = (2x − 3, y).</p>
@@ -525,8 +513,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ (0 − 0, 3·0) = (0, 0): deja el cero fijo, así que el filtro no la descarta. Pasarlo no la aprueba.</p><p class="nudge">✕ Pista: mete (0, 0) en cada una; la que da (0, 0) es la que sobrevive. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="3">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 1–3</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
           <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="filtro_cero" data-level="examen" data-module="3">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Sea L: R³ → R² con L(x, y, z) = (x + y − 2, z). Decide si puede ser lineal con la prueba más rápida.</p>
@@ -538,7 +532,19 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ L(0, 0, 0) = (0 + 0 − 2, 0) = (−2, 0). Como L(0) ≠ 0, no es lineal.</p><p class="nudge">✕ Sustituye el vector cero del dominio y compáralo con el cero del codominio. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="transformacion" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea T: R³ → R² con T(x, y, z) = (x − z, 2y). Halla T(1, 4, 3).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(−2, 8)</button>
+              <button class="opt" data-ok="0">(4, 8)</button>
+              <button class="opt" data-ok="0">(−2, 4)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Sustituyes en orden: x − z = 1 − 3 = −2; 2y = 2·4 = 8. Da (−2, 8).</p><p class="nudge">✕ Respeta el signo de x − z y dobla la y. Intenta de nuevo.</p></div>
+          </div>
+        </div>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
@@ -573,7 +579,6 @@
         <p class="fdef"><span class="flbl">Teorema y definición · Resumen del curso, Teo. 3.1 y Def. 3.5</span>Si L de R<sup>n</sup> a R<sup>m</sup> es una transformación lineal, existe una <strong>única</strong> matriz A de m × n tal que L(x) = A·x. Esa A es la <strong>matriz canónica</strong> de L: su columna j-ésima es L(e<sub>j</sub>), donde e<sub>j</sub> es el vector canónico j-ésimo.</p>
         <p class="idea">Tradúcelo: la «única matriz A» es tu ficha técnica, y los e<sub>j</sub> son los vectores de prueba — tu curso los llama vectores canónicos (Def. 3.2): e<sub>1</sub> = (1, 0), e<sub>2</sub> = (0, 1).</p>
         <p class="idea">Cada respuesta, una columna.</p>
-        <p class="idea paso">Dos retos para armar columnas sin dudar.</p>
         <p class="idea paso">Y con la ficha en la mano empiezan las preguntas de calidad sobre la máquina. La primera: ¿qué entradas destruye?</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="matriz_canonica" data-level="guiado" data-module="4">
@@ -681,7 +686,6 @@
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 3.8</span>El <strong>espacio nulo</strong> de una transformación lineal L de R<sup>n</sup> a R<sup>m</sup>, denotado por null(L), es: <strong>null(L) = { x ∈ R<sup>n</sup> | L(x) = 0 }</strong> — es decir, todos los puntos del dominio que llevan al cero del codominio.</p>
         <p class="idea">Léelo de vuelta: null(L) son «los x tales que L los manda al cero».</p>
         <p class="idea">Y no es un objeto nuevo: son las soluciones del sistema A·x = 0 — tu espacio nulo de la Unidad 2, ahora con la máquina de por medio.</p>
-        <p class="idea paso">Dos retos para cazar núcleos.</p>
         <p class="idea paso">La segunda pregunta de calidad es la opuesta: no qué destruye, sino qué puede producir. Esa es la próxima lección.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="nucleo" data-level="guiado" data-module="5">
@@ -782,7 +786,6 @@
         <p class="idea">Dos lecturas. La definición reúne «los w a los que sí se llega» — el catálogo.</p>
         <p class="idea">Y el teorema dice dónde buscarlos: en el generado de las columnas, tu lección 3 de la Unidad 2.</p>
         <p class="idea">Ojo con la palabra: aquí rango(L) nombra al catálogo completo — un conjunto. El número que mide su tamaño llega en la próxima lección.</p>
-        <p class="idea paso">Dos retos para fijar el catálogo.</p>
         <p class="idea paso">Ya tienes los dos espacios de la máquina. Falta medirlos — y la cuenta que sale trae teorema propio.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M6G" data-tema="imagen" data-level="guiado" data-module="6">
@@ -807,7 +810,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas sobre la imagen: el catálogo de lo que una máquina alcanza. Del acompañado al examen.</p>
+        <p class="practica-intro">Dos problemas sobre la imagen: el catálogo de lo que una máquina alcanza. Del acompañado al examen.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>¿Qué tan grande es la imagen</strong> de una T con columnas (1, 2) y (3, 6)?</p>
@@ -836,8 +839,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ (1, 2) no es múltiplo de (1, 0): dos direcciones independientes llenan el plano.</p><p class="nudge">✕ Pista: ¿es (1, 2) un múltiplo de (1, 0)? Si no, abren una segunda dirección. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="6">
+        <p class="practica-head">Repaso acumulativo <span>· idea 6</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
           <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="imagen" data-level="examen" data-module="6">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Sea L: R³ → R² con matriz canónica de columnas (1, 0), (0, 1) y (2, 3). ¿Cuál es su imagen (el rango de L)?</p>
@@ -849,7 +858,6 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Con (1, 0) y (0, 1) entre las columnas, el generado ya es todo R²; la tercera no agrega dimensión.</p><p class="nudge">✕ Busca si dos columnas ya llenan el plano; las demás no suben la dimensión. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Última pareja de ideas →</button></div>
     </section>
@@ -876,7 +884,6 @@
         <p class="idea">Tu resumen lo dice igual: es el número de variables libres de la forma reducida.</p>
         <p class="idea">Si conoces dos de los tres números, el tercero sale solo.</p>
         <p class="idea">Un detalle de examen: para dar una base de la imagen, los pivotes solo señalan cuáles columnas tomar — pero se toman de la matriz <strong>original</strong>: aquí, (1, 1) y (2, 3).</p>
-        <p class="idea paso">Dos retos de conteo.</p>
         <p class="idea paso">Cierre de la unidad: con estos dos números se decide el apellido de la máquina.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7G" data-tema="rango_nulidad" data-level="guiado" data-module="7">
@@ -991,7 +998,6 @@
         <p class="idea">Y tu resumen amarra la inyectividad con todo lo que ya sabes:</p>
         <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teo. 3.7</span>Son equivalentes: L es inyectiva · las columnas de A son linealmente independientes · el sistema A·x = 0 solo tiene la solución trivial · null(L) = {0}.</p>
         <p class="idea">Cuatro caras de la misma moneda: no repetir salidas = columnas independientes = solo la solución trivial = núcleo {0}. En el examen puedes saltar de una a otra.</p>
-        <p class="idea paso">Dos retos y cierras la unidad.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M8G" data-tema="clasificacion" data-level="guiado" data-module="8">
         <div class="qtag">Compruébalo · guiado</div>
@@ -1028,7 +1034,7 @@
 
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas para ponerle apellido a la máquina con dos números. Del acompañado al examen.</p>
+        <p class="practica-intro">Dos problemas para ponerle apellido a la máquina con dos números. Del acompañado al examen.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Clasifica</strong> una T: R³ → R³ con rango 3 y nulidad 0.</p>
@@ -1057,8 +1063,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Con 2 columnas el rango no pasa de 2, menor que 4, así que jamás llena el codominio.</p><p class="nudge">✕ Pista: el rango no supera el número de columnas (2). Compáralo con la dimensión 4 del codominio. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="8">
+        <p class="practica-head">Repaso acumulativo <span>· idea 8</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
           <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="clasificacion" data-level="examen" data-module="8">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Sea L: R³ → R³ lineal con nulidad 1. Clasifícala: inyectiva, suprayectiva, biyectiva o ninguna.</p>
@@ -1070,7 +1082,6 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Nulidad 1 &gt; 0 → no inyectiva; rango = 3 − 1 = 2 &lt; 3 → no suprayectiva.</p><p class="nudge">✕ Saca el rango con rango-nulidad (3 − 1) y compáralo con el codominio; revisa también la nulidad. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="L3_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>

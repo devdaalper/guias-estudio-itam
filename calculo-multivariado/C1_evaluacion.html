@@ -72,7 +72,7 @@
   .opt.wrong{border-color:#d6336c;background:var(--red-tint);color:#a01243}
   .opt .mtx{font-size:18px}
 
-  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .why{display:none;border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
   .why.show{display:block}
   .why.miss{border-color:#f0d6b8;background:#fdf3ea}
   .why>.lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
@@ -98,7 +98,7 @@
   .scorechip b{font-size:20px}
   .scorechip.ok{border-color:var(--green);background:var(--green-tint);color:var(--green-deep)}
   .scorechip.no{border-color:#e9b8c6;background:#fdf2f5;color:#a01243}
-  .repasa{border:1.5px solid #f0d6b8;background:var(--cream);border-radius:12px;padding:12px 15px;margin-top:8px;font-size:16px}
+  .repasa{border:1.5px solid #f0d6b8;background:var(--cream);border-radius:12px;padding:12px 15px;margin-top:8px;font-size:17px}
   .repasa a{color:var(--deep);font-weight:800}
   .advance{margin-top:8px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 
@@ -116,7 +116,8 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -199,6 +200,8 @@
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>La p-serie converge si p &gt; 1 y diverge si p ≤ 1. El caso frontera p = 1 es la armónica, que diverge. Cuanto mayor el exponente, más rápido se encogen los términos.</p></div>
       </div>
+    
+      <div class="qcard cobertura-oficial" data-bloque="teoria" data-tema="criterio_integral" data-id="OT1"><div class="qhead"><span class="qnum">12</span><span class="blk teoria">Teoría</span></div><p class="q">¿Qué hipótesis necesita f para usar directamente el criterio de la integral?</p><div class="opts"><button class="opt" data-ok="1">Positiva, continua y decreciente</button><button class="opt" data-ok="0">Positiva, periódica y creciente</button><button class="opt" data-ok="0">Acotada y derivable</button><button class="opt" data-ok="0">Alternante y decreciente</button></div><div class="why"><span class="lbl">Por qué</span><p>Estas condiciones permiten comparar la cola discreta con el área continua.</p></div></div>
     </section>
 
     <h2 class="modhead">Bloque 2 · Práctica</h2>
@@ -281,6 +284,9 @@
         </div>
         <div class="why"><span class="lbl">Por qué</span><p>Como n<sup>2</sup> + n &gt; n<sup>2</sup>, cada término cumple <sup>1</sup>⁄<sub>(n<sup>2</sup>+n)</sub> &lt; <sup>1</sup>⁄<sub>n</sub><sup>2</sup>. La p-serie con p = 2 converge, y tu serie queda atrapada por debajo: converge. Que los términos vayan a 0 no basta por sí solo.</p></div>
       </div>
+    
+      <div class="qcard cobertura-oficial" data-bloque="practica" data-tema="criterio_raiz" data-id="OP1"><div class="qhead"><span class="qnum">13</span><span class="blk practica">Práctica</span></div><p class="q">El criterio de la raíz produce L = 1. ¿Cuál es la conclusión correcta?</p><div class="opts"><button class="opt" data-ok="1">El criterio no decide; hace falta otro</button><button class="opt" data-ok="0">La serie converge absolutamente</button><button class="opt" data-ok="0">La serie diverge</button><button class="opt" data-ok="0">La suma vale 1</button></div><div class="why"><span class="lbl">Por qué</span><p>El caso frontera L = 1 es inconcluso.</p></div></div>
+      <div class="qcard cobertura-oficial" data-bloque="practica" data-tema="reordenamiento" data-id="OP2"><div class="qhead"><span class="qnum">14</span><span class="blk practica">Práctica</span></div><p class="q">¿Qué propiedad garantiza que todo reordenamiento conserve la suma?</p><div class="opts"><button class="opt" data-ok="1">La convergencia absoluta</button><button class="opt" data-ok="0">Que aₙ tienda a cero</button><button class="opt" data-ok="0">Que la serie sea alternada</button><button class="opt" data-ok="0">Que todos los términos sean distintos</button></div><div class="why"><span class="lbl">Por qué</span><p>La suma es invariante ante reordenamientos cuando ∑|aₙ| converge.</p></div></div>
     </section>
 
     <section class="cierre">

@@ -60,8 +60,8 @@
   .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
   .idea strong{font-weight:800;color:var(--ink)}
   .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
-  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
-  .paso{color:var(--muted);font-size:16px}
+  .key{border:1.5px solid #f0d6b8;background:var(--cream);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:650}.key::before{content:"Idea clave";display:block;margin-bottom:4px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep)}
+  .paso{color:var(--muted);font-size:17px}
   .paso::before{content:"→ ";color:var(--orange);font-weight:800}
 
   .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
@@ -75,8 +75,8 @@
   .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
   .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
 
-  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
-  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -145,7 +145,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -154,10 +154,10 @@
   .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
   .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
   .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
-  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .practica-intro{margin:0;font-size:17px;color:var(--slate);line-height:1.6;max-width:62ch}
   .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
-  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
-  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px}
   .p-res{background:var(--green-tint);color:var(--green-deep)}
   .p-res b{color:var(--green-deep)}
   .p-gui{background:var(--cream);color:var(--deep)}
@@ -166,11 +166,13 @@
   .p-ex b{color:#a01243}
   .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
   .prob-q strong{font-weight:800}
-  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prof{display:block;margin-bottom:6px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
   .prob .check{background:#fff;border-color:var(--line)}
   .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
-  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl{margin:0;font-size:17px;color:var(--slate)}
   .work .wl b{color:var(--ink);font-weight:800}
+  .checkpoint{border-style:solid;border-color:var(--navy);background:#eef1fb;box-shadow:none}
+  .checkpoint .prob{background:#fff;border-color:#cfd6f2}
   .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
   .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
@@ -186,6 +188,7 @@
   @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -207,21 +210,24 @@
     </div>
   </header>
 
-  <p class="route-label">Tu ruta · siete ideas breves</p>
+  <p class="route-label">Tu ruta · diez ideas breves</p>
   <nav class="route" role="tablist" aria-label="Ruta de microlecciones">
-    <button class="step" role="tab" data-go="1" aria-selected="true"><span class="num">1</span>Máx. y mín.</button>
+    <button class="step" role="tab" data-go="1" aria-selected="true"><span class="num">1</span>Extremo local</button>
     <button class="step" role="tab" data-go="2" aria-selected="false"><span class="num">2</span>Punto crítico</button>
     <button class="step" role="tab" data-go="3" aria-selected="false"><span class="num">3</span>Punto silla</button>
     <button class="step" role="tab" data-go="4" aria-selected="false"><span class="num">4</span>Hessiana</button>
-    <button class="step" role="tab" data-go="5" aria-selected="false"><span class="num">5</span>Discriminante D</button>
-    <button class="step" role="tab" data-go="6" aria-selected="false"><span class="num">6</span>Lagrange</button>
-    <button class="step" role="tab" data-go="7" aria-selected="false"><span class="num">7</span>Resolver Lagrange</button>
+    <button class="step" role="tab" data-go="5" aria-selected="false"><span class="num">5</span>Taylor</button>
+    <button class="step" role="tab" data-go="6" aria-selected="false"><span class="num">6</span>Prueba de la segunda derivada</button>
+    <button class="step" role="tab" data-go="7" aria-selected="false"><span class="num">7</span>Extremo global</button>
+    <button class="step" role="tab" data-go="8" aria-selected="false"><span class="num">8</span>Lagrange</button>
+    <button class="step" role="tab" data-go="9" aria-selected="false"><span class="num">9</span>Resolver la restricción</button>
+    <button class="step" role="tab" data-go="10" aria-selected="false"><span class="num">10</span>Desigualdades</button>
   </nav>
 
   <main>
 
     <section class="lesson is-active" data-step="1">
-      <header class="lesson-head"><p class="micro">Microlección 1 de 7 · Tema: Máximos y mínimos locales</p><h2>Máximo y mínimo local: cimas y hoyos del terreno</h2><p class="goal">Meta: distinguir un punto más alto que sus vecinos de uno más bajo.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 1 de 10 · Tema: Máximos y mínimos locales</p><h2>Máximo y mínimo local: cimas y hoyos del terreno</h2><p class="goal">Meta: distinguir un punto más alto que sus vecinos de uno más bajo.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy conoces la meta de toda la unidad: el <strong>máximo local</strong> y el <strong>mínimo local</strong>.</p>
         <p class="idea">Las palabras suenan a examen, pero son pura geografía. Vamos a construirlas con calma.</p>
@@ -245,7 +251,6 @@
         <p class="idea">Y con esto ya llegaste a la definición. Tu curso la enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso (temario UAP, tema 5.2)</span>f tiene un <strong>máximo local</strong> en (a, b) si f(a, b) ≥ f(x, y) para todo (x, y) cercano; tiene un <strong>mínimo local</strong> si f(a, b) ≤ f(x, y) para todo (x, y) cercano.</p>
         <p class="idea">Léela de vuelta: «cercano» es tu barrio; ≥ dice «nadie cerca es más alto» (una cima) y ≤ dice «nadie cerca es más bajo» (un hoyo).</p>
-        <p class="idea paso">Asegura la pieza con los dos retos. En cuanto la tengas, seguimos con lo natural: ¿cómo se encuentran esas cimas sin recorrer el terreno entero?</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="extremos_locales" data-level="guiado" data-module="1">
         <div class="qtag">Compruébalo · guiado</div>
@@ -269,7 +274,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas de leer un terreno: cima o hoyo. El primero lo armamos juntos; en los siguientes te suelto de a poco.</p>
+        <p class="practica-intro">Dos problemas de leer un terreno: cima o hoyo. El primero lo armamos juntos; el apoyo disminuye en los siguientes.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Lee el mapa.</strong> El punto P mide 7 y sus vecinos cercanos miden 4, 5, 6 y 3. ¿P es cima o hoyo?</p>
@@ -298,26 +303,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Todos los vecinos superan a Q (2 es el menor): Q está en el fondo, un mínimo local.</p><p class="nudge">✕ Pista: si todos los vecinos son mayores que Q, Q queda por debajo. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="extremos_locales" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Si f(a, b) ≥ f(x, y) para todo (x, y) cercano a (a, b), clasifica (a, b).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">Máximo local</button>
-              <button class="opt" data-ok="0">Mínimo local</button>
-              <button class="opt" data-ok="0">Punto silla</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ f(a, b) ≥ todo lo cercano dice «nadie cerca es más alto»: es un máximo local.</p><p class="nudge">✕ El signo ≥ pone a (a, b) por encima de sus vecinos. ¿Arriba o abajo? Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
+      <div class="lesson-nav"><span></span><button class="btn" data-next="2">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="2">
-      <header class="lesson-head"><p class="micro">Microlección 2 de 7 · Tema: Puntos críticos</p><h2>Punto crítico: donde el terreno queda llano</h2><p class="goal">Meta: escribir la condición que cumple una cima o un hoyo.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 2 de 10 · Tema: Puntos críticos</p><h2>Punto crítico: donde el terreno queda llano</h2><p class="goal">Meta: escribir la condición que cumple una cima o un hoyo.</p></header>
       <div class="sec">
         <p class="idea lede">Ya sabes qué buscas —cimas y hoyos—. Hoy aprendes a <strong>localizarlos</strong>: el <strong>punto crítico</strong>.</p>
         <p class="idea">Camina ladera arriba: cada paso sube un poco menos que el anterior.</p>
@@ -337,7 +330,6 @@
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso (temario UAP, tema 5.2)</span>(a, b) es un <strong>punto crítico</strong> de f si f<sub>x</sub>(a, b) = 0 y f<sub>y</sub>(a, b) = 0, es decir <strong>∇f(a, b) = (0, 0)</strong>.</p>
         <p class="idea">Léela de vuelta: las dos parciales en cero es el suelo llano; ∇f = (0, 0) es la misma frase, en flechas.</p>
         <p class="idea key">Ojo: un punto crítico es solo <strong>candidato</strong> a cima o a hoyo. Todavía no es el ganador.</p>
-        <p class="idea paso">Fija la condición con los retos. En la próxima lección verás por qué «candidato»: hay un llano tramposo que no es ni cima ni hoyo.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="punto_critico" data-level="guiado" data-module="2">
         <div class="qtag">Compruébalo · guiado</div>
@@ -405,11 +397,11 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="3">
-      <header class="lesson-head"><p class="micro">Microlección 3 de 7 · Tema: Puntos silla</p><h2>Punto silla: el llano que engaña</h2><p class="goal">Meta: reconocer un punto crítico que no es máximo ni mínimo.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 3 de 10 · Tema: Puntos silla</p><h2>Punto silla: el llano que engaña</h2><p class="goal">Meta: reconocer un punto crítico que no es máximo ni mínimo.</p></header>
       <div class="sec">
         <p class="idea lede">El candidato de la lección pasada esconde una trampa. Hoy la desarmas: el <strong>punto silla</strong>.</p>
         <p class="idea">Piensa en un <strong>paso de montaña</strong>: el lugar donde una carretera cruza entre dos cumbres.</p>
@@ -459,7 +451,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas de reconocer el llano que engaña. El primero lo probamos con números; luego te suelto.</p>
+        <p class="practica-intro">Dos problemas de reconocer el llano que engaña. El primero lo probamos con números; luego te suelto.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Ponlo a prueba.</strong> El origen (0, 0) es punto crítico de f = x·y. ¿Es cima, hoyo o silla?</p>
@@ -488,8 +480,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Máximo por una dirección y mínimo por la otra: es el paso de montaña, un punto silla.</p><p class="nudge">✕ Pista: un mismo punto que es cima para uno y fondo para otro no puede ser ni máximo ni mínimo. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="3">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 1–3</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
           <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="punto_silla" data-level="examen" data-module="3">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>En (a, b) se cumple ∇f = 0 y en toda vecindad f toma valores mayores y menores que f(a, b).</p>
@@ -502,13 +500,25 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Es punto crítico (∇f = 0) pero con valores por arriba y por abajo cerca: un punto silla.</p><p class="nudge">✕ Un máximo solo tiene valores menores cerca y un mínimo solo mayores; aquí hay de ambos. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="extremos_locales" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Si f(a, b) ≥ f(x, y) para todo (x, y) cercano a (a, b), clasifica (a, b).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Máximo local</button>
+              <button class="opt" data-ok="0">Mínimo local</button>
+              <button class="opt" data-ok="0">Punto silla</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ f(a, b) ≥ todo lo cercano dice «nadie cerca es más alto»: es un máximo local.</p><p class="nudge">✕ El signo ≥ pone a (a, b) por encima de sus vecinos. ¿Arriba o abajo? Intenta de nuevo.</p></div>
+          </div>
+        </div>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="4">
-      <header class="lesson-head"><p class="micro">Microlección 4 de 7 · Tema: Criterio de la matriz Hessiana</p><h2>Matriz hessiana: la tabla de la curvatura</h2><p class="goal">Meta: llenar una tabla 2×2 con las segundas derivadas.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 4 de 10 · Tema: Criterio de la matriz Hessiana</p><h2>Matriz hessiana: la tabla de la curvatura</h2><p class="goal">Meta: llenar una tabla 2×2 con las segundas derivadas.</p></header>
       <div class="sec">
         <p class="idea lede">Para separar cima, hoyo y silla necesitas medir la <strong>curvatura</strong>, y guardarla en la <strong>matriz hessiana</strong>.</p>
         <p class="idea">¿Qué distingue un hoyo de una cima, si en ambos la pendiente es cero? La <strong>forma</strong> del terreno alrededor.</p>
@@ -523,7 +533,6 @@
         <p class="idea">Tu curso la enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso (temario UAP, tema 5.3)</span>La <strong>matriz hessiana</strong> de f en (a, b) es la tabla 2×2 con f<sub>xx</sub>, f<sub>xy</sub> en el primer renglón y f<sub>yx</sub>, f<sub>yy</sub> en el segundo, evaluada en el punto. Por el teorema de Clairaut f<sub>xy</sub> = f<sub>yx</sub>, así que es simétrica.</p>
         <p class="idea">Léela de vuelta: la diagonal lleva los dos dobleces y las esquinas la torsión, repetida por la simetría.</p>
-        <p class="idea paso">Practica llenar la tabla en los retos. En la próxima lección esos cuatro números se combinan en <strong>uno solo</strong> que da el veredicto.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="hessiana" data-level="guiado" data-module="4">
         <div class="qtag">Compruébalo · guiado</div>
@@ -591,11 +600,15 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente →</button></div>
     </section>
 
-    <section class="lesson" data-step="5">
-      <header class="lesson-head"><p class="micro">Microlección 5 de 7 · Tema: Criterio de la matriz Hessiana</p><h2>El discriminante D: un número que decide</h2><p class="goal">Meta: combinar la hessiana en un número y leer su veredicto.</p></header>
+    <section class="lesson" data-step="5"><header class="lesson-head"><p class="micro">Microlección 5 de 10 · Tema: Aproximación de Taylor</p><h2>Taylor: acercar una superficie con piezas simples</h2><p class="goal">Meta: construir aproximaciones lineales y cuadráticas</p></header><div class="sec"><p class="idea lede">Cerca de un punto, una superficie suave se parece primero a un plano. Si agregas su curvatura, obtienes una aproximación más fina.</p><div class="fx"><div class="sys"><span class="eq">L(x,y) = f(a,b)</span><span class="eq">+ f<sub>x</sub>(a,b)(x−a)</span><span class="eq">+ f<sub>y</sub>(a,b)(y−b)</span></div></div><p class="idea">Esa es la aproximación lineal. La cuadrática agrega la información de las segundas derivadas.</p><div class="fx"><div class="sys"><span class="eq">Q(x,y) = L(x,y)</span><span class="eq">+ ½[f<sub>xx</sub>h² + 2f<sub>xy</sub>hk + f<sub>yy</sub>k²]</span><span class="eq">h=x−a, k=y−b</span></div></div><p class="fdef"><span class="flbl">Taylor multivariable · temario oficial, unidad 5</span>La aproximación lineal usa valor y gradiente. La cuadrática agrega la matriz Hessiana para incorporar curvatura.</p></div><div class="check challenge" data-kind="item" data-id="M5G" data-tema="taylor_multivariable" data-level="guiado" data-module="5"><div class="qtag">Compruébalo</div><p class="q">¿Qué información nueva agrega la aproximación cuadrática?</p><div class="opts"><button class="opt" data-ok="1">Las segundas derivadas</button><button class="opt" data-ok="0">Solo el valor f(a,b)</button><button class="opt" data-ok="0">Una restricción g(x,y)=c</button></div><div class="fb"><p class="okc">✓ La Hessiana reúne las segundas derivadas.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="check challenge" data-kind="item" data-id="M5S" data-tema="taylor_multivariable" data-level="solo" data-module="5"><div class="qtag">Ahora tú</div><p class="q">Si f(x,y)=x²+y² y el centro es (0,0), ¿cuál es su aproximación lineal?</p><div class="opts"><button class="opt" data-ok="1">L(x,y)=0</button><button class="opt" data-ok="0">L(x,y)=x+y</button><button class="opt" data-ok="0">L(x,y)=x²+y²</button></div><div class="fb"><p class="okc">✓ El valor y las dos primeras derivadas valen cero en el origen.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="practica"><p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p><p class="practica-intro">Tres problemas para fijar esta idea antes de seguir.</p><div class="prob"><div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div><div class="check challenge" data-kind="item" data-id="M5P1" data-tema="taylor_multivariable" data-level="resuelto" data-module="5"><div class="qtag">Da el paso que falta</div><p class="q">Para f(x,y)=x+y en (0,0), ¿cuál es L?</p><div class="opts"><button class="opt" data-ok="1">x+y</button><button class="opt" data-ok="0">0</button><button class="opt" data-ok="0">x²+y²</button></div><div class="fb"><p class="okc">✓ Una función lineal coincide con su propia linealización.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-gui"><b>2</b> Guiado · con una pista</div><div class="check challenge" data-kind="item" data-id="M5P2" data-tema="taylor_multivariable" data-level="guiado" data-module="5"><div class="qtag">Da el paso que falta</div><p class="q">En L, ¿dónde se evalúan fₓ y fᵧ?</p><div class="opts"><button class="opt" data-ok="1">En el centro (a,b)</button><button class="opt" data-ok="0">En el punto variable (x,y)</button><button class="opt" data-ok="0">En cualquier punto crítico</button></div><div class="fb"><p class="okc">✓ Los coeficientes del plano se fijan en el centro.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-ex"><b>3</b> Como en tu examen</div><div class="check challenge" data-kind="item" data-id="M5P3" data-tema="taylor_multivariable" data-level="examen" data-module="5"><div class="qtag">Sin ayuda</div><p class="q">¿Qué objeto organiza el término cuadrático de Taylor?</p><div class="opts"><button class="opt" data-ok="1">La Hessiana</button><button class="opt" data-ok="0">El gradiente solamente</button><button class="opt" data-ok="0">El multiplicador de Lagrange</button></div><div class="fb"><p class="okc">✓ La Hessiana contiene fxx, fxy, fyx y fyy.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente →</button></div>
+    </section>
+
+    <section class="lesson" data-step="6">
+      <header class="lesson-head"><p class="micro">Microlección 6 de 10 · Tema: Criterio de la matriz Hessiana</p><h2>El discriminante D: un número que decide</h2><p class="goal">Meta: combinar la hessiana en un número y leer su veredicto.</p></header>
       <div class="sec">
         <p class="idea lede">Cuatro números en la tabla, una sola pregunta: ¿cima, hoyo o silla? Los combinas en el <strong>discriminante D</strong>.</p>
         <p class="idea">La jugada: multiplica los dos dobleces de la diagonal, f<sub>xx</sub> · f<sub>yy</sub>.</p>
@@ -617,9 +630,8 @@
           <div class="mix-result"><p>El criterio dice</p><strong id="mixWords">Mínimo local</strong><p id="mixFormula">D = (2)(2) − (0)² = 4</p></div>
         </div>
         <p class="idea key">Fíjate en el patrón: mientras D &gt; 0, el signo de f<sub>xx</sub> desempata; en cuanto D &lt; 0, el veredicto es silla sin mirar nada más.</p>
-        <p class="idea paso">Asegura la lectura con los retos. Con esto cierras la optimización libre; en la próxima lección aparece una <strong>restricción</strong> que lo cambia todo.</p>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M5G" data-tema="criterio_segunda_derivada" data-level="guiado" data-module="5">
+      <div class="check challenge" data-kind="item" data-id="M6G" data-tema="criterio_segunda_derivada" data-level="guiado" data-module="6">
         <div class="qtag">Compruébalo · guiado</div>
         <p class="q"><strong>Lee el veredicto.</strong> Al evaluar en el punto crítico sale D &gt; 0 y f<sub>xx</sub> &gt; 0. ¿Qué tipo de punto es?</p>
         <div class="opts">
@@ -629,7 +641,7 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Con D &gt; 0 es cima o hoyo; f<sub>xx</sub> &gt; 0 lo curva hacia arriba: mínimo.</p><p class="nudge">✕ D &gt; 0 descarta la silla; el signo de f<sub>xx</sub> desempata, y positivo abre hacia arriba. Intenta de nuevo.</p></div>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M5S" data-tema="criterio_segunda_derivada" data-level="solo" data-module="5">
+      <div class="check challenge" data-kind="item" data-id="M6S" data-tema="criterio_segunda_derivada" data-level="solo" data-module="6">
         <div class="qtag">Ahora tú · sin copiar</div>
         <p class="q"><strong>Cambia el número.</strong> En un punto crítico el discriminante te sale D = −5. ¿Qué concluyes?</p>
         <div class="opts">
@@ -646,7 +658,7 @@
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Clasifica el punto crítico</strong> con f<sub>xx</sub> = −2, f<sub>yy</sub> = −2 y f<sub>xy</sub> = 0.</p>
           <div class="work"><p class="wl">Multiplico la diagonal: f<sub>xx</sub> · f<sub>yy</sub> = (−2)(−2) = <b>4</b>.</p><p class="wl">Resto la torsión: D = 4 − 0<sup>2</sup> = <b>4</b> &gt; 0. Falta mirar el signo de f<sub>xx</sub>.</p></div>
-          <div class="check challenge" data-kind="item" data-id="M5P1" data-tema="criterio_segunda_derivada" data-level="resuelto" data-module="5">
+          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="criterio_segunda_derivada" data-level="resuelto" data-module="6">
             <div class="qtag">Da el paso que falta</div>
             <p class="q">D = 4 &gt; 0, así que es cima o hoyo. Con f<sub>xx</sub> = −2 &lt; 0, ¿cuál es?</p>
             <div class="opts">
@@ -659,7 +671,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
-          <div class="check challenge" data-kind="item" data-id="M5P2" data-tema="criterio_segunda_derivada" data-level="guiado" data-module="5">
+          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="criterio_segunda_derivada" data-level="guiado" data-module="6">
             <div class="qtag">Tú, con una pista</div>
             <p class="q"><strong>Cambia los números.</strong> En un punto crítico, f<sub>xx</sub> = 3, f<sub>yy</sub> = 3 y f<sub>xy</sub> = 2. Calcula D y clasifica.</p>
             <div class="opts">
@@ -672,7 +684,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="criterio_segunda_derivada" data-level="examen" data-module="5">
+          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="criterio_segunda_derivada" data-level="examen" data-module="6">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>En un punto crítico, f<sub>xx</sub> = 1, f<sub>yy</sub> = 4, f<sub>xy</sub> = 3. Aplica D = f<sub>xx</sub>f<sub>yy</sub> − (f<sub>xy</sub>)<sup>2</sup>.</p>
             <div class="opts">
@@ -685,11 +697,15 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente →</button></div>
     </section>
 
-    <section class="lesson" data-step="6">
-      <header class="lesson-head"><p class="micro">Microlección 6 de 7 · Tema: Multiplicadores de Lagrange</p><h2>Lagrange: el punto más alto del sendero</h2><p class="goal">Meta: escribir la condición de los gradientes en un óptimo con restricción.</p></header>
+    <section class="lesson" data-step="7"><header class="lesson-head"><p class="micro">Microlección 7 de 10 · Tema: Extremos globales</p><h2>Extremo global: comparar todo el terreno</h2><p class="goal">Meta: encontrar candidatos interiores y de frontera en un compacto</p></header><div class="sec"><p class="idea lede">Un máximo local gana solo cerca. Un máximo global gana frente a todos los puntos permitidos.</p><p class="idea">Si la región es compacta y f es continua, existen un máximo y un mínimo globales. Esa garantía se llama teorema de Weierstrass.</p><div class="fx"><div class="sys"><span class="eq">1. busca críticos en el interior</span><span class="eq">2. revisa la frontera</span><span class="eq">3. revisa esquinas o extremos</span><span class="eq">4. compara todos los valores</span></div></div><p class="fdef"><span class="flbl">Teorema de Weierstrass · temario oficial, unidad 5</span>Una función continua sobre un conjunto compacto alcanza su máximo y su mínimo globales.</p></div><div class="check challenge" data-kind="item" data-id="M7G" data-tema="extremos_globales" data-level="guiado" data-module="7"><div class="qtag">Compruébalo</div><p class="q">¿Qué permite afirmar Weierstrass en una región compacta?</p><div class="opts"><button class="opt" data-ok="1">Que existen máximo y mínimo globales</button><button class="opt" data-ok="0">Que todo punto crítico es máximo</button><button class="opt" data-ok="0">Que no hace falta revisar la frontera</button></div><div class="fb"><p class="okc">✓ La continuidad sobre un compacto garantiza que se alcancen ambos extremos.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="check challenge" data-kind="item" data-id="M7S" data-tema="extremos_globales" data-level="solo" data-module="7"><div class="qtag">Ahora tú</div><p class="q">Después de hallar candidatos interiores y de frontera, ¿qué paso cierra el problema?</p><div class="opts"><button class="opt" data-ok="1">Evaluar f y comparar los valores</button><button class="opt" data-ok="0">Elegir el punto con mayor x</button><button class="opt" data-ok="0">Descartar todas las esquinas</button></div><div class="fb"><p class="okc">✓ El valor de f decide cuál candidato es global.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="practica"><p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p><p class="practica-intro">Tres problemas para fijar esta idea antes de seguir.</p><div class="prob"><div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div><div class="check challenge" data-kind="item" data-id="M7P1" data-tema="extremos_globales" data-level="resuelto" data-module="7"><div class="qtag">Da el paso que falta</div><p class="q">En [−1,2], f(x)=x. ¿Dónde está el máximo global?</p><div class="opts"><button class="opt" data-ok="1">x=2</button><button class="opt" data-ok="0">x=−1</button><button class="opt" data-ok="0">x=0</button></div><div class="fb"><p class="okc">✓ La función crece y el extremo derecho da el mayor valor.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-gui"><b>2</b> Guiado · con una pista</div><div class="check challenge" data-kind="item" data-id="M7P2" data-tema="extremos_globales" data-level="guiado" data-module="7"><div class="qtag">Da el paso que falta</div><p class="q">¿Por qué no basta buscar ∇f=0 en una región cerrada?</p><div class="opts"><button class="opt" data-ok="1">El extremo puede estar en la frontera</button><button class="opt" data-ok="0">La gradiente nunca existe</button><button class="opt" data-ok="0">Todo punto de frontera es crítico</button></div><div class="fb"><p class="okc">✓ Los candidatos globales también viven en el borde.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-ex"><b>3</b> Como en tu examen</div><div class="check challenge" data-kind="item" data-id="M7P3" data-tema="extremos_globales" data-level="examen" data-module="7"><div class="qtag">Sin ayuda</div><p class="q">¿Cuál lista de candidatos es completa en un rectángulo cerrado?</p><div class="opts"><button class="opt" data-ok="1">Críticos interiores, bordes y esquinas</button><button class="opt" data-ok="0">Solo críticos interiores</button><button class="opt" data-ok="0">Solo las cuatro esquinas</button></div><div class="fb"><p class="okc">✓ Hay que revisar interior y toda la frontera.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Siguiente →</button></div>
+    </section>
+
+    <section class="lesson" data-step="8">
+      <header class="lesson-head"><p class="micro">Microlección 8 de 10 · Tema: Multiplicadores de Lagrange</p><h2>Lagrange: el punto más alto del sendero</h2><p class="goal">Meta: escribir la condición de los gradientes en un óptimo con restricción.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy cambia la pregunta: optimizar cuando no puedes moverte libre. Entran los <strong>multiplicadores de Lagrange</strong>.</p>
         <p class="idea">Piensa en un corral: cercar la mayor área contra un muro, con 40 metros de malla para los otros tres lados. La malla manda:</p>
@@ -719,9 +735,8 @@
         <p class="idea">Tu curso enuncia la condición así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso (temario UAP, tema 5.5)</span>Para optimizar f(x, y) sujeta a la restricción g(x, y) = k, en un óptimo los gradientes son paralelos: <strong>∇f = λ ∇g</strong>, donde el escalar λ es el <strong>multiplicador</strong>.</p>
         <p class="idea">Léela de vuelta: ∇f = λ∇g es «la flecha de f y la del sendero apuntan igual», y λ mide cuánto una es múltiplo de la otra.</p>
-        <p class="idea paso">Fija la idea con los retos. En la última lección esta condición se vuelve un <strong>sistema</strong> de tres ecuaciones que sí resuelves.</p>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M6G" data-tema="lagrange" data-level="guiado" data-module="6">
+      <div class="check challenge" data-kind="item" data-id="M8G" data-tema="lagrange" data-level="guiado" data-module="8">
         <div class="qtag">Compruébalo · guiado</div>
         <p class="q"><strong>La idea central.</strong> ¿Cuál es el corazón del método de Lagrange?</p>
         <div class="opts">
@@ -731,7 +746,7 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ En el óptimo la curva de nivel roza el sendero, así que ∇f y ∇g quedan alineados: ∇f = λ∇g.</p><p class="nudge">✕ No se iguala f a cero ni entra la hessiana; lo que se alinea son los dos gradientes. Intenta de nuevo.</p></div>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M6S" data-tema="lagrange" data-level="solo" data-module="6">
+      <div class="check challenge" data-kind="item" data-id="M8S" data-tema="lagrange" data-level="solo" data-module="8">
         <div class="qtag">Ahora tú · sin copiar</div>
         <p class="q"><strong>Arma las ecuaciones.</strong> Para f = x·y con restricción g: 3x + y, se tiene ∇f = (y, x) y ∇g = (3, 1). ¿Qué ecuaciones da ∇f = λ∇g?</p>
         <div class="opts">
@@ -748,7 +763,7 @@
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Arma la condición.</strong> Optimizas f = x·y sujeto a g: x + 3y = 12.</p>
           <div class="work"><p class="wl">Gradientes: ∇f = (y, x) y ∇g = (1, 3).</p><p class="wl">Igualo ∇f = λ∇g componente a componente: primera con primera, segunda con segunda.</p></div>
-          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="lagrange" data-level="resuelto" data-module="6">
+          <div class="check challenge" data-kind="item" data-id="M8P1" data-tema="lagrange" data-level="resuelto" data-module="8">
             <div class="qtag">Da el paso que falta</div>
             <p class="q">De ∇f = λ∇g con ∇f = (y, x) y ∇g = (1, 3), ¿qué dos ecuaciones salen?</p>
             <div class="opts">
@@ -761,7 +776,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
-          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="lagrange" data-level="guiado" data-module="6">
+          <div class="check challenge" data-kind="item" data-id="M8P2" data-tema="lagrange" data-level="guiado" data-module="8">
             <div class="qtag">Tú, con una pista</div>
             <p class="q"><strong>Minimizas</strong> f = x<sup>2</sup> + y<sup>2</sup> sujeto a x + 2y = 5. Con ∇f = (2x, 2y) y ∇g = (1, 2), ¿qué ecuaciones da ∇f = λ∇g?</p>
             <div class="opts">
@@ -774,7 +789,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="lagrange" data-level="examen" data-module="6">
+          <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="lagrange" data-level="examen" data-module="8">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Al optimizar f sujeta a g = k, ¿qué relación cumplen los gradientes ∇f y ∇g en el óptimo?</p>
             <div class="opts">
@@ -787,11 +802,11 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Última idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn" data-next="9">Siguiente →</button></div>
     </section>
 
-    <section class="lesson" data-step="7">
-      <header class="lesson-head"><p class="micro">Microlección 7 de 7 · Tema: Multiplicadores de Lagrange</p><h2>Resolver el sistema de Lagrange</h2><p class="goal">Meta: armar y resolver las tres ecuaciones del método.</p></header>
+    <section class="lesson" data-step="9">
+      <header class="lesson-head"><p class="micro">Microlección 9 de 10 · Tema: Multiplicadores de Lagrange</p><h2>Resolver el sistema de Lagrange</h2><p class="goal">Meta: armar y resolver las tres ecuaciones del método.</p></header>
       <div class="sec">
         <p class="idea lede">Última pieza: convertir ∇f = λ∇g en un <strong>sistema</strong> y resolverlo.</p>
         <p class="idea">La condición se separa componente a componente. Con dos variables salen tres ecuaciones:</p>
@@ -808,9 +823,8 @@
         <p class="idea">Tu curso resume el método así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso (temario UAP, tema 5.5)</span>El <strong>método de los multiplicadores de Lagrange</strong> resuelve el sistema ∇f = λ∇g junto con g(x, y) = k — una ecuación por cada componente más la restricción — y sus soluciones (x, y) son los candidatos a óptimo.</p>
         <p class="idea">Léelo de vuelta: dos ecuaciones nacen de igualar las flechas y la tercera es la propia restricción; resolverlas da el punto buscado.</p>
-        <p class="idea paso">Cierra el ciclo tú: el corral del inicio te espera en el reto de abajo, con los mismos pasos que acabas de ver.</p>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M7G" data-tema="lagrange" data-level="guiado" data-module="7">
+      <div class="check challenge" data-kind="item" data-id="M9G" data-tema="lagrange" data-level="guiado" data-module="9">
         <div class="qtag">Compruébalo · guiado</div>
         <p class="q"><strong>Resuelve el sistema.</strong> De y = λ, x = λ y x + y = 10, ¿cuánto valen x e y?</p>
         <div class="opts">
@@ -820,7 +834,7 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Como x = y = λ, la restricción da 2x = 10, x = 5 y y = 5.</p><p class="nudge">✕ Primero usa x = y (ambos valen λ), luego mételo en x + y = 10. Intenta de nuevo.</p></div>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M7S" data-tema="lagrange" data-level="solo" data-module="7">
+      <div class="check challenge" data-kind="item" data-id="M9S" data-tema="lagrange" data-level="solo" data-module="9">
         <div class="qtag">Ahora tú · sin copiar</div>
         <p class="q"><strong>Cierra el corral.</strong> Maximizas el área x·y con 2x + y = 40; ∇f = (y, x), ∇g = (2, 1) dan y = 2x. ¿Qué medidas dan el área máxima?</p>
         <div class="opts">
@@ -831,26 +845,18 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ Con y = 2x, la malla 2x + y = 40 da 4x = 40, x = 10, y = 20; área 200.</p><p class="nudge">✕ Sustituye y = 2x en 2x + y = 40 y despeja x; después saca y = 2x. Intenta de nuevo.</p></div>
       </div>
 
-      <section class="finish">
-        <h3>Cierra sin mirar arriba</h3>
-        <p>Explica en voz alta esta cadena: punto crítico → hessiana → discriminante D → veredicto.</p>
-        <p>Después responde: <strong>¿en qué se distingue optimizar libre de optimizar con una restricción?</strong></p>
-        <p class="nota">¿Qué tan segura te sientes clasificando puntos críticos y optimizando por Lagrange? 1 = nada · 5 = lo domino.</p>
-        <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
-        <button class="btn" id="makeReport">Generar reporte para el tutor</button>
-        <div class="report" id="reportSummary" aria-live="polite"></div>
-      </section>
+      
 
-      <nav class="nav-lecs"><a href="C5_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C5_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
+      
 
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas de armar y resolver el sistema completo. El primero lo resolvemos paso a paso.</p>
+        <p class="practica-intro">Dos problemas de armar y resolver el sistema completo. El primero lo resolvemos paso a paso.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Resuelve por Lagrange.</strong> Minimiza f = x<sup>2</sup> + y<sup>2</sup> sujeto a x + 2y = 5. El sistema es 2x = λ, 2y = 2λ, x + 2y = 5.</p>
           <div class="work"><p class="wl">De 2x = λ y 2y = 2λ: sustituyo λ = 2x, así 2y = 2(2x) = 4x, o sea <b>y = 2x</b>.</p><p class="wl">Meto y = 2x en x + 2y = 5: x + 4x = 5x = 5, entonces <b>x = 1</b>.</p></div>
-          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="lagrange" data-level="resuelto" data-module="7">
+          <div class="check challenge" data-kind="item" data-id="M9P1" data-tema="lagrange" data-level="resuelto" data-module="9">
             <div class="qtag">Da el paso que falta</div>
             <p class="q">Con x = 1 e y = 2x, ¿cuál es el punto óptimo (x, y)?</p>
             <div class="opts">
@@ -863,7 +869,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
-          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="lagrange" data-level="guiado" data-module="7">
+          <div class="check challenge" data-kind="item" data-id="M9P2" data-tema="lagrange" data-level="guiado" data-module="9">
             <div class="qtag">Tú, con una pista</div>
             <p class="q"><strong>Resuelve el sistema.</strong> De y = λ, x = λ y x + y = 8, ¿cuánto valen x e y?</p>
             <div class="opts">
@@ -874,9 +880,15 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ x = y = λ, así que x = y; en x + y = 8 queda 2x = 8, x = 4 e y = 4.</p><p class="nudge">✕ Pista: como ambos valen λ, son iguales; mételo en x + y = 8. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="7">
+        <p class="practica-head">Repaso acumulativo <span>· idea 7</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="lagrange" data-level="examen" data-module="7">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M9P3" data-tema="lagrange" data-level="examen" data-module="9">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Maximiza f = x·y sujeto a 2x + y = 8. Con ∇f = (y, x) y ∇g = (2, 1), resuelve por Lagrange.</p>
             <div class="opts">
@@ -887,9 +899,22 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ y = 2λ y x = λ dan y = 2x; en 2x + y = 8 queda 4x = 8, x = 2 e y = 4.</p><p class="nudge">✕ (3, 2) cumple la restricción pero no ∇f = λ∇g: primero saca y = 2x. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C5_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="8">← Anterior</button><button class="btn" data-next="10">Siguiente →</button></div>
+    </section>
+
+    <section class="lesson" data-step="10"><header class="lesson-head"><p class="micro">Microlección 10 de 10 · Tema: Restricciones de desigualdad</p><h2>Desigualdades: interior, borde y esquinas</h2><p class="goal">Meta: organizar todos los candidatos de una región factible</p></header><div class="sec"><p class="idea lede">Una igualdad te obliga a caminar sobre una línea. Una desigualdad permite moverte dentro de una región y también sobre su borde.</p><figure class="visual"><svg viewBox="0 0 620 260" role="img" aria-label="Región factible con interior, borde y esquinas señalados"><path d="M140 210L260 55L500 210Z" fill="#E6F5EC" stroke="#283891" stroke-width="5"/><circle cx="300" cy="155" r="9" fill="#F5821F"/><circle cx="260" cy="55" r="9" fill="#C75D08"/><text x="315" y="150" font-size="26">interior</text><text x="275" y="42" font-size="26">esquina</text><text x="420" y="240" font-size="26">borde</text></svg><figcaption>Una desigualdad crea una región completa: cada tipo de lugar aporta candidatos.</figcaption></figure><div class="fx"><div class="sys"><span class="eq">interior → ∇f = 0</span><span class="eq">borde suave → igualdad activa</span><span class="eq">esquinas → revisión directa</span><span class="eq">final → comparar f</span></div></div><p class="fdef"><span class="flbl">Restricciones de desigualdad · temario oficial, unidad 5</span>Para optimizar en una región con desigualdades, reúne candidatos del interior, de cada frontera activa y de las esquinas; después compara sus valores.</p></div><div class="check challenge" data-kind="item" data-id="M10G" data-tema="restricciones_desigualdad" data-level="guiado" data-module="10"><div class="qtag">Compruébalo</div><p class="q">¿Qué ecuación describe el borde activo de x²+y²≤4?</p><div class="opts"><button class="opt" data-ok="1">x²+y²=4</button><button class="opt" data-ok="0">x²+y²&lt;4</button><button class="opt" data-ok="0">x²+y²&gt;4</button></div><div class="fb"><p class="okc">✓ En el borde la desigualdad se vuelve igualdad.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="check challenge" data-kind="item" data-id="M10S" data-tema="restricciones_desigualdad" data-level="solo" data-module="10"><div class="qtag">Ahora tú</div><p class="q">¿Qué candidatos debes revisar además del borde?</p><div class="opts"><button class="opt" data-ok="1">Críticos del interior y esquinas</button><button class="opt" data-ok="0">Solo el origen</button><button class="opt" data-ok="0">Ninguno: Lagrange encuentra todo</button></div><div class="fb"><p class="okc">✓ La región tiene varios tipos de puntos posibles.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="practica"><p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p><p class="practica-intro">Tres problemas para fijar esta idea antes de seguir.</p><div class="prob"><div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div><div class="check challenge" data-kind="item" data-id="M10P1" data-tema="restricciones_desigualdad" data-level="resuelto" data-module="10"><div class="qtag">Da el paso que falta</div><p class="q">En x²+y²≤1, ¿el punto (0,0) es interior o borde?</p><div class="opts"><button class="opt" data-ok="1">Interior</button><button class="opt" data-ok="0">Borde</button><button class="opt" data-ok="0">Exterior</button></div><div class="fb"><p class="okc">✓ Cumple la desigualdad de forma estricta.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-gui"><b>2</b> Guiado · con una pista</div><div class="check challenge" data-kind="item" data-id="M10P2" data-tema="restricciones_desigualdad" data-level="guiado" data-module="10"><div class="qtag">Da el paso que falta</div><p class="q">En el cuadrado 0≤x≤1, 0≤y≤1, ¿qué puntos requieren revisión directa?</p><div class="opts"><button class="opt" data-ok="1">Las cuatro esquinas</button><button class="opt" data-ok="0">Solo (0,0)</button><button class="opt" data-ok="0">Ninguno</button></div><div class="fb"><p class="okc">✓ Las esquinas son encuentros no suaves de fronteras.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-ex"><b>3</b> Como en tu examen</div><div class="check challenge" data-kind="item" data-id="M10P3" data-tema="restricciones_desigualdad" data-level="examen" data-module="10"><div class="qtag">Sin ayuda</div><p class="q">¿Qué paso final decide el máximo global entre todos los candidatos?</p><div class="opts"><button class="opt" data-ok="1">Comparar los valores de f</button><button class="opt" data-ok="0">Escoger el de mayor norma</button><button class="opt" data-ok="0">Escoger siempre un punto de frontera</button></div><div class="fb"><p class="okc">✓ El objetivo, no la ubicación, determina el máximo.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div></div><section class="finish">
+        <h3>Cierra sin mirar arriba</h3>
+        <p>Explica en voz alta esta cadena: punto crítico → hessiana → discriminante D → veredicto.</p>
+        <p>Después responde: <strong>¿en qué se distingue optimizar libre de optimizar con una restricción?</strong></p>
+        <p class="nota">¿Qué tan segura te sientes clasificando puntos críticos y optimizando por Lagrange? 1 = nada · 5 = lo domino.</p>
+        <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
+        <button class="btn" id="makeReport">Generar reporte para el tutor</button>
+        <div class="report" id="reportSummary" aria-live="polite"></div>
+      </section>
+
+      <nav class="nav-lecs"><a href="C5_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C5_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="9">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 
   </main>
@@ -901,15 +926,18 @@
 <script>
 (function(){
   'use strict';
-  var KEY='valentina-calculo-u5-guia-micro';
+  var KEY='valentina-calculo-u5-guia-micro-cobertura-20260715';
   var goals=[
-    'Máximos y mínimos locales: distinguir una cima de un hoyo.',
-    'Punto crítico: hallar dónde el terreno queda llano.',
-    'Punto silla: reconocer el llano que no es cima ni hoyo.',
-    'Matriz hessiana: guardar la curvatura en una tabla 2×2.',
-    'Discriminante D: un número que clasifica el punto crítico.',
-    'Multiplicadores de Lagrange: optimizar sin salir del sendero.',
-    'Resolver el sistema de Lagrange: tres ecuaciones, tres incógnitas.'
+    'Extremo local: reconocer cima y hoyo cercanos.',
+    'Punto crítico: hallar donde la pendiente se anula.',
+    'Punto silla: reconocer un llano que no es extremo.',
+    'Hessiana: organizar las segundas derivadas.',
+    'Taylor: aproximar con plano y curvatura.',
+    'Segunda derivada: clasificar con el determinante.',
+    'Extremo global: comparar interior y frontera.',
+    'Lagrange: imponer una igualdad activa.',
+    'Sistema de Lagrange: resolver todos los candidatos.',
+    'Desigualdades: revisar interior, bordes y esquinas.'
   ];
   var state={current:1,started:new Date().toISOString(),items:{},confidence:null};
   try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&saved.items){state=saved;}}catch(e){}
@@ -917,7 +945,7 @@
   function shuffle(box){var a=Array.prototype.slice.call(box.children);for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}for(var k=0;k<a.length;k++){box.appendChild(a[k]);}}
   function markDone(){document.querySelectorAll('.step').forEach(function(btn){var m=btn.dataset.go;var cards=document.querySelectorAll('.challenge[data-module="'+m+'"]');var ids=Array.prototype.map.call(cards,function(x){return x.dataset.id;});btn.classList.toggle('is-done',ids.length>0&&ids.every(function(id){return state.items[id]&&state.items[id].correct;}));});}
   function progress(){var total=document.querySelectorAll('.challenge').length;var done=Object.keys(state.items).filter(function(id){return state.items[id].correct;}).length;return {done:done,total:total};}
-  function go(n){n=Math.max(1,Math.min(7,Number(n)||1));state.current=n;save();
+  function go(n){n=Math.max(1,Math.min(10,Number(n)||1));state.current=n;save();
     document.querySelectorAll('.lesson').forEach(function(x){x.classList.toggle('is-active',Number(x.dataset.step)===n);});
     document.querySelectorAll('.step').forEach(function(x){x.setAttribute('aria-selected',String(Number(x.dataset.go)===n));});
     document.getElementById('heroStep').textContent=n;

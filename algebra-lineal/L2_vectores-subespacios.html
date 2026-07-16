@@ -60,8 +60,8 @@
   .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
   .idea strong{font-weight:800;color:var(--ink)}
   .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
-  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
-  .paso{color:var(--muted);font-size:16px}
+  .key{border:1.5px solid #f0d6b8;background:var(--cream);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:650}.key::before{content:"Idea clave";display:block;margin-bottom:4px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep)}
+  .paso{color:var(--muted);font-size:17px}
   .paso::before{content:"→ ";color:var(--orange);font-weight:800}
 
   .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
@@ -78,8 +78,8 @@
   .name-card{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:14px 16px;background:var(--cream);border:2px dashed var(--deep);border-radius:14px}
   .name-card .stamp{padding:4px 10px;background:var(--ink);color:#fff;border-radius:999px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
   .name-card p{margin:2px 0 0}
-  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
-  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -148,7 +148,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -158,10 +158,10 @@
   .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
   .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
   .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
-  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .practica-intro{margin:0;font-size:17px;color:var(--slate);line-height:1.6;max-width:62ch}
   .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
-  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
-  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px}
   .p-res{background:var(--green-tint);color:var(--green-deep)}
   .p-res b{color:var(--green-deep)}
   .p-gui{background:var(--cream);color:var(--deep)}
@@ -170,11 +170,13 @@
   .p-ex b{color:#a01243}
   .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
   .prob-q strong{font-weight:800}
-  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prof{display:block;margin-bottom:6px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
   .prob .check{background:#fff;border-color:var(--line)}
   .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
-  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl{margin:0;font-size:17px;color:var(--slate)}
   .work .wl b{color:var(--ink);font-weight:800}
+  .checkpoint{border-style:solid;border-color:var(--navy);background:#eef1fb;box-shadow:none}
+  .checkpoint .prob{background:#fff;border-color:#cfd6f2}
   .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
   .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
@@ -191,6 +193,7 @@
   @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -256,7 +259,6 @@
         <p class="idea">Tu curso lo define así:</p>
         <p class="fdef"><span class="flbl">Definición · así la dice tu curso</span>Un <strong>vector</strong> en R<sup>n</sup> es una lista ordenada de n números reales, v = (v<sub>1</sub>, v<sub>2</sub>, …, v<sub>n</sub>). Se escribe <strong>v ∈ R<sup>n</sup></strong>, «v está en R<sup>n</sup>».</p>
         <p class="idea">Léela con lo que ya tienes: la «lista ordenada» es tu receta, la n dice cuántos ingredientes lleva, y tu jarra (2, 3) es un vector de R² — dos entradas.</p>
-        <p class="idea paso">Asegura la pieza con los dos retos de abajo. Y en cuanto la tengas, seguimos con lo natural: si un vector es una receta, lo que sigue es <strong>cocinar</strong> con él.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="vector" data-level="guiado" data-module="1">
         <div class="qtag">Compruébalo · guiado</div>
@@ -280,7 +282,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas como en un examen. El primero lo armamos juntos; en los siguientes te voy soltando de a poco.</p>
+        <p class="practica-intro">Dos problemas como en un examen. El primero lo armamos juntos; el apoyo disminuye en los siguientes.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>¿Cuándo son iguales</strong> los vectores (a, 3) y (5, b)?</p>
@@ -309,19 +311,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Un vector no es un montón de números sueltos: es una lista ordenada. Cambiar el orden lo cambia.</p><p class="nudge">✕ Pista: compara posición con posición, no el conjunto de números. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="vector_igualdad" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sean v = (x − 1, 4) y w = (3, y + 2). Si v = w, halla x e y.</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">x = 4, y = 2</button>
-              <button class="opt" data-ok="0">x = 2, y = 4</button>
-              <button class="opt" data-ok="0">x = 3, y = 4</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Igualas entrada por entrada: x − 1 = 3 da x = 4; y 4 = y + 2 da y = 2.</p><p class="nudge">✕ Iguala la primera con la primera y despeja; luego la segunda. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
@@ -352,7 +342,6 @@
         <p class="idea">Esa jugada doble es justo la <strong>combinación lineal</strong> que anunciamos al inicio. Ya la hiciste con tus manos; ahora dila como la dice tu curso:</p>
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.9</span>v es <strong>combinación lineal</strong> de v<sub>1</sub>, …, v<sub>k</sub> si v = c<sub>1</sub>v<sub>1</sub> + c<sub>2</sub>v<sub>2</sub> + … + c<sub>k</sub>v<sub>k</sub> para ciertos escalares c<sub>1</sub>, …, c<sub>k</sub> ∈ R.</p>
         <p class="idea">Tradúcela: los c<sub>i</sub> son «cuántas veces va cada receta» — su nombre formal es <strong>escalares</strong>. Tu mezcla, en símbolos: (3, 4) = 1·(2, 1) + 1·(1, 3), con c<sub>1</sub> = c<sub>2</sub> = 1.</p>
-        <p class="idea paso">Dos retos abajo para asegurar la jugada.</p>
         <p class="idea paso">Y en cuanto la asegures, la pregunta se voltea: de todas las mezclas posibles, ¿cuáles puedes <strong>alcanzar</strong>? Esa es la siguiente gran idea del curso.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="combinacion_lineal" data-level="guiado" data-module="2">
@@ -466,7 +455,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas sobre qué alcanza un conjunto de vectores.</p>
+        <p class="practica-intro">Dos problemas sobre qué alcanza un conjunto de vectores.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>¿Qué genera un solo vector</strong> no nulo, digamos (2, 3), en R²?</p>
@@ -495,8 +484,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ (2, 0) = 2·(1, 0): uno es múltiplo del otro. Dos vectores alineados generan solo una recta.</p><p class="nudge">✕ Pista: ¿es (2, 0) un múltiplo de (1, 0)? Si sí, no abre una segunda dirección. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="3">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 1–3</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
           <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="generado" data-level="examen" data-module="3">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Pones tres vectores de R³ como columnas y al reducir salen 3 pivotes. ¿Qué es su espacio generado?</p>
@@ -508,7 +503,19 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ 3 pivotes = 3 direcciones independientes en R³. Igualan la dimensión del espacio, así que lo generan entero.</p><p class="nudge">✕ Cuenta pivotes y compáralos con la dimensión de R³ (que es 3). Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="vector_igualdad" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean v = (x − 1, 4) y w = (3, y + 2). Si v = w, halla x e y.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">x = 4, y = 2</button>
+              <button class="opt" data-ok="0">x = 2, y = 4</button>
+              <button class="opt" data-ok="0">x = 3, y = 4</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Igualas entrada por entrada: x − 1 = 3 da x = 4; y 4 = y + 2 da y = 2.</p><p class="nudge">✕ Iguala la primera con la primera y despeja; luego la segunda. Intenta de nuevo.</p></div>
+          </div>
+        </div>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
@@ -533,7 +540,6 @@
         <p class="idea">Tu curso las decide con una sola prueba:</p>
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 2.11 y 2.12</span>{v<sub>1</sub>, …, v<sub>k</sub>} es <strong>linealmente independiente</strong> si la <strong>única</strong> forma de lograr c<sub>1</sub>v<sub>1</sub> + … + c<sub>k</sub>v<sub>k</sub> = 0 es con todos los c<sub>i</sub> = 0; si existe otra forma, es <strong>linealmente dependiente</strong>.</p>
         <p class="idea">Dicho simple: si la única manera de armar la mezcla vacía es no usar ninguna receta, nadie sobra. Si hay otra manera, alguien está repitiendo el trabajo de los demás.</p>
-        <p class="idea paso">Prueba tu detector con los retos de abajo. Con él en la mano, el siguiente paso cae de madura: quedarte con el <strong>equipo mínimo</strong> — sin sobras, pero sin que falte nada.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="independencia" data-level="guiado" data-module="4">
         <div class="qtag">Compruébalo · guiado</div>
@@ -622,7 +628,6 @@
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 2.13 y 2.14</span>{v<sub>1</sub>, …, v<sub>k</sub>} es una <strong>base</strong> de S si (i) gen({v<sub>1</sub>, …, v<sub>k</sub>}) = S y (ii) el conjunto es linealmente independiente. La <strong>dimensión</strong> es el número de vectores de cualquier base: dim(S) = k.</p>
         <p class="idea">Reconócelas: el requisito (i) es «genera todo» y el (ii) es «nadie sobra». En nuestro ejemplo, {u, v} cumple ambos — y por eso dim = 2.</p>
         <div class="fx"><div class="sys"><span class="eq">base = {u, v}</span><span class="eq">dimensión = 2</span></div></div>
-        <p class="idea paso">Dos retos para fijarlo.</p>
         <p class="idea paso">Y una pista de lo que viene: estos mapas de lo alcanzable tienen una propiedad rara — por más que operes adentro, <strong>nunca te sales</strong>.</p>
         <p class="idea paso">Mundos cerrados. De eso trata la siguiente lección.</p>
       </div>
@@ -648,7 +653,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas para elegir el equipo mínimo y contar sus direcciones.</p>
+        <p class="practica-intro">Dos problemas para elegir el equipo mínimo y contar sus direcciones.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Reduces cuatro vectores</strong> de R⁴ y quedan 3 pivotes. ¿Cuál es la dimensión de su generado?</p>
@@ -677,19 +682,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Toda base de R³ tiene exactamente 3 vectores: ese número ES la dimensión.</p><p class="nudge">✕ Pista: la dimensión de un espacio = cuántos vectores tiene cualquiera de sus bases. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="base" data-level="examen" data-module="5">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea B = {(1, 0, 0), (0, 1, 0)}. ¿Es B una base de R³?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">No: solo generan un plano (el z = 0); faltan direcciones para todo R³</button>
-              <button class="opt" data-ok="0">Sí: son linealmente independientes</button>
-              <button class="opt" data-ok="0">Sí: todo par de vectores es base</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Son l.i., pero una base de R³ necesita 3 vectores. Con 2 solo cubres un plano, no llegas a la tercera coordenada.</p><p class="nudge">✕ Ser independientes no basta: una base también debe GENERAR todo el espacio. ¿Cuántos hacen falta en R³? Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
@@ -743,7 +736,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas para revisar las condiciones de subespacio.</p>
+        <p class="practica-intro">Dos problemas para revisar las condiciones de subespacio.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>¿Es la recta y = 2x</strong> un subespacio de R²?</p>
@@ -772,8 +765,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ y = x + 1 no pasa por el (0, 0): con x = 0 da y = 1. Falla la primera condición.</p><p class="nudge">✕ Pista: revisa cuál NO contiene al vector cero. Prueba x = 0 en cada recta. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="6">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 5–6</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
           <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="subespacio" data-level="examen" data-module="6">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Sea S = {(x, y) ∈ R² : x·y = 0} (los que están sobre alguno de los ejes). ¿Es S subespacio de R²?</p>
@@ -785,7 +784,19 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ (1, 0) y (0, 1) están en S, pero su suma (1, 1) cumple 1·1 = 1 ≠ 0: no es cerrado bajo suma.</p><p class="nudge">✕ Sí contiene al cero; el problema está en la suma. Toma un vector de cada eje y súmalos. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="base" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea B = {(1, 0, 0), (0, 1, 0)}. ¿Es B una base de R³?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">No: solo generan un plano (el z = 0); faltan direcciones para todo R³</button>
+              <button class="opt" data-ok="0">Sí: son linealmente independientes</button>
+              <button class="opt" data-ok="0">Sí: todo par de vectores es base</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Son l.i., pero una base de R³ necesita 3 vectores. Con 2 solo cubres un plano, no llegas a la tercera coordenada.</p><p class="nudge">✕ Ser independientes no basta: una base también debe GENERAR todo el espacio. ¿Cuántos hacen falta en R³? Intenta de nuevo.</p></div>
+          </div>
+        </div>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
@@ -813,7 +824,6 @@
         <p class="idea">Y esos son, con sus nombres del temario, el <strong>espacio nulo</strong> (lo que se aplasta) y el <strong>espacio columna</strong> (lo que se puede fabricar). En los símbolos de tu curso:</p>
         <p class="fdef"><span class="flbl">Definición · así los escribe tu curso</span><strong>Nul(A)</strong> = { x ∈ R<sup>n</sup> | A·x = 0 }  ·  <strong>Col(A)</strong> = gen(columnas de A).</p>
         <p class="idea">Léelos de vuelta: Nul(A) son «los x tales que A los manda al cero»; Col(A) es el generado de las columnas — tu lección 3, aplicada a la máquina.</p>
-        <p class="idea paso">Dos retos para distinguirlos sin titubear.</p>
         <p class="idea paso">Queda una sola pregunta en toda la unidad: ¿qué <strong>tamaño</strong> tienen estos dos espacios? Contarlo es la última idea — y trae un teorema de regalo.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7G" data-tema="espacio_nulo" data-level="guiado" data-module="7">

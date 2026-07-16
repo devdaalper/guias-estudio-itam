@@ -60,8 +60,8 @@
   .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
   .idea strong{font-weight:800;color:var(--ink)}
   .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
-  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
-  .paso{color:var(--muted);font-size:16px}
+  .key{border:1.5px solid #f0d6b8;background:var(--cream);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:650}.key::before{content:"Idea clave";display:block;margin-bottom:4px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep)}
+  .paso{color:var(--muted);font-size:17px}
   .paso::before{content:"→ ";color:var(--orange);font-weight:800}
 
   .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
@@ -78,8 +78,8 @@
   .name-card{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:14px 16px;background:var(--cream);border:2px dashed var(--deep);border-radius:14px}
   .name-card .stamp{padding:4px 10px;background:var(--ink);color:#fff;border-radius:999px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
   .name-card p{margin:2px 0 0}
-  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
-  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -148,7 +148,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -157,10 +157,10 @@
   .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
   .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
   .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
-  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .practica-intro{margin:0;font-size:17px;color:var(--slate);line-height:1.6;max-width:62ch}
   .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
-  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
-  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px}
   .p-res{background:var(--green-tint);color:var(--green-deep)}
   .p-res b{color:var(--green-deep)}
   .p-gui{background:var(--cream);color:var(--deep)}
@@ -169,11 +169,13 @@
   .p-ex b{color:#a01243}
   .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
   .prob-q strong{font-weight:800}
-  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prof{display:block;margin-bottom:6px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
   .prob .check{background:#fff;border-color:var(--line)}
   .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
-  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl{margin:0;font-size:17px;color:var(--slate)}
   .work .wl b{color:var(--ink);font-weight:800}
+  .checkpoint{border-style:solid;border-color:var(--navy);background:#eef1fb;box-shadow:none}
+  .checkpoint .prob{background:#fff;border-color:#cfd6f2}
   .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
   .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
@@ -190,6 +192,7 @@
   @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -262,7 +265,6 @@
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 1.1</span>Un <strong>sistema lineal</strong> de m ecuaciones con n incógnitas es un conjunto de m ecuaciones lineales, cada una con n incógnitas; las x<sub>i</sub> son las incógnitas o variables de decisión y las b<sub>j</sub> son las constantes.</p>
         <p class="idea">Léela con tus notas: aquí m = 2 (dos ecuaciones) y n = 2 (café y jugo).</p>
         <p class="idea">Las incógnitas que el curso llama x<sub>1</sub> y x<sub>2</sub> son tus letras c y j, y las constantes son los totales 13 y 8.</p>
-        <p class="idea paso">Asegura la idea con los dos retos de abajo.</p>
         <p class="idea paso">Y en cuanto la tengas, viene la pregunta natural: ¿qué significa exactamente <strong>resolver</strong> este paquete?</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="sistema_lineal" data-level="guiado" data-module="1">
@@ -287,7 +289,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas para plantear un sistema. El primero lo armamos juntos; en los siguientes te voy soltando de a poco.</p>
+        <p class="practica-intro">Dos problemas para plantear un sistema. El primero lo armamos juntos; el apoyo disminuye en los siguientes.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Traduce las notas.</strong> Dos panes y un jugo cuestan $22; un pan y un jugo cuestan $14. Con p y j como precios.</p>
@@ -316,19 +318,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Dos renglones son dos ecuaciones (m = 2); las letras distintas x, y, z son tres incógnitas (n = 3).</p><p class="nudge">✕ Pista: m cuenta ecuaciones (renglones); n cuenta letras distintas. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="sistema_modelado" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Plantea el sistema lineal: 3 boletos de adulto y 2 de niño cuestan $34; 1 de adulto y 4 de niño cuestan $28. Usa a y n.</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">3a + 2n = 34 y a + 4n = 28</button>
-              <button class="opt" data-ok="0">2a + 3n = 34 y 4a + n = 28</button>
-              <button class="opt" data-ok="0">3a + 2n = 28 y a + 4n = 34</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Cada compra es una ecuación: 3 adultos y 2 niños dan 34; 1 adulto y 4 niños dan 28.</p><p class="nudge">✕ Coloca cada cantidad junto a su incógnita y cada total tras su igual. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
@@ -371,7 +361,6 @@
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 1.2, 1.3 y 1.4</span>La solución de un sistema lineal, o <strong>conjunto solución</strong>, es el conjunto formado por todos los puntos (x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>) que cumplen las m ecuaciones simultáneamente. El sistema es <strong>consistente</strong> si su conjunto solución es no vacío; de lo contrario es <strong>inconsistente</strong>. Un consistente es <strong>determinado</strong> si el conjunto consta de un solo elemento y, en caso contrario, <strong>consistente indeterminado</strong>.</p>
         <p class="idea">Tradúcelo con los dibujos: consistente = existe al menos un punto común (una o infinitas); inconsistente = paralelas, conjunto vacío.</p>
         <p class="idea">Y dentro de los consistentes: determinado = exactamente un punto; indeterminado = infinitas.</p>
-        <p class="idea paso">Dos retos para fijar los nombres.</p>
         <p class="idea paso">Clasificar ya está; falta <strong>calcular</strong>. Y para calcular a mano, el primer paso es quitarle el ruido al sistema: convertirlo en una tabla.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="conjunto_solucion" data-level="guiado" data-module="2">
@@ -396,7 +385,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas sobre soluciones y consistencia. Vamos del acompañado al examen.</p>
+        <p class="practica-intro">Dos problemas sobre soluciones y consistencia. Vamos del acompañado al examen.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>¿Es (3, 1) solución</strong> del sistema 2x + y = 7 y x − y = 2?</p>
@@ -425,19 +414,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ La segunda ecuación es 2 veces la primera: misma recta, infinitas soluciones comunes.</p><p class="nudge">✕ Pista: ¿es 2x + 2y = 10 un múltiplo de x + y = 5? Si sí, son la misma recta. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="consistencia" data-level="examen" data-module="2">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Un sistema lineal consistente, ¿cuántas soluciones puede tener exactamente?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">Una o infinitas</button>
-              <button class="opt" data-ok="0">Siempre exactamente una</button>
-              <button class="opt" data-ok="0">Cualquier cantidad, incluso exactamente dos</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Consistente = conjunto no vacío: determinado (una) o indeterminado (infinitas). Nunca exactamente dos.</p><p class="nudge">✕ Recuerda los tres finales posibles: una, ninguna o infinitas. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
@@ -482,7 +459,6 @@
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 1.7 y 1.8</span>La matriz A que guarda la información de los coeficientes del sistema se denomina la <strong>matriz de coeficientes</strong>; la que además guarda las constantes b<sub>i</sub> se denomina la <strong>matriz aumentada</strong> del sistema.</p>
         <p class="idea">Léelo de vuelta: «coeficientes» son los números que acompañan a las letras (1, 2, 3 y −1).</p>
         <p class="idea">Y «aumentada» porque a esa tabla se le agrega una columna extra — la de los resultados 5 y 1.</p>
-        <p class="idea paso">Dos retos para dominar la traducción en los dos sentidos.</p>
         <p class="idea paso">Ya vives en la tabla. Lo que sigue: las únicas tres movidas legales para transformarla.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="matriz_aumentada" data-level="guiado" data-module="3">
@@ -551,6 +527,36 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L1_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
+      <div class="practica checkpoint" data-checkpoint="3">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 1–2</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="consistencia" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Un sistema lineal consistente, ¿cuántas soluciones puede tener exactamente?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Una o infinitas</button>
+              <button class="opt" data-ok="0">Siempre exactamente una</button>
+              <button class="opt" data-ok="0">Cualquier cantidad, incluso exactamente dos</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Consistente = conjunto no vacío: determinado (una) o indeterminado (infinitas). Nunca exactamente dos.</p><p class="nudge">✕ Recuerda los tres finales posibles: una, ninguna o infinitas. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="sistema_modelado" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Plantea el sistema lineal: 3 boletos de adulto y 2 de niño cuestan $34; 1 de adulto y 4 de niño cuestan $28. Usa a y n.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">3a + 2n = 34 y a + 4n = 28</button>
+              <button class="opt" data-ok="0">2a + 3n = 34 y 4a + n = 28</button>
+              <button class="opt" data-ok="0">3a + 2n = 28 y a + 4n = 34</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada compra es una ecuación: 3 adultos y 2 niños dan 34; 1 adulto y 4 niños dan 28.</p><p class="nudge">✕ Coloca cada cantidad junto a su incógnita y cada total tras su igual. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -580,7 +586,6 @@
         <p class="idea">A los sistemas que comparten soluciones tu curso les da nombre, y a las movidas también:</p>
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 1.6 y 1.9</span>Dos sistemas son <strong>equivalentes</strong> si tienen el mismo conjunto solución. Existen tres <strong>operaciones elementales por renglón</strong> que mantienen la equivalencia: (i) intercambiar el renglón i con el renglón k; (ii) multiplicar el renglón i por una constante c ≠ 0; (iii) sumarle al renglón i c veces el renglón k.</p>
         <p class="idea">Ahí están tus tres movidas, numeradas. En tareas y examen las verás en símbolos: R<sub>1</sub> ↔ R<sub>2</sub>, R<sub>2</sub> → 2·R<sub>2</sub>, R<sub>2</sub> → R<sub>2</sub> − 3·R<sub>1</sub> — la flecha se lee «el renglón se reemplaza por».</p>
-        <p class="idea paso">Dos retos para asegurar la caja de herramientas.</p>
         <p class="idea paso">Herramientas listas. Falta saber hacia dónde empujar la tabla: una forma con nombre de escalera.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="operaciones_elementales" data-level="guiado" data-module="4">
@@ -692,7 +697,6 @@
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 1.10</span>Una matriz es <strong>escalonada</strong> si: el primer elemento de cada renglón no nulo es un número 1, que se llama <strong>1-pivote</strong>; todo 1-pivote se encuentra a la derecha de los 1-pivote de renglones por encima de él; y si hay renglones nulos, están en la parte inferior de la matriz.</p>
         <p class="idea">Léela con la figura: «primer elemento… es un 1» son los círculos verdes; «a la derecha de» es la escalera que baja.</p>
         <p class="idea">Y «renglones nulos abajo» es el fondo reservado para los renglones de puros ceros.</p>
-        <p class="idea paso">Dos retos para entrenar el ojo.</p>
         <p class="idea paso">La escalera ordena, pero todavía no se lee sola: arriba de los pivotes queda basura. Limpiarla produce la forma final — la de la próxima lección.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="escalonada" data-level="guiado" data-module="5">
@@ -780,7 +784,6 @@
         <p class="idea">La definición del curso agrega exactamente una condición a la de ayer:</p>
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 1.11</span>Una matriz es <strong>escalonada reducida</strong> si además de ser escalonada, por encima de todo 1-pivote solo hay elementos que valen cero.</p>
         <p class="idea">La diferencia cabe en una palabra: «encima». La escalonada garantiza ceros debajo de los pivotes; la reducida también los exige arriba.</p>
-        <p class="idea paso">Dos retos para afilar la diferencia.</p>
         <p class="idea paso">Objeto listo, meta clara. Solo falta el camino que lleva cualquier tabla hasta aquí — y ese camino lleva nombre propio.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M6G" data-tema="escalonada_reducida" data-level="guiado" data-module="6">
@@ -911,7 +914,6 @@
         <p class="idea">Y tu curso te garantiza el final del viaje con su primer teorema:</p>
         <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teorema 1.1</span>El resultado de aplicar el método de <strong>Gauss-Jordan</strong> a una matriz aumentada es una matriz escalonada reducida.</p>
         <p class="idea">Léelo como promesa: no importa qué tan enredado empiece el sistema, el método siempre termina en la tabla que se lee sola.</p>
-        <p class="idea paso">El plan se entiende aquí; la velocidad se gana en papel. Los 3×3 completos, con su bajada y su subida, te esperan en el cuadernillo de esta unidad.</p>
         <p class="idea paso">Queda una sola destreza: leer la respuesta cuando la tabla no dice simplemente «x vale tanto».</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7G" data-tema="gauss_jordan" data-level="guiado" data-module="7">

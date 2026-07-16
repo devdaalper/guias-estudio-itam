@@ -63,10 +63,10 @@
   .stmt .eq{white-space:normal;font-variant-numeric:tabular-nums}
   .stmt .lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--deep);margin-bottom:2px}
   .cond{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
-  .cond li{display:flex;gap:10px;align-items:flex-start;font-size:clamp(16px,1.8vw,18px)}
+  .cond li{display:flex;gap:10px;align-items:flex-start;font-size:clamp(17px,1.8vw,18px)}
   .cond li .k{flex:0 0 auto;width:24px;height:24px;border-radius:7px;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:grid;place-items:center}
 
-  .porque{border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:16px}
+  .porque{border:1.5px solid #bfe6cd;background:#eef7f0;border-radius:10px;padding:11px 14px;font-size:17px}
   .porque .lbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green-deep);margin-bottom:2px}
   .porque p{margin:0;line-height:1.55}
 
@@ -75,7 +75,7 @@
   .drill .qtag{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy)}
   .drill .qtag::before{content:"⟲ "}
   .drill .q{margin:0;font-weight:700;font-size:17px}
-  .drill .revealbtn{font:inherit;font-weight:800;font-size:16px;padding:11px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer;justify-self:start;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
+  .drill .revealbtn{font:inherit;font-weight:800;font-size:17px;padding:11px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer;justify-self:start;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
   .drill .revealbtn:hover{transform:translate(-1px,-1px)}
   .drill .answer{display:none;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:13px 16px}
   .drill .answer.show{display:block}
@@ -121,7 +121,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
   footer b{color:var(--orange)}
@@ -132,6 +132,7 @@
   .ficha-memo li,.calc,.pstatement,.q,.idea{overflow-wrap:anywhere}
   .ficha-memo li{display:block;position:relative;padding-left:27px;min-width:0}
   @media(max-width:400px){.sys,.mtx{font-size:18px}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -479,6 +480,44 @@
             <button type="button" data-rep="con_pista">Con pista</button>
             <button type="button" data-rep="falla">Falla</button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="modhead">Cobertura oficial añadida</h2>
+
+    <section class="card cobertura-oficial">
+      <div class="head"><span class="badge teo">Criterio</span><h3>Criterio de la integral</h3></div>
+      <div class="body">
+        <div class="fx"><div class="stmt"><span class="lbl">Enunciado formal</span><span class="eq">Sea a<sub>n</sub> = f(n), con f positiva, continua y decreciente.</span><span class="eq">∑ a<sub>n</sub> converge ⇔ ∫ f(x) dx converge.</span><span class="eq">La equivalencia es de comportamiento; los valores no tienen que coincidir.</span></div></div>
+        <div class="drill" data-kind="recall" data-fid="OF1_integral" data-tema="criterio_integral">
+          <div class="qtag">De memoria · enúncialo</div><p class="q">Enuncia el criterio de la integral con sus tres hipótesis.</p><button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer"><span class="lbl">Respuesta</span><div class="stmt"><span class="eq">f positiva, continua y decreciente; la serie ∑f(n) y la integral impropia ∫f(x)dx convergen o divergen juntas.</span></div></div>
+          <div class="selfrep"><span class="srtag">¿Cómo te salió?</span><button type="button" data-rep="de_memoria">De memoria</button><button type="button" data-rep="con_pista">Con pista</button><button type="button" data-rep="falla">Falla</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card cobertura-oficial">
+      <div class="head"><span class="badge teo">Criterio</span><h3>Criterio de la raíz</h3></div>
+      <div class="body">
+        <div class="fx"><div class="stmt"><span class="lbl">Enunciado formal</span><span class="eq">L = lím<sub>n→∞</sub> √[n]{|a<sub>n</sub>|}.</span><span class="eq">L &lt; 1 ⇒ convergencia absoluta.</span><span class="eq">L &gt; 1 ⇒ divergencia.</span><span class="eq">L = 1 ⇒ el criterio no decide.</span></div></div>
+        <div class="drill" data-kind="recall" data-fid="OF2_raiz" data-tema="criterio_raiz">
+          <div class="qtag">De memoria · enúncialo</div><p class="q">Enuncia los tres casos del criterio de la raíz.</p><button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer"><span class="lbl">Respuesta</span><div class="stmt"><span class="eq">Menor que 1: converge absolutamente; mayor que 1: diverge; igual a 1: no decide.</span></div></div>
+          <div class="selfrep"><span class="srtag">¿Cómo te salió?</span><button type="button" data-rep="de_memoria">De memoria</button><button type="button" data-rep="con_pista">Con pista</button><button type="button" data-rep="falla">Falla</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card cobertura-oficial">
+      <div class="head"><span class="badge teo">Propiedad</span><h3>Reordenamiento de series</h3></div>
+      <div class="body">
+        <div class="fx"><div class="stmt"><span class="lbl">Enunciado formal</span><span class="eq">Convergencia absoluta ⇒ todo reordenamiento conserva la suma.</span><span class="eq">Convergencia condicional ⇒ un reordenamiento puede cambiar la suma o destruir la convergencia.</span></div></div>
+        <div class="drill" data-kind="recall" data-fid="OF3_reorden" data-tema="reordenamiento">
+          <div class="qtag">De memoria · enúncialo</div><p class="q">¿Cuándo es seguro reordenar una serie infinita?</p><button class="revealbtn" type="button">Revelar respuesta</button>
+          <div class="answer"><span class="lbl">Respuesta</span><div class="stmt"><span class="eq">Cuando converge absolutamente. Si solo converge condicionalmente, el orden puede cambiar el resultado.</span></div></div>
+          <div class="selfrep"><span class="srtag">¿Cómo te salió?</span><button type="button" data-rep="de_memoria">De memoria</button><button type="button" data-rep="con_pista">Con pista</button><button type="button" data-rep="falla">Falla</button></div>
         </div>
       </div>
     </section>

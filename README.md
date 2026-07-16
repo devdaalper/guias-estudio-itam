@@ -1,9 +1,10 @@
-# Guías interactivas de estudio — Álgebra Lineal y Cálculo Multivariado (ITAM)
+# Material generado
 
-Guías de estudio interactivas, autocontenidas y sin calculadora, para las unidades de
-**Álgebra Lineal I** y **Cálculo Multivariado**. Marca aprueba.net.
+Lecciones interactivas, formularios activos y simulacros. Convenciones (ver `../AGENTS.md` §6):
+- Instrumentado (emite archivo de sesión a `../expediente/sesiones/`) y **sin-calculadora** por defecto.
+- Identidad visual por materia: Álgebra = azul, Cálculo = ámbar, Puente = verde; cada lección/problema con color + ícono + etiqueta de unidad.
+- Recall de fórmula embebido (el problema la exige; no se regala).
+- Formatos abiertos (HTML/JSON/MD), procesables en la compu de ella y de Darío.
 
-Abre **`index.html`** (o la GitHub Page) para navegar entre todos los temas.
-
-Cada guía funciona offline en cualquier navegador: teoría breve, ejemplo resuelto paso a paso,
-práctica en rampa (guiado → solo) y un reporte de sesión descargable.
+## Carpetas
+- `algebra-lineal/` · `calculo-multivariado/` · `_plantillas/` (cascarón compartido instrumentado).

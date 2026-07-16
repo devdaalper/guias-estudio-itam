@@ -33,12 +33,12 @@
   @media(min-width:680px){.how{grid-template-columns:1fr 1fr 1fr}}
   .howcard{border:1.5px solid var(--line);border-radius:14px;background:#fcfbf9;padding:15px 17px}
   .howcard .ic{font-size:22px}
-  .howcard h3{margin:6px 0 3px;font-size:16px}
+  .howcard h3{margin:6px 0 3px;font-size:17px}
   .howcard p{margin:0;font-size:15px;color:var(--slate);line-height:1.5}
 
   .curve{border:2px solid var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow);padding:18px 20px;margin-top:16px;display:grid;gap:12px}
   .curve h2{margin:0;font-size:19px}
-  .curve p{margin:0;font-size:16px;color:var(--slate)}
+  .curve p{margin:0;font-size:17px;color:var(--slate)}
   .curve svg{display:block;width:100%;height:auto;max-width:520px;margin:2px auto 0}
 
   .legend{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0 4px;font-size:14px;font-weight:700;color:var(--slate)}
@@ -49,15 +49,15 @@
   .days{display:grid;gap:12px}
   .day{border:2px solid var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow);padding:15px 17px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;min-width:0}
   .dnum{flex:0 0 auto;width:52px;height:52px;border-radius:13px;display:grid;place-items:center;text-align:center;background:var(--ink);color:#fff;font-weight:800;line-height:1;padding:4px}
-  .dnum small{display:block;font-size:10px;font-weight:700;opacity:.75;letter-spacing:.04em;margin-top:2px}
+  .dnum small{display:block;font-size:13px;font-weight:700;opacity:.75;letter-spacing:.04em;margin-top:2px}
   .day.rest .dnum{background:var(--green-deep)}
   .day.sim .dnum{background:var(--orange)}
   .drow{display:grid;gap:7px;min-width:0}
-  .drow .rlbl{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .drow .rlbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
   .chips{display:flex;gap:7px;flex-wrap:wrap;min-width:0}
   .chip{font-size:14px;font-weight:700;text-decoration:none;padding:7px 12px;border-radius:10px;border:1.5px solid var(--line);display:inline-flex;gap:6px;align-items:center;transition:transform .1s,box-shadow .1s;overflow-wrap:anywhere}
   .chip:hover{transform:translate(-1px,-1px);box-shadow:2px 2px 0 var(--ink);border-color:var(--ink)}
-  .chip .mt{font-size:11px;font-weight:800;letter-spacing:.03em;opacity:.7}
+  .chip .mt{font-size:13px;font-weight:800;letter-spacing:.03em;opacity:.7}
   .chip.aprende{background:var(--cream);border-color:#f0d6b8;color:var(--deep)}
   .chip.repasa{background:#eef1fb;border-color:#c7cef0;color:var(--navy)}
   .chip.acum{background:var(--green-tint);border-color:#bfe6cd;color:var(--green-deep)}
@@ -72,6 +72,7 @@
   .day,.drow,.chips,.how,.curve{min-width:0}
   .day,.chip,.curve svg{max-width:100%}
   @media(max-width:520px){.day{grid-template-columns:1fr}.dnum{width:auto;justify-self:start;padding:6px 14px;height:auto}.dnum small{display:inline;margin-left:6px}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -95,9 +96,9 @@
     <svg viewBox="0 0 520 200" role="img" aria-label="Curva del olvido con repasos que la reponen">
       <line x1="40" y1="170" x2="510" y2="170" stroke="#181B22" stroke-width="1.5"/>
       <line x1="40" y1="20" x2="40" y2="170" stroke="#181B22" stroke-width="1.5"/>
-      <text x="8" y="30" font-size="11" fill="#4b5563" font-family="sans-serif">100%</text>
-      <text x="14" y="168" font-size="11" fill="#4b5563" font-family="sans-serif">0%</text>
-      <text x="250" y="192" font-size="11" fill="#4b5563" font-family="sans-serif">tiempo →</text>
+      <text x="8" y="30" font-size="13" fill="#4b5563" font-family="sans-serif">100%</text>
+      <text x="14" y="168" font-size="13" fill="#4b5563" font-family="sans-serif">0%</text>
+      <text x="250" y="192" font-size="13" fill="#4b5563" font-family="sans-serif">tiempo →</text>
       <path d="M40 30 Q 80 120 130 140" fill="none" stroke="#CF2E2E" stroke-width="2.5" stroke-dasharray="6 5"/>
       <path d="M130 30 Q 180 95 240 120" fill="none" stroke="#F5821F" stroke-width="2.5"/>
       <path d="M240 30 Q 320 80 400 105" fill="none" stroke="#F5821F" stroke-width="2.5"/>
@@ -106,9 +107,9 @@
       <line x1="240" y1="30" x2="240" y2="120" stroke="#283891" stroke-width="1.5" stroke-dasharray="3 3"/>
       <line x1="400" y1="30" x2="400" y2="105" stroke="#283891" stroke-width="1.5" stroke-dasharray="3 3"/>
       <circle cx="130" cy="30" r="4" fill="#283891"/><circle cx="240" cy="30" r="4" fill="#283891"/><circle cx="400" cy="30" r="4" fill="#283891"/>
-      <text x="112" y="16" font-size="10" fill="#283891" font-family="sans-serif" font-weight="700">repaso</text>
-      <text x="222" y="16" font-size="10" fill="#283891" font-family="sans-serif" font-weight="700">repaso</text>
-      <text x="382" y="16" font-size="10" fill="#283891" font-family="sans-serif" font-weight="700">repaso</text>
+      <text x="112" y="16" font-size="13" fill="#283891" font-family="sans-serif" font-weight="700">repaso</text>
+      <text x="222" y="16" font-size="13" fill="#283891" font-family="sans-serif" font-weight="700">repaso</text>
+      <text x="382" y="16" font-size="13" fill="#283891" font-family="sans-serif" font-weight="700">repaso</text>
     </svg>
   </div>
 

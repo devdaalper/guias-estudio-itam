@@ -60,8 +60,8 @@
   .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
   .idea strong{font-weight:800;color:var(--ink)}
   .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
-  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
-  .paso{color:var(--muted);font-size:16px}
+  .key{border:1.5px solid #f0d6b8;background:var(--cream);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:650}.key::before{content:"Idea clave";display:block;margin-bottom:4px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep)}
+  .paso{color:var(--muted);font-size:17px}
   .paso::before{content:"→ ";color:var(--orange);font-weight:800}
 
   .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
@@ -75,8 +75,8 @@
   .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
   .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
 
-  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
-  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -145,7 +145,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -154,10 +154,10 @@
   .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
   .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
   .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
-  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .practica-intro{margin:0;font-size:17px;color:var(--slate);line-height:1.6;max-width:62ch}
   .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
-  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
-  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px}
   .p-res{background:var(--green-tint);color:var(--green-deep)}
   .p-res b{color:var(--green-deep)}
   .p-gui{background:var(--cream);color:var(--deep)}
@@ -166,11 +166,13 @@
   .p-ex b{color:#a01243}
   .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
   .prob-q strong{font-weight:800}
-  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prof{display:block;margin-bottom:6px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
   .prob .check{background:#fff;border-color:var(--line)}
   .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
-  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl{margin:0;font-size:17px;color:var(--slate)}
   .work .wl b{color:var(--ink);font-weight:800}
+  .checkpoint{border-style:solid;border-color:var(--navy);background:#eef1fb;box-shadow:none}
+  .checkpoint .prob{background:#fff;border-color:#cfd6f2}
   .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
   .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
@@ -186,6 +188,7 @@
   @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -258,7 +261,6 @@
         <p class="idea">Léela con tu ladera: ∂f/∂x es caminar al este con la y congelada; ∂f/∂y, caminar al norte con la x congelada.</p>
         <p class="idea">«Parcial» = solo la <strong>parte</strong> del cambio que se ve en esa dirección.</p>
         <p class="idea paso">La definición por límite —la resta de alturas entre el tamaño del paso— vive en tu capa de Teoría, en la tarjeta «del límite a la parcial».</p>
-        <p class="idea paso">Asegura la pieza con los dos retos. En cuanto la tengas, seguimos: dos parciales sueltas piden juntarse en una sola flecha.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="derivadas_parciales" data-level="guiado" data-module="1">
         <div class="qtag">Compruébalo · guiado</div>
@@ -366,7 +368,6 @@
         <p class="idea">Se escribe con el símbolo <strong>∇</strong> («nabla»). Así lo define tu curso:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 4.4</span>El <strong>gradiente</strong> de f es el vector que junta sus derivadas parciales: ∇f = (∂f/∂x, ∂f/∂y). Apunta hacia el máximo crecimiento y su longitud es esa tasa máxima.</p>
         <p class="idea">Léelo de vuelta: primero armas la fórmula con las dos parciales; luego metes el punto. Sumar las parciales daría un número y perderías la dirección.</p>
-        <p class="idea paso">Dos retos para asegurar la flecha.</p>
         <p class="idea paso">Con las mismas parciales, la próxima idea arma otra cosa: una tabla que predice alturas cercanas.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="gradiente" data-level="guiado" data-module="2">
@@ -391,7 +392,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres gradientes, cada vez con menos apoyo: arma las dos parciales, evalúa en el punto y ordénalas en la flecha.</p>
+        <p class="practica-intro">Dos gradientes, cada vez con menos apoyo: arma las dos parciales, evalúa en el punto y ordénalas en la flecha.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Arma el gradiente</strong> de f(x, y) = x<sup>2</sup> + 3xy en el punto (1, 2).</p>
@@ -420,19 +421,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ ∂g/∂x = 2xy = 12 y ∂g/∂y = x<sup>2</sup> = 4: el gradiente es (12, 4).</p><p class="nudge">✕ Pista: ∂g/∂x = 2xy (la y es factor) y ∂g/∂y = x<sup>2</sup>. Evalúa en (2, 3). Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="gradiente" data-level="examen" data-module="2">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x, y) = x<sup>2</sup> + y<sup>2</sup>. Halla ∇f(3, 1).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">(6, 2)</button>
-              <button class="opt" data-ok="0">(2, 6)</button>
-              <button class="opt" data-ok="0">(9, 1)</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ ∇f = (2x, 2y); en (3, 1) da (6, 2).</p><p class="nudge">✕ El gradiente son las parciales (2x, 2y), no los valores x<sup>2</sup>, y<sup>2</sup>. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
@@ -464,8 +453,6 @@
         <p class="idea">Y con esto ya llegaste al <strong>plano tangente</strong>. Tu curso lo escribe así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 4.2</span>El <strong>plano tangente</strong> a z = f(x, y) en (x<sub>0</sub>, y<sub>0</sub>) es z = f(x<sub>0</sub>, y<sub>0</sub>) + ∂f/∂x·(x − x<sub>0</sub>) + ∂f/∂y·(y − y<sub>0</sub>), con las parciales evaluadas en el punto.</p>
         <p class="idea">Léelo de vuelta: sin la altura la tabla flota; sin las pendientes no se inclina como el terreno. Las tres piezas juntas la fijan.</p>
-        <p class="idea paso">La construcción paso a paso de un plano completo vive en tu Cuadernillo; aquí basta reconocer la fórmula bien armada.</p>
-        <p class="idea paso">Prueba el armado con los retos. Después: ¿y si te mueves con el tiempo? El cambio empieza a viajar en cadena.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="plano_tangente" data-level="guiado" data-module="3">
         <div class="qtag">Compruébalo · guiado</div>
@@ -533,6 +520,23 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
+      <div class="practica checkpoint" data-checkpoint="3">
+        <p class="practica-head">Repaso acumulativo <span>· idea 2</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="gradiente" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x, y) = x<sup>2</sup> + y<sup>2</sup>. Halla ∇f(3, 1).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(6, 2)</button>
+              <button class="opt" data-ok="0">(2, 6)</button>
+              <button class="opt" data-ok="0">(9, 1)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ ∇f = (2x, 2y); en (3, 1) da (6, 2).</p><p class="nudge">✕ El gradiente son las parciales (2x, 2y), no los valores x<sup>2</sup>, y<sup>2</sup>. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -567,7 +571,6 @@
         <p class="idea">Un caso concreto, con f(x, y) = x<sup>2</sup> + y<sup>2</sup>, x = t, y = t<sup>2</sup>. Las piezas y la suma:</p>
         <div class="fx"><div class="sys"><span class="eq">df/dt = (2x)(1) + (2y)(2t)</span><span class="eq">= 2t + 4t<sup>3</sup></span></div></div>
         <p class="idea">Verifica sustituyendo primero: f = t<sup>2</sup> + t<sup>4</sup>, cuya derivada es 2t + 4t<sup>3</sup>. Coincide.</p>
-        <p class="idea paso">El desarrollo por fases y con más funciones vive en tu Cuadernillo; aquí fijas la forma de la suma.</p>
         <p class="idea paso">La cadena sumó caminos. La próxima idea usa la misma suma para medir la pendiente en un rumbo que tú eliges.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="regla_cadena" data-level="guiado" data-module="4">
@@ -592,7 +595,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres veces la regla de la cadena, soltándote de a poco: junta las piezas, suma los caminos y deja todo en t.</p>
+        <p class="practica-intro">Tres veces la regla de la cadena, con menos apoyo en cada intento: junta las piezas, suma los caminos y deja todo en t.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Aplica la cadena</strong> a f(x, y) = x<sup>2</sup> + y<sup>2</sup> con x = t, y = t<sup>3</sup>.</p>
@@ -672,7 +675,6 @@
         <p class="idea">Y con esto ya llegaste. Tu curso enuncia así la derivada direccional:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 4.4</span>La <strong>derivada direccional</strong> de f en un punto, en la dirección unitaria u, es D<sub>u</sub>f = ∇f · u: el producto punto del gradiente con el rumbo elegido.</p>
         <p class="idea">Como elegí justo la dirección del gradiente, salió el <strong>máximo</strong>: 10, que es la longitud de ∇f(3, 4). En cualquier otro rumbo saldría menos.</p>
-        <p class="idea paso">Más rumbos y más funciones se practican en tu Cuadernillo; aquí fijas la receta: gradiente, normalizar, producto punto.</p>
         <p class="idea paso">Ya usas la parcial en muchas formas. La próxima idea la vuelve a derivar sobre sí misma.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="derivada_direccional" data-level="guiado" data-module="5">
@@ -780,7 +782,6 @@
         <p class="idea">Así lo enuncia tu curso, con la parcial cruzada escrita ∂<sup>2</sup>f/∂x∂y:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 4.5</span>Una <strong>derivada de orden superior</strong> es la parcial de una parcial: ∂<sup>2</sup>f/∂x<sup>2</sup> deriva dos veces por x; ∂<sup>2</sup>f/∂x∂y cambia de variable a media ruta (parcial cruzada).</p>
         <p class="idea">Léelo de vuelta: cada símbolo abajo es «una vuelta más de derivada» por esa letra. El teorema que iguala las cruzadas se llama de Clairaut.</p>
-        <p class="idea paso">Prueba el doble derivado con los retos.</p>
         <p class="idea paso">Una última idea cierra la unidad: tener las parciales no siempre basta para que la tabla se pegue de verdad.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M6G" data-tema="orden_superior" data-level="guiado" data-module="6">
@@ -853,18 +854,18 @@
     </section>
 
     <section class="lesson" data-step="7">
-      <header class="lesson-head"><p class="micro">Microlección 7 de 7 · Tema: Propiedades de la derivada</p><h2>Diferenciabilidad: cuándo la tabla se pega de verdad</h2><p class="goal">Meta: distinguir derivable de diferenciable.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 7 de 7 · Tema: Diferenciabilidad</p><h2>Diferenciabilidad: cuándo la tabla se pega de verdad</h2><p class="goal">Meta: distinguir tener parciales de ser diferenciable.</p></header>
       <div class="sec">
-        <p class="idea lede">Cierras la unidad con una distinción fina: ser <strong>derivable</strong> no es lo mismo que ser <strong>diferenciable</strong>.</p>
+        <p class="idea lede">Cierras la unidad con una distinción fina: <strong>tener derivadas parciales</strong> no es lo mismo que ser <strong>diferenciable</strong>.</p>
         <p class="idea">Que existan las dos parciales solo garantiza dos direcciones bien medidas: el este y el norte.</p>
-        <p class="idea">Cuando existen, decimos que f es <strong>derivable</strong> en el punto.</p>
+        <p class="idea">Cuando existen, decimos exactamente eso: <strong>f tiene sus derivadas parciales</strong> en el punto.</p>
         <p class="idea">Pero el plano tangente promete más: pegarse al terreno en <strong>todas</strong> las direcciones a la vez, no solo en dos.</p>
-        <p class="idea key">Cuando el plano se pega en todas las direcciones cercanas, f es <strong>diferenciable</strong>: más fuerte que derivable.</p>
+        <p class="idea key">Cuando una sola aproximación lineal funciona para todos los rumbos cercanos, f es <strong>diferenciable</strong>. Es una condición más fuerte.</p>
         <figure class="visual">
-          <svg viewBox="0 0 560 230" role="img" aria-label="Derivable mira dos direcciones; diferenciable, todas">
+          <svg viewBox="0 0 560 230" role="img" aria-label="Tener parciales mide dos direcciones; ser diferenciable controla todas">
             <defs><marker id="arrXo" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0L11 4L0 8Z" fill="#F5821F"/></marker><marker id="arrXb" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0L11 4L0 8Z" fill="#283891"/></marker></defs>
             <rect x="15" y="20" width="255" height="195" rx="16" fill="#fff" stroke="#181B22" stroke-width="3"/>
-            <text x="142" y="50" text-anchor="middle" font-size="17" font-weight="800" fill="#181B22">DERIVABLE</text>
+            <text x="142" y="50" text-anchor="middle" font-size="17" font-weight="800" fill="#181B22">PARCIALES</text>
             <text x="142" y="72" text-anchor="middle" font-size="14" fill="#475569">solo dos direcciones</text>
             <circle cx="142" cy="145" r="6" fill="#181B22"/>
             <path d="M142 145L222 145" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrXo)"/>
@@ -882,15 +883,14 @@
             <path d="M417 145L417 207" stroke="#283891" stroke-width="2.5" marker-end="url(#arrXb)"/>
             <path d="M417 145L461 189" stroke="#283891" stroke-width="2.5" marker-end="url(#arrXb)"/>
           </svg>
-          <figcaption>Derivable mide dos rumbos; diferenciable, el abanico entero.</figcaption>
+          <figcaption>Las parciales miden los ejes; la diferenciabilidad controla el abanico entero.</figcaption>
         </figure>
         <p class="idea">Hay terrenos con las dos pendientes sanas donde, en una <strong>diagonal</strong> entre el este y el norte, el terreno cae en un pliegue y la tabla ya no se pega.</p>
-        <p class="idea">Dos direcciones sanas no garantizan las infinitas restantes. Por eso derivable no basta para diferenciable.</p>
+        <p class="idea">Dos direcciones sanas no garantizan las infinitas restantes. Por eso la existencia de parciales no basta.</p>
         <p class="idea">Así lo enuncia tu curso:</p>
-        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, temas 4.1 y 4.3</span>f es <strong>diferenciable</strong> en un punto si su plano tangente la aproxima bien en todas las direcciones cercanas; es más fuerte que ser <strong>derivable</strong>, que solo pide que existan las parciales.</p>
-        <p class="idea">Léelo de vuelta: derivable mira dos flechas; diferenciable, el abanico entero.</p>
+        <p class="fdef"><span class="flbl">Definición · temario oficial, temas 4.1 y 4.3</span>f es <strong>diferenciable</strong> en un punto si existe una aproximación lineal cuyo error, dividido entre la distancia al punto, tiende a cero.</p>
+        <p class="idea">Léelo de vuelta: las parciales aportan las pendientes del plano; la definición exige que ese mismo plano funcione en todos los rumbos.</p>
         <p class="idea">Un dato útil: si las parciales son continuas cerca del punto, la diferenciabilidad queda garantizada.</p>
-        <p class="idea paso">Los criterios formales y los contraejemplos viven en tu Teoría; aquí basta separar las dos palabras sin confundirlas.</p>
         <p class="idea paso">Con esto cierras la unidad: parcial → gradiente → plano tangente → cadena → direccional → orden superior → diferenciabilidad.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7G" data-tema="diferenciabilidad" data-level="guiado" data-module="7">
@@ -901,23 +901,23 @@
           <button class="opt" data-ok="0">Sí: si existen las dos parciales, siempre es diferenciable</button>
           <button class="opt" data-ok="0">No: hace falta que las parciales valgan cero</button>
         </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ Derivable mira dos direcciones; diferenciable pide que el plano se pegue en todas.</p><p class="nudge">✕ Existen funciones con las dos parciales que no son diferenciables. Intenta de nuevo.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Tener parciales controla los ejes; ser diferenciable exige una aproximación lineal común.</p><p class="nudge">✕ Existen funciones con las dos parciales que no son diferenciables. Intenta de nuevo.</p></div>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7S" data-tema="diferenciabilidad" data-level="solo" data-module="7">
         <div class="qtag">Ahora tú · transferencia</div>
         <p class="q"><strong>Aplica la distinción.</strong> Un terreno tiene sus dos parciales, pero en una diagonal cae en un pliegue y la tabla no se pega ahí. ¿Cómo es f en ese punto?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">Derivable pero no diferenciable</button>
+          <button class="opt" data-ok="1">Tiene parciales, pero no es diferenciable</button>
           <button class="opt" data-ok="0">Diferenciable, porque las dos parciales existen</button>
-          <button class="opt" data-ok="0">Ni derivable ni diferenciable</button>
+          <button class="opt" data-ok="0">No tiene parciales ni es diferenciable</button>
         </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ Las parciales existen (derivable), pero el plano falla en la diagonal (no diferenciable).</p><p class="nudge">✕ Tener las dos parciales ya la hace derivable; el pliegue rompe solo la diferenciabilidad. Intenta de nuevo.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Las parciales existen, pero el plano falla en la diagonal: no es diferenciable.</p><p class="nudge">✕ El dato garantiza las parciales, no una aproximación lineal válida en todos los rumbos. Intenta de nuevo.</p></div>
       </div>
 
       <section class="finish">
         <h3>Cierra sin mirar arriba</h3>
         <p>Explica en voz alta esta cadena: parcial → gradiente → plano tangente → regla de la cadena → derivada direccional.</p>
-        <p>Después responde: <strong>¿qué diferencia hay entre una función derivable y una diferenciable?</strong></p>
+        <p>Después responde: <strong>¿por qué tener parciales no basta para ser diferenciable?</strong></p>
         <p class="nota">¿Qué tan segura te sientes derivando en varias variables y usando el gradiente? 1 = nada · 5 = lo domino.</p>
         <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
         <button class="btn" id="makeReport">Generar reporte para el tutor</button>
@@ -928,11 +928,11 @@
 
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres preguntas para separar derivable de diferenciable sin confundirlas, de lo acompañado a la voz de examen.</p>
+        <p class="practica-intro">Dos preguntas para separar la existencia de parciales de la diferenciabilidad.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
-          <p class="prob-q"><strong>Derivable no es diferenciable.</strong> Repasa qué pide cada palabra.</p>
-          <div class="work"><p class="wl">Existen las dos parciales → f es <b>derivable</b>: dos direcciones bien medidas.</p><p class="wl">El plano tangente se pega en <b>todas</b> las direcciones → f es <b>diferenciable</b>: más fuerte.</p></div>
+          <p class="prob-q"><strong>Parciales y diferenciabilidad.</strong> Repasa qué pide cada condición.</p>
+          <div class="work"><p class="wl">Existen las dos parciales → dos direcciones bien medidas.</p><p class="wl">Una aproximación lineal controla <b>todos</b> los rumbos → f es <b>diferenciable</b>.</p></div>
           <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="diferenciabilidad" data-level="resuelto" data-module="7">
             <div class="qtag">Da el paso que falta</div>
             <p class="q">Si en un punto existen ∂f/∂x y ∂f/∂y, ¿f es automáticamente diferenciable ahí?</p>
@@ -941,7 +941,7 @@
               <button class="opt" data-ok="0">Sí: existir las dos parciales ya la hace diferenciable</button>
               <button class="opt" data-ok="0">No: falta que las parciales valgan cero</button>
             </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Derivable mira dos direcciones; diferenciable pide que el plano se pegue en todas.</p><p class="nudge">✕ Hay funciones con las dos parciales que no son diferenciables. Intenta de nuevo.</p></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Las parciales controlan los ejes; la diferenciabilidad exige una aproximación lineal común.</p><p class="nudge">✕ Hay funciones con las dos parciales que no son diferenciables. Intenta de nuevo.</p></div>
           </div>
         </div>
         <div class="prob">
@@ -957,21 +957,26 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Si las parciales son continuas cerca del punto, la diferenciabilidad queda garantizada.</p><p class="nudge">✕ Pista: no basta con que exista una parcial; piensa en la continuidad de ambas. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="7">
+        <p class="practica-head">Repaso acumulativo <span>· idea 7</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
           <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="diferenciabilidad" data-level="examen" data-module="7">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Un terreno tiene sus dos parciales en (0, 0), pero en una diagonal cae en un pliegue y el plano no se pega ahí.</p>
             <p class="prob-q">¿Cómo es f en (0, 0)?</p>
             <div class="opts">
-              <button class="opt" data-ok="1">Derivable pero no diferenciable</button>
+              <button class="opt" data-ok="1">Tiene parciales, pero no es diferenciable</button>
               <button class="opt" data-ok="0">Diferenciable, porque las parciales existen</button>
-              <button class="opt" data-ok="0">Ni derivable ni diferenciable</button>
+              <button class="opt" data-ok="0">No tiene parciales ni es diferenciable</button>
             </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Las parciales existen (derivable), pero el plano falla en la diagonal (no diferenciable).</p><p class="nudge">✕ Tener las dos parciales ya la hace derivable; el pliegue rompe solo la diferenciabilidad. Intenta de nuevo.</p></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Las parciales existen, pero el plano falla en la diagonal: no es diferenciable.</p><p class="nudge">✕ El pliegue muestra que no existe una aproximación lineal válida en todos los rumbos. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>

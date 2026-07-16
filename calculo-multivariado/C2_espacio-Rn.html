@@ -60,8 +60,8 @@
   .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
   .idea strong{font-weight:800;color:var(--ink)}
   .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
-  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
-  .paso{color:var(--muted);font-size:16px}
+  .key{border:1.5px solid #f0d6b8;background:var(--cream);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:650}.key::before{content:"Idea clave";display:block;margin-bottom:4px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep)}
+  .paso{color:var(--muted);font-size:17px}
   .paso::before{content:"→ ";color:var(--orange);font-weight:800}
 
   .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
@@ -75,8 +75,8 @@
   .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
   .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
 
-  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
-  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -145,7 +145,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -154,10 +154,10 @@
   .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
   .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
   .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
-  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .practica-intro{margin:0;font-size:17px;color:var(--slate);line-height:1.6;max-width:62ch}
   .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
-  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
-  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px}
   .p-res{background:var(--green-tint);color:var(--green-deep)}
   .p-res b{color:var(--green-deep)}
   .p-gui{background:var(--cream);color:var(--deep)}
@@ -166,11 +166,13 @@
   .p-ex b{color:#a01243}
   .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
   .prob-q strong{font-weight:800}
-  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prof{display:block;margin-bottom:6px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
   .prob .check{background:#fff;border-color:var(--line)}
   .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
-  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl{margin:0;font-size:17px;color:var(--slate)}
   .work .wl b{color:var(--ink);font-weight:800}
+  .checkpoint{border-style:solid;border-color:var(--navy);background:#eef1fb;box-shadow:none}
+  .checkpoint .prob{background:#fff;border-color:#cfd6f2}
   .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
   .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
@@ -186,6 +188,7 @@
   @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -207,22 +210,25 @@
     </div>
   </header>
 
-  <p class="route-label">Tu ruta · ocho ideas breves</p>
+  <p class="route-label">Tu ruta · once ideas breves</p>
   <nav class="route" role="tablist" aria-label="Ruta de microlecciones">
     <button class="step" role="tab" data-go="1" aria-selected="true"><span class="num">1</span>Vectores</button>
     <button class="step" role="tab" data-go="2" aria-selected="false"><span class="num">2</span>Norma y distancia</button>
     <button class="step" role="tab" data-go="3" aria-selected="false"><span class="num">3</span>Producto punto</button>
-    <button class="step" role="tab" data-go="4" aria-selected="false"><span class="num">4</span>Ángulo y ortogonalidad</button>
+    <button class="step" role="tab" data-go="4" aria-selected="false"><span class="num">4</span>Ángulo</button>
     <button class="step" role="tab" data-go="5" aria-selected="false"><span class="num">5</span>Cauchy-Schwarz</button>
-    <button class="step" role="tab" data-go="6" aria-selected="false"><span class="num">6</span>Coordenadas polares</button>
-    <button class="step" role="tab" data-go="7" aria-selected="false"><span class="num">7</span>Rectas y planos</button>
-    <button class="step" role="tab" data-go="8" aria-selected="false"><span class="num">8</span>Abiertos y cerrados</button>
+    <button class="step" role="tab" data-go="6" aria-selected="false"><span class="num">6</span>Vector tangente</button>
+    <button class="step" role="tab" data-go="7" aria-selected="false"><span class="num">7</span>Polares</button>
+    <button class="step" role="tab" data-go="8" aria-selected="false"><span class="num">8</span>Recta y segmento</button>
+    <button class="step" role="tab" data-go="9" aria-selected="false"><span class="num">9</span>Hiperplano</button>
+    <button class="step" role="tab" data-go="10" aria-selected="false"><span class="num">10</span>Abierto o cerrado</button>
+    <button class="step" role="tab" data-go="11" aria-selected="false"><span class="num">11</span>Acotado y compacto</button>
   </nav>
 
   <main>
 
     <section class="lesson is-active" data-step="1">
-      <header class="lesson-head"><p class="micro">Microlección 1 de 8 · Tema: Vectores en Rⁿ</p><h2>Vectores: una lista que se suma y se escala</h2><p class="goal">Meta: operar dos listas sin cruzar sus lugares.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 1 de 11 · Tema: Vectores en Rⁿ</p><h2>Vectores: una lista que se suma y se escala</h2><p class="goal">Meta: operar dos listas sin cruzar sus lugares.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy conoces al protagonista de toda la unidad: el <strong>vector</strong>.</p>
         <p class="idea">La palabra suena técnica, pero el objeto cabe en un anuncio de casas. Cada casa trae una ficha: precio, tamaño, cuartos.</p>
@@ -247,12 +253,11 @@
         <div class="fx"><div class="sys"><span class="eq">(2, 3) + (1, 4) = (3, 7)</span></div></div>
         <p class="idea">La segunda, <strong>escalar</strong>: un número de afuera multiplica a cada componente.</p>
         <div class="fx"><div class="sys"><span class="eq">2·(1, 4) = (2, 8)</span></div></div>
-        <p class="idea">Restar no es jugada nueva: es sumar el opuesto. Y muchas veces escalas y sumas de corrido.</p>
+        <p class="idea">Restar no es jugada nueva: es sumar el opuesto. Y muchas veces escalas y sumas en una misma expresión.</p>
         <div class="fx"><div class="sys"><span class="eq">3·(2, 1) = (6, 3)</span><span class="eq">(6, 3) + (1, 5) = (7, 8)</span></div></div>
         <p class="idea">Ya lo hiciste con las manos. Ahora dilo como lo dice tu curso:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 2.1</span>Un <strong>vector</strong> de R<sup>n</sup> es una lista ordenada v = (v<sub>1</sub>, …, v<sub>n</sub>) de n números reales. Dos vectores se <strong>suman</strong> y se <strong>escalan</strong> componente por componente.</p>
         <p class="idea">Léela de vuelta: la «lista ordenada» es tu ficha, la n cuenta los datos, y (3, 4) es un vector de R² — dos componentes.</p>
-        <p class="idea paso">Asegura la pieza con los dos retos de abajo. Con la lista dominada, lo natural es preguntar: ¿qué tan <strong>largo</strong> es ese viaje?</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="operaciones_vectores" data-level="guiado" data-module="1">
         <div class="qtag">Compruébalo · guiado</div>
@@ -276,7 +281,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas para operar listas: escalar, sumar y restar sin cruzar los lugares.</p>
+        <p class="practica-intro">Dos problemas para operar listas: escalar, sumar y restar sin cruzar los lugares.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Escala y suma.</strong> ¿Cuánto vale 2·(3, −1, 2) + (1, 0, 4)?</p>
@@ -305,26 +310,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ 3·(1, 2) = (3, 6); luego (3 − 2, 6 − 1) = (1, 5).</p><p class="nudge">✕ Pista: escala primero, y al restar cuida el signo de cada lugar. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="operaciones_vectores" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sean u = (1, 3) y w = (0, −1). Calcula 2u + w.</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">(2, 5)</button>
-              <button class="opt" data-ok="0">(2, 6)</button>
-              <button class="opt" data-ok="0">(1, 2)</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ 2u = (2, 6); luego 2u + w = (2 + 0, 6 − 1) = (2, 5).</p><p class="nudge">✕ El 2 multiplica a las dos componentes de u antes de sumar w. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
+      <div class="lesson-nav"><span></span><button class="btn" data-next="2">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="2">
-      <header class="lesson-head"><p class="micro">Microlección 2 de 8 · Tema: Norma euclidiana y distancia</p><h2>Norma y distancia: qué tan lejos</h2><p class="goal">Meta: medir el largo de una flecha con la suma de cuadrados.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 2 de 11 · Tema: Norma euclidiana y distancia</p><h2>Norma y distancia: qué tan lejos</h2><p class="goal">Meta: medir el largo de una flecha con la suma de cuadrados.</p></header>
       <div class="sec">
         <p class="idea lede">Ya operas listas. Hoy aprendes a medir su largo: la <strong>norma euclidiana</strong>.</p>
         <p class="idea">Vuelve al mapa. El mercado queda en (3, 4). Por las calles caminas 3 al este y 4 al norte.</p>
@@ -351,7 +344,6 @@
         <p class="idea">Con eso ya tienes las dos medidas. Tu curso las enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 2.1</span>La <strong>norma euclidiana</strong> de v = (v<sub>1</sub>, …, v<sub>n</sub>) es |v| = √(v<sub>1</sub><sup>2</sup> + … + v<sub>n</sub><sup>2</sup>). La <strong>distancia</strong> entre u y v es |u − v|.</p>
         <p class="idea">Léela de vuelta: sumas los cuadrados de las componentes y sacas raíz; la distancia es solo la norma de la resta.</p>
-        <p class="idea paso">Fija la receta con los retos. Después llega la operación que, con estas mismas listas, mide <strong>ángulos</strong>.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="norma" data-level="guiado" data-module="2">
         <div class="qtag">Compruébalo · guiado</div>
@@ -419,11 +411,11 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="3">
-      <header class="lesson-head"><p class="micro">Microlección 3 de 8 · Tema: Producto punto</p><h2>Producto punto: emparejar, multiplicar y sumar</h2><p class="goal">Meta: obtener un solo número a partir de dos listas.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 3 de 11 · Tema: Producto punto</p><h2>Producto punto: emparejar, multiplicar y sumar</h2><p class="goal">Meta: obtener un solo número a partir de dos listas.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy llega la operación que une dos vectores en un solo número: el <strong>producto punto</strong>.</p>
         <p class="idea">Nace de una escena diaria. Tu lista de compras es (2, 3): 2 kg de limones y 3 de azúcar. Los precios del puesto son (30, 20).</p>
@@ -454,7 +446,6 @@
         <p class="idea">Ya lo calculaste. En símbolos de tu curso:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 2.1</span>El <strong>producto punto</strong> de u = (u<sub>1</sub>, …, u<sub>n</sub>) y v = (v<sub>1</sub>, …, v<sub>n</sub>) es u·v = u<sub>1</sub>v<sub>1</sub> + u<sub>2</sub>v<sub>2</sub> + … + u<sub>n</sub>v<sub>n</sub>, un número real.</p>
         <p class="idea">Léelo de vuelta: cada u<sub>i</sub>v<sub>i</sub> es un par emparejado; el signo de suma junta todos los pares en un valor.</p>
-        <p class="idea paso">Practica la cuenta abajo. Enseguida verás por qué ese número mide qué tan alineadas van dos flechas.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="producto_punto" data-level="guiado" data-module="3">
         <div class="qtag">Compruébalo · guiado</div>
@@ -522,11 +513,28 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
+      <div class="practica checkpoint" data-checkpoint="3">
+        <p class="practica-head">Repaso acumulativo <span>· idea 1</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="operaciones_vectores" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean u = (1, 3) y w = (0, −1). Calcula 2u + w.</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(2, 5)</button>
+              <button class="opt" data-ok="0">(2, 6)</button>
+              <button class="opt" data-ok="0">(1, 2)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2u = (2, 6); luego 2u + w = (2 + 0, 6 − 1) = (2, 5).</p><p class="nudge">✕ El 2 multiplica a las dos componentes de u antes de sumar w. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="4">
-      <header class="lesson-head"><p class="micro">Microlección 4 de 8 · Tema: Ángulo y ortogonalidad</p><h2>Ángulo y ortogonalidad: leer ese número</h2><p class="goal">Meta: decidir si dos flechas son perpendiculares con el producto punto.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 4 de 11 · Tema: Ángulo y ortogonalidad</p><h2>Ángulo y ortogonalidad: leer ese número</h2><p class="goal">Meta: decidir si dos flechas son perpendiculares con el producto punto.</p></header>
       <div class="sec">
         <p class="idea lede">Te dejé una sorpresa: ese número del producto punto mide el <strong>ángulo</strong> entre dos flechas.</p>
         <p class="idea">Lo mide a través del <strong>coseno</strong>, un medidor de alineación que marca un valor entre 1 y −1 según qué tanto apuntan al mismo lado.</p>
@@ -558,7 +566,6 @@
         <p class="idea">Cuando lo dejaste en cero, las dos flechas quedaron perpendiculares. Tu curso lo enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 2.1</span>El <strong>ángulo</strong> θ entre u y v cumple u·v = |u| |v| cos θ. Se dice que u y v son <strong>ortogonales</strong> cuando u·v = 0.</p>
         <p class="idea">Léela de vuelta: el producto punto es «largo por largo por coseno»; si ese producto es cero, el coseno es cero y el ángulo es recto.</p>
-        <p class="idea paso">Prueba tu detector abajo. Después verás que ese mismo coseno esconde un <strong>tope</strong> que no se puede romper.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="ortogonalidad" data-level="guiado" data-module="4">
         <div class="qtag">Compruébalo · guiado</div>
@@ -582,7 +589,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas para decidir si dos flechas son perpendiculares con el producto punto.</p>
+        <p class="practica-intro">Dos problemas para decidir si dos flechas son perpendiculares con el producto punto.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>¿Perpendiculares?</strong> Revisa si (2, 1, 3) y (1, −2, 0) son ortogonales.</p>
@@ -611,26 +618,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Pon el producto punto en cero: (2)(3) + (k)(6) = 6 + 6k = 0, así que k = −1.</p><p class="nudge">✕ Pista: perpendiculares significa producto punto cero; arma 6 + 6k = 0 y despeja. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="ortogonalidad" data-level="examen" data-module="4">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>¿Se cumple u ⊥ v para u = (5, 2) y v = (−2, 5)?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">Sí: u·v = −10 + 10 = 0</button>
-              <button class="opt" data-ok="0">No: u·v = 20</button>
-              <button class="opt" data-ok="0">No se puede saber sin medir el ángulo</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ (5)(−2) + (2)(5) = −10 + 10 = 0: producto punto cero, así que u ⊥ v.</p><p class="nudge">✕ El primer producto es negativo; súmalo con signo antes de decidir. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente →</button></div>
     </section>
 
     <section class="lesson" data-step="5">
-      <header class="lesson-head"><p class="micro">Microlección 5 de 8 · Tema: Desigualdad de Cauchy-Schwarz</p><h2>Cauchy-Schwarz: el tope que no se rompe</h2><p class="goal">Meta: reconocer que el producto punto nunca supera al producto de las normas.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 5 de 11 · Tema: Desigualdad de Cauchy-Schwarz</p><h2>Cauchy-Schwarz: el tope que no se rompe</h2><p class="goal">Meta: reconocer que el producto punto nunca supera al producto de las normas.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy sacas una consecuencia del coseno: la <strong>desigualdad de Cauchy-Schwarz</strong>.</p>
         <p class="idea">Despeja el coseno de la fórmula anterior:</p>
@@ -656,7 +651,6 @@
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, tema 2.1</span><strong>Desigualdad de Cauchy-Schwarz</strong>: para todo par u, v se cumple |u·v| ≤ |u| |v|, con igualdad si y solo si uno es múltiplo del otro (son <strong>paralelos</strong>).</p>
         <p class="idea">Léela de vuelta: las barras alrededor de un vector miden longitud; alrededor de un número, tamaño sin signo.</p>
         <p class="idea">El producto punto nunca gana esa comparación.</p>
-        <p class="idea paso">Prueba el tope con los retos. Luego cambiamos de tema: cómo <strong>ubicar</strong> un punto con radio y ángulo.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="cauchy_schwarz" data-level="guiado" data-module="5">
         <div class="qtag">Compruébalo · guiado</div>
@@ -680,7 +674,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas sobre el tope de Cauchy-Schwarz: el producto punto nunca lo supera.</p>
+        <p class="practica-intro">Dos problemas sobre el tope de Cauchy-Schwarz: el producto punto nunca lo supera.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Comprueba el tope.</strong> Con u = (1, 2) y v = (2, 1), revisa si |u·v| ≤ |u| |v|.</p>
@@ -709,26 +703,18 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ El tope es |u| |v| = 4·4 = 16, y el producto punto nunca lo supera: 20 es imposible.</p><p class="nudge">✕ Pista: calcula |u| |v| y compáralo con 20; nada puede pasarse del tope. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="cauchy_schwarz" data-level="examen" data-module="5">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sean u, v con ‖u‖ = 5 y ‖v‖ = 2. Según |u·v| ≤ ‖u‖‖v‖, ¿cuál es el mayor valor posible de |u·v|?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">10, cuando u y v son paralelos</button>
-              <button class="opt" data-ok="0">7, la suma 5 + 2</button>
-              <button class="opt" data-ok="0">No tiene tope máximo</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ El máximo es ‖u‖‖v‖ = 5·2 = 10, y se alcanza solo cuando son paralelos.</p><p class="nudge">✕ El tope es el producto de las normas, no su suma. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente →</button></div>
     </section>
 
-    <section class="lesson" data-step="6">
-      <header class="lesson-head"><p class="micro">Microlección 6 de 8 · Tema: Coordenadas polares</p><h2>Coordenadas polares: radio y ángulo</h2><p class="goal">Meta: ubicar un punto por su distancia y su dirección.</p></header>
+    <section class="lesson" data-step="6"><header class="lesson-head"><p class="micro">Microlección 6 de 11 · Tema: Vector tangente</p><h2>Vector tangente: el rumbo instantáneo</h2><p class="goal">Meta: hallar la dirección de una curva en un instante</p></header><div class="sec"><p class="idea lede">Una ruta curva cambia de rumbo. El vector tangente muestra hacia dónde avanza justo en el instante que eliges.</p><figure class="visual"><svg viewBox="0 0 620 260" role="img" aria-label="Curva con una flecha tangente en uno de sus puntos"><path d="M60 210 C170 190 220 60 360 105 S500 215 570 75" fill="none" stroke="#283891" stroke-width="7"/><circle cx="360" cy="105" r="9" fill="#F5821F"/><path d="M300 85L455 135" stroke="#C75D08" stroke-width="6" marker-end="url(#arr)"/><defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#C75D08"/></marker></defs><text x="425" y="83" font-size="28" fill="#C75D08">γ′(t)</text></svg><figcaption>La curva es el camino; la flecha tangente es su rumbo instantáneo.</figcaption></figure><p class="idea">Si γ(t) = (x(t), y(t)), deriva cada coordenada por separado.</p><div class="fx"><div class="sys"><span class="eq">γ′(t) = (x′(t), y′(t))</span><span class="eq">γ(t) = (t, t²)</span><span class="eq">γ′(1) = (1, 2)</span></div></div><p class="fdef"><span class="flbl">Definición · temario oficial, unidad 2</span>El vector tangente γ′(t) da la velocidad y la dirección instantánea de una curva parametrizada.</p></div><div class="check challenge" data-kind="item" data-id="M6G" data-tema="vector_tangente" data-level="guiado" data-module="6"><div class="qtag">Compruébalo</div><p class="q">Para γ(t) = (t², 3t), ¿cuál es γ′(t)?</p><div class="opts"><button class="opt" data-ok="1">(2t, 3)</button><button class="opt" data-ok="0">(t, 3)</button><button class="opt" data-ok="0">(2, 3t²)</button></div><div class="fb"><p class="okc">✓ Se deriva cada coordenada respecto de t.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="check challenge" data-kind="item" data-id="M6S" data-tema="vector_tangente" data-level="solo" data-module="6"><div class="qtag">Ahora tú</div><p class="q">Si γ′(2) = (0, 5), ¿hacia dónde apunta el movimiento en ese instante?</p><div class="opts"><button class="opt" data-ok="1">Verticalmente hacia arriba</button><button class="opt" data-ok="0">Horizontalmente a la derecha</button><button class="opt" data-ok="0">No tiene dirección</button></div><div class="fb"><p class="okc">✓ La componente horizontal es 0 y la vertical es positiva.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="practica"><p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p><p class="practica-intro">Tres problemas para fijar esta idea antes de seguir.</p><div class="prob"><div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div><div class="check challenge" data-kind="item" data-id="M6P1" data-tema="vector_tangente" data-level="resuelto" data-module="6"><div class="qtag">Da el paso que falta</div><p class="q">Para γ(t) = (t, 2t), calcula γ′(3).</p><div class="opts"><button class="opt" data-ok="1">(1, 2)</button><button class="opt" data-ok="0">(3, 6)</button><button class="opt" data-ok="0">(0, 2)</button></div><div class="fb"><p class="okc">✓ La derivada es constante: (1, 2).</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-gui"><b>2</b> Guiado · con una pista</div><div class="check challenge" data-kind="item" data-id="M6P2" data-tema="vector_tangente" data-level="guiado" data-module="6"><div class="qtag">Da el paso que falta</div><p class="q">Para γ(t) = (t², t³), calcula γ′(1).</p><div class="opts"><button class="opt" data-ok="1">(2, 3)</button><button class="opt" data-ok="0">(1, 1)</button><button class="opt" data-ok="0">(2t, 3t²)</button></div><div class="fb"><p class="okc">✓ Primero γ′(t) = (2t, 3t²); luego evalúa t = 1.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-ex"><b>3</b> Como en tu examen</div><div class="check challenge" data-kind="item" data-id="M6P3" data-tema="vector_tangente" data-level="examen" data-module="6"><div class="qtag">Sin ayuda</div><p class="q">Una curva tiene γ′(0) = (0, 0). ¿Qué afirma ese dato?</p><div class="opts"><button class="opt" data-ok="1">La parametrización se detiene instantáneamente</button><button class="opt" data-ok="0">La curva es necesariamente una recta</button><button class="opt" data-ok="0">El punto está en el origen</button></div><div class="fb"><p class="okc">✓ El vector velocidad es cero en ese instante.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente →</button></div>
+    </section>
+
+    <section class="lesson" data-step="7">
+      <header class="lesson-head"><p class="micro">Microlección 7 de 11 · Tema: Coordenadas polares</p><h2>Coordenadas polares: radio y ángulo</h2><p class="goal">Meta: ubicar un punto por su distancia y su dirección.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy conoces otra forma de decir dónde queda un punto: las <strong>coordenadas polares</strong>.</p>
         <p class="idea">Hay dos maneras de señalar un lugar del mapa. La de siempre: «1 al oeste y 1 al norte», la lista (−1, 1).</p>
@@ -757,7 +743,7 @@
         <p class="idea">Léela de vuelta: el coseno reparte hacia el este (la x); el seno, hacia el norte (la y). El cuadrante decide el ángulo: cuídalo siempre.</p>
         <p class="idea paso">Convierte tú abajo. Después describimos objetos más grandes: <strong>rectas y planos</strong>.</p>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M6G" data-tema="polares" data-level="guiado" data-module="6">
+      <div class="check challenge" data-kind="item" data-id="M7G" data-tema="polares" data-level="guiado" data-module="7">
         <div class="qtag">Compruébalo · guiado</div>
         <p class="q"><strong>Cuida el cuadrante.</strong> El punto (−1, 1) tiene θ = 135°, no 45°. ¿Por qué?</p>
         <div class="opts">
@@ -767,7 +753,7 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ La referencia son 45°, pero x negativo con y positivo pone el punto en el segundo cuadrante: 180° − 45° = 135°.</p><p class="nudge">✕ El signo de x y y decide el cuadrante, y el cuadrante decide el ángulo. Intenta de nuevo.</p></div>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M6S" data-tema="polares" data-level="solo" data-module="6">
+      <div class="check challenge" data-kind="item" data-id="M7S" data-tema="polares" data-level="solo" data-module="7">
         <div class="qtag">Ahora tú · sin copiar</div>
         <p class="q"><strong>Vuelve a cartesianas.</strong> Un punto polar es r = 2, θ = 60°. Con cos 60° = 1⁄2 y sen 60° = √3⁄2, ¿cuáles son sus (x, y)?</p>
         <div class="opts">
@@ -784,7 +770,7 @@
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Polar a cartesianas.</strong> Un punto es r = 4, θ = 30°. Con cos 30° = √3⁄2 y sen 30° = 1⁄2, halla (x, y).</p>
           <div class="work"><p class="wl">El coseno arma la x: x = r·cos θ = 4·(√3⁄2) = <b>2√3</b>.</p><p class="wl">El seno arma la y: falta y = r·sen θ = 4·(1⁄2).</p></div>
-          <div class="check challenge" data-kind="item" data-id="M6P1" data-tema="polares" data-level="resuelto" data-module="6">
+          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="polares" data-level="resuelto" data-module="7">
             <div class="qtag">Da el paso que falta</div>
             <p class="q">Ya tienes x = 2√3. ¿Cuál es el par (x, y) completo?</p>
             <div class="opts">
@@ -797,7 +783,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
-          <div class="check challenge" data-kind="item" data-id="M6P2" data-tema="polares" data-level="guiado" data-module="6">
+          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="polares" data-level="guiado" data-module="7">
             <div class="qtag">Tú, con una pista</div>
             <p class="q"><strong>Cartesianas a polar.</strong> El punto (0, −3) está sobre el eje vertical hacia abajo. ¿Cuáles son (r, θ)?</p>
             <div class="opts">
@@ -810,7 +796,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="polares" data-level="examen" data-module="6">
+          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="polares" data-level="examen" data-module="7">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Un punto tiene r = √2 y θ = 45°. Con cos 45° = sen 45° = √2⁄2, da sus coordenadas (x, y).</p>
             <div class="opts">
@@ -823,109 +809,49 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
-    </section>
-
-    <section class="lesson" data-step="7">
-      <header class="lesson-head"><p class="micro">Microlección 7 de 8 · Tema: Rectas y planos</p><h2>Rectas y planos: un punto de paso y un rumbo</h2><p class="goal">Meta: leer el vector director de una recta y la normal de un plano.</p></header>
-      <div class="sec">
-        <p class="idea lede">Hoy describes objetos rectos con vectores: la <strong>recta</strong> y el <strong>plano</strong>.</p>
-        <p class="idea">¿Cómo describes una calle perfectamente recta? Con dos datos: un <strong>lugar por donde pasa</strong> y <strong>hacia dónde va</strong>.</p>
-        <p class="idea">«Pasa por (1, 2) con rumbo (3, −1)»: te paras en (1, 2) y avanzas t pasos en esa dirección.</p>
-        <figure class="visual">
-          <svg viewBox="0 0 300 200" role="img" aria-label="Una recta con su punto de paso y su vector director">
-            <path d="M20 170H285M60 195V25" stroke="#64748B" stroke-width="2"/>
-            <path d="M30 40L275 175" stroke="#1C7A3A" stroke-width="3" stroke-dasharray="9 7"/>
-            <defs><marker id="arrc7" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="10" refX="12" refY="5" orient="auto"><path d="M0 0L13 5L0 10Z" fill="#F5821F"/></marker></defs>
-            <circle cx="120" cy="90" r="6" fill="#181B22"/>
-            <text x="70" y="86" font-size="15" font-weight="800" fill="#181B22">(1, 2)</text>
-            <path d="M120 90L200 133" stroke="#F5821F" stroke-width="3.5" marker-end="url(#arrc7)"/>
-            <text x="168" y="150" font-size="15" font-weight="800" fill="#C75D08">(3, −1)</text>
-          </svg>
-          <figcaption>La recta es el punto de paso (1, 2) más el rumbo (3, −1) tomado t veces.</figcaption>
-        </figure>
-        <p class="idea">Cada valor de t te deja en un punto: con t = 1 caes en (1 + 3, 2 − 1) = (4, 1).</p>
-        <div class="fx"><div class="sys"><span class="eq">(x, y) = (1, 2) + t·(3, −1)</span></div></div>
-        <p class="idea key">Al vector del rumbo se le llama <strong>vector director</strong>: es el que multiplica a t.</p>
-        <p class="idea">Un <strong>plano</strong> en R³ (una losa infinita) se describe con otro truco: un punto de paso y un <strong>poste perpendicular</strong> a la losa.</p>
-        <p class="idea">Ese poste es la <strong>normal</strong>. Al escribir el plano, sus coeficientes son justo ese vector normal.</p>
-        <div class="fx"><div class="sys"><span class="eq">2x + y − z = 2</span><span class="eq">normal = (2, 1, −1)</span></div></div>
-        <p class="idea">Así lo enuncia tu curso:</p>
-        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · Temario, temas 2.3 y 2.5</span>Una <strong>recta</strong> se escribe (x) = p + t·d, con p un punto de paso y d el <strong>vector director</strong>. Un <strong>plano</strong> ax + by + cz = d tiene por <strong>normal</strong> a (a, b, c), perpendicular a toda la superficie.</p>
-        <p class="idea">Léela de vuelta: en la recta, la dirección viaja con t; en el plano, la dirección clave es la normal, escondida en los coeficientes.</p>
-        <p class="idea paso">Distingue las dos piezas abajo. Cierra la unidad hablando de <strong>regiones</strong>: qué es abierto y qué es cerrado.</p>
-      </div>
-      <div class="check challenge" data-kind="item" data-id="M7G" data-tema="recta_plano" data-level="guiado" data-module="7">
-        <div class="qtag">Compruébalo · guiado</div>
-        <p class="q"><strong>Halla la dirección.</strong> En (x, y) = (1, 2) + t·(3, −1), ¿cuál es el vector director?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">(3, −1)</button>
-          <button class="opt" data-ok="0">(1, 2)</button>
-          <button class="opt" data-ok="0">(4, 1)</button>
-        </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ La dirección es el vector que acompaña a t: (3, −1). El (1, 2) es solo el punto de paso.</p><p class="nudge">✕ Busca el vector que multiplica al parámetro t, no el punto por donde arranca. Intenta de nuevo.</p></div>
-      </div>
-      <div class="check challenge" data-kind="item" data-id="M7S" data-tema="recta_plano" data-level="solo" data-module="7">
-        <div class="qtag">Ahora tú · sin copiar</div>
-        <p class="q"><strong>Lee la normal.</strong> ¿Cuál es el vector normal del plano 3x − 2y + z = 7?</p>
-        <div class="opts">
-          <button class="opt" data-ok="1">(3, −2, 1)</button>
-          <button class="opt" data-ok="0">(3, 2, 7)</button>
-          <button class="opt" data-ok="0">(7, 7, 7)</button>
-        </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ La normal son los coeficientes: (3, −2, 1). Cuida el signo de la y y no metas el lado derecho.</p><p class="nudge">✕ La normal de ax + by + cz = d es (a, b, c); el 7 es el lado derecho, no una componente. Intenta de nuevo.</p></div>
-      </div>
-      <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas para leer el vector director de una recta y la normal de un plano.</p>
+      <div class="practica checkpoint" data-checkpoint="6">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 4–5</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
-          <p class="prob-q"><strong>Lee la recta.</strong> En (x, y) = (2, −1) + t·(4, 3), separa el punto de paso del rumbo.</p>
-          <div class="work"><p class="wl">El punto de paso es el término suelto: <b>(2, −1)</b>.</p><p class="wl">El rumbo es el vector que multiplica al parámetro t.</p></div>
-          <div class="check challenge" data-kind="item" data-id="M7P1" data-tema="recta_plano" data-level="resuelto" data-module="7">
-            <div class="qtag">Da el paso que falta</div>
-            <p class="q">¿Cuál es el vector director de la recta?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">(4, 3)</button>
-              <button class="opt" data-ok="0">(2, −1)</button>
-              <button class="opt" data-ok="0">(6, 2)</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ El director es el que acompaña a t: (4, 3). El (2, −1) es solo el punto de paso.</p><p class="nudge">✕ Busca el vector multiplicado por t, no el punto por donde arranca ni el lugar con t = 1. Intenta de nuevo.</p></div>
-          </div>
-        </div>
-        <div class="prob">
-          <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
-          <div class="check challenge" data-kind="item" data-id="M7P2" data-tema="recta_plano" data-level="guiado" data-module="7">
-            <div class="qtag">Tú, con una pista</div>
-            <p class="q"><strong>Lee el plano.</strong> ¿Cuál es el vector normal de 2x + y − z = 2?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">(2, 1, −1)</button>
-              <button class="opt" data-ok="0">(2, 1, 2)</button>
-              <button class="opt" data-ok="0">(1, 1, 1)</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ La normal son los coeficientes: (2, 1, −1). Cuida el signo de la z.</p><p class="nudge">✕ Pista: toma los números que acompañan a x, y, z; el 2 de la derecha no es una componente. Intenta de nuevo.</p></div>
-          </div>
-        </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="recta_plano" data-level="examen" data-module="7">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="cauchy_schwarz" data-level="examen" data-module="5">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>El plano n·(x − p) = 0 quedó escrito como x − 4y + 2z = 9. ¿Cuál es su vector normal n?</p>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean u, v con ‖u‖ = 5 y ‖v‖ = 2. Según |u·v| ≤ ‖u‖‖v‖, ¿cuál es el mayor valor posible de |u·v|?</p>
             <div class="opts">
-              <button class="opt" data-ok="1">(1, −4, 2)</button>
-              <button class="opt" data-ok="0">(1, 4, 9)</button>
-              <button class="opt" data-ok="0">(9, 9, 9)</button>
+              <button class="opt" data-ok="1">10, cuando u y v son paralelos</button>
+              <button class="opt" data-ok="0">7, la suma 5 + 2</button>
+              <button class="opt" data-ok="0">No tiene tope máximo</button>
             </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ La normal son los coeficientes de x, y, z: (1, −4, 2).</p><p class="nudge">✕ Respeta el signo de la y y no metas el 9 del lado derecho. Intenta de nuevo.</p></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El máximo es ‖u‖‖v‖ = 5·2 = 10, y se alcanza solo cuando son paralelos.</p><p class="nudge">✕ El tope es el producto de las normas, no su suma. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="ortogonalidad" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>¿Se cumple u ⊥ v para u = (5, 2) y v = (−2, 5)?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Sí: u·v = −10 + 10 = 0</button>
+              <button class="opt" data-ok="0">No: u·v = 20</button>
+              <button class="opt" data-ok="0">No se puede saber sin medir el ángulo</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (5)(−2) + (2)(5) = −10 + 10 = 0: producto punto cero, así que u ⊥ v.</p><p class="nudge">✕ El primer producto es negativo; súmalo con signo antes de decidir. Intenta de nuevo.</p></div>
+          </div>
+        </div>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Última idea →</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn" data-next="8">Siguiente →</button></div>
     </section>
 
-    <section class="lesson" data-step="8">
-      <header class="lesson-head"><p class="micro">Microlección 8 de 8 · Tema: Conjuntos abiertos y cerrados</p><h2>Abiertos y cerrados: todo en el signo</h2><p class="goal">Meta: clasificar una región por el signo de su desigualdad.</p></header>
+    <section class="lesson" data-step="8"><header class="lesson-head"><p class="micro">Microlección 8 de 11 · Tema: Rectas y segmentos</p><h2>Recta y segmento: mismo rumbo, distinto alcance</h2><p class="goal">Meta: distinguir una recta infinita del tramo entre dos puntos</p></header><div class="sec"><p class="idea lede">Un punto de partida y una flecha de rumbo describen una recta completa.</p><div class="fx"><div class="sys"><span class="eq">r(t) = p + t v</span><span class="eq">t ∈ ℝ → recta completa</span></div></div><p class="idea">Para ir solo de p a q, usa el rumbo q − p y limita el recorrido entre 0 y 1.</p><figure class="visual"><svg viewBox="0 0 620 190" role="img" aria-label="Recta larga y segmento resaltado entre p y q"><path d="M45 145L575 40" stroke="#cbd5e1" stroke-width="5"/><path d="M170 120L465 62" stroke="#F5821F" stroke-width="9"/><circle cx="170" cy="120" r="9" fill="#283891"/><circle cx="465" cy="62" r="9" fill="#283891"/><text x="135" y="165" font-size="28">p</text><text x="482" y="61" font-size="28">q</text></svg><figcaption>La recta sigue sin fin; el segmento conserva solo el tramo naranja.</figcaption></figure><div class="fx"><div class="sys"><span class="eq">s(t) = p + t(q − p)</span><span class="eq">0 ≤ t ≤ 1</span></div></div><p class="fdef"><span class="flbl">Definición · temario oficial, unidad 2</span>El segmento entre p y q contiene todas las mezclas (1 − t)p + tq con 0 ≤ t ≤ 1.</p></div><div class="check challenge" data-kind="item" data-id="M8G" data-tema="rectas_segmentos" data-level="guiado" data-module="8"><div class="qtag">Compruébalo</div><p class="q">En r(t) = (1, 2) + t(3, −1), ¿cuál es el vector director?</p><div class="opts"><button class="opt" data-ok="1">(3, −1)</button><button class="opt" data-ok="0">(1, 2)</button><button class="opt" data-ok="0">t</button></div><div class="fb"><p class="okc">✓ El vector que multiplica a t marca el rumbo.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="check challenge" data-kind="item" data-id="M8S" data-tema="rectas_segmentos" data-level="solo" data-module="8"><div class="qtag">Ahora tú</div><p class="q">En el segmento de p a q, ¿qué valor de t produce q?</p><div class="opts"><button class="opt" data-ok="1">t = 1</button><button class="opt" data-ok="0">t = 0</button><button class="opt" data-ok="0">t = −1</button></div><div class="fb"><p class="okc">✓ p + 1(q − p) = q.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="practica"><p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p><p class="practica-intro">Tres problemas para fijar esta idea antes de seguir.</p><div class="prob"><div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div><div class="check challenge" data-kind="item" data-id="M8P1" data-tema="rectas_segmentos" data-level="resuelto" data-module="8"><div class="qtag">Da el paso que falta</div><p class="q">¿Qué punto da t = 0 en p + t(q − p)?</p><div class="opts"><button class="opt" data-ok="1">p</button><button class="opt" data-ok="0">q</button><button class="opt" data-ok="0">q − p</button></div><div class="fb"><p class="okc">✓ Al anular el avance queda el punto inicial.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-gui"><b>2</b> Guiado · con una pista</div><div class="check challenge" data-kind="item" data-id="M8P2" data-tema="rectas_segmentos" data-level="guiado" data-module="8"><div class="qtag">Da el paso que falta</div><p class="q">Con p = (0, 0), q = (4, 2), ¿qué punto da t = 1/2?</p><div class="opts"><button class="opt" data-ok="1">(2, 1)</button><button class="opt" data-ok="0">(4, 2)</button><button class="opt" data-ok="0">(1, 1/2)</button></div><div class="fb"><p class="okc">✓ La mitad del recorrido llega al punto medio.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-ex"><b>3</b> Como en tu examen</div><div class="check challenge" data-kind="item" data-id="M8P3" data-tema="rectas_segmentos" data-level="examen" data-module="8"><div class="qtag">Sin ayuda</div><p class="q">¿Qué cambio convierte una recta parametrizada en el segmento de p a q?</p><div class="opts"><button class="opt" data-ok="1">Restringir t a 0 ≤ t ≤ 1 y usar q − p</button><button class="opt" data-ok="0">Exigir t &gt; 1</button><button class="opt" data-ok="0">Cambiar el vector director por p + q</button></div><div class="fb"><p class="okc">✓ El intervalo cerrado conserva exactamente el tramo entre los extremos.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn" data-next="9">Siguiente →</button></div>
+    </section>
+
+    <section class="lesson" data-step="9"><header class="lesson-head"><p class="micro">Microlección 9 de 11 · Tema: Hiperplanos</p><h2>Hiperplano: todos los puntos con la misma proyección</h2><p class="goal">Meta: leer el vector normal y comprobar pertenencia</p></header><div class="sec"><p class="idea lede">Una recta usa un rumbo que va por ella. Un hiperplano usa una flecha normal que apunta de frente, perpendicular a toda su superficie.</p><div class="fx"><div class="sys"><span class="eq">a · x = b</span><span class="eq">a = vector normal</span></div></div><p class="idea">En R² esta ecuación dibuja una recta. En R³ dibuja un plano. En Rⁿ se llama hiperplano.</p><p class="fdef"><span class="flbl">Definición · temario oficial, unidad 2</span>Si a ≠ 0, el conjunto de puntos x que cumplen a · x = b es un hiperplano con vector normal a.</p></div><div class="check challenge" data-kind="item" data-id="M9G" data-tema="hiperplanos" data-level="guiado" data-module="9"><div class="qtag">Compruébalo</div><p class="q">En 2x − 3y = 7, ¿qué vector es normal al hiperplano?</p><div class="opts"><button class="opt" data-ok="1">(2, −3)</button><button class="opt" data-ok="0">(7, 0)</button><button class="opt" data-ok="0">(−3, 2)</button></div><div class="fb"><p class="okc">✓ Los coeficientes de las variables forman la normal.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="check challenge" data-kind="item" data-id="M9S" data-tema="hiperplanos" data-level="solo" data-module="9"><div class="qtag">Ahora tú</div><p class="q">¿El punto (2, 1) pertenece a x + 2y = 4?</p><div class="opts"><button class="opt" data-ok="1">Sí: 2 + 2·1 = 4</button><button class="opt" data-ok="0">No: 2 + 1 = 3</button><button class="opt" data-ok="0">Sí: todo punto de R² pertenece</button></div><div class="fb"><p class="okc">✓ Sustituir el punto verifica la ecuación.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="practica"><p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p><p class="practica-intro">Tres problemas para fijar esta idea antes de seguir.</p><div class="prob"><div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div><div class="check challenge" data-kind="item" data-id="M9P1" data-tema="hiperplanos" data-level="resuelto" data-module="9"><div class="qtag">Da el paso que falta</div><p class="q">¿Qué figura describe x + y = 1 en R²?</p><div class="opts"><button class="opt" data-ok="1">Una recta</button><button class="opt" data-ok="0">Un plano tridimensional</button><button class="opt" data-ok="0">Un solo punto</button></div><div class="fb"><p class="okc">✓ En R² un hiperplano tiene una dimensión menos: es recta.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-gui"><b>2</b> Guiado · con una pista</div><div class="check challenge" data-kind="item" data-id="M9P2" data-tema="hiperplanos" data-level="guiado" data-module="9"><div class="qtag">Da el paso que falta</div><p class="q">¿Qué figura describe x + y + z = 1 en R³?</p><div class="opts"><button class="opt" data-ok="1">Un plano</button><button class="opt" data-ok="0">Una recta</button><button class="opt" data-ok="0">Todo R³</button></div><div class="fb"><p class="okc">✓ En R³ un hiperplano es bidimensional.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-ex"><b>3</b> Como en tu examen</div><div class="check challenge" data-kind="item" data-id="M9P3" data-tema="hiperplanos" data-level="examen" data-module="9"><div class="qtag">Sin ayuda</div><p class="q">Dos puntos x₁ y x₂ están en a·x=b. ¿Qué cumple su diferencia?</p><div class="opts"><button class="opt" data-ok="1">a·(x₁−x₂)=0</button><button class="opt" data-ok="0">a·(x₁−x₂)=b</button><button class="opt" data-ok="0">x₁−x₂=a</button></div><div class="fb"><p class="okc">✓ Al restar las dos ecuaciones, la diferencia queda ortogonal a la normal.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="8">← Anterior</button><button class="btn" data-next="10">Siguiente →</button></div>
+    </section>
+
+    <section class="lesson" data-step="10">
+      <header class="lesson-head"><p class="micro">Microlección 10 de 11 · Tema: Conjuntos abiertos y cerrados</p><h2>Abiertos y cerrados: todo en el signo</h2><p class="goal">Meta: clasificar una región por el signo de su desigualdad.</p></header>
       <div class="sec">
         <p class="idea lede">Cierras la unidad con el vocabulario de las regiones: conjuntos <strong>abiertos</strong> y <strong>cerrados</strong>.</p>
         <p class="idea">Párate en un punto y enciende una señal de wifi con alcance r: le llega a todos los puntos a distancia <strong>menor que r</strong> de ti.</p>
@@ -950,7 +876,7 @@
         <p class="idea">Léela de vuelta: la barra | dice «tales que», &lt; deja la orilla fuera (abierto) y ≤ la mete (cerrado). Por eso (1, 0) está en la bola cerrada de radio 1, pero no en la abierta.</p>
         <p class="idea paso">Clasifica tú abajo. Con esto cierras el terreno donde vivirá todo el cálculo de varias variables.</p>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M8G" data-tema="conjuntos" data-level="guiado" data-module="8">
+      <div class="check challenge" data-kind="item" data-id="M10G" data-tema="conjuntos" data-level="guiado" data-module="10">
         <div class="qtag">Compruébalo · guiado</div>
         <p class="q"><strong>Mira solo el signo.</strong> En { (x, y) : x<sup>2</sup> + y<sup>2</sup> &lt; 1 }, ¿la frontera está incluida?</p>
         <div class="opts">
@@ -960,7 +886,7 @@
         </div>
         <div class="fb" aria-live="polite"><p class="okc">✓ Con &lt; estricto, los puntos con x² + y² = 1 quedan fuera: la frontera no entra. Eso es un conjunto abierto.</p><p class="nudge">✕ Un punto de la frontera cumple x² + y² = 1; pregúntate si cumple x² + y² &lt; 1. Intenta de nuevo.</p></div>
       </div>
-      <div class="check challenge" data-kind="item" data-id="M8S" data-tema="conjuntos" data-level="solo" data-module="8">
+      <div class="check challenge" data-kind="item" data-id="M10S" data-tema="conjuntos" data-level="solo" data-module="10">
         <div class="qtag">Ahora tú · sin copiar</div>
         <p class="q"><strong>Clasifica.</strong> ¿Cómo es { (x, y) : x<sup>2</sup> + y<sup>2</sup> ≤ 4 }?</p>
         <div class="opts">
@@ -971,26 +897,18 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ El ≤ agrega los puntos con x² + y² = 4, que son la frontera. Un conjunto que la contiene toda es cerrado.</p><p class="nudge">✕ Fíjate si el signo permite la igualdad: ≤ mete la orilla, y eso lo vuelve cerrado. Intenta de nuevo.</p></div>
       </div>
 
-      <section class="finish">
-        <h3>Cierra sin mirar arriba</h3>
-        <p>Explica en voz alta esta cadena: lista → norma → producto punto → ángulo → Cauchy-Schwarz.</p>
-        <p>Después responde: <strong>¿qué distingue a un conjunto abierto de uno cerrado?</strong></p>
-        <p class="nota">¿Qué tan segura te sientes moviéndote en Rⁿ sin leer? 1 = nada · 5 = lo domino.</p>
-        <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
-        <button class="btn" id="makeReport">Generar reporte para el tutor</button>
-        <div class="report" id="reportSummary" aria-live="polite"></div>
-      </section>
+      
 
-      <nav class="nav-lecs"><a href="C2_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C2_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
+      
 
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas para clasificar una región mirando solo el signo de su desigualdad.</p>
+        <p class="practica-intro">Dos problemas para clasificar una región mirando solo el signo de su desigualdad.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Clasifica la región.</strong> ¿Cómo es { (x, y) : x<sup>2</sup> + y<sup>2</sup> &lt; 9 }?</p>
           <div class="work"><p class="wl">La frontera son los puntos con x<sup>2</sup> + y<sup>2</sup> = <b>9</b>.</p><p class="wl">El signo &lt; es estricto: esos puntos no cumplen &lt; 9, así que quedan fuera.</p></div>
-          <div class="check challenge" data-kind="item" data-id="M8P1" data-tema="conjuntos" data-level="resuelto" data-module="8">
+          <div class="check challenge" data-kind="item" data-id="M10P1" data-tema="conjuntos" data-level="resuelto" data-module="10">
             <div class="qtag">Da el paso que falta</div>
             <p class="q">Si la frontera queda fuera, ¿el conjunto es abierto o cerrado?</p>
             <div class="opts">
@@ -1003,7 +921,7 @@
         </div>
         <div class="prob">
           <div class="plevel p-gui"><b>2</b> Guiado · con una pista</div>
-          <div class="check challenge" data-kind="item" data-id="M8P2" data-tema="conjuntos" data-level="guiado" data-module="8">
+          <div class="check challenge" data-kind="item" data-id="M10P2" data-tema="conjuntos" data-level="guiado" data-module="10">
             <div class="qtag">Tú, con una pista</div>
             <p class="q"><strong>¿Está adentro?</strong> ¿El punto (3, 0) pertenece a { (x, y) : x<sup>2</sup> + y<sup>2</sup> ≤ 9 }?</p>
             <div class="opts">
@@ -1014,9 +932,15 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ 3<sup>2</sup> + 0<sup>2</sup> = 9, y 9 ≤ 9 se cumple: el ≤ mete la frontera.</p><p class="nudge">✕ Pista: evalúa x² + y² en (3, 0) y compara con ≤ 9; la igualdad sí cuenta. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C2_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="8">
+        <p class="practica-head">Repaso acumulativo <span>· idea 8</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="conjuntos" data-level="examen" data-module="8">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M10P3" data-tema="conjuntos" data-level="examen" data-module="10">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Sea la bola abierta B(0, 2) = { x : ‖x‖ &lt; 2 }. ¿El punto (2, 0) pertenece a B(0, 2)?</p>
             <div class="opts">
@@ -1027,9 +951,22 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ ‖(2, 0)‖ = √4 = 2, y 2 &lt; 2 es falso: el punto queda en la frontera, fuera de la bola abierta.</p><p class="nudge">✕ La bola abierta pide &lt; estricto; 2 ≤ 2 sería la cerrada. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C2_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
       </div>
-      <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="9">← Anterior</button><button class="btn" data-next="11">Siguiente →</button></div>
+    </section>
+
+    <section class="lesson" data-step="11"><header class="lesson-head"><p class="micro">Microlección 11 de 11 · Tema: Conjuntos acotados y compactos</p><h2>Acotado y compacto: que nada escape y no falte la orilla</h2><p class="goal">Meta: reconocer compacidad en Rⁿ con dos pruebas</p></header><div class="sec"><p class="idea lede">Un conjunto es acotado si cabe dentro de alguna bola suficientemente grande. No importa que la bola sea enorme: importa que exista.</p><figure class="visual"><svg viewBox="0 0 620 250" role="img" aria-label="Una región cerrada contenida dentro de un círculo grande"><circle cx="310" cy="120" r="98" fill="#eef1fb" stroke="#283891" stroke-width="4" stroke-dasharray="10 8"/><path d="M235 130C245 75 340 56 390 112C425 151 365 200 298 190C250 182 218 164 235 130Z" fill="#E6F5EC" stroke="#1C7A3A" stroke-width="4"/><text x="310" y="238" text-anchor="middle" font-size="26">toda la región cabe dentro de una bola</text></svg><figcaption>Acotado controla el tamaño; cerrado conserva todos sus puntos límite.</figcaption></figure><div class="fx"><div class="sys"><span class="eq">en Rⁿ:</span><span class="eq">compacto ⇔ cerrado y acotado</span></div></div><p class="fdef"><span class="flbl">Teorema de Heine–Borel · temario oficial, unidad 2</span>En Rⁿ, un conjunto es compacto exactamente cuando es cerrado y acotado.</p></div><div class="check challenge" data-kind="item" data-id="M11G" data-tema="compactos" data-level="guiado" data-module="11"><div class="qtag">Compruébalo</div><p class="q">El disco x² + y² ≤ 4 incluye su frontera y cabe en una bola. ¿Cómo es?</p><div class="opts"><button class="opt" data-ok="1">Compacto</button><button class="opt" data-ok="0">Abierto y no acotado</button><button class="opt" data-ok="0">Cerrado pero no acotado</button></div><div class="fb"><p class="okc">✓ Es cerrado y acotado, así que es compacto.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="check challenge" data-kind="item" data-id="M11S" data-tema="compactos" data-level="solo" data-module="11"><div class="qtag">Ahora tú</div><p class="q">¿El conjunto R² completo es acotado?</p><div class="opts"><button class="opt" data-ok="1">No: ningún radio lo contiene entero</button><button class="opt" data-ok="0">Sí: no tiene frontera</button><button class="opt" data-ok="0">Sí: es cerrado</button></div><div class="fb"><p class="okc">✓ Siempre puedes hallar puntos más lejos que cualquier radio.</p><p class="nudge">✕ Vuelve a la representación y prueba otra vez.</p></div></div><div class="practica"><p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p><p class="practica-intro">Tres problemas para fijar esta idea antes de seguir.</p><div class="prob"><div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div><div class="check challenge" data-kind="item" data-id="M11P1" data-tema="compactos" data-level="resuelto" data-module="11"><div class="qtag">Da el paso que falta</div><p class="q">¿Es compacto el intervalo [0, 1] en R?</p><div class="opts"><button class="opt" data-ok="1">Sí: cerrado y acotado</button><button class="opt" data-ok="0">No: tiene extremos</button><button class="opt" data-ok="0">No: todo intervalo es abierto</button></div><div class="fb"><p class="okc">✓ Incluye sus extremos y tiene tamaño finito.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-gui"><b>2</b> Guiado · con una pista</div><div class="check challenge" data-kind="item" data-id="M11P2" data-tema="compactos" data-level="guiado" data-module="11"><div class="qtag">Da el paso que falta</div><p class="q">¿Es compacto el intervalo (0, 1)?</p><div class="opts"><button class="opt" data-ok="1">No: es acotado pero no cerrado</button><button class="opt" data-ok="0">Sí: cabe en una bola</button><button class="opt" data-ok="0">No: es cerrado pero no acotado</button></div><div class="fb"><p class="okc">✓ Le faltan sus puntos límite 0 y 1.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div><div class="prob"><div class="plevel p-ex"><b>3</b> Como en tu examen</div><div class="check challenge" data-kind="item" data-id="M11P3" data-tema="compactos" data-level="examen" data-module="11"><div class="qtag">Sin ayuda</div><p class="q">¿Cuál conjunto es compacto en R²?</p><div class="opts"><button class="opt" data-ok="1">{(x,y): x²+y²≤9}</button><button class="opt" data-ok="0">{(x,y): x²+y²&lt;9}</button><button class="opt" data-ok="0">{(x,y): y≥0}</button></div><div class="fb"><p class="okc">✓ El disco cerrado incluye la frontera y está acotado.</p><p class="nudge">✕ Revisa la idea anterior y vuelve a decidir.</p></div></div></div></div><section class="finish">
+        <h3>Cierra sin mirar arriba</h3>
+        <p>Explica en voz alta esta cadena: lista → norma → producto punto → ángulo → Cauchy-Schwarz.</p>
+        <p>Después responde: <strong>¿qué distingue a un conjunto abierto de uno cerrado?</strong></p>
+        <p class="nota">¿Qué tan segura te sientes moviéndote en Rⁿ sin leer? 1 = nada · 5 = lo domino.</p>
+        <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
+        <button class="btn" id="makeReport">Generar reporte para el tutor</button>
+        <div class="report" id="reportSummary" aria-live="polite"></div>
+      </section>
+
+      <nav class="nav-lecs"><a href="C2_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C2_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
+      <div class="lesson-nav"><button class="btn ghost" data-prev="10">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
 
   </main>
@@ -1041,16 +978,19 @@
 <script>
 (function(){
   'use strict';
-  var KEY='valentina-calculo-u2-guia-micro';
+  var KEY='valentina-calculo-u2-guia-micro-cobertura-20260715';
   var goals=[
-    'Vectores: leer y operar una lista de números como un objeto.',
-    'Norma y distancia: medir el largo de una flecha y la separación entre puntos.',
-    'Producto punto: emparejar, multiplicar y sumar para obtener un número.',
-    'Ángulo y ortogonalidad: leer el producto punto como alineación.',
-    'Cauchy-Schwarz: reconocer el tope que el producto punto nunca supera.',
-    'Coordenadas polares: ubicar un punto con radio y ángulo.',
-    'Rectas y planos: describirlos con un punto de paso y un rumbo.',
-    'Conjuntos abiertos y cerrados: distinguirlos por el signo de la desigualdad.'
+    'Vectores: operar listas como objetos.',
+    'Norma y distancia: medir largo y separación.',
+    'Producto punto: obtener un número de dos vectores.',
+    'Ángulo y ortogonalidad: leer la alineación.',
+    'Cauchy-Schwarz: reconocer el tope del producto punto.',
+    'Vector tangente: hallar el rumbo instantáneo de una curva.',
+    'Coordenadas polares: ubicar con radio y ángulo.',
+    'Recta y segmento: distinguir recorrido infinito y tramo.',
+    'Hiperplano: leer la ecuación a·x=b y su normal.',
+    'Abiertos y cerrados: decidir si la frontera entra.',
+    'Acotados y compactos: controlar tamaño y puntos límite.'
   ];
   var state={current:1,started:new Date().toISOString(),items:{},confidence:null};
   try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&saved.items){state=saved;}}catch(e){}
@@ -1058,7 +998,7 @@
   function shuffle(box){var a=Array.prototype.slice.call(box.children);for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}for(var k=0;k<a.length;k++){box.appendChild(a[k]);}}
   function markDone(){document.querySelectorAll('.step').forEach(function(btn){var m=btn.dataset.go;var cards=document.querySelectorAll('.challenge[data-module="'+m+'"]');var ids=Array.prototype.map.call(cards,function(x){return x.dataset.id;});btn.classList.toggle('is-done',ids.length>0&&ids.every(function(id){return state.items[id]&&state.items[id].correct;}));});}
   function progress(){var total=document.querySelectorAll('.challenge').length;var done=Object.keys(state.items).filter(function(id){return state.items[id].correct;}).length;return {done:done,total:total};}
-  function go(n){n=Math.max(1,Math.min(8,Number(n)||1));state.current=n;save();
+  function go(n){n=Math.max(1,Math.min(11,Number(n)||1));state.current=n;save();
     document.querySelectorAll('.lesson').forEach(function(x){x.classList.toggle('is-active',Number(x.dataset.step)===n);});
     document.querySelectorAll('.step').forEach(function(x){x.setAttribute('aria-selected',String(Number(x.dataset.go)===n));});
     document.getElementById('heroStep').textContent=n;

@@ -60,8 +60,8 @@
   .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
   .idea strong{font-weight:800;color:var(--ink)}
   .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
-  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
-  .paso{color:var(--muted);font-size:16px}
+  .key{border:1.5px solid #f0d6b8;background:var(--cream);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:650}.key::before{content:"Idea clave";display:block;margin-bottom:4px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep)}
+  .paso{color:var(--muted);font-size:17px}
   .paso::before{content:"→ ";color:var(--orange);font-weight:800}
 
   .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
@@ -75,8 +75,8 @@
   .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
   .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
 
-  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
-  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -145,7 +145,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -154,10 +154,10 @@
   .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
   .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
   .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
-  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .practica-intro{margin:0;font-size:17px;color:var(--slate);line-height:1.6;max-width:62ch}
   .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
-  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
-  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px}
   .p-res{background:var(--green-tint);color:var(--green-deep)}
   .p-res b{color:var(--green-deep)}
   .p-gui{background:var(--cream);color:var(--deep)}
@@ -166,11 +166,13 @@
   .p-ex b{color:#a01243}
   .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
   .prob-q strong{font-weight:800}
-  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prof{display:block;margin-bottom:6px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
   .prob .check{background:#fff;border-color:var(--line)}
   .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
-  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl{margin:0;font-size:17px;color:var(--slate)}
   .work .wl b{color:var(--ink);font-weight:800}
+  .checkpoint{border-style:solid;border-color:var(--navy);background:#eef1fb;box-shadow:none}
+  .checkpoint .prob{background:#fff;border-color:#cfd6f2}
   .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
   .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
@@ -186,6 +188,7 @@
   @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -261,7 +264,6 @@
         <p class="idea">Cuando renglones y columnas empatan, la matriz gana un apellido que usaremos toda la unidad:</p>
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 4.1</span>Una matriz es <strong>cuadrada</strong> si tiene el mismo número de renglones y columnas. Es decir, si n = m.</p>
         <p class="idea">La de recetas es cuadrada: 2 = 2. Guarda ese apellido — más adelante verás que solo las cuadradas pueden aspirar a inversa.</p>
-        <p class="idea paso">Asegura la lectura con los dos retos. Y en cuanto la tengas, les damos vida a estas tablas: se suman y se estiran igual que los números.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="lectura_matriz" data-level="guiado" data-module="1">
         <div class="qtag">Compruébalo · guiado</div>
@@ -314,19 +316,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Fila 3, columna 1: el 6.</p><p class="nudge">✕ Pista: baja hasta la fila 3 y quédate en la columna 1. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="lectura_matriz" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A = (a<sub>ij</sub>) de 3×3 con a<sub>ij</sub> = 0 para todo i ≠ j, y a<sub>11</sub> = 2, a<sub>22</sub> = 5, a<sub>33</sub> = 7. ¿Cuánto vale a<sub>21</sub>?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">0, porque la fila 2 y la columna 1 no coinciden</button>
-              <button class="opt" data-ok="0">5, es la segunda entrada de la diagonal</button>
-              <button class="opt" data-ok="0">No se sabe sin ver toda la tabla</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ En a<sub>21</sub> hay i = 2, j = 1: como i ≠ j, la regla la deja en 0.</p><p class="nudge">✕ La condición a<sub>ij</sub> = 0 para i ≠ j apaga toda casilla fuera de la diagonal. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
@@ -352,7 +342,6 @@
         <p class="idea">La segunda es igual de directa:</p>
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 4.5</span>Sea A = (a<sub>ij</sub>) una matriz y r ∈ R. El <strong>múltiplo escalar</strong> r·A = (b<sub>ij</sub>) es tal que b<sub>ij</sub> = r·a<sub>ij</sub>.</p>
         <p class="idea">El r — el <strong>escalar</strong>, un número suelto — entra a cada casilla. Tu 2·L, en símbolos.</p>
-        <p class="idea paso">Dos retos para fijarlo.</p>
         <p class="idea paso">Y una advertencia para la siguiente: multiplicar una matriz <strong>por otra matriz</strong> no funciona casilla por casilla. Tiene jugada propia — la reina del examen.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="suma_escalar" data-level="guiado" data-module="2">
@@ -450,7 +439,6 @@
         <p class="idea">Y con esto ya llegaste: hiciste todas las cuentas de caja de una sola vez. Tu curso lo enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>Si A es de m×n y B es de n×p, el <strong>producto</strong> A·B es la matriz de m×p cuya entrada c<sub>ij</sub> se obtiene multiplicando en pares el renglón i de A con la columna j de B y sumando los resultados.</p>
         <p class="idea">Léela de vuelta: c<sub>ij</sub> nombra la casilla; la i dice qué renglón tomas de la izquierda y la j qué columna de la derecha — tu cuenta de la caja, automatizada.</p>
-        <p class="idea paso">Asegura la jugada con los dos retos.</p>
         <p class="idea paso">Y fíjate en la n que se repite en «m×n por n×p»: no es casualidad. Es el requisito escondido del producto — la siguiente lección.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="producto_matrices" data-level="guiado" data-module="3">
@@ -519,6 +507,23 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
+      <div class="practica checkpoint" data-checkpoint="3">
+        <p class="practica-head">Repaso acumulativo <span>· idea 1</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="lectura_matriz" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A = (a<sub>ij</sub>) de 3×3 con a<sub>ij</sub> = 0 para todo i ≠ j, y a<sub>11</sub> = 2, a<sub>22</sub> = 5, a<sub>33</sub> = 7. ¿Cuánto vale a<sub>21</sub>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">0, porque la fila 2 y la columna 1 no coinciden</button>
+              <button class="opt" data-ok="0">5, es la segunda entrada de la diagonal</button>
+              <button class="opt" data-ok="0">No se sabe sin ver toda la tabla</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ En a<sub>21</sub> hay i = 2, j = 1: como i ≠ j, la regla la deja en 0.</p><p class="nudge">✕ La condición a<sub>ij</sub> = 0 para i ≠ j apaga toda casilla fuera de la diagonal. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -540,7 +545,7 @@
             <rect x="250" y="34" width="86" height="52" rx="10" fill="white" stroke="#334155" stroke-width="2.5"/><text x="293" y="66" text-anchor="middle" font-size="22" font-weight="800" fill="#181B22">2×2</text>
             <path d="M78 100 C 78 122, 150 122, 150 100" fill="none" stroke="#334155" stroke-width="2.5"/>
             <text x="114" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#C75D08">3 = 3 → sí se puede</text>
-            <text x="293" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#C75D08">extremos → tamaño</text>
+            <text x="293" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#C75D08">extremos → tamaño</text>
           </svg>
           <figcaption>Los números de en medio deciden si el producto existe; los extremos, cuánto mide.</figcaption>
         </figure>
@@ -556,7 +561,6 @@
         <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teo. 4.1</span>Sean A, B, C matrices de m×n, D, F de n×p y G de p×k. Entonces: A + B = B + A; A + (B + C) = (A + B) + C; (A + B)·D = A·D + B·D; A·(D + F) = A·D + A·F; (A·D)·G = A·(D·G).</p>
         <p class="idea">Léelo por lo que dice y por lo que calla: puedes agrupar como quieras y repartir sobre la suma… pero en ninguna línea aparece A·D = D·A.</p>
         <p class="idea">La conmutatividad del producto no está en la lista, porque no se cumple.</p>
-        <p class="idea paso">Dos retos para asegurar tamaño y orden.</p>
         <p class="idea paso">Después, una operación que no calcula nada nuevo pero reacomoda todo: voltear la tabla.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="propiedades_producto" data-level="guiado" data-module="4">
@@ -610,19 +614,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ En medio quedan 3 y 2: distintos, así que el producto no existe.</p><p class="nudge">✕ Pista: compara solo los dos números de en medio. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="propiedades_producto" data-level="examen" data-module="4">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sean A, B, C matrices de n×n. ¿Cuál igualdad NO se cumple en general?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">A·B = B·A</button>
-              <button class="opt" data-ok="0">(A·B)·C = A·(B·C)</button>
-              <button class="opt" data-ok="0">A·(B + C) = A·B + A·C</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ El producto no es conmutativo: A·B = B·A falla en general. Las otras dos sí valen.</p><p class="nudge">✕ Asociar y repartir sobre la suma siempre valen; lo que falla es voltear el orden. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
@@ -672,7 +664,6 @@
         <p class="idea">Esa regla viene con sus hermanas, todas en un mismo teorema del curso:</p>
         <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teo. 4.3</span>Si r es un escalar y A, B son matrices cuadradas de n×n, entonces: (A<sup>T</sup>)<sup>T</sup> = A; (A + B)<sup>T</sup> = A<sup>T</sup> + B<sup>T</sup>; (A·B)<sup>T</sup> = B<sup>T</sup>·A<sup>T</sup>; (r·A)<sup>T</sup> = r·A<sup>T</sup>.</p>
         <p class="idea">En palabras: voltear dos veces te regresa a la original, la suma y el escalar no se inmutan… y solo el producto exige voltear el orden.</p>
-        <p class="idea paso">Dos retos para dejarlo firme.</p>
         <p class="idea paso">Y prepárate: lo que sigue es la pareja central del temario — la tabla que no hace nada y la tabla que deshace.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="transpuesta" data-level="guiado" data-module="5">
@@ -726,19 +717,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ La casilla (1, 2) y la (2, 1) se intercambian: el 1 y el 3 cambian de lugar.</p><p class="nudge">✕ Pista: la diagonal (6 y 8) no se mueve; solo se cruzan el 1 y el 3. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="transpuesta" data-level="examen" data-module="5">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sean A, B matrices de n×n. ¿A qué es igual (A·B)<sup>T</sup>?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">B<sup>T</sup>·A<sup>T</sup></button>
-              <button class="opt" data-ok="0">A<sup>T</sup>·B<sup>T</sup></button>
-              <button class="opt" data-ok="0">A·B</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Transponer un producto voltea el orden: primero B<sup>T</sup>, después A<sup>T</sup>.</p><p class="nudge">✕ Como los calcetines y zapatos: para deshacer, empiezas por lo último. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
@@ -779,7 +758,6 @@
         <p class="idea">La inversa también trae sus reglas de operación, y una ya la conoces:</p>
         <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teo. 4.4</span>Sean A y B matrices no singulares. Entonces: A<sup>−1</sup> es no singular y (A<sup>−1</sup>)<sup>−1</sup> = A; A·B es no singular y (A·B)<sup>−1</sup> = B<sup>−1</sup>·A<sup>−1</sup>; (A<sup>T</sup>)<sup>−1</sup> = (A<sup>−1</sup>)<sup>T</sup>.</p>
         <p class="idea">La del medio es la misma jugada que la transpuesta: deshacer un producto voltea el orden — zapatos primero, calcetines después.</p>
-        <p class="idea paso">Dos retos para asegurar la pareja.</p>
         <p class="idea paso">Saber qué es la inversa no dice cómo encontrarla. Eso — lo que de verdad cae en examen — es la siguiente lección.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M6G" data-tema="inversa_concepto" data-level="guiado" data-module="6">
@@ -848,6 +826,36 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
+      <div class="practica checkpoint" data-checkpoint="6">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 4–5</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="transpuesta" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean A, B matrices de n×n. ¿A qué es igual (A·B)<sup>T</sup>?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">B<sup>T</sup>·A<sup>T</sup></button>
+              <button class="opt" data-ok="0">A<sup>T</sup>·B<sup>T</sup></button>
+              <button class="opt" data-ok="0">A·B</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Transponer un producto voltea el orden: primero B<sup>T</sup>, después A<sup>T</sup>.</p><p class="nudge">✕ Como los calcetines y zapatos: para deshacer, empiezas por lo último. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="propiedades_producto" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sean A, B, C matrices de n×n. ¿Cuál igualdad NO se cumple en general?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">A·B = B·A</button>
+              <button class="opt" data-ok="0">(A·B)·C = A·(B·C)</button>
+              <button class="opt" data-ok="0">A·(B + C) = A·B + A·C</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El producto no es conmutativo: A·B = B·A falla en general. Las otras dos sí valen.</p><p class="nudge">✕ Asociar y repartir sobre la suma siempre valen; lo que falla es voltear el orden. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
 
@@ -890,7 +898,6 @@
         <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teo. 4.7</span>Una matriz de n×n es no singular si y solo si es equivalente por renglones a la matriz identidad I<sub>n</sub>.</p>
         <p class="idea">«Equivalente por renglones a I<sub>n</sub>» = con operaciones de renglón puedes convertirla en la identidad.</p>
         <p class="idea">Si llegas, la inversa existe y quedó a la derecha; si un renglón se apaga, nunca llegarás: singular.</p>
-        <p class="idea paso">Dos retos para asegurar el método. La práctica completa en papel vive en tu cuadernillo.</p>
         <p class="idea paso">Queda una última pregunta en la unidad: ¿qué son, en el fondo, esas operaciones de renglón? Cada una es… una matriz. Con eso cerramos.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7G" data-tema="inversa_gauss_jordan" data-level="guiado" data-module="7">

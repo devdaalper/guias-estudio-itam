@@ -60,8 +60,8 @@
   .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
   .idea strong{font-weight:800;color:var(--ink)}
   .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
-  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
-  .paso{color:var(--muted);font-size:16px}
+  .key{border:1.5px solid #f0d6b8;background:var(--cream);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:650}.key::before{content:"Idea clave";display:block;margin-bottom:4px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep)}
+  .paso{color:var(--muted);font-size:17px}
   .paso::before{content:"→ ";color:var(--orange);font-weight:800}
 
   .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
@@ -75,8 +75,8 @@
   .matrix .pivot{background:var(--green-tint);color:var(--green-deep);font-weight:800}
   .matrix .free{background:var(--cream);color:var(--deep);font-weight:800}
 
-  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
-  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -145,7 +145,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -154,10 +154,10 @@
   .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
   .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
   .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
-  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .practica-intro{margin:0;font-size:17px;color:var(--slate);line-height:1.6;max-width:62ch}
   .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
-  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
-  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px}
   .p-res{background:var(--green-tint);color:var(--green-deep)}
   .p-res b{color:var(--green-deep)}
   .p-gui{background:var(--cream);color:var(--deep)}
@@ -166,11 +166,13 @@
   .p-ex b{color:#a01243}
   .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
   .prob-q strong{font-weight:800}
-  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prof{display:block;margin-bottom:6px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
   .prob .check{background:#fff;border-color:var(--line)}
   .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
-  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl{margin:0;font-size:17px;color:var(--slate)}
   .work .wl b{color:var(--ink);font-weight:800}
+  .checkpoint{border-style:solid;border-color:var(--navy);background:#eef1fb;box-shadow:none}
+  .checkpoint .prob{background:#fff;border-color:#cfd6f2}
   .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
   .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
@@ -186,6 +188,7 @@
   @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -257,7 +260,6 @@
         <p class="idea">Tu curso lo plantea así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.1</span>Una ecuación F(x, y) = 0 define a y como <strong>función implícita</strong> de x cerca de un punto cuando, en un entorno de ese punto, a cada x le corresponde un único y que cumple la ecuación.</p>
         <p class="idea">Léela con lo que ya tienes: «F(x, y) = 0» es la ecuación amarrada, y «cerca de un punto» es la letra pequeña — la función vive en un trozo, no en la curva entera.</p>
-        <p class="idea paso">Asegura la pieza con los dos retos de abajo. Y en cuanto la tengas, seguimos con lo natural: si hay una función escondida, querrás su <strong>pendiente</strong> — sin despejarla.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="funcion_implicita" data-level="guiado" data-module="1">
         <div class="qtag">Compruébalo · guiado</div>
@@ -281,7 +283,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas como en un examen: reconocer cuándo una ecuación esconde una función cerca de un punto. El primero lo armamos juntos.</p>
+        <p class="practica-intro">Dos problemas como en un examen: reconocer cuándo una ecuación esconde una función cerca de un punto. El primero lo armamos juntos.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>¿Define la ecuación</strong> x² + y² = 100 a y como función de x cerca del punto (6, 8)?</p>
@@ -310,19 +312,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ La curva completa tiene dos ramas, pero cerca de (8, 15) es solo la de arriba: función.</p><p class="nudge">✕ Pista: la definición pide mirar SOLO cerca del punto, no la curva entera. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="funcion_implicita" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sobre la circunferencia x² + y² = 25, ¿en cuál punto NO se puede ver y como función de x en un entorno?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">(5, 0)</button>
-              <button class="opt" data-ok="0">(3, 4)</button>
-              <button class="opt" data-ok="0">(0, 5)</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ En (5, 0) la curva va vertical: a la izquierda hay dos ramas y a la derecha ninguna, así que ningún trozo es función y = f(x).</p><p class="nudge">✕ Busca dónde la curva se pone vertical (los extremos izquierdo y derecho), no arriba o abajo. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
@@ -361,7 +351,6 @@
         <p class="idea">Todo junto tiene nombre. Tu curso lo enuncia así:</p>
         <p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.1</span>Si F(x, y) = 0 y en un punto <strong>F<sub>y</sub> ≠ 0</strong>, entonces cerca de ahí y es función de x y su pendiente es dy/dx = −F<sub>x</sub>/F<sub>y</sub>.</p>
         <p class="idea">Léelo por partes: «F<sub>y</sub> ≠ 0» es el permiso (la máquina existe) y «dy/dx = −F<sub>x</sub>/F<sub>y</sub>» es la pendiente que te llevas.</p>
-        <p class="idea paso">Dos retos para fijar la fórmula.</p>
         <p class="idea paso">Y en cuanto la asegures, subimos un piso: la misma idea cuando la ecuación amarra <strong>tres</strong> variables.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="derivacion_implicita" data-level="guiado" data-module="2">
@@ -461,7 +450,6 @@
         <p class="idea">Es el mismo teorema de ayer, ahora en tres variables. Tu curso lo enuncia así:</p>
         <p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.1 (tres variables)</span>Si F(x, y, z) = 0 y <strong>F<sub>z</sub> ≠ 0</strong> en un punto, entonces cerca de ahí z es función de (x, y), con ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub> y ∂z/∂y = −F<sub>y</sub>/F<sub>z</sub>.</p>
         <p class="idea">Reconócelo: «F<sub>z</sub> ≠ 0» es el mismo permiso que ayer, y las dos fórmulas son la de ayer repetida, una por cada entrada.</p>
-        <p class="idea paso">Dos retos con la esfera.</p>
         <p class="idea paso">Y con la función implícita cerrada, cambiamos de pregunta: ¿cómo se <strong>deshace</strong> una máquina?</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="derivacion_implicita_3var" data-level="guiado" data-module="3">
@@ -530,6 +518,23 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
+      <div class="practica checkpoint" data-checkpoint="3">
+        <p class="practica-head">Repaso acumulativo <span>· idea 1</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="funcion_implicita" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sobre la circunferencia x² + y² = 25, ¿en cuál punto NO se puede ver y como función de x en un entorno?</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">(5, 0)</button>
+              <button class="opt" data-ok="0">(3, 4)</button>
+              <button class="opt" data-ok="0">(0, 5)</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ En (5, 0) la curva va vertical: a la izquierda hay dos ramas y a la derecha ninguna, así que ningún trozo es función y = f(x).</p><p class="nudge">✕ Busca dónde la curva se pone vertical (los extremos izquierdo y derecho), no arriba o abajo. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -587,7 +592,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas de derivada de la inversa. El truco de siempre: evalúa f′ en a, no en b, y toma el recíproco.</p>
+        <p class="practica-intro">Dos problemas de derivada de la inversa. El truco de siempre: evalúa f′ en a, no en b, y toma el recíproco.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Para f(x) = x³ + x</strong> se sabe que f(1) = 2. Halla (f⁻¹)′(2).</p>
@@ -616,19 +621,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ f′(x) = 2x + 3, así que f′(1) = 5 y (f⁻¹)′(4) = 1/5.</p><p class="nudge">✕ Pista: f′(x) = 2x + 3, evalúa en a = 1 (da 5) y toma el recíproco. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="funcion_inversa" data-level="examen" data-module="4">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x) = x⁵ + 2x + 1, con f(1) = 4. Calcula (f⁻¹)′(4).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">1/7</button>
-              <button class="opt" data-ok="0">7</button>
-              <button class="opt" data-ok="0">1/4</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ f′(x) = 5x⁴ + 2, así que f′(1) = 7 y (f⁻¹)′(4) = 1/f′(1) = 1/7.</p><p class="nudge">✕ Evalúa f′ en a = 1, no en b = 4; luego el recíproco. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
@@ -650,7 +643,6 @@
         <p class="idea">Con eso ya la sabes armar. Tu curso la define así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.2</span>La <strong>matriz jacobiana</strong> de una transformación (x, y) → (u, v) tiene por primera fila (∂u/∂x, ∂u/∂y) y por segunda fila (∂v/∂x, ∂v/∂y): sus filas son las parciales de cada salida.</p>
         <p class="idea">Léela: cada fila es una salida (u, luego v) y cada columna una entrada (x, luego y). La casilla de la fila u y la columna x es ∂u/∂x.</p>
-        <p class="idea paso">Dos retos para llenar filas sin equivocar el signo.</p>
         <p class="idea paso">Y en la última lección, un solo número resumirá a J y dirá si la máquina se puede <strong>deshacer</strong>.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="jacobiano" data-level="guiado" data-module="5">
@@ -793,7 +785,7 @@
 
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres problemas con el determinante jacobiano: diagonal menos antidiagonal, y qué significa que no sea 0.</p>
+        <p class="practica-intro">Dos problemas con el determinante jacobiano: diagonal menos antidiagonal, y qué significa que no sea 0.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Una transformación tiene jacobiana</strong> con filas (5, 2) y (1, 3). Halla su determinante.</p>
@@ -822,8 +814,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ 3·2 − 4·1 = 6 − 4 = 2. Distinto de 0, así que hay inversa local.</p><p class="nudge">✕ Pista: diagonal menos antidiagonal: 3·2 − 4·1 = 6 − 4. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C6_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="6">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 4–6</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
           <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="jacobiano" data-level="examen" data-module="6">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Sea T(x, y) = (x² + y, y² − x). Calcula el jacobiano det(J) en el punto (1, 2).</p>
@@ -835,7 +833,19 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ J tiene filas (2x, 1) y (−1, 2y); det = 4xy − (1)(−1) = 4xy + 1. En (1, 2): 8 + 1 = 9.</p><p class="nudge">✕ Cuidado: restar (1)(−1) suma 1. En (1, 2) da 4·2 + 1 = 9. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C6_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="funcion_inversa" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x) = x⁵ + 2x + 1, con f(1) = 4. Calcula (f⁻¹)′(4).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">1/7</button>
+              <button class="opt" data-ok="0">7</button>
+              <button class="opt" data-ok="0">1/4</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ f′(x) = 5x⁴ + 2, así que f′(1) = 7 y (f⁻¹)′(4) = 1/f′(1) = 1/7.</p><p class="nudge">✕ Evalúa f′ en a = 1, no en b = 4; luego el recíproco. Intenta de nuevo.</p></div>
+          </div>
+        </div>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>

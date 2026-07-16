@@ -60,8 +60,8 @@
   .idea{margin:0;font-size:clamp(17px,1.7vw,18px);line-height:1.72;max-width:62ch;color:var(--slate)}
   .idea strong{font-weight:800;color:var(--ink)}
   .lede{font-size:clamp(18px,2vw,19.5px);line-height:1.62;color:var(--ink);font-weight:650}
-  .key{border-left:4px solid var(--orange);background:linear-gradient(90deg,var(--cream),rgba(255,243,231,0) 88%);padding:11px 14px;border-radius:0 12px 12px 0;color:var(--ink);font-weight:650}
-  .paso{color:var(--muted);font-size:16px}
+  .key{border:1.5px solid #f0d6b8;background:var(--cream);padding:12px 14px;border-radius:12px;color:var(--ink);font-weight:650}.key::before{content:"Idea clave";display:block;margin-bottom:4px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--deep)}
+  .paso{color:var(--muted);font-size:17px}
   .paso::before{content:"→ ";color:var(--orange);font-weight:800}
 
   .fx{justify-self:center;max-width:100%;overflow-x:auto;padding:13px 20px;border:1.5px solid var(--line);border-radius:12px;background:#fcfbf9}
@@ -69,8 +69,8 @@
   .sys .eq{white-space:nowrap}
   .unknown{color:var(--deep);font-weight:800}
 
-  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid var(--line);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;font-size:16.5px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
-  .fdef .flbl{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
+  .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -139,7 +139,7 @@
   .nav-lecs a:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
   .nav-lecs a.next{text-align:right;margin-left:auto}
   .nav-lecs .sp{display:block;font-size:13px;color:var(--deep);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-  .nav-lecs .ti{font-size:16px;font-weight:700}
+  .nav-lecs .ti{font-size:17px;font-weight:700}
 
   footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
   footer p{margin:0;color:var(--muted);font-size:15px}
@@ -148,10 +148,10 @@
   .practica{display:grid;gap:14px;padding:18px 20px 20px;border:2px dashed var(--ink);border-radius:16px;background:#fff;box-shadow:var(--shadow)}
   .practica-head{margin:0;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--deep)}
   .practica-head span{color:var(--muted);font-weight:700;letter-spacing:0;text-transform:none}
-  .practica-intro{margin:0;font-size:16px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .practica-intro{margin:0;font-size:17px;color:var(--slate);line-height:1.6;max-width:62ch}
   .prob{display:grid;gap:11px;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;background:#fcfbf9}
-  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
-  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:12px}
+  .plevel{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:5px 12px;border-radius:999px;width:max-content}
+  .plevel b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:13px}
   .p-res{background:var(--green-tint);color:var(--green-deep)}
   .p-res b{color:var(--green-deep)}
   .p-gui{background:var(--cream);color:var(--deep)}
@@ -160,11 +160,13 @@
   .p-ex b{color:#a01243}
   .prob-q{margin:0;font-size:17px;line-height:1.55;color:var(--ink)}
   .prob-q strong{font-weight:800}
-  .prof{display:block;margin-bottom:6px;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
+  .prof{display:block;margin-bottom:6px;font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#a01243}
   .prob .check{background:#fff;border-color:var(--line)}
   .work{display:grid;gap:5px;padding:11px 14px;border:1.5px dashed var(--line);border-radius:11px;background:#fff;font-variant-numeric:tabular-nums}
-  .work .wl{margin:0;font-size:16px;color:var(--slate)}
+  .work .wl{margin:0;font-size:17px;color:var(--slate)}
   .work .wl b{color:var(--ink);font-weight:800}
+  .checkpoint{border-style:solid;border-color:var(--navy);background:#eef1fb;box-shadow:none}
+  .checkpoint .prob{background:#fff;border-color:#cfd6f2}
   .practica-mas{margin:2px 0 0;font-size:15px;color:var(--muted);line-height:1.55}
   .practica-mas a{color:var(--deep);font-weight:800}
   /*aire-matematico*/
@@ -180,6 +182,7 @@
   @media(max-width:620px){.mix-grid,.criteria{grid-template-columns:1fr}.tag{display:none}}
   @media(max-width:400px){.sys{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  sub,sup{font-size:13px}
 </style>
 </head>
 <body>
@@ -252,7 +255,6 @@
         <p class="idea">Eso que acabas de usar —dos entradas, una salida— es la <strong>función de dos variables</strong>. Tu curso la enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3</span>Una <strong>función de dos variables</strong> f asigna a cada pareja (x, y) de un conjunto D del plano un <strong>único</strong> número real, que se escribe f(x, y).</p>
         <p class="idea">Léela de vuelta: la pareja (x, y) son tus dos mandos y f(x, y) es el número que sale. «Único» dice que a cada pareja le toca una sola salida.</p>
-        <p class="idea paso">Asegura la pieza con los dos retos de abajo.</p>
         <p class="idea paso">Y en cuanto la tengas, seguimos con lo natural: si la máquina da una altura sobre cada punto, ¿qué <strong>dibujo</strong> forma?</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="funcion_dos_variables" data-level="guiado" data-module="1">
@@ -277,7 +279,7 @@
       </div>
       <div class="practica">
         <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
-        <p class="practica-intro">Tres evaluaciones como en un examen. La primera la armamos juntos; en las siguientes te voy soltando de a poco.</p>
+        <p class="practica-intro">Tres evaluaciones como en un examen. La primera la armamos juntos; el apoyo disminuye en las siguientes.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
           <p class="prob-q"><strong>Evalúa</strong> f(x, y) = x² − y en el punto (3, 2).</p>
@@ -306,19 +308,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ x = 1 y y = 3: 2·1 + 3² = 2 + 9 = 11.</p><p class="nudge">✕ Pista: el 2 multiplica a la x; la y va al cuadrado (3² = 9), no multiplicada por 2. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="funcion_dos_variables" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x, y) = x² + xy. Calcula f(2, 3).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">10</button>
-              <button class="opt" data-ok="0">15</button>
-              <button class="opt" data-ok="0">13</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ x = 2, y = 3: 2² + 2·3 = 4 + 6 = 10. Respeta el orden de la pareja.</p><p class="nudge">✕ No cruces el orden: x = 2 y y = 3. El segundo término es x·y = 2·3, no y². Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" disabled>← Anterior</button><button class="btn" data-next="2">Siguiente idea →</button></div>
@@ -359,7 +349,6 @@
         <p class="idea">Ese terreno es, palabra por palabra, lo que tu curso llama <strong>gráfica</strong>:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.2</span>La <strong>gráfica</strong> de f es el conjunto de puntos (x, y, z) del espacio con z = f(x, y): una <strong>superficie</strong> levantada sobre el plano.</p>
         <p class="idea">Léela así: el par (x, y) es el punto del mapa y z = f(x, y) es la altura sobre él. Juntar todas esas alturas arma la superficie.</p>
-        <p class="idea paso">Fija la idea con los retos de abajo.</p>
         <p class="idea paso">Y ojo con lo que viene: ningún terreno acepta cualquier pareja —hay puntos que <strong>rompen</strong> la fórmula. Esa es la siguiente idea.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="grafica" data-level="guiado" data-module="2">
@@ -413,19 +402,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Adentro queda 25 − 9 − 0 = 16, y √16 = 4.</p><p class="nudge">✕ Pista: primero 3² = 9 (no 3), luego 25 − 9 = 16, y por último saca la raíz. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="grafica" data-level="examen" data-module="2">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x, y) = √(36 − x² − y²). Calcula f(4, 2).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">4</button>
-              <button class="opt" data-ok="0">16</button>
-              <button class="opt" data-ok="0">6</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Adentro: 36 − 4² − 2² = 36 − 16 − 4 = 16, y √16 = 4.</p><p class="nudge">✕ Resta los dos cuadrados (16 y 4) antes de la raíz; √36 solo aplica si el punto fuera (0, 0). Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="1">← Anterior</button><button class="btn" data-next="3">Siguiente idea →</button></div>
@@ -458,7 +435,6 @@
         <p class="idea">Reunido todo, el dominio es lo que tu curso define así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.1</span>El <strong>dominio</strong> de f es el conjunto de todas las parejas (x, y) para las que f(x, y) da un número real: las que no rompen ninguna operación.</p>
         <p class="idea">Léelo de vuelta: recorres las tres operaciones peligrosas, impones su condición y te quedas con las parejas que la cumplen.</p>
-        <p class="idea paso">Cázalas con los dos retos de abajo.</p>
         <p class="idea paso">El dominio vigila las <strong>entradas</strong>. La siguiente lección vigila su gemela: las <strong>salidas</strong>.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="dominio" data-level="guiado" data-module="3">
@@ -527,6 +503,36 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
+      <div class="practica checkpoint" data-checkpoint="3">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 1–2</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="grafica" data-level="examen" data-module="2">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x, y) = √(36 − x² − y²). Calcula f(4, 2).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">4</button>
+              <button class="opt" data-ok="0">16</button>
+              <button class="opt" data-ok="0">6</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Adentro: 36 − 4² − 2² = 36 − 16 − 4 = 16, y √16 = 4.</p><p class="nudge">✕ Resta los dos cuadrados (16 y 4) antes de la raíz; √36 solo aplica si el punto fuera (0, 0). Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="funcion_dos_variables" data-level="examen" data-module="1">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x, y) = x² + xy. Calcula f(2, 3).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">10</button>
+              <button class="opt" data-ok="0">15</button>
+              <button class="opt" data-ok="0">13</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ x = 2, y = 3: 2² + 2·3 = 4 + 6 = 10. Respeta el orden de la pareja.</p><p class="nudge">✕ No cruces el orden: x = 2 y y = 3. El segundo término es x·y = 2·3, no y². Intenta de nuevo.</p></div>
+          </div>
+        </div>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
 
@@ -556,7 +562,6 @@
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.1</span>La <strong>imagen</strong> de f es el conjunto de todos los valores f(x, y) que la función llega a producir cuando (x, y) recorre el dominio.</p>
         <p class="idea">Y cuida la diferencia, porque en examen la preguntan:</p>
         <ul class="idea" style="margin:0;padding-left:20px"><li>El <strong>dominio</strong> está hecho de <strong>parejas</strong> (x, y): vive en el mapa.</li><li>La <strong>imagen</strong> está hecha de <strong>números sueltos</strong>: las alturas de salida.</li></ul>
-        <p class="idea paso">Distínguelas con los retos de abajo.</p>
         <p class="idea paso">Con dominio e imagen ya lees el terreno por sus bordes; la siguiente lección lo lee <strong>por dentro</strong>, sin dibujarlo en 3D.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="imagen" data-level="guiado" data-module="4">
@@ -610,19 +615,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ x² + y² va de 0 en adelante; con el signo menos se voltea: su mayor valor es 0 y baja sin tope.</p><p class="nudge">✕ Pista: el menos convierte lo positivo en negativo. El máximo es 0 (en el origen); ¿hacia dónde va el resto? Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="imagen" data-level="examen" data-module="4">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Halla la imagen de f(x, y) = 1 ⁄ (x² + y² + 1).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">El intervalo (0, 1]: vale 1 en el origen y tiende a 0 sin tocarlo</button>
-              <button class="opt" data-ok="0">El intervalo [0, 1], incluido el 0</button>
-              <button class="opt" data-ok="0">Todos los números reales</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ El denominador va de 1 en adelante, así que la fracción vale 1 en el origen y baja acercándose a 0 sin alcanzarlo: (0, 1].</p><p class="nudge">✕ El denominador nunca es infinito, así que la fracción se acerca a 0 pero no llega: el 0 queda fuera. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="3">← Anterior</button><button class="btn" data-next="5">Siguiente idea →</button></div>
@@ -658,7 +651,6 @@
         <p class="idea">Esa idea es lo que tu curso enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.2</span>La <strong>curva de nivel</strong> de altura k de f es el conjunto de puntos (x, y) del dominio donde f(x, y) = k. Con tres variables el análogo es una <strong>superficie de nivel</strong>; el nombre común a ambos es <strong>conjunto de nivel</strong>.</p>
         <p class="idea">Léela de vuelta: fijas una altura k, igualas la fórmula a k y dibujas los puntos que lo cumplen.</p>
-        <p class="idea paso">Practica con los dos retos de abajo.</p>
         <p class="idea paso">Hasta aquí miramos el terreno quieto. La siguiente lección lo mira en <strong>movimiento</strong>: qué pasa al acercarte a un punto.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="curvas_nivel" data-level="guiado" data-module="5">
@@ -712,19 +704,7 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ x² + y² es una suma de cuadrados: nunca vale −4, así que ningún punto lo cumple y el nivel es vacío.</p><p class="nudge">✕ Pista: ¿puede una suma de cuadrados dar un número negativo? Si no, no hay puntos. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
-          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="curvas_nivel" data-level="examen" data-module="5">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Describe la curva de nivel k = 1 de f(x, y) = y − x².</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">Una parábola: y = x² + 1</button>
-              <button class="opt" data-ok="0">Una recta</button>
-              <button class="opt" data-ok="0">Un círculo de radio 1</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ y − x² = 1 se despeja como y = x² + 1: una parábola, no una recta ni un círculo.</p><p class="nudge">✕ Iguala a 1 y despeja la y: queda y = x² + 1. El x² la delata como parábola. Intenta de nuevo.</p></div>
-          </div>
-        </div>
+        
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="4">← Anterior</button><button class="btn" data-next="6">Siguiente idea →</button></div>
@@ -761,7 +741,6 @@
         <p class="idea">La definición del curso dice justo eso:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.3</span>lím<sub>(x,y)→(a,b)</sub> f(x, y) = L significa que f(x, y) se acerca a L cuando (x, y) se acerca a (a, b) <strong>por cualquier camino</strong> dentro del dominio.</p>
         <p class="idea">Léela de vuelta: si dos caminos dan valores distintos, ningún número puede ser ese L único, y el límite no existe.</p>
-        <p class="idea paso">Prueba la lógica con los dos retos de abajo.</p>
         <p class="idea paso">Descartar es barato. Pero para <strong>confirmar</strong> que un límite sí existe, probar caminos nunca alcanza — la siguiente lección trae el truco que los cubre todos.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M6G" data-tema="limites" data-level="guiado" data-module="6">
@@ -830,6 +809,36 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C3_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
+      <div class="practica checkpoint" data-checkpoint="6">
+        <p class="practica-head">Repaso acumulativo <span>· ideas 4–5</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="curvas_nivel" data-level="examen" data-module="5">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Describe la curva de nivel k = 1 de f(x, y) = y − x².</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">Una parábola: y = x² + 1</button>
+              <button class="opt" data-ok="0">Una recta</button>
+              <button class="opt" data-ok="0">Un círculo de radio 1</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ y − x² = 1 se despeja como y = x² + 1: una parábola, no una recta ni un círculo.</p><p class="nudge">✕ Iguala a 1 y despeja la y: queda y = x² + 1. El x² la delata como parábola. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob">
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
+          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="imagen" data-level="examen" data-module="4">
+            <div class="qtag">Sin ayuda</div>
+            <p class="prob-q"><span class="prof">En voz de examen</span>Halla la imagen de f(x, y) = 1 ⁄ (x² + y² + 1).</p>
+            <div class="opts">
+              <button class="opt" data-ok="1">El intervalo (0, 1]: vale 1 en el origen y tiende a 0 sin tocarlo</button>
+              <button class="opt" data-ok="0">El intervalo [0, 1], incluido el 0</button>
+              <button class="opt" data-ok="0">Todos los números reales</button>
+            </div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El denominador va de 1 en adelante, así que la fracción vale 1 en el origen y baja acercándose a 0 sin alcanzarlo: (0, 1].</p><p class="nudge">✕ El denominador nunca es infinito, así que la fracción se acerca a 0 pero no llega: el 0 queda fuera. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+      </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
 
@@ -846,7 +855,7 @@
             <line x1="40" y1="160" x2="286" y2="160" stroke="#181B22" stroke-width="1.5"/>
             <polygon points="292,160 282,155 282,165" fill="#181B22"/>
             <line x1="40" y1="160" x2="40" y2="18" stroke="#181B22" stroke-width="1.5"/>
-            <text x="256" y="177" font-size="12" fill="#4b5563">este</text>
+            <text x="256" y="177" font-size="13" fill="#4b5563">este</text>
             <line x1="40" y1="160" x2="220" y2="160" stroke="#283891" stroke-width="3"/>
             <line x1="220" y1="160" x2="220" y2="60" stroke="#1C7A3A" stroke-width="3"/>
             <line x1="40" y1="160" x2="220" y2="60" stroke="#F5821F" stroke-width="3"/>
@@ -873,7 +882,6 @@
         <div class="fx"><div class="sys"><span class="eq">límite = 0</span></div></div>
         <p class="idea">Esta forma de nombrar el punto es lo que tu curso llama:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 2.4</span>En <strong>coordenadas polares</strong>, cada punto (x, y) se nombra con su distancia al origen r ≥ 0 y su ángulo θ desde el eje x: x = r·cos θ, y = r·sen θ.</p>
-        <p class="idea paso">Asegura el truco con los retos de abajo.</p>
         <p class="idea paso">Con el límite dominado por los dos lados, cierra la unidad la pregunta que los junta: ¿la función es <strong>continua</strong> en el punto?</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7G" data-tema="limites_polares" data-level="guiado" data-module="7">
@@ -973,7 +981,6 @@
         <p class="idea">Tu curso lo enuncia así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.3</span>f es <strong>continua</strong> en (a, b) si se cumplen tres cosas: (i) existe f(a, b); (ii) existe lím<sub>(x,y)→(a,b)</sub> f(x, y); y (iii) los dos coinciden.</p>
         <p class="idea">Léela de vuelta: calculas el valor, calculas el límite y los comparas. Iguales → continua; distintos → salto.</p>
-        <p class="idea paso">Cierra la unidad con los dos retos de abajo.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M8G" data-tema="continuidad" data-level="guiado" data-module="8">
         <div class="qtag">Compruébalo · guiado</div>
@@ -1039,8 +1046,14 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ Existen los dos, pero 4 ≠ 0: falla la tercera condición y hay un salto, así que es discontinua.</p><p class="nudge">✕ Pista: que existan el valor y el límite no basta; además deben ser iguales. Aquí 4 ≠ 0. Intenta de nuevo.</p></div>
           </div>
         </div>
+        
+        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C3_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
+      </div>
+      <div class="practica checkpoint" data-checkpoint="8">
+        <p class="practica-head">Repaso acumulativo <span>· idea 8</span></p>
+        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
           <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="continuidad" data-level="examen" data-module="8">
             <div class="qtag">Sin ayuda</div>
             <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x, y) = xy ⁄ (x² + y²) para (x, y) ≠ (0, 0) y f(0, 0) = 0. ¿Es f continua en (0, 0)?</p>
@@ -1052,7 +1065,6 @@
             <div class="fb" aria-live="polite"><p class="okc">✓ xy ⁄ (x² + y²) no tiene límite en el origen (dos caminos discrepan): sin límite no hay continuidad, sea cual sea el valor asignado.</p><p class="nudge">✕ Antes de comparar, revisa si el límite existe: aquí no. Asignar un valor no arregla un límite ausente. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C3_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="7">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
