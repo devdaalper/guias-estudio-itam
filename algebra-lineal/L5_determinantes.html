@@ -224,16 +224,16 @@
   <main>
 
     <section class="lesson is-active" data-step="1">
-      <header class="lesson-head"><p class="micro">Microlección 1 de 7 · Tema: Definición del determinante</p><h2>El determinante: el factor de área de una máquina</h2><p class="goal">Meta: calcular el determinante de una 2×2 con la cruz.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 1 de 7 · Tema: Definición del determinante</p><h2>El determinante: el factor de área de una matriz</h2><p class="goal">Meta: calcular el determinante de una 2×2 con la cruz.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy conoces el número que manda en toda la unidad: el <strong>determinante</strong>.</p>
         <p class="idea">Vienes de la Unidad 4 sabiendo que una matriz multiplica vectores: le das una flecha y te devuelve otra.</p>
-        <p class="idea">Si le hace eso a <strong>todas</strong> las flechas del plano a la vez, entonces una matriz es una <strong>máquina que transforma el plano entero</strong>.</p>
+        <p class="idea">Si le hace eso a <strong>todas</strong> las flechas del plano a la vez, entonces una matriz es una <strong>matriz que transforma el plano entero</strong>.</p>
         <p class="idea">Es como una app de fotos: metes un dibujo y sale estirado, inclinado o volteado.</p>
         <p class="idea">¿Cómo medimos cuánto deforma? Con un testigo: un cuadradito de 1 × 1, de área 1.</p>
-        <p class="idea">Mételo a la máquina de renglones (2, 0) y (0, 3). Sale un rectángulo de 2 × 3:</p>
+        <p class="idea">Aplica la matriz con renglones (2, 0) y (0, 3) al cuadrado unitario. Sale un rectángulo de 2 × 3:</p>
         <figure class="visual">
-          <svg viewBox="0 0 520 250" role="img" aria-label="Un cuadrado de área 1 entra a la máquina y sale un rectángulo de área 6">
+          <svg viewBox="0 0 520 250" role="img" aria-label="Un cuadrado de área 1 entra a la matriz y sale un rectángulo de área 6">
             <defs><marker id="arrM" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#181B22"/></marker></defs>
             <g stroke="#E1E5EA"><path d="M40 60H180M40 100H180M40 140H180M40 180H180"/><path d="M60 40V200M100 40V200M140 40V200M180 40V200"/></g>
             <rect x="60" y="140" width="40" height="40" fill="#F5821F" fill-opacity="0.3" stroke="#C75D08" stroke-width="2.5"/>
@@ -246,12 +246,12 @@
             <rect x="395" y="85" width="70" height="105" fill="#39B54A" fill-opacity="0.25" stroke="#1C7A3A" stroke-width="2.5"/>
             <text x="435" y="228" text-anchor="middle" font-size="16" fill="#475569">área 6 = 2·3</text>
           </svg>
-          <figcaption>El cuadradito testigo entra con área 1 y sale con área 6: la máquina multiplica áreas por 6.</figcaption>
+          <figcaption>El cuadradito testigo entra con área 1 y sale con área 6: la matriz multiplica áreas por 6.</figcaption>
         </figure>
         <p class="idea">Y le pasa lo mismo a cualquier figura: un dibujo de área 10 sale con área 60.</p>
-        <p class="idea key">Toda la máquina cabe en un dato — <strong>multiplica las áreas por 6</strong>. Ese factor de área es el <strong>determinante</strong>, y solo existe para matrices <strong>cuadradas</strong>.</p>
+        <p class="idea key">Toda la matriz cabe en un dato — <strong>multiplica las áreas por 6</strong>. Ese factor de área es el <strong>determinante</strong>, y solo existe para matrices <strong>cuadradas</strong>.</p>
         <p class="idea">Se escribe de dos formas que se leen igual: la abreviatura det(A), o la matriz entre barras verticales, |A|.</p>
-        <p class="idea">¿Y si los cuatro números están ocupados? Toma la máquina de renglones (2, 1) y (1, 3). La diagonal que baja (↘) sigue estirando: 2·3.</p>
+        <p class="idea">¿Y si los cuatro números están ocupados? Toma la matriz de renglones (2, 1) y (1, 3). La diagonal que baja (↘) sigue estirando: 2·3.</p>
         <p class="idea">Pero el 1 y el 1 de la diagonal que sube (↗) inclinan el cuadradito y le roban área: 1·1.</p>
         <p class="idea">El área que queda es la resta de los dos productos:</p>
         <div class="fx"><div class="sys"><span class="eq">det = 2·3 − 1·1</span><span class="eq">= 6 − 1 = 5</span></div></div>
@@ -285,7 +285,7 @@
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="determinante_2x2" data-level="guiado" data-module="1">
         <div class="qtag">Compruébalo · guiado</div>
-        <p class="q"><strong>Arma la cruz.</strong> En la máquina de renglones (2, 1) y (1, 3), ¿cuál producto se resta?</p>
+        <p class="q"><strong>Arma la cruz.</strong> En la matriz de renglones (2, 1) y (1, 3), ¿cuál producto se resta?</p>
         <div class="opts">
           <button class="opt" data-ok="1">1·1, el de la diagonal que sube (↗)</button>
           <button class="opt" data-ok="0">2·3, el de la diagonal que baja (↘)</button>
@@ -304,7 +304,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ 4·5 = 20, 2·3 = 6, y 20 − 6 = 14.</p><p class="nudge">✕ Multiplica esquina con esquina en cada diagonal y resta la que sube a la que baja. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos retos con la cruz. El primero lo armamos juntos; el apoyo disminuye en los siguientes.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -318,7 +318,7 @@
               <button class="opt" data-ok="0">2, la resta siempre es positiva</button>
               <button class="opt" data-ok="0">10, se suman los dos productos</button>
             </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ 4 − 6 = −2. El signo negativo no es error: avisa que la máquina voltea en espejo.</p><p class="nudge">✕ Resta la diagonal que sube a la que baja, sin cambiar el orden ni sumar. Intenta de nuevo.</p></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 4 − 6 = −2. El signo negativo no es error: avisa que la matriz voltea en espejo.</p><p class="nudge">✕ Resta la diagonal que sube a la que baja, sin cambiar el orden ni sumar. Intenta de nuevo.</p></div>
           </div>
         </div>
         <div class="prob">
@@ -341,13 +341,12 @@
     </section>
 
     <section class="lesson" data-step="2">
-      <header class="lesson-head"><p class="micro">Microlección 2 de 7 · Tema: Determinante e invertibilidad</p><h2>Determinante cero: la máquina que no se deshace</h2><p class="goal">Meta: decidir si una matriz tiene inversa mirando su determinante.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 2 de 7 · Tema: Determinante e invertibilidad</p><h2>Determinante cero: cuándo no existe la inversa</h2><p class="goal">Meta: decidir si una matriz tiene inversa mirando su determinante.</p></header>
       <div class="sec">
         <p class="idea lede">Ya calculas el número; hoy lo pones a decidir lo más importante: la <strong>invertibilidad</strong>.</p>
-        <p class="idea">La cruz puede dar cualquier resultado: positivo, negativo… o cero. Cada uno cuenta una historia distinta de la máquina.</p>
+        <p class="idea">La cruz puede dar cualquier resultado: positivo, negativo… o cero. El signo y el valor tienen interpretaciones matemáticas distintas.</p>
         <p class="idea">Si sale negativo, no es error: el tamaño dice cuánto estira, y el signo avisa que el dibujo salió <strong>volteado en espejo</strong>.</p>
-        <p class="idea">Es como esas selfies con izquierda y derecha intercambiadas.</p>
-        <p class="idea">El caso serio es el <strong>cero</strong>: el cuadradito testigo salió con área 0. ¿Y qué figura tiene área cero? Una <strong>línea</strong>. La máquina lo aplastó.</p>
+        <p class="idea">El caso serio es el <strong>cero</strong>: el cuadradito testigo salió con área 0. ¿Y qué figura tiene área cero? Una <strong>línea</strong>. La matriz lo aplastó.</p>
         <figure class="visual">
           <svg viewBox="0 0 520 230" role="img" aria-label="Dos renglones alineados: el paralelogramo se aplasta a una línea">
             <defs><marker id="arrA" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto"><path d="M0 0L14 5L0 10Z" fill="#F5821F"/></marker><marker id="arrB" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto"><path d="M0 0L14 5L0 10Z" fill="#283891"/></marker></defs>
@@ -362,27 +361,31 @@
           <figcaption>El renglón (6, 2) es el doble del (3, 1): pisan la misma línea y no encierran nada.</figcaption>
         </figure>
         <p class="idea">Míralo en el dibujo: las dos flechas apuntan igual, así que el paralelogramo se aplasta. La cruz lo confirma: 3·2 − 1·6 = 0.</p>
-        <p class="idea key">Y una máquina que aplasta <strong>no se puede deshacer</strong>.</p>
+        <p class="idea key">Y una matriz que aplasta <strong>no se puede deshacer</strong>.</p>
         <p class="idea">Muchos puntos cayeron sobre el mismo, y ya nadie sabe de dónde venía cada uno.</p>
         <p class="idea">Deshacer tiene nombre desde la Unidad 4: la <strong>inversa</strong>. Aplicas A, aplicas su inversa, y el plano vuelve a su lugar.</p>
         <p class="idea">A la matriz que sí tiene inversa tu curso también le dice <strong>no singular</strong>.</p>
-        <p class="idea">Juega con la máquina tú misma: elige los dos renglones y mira el factor de área. Busca el estirón, el espejo y el aplastón:</p>
+        <p class="idea">Juega con la matriz tú misma: elige los dos renglones y mira el factor de área. Busca el estirón, el espejo y el aplastón:</p>
         <div class="mixlab" aria-label="Laboratorio del factor de área">
           <div class="mix-grid">
             <div class="recipe"><h4>Renglón 1 · (a, b)</h4><p>la primera flecha</p><div class="pick" data-mix="a"><button data-value="0" class="is-on">(3, 1)</button><button data-value="1">(2, 0)</button><button data-value="2">(1, 3)</button></div></div>
             <div class="recipe"><h4>Renglón 2 · (c, d)</h4><p>la segunda flecha</p><div class="pick" data-mix="b"><button data-value="0" class="is-on">(1, 2)</button><button data-value="1">(6, 2)</button><button data-value="2">(0, 3)</button></div></div>
           </div>
-          <div class="mix-result"><p>El factor de área de esta máquina</p><strong id="mixWords">det = 5 · estira las áreas ×5</strong><p id="mixFormula">3·2 − 1·1 = 5</p></div>
+          <div class="mix-result"><p>El factor de área de esta matriz</p><strong id="mixWords">det = 5 · estira las áreas ×5</strong><p id="mixFormula">3·2 − 1·1 = 5</p></div>
         </div>
-        <p class="idea">¿Encontraste el 0 con (3, 1) y (6, 2)? Esa es la máquina sin regreso. Tu curso lo enuncia en una línea:</p>
+        <p class="idea">¿Encontraste el 0 con (3, 1) y (6, 2)? Esa es la matriz sin regreso. Tu curso lo enuncia en una línea:</p>
+        <!-- aterrizaje-matematico: puente -->
+        <p class="idea">Las observaciones de área se traducen en una cadena algebraica precisa:</p>
+<div class="fx"><div class="sys"><span class="eq">det(A) = 0</span><span class="eq">⇔ las columnas son dependientes</span><span class="eq">⇔ existe x ≠ 0 con Ax = 0</span><span class="eq">⇔ A no tiene inversa</span></div></div>
+<p class="idea key">El determinante cero no es solo una imagen aplastada: certifica que el sistema Ax = 0 tiene una solución no trivial.</p>
         <p class="fdef"><span class="flbl">Teorema · Resumen del curso, Teo. 5.1</span>Una matriz es <strong>no singular</strong> si su determinante es diferente de cero.</p>
-        <p class="idea">Léelo de vuelta con tus palabras: det ≠ 0, la máquina no aplasta y hay inversa; det = 0, aplasta y no la hay. Un solo número decide, sin intentar invertir nada:</p>
+        <p class="idea">Léelo de vuelta con tus palabras: det ≠ 0, la matriz no aplasta y hay inversa; det = 0, aplasta y no la hay. Un solo número decide, sin intentar invertir nada:</p>
         <div class="fx"><div class="sys"><span class="eq">det(A) = 0 → sin inversa</span><span class="eq">det(A) ≠ 0 → sí hay inversa</span></div></div>
         <p class="idea paso">Todo esto fue en 2×2. Lo que sigue es el plan para las matrices grandes: <strong>desarmarlas en piezas</strong>.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="invertibilidad" data-level="guiado" data-module="2">
         <div class="qtag">Compruébalo · guiado</div>
-        <p class="q"><strong>Lee la máquina.</strong> Renglones (3, 1) y (6, 2), como en el laboratorio. ¿Qué hace esta máquina con el plano?</p>
+        <p class="q"><strong>Lee la matriz.</strong> Renglones (3, 1) y (6, 2), como en el laboratorio. ¿Qué hace esta matriz con el plano?</p>
         <div class="opts">
           <button class="opt" data-ok="1">Lo aplasta: det = 0, no tiene inversa</button>
           <button class="opt" data-ok="0">Lo estira ×12 y sí tiene inversa</button>
@@ -398,10 +401,10 @@
           <button class="opt" data-ok="0">Sí: su determinante es 20</button>
           <button class="opt" data-ok="0">Sí: ninguna de sus entradas es cero</button>
         </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ 20 − 20 = 0, y además (10, 4) es el doble de (5, 2): la máquina aplasta y no hay regreso.</p><p class="nudge">✕ Las entradas no deciden; decide el determinante. Haz la cruz y mira si da cero.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ 20 − 20 = 0, y además (10, 4) es el doble de (5, 2): la matriz aplasta y no hay regreso.</p><p class="nudge">✕ Las entradas no deciden; decide el determinante. Haz la cruz y mira si da cero.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos retos para decidir la inversa sin invertir nada: un solo número, el determinante, resuelve.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -411,7 +414,7 @@
             <div class="qtag">Da el paso que falta</div>
             <p class="q">El determinante dio 0. Entonces, ¿la matriz tiene inversa?</p>
             <div class="opts">
-              <button class="opt" data-ok="1">No: determinante 0, la máquina aplasta y no hay regreso</button>
+              <button class="opt" data-ok="1">No: determinante 0, la matriz aplasta y no hay regreso</button>
               <button class="opt" data-ok="0">Sí: toda matriz cuadrada tiene inversa</button>
               <button class="opt" data-ok="0">Sí: ninguna entrada vale cero</button>
             </div>
@@ -428,7 +431,7 @@
               <button class="opt" data-ok="0">No: su determinante es 0</button>
               <button class="opt" data-ok="0">No se puede saber sin construir la inversa</button>
             </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ 12 − 2 = 10 ≠ 0: la máquina no aplasta, así que sí hay inversa.</p><p class="nudge">✕ Pista: haz la cruz 3·4 − 1·2 y mira si el resultado es cero o no. Intenta de nuevo.</p></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 12 − 2 = 10 ≠ 0: la matriz no aplasta, así que sí hay inversa.</p><p class="nudge">✕ Pista: haz la cruz 3·4 − 1·2 y mira si el resultado es cero o no. Intenta de nuevo.</p></div>
           </div>
         </div>
         
@@ -500,7 +503,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ Tapas renglón 3 y columna 1: queda la 2×2 de renglones (2, 0) y (3, 1), con cruz 2·1 − 0·3 = 2. El signo de (3, 1) es + porque 3 + 1 = 4 es par.</p><p class="nudge">✕ Primero el menor (tapa renglón 3 y columna 1 y haz la cruz de lo que sobra); después el signo con la suma 3 + 1.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres retos de fabricar piezas: primero el menor con la tapada de dedo, después el signo del tablero.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -531,10 +534,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="cofactores" data-level="examen" data-module="3">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Para A de renglones (1, 2, 1), (3, 0, 4) y (2, 1, 5), calcula el cofactor A<sub>32</sub>.</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Para A de renglones (1, 2, 1), (3, 0, 4) y (2, 1, 5), calcula el cofactor A<sub>32</sub>.</p>
             <div class="opts">
               <button class="opt" data-ok="1">−1</button>
               <button class="opt" data-ok="0">+1</button>
@@ -545,35 +548,48 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="practica checkpoint" data-checkpoint="3">
-        <p class="practica-head">Repaso acumulativo <span>· ideas 1–2</span></p>
-        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="invertibilidad" data-level="examen" data-module="2">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>¿Para qué valor de k la matriz A de renglones (k, 2) y (3, 6) es singular?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">k = 1</button>
-              <button class="opt" data-ok="0">k = 0</button>
-              <button class="opt" data-ok="0">k = 6</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Singular es det = 0. Aquí det(A) = 6k − 6, y 6k − 6 = 0 da k = 1. Con k = 1 los renglones quedan proporcionales.</p><p class="nudge">✕ Singular significa determinante cero. Arma det(A) = k·6 − 2·3 e iguala a 0. Intenta de nuevo.</p></div>
+      <div class="practica checkpoint exam-bridge" data-checkpoint="3">
+        <p class="practica-head">Puente al examen <span>· encontrar el parámetro que vuelve singular una matriz</span></p>
+        <p class="practica-intro"><strong>Caso.</strong> Determina para qué valor de a la matriz A deja de ser invertible. Justifica mediante el determinante y comprueba la dependencia.</p>
+        <div class="fx"><div class="sys"><span class="eq">R1 = (a, 2, 0)</span><span class="eq">R2 = (0, 1, 1)</span><span class="eq">R3 = (1, 3, 4)</span></div></div>
+        <p class="practica-intro"><strong>Trabájalo en papel.</strong> No adivines el final: cada decisión usa el resultado anterior.</p>
+        <div class="prob exam-step">
+          <div class="plevel p-res"><b>1</b> Decide el plan</div>
+          <div class="check challenge" data-kind="item" data-id="PX3A" data-tema="expansion_cofactores" data-level="guiado" data-module="3">
+            <div class="qtag">Elige el camino</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué expansión aprovecha mejor los ceros?</p>
+            <div class="opts"><button class="opt" data-ok="1">Desarrollar por el primer renglón</button><button class="opt" data-ok="0">Desarrollar obligatoriamente por la segunda columna</button><button class="opt" data-ok="0">Sumar todas las entradas del primer renglón</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El cero de la tercera entrada elimina uno de los tres términos.</p><p class="nudge">✕ Elige el renglón o columna que produzca menos menores. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="determinante_2x2" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A la matriz de renglones (6, 2) y (5, 3). Calcula det(A).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">8</button>
-              <button class="opt" data-ok="0">28</button>
-              <button class="opt" data-ok="0">−8</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ 6·3 = 18, 2·5 = 10, y 18 − 10 = 8.</p><p class="nudge">✕ Es a·d − b·c: 6·3 menos 2·5. No sumes los productos ni inviertas la resta. Intenta de nuevo.</p></div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>2</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX3B" data-tema="determinante_parametro" data-level="juntos" data-module="3">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuál es det(A)?</p>
+            <div class="opts"><button class="opt" data-ok="1">a + 2</button><button class="opt" data-ok="0">a − 2</button><button class="opt" data-ok="0">4a + 2</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El primer menor vale 1 y el segundo aporta +2.</p><p class="nudge">✕ Cuida el signo negativo del cofactor en la posición (1,2). Intenta de nuevo.</p></div>
           </div>
         </div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>3</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX3C" data-tema="singularidad" data-level="juntos" data-module="2">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Para qué valor A es singular?</p>
+            <div class="opts"><button class="opt" data-ok="1">a = −2</button><button class="opt" data-ok="0">a = 2</button><button class="opt" data-ok="0">a = 0</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Una matriz es singular exactamente cuando su determinante vale cero.</p><p class="nudge">✕ Resuelve a + 2 = 0. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-ex"><b>4</b> Concluye y verifica</div>
+          <div class="check challenge" data-kind="item" data-id="PX3D" data-tema="verificacion_dependencia" data-level="examen" data-module="5">
+            <div class="qtag">Cierra el problema</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>Con a = −2, ¿qué relación comprueba la dependencia de los renglones?</p>
+            <div class="opts"><button class="opt" data-ok="1">R3 = (−1/2)R1 + 4R2</button><button class="opt" data-ok="0">R3 = R1 + R2</button><button class="opt" data-ok="0">R3 = 2R1 − R2</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (−1/2)(−2,2,0)+4(0,1,1)=(1,3,4).</p><p class="nudge">✕ Sustituye a = −2 y prueba la combinación entrada por entrada. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">El <a href="L5_cuadernillo-papel.html">cuadernillo</a> continúa este patrón con desarrollo completo y problemas sin pistas.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
@@ -617,7 +633,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ Solo vive el 1 de (2, 2), con signo +. Su menor es la cruz de (3, 2) y (2, 1): 3·1 − 2·2 = −1, y 1·(−1) = −1.</p><p class="nudge">✕ Tapa renglón 2 y columna 2 para el menor del 1, y cuida el orden de la resta en la cruz.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres retos de armar el 3×3 completo: primero aprovechando los ceros, al final con los tres términos vivos.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -648,10 +664,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="expansion_cofactores" data-level="examen" data-module="4">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A de renglones (1, 1, 2), (2, 1, 0) y (1, 3, 1). Calcula det(A) desarrollando por el primer renglón.</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Sea A de renglones (1, 1, 2), (2, 1, 0) y (1, 3, 1). Calcula det(A) desarrollando por el primer renglón.</p>
             <div class="opts">
               <button class="opt" data-ok="1">9</button>
               <button class="opt" data-ok="0">13</button>
@@ -677,8 +693,8 @@
         <div class="fx"><div class="sys"><span class="eq">det(T) = 2·3·1</span><span class="eq">= 6</span></div></div>
         <p class="idea key">Triangular → <strong>multiplica la diagonal</strong>. Los números de arriba no cuentan para nada.</p>
         <p class="idea">¿Y por qué dos renglones iguales o proporcionales matan el determinante?</p>
-        <p class="idea">Ya lo sabes de la lección 2: dos flechas que apuntan igual no encierran área — la máquina aplasta.</p>
-        <p class="idea">Quedan dos avisos de manejo: intercambiar dos renglones voltea el signo (el espejo), y las máquinas en serie multiplican sus factores:</p>
+        <p class="idea">Ya lo sabes de la lección 2: dos flechas que apuntan igual no encierran área — la matriz aplasta.</p>
+        <p class="idea">Quedan dos avisos de manejo: intercambiar dos renglones voltea el signo (el espejo), y las matrices en serie multiplican sus factores:</p>
         <div class="fx"><div class="sys"><span class="eq">det(AB) = det(A)·det(B)</span></div></div>
         <p class="idea">Los teoremas del curso dicen todo esto en corto:</p>
         <p class="fdef"><span class="flbl">Teoremas · Resumen del curso, Teos. 5.2 a 5.4 y Cor. 5.1</span>det(A) = det(A<sup>T</sup>) y det(AB) = det(A)·det(B) (Teo. 5.2). Si A es triangular, det(A) = a<sub>11</sub>a<sub>22</sub>⋯a<sub>nn</sub>, el producto de su diagonal (Teo. 5.3). Intercambiar dos renglones cambia el signo del determinante; multiplicar un renglón por c lo multiplica por c; sumar a un renglón un múltiplo de otro no lo altera (Teo. 5.4). Si dos renglones (o columnas) son iguales, det(A) = 0 (Cor. 5.1).</p>
@@ -707,7 +723,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ 4·2·3 = 24, directo de la diagonal, sin expandir nada.</p><p class="nudge">✕ No sumes: el atajo multiplica los tres números de la diagonal. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos retos con los atajos: la triangular que se multiplica y los renglones que anuncian un cero.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -744,7 +760,7 @@
     </section>
 
     <section class="lesson" data-step="6">
-      <header class="lesson-head"><p class="micro">Microlección 6 de 7 · Tema: La adjunta y la inversa</p><h2>La adjunta: la receta de la inversa</h2><p class="goal">Meta: armar la adjunta de una 2×2 en dos movimientos.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 6 de 7 · Tema: La adjunta y la inversa</p><h2>La adjunta: construir la inversa</h2><p class="goal">Meta: armar la adjunta de una 2×2 en dos movimientos.</p></header>
       <div class="sec">
         <p class="idea lede">Hoy cobras la promesa: la <strong>adjunta</strong>, la matriz con la que el determinante fabrica la inversa.</p>
         <p class="idea">En la lección 2 el determinante solo avisaba si la inversa existe. Hoy la construye, con tres movimientos sobre los propios números de A:</p>
@@ -787,7 +803,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ El 5 y el 1 se intercambian; el 2 y el 3 cambian de signo. Con det = 5·1 − 2·3 = −1, la inversa sería la adjunta entre −1.</p><p class="nudge">✕ Solo la diagonal principal se intercambia; los otros dos se quedan en su lugar pero con signo cambiado.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres retos con los dos movimientos: intercambiar la diagonal principal y cambiar el signo de la otra.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -818,10 +834,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="adjunta_inversa" data-level="examen" data-module="6">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A la matriz de renglones (2, −1) y (−3, 2). Halla A<sup>−1</sup>.</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Sea A la matriz de renglones (2, −1) y (−3, 2). Halla A<sup>−1</sup>.</p>
             <div class="opts">
               <button class="opt" data-ok="1">Renglones (2, 1) y (3, 2)</button>
               <button class="opt" data-ok="0">Renglones (2, −1) y (−3, 2)</button>
@@ -832,22 +848,30 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L5_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="practica checkpoint" data-checkpoint="6">
-        <p class="practica-head">Repaso acumulativo <span>· idea 5</span></p>
-        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="propiedades" data-level="examen" data-module="5">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A la triangular de renglones (3, 8, 2), (0, −2, 5) y (0, 0, 4). Calcula det(A).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">−24</button>
-              <button class="opt" data-ok="0">24</button>
-              <button class="opt" data-ok="0">5</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Producto de la diagonal: 3·(−2)·4 = −24. El signo negativo de la diagonal viaja al resultado.</p><p class="nudge">✕ Multiplica la diagonal completa, con todo y el signo del −2. No lo sumes ni lo ignores. Intenta de nuevo.</p></div>
+      <div class="practica checkpoint exam-bridge" data-checkpoint="6">
+        <p class="practica-head">Puente al examen <span>· seguir el efecto de operaciones sobre el determinante</span></p>
+        <p class="practica-intro"><strong>Caso.</strong> Se sabe que det(A) = −6. B se obtiene intercambiando R1 y R2, y después multiplicando R3 por 3.</p>
+        <div class="fx"><div class="sys"><span class="eq">det(A) = −6</span><span class="eq">A → intercambio → escala</span></div></div>
+        <p class="practica-intro"><strong>Trabájalo en papel.</strong> No adivines el final: cada decisión usa el resultado anterior.</p>
+        <div class="prob exam-step">
+          <div class="plevel p-res"><b>1</b> Decide el plan</div>
+          <div class="check challenge" data-kind="item" data-id="PX6A" data-tema="propiedades_determinante" data-level="guiado" data-module="5">
+            <div class="qtag">Elige el camino</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>Después de intercambiar R1 y R2, ¿cuánto vale el determinante?</p>
+            <div class="opts"><button class="opt" data-ok="1">6</button><button class="opt" data-ok="0">−6</button><button class="opt" data-ok="0">−12</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Un intercambio de renglones cambia el signo.</p><p class="nudge">✕ No vuelvas a calcular la matriz: sigue el efecto de la operación. Intenta de nuevo.</p></div>
           </div>
         </div>
+        <div class="prob exam-step">
+          <div class="plevel p-ex"><b>2</b> Concluye y verifica</div>
+          <div class="check challenge" data-kind="item" data-id="PX6B" data-tema="propiedades_determinante" data-level="examen" data-module="5">
+            <div class="qtag">Cierra el problema</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>Después de multiplicar R3 por 3, ¿cuánto vale det(B)?</p>
+            <div class="opts"><button class="opt" data-ok="1">18</button><button class="opt" data-ok="0">6</button><button class="opt" data-ok="0">54</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Escalar un renglón por 3 escala el determinante por 3.</p><p class="nudge">✕ Parte del valor 6 que dejó el intercambio. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">El <a href="L5_cuadernillo-papel.html">cuadernillo</a> continúa este patrón con desarrollo completo y problemas sin pistas.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Última idea →</button></div>
     </section>
@@ -856,7 +880,7 @@
       <header class="lesson-head"><p class="micro">Microlección 7 de 7 · Tema: Regla de Cramer</p><h2>La regla de Cramer: sistemas por determinantes</h2><p class="goal">Meta: despejar una incógnita dividiendo dos determinantes.</p></header>
       <div class="sec">
         <p class="idea lede">Última pieza: la <strong>regla de Cramer</strong> — resolver un sistema completo con puros determinantes.</p>
-        <p class="idea">Un sistema tiene solución única justo cuando su máquina de coeficientes no aplasta: det ≠ 0, tu Teorema 5.1.</p>
+        <p class="idea">Un sistema tiene solución única justo cuando su matriz de coeficientes no aplasta: det ≠ 0, tu Teorema 5.1.</p>
         <p class="idea">Cramer aprovecha eso: cada incógnita sale de <strong>dividir dos determinantes</strong>.</p>
         <p class="idea">Paso a paso con este sistema:</p>
         <div class="fx"><div class="sys"><span class="eq">2x + <span class="unknown">y</span> = 5</span><span class="eq"><span class="unknown">x</span> + 3y = 10</span></div></div>
@@ -897,6 +921,40 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ det del sistema: 3·1 − 2·1 = 1. det de x, con (8, 3) en la columna de x: 8·1 − 2·3 = 2. Y x = 2 ÷ 1 = 2.</p><p class="nudge">✕ Arma dos determinantes: el del sistema y el que lleva los resultados (8, 3) en la columna de x. Luego divide.</p></div>
       </div>
 
+      <div class="practica checkpoint exam-bridge" data-checkpoint="7">
+        <p class="practica-head">Puente al examen <span>· resolver un sistema completo con Cramer</span></p>
+        <p class="practica-intro"><strong>Caso final.</strong> Resuelve el sistema con la regla de Cramer y comprueba el resultado en las dos ecuaciones.</p>
+        <div class="fx"><div class="sys"><span class="eq">2x + y = 5</span><span class="eq">x − y = 1</span></div></div>
+        <p class="practica-intro"><strong>Trabájalo en papel.</strong> No adivines el final: cada decisión usa el resultado anterior.</p>
+        <div class="prob exam-step">
+          <div class="plevel p-res"><b>1</b> Decide el plan</div>
+          <div class="check challenge" data-kind="item" data-id="PX7A" data-tema="cramer_determinantes" data-level="guiado" data-module="7">
+            <div class="qtag">Elige el camino</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuáles son D, D<sub>x</sub> y D<sub>y</sub>?</p>
+            <div class="opts"><button class="opt" data-ok="1">D = −3, Dₓ = −6, Dᵧ = −3</button><button class="opt" data-ok="0">D = 3, Dₓ = 6, Dᵧ = 3</button><button class="opt" data-ok="0">D = −3, Dₓ = −3, Dᵧ = −6</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Calcula cada determinante conservando la columna que no se reemplaza.</p><p class="nudge">✕ En Dₓ sustituye la primera columna; en Dᵧ, la segunda. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>2</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX7B" data-tema="cramer_solucion" data-level="juntos" data-module="7">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué solución produce Cramer?</p>
+            <div class="opts"><button class="opt" data-ok="1">x = 2, y = 1</button><button class="opt" data-ok="0">x = 1, y = 2</button><button class="opt" data-ok="0">x = −2, y = −1</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ x = Dₓ/D = 2 y y = Dᵧ/D = 1.</p><p class="nudge">✕ Divide cada determinante reemplazado entre D. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-ex"><b>3</b> Concluye y verifica</div>
+          <div class="check challenge" data-kind="item" data-id="PX7C" data-tema="verificacion_sistema" data-level="examen" data-module="7">
+            <div class="qtag">Cierra el problema</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué sustitución verifica las dos ecuaciones?</p>
+            <div class="opts"><button class="opt" data-ok="1">2·2 + 1 = 5 y 2 − 1 = 1</button><button class="opt" data-ok="0">2·1 + 2 = 5 y 1 − 2 = 1</button><button class="opt" data-ok="0">2·2 − 1 = 5 y 2 + 1 = 1</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La pareja satisface simultáneamente los dos renglones.</p><p class="nudge">✕ Una solución no queda comprobada hasta sustituirla en ambas ecuaciones. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">El <a href="L5_cuadernillo-papel.html">cuadernillo</a> continúa este patrón con desarrollo completo y problemas sin pistas.</p>
+      </div>
       <section class="finish">
         <h3>Cierra sin mirar arriba</h3>
         <p>Explica en voz alta esta cadena: determinante → cero aplasta → menor y cofactor → expansión → atajos → adjunta → Cramer.</p>
@@ -910,7 +968,7 @@
       <nav class="nav-lecs"><a href="L5_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L5_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres retos con Cramer: cada incógnita es un cociente de dos determinantes, sin reducir la matriz.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -941,10 +999,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="regla_de_cramer" data-level="examen" data-module="7">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Con el sistema 4x + 3y = 18, 2x + y = 8, usa la regla de Cramer para hallar y.</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Con el sistema 4x + 3y = 18, 2x + y = 8, usa la regla de Cramer para hallar y.</p>
             <div class="opts">
               <button class="opt" data-ok="1">y = 2</button>
               <button class="opt" data-ok="0">y = −4</button>

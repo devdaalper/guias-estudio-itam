@@ -203,7 +203,7 @@
   <header class="hero">
     <p class="kick">Cálculo Multivariado · Unidad 6</p>
     <h1>Cuando una ecuación <mark>esconde</mark> una función</h1>
-    <p class="lead">Una idea a la vez, sabiendo siempre a dónde vas: derivar sin despejar, deshacer una máquina y medir cuánto estira una transformación. Cada lección anuncia su concepto del temario y lo lleva de lo cotidiano hasta su teorema.</p>
+    <p class="lead">Una idea a la vez, sabiendo siempre a dónde vas: derivar sin despejar, deshacer una función y medir cuánto estira una transformación. Cada lección anuncia su concepto del temario y lo lleva de lo cotidiano hasta su teorema.</p>
     <div class="today">
       <span class="n" id="heroStep">1</span>
       <p><b id="heroGoal">Reconocer la función escondida cerca de un punto.</b><small>Avanza con libertad. Un error nunca bloquea el siguiente paso.</small></p>
@@ -227,8 +227,8 @@
       <div class="sec">
         <p class="idea lede">Hoy conoces al concepto que abre toda la unidad: la <strong>función implícita</strong>.</p>
         <p class="idea">El nombre suena técnico, pero nace de algo que ya distingues: cuándo una regla te da un único resultado y cuándo te da varios.</p>
-        <p class="idea">Una función es una <strong>máquina</strong>: le das una x y te devuelve un único y. Por ejemplo y = 2x + 1: con x = 3 sale 7, y solo 7.</p>
-        <p class="idea key">En esa máquina la y está <strong>despejada</strong>, sola de un lado. Cuando se ve así, la función es <strong>explícita</strong>.</p>
+        <p class="idea">Una función es una <strong>función</strong>: le das una x y te devuelve un único y. Por ejemplo y = 2x + 1: con x = 3 sale 7, y solo 7.</p>
+        <p class="idea key">En esa función la y está <strong>despejada</strong>, sola de un lado. Cuando se ve así, la función es <strong>explícita</strong>.</p>
         <p class="idea">Ahora mira la ecuación de un aro de alambre circular, un caso donde la y no está sola:</p>
         <div class="fx"><div class="sys"><span class="eq">x² + y² = 25</span></div></div>
         <p class="idea">Aquí la x y la y vienen <strong>amarradas</strong> en un mismo renglón. La regla existe, pero las instrucciones de la y están guardadas adentro.</p>
@@ -255,7 +255,7 @@
           </svg>
           <figcaption>La circunferencia entera falla la prueba; un trocito cerca del punto sí es función.</figcaption>
         </figure>
-        <p class="idea">Fíjate cerca de <strong>(3, 4)</strong> —solo el arco de arriba—. Ahí, a cada x le toca un único y: en ese trozo sí hay máquina.</p>
+        <p class="idea">Fíjate cerca de <strong>(3, 4)</strong> —solo el arco de arriba—. Ahí, a cada x le toca un único y: en ese trozo sí hay función.</p>
         <p class="idea">Y con esto ya llegaste. Una ecuación que, cerca de un punto, deja a una variable como función de la otra: eso es una <strong>función implícita</strong>.</p>
         <p class="idea">Tu curso lo plantea así:</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.1</span>Una ecuación F(x, y) = 0 define a y como <strong>función implícita</strong> de x cerca de un punto cuando, en un entorno de ese punto, a cada x le corresponde un único y que cumple la ecuación.</p>
@@ -282,7 +282,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ 25 + y² = 169 da y² = 144: dos raíces, 12 y −12.</p><p class="nudge">✕ Resuelve y² = 169 − 25 y cuenta las raíces. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos problemas como en un examen: reconocer cuándo una ecuación esconde una función cerca de un punto. El primero lo armamos juntos.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -347,10 +347,10 @@
           <figure class="visual" id="tanPlane"></figure>
           <div class="mix-result"><p>Pendiente de la tangente</p><strong id="tanSlope">dy/dx = −3/4</strong><p id="tanNote">En (3, 4) baja suave hacia la derecha.</p></div>
         </div>
-        <p class="idea">¿Viste el borde derecho (5, 0)? Ahí F<sub>y</sub> = 2y = 0, la tangente es vertical y la función escondida desaparece. Donde la fórmula falla, la máquina también.</p>
+        <p class="idea">¿Viste el borde derecho (5, 0)? Ahí F<sub>y</sub> = 2y = 0, la tangente es vertical y la función escondida desaparece. Donde la fórmula falla, la función también.</p>
         <p class="idea">Todo junto tiene nombre. Tu curso lo enuncia así:</p>
         <p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.1</span>Si F(x, y) = 0 y en un punto <strong>F<sub>y</sub> ≠ 0</strong>, entonces cerca de ahí y es función de x y su pendiente es dy/dx = −F<sub>x</sub>/F<sub>y</sub>.</p>
-        <p class="idea">Léelo por partes: «F<sub>y</sub> ≠ 0» es el permiso (la máquina existe) y «dy/dx = −F<sub>x</sub>/F<sub>y</sub>» es la pendiente que te llevas.</p>
+        <p class="idea">Léelo por partes: «F<sub>y</sub> ≠ 0» es el permiso (la función existe) y «dy/dx = −F<sub>x</sub>/F<sub>y</sub>» es la pendiente que te llevas.</p>
         <p class="idea paso">Y en cuanto la asegures, subimos un piso: la misma idea cuando la ecuación amarra <strong>tres</strong> variables.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="derivacion_implicita" data-level="guiado" data-module="2">
@@ -374,7 +374,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ −8/6 se simplifica a −4/3.</p><p class="nudge">✕ Divide −x entre y y simplifica la fracción. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres problemas de derivada implícita, del acompañado al examen. La regla: dy/dx = −F<sub>x</sub>/F<sub>y</sub>.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -405,10 +405,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="derivacion_implicita" data-level="examen" data-module="2">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea F(x, y) = x² + xy + y² − 7 = 0. Con dy/dx = −F<sub>x</sub>/F<sub>y</sub>, halla la pendiente en (1, 2).</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Sea F(x, y) = x² + xy + y² − 7 = 0. Con dy/dx = −F<sub>x</sub>/F<sub>y</sub>, halla la pendiente en (1, 2).</p>
             <div class="opts">
               <button class="opt" data-ok="1">−4/5</button>
               <button class="opt" data-ok="0">−5/4</button>
@@ -425,12 +425,14 @@
     <section class="lesson" data-step="3">
       <header class="lesson-head"><p class="micro">Microlección 3 de 6 · Tema: Teorema de la función implícita (tres variables)</p><h2>Tres variables: z como función de (x, y)</h2><p class="goal">Meta: derivar z respecto a x y a y sin despejar z.</p></header>
       <div class="sec">
-        <p class="idea lede">Hoy repites la jugada de ayer un piso más arriba: la misma <strong>derivada implícita</strong> con <strong>tres</strong> variables.</p>
-        <p class="idea">Antes la ecuación amarraba dos letras; ahora amarra tres:</p>
-        <div class="fx"><div class="sys"><span class="eq">F(x, y, z) = 0</span></div></div>
-        <p class="idea">Sus puntos ya no dibujan una curva, sino una <strong>superficie</strong> — una cáscara, como la de una esfera.</p>
-        <p class="idea">Cerca de un punto bueno, esa cáscara esconde una máquina de <strong>dos entradas y una salida</strong>: le das (x, y) y te devuelve la altura z, como un terreno.</p>
-        <figure class="visual">
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">Una ecuación F(x, y, z) = 0 puede definir localmente z como función de x y y.</p>
+<p class="idea">En F(x, y, z(x, y)) = 0, deriva respecto a x usando la regla de la cadena:</p>
+<div class="fx"><div class="sys"><span class="eq">F<sub>x</sub> + F<sub>z</sub>z<sub>x</sub> = 0</span><span class="eq">z<sub>x</sub> = −F<sub>x</sub>/F<sub>z</sub></span></div></div>
+<p class="idea">Respecto a y ocurre lo mismo:</p>
+<div class="fx"><div class="sys"><span class="eq">F<sub>y</sub> + F<sub>z</sub>z<sub>y</sub> = 0</span><span class="eq">z<sub>y</sub> = −F<sub>y</sub>/F<sub>z</sub></span></div></div>
+<p class="idea">La división requiere F<sub>z</sub> ≠ 0. Esa condición permite despejar localmente los cambios de z.</p>
+<figure class="visual">
           <svg viewBox="0 0 600 260" role="img" aria-label="Una superficie que a cada punto del piso le asigna una altura z">
             <ellipse cx="300" cy="212" rx="150" ry="34" fill="#f4f1ec" stroke="#cbd5e1" stroke-width="1.5"/>
             <path d="M150 212 Q300 40 450 212" fill="none" stroke="#F5821F" stroke-width="4"/>
@@ -441,20 +443,14 @@
           </svg>
           <figcaption>Le das un punto (x, y) del piso y la superficie te devuelve la altura z.</figcaption>
         </figure>
-        <p class="idea">Como ahora se despeja la <strong>z</strong>, su parcial toma el puesto de denominador: la condición gemela es <strong>F<sub>z</sub> ≠ 0</strong>.</p>
-        <p class="idea">Y como hay dos entradas, salen <strong>dos</strong> pendientes, una por entrada. Se escriben con la <strong>d rizada ∂</strong>:</p>
-        <div class="fx"><div class="sys"><span class="eq">∂z/∂x = − F<sub>x</sub> / F<sub>z</sub></span><span class="eq">∂z/∂y = − F<sub>y</sub> / F<sub>z</sub></span></div></div>
-        <p class="idea key">Misma receta de ayer, «menos la de arriba entre la del despejado», solo que ahora la de abajo es siempre <strong>F<sub>z</sub></strong>.</p>
-        <p class="idea">Léelo con un ejemplo. La esfera x² + y² + z² = 9 cerca de (1, 2, 2): las parciales son F<sub>x</sub> = 2x y F<sub>z</sub> = 2z, con F<sub>z</sub> = 4 ≠ 0, así que el teorema aplica.</p>
-        <div class="fx"><div class="sys"><span class="eq">∂z/∂x = −2x/2z = −x/z</span><span class="eq">= −1/2</span></div></div>
-        <p class="idea">Es el mismo teorema de ayer, ahora en tres variables. Tu curso lo enuncia así:</p>
-        <p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.1 (tres variables)</span>Si F(x, y, z) = 0 y <strong>F<sub>z</sub> ≠ 0</strong> en un punto, entonces cerca de ahí z es función de (x, y), con ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub> y ∂z/∂y = −F<sub>y</sub>/F<sub>z</sub>.</p>
-        <p class="idea">Reconócelo: «F<sub>z</sub> ≠ 0» es el mismo permiso que ayer, y las dos fórmulas son la de ayer repetida, una por cada entrada.</p>
-        <p class="idea paso">Y con la función implícita cerrada, cambiamos de pregunta: ¿cómo se <strong>deshace</strong> una máquina?</p>
+<p class="idea">Para la esfera F = x<sup>2</sup> + y<sup>2</sup> + z<sup>2</sup> − 9 en (1, 2, 2):</p>
+<div class="fx"><div class="sys"><span class="eq">z<sub>x</sub> = −2x/2z = −1/2</span><span class="eq">z<sub>y</sub> = −2y/2z = −1</span></div></div>
+<p class="idea key">Las fórmulas no se memorizan como una receta aislada: salen de derivar la identidad F(x, y, z(x, y)) = 0.</p>
+<p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.1 (tres variables)</span>Si F(x, y, z) = 0 y <strong>F<sub>z</sub> ≠ 0</strong> en un punto, entonces cerca de ahí z es función de (x, y), con ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub> y ∂z/∂y = −F<sub>y</sub>/F<sub>z</sub>.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="derivacion_implicita_3var" data-level="guiado" data-module="3">
         <div class="qtag">Compruébalo · guiado</div>
-        <p class="q"><strong>Una parcial.</strong> En x² + y² + z² = 9, con la receta ∂z/∂x = −x/z, ¿cuánto vale en (1, 2, 2)?</p>
+        <p class="q"><strong>Una parcial.</strong> En x² + y² + z² = 9, con la fórmula ∂z/∂x = −x/z, ¿cuánto vale en (1, 2, 2)?</p>
         <div class="opts">
           <button class="opt" data-ok="1">−1/2</button>
           <button class="opt" data-ok="0">−2</button>
@@ -473,7 +469,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ −y/z = −2/3, con y = 2 y z = 3.</p><p class="nudge">✕ Ahora la de arriba es F<sub>y</sub> = 2y; divide −y entre z. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres problemas de derivada implícita con tres variables. La de abajo siempre es F<sub>z</sub>.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -504,10 +500,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="derivacion_implicita_3var" data-level="examen" data-module="3">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea F(x, y, z) = xyz − 6 = 0. Halla ∂z/∂x en el punto (1, 2, 3).</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Sea F(x, y, z) = xyz − 6 = 0. Halla ∂z/∂x en el punto (1, 2, 3).</p>
             <div class="opts">
               <button class="opt" data-ok="1">−3</button>
               <button class="opt" data-ok="0">−1/3</button>
@@ -518,22 +514,39 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C6_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="practica checkpoint" data-checkpoint="3">
-        <p class="practica-head">Repaso acumulativo <span>· idea 1</span></p>
-        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="funcion_implicita" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sobre la circunferencia x² + y² = 25, ¿en cuál punto NO se puede ver y como función de x en un entorno?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">(5, 0)</button>
-              <button class="opt" data-ok="0">(3, 4)</button>
-              <button class="opt" data-ok="0">(0, 5)</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ En (5, 0) la curva va vertical: a la izquierda hay dos ramas y a la derecha ninguna, así que ningún trozo es función y = f(x).</p><p class="nudge">✕ Busca dónde la curva se pone vertical (los extremos izquierdo y derecho), no arriba o abajo. Intenta de nuevo.</p></div>
+      <div class="practica checkpoint exam-bridge" data-checkpoint="3">
+        <p class="practica-head">Puente al examen <span>· usar el teorema implícito antes de derivar</span></p>
+        <p class="practica-intro"><strong>Caso.</strong> Sea F(x,y,z)=xyz−6. Cerca de (1,2,3), decide si z puede verse como función de (x,y) y calcula dos parciales.</p>
+        <div class="fx"><div class="sys"><span class="eq">F(x,y,z)=xyz−6=0</span><span class="eq">p=(1,2,3)</span></div></div>
+        <p class="practica-intro"><strong>Trabájalo en papel.</strong> No adivines el final: cada decisión usa el resultado anterior.</p>
+        <div class="prob exam-step">
+          <div class="plevel p-res"><b>1</b> Decide el plan</div>
+          <div class="check challenge" data-kind="item" data-id="PX3A" data-tema="teorema_implicito" data-level="guiado" data-module="3">
+            <div class="qtag">Elige el camino</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué derivada debes revisar para despejar localmente z?</p>
+            <div class="opts"><button class="opt" data-ok="1">F<sub>z</sub>(1,2,3)=xy=2 ≠ 0</button><button class="opt" data-ok="0">F<sub>x</sub>(1,2,3)=yz=6 debe valer 0</button><button class="opt" data-ok="0">F(1,2,3) debe ser distinto de 0</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La variable que quieres convertir en función necesita derivada parcial no nula.</p><p class="nudge">✕ Revisa F<sub>z</sub>, no una derivada elegida al azar. Intenta de nuevo.</p></div>
           </div>
         </div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>2</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX3B" data-tema="derivada_implicita" data-level="juntos" data-module="3">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuánto vale ∂z/∂x en (1,2)?</p>
+            <div class="opts"><button class="opt" data-ok="1">−Fₓ/F<sub>z</sub> = −3</button><button class="opt" data-ok="0">−F<sub>z</sub>/Fₓ = −1/3</button><button class="opt" data-ok="0">Fₓ/F<sub>z</sub> = 3</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Fₓ=yz=6 y F<sub>z</sub>=xy=2.</p><p class="nudge">✕ Conserva el signo negativo de la fórmula implícita. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-ex"><b>3</b> Concluye y verifica</div>
+          <div class="check challenge" data-kind="item" data-id="PX3C" data-tema="derivada_implicita" data-level="examen" data-module="3">
+            <div class="qtag">Cierra el problema</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuánto vale ∂z/∂y en (1,2)?</p>
+            <div class="opts"><button class="opt" data-ok="1">−Fᵧ/F<sub>z</sub> = −3/2</button><button class="opt" data-ok="0">−2/3</button><button class="opt" data-ok="0">3/2</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Fᵧ=xz=3 y F<sub>z</sub>=2.</p><p class="nudge">✕ Cambia Fₓ por Fᵧ, pero conserva el mismo denominador F<sub>z</sub>. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">El <a href="C6_cuadernillo-papel.html">cuadernillo</a> continúa este patrón con desarrollo completo y problemas sin pistas.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
@@ -541,15 +554,12 @@
     <section class="lesson" data-step="4">
       <header class="lesson-head"><p class="micro">Microlección 4 de 6 · Tema: Teorema de la función inversa</p><h2>Función inversa: la pendiente al revés</h2><p class="goal">Meta: derivar la inversa sin despejarla, con (f⁻¹)′(b) = 1/f′(a).</p></header>
       <div class="sec">
-        <p class="idea lede">Cambiamos de pregunta, misma familia. Hoy: la <strong>función inversa</strong> y su pendiente.</p>
-        <p class="idea">Una función es una máquina: entra a, sale b. A veces la necesitas <strong>al revés</strong>: conoces la salida y quieres recuperar la entrada.</p>
-        <p class="idea">La máquina que pasa kilómetros a metros (por 1000) tiene por vuelta al revés la que pasa metros a kilómetros (entre 1000).</p>
-        <p class="idea">A esa vuelta al revés se le llama la <strong>inversa</strong> de f, y se escribe <strong>f⁻¹</strong>. Ese −1 no es un exponente: es el letrero de «al revés».</p>
-        <p class="idea">¿Siempre se puede deshacer? No. Si cerca de a la máquina está <strong>plana</strong> (f′(a) = 0), dos entradas vecinas dan casi la misma salida y ya no sabes de cuál veniste.</p>
-        <p class="idea key">En cambio, si <strong>f′(a) ≠ 0</strong>, sí se deshace. Es la gemela de F<sub>y</sub> ≠ 0 de la lección 2.</p>
-        <p class="idea">¿Y qué pendiente tiene esa vuelta al revés? Con números chicos:</p>
-        <div class="fx"><div class="sys"><span class="eq">f(x) = 3x  →  pendiente 3</span><span class="eq">al revés  →  pendiente 1/3</span></div></div>
-        <figure class="visual">
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">La función inversa recupera una entrada a partir de su salida.</p>
+<p class="idea">Si f(x) = 3x, entonces g(y) = y/3 deshace a f:</p>
+<div class="fx"><div class="sys"><span class="eq">g(f(x)) = (3x)/3</span><span class="eq">= x</span></div></div>
+<p class="idea">Sus pendientes son 3 y 1/3. El producto vale 1 porque la composición g(f(x)) no cambia x.</p>
+<figure class="visual">
           <svg viewBox="0 0 520 250" role="img" aria-label="Una recta empinada y su inversa suave, reflejadas en la diagonal">
             <line x1="60" y1="210" x2="500" y2="210" stroke="#64748B" stroke-width="2"/>
             <line x1="60" y1="210" x2="60" y2="25" stroke="#64748B" stroke-width="2"/>
@@ -562,13 +572,13 @@
           </svg>
           <figcaption>La inversa es el reflejo en la diagonal: su pendiente es el recíproco de la original.</figcaption>
         </figure>
-        <p class="idea">Deshacer un estirón de 3 es encoger con 1/3: la pendiente de la inversa es el <strong>recíproco</strong> de la original.</p>
-        <p class="idea key">El detalle que cuesta: <strong>dónde se evalúa</strong>. La inversa se pregunta en b, pero f′ se mide en <strong>a</strong>, el lado de las entradas.</p>
-        <p class="idea">Todo junto, la regla que memorizas. Tu curso la enuncia así:</p>
-        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.2 (caso de una variable)</span>Si f′(a) ≠ 0 con b = f(a), entonces la inversa es derivable en b y <strong>(f⁻¹)′(b) = 1/f′(a)</strong>.</p>
-        <p class="idea">Léela: «f′(a) ≠ 0» es el permiso, «1/f′(a)» es el recíproco, y la a de adentro te recuerda evaluar del lado de la entrada.</p>
-        <p class="idea paso">Dos retos, con cuidado de evaluar en a.</p>
-        <p class="idea paso">Y ahora el salto final: ¿cómo se ve todo esto cuando la máquina tiene <strong>varias entradas y varias salidas</strong>?</p>
+<p class="idea">Ahora deriva el caso general. Si g = f<sup>−1</sup>, entonces f(g(y)) = y:</p>
+<div class="fx"><div class="sys"><span class="eq">f′(g(y)) · g′(y) = 1</span><span class="eq">g′(y) = 1/f′(g(y))</span></div></div>
+<p class="idea">En y = f(a), se cumple g(y) = a. Por eso:</p>
+<div class="fx"><div class="sys"><span class="eq">(f<sup>−1</sup>)′(f(a)) = 1/f′(a)</span></div></div>
+<p class="idea key">La condición f′(a) ≠ 0 permite dividir y garantiza una inversa local cerca de a.</p>
+<p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.2 (caso de una variable)</span>Si f′(a) ≠ 0 con b = f(a), entonces la inversa es derivable en b y <strong>(f⁻¹)′(b) = 1/f′(a)</strong>.</p>
+<p class="idea">Cuida dónde se evalúa: la derivada de la inversa se pide en la salida f(a), pero el denominador f′ se evalúa en la entrada a.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="funcion_inversa" data-level="guiado" data-module="4">
         <div class="qtag">Compruébalo · guiado</div>
@@ -582,7 +592,7 @@
       </div>
       <div class="check challenge" data-kind="item" data-id="M4S" data-tema="funcion_inversa" data-level="solo" data-module="4">
         <div class="qtag">Ahora tú · sin copiar</div>
-        <p class="q"><strong>Otra máquina.</strong> Para f(x) = x², con f(3) = 9, ¿cuánto vale (f⁻¹)′(9)?</p>
+        <p class="q"><strong>Otra función.</strong> Para f(x) = x², con f(3) = 9, ¿cuánto vale (f⁻¹)′(9)?</p>
         <div class="opts">
           <button class="opt" data-ok="1">1/6</button>
           <button class="opt" data-ok="0">6</button>
@@ -591,7 +601,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ f′(x) = 2x, así que f′(3) = 6 y (f⁻¹)′(9) = 1/6.</p><p class="nudge">✕ Deriva f, evalúa en a = 3 y toma el recíproco. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos problemas de derivada de la inversa. El truco de siempre: evalúa f′ en a, no en b, y toma el recíproco.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -630,9 +640,9 @@
     <section class="lesson" data-step="5">
       <header class="lesson-head"><p class="micro">Microlección 5 de 6 · Tema: Matriz jacobiana</p><h2>Matriz jacobiana: la derivada de una transformación</h2><p class="goal">Meta: armar la tabla 2×2 de parciales de una transformación.</p></header>
       <div class="sec">
-        <p class="idea lede">Última familia. Hoy: la <strong>matriz jacobiana</strong>, la derivada de una máquina con varias entradas y salidas.</p>
-        <p class="idea">Imagina una máquina con dos entradas y <strong>dos salidas</strong>: le das (x, y) y te devuelve (u, v). A eso se le llama <strong>transformación</strong>.</p>
-        <p class="idea">¿Cuál es «la pendiente» de esa máquina? Un solo número ya no alcanza: hay <strong>cuatro</strong> preguntas, una por cada par entrada-salida.</p>
+        <p class="idea lede">Última familia. Hoy: la <strong>matriz jacobiana</strong>, la derivada de una función con varias entradas y salidas.</p>
+        <p class="idea">Imagina una función con dos entradas y <strong>dos salidas</strong>: le das (x, y) y te devuelve (u, v). A eso se le llama <strong>transformación</strong>.</p>
+        <p class="idea">¿Cuál es «la pendiente» de esa función? Un solo número ya no alcanza: hay <strong>cuatro</strong> preguntas, una por cada par entrada-salida.</p>
         <div class="fx"><div class="sys"><span class="eq">∂u/∂x  ·  ∂u/∂y</span><span class="eq">∂v/∂x  ·  ∂v/∂y</span></div></div>
         <p class="idea">Esas cuatro parciales se acomodan en una tabla 2×2, una fila por salida y una columna por entrada:</p>
         <div class="fx"><div class="matrix-form"><span>J =</span><span class="matrix" aria-label="Matriz jacobiana con filas de parciales de u y de v"><span>∂u/∂x</span><span>∂u/∂y</span><span>∂v/∂x</span><span>∂v/∂y</span></span></div></div>
@@ -641,9 +651,13 @@
         <div class="fx"><div class="matrix-form"><span>J =</span><span class="matrix" aria-label="Matriz jacobiana llena del ejemplo"><span>2x</span><span>−2y</span><span>2y</span><span>2x</span></span></div></div>
         <p class="idea">Fila de u: ∂u/∂x = 2x y ∂u/∂y = −2y. Fila de v: ∂v/∂x = 2y y ∂v/∂y = 2x. El signo menos del −y² se conserva.</p>
         <p class="idea">Con eso ya la sabes armar. Tu curso la define así:</p>
+        <!-- aterrizaje-matematico: puente -->
+        <p class="idea">La función T(x, y) = (u(x, y), v(x, y)) cambia un pequeño desplazamiento (Δx, Δy) aproximadamente así:</p>
+<div class="fx"><div class="sys"><span class="eq">ΔT ≈ J<sub>T</sub>(x, y) · (Δx, Δy)</span></div></div>
+<p class="idea key">Cada fila pertenece a una salida; cada columna, a una entrada. J es la mejor transformación lineal que aproxima a T cerca del punto.</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.2</span>La <strong>matriz jacobiana</strong> de una transformación (x, y) → (u, v) tiene por primera fila (∂u/∂x, ∂u/∂y) y por segunda fila (∂v/∂x, ∂v/∂y): sus filas son las parciales de cada salida.</p>
         <p class="idea">Léela: cada fila es una salida (u, luego v) y cada columna una entrada (x, luego y). La casilla de la fila u y la columna x es ∂u/∂x.</p>
-        <p class="idea paso">Y en la última lección, un solo número resumirá a J y dirá si la máquina se puede <strong>deshacer</strong>.</p>
+        <p class="idea paso">Y en la última lección, un solo número resumirá a J y dirá si la función se puede <strong>deshacer</strong>.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="jacobiano" data-level="guiado" data-module="5">
         <div class="qtag">Compruébalo · guiado</div>
@@ -666,7 +680,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ ∂v/∂x = y (la x se deriva, la y queda) y ∂v/∂y = x.</p><p class="nudge">✕ Al derivar en x, la y es constante; al derivar en y, lo es la x. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres problemas para armar la matriz jacobiana sin equivocar el signo ni olvidar una variable.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -697,10 +711,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="jacobiano" data-level="examen" data-module="5">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea T(x, y) = (x³, x + y). Escribe su matriz jacobiana J(x, y).</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Sea T(x, y) = (x³, x + y). Escribe su matriz jacobiana J(x, y).</p>
             <div class="opts">
               <button class="opt" data-ok="1">filas (3x², 0) y (1, 1)</button>
               <button class="opt" data-ok="0">filas (3x², 1) y (1, 1)</button>
@@ -717,13 +731,14 @@
     <section class="lesson" data-step="6">
       <header class="lesson-head"><p class="micro">Microlección 6 de 6 · Tema: Teorema de la función inversa</p><h2>Jacobiano: si la transformación se deshace</h2><p class="goal">Meta: leer el determinante de J para saber si hay inversa local.</p></header>
       <div class="sec">
-        <p class="idea lede">Cierre de la unidad: el <strong>jacobiano</strong> y el <strong>teorema de la función inversa</strong>.</p>
-        <p class="idea">Ya tienes la matriz J. Para saber si la máquina se puede deshacer necesitamos un solo número que la resuma.</p>
-        <p class="idea">Piensa en una máquina que solo <strong>estira</strong> el plano. Si estira al doble de ancho y al triple de alto, un cuadrito de área 1 crece a:</p>
-        <div class="fx"><div class="sys"><span class="eq">área nueva = 2 · 3 = 6</span></div></div>
-        <p class="idea">Ese <strong>6</strong> es el <strong>factor de área</strong>: cada pedacito sale 6 veces más grande. ¿Y si aplasta lo alto hasta 0?</p>
-        <div class="fx"><div class="sys"><span class="eq">área nueva = 2 · 0 = 0</span></div></div>
-        <figure class="visual">
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">El teorema de la función inversa usa la matriz jacobiana para decidir si una transformación puede invertirse cerca de un punto.</p>
+<p class="idea">Compara dos transformaciones lineales:</p>
+<div class="fx"><div class="sys"><span class="eq">T(x, y) = (2x, 3y)</span><span class="eq">S(x, y) = (2x, 0)</span></div></div>
+<p class="idea">Sus jacobianas y determinantes son:</p>
+<div class="fx"><div class="sys"><span class="eq">J<sub>T</sub> = diag(2, 3), det(J<sub>T</sub>) = 6</span><span class="eq">J<sub>S</sub> = diag(2, 0), det(J<sub>S</sub>) = 0</span></div></div>
+<p class="idea">T conserva dos direcciones independientes y tiene inversa T<sup>−1</sup>(u, v) = (u/2, v/3). S elimina la segunda coordenada; no es posible recuperarla.</p>
+<figure class="visual">
           <svg viewBox="0 0 620 230" role="img" aria-label="Un cuadrito que se estira conserva área y otro que se aplasta la pierde">
             <text x="155" y="34" text-anchor="middle" font-size="16" font-weight="800" fill="#181B22">ESTIRA · factor 6</text>
             <rect x="40" y="120" width="30" height="30" fill="#FFF3E7" stroke="#181B22" stroke-width="2"/>
@@ -738,17 +753,9 @@
           </svg>
           <figcaption>Factor distinto de cero conserva área y se puede revertir; factor 0 aplasta y no.</figcaption>
         </figure>
-        <p class="idea">Factor 0: el plano queda aplastado sobre una raya, y dos puntos separados caen encima uno del otro — la misma trampa que la máquina plana con f′ = 0.</p>
-        <p class="idea">De álgebra lineal, ese factor de área es justo el <strong>determinante</strong> de J. Para una tabla 2×2 se saca con «diagonal menos antidiagonal»:</p>
-        <div class="fx"><div class="matrix-form"><span>J =</span><span class="matrix" aria-label="Matriz de ejemplo dos por dos"><span>2</span><span>1</span><span>3</span><span>4</span></span></div></div>
-        <div class="fx"><div class="sys"><span class="eq">det = 2·4 − 1·3</span><span class="eq">= 8 − 3 = 5</span></div></div>
-        <p class="idea key">A ese determinante se le llama <strong>el jacobiano</strong>. Su «distinto de cero» decide si hay inversa.</p>
-        <p class="idea">Cierra el paralelo con las otras dos condiciones de la unidad:</p>
-        <div class="fx"><div class="sys"><span class="eq">f′(a) ≠ 0  →  la máquina de un número se deshace</span><span class="eq">F<sub>y</sub> ≠ 0  →  la y escondida se despeja</span><span class="eq">det(J) ≠ 0  →  la transformación se revierte</span></div></div>
-        <p class="idea">Todo junto es el <strong>teorema de la función inversa</strong>. Tu curso lo enuncia así:</p>
-        <p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.2</span>Si <strong>det(J) ≠ 0</strong> en un punto, entonces la transformación es <strong>localmente invertible</strong> ahí, y la derivada de la inversa es la matriz inversa J⁻¹.</p>
-        <p class="idea">Léelo: «det(J) ≠ 0» es el permiso (igual que f′(a) ≠ 0), y donde el número se volvía recíproco, la matriz J se vuelve su inversa J⁻¹.</p>
-        <p class="idea paso">Dos retos: uno con números vistos y otro nuevo.</p>
+<p class="idea">Para una transformación no lineal, J es su aproximación lineal cerca del punto. Si det(J) ≠ 0, esa aproximación es invertible y el teorema transfiere la propiedad localmente a la función.</p>
+<p class="idea key">“Local” significa en una vecindad del punto; no afirma que exista una inversa en todo el dominio.</p>
+<p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.2</span>Si <strong>det(J) ≠ 0</strong> en un punto, entonces la transformación es <strong>localmente invertible</strong> ahí, y la derivada de la inversa es la matriz inversa J⁻¹.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M6G" data-tema="jacobiano" data-level="guiado" data-module="6">
         <div class="qtag">Compruébalo · guiado</div>
@@ -774,7 +781,7 @@
       <section class="finish">
         <h3>Cierra sin mirar arriba</h3>
         <p>Explica en voz alta esta cadena: función implícita → dy/dx = −F<sub>x</sub>/F<sub>y</sub> → tres variables → derivada de la inversa → matriz jacobiana → det(J) ≠ 0.</p>
-        <p>Después responde: <strong>¿qué condición se repite en los tres teoremas para que la máquina se pueda deshacer?</strong></p>
+        <p>Después responde: <strong>¿qué condición se repite en los tres teoremas para que la función se pueda deshacer?</strong></p>
         <p class="nota">¿Qué tan segura te sientes explicando estas ideas sin leer? 1 = nada · 5 = lo domino.</p>
         <div class="escala" aria-label="Confianza del uno al cinco"><button data-confidence="1">1</button><button data-confidence="2">2</button><button data-confidence="3">3</button><button data-confidence="4">4</button><button data-confidence="5">5</button></div>
         <button class="btn" id="makeReport">Generar reporte para el tutor</button>
@@ -784,7 +791,7 @@
       <nav class="nav-lecs"><a href="C6_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C6_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos problemas con el determinante jacobiano: diagonal menos antidiagonal, y qué significa que no sea 0.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -817,35 +824,48 @@
         
         <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C6_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
       </div>
-      <div class="practica checkpoint" data-checkpoint="6">
-        <p class="practica-head">Repaso acumulativo <span>· ideas 4–6</span></p>
-        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="jacobiano" data-level="examen" data-module="6">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea T(x, y) = (x² + y, y² − x). Calcula el jacobiano det(J) en el punto (1, 2).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">9</button>
-              <button class="opt" data-ok="0">7</button>
-              <button class="opt" data-ok="0">8</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ J tiene filas (2x, 1) y (−1, 2y); det = 4xy − (1)(−1) = 4xy + 1. En (1, 2): 8 + 1 = 9.</p><p class="nudge">✕ Cuidado: restar (1)(−1) suma 1. En (1, 2) da 4·2 + 1 = 9. Intenta de nuevo.</p></div>
+      <div class="practica checkpoint exam-bridge" data-checkpoint="6">
+        <p class="practica-head">Puente al examen <span>· decidir invertibilidad local con el jacobiano</span></p>
+        <p class="practica-intro"><strong>Caso final.</strong> Sea T(x,y)=(x²+y, y²−x). Estudia su inversa local cerca de (1,2).</p>
+        <div class="fx"><div class="sys"><span class="eq">T(x,y)=(x²+y, y²−x)</span></div></div>
+        <p class="practica-intro"><strong>Trabájalo en papel.</strong> No adivines el final: cada decisión usa el resultado anterior.</p>
+        <div class="prob exam-step">
+          <div class="plevel p-res"><b>1</b> Decide el plan</div>
+          <div class="check challenge" data-kind="item" data-id="PX6A" data-tema="matriz_jacobiana" data-level="guiado" data-module="5">
+            <div class="qtag">Elige el camino</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuál es J<sub>T</sub>(1,2)?</p>
+            <div class="opts"><button class="opt" data-ok="1">Renglones (2,1), (−1,4)</button><button class="opt" data-ok="0">Renglones (1,2), (4,−1)</button><button class="opt" data-ok="0">Renglones (2,−1), (1,4)</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Las filas son los gradientes de las dos componentes de T.</p><p class="nudge">✕ Deriva cada salida respecto de x y de y, en ese orden. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="funcion_inversa" data-level="examen" data-module="4">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x) = x⁵ + 2x + 1, con f(1) = 4. Calcula (f⁻¹)′(4).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">1/7</button>
-              <button class="opt" data-ok="0">7</button>
-              <button class="opt" data-ok="0">1/4</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ f′(x) = 5x⁴ + 2, así que f′(1) = 7 y (f⁻¹)′(4) = 1/f′(1) = 1/7.</p><p class="nudge">✕ Evalúa f′ en a = 1, no en b = 4; luego el recíproco. Intenta de nuevo.</p></div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>2</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX6B" data-tema="determinante_jacobiano" data-level="juntos" data-module="6">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuánto vale det(J<sub>T</sub>(1,2))?</p>
+            <div class="opts"><button class="opt" data-ok="1">9</button><button class="opt" data-ok="0">7</button><button class="opt" data-ok="0">−9</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2·4 − 1·(−1)=9.</p><p class="nudge">✕ Aplica ad−bc y cuida el signo negativo. Intenta de nuevo.</p></div>
           </div>
         </div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>3</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX6C" data-tema="teorema_inversa" data-level="juntos" data-module="6">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué concluye el teorema de la inversa?</p>
+            <div class="opts"><button class="opt" data-ok="1">T tiene inversa local cerca de (1,2)</button><button class="opt" data-ok="0">T no puede tener inversa porque es no lineal</button><button class="opt" data-ok="0">T es invertible globalmente en todo R²</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Un jacobiano no nulo garantiza invertibilidad local, no global.</p><p class="nudge">✕ Distingue la conclusión local de una afirmación sobre todo el plano. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-ex"><b>4</b> Concluye y verifica</div>
+          <div class="check challenge" data-kind="item" data-id="PX6D" data-tema="derivada_inversa" data-level="examen" data-module="6">
+            <div class="qtag">Cierra el problema</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuál es la derivada de la inversa en T(1,2)?</p>
+            <div class="opts"><button class="opt" data-ok="1">(J<sub>T</sub>(1,2))⁻¹ = (1/9)·renglones (4,−1), (1,2)</button><button class="opt" data-ok="0">(1/9)·renglones (2,1), (−1,4)</button><button class="opt" data-ok="0">9·renglones (4,−1), (1,2)</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La derivada de la inversa es la matriz inversa del jacobiano.</p><p class="nudge">✕ Invierte la 2×2 usando su determinante 9. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">El <a href="C6_cuadernillo-papel.html">cuadernillo</a> continúa este patrón con desarrollo completo y problemas sin pistas.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
@@ -864,7 +884,7 @@
     'Función implícita: reconocer la función escondida cerca de un punto.',
     'Derivada implícita: sacar la pendiente sin despejar la y.',
     'Tres variables: derivar z como función de (x, y).',
-    'Función inversa: hallar la pendiente de la máquina al revés.',
+    'Función inversa: hallar la pendiente de la función al revés.',
     'Matriz jacobiana: acomodar las cuatro parciales en una tabla.',
     'Jacobiano: leer si la transformación se puede deshacer.'
   ];

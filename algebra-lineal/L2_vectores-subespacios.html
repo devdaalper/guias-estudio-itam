@@ -207,8 +207,8 @@
 
   <header class="hero">
     <p class="kick">Álgebra Lineal · Unidad 2</p>
-    <h1>De recetas a <mark>espacios vectoriales</mark></h1>
-    <p class="lead">Una idea a la vez, sabiendo siempre a dónde vas: cada lección anuncia su concepto del temario y te lleva de lo cotidiano hasta su definición formal.</p>
+    <h1>De listas ordenadas a <mark>espacios vectoriales</mark></h1>
+    <p class="lead">Una idea a la vez: observa casos, reconoce el patrón, exprésalo con palabras y después llévalo a la definición y notación del curso.</p>
     <div class="today">
       <span class="n" id="heroStep">1</span>
       <p><b id="heroGoal">Leer dos cantidades que deben viajar juntas.</b><small>Avanza con libertad. Un error nunca bloquea el siguiente paso.</small></p>
@@ -230,58 +230,43 @@
   <main>
 
     <section class="lesson is-active" data-step="1">
-      <header class="lesson-head"><p class="micro">Microlección 1 de 8 · Tema: Vectores en Rⁿ</p><h2>Vectores: dos números que viajan juntos</h2><p class="goal">Meta: leer una pareja sin confundir el orden.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 1 de 8 · Tema: Vectores en Rⁿ</p><h2>Vectores: listas ordenadas de números</h2><p class="goal">Meta: leer una pareja sin confundir el orden.</p></header>
       <div class="sec">
-        <p class="idea lede">Hoy conoces al protagonista de toda la unidad: el <strong>vector</strong>.</p>
-        <p class="idea">La palabra suena técnica, pero el objeto cabe en una receta de cocina. Vamos a construirlo con calma — al final, la definición formal del curso se te va a leer sola.</p>
-        <p class="idea">Una jarra de agua de limón lleva <strong>2 limones</strong> y <strong>3 cucharadas de azúcar</strong>. Son dos números, pero no viven separados: juntos describen <strong>una</strong> receta.</p>
-        <p class="idea key">Y el orden en que los anotas importa: acordamos que primero van los limones y después el azúcar.</p>
-        <p class="idea">Si los volteas, es otra receta (3 limones, 2 de azúcar — mucho más ácida).</p>
-        <p class="idea">Para no escribir frases completas, la receta se anota en corto: los dos números, en su orden, entre paréntesis:</p>
-        <div class="fx"><div class="sys"><span class="eq">(2, 3)</span></div></div>
-        <p class="idea">Aquí viene lo interesante: esa misma pareja sirve para contar otras historias.</p>
-        <p class="idea">Por ejemplo, también describe un recorrido — 2 pasos a la derecha, 3 hacia arriba. Mismos números, otro cuento:</p>
-        <figure class="visual">
-          <svg viewBox="0 0 520 260" role="img" aria-label="La pareja 2,3 representada como receta y como flecha">
-            <defs><marker id="arr1" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto"><path d="M0,0 L14,5 L0,10 Z" fill="#F5821F"/></marker></defs>
-            <rect x="18" y="28" width="205" height="190" rx="18" fill="#FFF3E7" stroke="#181B22" stroke-width="3"/>
-            <text x="120" y="65" text-anchor="middle" font-size="20" font-weight="700" fill="#181B22">RECETA</text>
-            <circle cx="82" cy="115" r="29" fill="#F5821F"/><text x="82" y="123" text-anchor="middle" font-size="24" font-weight="800" fill="white">2</text>
-            <text x="127" y="122" font-size="18" fill="#334155">limones</text>
-            <circle cx="82" cy="172" r="29" fill="#283891"/><text x="82" y="180" text-anchor="middle" font-size="24" font-weight="800" fill="white">3</text>
-            <text x="127" y="179" font-size="18" fill="#334155">azúcar</text>
-            <g transform="translate(265 25)"><path d="M28 200H225M28 200V15" stroke="#64748B" stroke-width="2"/><g stroke="#D1D5DB"><path d="M68 20V200M108 20V200M148 20V200M188 20V200"/><path d="M28 160H225M28 120H225M28 80H225M28 40H225"/></g><path d="M28 200L108 80" stroke="#F5821F" stroke-width="4" marker-end="url(#arr1)"/><text x="122" y="73" font-size="20" font-weight="800" fill="#C75D08">(2, 3)</text><text x="122" y="98" font-size="15" fill="#475569">2 derecha · 3 arriba</text></g>
-          </svg>
-          <figcaption>La receta y la flecha conservan lo mismo: dos cantidades, en un orden fijo.</figcaption>
-        </figure>
-        <p class="idea">Fíjate en lo que acabas de ver: un mismo par de números contando historias distintas, comportándose igual en las dos.</p>
-        <p class="idea">Y con esto ya llegaste. Un par ordenado que guarda cantidades y se comporta igual en cualquier historia: eso es un <strong>vector</strong>.</p>
-        <p class="idea">Tu curso lo define así:</p>
-        <p class="fdef"><span class="flbl">Definición · así la dice tu curso</span>Un <strong>vector</strong> en R<sup>n</sup> es una lista ordenada de n números reales, v = (v<sub>1</sub>, v<sub>2</sub>, …, v<sub>n</sub>). Se escribe <strong>v ∈ R<sup>n</sup></strong>, «v está en R<sup>n</sup>».</p>
-        <p class="idea">Léela con lo que ya tienes: la «lista ordenada» es tu receta, la n dice cuántos ingredientes lleva, y tu jarra (2, 3) es un vector de R² — dos entradas.</p>
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">Hoy construyes el objeto básico de la unidad: el <strong>vector</strong>.</p>
+<p class="idea">Empieza con dos listas que contienen los mismos números:</p>
+<div class="fx"><div class="sys"><span class="eq">u = (2, 3)</span><span class="eq">v = (3, 2)</span></div></div>
+<p class="idea">¿Son el mismo objeto? No. En u la primera entrada es 2; en v la primera entrada es 3. <strong>Cambiar el orden cambia la lista.</strong></p>
+<p class="idea">Ahora agrega una tercera posición:</p>
+<div class="fx"><div class="sys"><span class="eq">w = (2, −1, 4)</span></div></div>
+<p class="idea">Aquí hay tres entradas. Podemos nombrarlas sin inventar historias: w<sub>1</sub> = 2, w<sub>2</sub> = −1 y w<sub>3</sub> = 4.</p>
+<p class="idea key">El patrón es una <strong>lista ordenada de números</strong>. La cantidad de posiciones puede cambiar; el orden siempre conserva significado.</p>
+<p class="fdef"><span class="flbl">Definición · así la dice tu curso</span>Un <strong>vector</strong> en R<sup>n</sup> es una lista ordenada de n números reales, v = (v<sub>1</sub>, v<sub>2</sub>, …, v<sub>n</sub>). Se escribe <strong>v ∈ R<sup>n</sup></strong>, «v está en R<sup>n</sup>».</p>
+<p class="idea">En w = (2, −1, 4), la letra n vale 3 y cada v<sub>i</sub> de la definición corresponde a una posición. Escribir w ∈ R<sup>3</sup> dice exactamente que w tiene tres entradas reales.</p>
+<p class="idea">Una flecha o una lista de cantidades pueden representar un vector, pero son representaciones. El objeto matemático que usarás es la lista ordenada y sus operaciones.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1G" data-tema="vector" data-level="guiado" data-module="1">
         <div class="qtag">Compruébalo · guiado</div>
-        <p class="q"><strong>Lee la pareja.</strong> En la receta (2, 3), ¿qué significa el segundo número?</p>
+        <p class="q"><strong>Lee por posiciones.</strong> En u = (2, 3), ¿cuál es la segunda entrada u<sub>2</sub>?</p>
         <div class="opts">
-          <button class="opt" data-ok="0">Dos limones</button>
-          <button class="opt" data-ok="1">Tres cucharadas de azúcar</button>
-          <button class="opt" data-ok="0">Tres jarras completas</button>
+          <button class="opt" data-ok="0">2</button>
+          <button class="opt" data-ok="1">3</button>
+          <button class="opt" data-ok="0">5</button>
         </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ El segundo lugar pertenece al azúcar: el orden acordado fue limones, azúcar.</p><p class="nudge">✕ Mira el acuerdo de la receta: primero limones; después, azúcar. Intenta de nuevo.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ La segunda posición contiene 3, por eso u<sub>2</sub> = 3.</p><p class="nudge">✕ Lee la lista por posiciones: la primera entrada es 2 y la segunda es 3. Intenta de nuevo.</p></div>
       </div>
       <div class="check challenge" data-kind="item" data-id="M1S" data-tema="vector" data-level="solo" data-module="1">
         <div class="qtag">Ahora tú · sin copiar</div>
-        <p class="q"><strong>Cambia los datos.</strong> Una mezcla usa 4 medidas de agua y 1 de concentrado. Si el orden es (agua, concentrado), ¿cuál vector la describe?</p>
+        <p class="q"><strong>Cambia el orden.</strong> Si u = (4, 1), ¿qué vector obtienes al intercambiar sus dos entradas?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">(4, 1)</button>
-          <button class="opt" data-ok="0">(1, 4)</button>
+          <button class="opt" data-ok="0">(4, 1)</button>
+          <button class="opt" data-ok="1">(1, 4)</button>
           <button class="opt" data-ok="0">(5, 0)</button>
         </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ El orden manda: 4 de agua primero y 1 de concentrado después.</p><p class="nudge">✕ Coloca cada cantidad en el lugar anunciado, sin intercambiarlas. Intenta de nuevo.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Intercambiar las posiciones convierte (4, 1) en (1, 4).</p><p class="nudge">✕ Cambia primera por segunda y segunda por primera. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos problemas como en un examen. El primero lo armamos juntos; el apoyo disminuye en los siguientes.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -318,35 +303,30 @@
     </section>
 
     <section class="lesson" data-step="2">
-      <header class="lesson-head"><p class="micro">Microlección 2 de 8 · Tema: Combinación lineal</p><h2>Combinación lineal: repetir y juntar recetas</h2><p class="goal">Meta: construir una mezcla nueva a partir de dos vectores.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 2 de 8 · Tema: Combinación lineal</p><h2>Combinación lineal: escalar y sumar vectores</h2><p class="goal">Meta: calcular y reconocer expresiones de la forma αu + βv.</p></header>
       <div class="sec">
-        <p class="idea lede">Ya tienes vectores. Hoy aprendes la operación estrella que se hace con ellos: la <strong>combinación lineal</strong>.</p>
-        <p class="idea">El nombre impone; la idea es pura cocina. Trabajamos con dos recetas — la tuya, A = (2, 1), y la de tu prima, B = (1, 3), más dulce.</p>
-        <p class="idea">Porque guardar recetas no es la meta: la meta es <strong>cocinar</strong> con ellas. Y con una receta, en la vida real, se hacen exactamente dos cosas.</p>
-        <p class="idea">La primera: <strong>repetirla</strong>. Hoy vienen seis invitados, así que preparas A dos veces. ¿Cuánto compras? El doble de cada cosa — el 2 entra a las dos cantidades:</p>
-        <div class="fx"><div class="sys"><span class="eq">2 · (2, 1)</span><span class="eq">= (4, 2)</span></div></div>
-        <p class="idea">Léelo de vuelta: cuatro limones, dos de azúcar. Sigue siendo una receta; solo creció.</p>
-        <p class="idea">La segunda: <strong>mezclarlas</strong>. Viertes tu jarra y la de tu prima en un recipiente grande.</p>
-        <p class="idea">¿Qué quedó ahí dentro? Los limones se juntan con los limones y el azúcar con el azúcar:</p>
-        <div class="fx"><div class="sys"><span class="eq">(2, 1) + (1, 3)</span><span class="eq">= (3, 4)</span></div></div>
-        <p class="idea key">Y aquí lo importante: repetir y juntar <strong>no son dos temas sueltos</strong>. Son las dos únicas operaciones de toda la unidad.</p>
-        <p class="idea">El generado, la independencia, las bases: todo se construye con ellas. Por eso vale la pena jugarlas tú misma antes de seguir:</p>
-        <div class="mixlab" aria-label="Laboratorio de mezcla de recetas">
-          <div class="mix-grid">
-            <div class="recipe"><h4>Receta A · (2, 1)</h4><p>2 limones · 1 azúcar</p><div class="pick" data-mix="a"><button data-value="0">No usar</button><button data-value="1" class="is-on">Una vez</button><button data-value="2">Dos veces</button></div></div>
-            <div class="recipe"><h4>Receta B · (1, 3)</h4><p>1 limón · 3 azúcar</p><div class="pick" data-mix="b"><button data-value="0" class="is-on">No usar</button><button data-value="1">Una vez</button><button data-value="2">Dos veces</button></div></div>
-          </div>
-          <div class="mix-result"><p>Tu jarra contiene</p><strong id="mixWords">2 limones · 1 azúcar</strong><p id="mixFormula">1·(2,1) + 0·(1,3) = (2,1)</p></div>
-        </div>
-        <p class="idea">¿Notas lo que acabas de hacer? Elegiste <strong>cuántas veces</strong> va cada receta y <strong>juntaste</strong> los resultados.</p>
-        <p class="idea">Esa jugada doble es justo la <strong>combinación lineal</strong> que anunciamos al inicio. Ya la hiciste con tus manos; ahora dila como la dice tu curso:</p>
-        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.9</span>v es <strong>combinación lineal</strong> de v<sub>1</sub>, …, v<sub>k</sub> si v = c<sub>1</sub>v<sub>1</sub> + c<sub>2</sub>v<sub>2</sub> + … + c<sub>k</sub>v<sub>k</sub> para ciertos escalares c<sub>1</sub>, …, c<sub>k</sub> ∈ R.</p>
-        <p class="idea">Tradúcela: los c<sub>i</sub> son «cuántas veces va cada receta» — su nombre formal es <strong>escalares</strong>. Tu mezcla, en símbolos: (3, 4) = 1·(2, 1) + 1·(1, 3), con c<sub>1</sub> = c<sub>2</sub> = 1.</p>
-        <p class="idea paso">Y en cuanto la asegures, la pregunta se voltea: de todas las mezclas posibles, ¿cuáles puedes <strong>alcanzar</strong>? Esa es la siguiente gran idea del curso.</p>
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">Ya tienes vectores. Ahora observa las dos operaciones que se combinan en una <strong>combinación lineal</strong>.</p>
+<p class="idea">Toma u = (2, 1). Multiplicarlo por 2 significa multiplicar <strong>cada entrada</strong>:</p>
+<div class="fx"><div class="sys"><span class="eq">2u = 2(2, 1)</span><span class="eq">= (4, 2)</span></div></div>
+<p class="idea">Toma además v = (1, 3). Sumarlos significa sumar posiciones correspondientes:</p>
+<div class="fx"><div class="sys"><span class="eq">u + v = (2 + 1, 1 + 3)</span><span class="eq">= (3, 4)</span></div></div>
+<p class="idea">Junta ambas operaciones. Con α = 2 y β = −1 obtienes:</p>
+<div class="fx"><div class="sys"><span class="eq">αu + βv = 2u − v</span><span class="eq">= 2(2, 1) − (1, 3)</span><span class="eq">= (3, −1)</span></div></div>
+<p class="idea key">Lo que cambia son los escalares α y β. Lo que permanece es la regla: multiplicar cada vector y después sumar entrada por entrada.</p>
+<div class="mixlab" aria-label="Explora una combinación lineal de dos vectores">
+  <div class="mix-grid">
+    <div class="recipe"><h4>Vector u · (2, 1)</h4><p>Elige el escalar α</p><div class="pick" data-mix="a"><button data-value="0">α = 0</button><button data-value="1" class="is-on">α = 1</button><button data-value="2">α = 2</button></div></div>
+    <div class="recipe"><h4>Vector v · (1, 3)</h4><p>Elige el escalar β</p><div class="pick" data-mix="b"><button data-value="0" class="is-on">β = 0</button><button data-value="1">β = 1</button><button data-value="2">β = 2</button></div></div>
+  </div>
+  <div class="mix-result"><p>La combinación produce</p><strong id="mixWords">Resultado: (2, 1)</strong><p id="mixFormula">1·(2,1) + 0·(1,3) = (2,1)</p></div>
+</div>
+<p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.9</span>v es <strong>combinación lineal</strong> de v<sub>1</sub>, …, v<sub>k</sub> si v = c<sub>1</sub>v<sub>1</sub> + c<sub>2</sub>v<sub>2</sub> + … + c<sub>k</sub>v<sub>k</sub> para ciertos escalares c<sub>1</sub>, …, c<sub>k</sub> ∈ R.</p>
+<p class="idea">En el ejemplo, c<sub>1</sub> y c<sub>2</sub> son α y β; v<sub>1</sub> y v<sub>2</sub> son u y v. La definición resume exactamente la cuenta que acabas de hacer.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="combinacion_lineal" data-level="guiado" data-module="2">
         <div class="qtag">Compruébalo · guiado</div>
-        <p class="q"><strong>Repite una receta.</strong> Si u = (2, 1), ¿cuánto vale 2·u?</p>
+        <p class="q"><strong>Multiplica por un escalar.</strong> Si u = (2, 1), ¿cuánto vale 2u?</p>
         <div class="opts">
           <button class="opt" data-ok="0">(4, 1)</button>
           <button class="opt" data-ok="1">(4, 2)</button>
@@ -356,7 +336,7 @@
       </div>
       <div class="check challenge" data-kind="item" data-id="M2S" data-tema="combinacion_lineal" data-level="solo" data-module="2">
         <div class="qtag">Ahora tú · sin copiar</div>
-        <p class="q"><strong>Junta dos recetas.</strong> Con u = (2, 1) y v = (1, 3), ¿cuánto vale u + v?</p>
+        <p class="q"><strong>Suma entrada por entrada.</strong> Con u = (2, 1) y v = (1, 3), ¿cuánto vale u + v?</p>
         <div class="opts">
           <button class="opt" data-ok="0">(2, 3)</button>
           <button class="opt" data-ok="0">(3, 3)</button>
@@ -365,7 +345,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ Primero con primero y segundo con segundo: 2+1 = 3; 1+3 = 4.</p><p class="nudge">✕ No cruces lugares: suma la primera componente con la primera. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres problemas de combinación lineal. Vamos del acompañado al examen.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -396,10 +376,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="combinacion_planteo" data-level="examen" data-module="2">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sean u = (1, 2), v = (3, 1), w = (7, 4). Plantea la matriz [u v | w]. ¿Cuáles son sus dos renglones?</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Sean u = (1, 2), v = (3, 1), w = (7, 4). Plantea la matriz [u v | w]. ¿Cuáles son sus dos renglones?</p>
             <div class="opts">
               <button class="opt" data-ok="1">(1, 3 | 7) y (2, 1 | 4)</button>
               <button class="opt" data-ok="0">(1, 2 | 7) y (3, 1 | 4)</button>
@@ -416,22 +396,22 @@
     <section class="lesson" data-step="3">
       <header class="lesson-head"><p class="micro">Microlección 3 de 8 · Tema: Espacio generado</p><h2>El generado (span): todo lo que puedes alcanzar</h2><p class="goal">Meta: distinguir un resultado de la colección de todos los resultados.</p></header>
       <div class="sec">
-        <p class="idea lede">Hoy llega el primer concepto con apellido de teoría: el <strong>espacio generado</strong> (span).</p>
-        <p class="idea">Suena grande, pero nace de tu mezcla: ayer produjiste (3, 4) — <strong>una</strong> mezcla, un solo punto de llegada.</p>
-        <p class="idea">La pregunta que nace sola es más ambiciosa: si puedes variar los pesos como quieras (dos veces A, media vez B, nada de A…), ¿a qué mezclas puedes llegar <strong>en total</strong>?</p>
-        <p class="idea">Es otra clase de pregunta. Ya no pide un resultado: pide el <strong>mapa completo</strong> de lo alcanzable. Y el mapa depende de cuántas direcciones tengas:</p>
-        <figure class="visual">
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">Una combinación lineal produce un vector. El <strong>espacio generado</strong> pregunta por <em>todos</em> los vectores que puedes producir.</p>
+<p class="idea">Primer caso: con u = (1, 0), cualquier múltiplo tiene la forma:</p>
+<div class="fx"><div class="sys"><span class="eq">αu = (α, 0)</span></div></div>
+<p class="idea">Cambia α: obtienes (2, 0), (−3, 0), (½, 0)… Cambia el punto, pero la segunda entrada permanece en cero. Solo recorres una recta.</p>
+<p class="idea">Segundo caso: agrega v = (2, 0). Aunque hay dos vectores, v = 2u; las combinaciones siguen sobre la misma recta.</p>
+<p class="idea">Tercer caso: usa u = (1, 0) y w = (0, 1):</p>
+<div class="fx"><div class="sys"><span class="eq">αu + βw = (α, β)</span></div></div>
+<p class="idea">Ahora α elige la primera coordenada y β la segunda. Para llegar a (5, −2), basta tomar α = 5 y β = −2.</p>
+<figure class="visual">
           <svg viewBox="0 0 620 280" role="img" aria-label="Un vector genera una recta y dos direcciones generan un plano"><defs><marker id="arr3o" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto"><path d="M0 0L14 5L0 10Z" fill="#F5821F"/></marker><marker id="arr3b" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto"><path d="M0 0L14 5L0 10Z" fill="#283891"/></marker></defs><rect x="15" y="20" width="280" height="230" rx="16" fill="white" stroke="#181B22" stroke-width="3"/><text x="155" y="53" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">UNA DIRECCIÓN</text><path d="M45 208L264 62" stroke="#D97706" stroke-width="4" stroke-dasharray="8 7"/><circle cx="155" cy="135" r="5" fill="#181B22"/><path d="M155 135L223 90" stroke="#F5821F" stroke-width="4" marker-end="url(#arr3o)"/><text x="155" y="230" text-anchor="middle" font-size="16" fill="#475569">solo alcanzas una recta</text><rect x="325" y="20" width="280" height="230" rx="16" fill="white" stroke="#181B22" stroke-width="3"/><text x="465" y="53" text-anchor="middle" font-size="19" font-weight="700" fill="#181B22">DOS DIRECCIONES</text><g stroke="#E1E5EA"><path d="M350 85H580M350 125H580M350 165H580M350 205H580"/><path d="M385 65V220M430 65V220M475 65V220M520 65V220M565 65V220"/></g><circle cx="465" cy="165" r="5" fill="#181B22"/><path d="M465 165L548 165" stroke="#F5821F" stroke-width="4" marker-end="url(#arr3o)"/><path d="M465 165L465 85" stroke="#283891" stroke-width="4" marker-end="url(#arr3b)"/><text x="465" y="230" text-anchor="middle" font-size="16" fill="#475569">puedes alcanzar todo el plano</text></svg>
           <figcaption>Una dirección estira sobre una línea. Dos direcciones distintas permiten combinar movimientos.</figcaption>
         </figure>
-        <p class="idea">Lee el dibujo con calma. Con una sola receta solo obtienes "más o menos de lo mismo": recorres una línea.</p>
-        <p class="idea key">Con dos direcciones distintas, dosificando cuánto tomas de cada una, alcanzas <strong>cualquier</strong> punto del plano.</p>
-        <p class="idea">Ese mapa completo es el <strong>espacio generado</strong> del que hablamos al inicio. En tu curso se escribe así:</p>
-        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.10</span>gen(S) = { v ∈ R<sup>n</sup> | v = c<sub>1</sub>v<sub>1</sub> + … + c<sub>k</sub>v<sub>k</sub>, con c<sub>i</sub> ∈ R }.</p>
-        <p class="idea">La notación se lee sola: «todos los v de R<sup>n</sup> <strong>tales que</strong> (esa es la barra |) v se arma combinando v<sub>1</sub>, …, v<sub>k</sub>». Así aparecerá en tareas y examen; el libro lo llama <strong>span</strong>.</p>
-        <div class="fx"><div class="sys"><span class="eq">Gen(u, v)</span><span class="eq">= todas las combinaciones de u y v</span></div></div>
-        <p class="idea paso">Los retos de abajo fijan la diferencia entre "una mezcla" y "todas las mezclas".</p>
-        <p class="idea paso">Y dejan sembrada la duda que sigue: si con dos recetas ya llenas el plano… ¿una tercera aporta algo, o <strong>sobra</strong>?</p>
+<p class="idea key">El patrón no depende de cuántos vectores escribes, sino de cuántas <strong>direcciones independientes</strong> aportan.</p>
+<p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.10</span>gen(S) = { v ∈ R<sup>n</sup> | v = c<sub>1</sub>v<sub>1</sub> + … + c<sub>k</sub>v<sub>k</sub>, con c<sub>i</sub> ∈ R }.</p>
+<p class="idea">La barra vertical se lee “tal que”. La definición reúne todos los vectores v que pueden escribirse como una combinación de los vectores de S.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="generado" data-level="guiado" data-module="3">
         <div class="qtag">Compruébalo · guiado</div>
@@ -454,7 +434,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ Una dirección mueve horizontalmente y la otra verticalmente: juntas llegan a cualquier punto.</p><p class="nudge">✕ Piensa qué pasa al elegir por separado cuánto avanzar horizontal y verticalmente.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos problemas sobre qué alcanza un conjunto de vectores.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -487,35 +467,39 @@
         
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="practica checkpoint" data-checkpoint="3">
-        <p class="practica-head">Repaso acumulativo <span>· ideas 1–3</span></p>
-        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="generado" data-level="examen" data-module="3">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Pones tres vectores de R³ como columnas y al reducir salen 3 pivotes. ¿Qué es su espacio generado?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">Todo R³: tres direcciones independientes llenan el espacio</button>
-              <button class="opt" data-ok="0">Una recta</button>
-              <button class="opt" data-ok="0">Un plano dentro de R³</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ 3 pivotes = 3 direcciones independientes en R³. Igualan la dimensión del espacio, así que lo generan entero.</p><p class="nudge">✕ Cuenta pivotes y compáralos con la dimensión de R³ (que es 3). Intenta de nuevo.</p></div>
+      <div class="practica checkpoint exam-bridge" data-checkpoint="3">
+        <p class="practica-head">Puente al examen <span>· decidir pertenencia a un generado</span></p>
+        <p class="practica-intro"><strong>Caso.</strong> Decide si w = (7, 4) pertenece al espacio generado por u = (1, 2) y v = (3, 1). Debes encontrar los pesos, no adivinar por el dibujo.</p>
+        <div class="fx"><div class="sys"><span class="eq">αu + βv = w</span><span class="eq">α(1, 2) + β(3, 1) = (7, 4)</span></div></div>
+        <p class="practica-intro"><strong>Trabájalo en papel.</strong> No adivines el final: cada decisión usa el resultado anterior.</p>
+        <div class="prob exam-step">
+          <div class="plevel p-res"><b>1</b> Decide el plan</div>
+          <div class="check challenge" data-kind="item" data-id="PX3A" data-tema="combinacion_planteo" data-level="guiado" data-module="2">
+            <div class="qtag">Elige el camino</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué sistema deben cumplir los pesos α y β?</p>
+            <div class="opts"><button class="opt" data-ok="1">α + 3β = 7 y 2α + β = 4</button><button class="opt" data-ok="0">α + 2β = 7 y 3α + β = 4</button><button class="opt" data-ok="0">α + β = 7 y 2α + 3β = 4</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Cada componente produce una ecuación distinta.</p><p class="nudge">✕ Iguala primero las primeras componentes y después las segundas. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="vector_igualdad" data-level="examen" data-module="1">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sean v = (x − 1, 4) y w = (3, y + 2). Si v = w, halla x e y.</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">x = 4, y = 2</button>
-              <button class="opt" data-ok="0">x = 2, y = 4</button>
-              <button class="opt" data-ok="0">x = 3, y = 4</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Igualas entrada por entrada: x − 1 = 3 da x = 4; y 4 = y + 2 da y = 2.</p><p class="nudge">✕ Iguala la primera con la primera y despeja; luego la segunda. Intenta de nuevo.</p></div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>2</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX3B" data-tema="combinacion_solucion" data-level="juntos" data-module="2">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué pesos resuelven el sistema?</p>
+            <div class="opts"><button class="opt" data-ok="1">α = 1, β = 2</button><button class="opt" data-ok="0">α = 2, β = 1</button><button class="opt" data-ok="0">α = 3, β = 1</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 1 + 3·2 = 7 y 2·1 + 2 = 4.</p><p class="nudge">✕ Prueba cada pareja en las dos ecuaciones, no solo en una. Intenta de nuevo.</p></div>
           </div>
         </div>
+        <div class="prob exam-step">
+          <div class="plevel p-ex"><b>3</b> Concluye y verifica</div>
+          <div class="check challenge" data-kind="item" data-id="PX3C" data-tema="espacio_generado" data-level="examen" data-module="3">
+            <div class="qtag">Cierra el problema</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuál es la conclusión completa?</p>
+            <div class="opts"><button class="opt" data-ok="1">w sí pertenece: w = u + 2v</button><button class="opt" data-ok="0">w no pertenece porque u y v son distintos</button><button class="opt" data-ok="0">w pertenece solo si α = β</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Encontrar pesos que funcionan demuestra la pertenencia.</p><p class="nudge">✕ La pertenencia al generado significa poder construir w con alguna combinación. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">El <a href="L2_cuadernillo-papel.html">cuadernillo</a> continúa este patrón con desarrollo completo y problemas sin pistas.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
@@ -523,23 +507,21 @@
     <section class="lesson" data-step="4">
       <header class="lesson-head"><p class="micro">Microlección 4 de 8 · Tema: Independencia lineal</p><h2>Independencia lineal: ¿alguna dirección sobra?</h2><p class="goal">Meta: detectar cuándo un vector no aporta nada nuevo.</p></header>
       <div class="sec">
-        <p class="idea lede">Hoy toca el detector oficial de recetas que sobran: la <strong>independencia lineal</strong>.</p>
-        <p class="idea">Quedamos en esa sospecha la lección pasada. Vamos a atrapar a la sobrante con las manos en la masa.</p>
-        <p class="idea">Compara estas dos:</p>
-        <div class="fx"><div class="sys"><span class="eq">u = (2, 3)</span><span class="eq">v = (4, 6)</span></div></div>
-        <p class="idea">Míralas bien: la segunda es exactamente <strong>dos veces</strong> la primera.</p>
-        <div class="fx"><div class="sys"><span class="eq">v = 2·u</span></div></div>
-        <p class="idea key">¿Y eso qué significa para tu mapa de lo alcanzable? Que v no abre <strong>ningún camino nuevo</strong>: todo lo que prepares con v ya lo preparabas con u.</p>
-        <p class="idea">En el dibujo se ve de inmediato — las dos flechas pisan la misma línea:</p>
-        <figure class="visual">
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">La <strong>independencia lineal</strong> decide si algún vector repite una dirección que los demás ya aportan.</p>
+<p class="idea">Compara u = (1, 2) y v = (2, 4):</p>
+<div class="fx"><div class="sys"><span class="eq">v = 2u</span><span class="eq">2u − v = (0, 0)</span></div></div>
+<p class="idea">Hay una combinación que da cero usando coeficientes que no son ambos cero. Eso demuestra que uno de los vectores puede construirse con el otro.</p>
+<figure class="visual">
           <svg viewBox="0 0 560 250" role="img" aria-label="Dos vectores alineados, uno es el doble del otro"><defs><marker id="arr4o" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto"><path d="M0 0L14 5L0 10Z" fill="#F5821F"/></marker><marker id="arr4b" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto"><path d="M0 0L14 5L0 10Z" fill="#283891"/></marker></defs><path d="M60 205H515M75 215V30" stroke="#CBD5E1" stroke-width="2"/><path d="M75 205L455 45" stroke="#283891" stroke-width="5" marker-end="url(#arr4b)"/><path d="M75 205L265 125" stroke="#F5821F" stroke-width="4.5" marker-end="url(#arr4o)"/><circle cx="75" cy="205" r="5" fill="#181B22"/><text x="150" y="192" font-size="20" font-weight="800" fill="#C75D08">u</text><text x="345" y="56" font-size="20" font-weight="800" fill="#283891">v = 2u</text></svg>
           <figcaption>Las flechas tienen distinto largo, pero la misma dirección. La segunda no abre un camino nuevo.</figcaption>
         </figure>
-        <p class="idea">Cuando esto pasa, el conjunto carga equipaje de sobra.</p>
-        <p class="idea">Y cuando no pasa —cuando cada vector abre un camino propio— el conjunto vale oro. Ahí tienes las dos caras de la <strong>independencia lineal</strong>.</p>
-        <p class="idea">Tu curso las decide con una sola prueba:</p>
-        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 2.11 y 2.12</span>{v<sub>1</sub>, …, v<sub>k</sub>} es <strong>linealmente independiente</strong> si la <strong>única</strong> forma de lograr c<sub>1</sub>v<sub>1</sub> + … + c<sub>k</sub>v<sub>k</sub> = 0 es con todos los c<sub>i</sub> = 0; si existe otra forma, es <strong>linealmente dependiente</strong>.</p>
-        <p class="idea">Dicho simple: si la única manera de armar la mezcla vacía es no usar ninguna receta, nadie sobra. Si hay otra manera, alguien está repitiendo el trabajo de los demás.</p>
+<p class="idea">Contrasta con e<sub>1</sub> = (1, 0) y e<sub>2</sub> = (0, 1):</p>
+<div class="fx"><div class="sys"><span class="eq">αe<sub>1</sub> + βe<sub>2</sub> = (0, 0)</span><span class="eq">(α, β) = (0, 0)</span></div></div>
+<p class="idea">Aquí la única posibilidad es α = 0 y β = 0. Ninguna dirección puede reemplazarse con la otra.</p>
+<p class="idea key">Dependencia significa que existe una combinación no trivial que produce cero. Independencia significa que solo la combinación trivial produce cero.</p>
+<p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 2.11 y 2.12</span>{v<sub>1</sub>, …, v<sub>k</sub>} es <strong>linealmente independiente</strong> si la <strong>única</strong> forma de lograr c<sub>1</sub>v<sub>1</sub> + … + c<sub>k</sub>v<sub>k</sub> = 0 es con todos los c<sub>i</sub> = 0; si existe otra forma, es <strong>linealmente dependiente</strong>.</p>
+<p class="idea">“Trivial” no añade una idea nueva: solo nombra el caso en que todos los coeficientes valen cero.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="independencia" data-level="guiado" data-module="4">
         <div class="qtag">Compruébalo · guiado</div>
@@ -562,7 +544,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ Una apunta horizontal y la otra vertical: ninguna puede reemplazar a la otra.</p><p class="nudge">✕ Los números compartidos no deciden; decide si una flecha es múltiplo de la otra.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres problemas para detectar cuándo un vector sobra.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -593,10 +575,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="independencia" data-level="examen" data-module="4">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>¿Es {(1, 0), (0, 1), (2, 3)} linealmente independiente en R²?</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>¿Es {(1, 0), (0, 1), (2, 3)} linealmente independiente en R²?</p>
             <div class="opts">
               <button class="opt" data-ok="1">No: tres vectores en R² siempre son dependientes</button>
               <button class="opt" data-ok="0">Sí: los tres son distintos</button>
@@ -611,25 +593,22 @@
     </section>
 
     <section class="lesson" data-step="5">
-      <header class="lesson-head"><p class="micro">Microlección 5 de 8 · Tema: Base y dimensión</p><h2>Base y dimensión: el equipo mínimo</h2><p class="goal">Meta: elegir los vectores necesarios y contar sus direcciones.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 5 de 8 · Tema: Base y dimensión</p><h2>Base y dimensión: un conjunto mínimo</h2><p class="goal">Meta: elegir los vectores necesarios y contar sus direcciones.</p></header>
       <div class="sec">
-        <p class="idea lede">Hoy caen dos conceptos que van de la mano: <strong>base</strong> y <strong>dimensión</strong>.</p>
-        <p class="idea">Y traes todo lo necesario: sabes combinar (lección 2), sabes qué alcanzas (lección 3) y sabes detectar sobras (lección 4).</p>
-        <p class="idea">Junta las tres piezas y aparece la pregunta del millón: ¿cuál es el <strong>equipo mínimo</strong> que lo genera todo?</p>
-        <p class="idea">Míralo en un caso concreto: tres direcciones, pero la tercera se arma con las primeras dos.</p>
-        <div class="fx"><div class="sys"><span class="eq">u = (1, 0)</span><span class="eq">v = (0, 1)</span><span class="eq">w = u + v = (1, 1)</span></div></div>
-        <p class="idea">Pásale tu detector de la lección pasada: como w = u + v, el vector w <strong>sobra</strong>. Con u y v ya alcanzas todo el plano; w no amplía nada.</p>
-        <figure class="visual">
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">Una <strong>base</strong> debe cumplir dos condiciones a la vez: alcanzar todo el espacio y no contener vectores redundantes.</p>
+<p class="idea">En R<sup>2</sup>, toma e<sub>1</sub> = (1, 0), e<sub>2</sub> = (0, 1) y w = (1, 1).</p>
+<div class="fx"><div class="sys"><span class="eq">w = e<sub>1</sub> + e<sub>2</sub></span></div></div>
+<p class="idea">Los tres generan el plano, pero el tercero sobra. Si eliminas w, e<sub>1</sub> y e<sub>2</sub> siguen llegando a cualquier (a, b):</p>
+<div class="fx"><div class="sys"><span class="eq">(a, b) = ae<sub>1</sub> + be<sub>2</sub></span></div></div>
+<figure class="visual">
           <svg viewBox="0 0 540 280" role="img" aria-label="Dos vectores base y un tercer vector redundante"><defs><marker id="arr5o" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto"><path d="M0 0L14 5L0 10Z" fill="#F5821F"/></marker><marker id="arr5b" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto"><path d="M0 0L14 5L0 10Z" fill="#283891"/></marker><marker id="arr5g" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto"><path d="M0 0L14 5L0 10Z" fill="#1C7A3A"/></marker></defs><g stroke="#E1E5EA"><path d="M80 60V230M160 60V230M240 60V230M320 60V230M400 60V230M480 60V230"/><path d="M60 90H490M60 150H490M60 210H490"/></g><circle cx="160" cy="210" r="5" fill="#181B22"/><path d="M160 210L340 210" stroke="#F5821F" stroke-width="4" marker-end="url(#arr5o)"/><path d="M160 210L160 82" stroke="#283891" stroke-width="4" marker-end="url(#arr5b)"/><path d="M160 210L340 82" stroke="#1C7A3A" stroke-width="3.5" stroke-dasharray="10 7" marker-end="url(#arr5g)"/><text x="285" y="198" font-size="20" font-weight="800" fill="#C75D08">u</text><text x="175" y="108" font-size="20" font-weight="800" fill="#283891">v</text><text x="330" y="73" font-size="20" font-weight="800" fill="#1C7A3A">w = u + v</text></svg>
           <figcaption>u y v forman el equipo mínimo. w puede reconstruirse con ellos.</figcaption>
         </figure>
-        <p class="idea key">El equipo que queda —u y v— logra el equilibrio exacto: <strong>genera todo</strong> y <strong>nadie sobra</strong>.</p>
-        <p class="idea">Ese equilibrio es exactamente la <strong>base</strong> que anunciamos — y su tamaño, la <strong>dimensión</strong>. Las definiciones del curso lo dicen requisito por requisito:</p>
-        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 2.13 y 2.14</span>{v<sub>1</sub>, …, v<sub>k</sub>} es una <strong>base</strong> de S si (i) gen({v<sub>1</sub>, …, v<sub>k</sub>}) = S y (ii) el conjunto es linealmente independiente. La <strong>dimensión</strong> es el número de vectores de cualquier base: dim(S) = k.</p>
-        <p class="idea">Reconócelas: el requisito (i) es «genera todo» y el (ii) es «nadie sobra». En nuestro ejemplo, {u, v} cumple ambos — y por eso dim = 2.</p>
-        <div class="fx"><div class="sys"><span class="eq">base = {u, v}</span><span class="eq">dimensión = 2</span></div></div>
-        <p class="idea paso">Y una pista de lo que viene: estos mapas de lo alcanzable tienen una propiedad rara — por más que operes adentro, <strong>nunca te sales</strong>.</p>
-        <p class="idea paso">Mundos cerrados. De eso trata la siguiente lección.</p>
+<p class="idea">¿Qué permanece al cambiar de base? El espacio. ¿Qué cuenta la dimensión? El número de vectores de cualquier base.</p>
+<p class="idea key">Base = genera todo + es linealmente independiente. Dimensión = cantidad de vectores de una base.</p>
+<p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 2.13 y 2.14</span>{v<sub>1</sub>, …, v<sub>k</sub>} es una <strong>base</strong> de S si (i) gen({v<sub>1</sub>, …, v<sub>k</sub>}) = S y (ii) el conjunto es linealmente independiente. La <strong>dimensión</strong> es el número de vectores de cualquier base: dim(S) = k.</p>
+<p class="idea">En este caso, {e<sub>1</sub>, e<sub>2</sub>} es una base de R<sup>2</sup> y dim(R<sup>2</sup>) = 2.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="base" data-level="guiado" data-module="5">
         <div class="qtag">Compruébalo · guiado</div>
@@ -652,7 +631,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ La dimensión cuenta cuántos vectores tiene una base.</p><p class="nudge">✕ No cuenta longitudes; cuenta direcciones independientes del equipo mínimo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos problemas para elegir el equipo mínimo y contar sus direcciones.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -689,30 +668,23 @@
     </section>
 
     <section class="lesson" data-step="6">
-      <header class="lesson-head"><p class="micro">Microlección 6 de 8 · Tema: Subespacios de Rⁿ</p><h2>Subespacios: un mundo que no se rompe</h2><p class="goal">Meta: revisar las tres condiciones de un subespacio sin usar atajos falsos.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 6 de 8 · Tema: Subespacios de Rⁿ</p><h2>Subespacios: operaciones que permanecen dentro</h2><p class="goal">Meta: revisar las tres condiciones de un subespacio sin usar atajos falsos.</p></header>
       <div class="sec">
-        <p class="idea lede">Hoy les ponemos su nombre del temario a los mundos cerrados: <strong>subespacios</strong>.</p>
-        <p class="idea">Te dejé la promesa de que un generado no te deja salir. Compruébalo tú misma.</p>
-        <p class="idea">Toma el generado de un solo vector — una recta que pasa por el origen.</p>
-        <p class="idea">Párate dentro y haz las dos únicas jugadas: suma dos puntos de la recta… y caes en la recta. Estira uno… y sigues en la recta.</p>
-        <p class="idea key">Hagas lo que hagas con material de adentro, <strong>nunca te sales</strong>.</p>
-        <p class="idea">Y hay una tercera seña: el punto de partida —el cero— siempre está ahí (usa peso 0 y lo obtienes).</p>
-        <p class="idea">Esas tres señas son, exactamente, la lista de requisitos:</p>
-        <div class="criteria"><div class="criterion"><b>1</b>Contiene al vector cero</div><div class="criterion"><b>2</b>Cierra al sumar</div><div class="criterion"><b>3</b>Cierra al escalar</div></div>
-        <p class="idea">Las tres son necesarias. Pasar por el cero es solo el primer filtro: sirve para <strong>descartar</strong> rápido, pero no basta para aprobar.</p>
-        <figure class="visual">
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">Un <strong>subespacio</strong> es un conjunto de vectores en el que las operaciones vectoriales no te sacan del conjunto.</p>
+<p class="idea">Prueba la recta S = {(x, y) : y = 2x}. Dos vectores de S son u = (1, 2) y v = (−2, −4).</p>
+<div class="fx"><div class="sys"><span class="eq">u + v = (−1, −2)</span><span class="eq">−2 = 2(−1)</span></div></div>
+<p class="idea">La suma sigue cumpliendo y = 2x. Multiplica u por 3:</p>
+<div class="fx"><div class="sys"><span class="eq">3u = (3, 6)</span><span class="eq">6 = 2(3)</span></div></div>
+<p class="idea">También permanece en S. Además, (0, 0) cumple 0 = 2·0.</p>
+<figure class="visual">
           <svg viewBox="0 0 620 280" role="img" aria-label="Una recta subespacio pasa por el origen y una recta afín está desplazada"><rect x="16" y="20" width="280" height="230" rx="16" fill="white" stroke="#181B22" stroke-width="3"/><text x="156" y="50" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">PASA POR EL CERO</text><path d="M45 210H268M70 230V68" stroke="#64748B" stroke-width="2"/><circle cx="70" cy="210" r="6" fill="#181B22"/><path d="M45 230L260 75" stroke="#1C7A3A" stroke-width="6"/><text x="170" y="224" font-size="16" fill="#1C7A3A">subespacio</text><rect x="324" y="20" width="280" height="230" rx="16" fill="white" stroke="#181B22" stroke-width="3"/><text x="464" y="50" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">ESTÁ CORRIDA</text><path d="M350 210H575M375 230V68" stroke="#64748B" stroke-width="2"/><circle cx="375" cy="210" r="6" fill="#181B22"/><path d="M350 170L570 70" stroke="#F5821F" stroke-width="6"/><text x="465" y="224" font-size="16" fill="#C75D08">afín</text></svg>
           <figcaption>La recta corrida conserva la forma, pero pierde el cero.</figcaption>
         </figure>
-        <p class="idea">El dibujo muestra el contraste completo. La recta por el origen cumple las tres condiciones.</p>
-        <p class="idea">Su gemela corrida conserva la forma, pero pierde el cero — y con él, el título. Esa es la línea que separa a los <strong>subespacios</strong> de sus copias corridas, los <strong>afines</strong>.</p>
-        <p class="idea">La definición del curso es, palabra por palabra, la lista de señas que ya comprobaste:</p>
-        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.6</span>S es un <strong>subespacio de R<sup>n</sup></strong> si: (i) 0 ∈ S; (ii) si u, v ∈ S entonces u + v ∈ S; (iii) si u ∈ S y c ∈ R entonces c·u ∈ S.</p>
-        <p class="idea">Léela con tus señas: «∈» es <strong>está en</strong>; (i) dice «el cero vive ahí»; (ii) y (iii) son los dos cierres — sumar no te saca, estirar no te saca. Tu curso los llama <strong>cerraduras</strong>.</p>
-        <p class="idea">¿Y cómo se escribe una de estas rectas corridas? Igual que un paseo: partes de un punto y avanzas sobre una dirección. El número t dice cuánto avanzas:</p>
-        <div class="fx"><div class="sys"><span class="eq">(x, y) = (0, 2) + <span class="unknown">t</span>·(1, 3)</span></div></div>
-        <p class="idea">Cuando t cambia, recorres la recta y = 3x + 2. A esta escritura se le llama <strong>forma paramétrica</strong>.</p>
-        <p class="idea paso">Con los mundos ya clasificados, en la siguiente lección conocerás a la <strong>fábrica</strong> que los produce en los exámenes: la matriz.</p>
+<p class="idea">Ahora contrasta con y = 2x + 1. El origen no cumple la ecuación, así que esa recta no puede ser subespacio.</p>
+<p class="idea key">Las tres comprobaciones son: contiene al cero, cierra bajo suma y cierra bajo multiplicación por escalares.</p>
+<p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.6</span>S es un <strong>subespacio de R<sup>n</sup></strong> si: (i) 0 ∈ S; (ii) si u, v ∈ S entonces u + v ∈ S; (iii) si u ∈ S y c ∈ R entonces c·u ∈ S.</p>
+<p class="idea">La palabra “cerrado” aquí significa que la operación termina dentro del conjunto; no es la noción topológica de conjunto cerrado que aparecerá en Cálculo.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M6G" data-tema="subespacio" data-level="guiado" data-module="6">
         <div class="qtag">Compruébalo · guiado</div>
@@ -735,7 +707,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ Está desplazada dos unidades: conserva la dirección, pero no contiene al cero.</p><p class="nudge">✕ La forma de recta no basta; sustituye x = 0 y revisa si aparece (0, 0).</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos problemas para revisar las condiciones de subespacio.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -768,63 +740,70 @@
         
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="L2_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="practica checkpoint" data-checkpoint="6">
-        <p class="practica-head">Repaso acumulativo <span>· ideas 5–6</span></p>
-        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="subespacio" data-level="examen" data-module="6">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea S = {(x, y) ∈ R² : x·y = 0} (los que están sobre alguno de los ejes). ¿Es S subespacio de R²?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">No: contiene al cero, pero (1, 0) + (0, 1) = (1, 1) se sale (falla la suma)</button>
-              <button class="opt" data-ok="0">Sí: contiene al cero y ambos ejes pasan por el origen</button>
-              <button class="opt" data-ok="0">No: porque no contiene al vector cero</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ (1, 0) y (0, 1) están en S, pero su suma (1, 1) cumple 1·1 = 1 ≠ 0: no es cerrado bajo suma.</p><p class="nudge">✕ Sí contiene al cero; el problema está en la suma. Toma un vector de cada eje y súmalos. Intenta de nuevo.</p></div>
+      <div class="practica checkpoint exam-bridge" data-checkpoint="6">
+        <p class="practica-head">Puente al examen <span>· probar que un conjunto es base</span></p>
+        <p class="practica-intro"><strong>Caso.</strong> Sea S = {(x, y, z) : x + y + z = 0}. Decide si B = {(1, −1, 0), (1, 0, −1)} es una base de S.</p>
+        <div class="fx"><div class="sys"><span class="eq">S: x + y + z = 0</span><span class="eq">B = {u, v}</span></div></div>
+        <p class="practica-intro"><strong>Trabájalo en papel.</strong> No adivines el final: cada decisión usa el resultado anterior.</p>
+        <div class="prob exam-step">
+          <div class="plevel p-res"><b>1</b> Decide el plan</div>
+          <div class="check challenge" data-kind="item" data-id="PX6A" data-tema="subespacio" data-level="guiado" data-module="6">
+            <div class="qtag">Elige el camino</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Por qué S sí es subespacio?</p>
+            <div class="opts"><button class="opt" data-ok="1">La condición es homogénea y se conserva al sumar y escalar</button><button class="opt" data-ok="0">Porque toda ecuación describe automáticamente un subespacio</button><button class="opt" data-ok="0">Porque S contiene al punto (1, 1, 1)</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ La ecuación tiene lado derecho cero y define un plano por el origen.</p><p class="nudge">✕ Revisa qué ocurre con el vector cero y con una combinación de dos soluciones. Intenta de nuevo.</p></div>
           </div>
         </div>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="base" data-level="examen" data-module="5">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea B = {(1, 0, 0), (0, 1, 0)}. ¿Es B una base de R³?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">No: solo generan un plano (el z = 0); faltan direcciones para todo R³</button>
-              <button class="opt" data-ok="0">Sí: son linealmente independientes</button>
-              <button class="opt" data-ok="0">Sí: todo par de vectores es base</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Son l.i., pero una base de R³ necesita 3 vectores. Con 2 solo cubres un plano, no llegas a la tercera coordenada.</p><p class="nudge">✕ Ser independientes no basta: una base también debe GENERAR todo el espacio. ¿Cuántos hacen falta en R³? Intenta de nuevo.</p></div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>2</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX6B" data-tema="independencia" data-level="juntos" data-module="4">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>Si αu + βv = 0, ¿qué fuerzan las componentes y y z?</p>
+            <div class="opts"><button class="opt" data-ok="1">−α = 0 y −β = 0; por tanto α = β = 0</button><button class="opt" data-ok="0">α = β, con infinitas soluciones no triviales</button><button class="opt" data-ok="0">α + β = 0, pero ambos quedan libres</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Las componentes segunda y tercera aíslan directamente los dos pesos.</p><p class="nudge">✕ Escribe las tres componentes de α(1,−1,0)+β(1,0,−1). Intenta de nuevo.</p></div>
           </div>
         </div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>3</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX6C" data-tema="generacion_base" data-level="juntos" data-module="5">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>Para (x, y, z) ∈ S, ¿qué combinación reproduce el vector?</p>
+            <div class="opts"><button class="opt" data-ok="1">(x, y, z) = (−y)u + (−z)v</button><button class="opt" data-ok="0">(x, y, z) = yu + zv</button><button class="opt" data-ok="0">(x, y, z) = xu + xv</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Como x = −y − z, la combinación da (−y−z, y, z).</p><p class="nudge">✕ Usa la ecuación de S para sustituir x antes de elegir los pesos. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-ex"><b>4</b> Concluye y verifica</div>
+          <div class="check challenge" data-kind="item" data-id="PX6D" data-tema="base_dimension" data-level="examen" data-module="5">
+            <div class="qtag">Cierra el problema</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué concluyes sobre B y la dimensión de S?</p>
+            <div class="opts"><button class="opt" data-ok="1">B es base de S y dim(S) = 2</button><button class="opt" data-ok="0">B genera S, pero no es independiente</button><button class="opt" data-ok="0">B es independiente, pero dim(S) = 3</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ B genera S y sus dos vectores son independientes.</p><p class="nudge">✕ Una base reúne exactamente generación e independencia. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">El <a href="L2_cuadernillo-papel.html">cuadernillo</a> continúa este patrón con desarrollo completo y problemas sin pistas.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="5">← Anterior</button><button class="btn" data-next="7">Siguiente idea →</button></div>
     </section>
 
     <section class="lesson" data-step="7">
-      <header class="lesson-head"><p class="micro">Microlección 7 de 8 · Tema: Espacio nulo y espacio columna</p><h2>Espacio nulo y columna: dos preguntas para una máquina</h2><p class="goal">Meta: separar lo que la matriz aplasta de lo que puede producir.</p></header>
+      <header class="lesson-head"><p class="micro">Microlección 7 de 8 · Tema: Espacio nulo y espacio columna</p><h2>Espacio nulo y columna: dos conjuntos asociados a una matriz</h2><p class="goal">Meta: separar lo que la matriz aplasta de lo que puede producir.</p></header>
       <div class="sec">
-        <p class="idea lede">Hoy: los dos espacios que toda matriz lleva dentro — el <strong>espacio nulo</strong> y el <strong>espacio columna</strong>.</p>
-        <p class="idea">Para encontrarlos, mira a la matriz <strong>viva</strong>: recibe un vector y entrega otro. Una máquina.</p>
-        <p class="idea">¿Y qué hace por dentro? Nada que no sepas ya: sus columnas son vectores-receta, y la entrada (a, b) dice cuántas veces tomar cada una.</p>
-        <p class="idea">La máquina <strong>combina</strong> — la jugada de la lección 2, automatizada:</p>
-        <div class="fx"><div class="matrix-form"><span>A =</span><span class="matrix" aria-label="Matriz A con renglones 1 2 y 2 4"><span>1</span><span>2</span><span>2</span><span>4</span></span></div></div>
-        <div class="fx"><div class="sys"><span class="eq"><span class="unknown">a</span>·(1, 2) + <span class="unknown">b</span>·(2, 4)</span><span class="eq">= (a + 2b, 2a + 4b)</span></div></div>
-        <div class="fx"><div class="sys"><span class="eq">A·(a, b)</span><span class="eq">= (a + 2b, 2a + 4b)</span></div></div>
-        <p class="idea key">Sobre cualquier máquina caben dos preguntas: ¿qué entradas <strong>destruye</strong>? y ¿qué salidas <strong>puede fabricar</strong>?</p>
-        <p class="idea">Mira la primera en acción — haz entrar (−2, 1):</p>
-        <div class="fx"><div class="sys"><span class="eq">A·(−2, 1)</span><span class="eq">= (0, 0)</span></div></div>
-        <p class="idea">Esa entrada desapareció en el cero: la máquina la <strong>aplastó</strong>.</p>
-        <p class="idea">Y probando otras entradas asoma la segunda cara: las salidas que sí produce —(1, 2), (3, 6), (−2, −4)— caen sobre una misma dirección. Su catálogo es limitado.</p>
-        <figure class="visual">
-          <svg viewBox="0 0 700 260" role="img" aria-label="Una matriz como máquina con entradas, cero y salidas alcanzables"><defs><marker id="arr7" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#181B22"/></marker></defs><rect x="28" y="42" width="170" height="170" rx="18" fill="#FFF3E7" stroke="#181B22" stroke-width="3"/><text x="113" y="78" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">ENTRADAS</text><text x="113" y="125" text-anchor="middle" font-size="22" fill="#334155">(−2, 1)</text><text x="113" y="167" text-anchor="middle" font-size="22" fill="#334155">(1, 0)</text><path d="M205 128H278" stroke="#181B22" stroke-width="4" marker-end="url(#arr7)"/><rect x="290" y="60" width="120" height="136" rx="20" fill="#283891" stroke="#181B22" stroke-width="3"/><text x="350" y="120" text-anchor="middle" font-size="32" font-weight="850" fill="white">A</text><text x="350" y="151" text-anchor="middle" font-size="15" fill="white">MÁQUINA</text><path d="M417 128H490" stroke="#181B22" stroke-width="4" marker-end="url(#arr7)"/><rect x="502" y="42" width="170" height="170" rx="18" fill="#E6F5EC" stroke="#181B22" stroke-width="3"/><text x="587" y="78" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">SALIDAS</text><text x="587" y="125" text-anchor="middle" font-size="22" fill="#334155">(0, 0)</text><text x="587" y="167" text-anchor="middle" font-size="22" fill="#334155">(1, 2)</text></svg>
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">Toda matriz A determina dos conjuntos: las entradas que envía a cero y las salidas que puede producir.</p>
+<p class="idea">Escribe A por columnas. Si A tiene columnas c<sub>1</sub> y c<sub>2</sub>, entonces:</p>
+<div class="fx"><div class="sys"><span class="eq">A(a, b) = ac<sub>1</sub> + bc<sub>2</sub></span></div></div>
+<p class="idea">Esta igualdad conecta matrices y combinaciones lineales: cada entrada (a, b) elige los coeficientes de las columnas.</p>
+<figure class="visual">
+          <svg viewBox="0 0 700 260" role="img" aria-label="Una matriz con entradas, vector cero y salidas alcanzables"><defs><marker id="arr7" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#181B22"/></marker></defs><rect x="28" y="42" width="170" height="170" rx="18" fill="#FFF3E7" stroke="#181B22" stroke-width="3"/><text x="113" y="78" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">ENTRADAS</text><text x="113" y="125" text-anchor="middle" font-size="22" fill="#334155">(−2, 1)</text><text x="113" y="167" text-anchor="middle" font-size="22" fill="#334155">(1, 0)</text><path d="M205 128H278" stroke="#181B22" stroke-width="4" marker-end="url(#arr7)"/><rect x="290" y="60" width="120" height="136" rx="20" fill="#283891" stroke="#181B22" stroke-width="3"/><text x="350" y="120" text-anchor="middle" font-size="32" font-weight="850" fill="white">A</text><text x="350" y="151" text-anchor="middle" font-size="15" fill="white">MATRIZ</text><path d="M417 128H490" stroke="#181B22" stroke-width="4" marker-end="url(#arr7)"/><rect x="502" y="42" width="170" height="170" rx="18" fill="#E6F5EC" stroke="#181B22" stroke-width="3"/><text x="587" y="78" text-anchor="middle" font-size="18" font-weight="800" fill="#181B22">SALIDAS</text><text x="587" y="125" text-anchor="middle" font-size="22" fill="#334155">(0, 0)</text><text x="587" y="167" text-anchor="middle" font-size="22" fill="#334155">(1, 2)</text></svg>
           <figcaption>Pregunta 1: ¿qué entradas llegan al cero? Pregunta 2: ¿qué salidas pueden aparecer?</figcaption>
         </figure>
-        <p class="idea">Y aquí se cierra el círculo de la unidad: las dos respuestas resultan ser <strong>subespacios</strong> — los mundos cerrados de la lección pasada.</p>
-        <p class="idea">Y esos son, con sus nombres del temario, el <strong>espacio nulo</strong> (lo que se aplasta) y el <strong>espacio columna</strong> (lo que se puede fabricar). En los símbolos de tu curso:</p>
-        <p class="fdef"><span class="flbl">Definición · así los escribe tu curso</span><strong>Nul(A)</strong> = { x ∈ R<sup>n</sup> | A·x = 0 }  ·  <strong>Col(A)</strong> = gen(columnas de A).</p>
-        <p class="idea">Léelos de vuelta: Nul(A) son «los x tales que A los manda al cero»; Col(A) es el generado de las columnas — tu lección 3, aplicada a la máquina.</p>
-        <p class="idea paso">Queda una sola pregunta en toda la unidad: ¿qué <strong>tamaño</strong> tienen estos dos espacios? Contarlo es la última idea — y trae un teorema de regalo.</p>
+<p class="idea">Primera pregunta: ¿qué entradas cumplen Ax = 0? Resolver ese sistema produce el <strong>espacio nulo</strong>.</p>
+<p class="idea">Segunda pregunta: ¿qué salidas pueden escribirse como combinación de las columnas? Ese conjunto es el <strong>espacio columna</strong>.</p>
+<div class="fx"><div class="sys"><span class="eq">Nul(A) = {x : Ax = 0}</span><span class="eq">Col(A) = Gen(c<sub>1</sub>, c<sub>2</sub>, …)</span></div></div>
+<p class="idea key">El espacio nulo vive en el conjunto de entradas. El espacio columna vive en el conjunto de salidas.</p>
+<p class="fdef"><span class="flbl">Definición · así los escribe tu curso</span><strong>Nul(A)</strong> = { x ∈ R<sup>n</sup> | A·x = 0 }  ·  <strong>Col(A)</strong> = gen(columnas de A).</p>
+<p class="idea">No son dos nombres para lo mismo: responden preguntas distintas y pueden tener dimensiones distintas.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7G" data-tema="espacio_nulo" data-level="guiado" data-module="7">
         <div class="qtag">Compruébalo · guiado</div>
@@ -847,7 +826,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ Al variar t aparecen todos los múltiplos de (1, 2): una recta completa.</p><p class="nudge">✕ El espacio columna reúne todas las salidas, no solo una de ellas.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres problemas sobre lo que la matriz aplasta y lo que produce.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -878,10 +857,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="espacio_columna" data-level="examen" data-module="7">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea A de 3×4 con rango 3. ¿Tiene A·x = b solución para todo b ∈ R³?</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Sea A de 3×4 con rango 3. ¿Tiene A·x = b solución para todo b ∈ R³?</p>
             <div class="opts">
               <button class="opt" data-ok="1">Sí: rango 3 en R³ significa que las columnas generan todo R³</button>
               <button class="opt" data-ok="0">No: hay más columnas que renglones</button>
@@ -898,22 +877,16 @@
     <section class="lesson" data-step="8">
       <header class="lesson-head"><p class="micro">Microlección 8 de 8 · Tema: Rango y nulidad</p><h2>Rango y nulidad: contar direcciones</h2><p class="goal">Meta: leer rango y nulidad a partir de pivotes y columnas libres.</p></header>
       <div class="sec">
-        <p class="idea lede">Última pieza: el <strong>rango</strong> y la <strong>nulidad</strong> — las medidas de tus dos espacios — y el teorema que las amarra.</p>
-        <p class="idea">La buena noticia: ambas salen de una operación que dominas desde la Unidad 1 — reducir.</p>
-        <p class="idea key"><strong>Reducir</strong> es aplicar las operaciones de renglón hasta que la matriz se lea sola.</p>
-        <p class="idea">Al terminar, cada columna quedó en uno de dos bandos — con pivote (el 1 verde) o libre:</p>
-        <div class="fx"><div class="matrix-form"><span>R =</span><span class="matrix three" aria-label="Matriz reducida con dos columnas pivote y una columna libre"><span class="pivot">1</span><span>0</span><span class="free">3</span><span>0</span><span class="pivot">1</span><span class="free">−2</span></span></div></div>
-        <div class="legend"><span><i class="dot green"></i>columnas con pivote: 1 y 2</span><span><i class="dot"></i>columna libre: 3</span></div>
-        <div class="fx"><div class="sys"><span class="eq">3 columnas</span><span class="eq">2 pivotes + 1 columna libre</span></div></div>
-        <p class="idea">Y aquí el puente con la lección pasada: cada <strong>pivote</strong> es una dirección de salida que la máquina sí produce.</p>
-        <p class="idea">Cada <strong>columna libre</strong> es una de las elecciones que arman el espacio nulo. Contar los bandos es medir los dos espacios:</p>
-        <p class="idea">Esas dos cuentas son el <strong>rango</strong> (direcciones de salida) y la <strong>nulidad</strong> (elecciones libres). Y el curso las amarra con su teorema:</p>
-        <p class="fdef"><span class="flbl">Definición y teorema · así los dice tu curso</span><strong>rango(A)</strong> = dim(Col(A))  ·  <strong>nulidad(A)</strong> = dim(Nul(A)). <strong>Teorema de la dimensión</strong>: rango(A) + nulidad(A) = n, el número de columnas.</p>
-        <p class="idea">El teorema solo dice lo que tú contaste: cada columna cae en un bando —pivote o libre— y entre los dos bandos suman todas.</p>
-        <div class="fx"><div class="sys"><span class="eq">rango = 2</span><span class="eq">nulidad = 1</span><span class="eq">2 + 1 = 3 columnas</span></div></div>
-        <p class="idea">No es una fórmula nueva para memorizar a ciegas. Solo reparte las columnas en dos grupos: pivote o libre.</p>
-        <div class="fx"><div class="sys"><span class="eq">rango + nulidad</span><span class="eq">= número de columnas</span></div></div>
-        <p class="idea">Para construir una base del espacio columna, los pivotes señalan qué columnas elegir, pero se toman de la matriz <strong>original</strong>, antes de reducir.</p>
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">El <strong>rango</strong> y la <strong>nulidad</strong> cuentan dimensiones de los dos espacios de la lección anterior.</p>
+<p class="idea">Reduce una matriz de m × n columnas. Después de Gauss–Jordan, cada columna es pivote o libre.</p>
+<div class="fx"><div class="sys"><span class="eq">número de pivotes = rango</span><span class="eq">número de variables libres = nulidad</span></div></div>
+<p class="idea">Mira una matriz con 4 columnas, 3 pivotes y 1 variable libre. La cuenta es:</p>
+<div class="fx"><div class="sys"><span class="eq">rango + nulidad = 3 + 1</span><span class="eq">= 4 = número de columnas</span></div></div>
+<p class="idea">Cambia la matriz: los dos números pueden cambiar, pero su suma permanece igual al número de entradas del dominio.</p>
+<p class="idea key">Cada dirección del dominio termina en uno de dos papeles: aporta una dirección de salida o una libertad que cae en el núcleo.</p>
+<p class="fdef"><span class="flbl">Definición y teorema · así los dice tu curso</span><strong>rango(A)</strong> = dim(Col(A))  ·  <strong>nulidad(A)</strong> = dim(Nul(A)). <strong>Teorema de la dimensión</strong>: rango(A) + nulidad(A) = n, el número de columnas.</p>
+<p class="idea">En la notación del teorema, n es el número de columnas de A. rango(A) mide Col(A) y nulidad(A) mide Nul(A).</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M8G" data-tema="rango_nulidad" data-level="guiado" data-module="8">
         <div class="qtag">Compruébalo · guiado</div>
@@ -936,6 +909,40 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ Tres columnas tienen pivote y dos quedan libres: 3 + 2 = 5.</p><p class="nudge">✕ Separa las cinco columnas en pivotes y libres; no intercambies los nombres.</p></div>
       </div>
 
+      <div class="practica checkpoint exam-bridge" data-checkpoint="8">
+        <p class="practica-head">Puente al examen <span>· leer rango, nulidad e inyectividad juntos</span></p>
+        <p class="practica-intro"><strong>Caso final.</strong> A es una matriz de 3×5 con rango 3. Clasifica la transformación L(x) = Ax y describe qué ocurre con Ax = b.</p>
+        <div class="fx"><div class="sys"><span class="eq">A: 3 × 5</span><span class="eq">rango(A) = 3</span></div></div>
+        <p class="practica-intro"><strong>Trabájalo en papel.</strong> No adivines el final: cada decisión usa el resultado anterior.</p>
+        <div class="prob exam-step">
+          <div class="plevel p-res"><b>1</b> Decide el plan</div>
+          <div class="check challenge" data-kind="item" data-id="PX8A" data-tema="rango_nulidad" data-level="guiado" data-module="8">
+            <div class="qtag">Elige el camino</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuál es la nulidad de A?</p>
+            <div class="opts"><button class="opt" data-ok="1">2, porque 5 − 3 = 2</button><button class="opt" data-ok="0">0, porque el rango llena R³</button><button class="opt" data-ok="0">3, porque hay tres renglones</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Rango + nulidad = número de columnas.</p><p class="nudge">✕ La dimensión del dominio es 5, no 3. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>2</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX8B" data-tema="espacio_columna" data-level="juntos" data-module="7">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Tiene Ax = b solución para todo b ∈ R³?</p>
+            <div class="opts"><button class="opt" data-ok="1">Sí: el espacio columna tiene dimensión 3 y llena R³</button><button class="opt" data-ok="0">No: cinco columnas siempre dejan valores de b fuera</button><button class="opt" data-ok="0">Solo cuando b = 0</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ El rango alcanza toda la dimensión del codominio.</p><p class="nudge">✕ Compara rango(A) con la dimensión de R³. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-ex"><b>3</b> Concluye y verifica</div>
+          <div class="check challenge" data-kind="item" data-id="PX8C" data-tema="inyectividad_suprayectividad" data-level="examen" data-module="8">
+            <div class="qtag">Cierra el problema</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cómo se clasifica L: R⁵ → R³?</p>
+            <div class="opts"><button class="opt" data-ok="1">Suprayectiva, pero no inyectiva</button><button class="opt" data-ok="0">Inyectiva, pero no suprayectiva</button><button class="opt" data-ok="0">Biyectiva</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Llena el codominio, pero su núcleo tiene dimensión 2.</p><p class="nudge">✕ Inyectiva exigiría nulidad cero; suprayectiva exige rango 3. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">El <a href="L2_cuadernillo-papel.html">cuadernillo</a> continúa este patrón con desarrollo completo y problemas sin pistas.</p>
+      </div>
       <section class="finish">
         <h3>Cierra sin mirar arriba</h3>
         <p>Explica en voz alta esta cadena: vector → combinación → generado → independencia → base → dimensión.</p>
@@ -949,7 +956,7 @@
       <nav class="nav-lecs"><a href="L2_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="L2_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres problemas con el teorema que amarra rango y nulidad.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -980,10 +987,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M8P3" data-tema="rango_nulidad" data-level="examen" data-module="8">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea L: R⁵ → R³ una transformación lineal con rango 3. ¿Es suprayectiva? ¿Inyectiva?</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Sea L: R⁵ → R³ una transformación lineal con rango 3. ¿Es suprayectiva? ¿Inyectiva?</p>
             <div class="opts">
               <button class="opt" data-ok="1">Suprayectiva pero no inyectiva</button>
               <button class="opt" data-ok="0">Inyectiva pero no suprayectiva</button>
@@ -1008,13 +1015,13 @@
   'use strict';
   var KEY='valentina-algebra-u2-guia-micro';
   var goals=[
-    'Vectores: leer dos cantidades que deben viajar juntas.',
-    'Combinación lineal: construir una mezcla nueva a partir de dos vectores.',
+    'Vectores: leer una lista ordenada de números.',
+    'Combinación lineal: multiplicar por escalares y sumar vectores.',
     'Espacio generado: distinguir un resultado de todo lo alcanzable.',
-    'Independencia lineal: detectar cuándo un vector no aporta nada nuevo.',
-    'Base y dimensión: elegir el equipo mínimo y contar sus direcciones.',
+    'Independencia lineal: decidir si solo la combinación trivial produce cero.',
+    'Base y dimensión: generar sin redundancia y contar vectores de la base.',
     'Subespacios: revisar las tres condiciones de la definición.',
-    'Espacio nulo y columna: qué aplasta y qué produce la matriz.',
+    'Espacio nulo y columna: resolver Ax = 0 y generar con las columnas.',
     'Rango y nulidad: leerlos con pivotes y columnas libres.'
   ];
   var state={current:1,started:new Date().toISOString(),items:{},confidence:null};
@@ -1047,7 +1054,7 @@
   document.querySelectorAll('[data-prev]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.prev);});});
   var mix={a:1,b:0};
   function paintMix(){var lemon=2*mix.a+mix.b;var sugar=mix.a+3*mix.b;
-    document.getElementById('mixWords').textContent=lemon+' limones · '+sugar+' azúcar';
+    document.getElementById('mixWords').textContent='Resultado: ('+lemon+', '+sugar+')';
     document.getElementById('mixFormula').textContent=mix.a+'·(2,1) + '+mix.b+'·(1,3) = ('+lemon+','+sugar+')';}
   document.querySelectorAll('.pick').forEach(function(group){group.querySelectorAll('button').forEach(function(btn){btn.addEventListener('click',function(){
     var key=group.dataset.mix;mix[key]=Number(btn.dataset.value);

@@ -283,7 +283,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ x<sup>3</sup> deriva a 3x<sup>2</sup>; en 4xy la y es constante, así que 4xy deriva a 4y.</p><p class="nudge">✕ Al derivar 4xy respecto a x, la y se queda como factor. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres problemas de parciales, del acompañado al examen. En el primero damos el paso juntos; luego te vas soltando.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -314,10 +314,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M1P3" data-tema="derivadas_parciales" data-level="examen" data-module="1">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Calcula ∂f/∂x para f(x, y) = x<sup>3</sup> + 4xy<sup>2</sup>.</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Calcula ∂f/∂x para f(x, y) = x<sup>3</sup> + 4xy<sup>2</sup>.</p>
             <div class="opts">
               <button class="opt" data-ok="1">3x<sup>2</sup> + 4y<sup>2</sup></button>
               <button class="opt" data-ok="0">3x<sup>2</sup> + 8xy</button>
@@ -366,6 +366,11 @@
         </div>
         <p class="idea">¿Notas cómo la flecha se rehace en cada lugar? Por eso el gradiente no es un número: es un vector con dirección y largo.</p>
         <p class="idea">Se escribe con el símbolo <strong>∇</strong> («nabla»). Así lo define tu curso:</p>
+        <!-- aterrizaje-matematico: puente -->
+        <p class="idea">Falta justificar por qué esa dirección es la de mayor subida. Si u es un vector unitario, la tasa en esa dirección es ∇f · u.</p>
+<div class="fx"><div class="sys"><span class="eq">∇f · u ≤ ‖∇f‖ ‖u‖</span><span class="eq">= ‖∇f‖</span></div></div>
+<p class="idea">La igualdad ocurre cuando u apunta en la misma dirección que ∇f. En el ejemplo ∇f = (4, 10), el este da tasa 4, el norte da 10 y la dirección del gradiente da √116, que es mayor.</p>
+<p class="idea key">Así se obtiene la conclusión: el gradiente apunta al máximo crecimiento y su norma es la tasa máxima.</p>
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 4.4</span>El <strong>gradiente</strong> de f es el vector que junta sus derivadas parciales: ∇f = (∂f/∂x, ∂f/∂y). Apunta hacia el máximo crecimiento y su longitud es esa tasa máxima.</p>
         <p class="idea">Léelo de vuelta: primero armas la fórmula con las dos parciales; luego metes el punto. Sumar las parciales daría un número y perderías la dirección.</p>
         <p class="idea paso">Con las mismas parciales, la próxima idea arma otra cosa: una tabla que predice alturas cercanas.</p>
@@ -391,7 +396,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ ∂g/∂x = 2x + y = 5 y ∂g/∂y = x = 2: el gradiente es (5, 2).</p><p class="nudge">✕ En ∂g/∂x, la y de xy suma; en ∂g/∂y solo queda la x. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos gradientes, cada vez con menos apoyo: arma las dos parciales, evalúa en el punto y ordénalas en la flecha.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -475,7 +480,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ ∂f/∂x = y = 3 va con (x − 2); ∂f/∂y = x = 2 va con (y − 3).</p><p class="nudge">✕ Cada pendiente acompaña al desplazamiento de su propia variable. No los cambies. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres planos tangentes en aumento de dificultad: altura, pendientes y desplazamientos, cada pieza en su lugar.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -506,10 +511,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M3P3" data-tema="plano_tangente" data-level="examen" data-module="3">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Halla el plano tangente a z = xy en el punto (3, 2).</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Halla el plano tangente a z = xy en el punto (3, 2).</p>
             <div class="opts">
               <button class="opt" data-ok="1">z = 6 + 2(x − 3) + 3(y − 2)</button>
               <button class="opt" data-ok="0">z = 6 + 3(x − 3) + 2(y − 2)</button>
@@ -520,22 +525,48 @@
         </div>
         <p class="practica-mas">¿Quieres más de este tipo? Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> los amplía con más problemas y un solucionario.</p>
       </div>
-      <div class="practica checkpoint" data-checkpoint="3">
-        <p class="practica-head">Repaso acumulativo <span>· idea 2</span></p>
-        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M2P3" data-tema="gradiente" data-level="examen" data-module="2">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sea f(x, y) = x<sup>2</sup> + y<sup>2</sup>. Halla ∇f(3, 1).</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">(6, 2)</button>
-              <button class="opt" data-ok="0">(2, 6)</button>
-              <button class="opt" data-ok="0">(9, 1)</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ ∇f = (2x, 2y); en (3, 1) da (6, 2).</p><p class="nudge">✕ El gradiente son las parciales (2x, 2y), no los valores x<sup>2</sup>, y<sup>2</sup>. Intenta de nuevo.</p></div>
+      <div class="practica checkpoint exam-bridge" data-checkpoint="3">
+        <p class="practica-head">Puente al examen <span>· encontrar un punto de tangencia desde un plano paralelo</span></p>
+        <p class="practica-intro"><strong>Caso.</strong> Para f(x,y)=x²+xy+y², encuentra el punto donde el plano tangente es paralelo a z=4x+5y y escribe ese plano.</p>
+        <div class="fx"><div class="sys"><span class="eq">f(x,y) = x² + xy + y²</span><span class="eq">plano dado: z = 4x + 5y</span></div></div>
+        <p class="practica-intro"><strong>Trabájalo en papel.</strong> No adivines el final: cada decisión usa el resultado anterior.</p>
+        <div class="prob exam-step">
+          <div class="plevel p-res"><b>1</b> Decide el plan</div>
+          <div class="check challenge" data-kind="item" data-id="PX3A" data-tema="derivadas_parciales" data-level="guiado" data-module="1">
+            <div class="qtag">Elige el camino</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué sistema expresa el paralelismo?</p>
+            <div class="opts"><button class="opt" data-ok="1">2x + y = 4 y x + 2y = 5</button><button class="opt" data-ok="0">2x + y = 5 y x + 2y = 4</button><button class="opt" data-ok="0">x + y = 4 y xy = 5</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Las pendientes del plano tangente son fₓ y fᵧ.</p><p class="nudge">✕ Calcula las dos parciales e iguálalas con 4 y 5 en el mismo orden. Intenta de nuevo.</p></div>
           </div>
         </div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>2</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX3B" data-tema="plano_tangente" data-level="juntos" data-module="3">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué punto del dominio resuelve el sistema?</p>
+            <div class="opts"><button class="opt" data-ok="1">(1, 2)</button><button class="opt" data-ok="0">(2, 1)</button><button class="opt" data-ok="0">(1, 1)</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 2·1+2=4 y 1+2·2=5.</p><p class="nudge">✕ Resuelve las dos ecuaciones simultáneamente. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>3</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX3C" data-tema="plano_tangente" data-level="juntos" data-module="3">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuál es la altura del punto de tangencia?</p>
+            <div class="opts"><button class="opt" data-ok="1">z = f(1,2) = 7</button><button class="opt" data-ok="0">z = 4+5 = 9</button><button class="opt" data-ok="0">z = 1+2 = 3</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ 1²+1·2+2²=7.</p><p class="nudge">✕ La altura sale de f, no del plano paralelo dado. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-ex"><b>4</b> Concluye y verifica</div>
+          <div class="check challenge" data-kind="item" data-id="PX3D" data-tema="plano_tangente" data-level="examen" data-module="3">
+            <div class="qtag">Cierra el problema</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuál es el plano tangente?</p>
+            <div class="opts"><button class="opt" data-ok="1">z = 7 + 4(x−1) + 5(y−2)</button><button class="opt" data-ok="0">z = 4x + 5y</button><button class="opt" data-ok="0">z = 7 + (x−4) + (y−5)</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Usa la altura 7 y las pendientes 4 y 5 en la fórmula puntual.</p><p class="nudge">✕ Paralelo significa mismas pendientes, no necesariamente el mismo plano. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">El <a href="C4_cuadernillo-papel.html">cuadernillo</a> continúa este patrón con desarrollo completo y problemas sin pistas.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="2">← Anterior</button><button class="btn" data-next="4">Siguiente idea →</button></div>
     </section>
@@ -594,7 +625,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ (y)(1) + (x)(2t) = t<sup>2</sup> + 2t<sup>2</sup> = 3t<sup>2</sup>. Sustituyendo: f = t<sup>3</sup>, df/dt = 3t<sup>2</sup>.</p><p class="nudge">✕ ∂f/∂x = y, ∂f/∂y = x; dx/dt = 1, dy/dt = 2t. Arma la suma. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres veces la regla de la cadena, con menos apoyo en cada intento: junta las piezas, suma los caminos y deja todo en t.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -625,10 +656,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M4P3" data-tema="regla_cadena" data-level="examen" data-module="4">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Con f(x, y) = x + y<sup>2</sup>, x = t<sup>2</sup>, y = t, calcula df/dt en términos de t.</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Con f(x, y) = x + y<sup>2</sup>, x = t<sup>2</sup>, y = t, calcula df/dt en términos de t.</p>
             <div class="opts">
               <button class="opt" data-ok="1">4t</button>
               <button class="opt" data-ok="0">2t + 1</button>
@@ -698,7 +729,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ ∇f(1, 1) = (2, 1) y u = (3/5, 4/5): 2·(3/5) + 1·(4/5) = 6/5 + 4/5 = 2.</p><p class="nudge">✕ El gradiente es (2x, 1) = (2, 1). Normaliza (3, 4) a (3/5, 4/5) y haz el producto punto. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres derivadas direccionales: gradiente, rumbo unitario y producto punto. Recuerda normalizar antes de operar.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -729,10 +760,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M5P3" data-tema="derivada_direccional" data-level="examen" data-module="5">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Sobre f(x, y) = x<sup>2</sup> + y<sup>2</sup>, ¿en qué dirección crece más rápido en (3, 4) y cuál es esa tasa máxima?</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Sobre f(x, y) = x<sup>2</sup> + y<sup>2</sup>, ¿en qué dirección crece más rápido en (3, 4) y cuál es esa tasa máxima?</p>
             <div class="opts">
               <button class="opt" data-ok="1">Hacia (6, 8), con tasa máxima 10</button>
               <button class="opt" data-ok="0">Hacia (3, 4), con tasa máxima 5</button>
@@ -805,7 +836,7 @@
         <div class="fb" aria-live="polite"><p class="okc">✓ ∂f/∂x = 3x<sup>2</sup> y, y al derivar otra vez por x queda 6xy.</p><p class="nudge">✕ 3x<sup>2</sup> y es solo la primera parcial; deriva una vez más, sin soltar la y. Intenta de nuevo.</p></div>
       </div>
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Tres derivadas de orden superior: deriva una parcial otra vez y comprueba que el orden no cambia el resultado.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -836,10 +867,10 @@
           </div>
         </div>
         <div class="prob">
-          <div class="plevel p-ex"><b>3</b> Como en tu examen</div>
+          <div class="plevel p-ex"><b>3</b> Transferencia · sin ayuda</div>
           <div class="check challenge" data-kind="item" data-id="M6P3" data-tema="orden_superior" data-level="examen" data-module="6">
             <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Para f(x, y) = x<sup>3</sup> + xy<sup>2</sup>, calcula ∂<sup>2</sup>f/∂x<sup>2</sup>.</p>
+            <p class="prob-q"><span class="prof">Consigna formal</span>Para f(x, y) = x<sup>3</sup> + xy<sup>2</sup>, calcula ∂<sup>2</sup>f/∂x<sup>2</sup>.</p>
             <div class="opts">
               <button class="opt" data-ok="1">6x</button>
               <button class="opt" data-ok="0">6x + 2y</button>
@@ -856,12 +887,15 @@
     <section class="lesson" data-step="7">
       <header class="lesson-head"><p class="micro">Microlección 7 de 7 · Tema: Diferenciabilidad</p><h2>Diferenciabilidad: cuándo la tabla se pega de verdad</h2><p class="goal">Meta: distinguir tener parciales de ser diferenciable.</p></header>
       <div class="sec">
-        <p class="idea lede">Cierras la unidad con una distinción fina: <strong>tener derivadas parciales</strong> no es lo mismo que ser <strong>diferenciable</strong>.</p>
-        <p class="idea">Que existan las dos parciales solo garantiza dos direcciones bien medidas: el este y el norte.</p>
-        <p class="idea">Cuando existen, decimos exactamente eso: <strong>f tiene sus derivadas parciales</strong> en el punto.</p>
-        <p class="idea">Pero el plano tangente promete más: pegarse al terreno en <strong>todas</strong> las direcciones a la vez, no solo en dos.</p>
-        <p class="idea key">Cuando una sola aproximación lineal funciona para todos los rumbos cercanos, f es <strong>diferenciable</strong>. Es una condición más fuerte.</p>
-        <figure class="visual">
+        <!-- aterrizaje-matematico: reescritura -->
+        <p class="idea lede">Tener derivadas parciales no garantiza que exista una buena aproximación lineal en todas las direcciones.</p>
+<p class="idea">Define f(0, 0) = 0 y, fuera del origen:</p>
+<div class="fx"><div class="sys"><span class="eq">f(x, y) = xy / √(x<sup>2</sup> + y<sup>2</sup>)</span></div></div>
+<p class="idea">Sobre los dos ejes, f(h, 0) = 0 y f(0, h) = 0. Por eso existen f<sub>x</sub>(0, 0) y f<sub>y</sub>(0, 0), y ambas valen cero.</p>
+<p class="idea">Ahora prueba la diagonal y = x:</p>
+<div class="fx"><div class="sys"><span class="eq">f(t, t) = t<sup>2</sup>/√(2t<sup>2</sup>)</span><span class="eq">= |t|/√2</span></div></div>
+<p class="idea">El plano construido con las parciales es z = 0, pero sobre esa diagonal el error tiene el mismo orden que la distancia al origen. No se vuelve despreciable.</p>
+<figure class="visual">
           <svg viewBox="0 0 560 230" role="img" aria-label="Tener parciales mide dos direcciones; ser diferenciable controla todas">
             <defs><marker id="arrXo" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0L11 4L0 8Z" fill="#F5821F"/></marker><marker id="arrXb" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto"><path d="M0 0L11 4L0 8Z" fill="#283891"/></marker></defs>
             <rect x="15" y="20" width="255" height="195" rx="16" fill="#fff" stroke="#181B22" stroke-width="3"/>
@@ -885,13 +919,9 @@
           </svg>
           <figcaption>Las parciales miden los ejes; la diferenciabilidad controla el abanico entero.</figcaption>
         </figure>
-        <p class="idea">Hay terrenos con las dos pendientes sanas donde, en una <strong>diagonal</strong> entre el este y el norte, el terreno cae en un pliegue y la tabla ya no se pega.</p>
-        <p class="idea">Dos direcciones sanas no garantizan las infinitas restantes. Por eso la existencia de parciales no basta.</p>
-        <p class="idea">Así lo enuncia tu curso:</p>
-        <p class="fdef"><span class="flbl">Definición · temario oficial, temas 4.1 y 4.3</span>f es <strong>diferenciable</strong> en un punto si existe una aproximación lineal cuyo error, dividido entre la distancia al punto, tiende a cero.</p>
-        <p class="idea">Léelo de vuelta: las parciales aportan las pendientes del plano; la definición exige que ese mismo plano funcione en todos los rumbos.</p>
-        <p class="idea">Un dato útil: si las parciales son continuas cerca del punto, la diferenciabilidad queda garantizada.</p>
-        <p class="idea paso">Con esto cierras la unidad: parcial → gradiente → plano tangente → cadena → direccional → orden superior → diferenciabilidad.</p>
+<p class="idea key">Las parciales revisan los ejes. La diferenciabilidad exige que una sola transformación lineal aproxime la función en todas las direcciones cercanas.</p>
+<p class="fdef"><span class="flbl">Definición · temario oficial, temas 4.1 y 4.3</span>f es <strong>diferenciable</strong> en un punto si existe una aproximación lineal cuyo error, dividido entre la distancia al punto, tiende a cero.</p>
+<p class="idea">Si las parciales existen y son continuas en una vecindad, sí puedes concluir diferenciabilidad; el contraejemplo muestra por qué la mera existencia no basta.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7G" data-tema="diferenciabilidad" data-level="guiado" data-module="7">
         <div class="qtag">Compruébalo · guiado</div>
@@ -927,7 +957,7 @@
       <nav class="nav-lecs"><a href="C4_teoria-formal.html"><span class="sp">Consolida →</span><span class="ti">Teoría · memoriza</span></a><a href="C4_cuadernillo-papel.html" class="next"><span class="sp">Practica →</span><span class="ti">Cuadernillo · en papel</span></a></nav>
 
       <div class="practica">
-        <p class="practica-head">Practica aquí mismo <span>· del acompañado al examen</span></p>
+        <p class="practica-head">Practica aquí mismo <span>· de la idea al procedimiento</span></p>
         <p class="practica-intro">Dos preguntas para separar la existencia de parciales de la diferenciabilidad.</p>
         <div class="prob">
           <div class="plevel p-res"><b>1</b> Te lo resuelvo contigo</div>
@@ -960,23 +990,48 @@
         
         <p class="practica-mas">Terminaste la práctica de la unidad. Tu <a href="C4_cuadernillo-papel.html">cuadernillo</a> la amplía con más problemas de cada tipo y su solucionario.</p>
       </div>
-      <div class="practica checkpoint" data-checkpoint="7">
-        <p class="practica-head">Repaso acumulativo <span>· idea 7</span></p>
-        <p class="practica-intro">Recupera estas ideas sin volver arriba. Mezclarlas aquí ayuda a conservarlas mientras avanzas.</p>
-        <div class="prob">
-          <div class="plevel p-ex"><b>↺</b> Recupera sin mirar</div>
-          <div class="check challenge" data-kind="item" data-id="M7P3" data-tema="diferenciabilidad" data-level="examen" data-module="7">
-            <div class="qtag">Sin ayuda</div>
-            <p class="prob-q"><span class="prof">En voz de examen</span>Un terreno tiene sus dos parciales en (0, 0), pero en una diagonal cae en un pliegue y el plano no se pega ahí.</p>
-            <p class="prob-q">¿Cómo es f en (0, 0)?</p>
-            <div class="opts">
-              <button class="opt" data-ok="1">Tiene parciales, pero no es diferenciable</button>
-              <button class="opt" data-ok="0">Diferenciable, porque las parciales existen</button>
-              <button class="opt" data-ok="0">No tiene parciales ni es diferenciable</button>
-            </div>
-            <div class="fb" aria-live="polite"><p class="okc">✓ Las parciales existen, pero el plano falla en la diagonal: no es diferenciable.</p><p class="nudge">✕ El pliegue muestra que no existe una aproximación lineal válida en todos los rumbos. Intenta de nuevo.</p></div>
+      <div class="practica checkpoint exam-bridge" data-checkpoint="7">
+        <p class="practica-head">Puente al examen <span>· encadenar gradiente, direccional y diferenciabilidad</span></p>
+        <p class="practica-intro"><strong>Caso final.</strong> Sea f(x,y)=x²+xy+y². Trabaja en p=(1,−1) y en la dirección unitaria u=(3/5,4/5).</p>
+        <div class="fx"><div class="sys"><span class="eq">f(x,y) = x² + xy + y²</span><span class="eq">p = (1,−1)</span></div></div>
+        <p class="practica-intro"><strong>Trabájalo en papel.</strong> No adivines el final: cada decisión usa el resultado anterior.</p>
+        <div class="prob exam-step">
+          <div class="plevel p-res"><b>1</b> Decide el plan</div>
+          <div class="check challenge" data-kind="item" data-id="PX7A" data-tema="gradiente" data-level="guiado" data-module="2">
+            <div class="qtag">Elige el camino</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuánto vale ∇f(1,−1)?</p>
+            <div class="opts"><button class="opt" data-ok="1">(1, −1)</button><button class="opt" data-ok="0">(3, −3)</button><button class="opt" data-ok="0">(−1, 1)</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ fₓ=2x+y y fᵧ=x+2y.</p><p class="nudge">✕ Calcula primero el gradiente general y luego evalúa. Intenta de nuevo.</p></div>
           </div>
         </div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>2</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX7B" data-tema="derivada_direccional" data-level="juntos" data-module="5">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuánto vale D<sub>u</sub>f(p)?</p>
+            <div class="opts"><button class="opt" data-ok="1">−1/5</button><button class="opt" data-ok="0">7/5</button><button class="opt" data-ok="0">1</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ (1,−1)·(3/5,4/5)=3/5−4/5.</p><p class="nudge">✕ Usa producto punto con la dirección ya unitaria. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-gui"><b>3</b> Sostén el desarrollo</div>
+          <div class="check challenge" data-kind="item" data-id="PX7C" data-tema="hessiana" data-level="juntos" data-module="6">
+            <div class="qtag">Da el paso clave</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Cuál es la Hessiana de f?</p>
+            <div class="opts"><button class="opt" data-ok="1">Renglones (2,1), (1,2)</button><button class="opt" data-ok="0">Renglones (2,0), (0,2)</button><button class="opt" data-ok="0">Renglones (1,2), (2,1)</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Las segundas parciales son fₓₓ=2, fₓᵧ=fᵧₓ=1, fᵧᵧ=2.</p><p class="nudge">✕ Ordena las cuatro parciales en una tabla 2×2. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <div class="prob exam-step">
+          <div class="plevel p-ex"><b>4</b> Concluye y verifica</div>
+          <div class="check challenge" data-kind="item" data-id="PX7D" data-tema="diferenciabilidad" data-level="examen" data-module="7">
+            <div class="qtag">Cierra el problema</div>
+            <p class="prob-q"><span class="prof">Problema encadenado</span>¿Qué permite concluir que f es diferenciable en todo R²?</p>
+            <div class="opts"><button class="opt" data-ok="1">Sus parciales son polinomios continuos</button><button class="opt" data-ok="0">Que D<sub>u</sub>f sea negativo en una dirección</button><button class="opt" data-ok="0">Que la Hessiana tenga cuatro entradas</button></div>
+            <div class="fb" aria-live="polite"><p class="okc">✓ Parciales continuas en un entorno garantizan diferenciabilidad.</p><p class="nudge">✕ Busca una condición suficiente que valga alrededor de cada punto. Intenta de nuevo.</p></div>
+          </div>
+        </div>
+        <p class="practica-mas">El <a href="C4_cuadernillo-papel.html">cuadernillo</a> continúa este patrón con desarrollo completo y problemas sin pistas.</p>
       </div>
       <div class="lesson-nav"><button class="btn ghost" data-prev="6">← Anterior</button><button class="btn ghost" data-go="1">Volver al inicio</button></div>
     </section>
