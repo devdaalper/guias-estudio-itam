@@ -77,6 +77,7 @@
 
   .fdef{margin:2px 0;padding:13px 16px;background:#fcfbf9;border:1.5px solid #cfd6f2;border-radius:12px;font-size:17px;line-height:1.64;color:var(--ink);max-width:62ch;overflow-wrap:anywhere}
   .fdef .flbl{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:4px}
+  .fdef .def-eq{display:block;margin:9px 0 0;font-size:clamp(18px,2.2vw,21px);font-weight:750;line-height:1.5;overflow-x:auto;white-space:nowrap}
 
   .visual{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px;margin:0}
   .visual svg{display:block;width:100%;height:auto}
@@ -346,45 +347,52 @@
       <div class="sec">
         <!-- aterrizaje-matematico: reescritura -->
         <!-- sin-saltos:START -->
-        <p class="idea lede">Ya sabes qué es una transformación. Hoy separas a las estrellas del curso: las <strong>transformaciones lineales</strong>.</p>
+        <p class="idea lede">Ya sabemos que una transformación recibe un vector y produce otro. Pero no todas conservan la manera en que sumamos vectores o multiplicamos un vector por un escalar. Las que sí lo hacen son las <strong>transformaciones lineales</strong>.</p>
+        <p class="idea">Consideremos T(x, y) = (2x − y, x + 3y). Antes de trabajar con letras, veamos qué ocurre con u = (1, 0) y v = (0, 2). Podemos sumar primero y transformar después, o transformar cada vector y sumar las dos salidas.</p>
         <figure class="visual">
           <svg viewBox="0 0 620 280" role="img" aria-label="Dos caminos, sumar y transformar o transformar y sumar, llegan al mismo resultado">
             <rect x="15" y="20" width="280" height="230" rx="16" fill="white" stroke="#181B22" stroke-width="3"/>
             <text x="155" y="52" text-anchor="middle" font-size="17" font-weight="800" fill="#181B22">PRIMERO SUMA</text>
-            <text x="155" y="100" text-anchor="middle" font-size="20" fill="#334155">(1, 0) + (0, 3)</text>
-            <text x="155" y="135" text-anchor="middle" font-size="20" fill="#334155">= (1, 3)</text>
-            <text x="155" y="178" text-anchor="middle" font-size="20" fill="#334155">T(1, 3)</text>
-            <text x="155" y="220" text-anchor="middle" font-size="22" font-weight="800" fill="#1C7A3A">= (2, 6)</text>
+            <text x="155" y="100" text-anchor="middle" font-size="20" fill="#334155">(1, 0) + (0, 2)</text>
+            <text x="155" y="135" text-anchor="middle" font-size="20" fill="#334155">= (1, 2)</text>
+            <text x="155" y="178" text-anchor="middle" font-size="20" fill="#334155">T(1, 2)</text>
+            <text x="155" y="220" text-anchor="middle" font-size="22" font-weight="800" fill="#1C7A3A">= (0, 7)</text>
             <rect x="325" y="20" width="280" height="230" rx="16" fill="white" stroke="#181B22" stroke-width="3"/>
             <text x="465" y="52" text-anchor="middle" font-size="17" font-weight="800" fill="#181B22">PRIMERO TRANSFORMA</text>
-            <text x="465" y="100" text-anchor="middle" font-size="20" fill="#334155">T(1, 0) = (2, 0)</text>
-            <text x="465" y="135" text-anchor="middle" font-size="20" fill="#334155">T(0, 3) = (0, 6)</text>
-            <text x="465" y="178" text-anchor="middle" font-size="20" fill="#334155">(2, 0) + (0, 6)</text>
-            <text x="465" y="220" text-anchor="middle" font-size="22" font-weight="800" fill="#1C7A3A">= (2, 6)</text>
+            <text x="465" y="100" text-anchor="middle" font-size="20" fill="#334155">T(1, 0) = (2, 1)</text>
+            <text x="465" y="135" text-anchor="middle" font-size="20" fill="#334155">T(0, 2) = (−2, 6)</text>
+            <text x="465" y="178" text-anchor="middle" font-size="20" fill="#334155">(2, 1) + (−2, 6)</text>
+            <text x="465" y="220" text-anchor="middle" font-size="22" font-weight="800" fill="#1C7A3A">= (0, 7)</text>
           </svg>
-          <figcaption>Los dos caminos aterrizan en (2, 6): la fotocopiadora respeta la suma.</figcaption>
+          <figcaption>Sumar antes o después de transformar produce (0, 7) en este caso.</figcaption>
         </figure>
-        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Demostrar linealidad: el ejemplo orienta; las letras demuestran</h3><p class="walk-sub">Verificamos T(x,y)=(2x−y, x+3y) con u=(a,b), v=(p,q) y un escalar real c.</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>T(x,y) = (2x−y, x+3y)</span></div><p class="walk-why"><strong>Fijamos la regla que se probará.</strong>La misma transformación debe usarse en todos los renglones de las dos condiciones.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>u + v = (a + p, b + q)</span></div><p class="walk-why"><strong>Sumamos por coordenadas.</strong>La primera entrada se suma con la primera; la segunda con la segunda.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>T(u + v) = T(a + p, b + q)</span></div><p class="walk-why"><strong>Sustituimos la suma.</strong>El vector que acabamos de obtener entra completo en T.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>T(u + v) = (2(a + p) − (b + q),</span><span class="line">(a + p) + 3(b + q))</span></div><p class="walk-why"><strong>Aplicamos la regla.</strong>En T(x, y) = (2x − y, x + 3y), x se reemplaza por a + p y y por b + q.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>T(u + v) = ((2a − b) + (2p − q),</span><span class="line">(a + 3b) + (p + 3q))</span></div><p class="walk-why"><strong>Distribuimos y reagrupamos.</strong>Primero quitamos paréntesis; después juntamos los términos de u y los términos de v.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">6</span>T(u + v) = T(u) + T(v)</span></div><p class="walk-why"><strong>Reconocemos las imágenes.</strong>Los dos vectores formados son exactamente T(a, b) y T(p, q).</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">7</span>T(cu) = T(ca, cb)</span></div><p class="walk-why"><strong>Empezamos la segunda condición.</strong>Multiplicar u por c produce el vector (ca, cb).</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">8</span>T(cu) = (2ca − cb, ca + 3cb)</span></div><p class="walk-why"><strong>Aplicamos la regla otra vez.</strong>Sustituimos x = ca y y = cb en cada salida.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">9</span>T(cu) = c(2a − b, a + 3b)</span></div><p class="walk-why"><strong>Sacamos factor común.</strong>Cada término contiene c; factorizarlo no cambia el valor.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">10</span>T(cu) = cT(u)</span></div><p class="walk-why"><strong>Cerramos la prueba.</strong>Las dos igualdades valen para vectores y escalares arbitrarios. Por eso T es lineal.</p></div></div>
-        <p class="idea key">Una <strong>transformación lineal</strong> es una transformación que respeta las dos operaciones.</p>
-        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 3.1</span>Una <strong>transformación lineal</strong> L de R<sup>n</sup> a R<sup>m</sup> es una función que asigna a cada u ∈ R<sup>n</sup> un único vector L(u) ∈ R<sup>m</sup> y cumple: (i) L(u + v) = L(u) + L(v) para cada u, v ∈ R<sup>n</sup>; (ii) L(k·u) = k·L(u) para cada u ∈ R<sup>n</sup> y k ∈ R.</p>
-        <p class="idea">Léela por partes: la (i) es «sumar antes o después da igual»; la (ii) es «estirar antes o después da igual». La k es el escalar — tu «peso» de la Unidad 2.</p>
+        <p class="idea">Los dos recorridos producen (0, 7). Para estos dos vectores, T conserva la suma.</p>
+        <p class="idea">¿Basta con eso para afirmar que T siempre conserva la suma? No. Solo hemos comprobado un par de vectores. Necesitamos repetir el razonamiento sin elegir números particulares.</p>
+        <p class="idea">Tomemos entonces u = (a, b) y v = (p, q). Haremos exactamente lo mismo: sumaremos antes de transformar y compararemos el resultado con la suma de T(u) y T(v). Después comprobaremos qué ocurre al multiplicar u por un escalar c.</p>
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">La misma transformación, ahora con vectores cualesquiera</h3><p class="walk-sub">Tomamos u=(a,b), v=(p,q) y un escalar real c. Primero comprobamos la suma; después, la multiplicación por escalares.</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>T(x,y) = (2x−y, x+3y)</span></div><p class="walk-why"><strong>Conservamos la misma regla.</strong>Es la transformación que acabamos de probar con números; ahora veremos si funciona para cualquier par de vectores.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>u + v = (a + p, b + q)</span></div><p class="walk-why"><strong>Sumamos por coordenadas.</strong>La primera entrada se suma con la primera; la segunda con la segunda.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>T(u + v) = T(a + p, b + q)</span></div><p class="walk-why"><strong>Sustituimos la suma.</strong>El vector que acabamos de obtener entra completo en T.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>T(u + v) = (2(a + p) − (b + q),</span><span class="line">(a + p) + 3(b + q))</span></div><p class="walk-why"><strong>Aplicamos la regla.</strong>En T(x, y) = (2x − y, x + 3y), x se reemplaza por a + p y y por b + q.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>T(u + v) = ((2a − b) + (2p − q),</span><span class="line">(a + 3b) + (p + 3q))</span></div><p class="walk-why"><strong>Distribuimos y reagrupamos.</strong>Primero quitamos paréntesis; después juntamos los términos de u y los términos de v.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">6</span>T(u + v) = T(u) + T(v)</span></div><p class="walk-why"><strong>Reconocemos las imágenes.</strong>Los dos vectores formados son exactamente T(a, b) y T(p, q). Con esto queda comprobada la primera condición.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">7</span>T(cu) = T(ca, cb)</span></div><p class="walk-why"><strong>Pasamos a la segunda condición.</strong>Multiplicar u por c produce el vector (ca, cb). Ahora comparamos transformar cu con multiplicar T(u) por c.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">8</span>T(cu) = (2ca − cb, ca + 3cb)</span></div><p class="walk-why"><strong>Aplicamos la regla otra vez.</strong>Sustituimos x = ca y y = cb en cada salida.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">9</span>T(cu) = c(2a − b, a + 3b)</span></div><p class="walk-why"><strong>Sacamos factor común.</strong>Cada término contiene c; factorizarlo no cambia el valor.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">10</span>T(cu) = cT(u)</span></div><p class="walk-why"><strong>Cerramos la prueba.</strong>Las dos igualdades valen para vectores y escalares arbitrarios. Por eso T es lineal.</p></div></div>
+        <p class="idea">La suma se conservó porque la propiedad distributiva permitió separar los términos que pertenecen a u de los que pertenecen a v. Por eso la expresión final se pudo reconocer como T(u) + T(v).</p>
+        <p class="idea">Con el escalar ocurrió algo parecido: c apareció en todos los términos y pudo sacarse como factor común. Lo que quedó dentro del paréntesis fue precisamente T(u), de modo que T(cu) = cT(u).</p>
+        <p class="idea">Como a, b, p, q y c representan valores cualesquiera, las dos igualdades valen para todos los vectores del dominio y para todo escalar real. Ahora sí podemos concluir que T es lineal.</p>
+        <p class="idea key">Una transformación lineal conserva las combinaciones lineales: combinar las entradas antes de transformarlas produce lo mismo que transformar cada entrada y combinar después las salidas.</p>
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 3.1</span>Una transformación L de R<sup>n</sup> a R<sup>m</sup> es <strong>lineal</strong> si, para todos los vectores u, v del dominio y todo escalar k, cumple:<span class="def-eq">L(u + v) = L(u) + L(v)</span><span class="def-eq">L(ku) = kL(u)</span></p>
+        <p class="idea">La primera igualdad conserva la suma y la segunda conserva la multiplicación por escalares. Juntas explican por qué también se conserva cualquier combinación αu + βv, la operación central de la unidad anterior.</p>
         <!-- sin-saltos:END -->
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="linealidad" data-level="guiado" data-module="2">
         <div class="qtag">Compruébalo · guiado</div>
-        <p class="q"><strong>Cierra el camino.</strong> La fotocopiadora duplica. Si (1, 0) + (0, 3) = (1, 3), ¿cuánto vale T(1, 3)?</p>
+        <p class="q"><strong>Cierra el primer recorrido.</strong> Sea T(x, y) = (2x − y, x + 3y). Si (1, 0) + (0, 2) = (1, 2), ¿cuánto vale T(1, 2)?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">(2, 6)</button>
-          <button class="opt" data-ok="0">(1, 6)</button>
-          <button class="opt" data-ok="0">(2, 3)</button>
+          <button class="opt" data-ok="1">(0, 7)</button>
+          <button class="opt" data-ok="0">(2, 7)</button>
+          <button class="opt" data-ok="0">(0, 6)</button>
         </div>
-        <div class="fb" aria-live="polite"><p class="okc">✓ Duplica las dos entradas: (2, 6) — el mismo punto al que llegas sumando las copias (2, 0) + (0, 6).</p><p class="nudge">✕ La regla duplica las dos entradas a la vez, no una sola. Intenta de nuevo.</p></div>
+        <div class="fb" aria-live="polite"><p class="okc">✓ Sustituir (1, 2) da (2·1 − 2, 1 + 3·2) = (0, 7), igual que T(1, 0) + T(0, 2).</p><p class="nudge">✕ Sustituye x = 1 y y = 2 en las dos coordenadas de la regla. Intenta de nuevo.</p></div>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2S" data-tema="linealidad" data-level="solo" data-module="2">
         <div class="qtag">Ahora tú · sin copiar</div>
-        <p class="q"><strong>Prueba el estiramiento.</strong> La transformación T(x, y) = (x, y + 5) suma un 5 fijo. Para u = (2, 0), ¿coincide 2·T(u) con T(2·u)?</p>
+        <p class="q"><strong>Prueba la multiplicación por escalar.</strong> La transformación T(x, y) = (x, y + 5) suma un 5 fijo. Para u = (2, 0), ¿coincide 2·T(u) con T(2·u)?</p>
         <div class="opts">
-          <button class="opt" data-ok="1">No: dan (4, 10) y (4, 5) — el 5 fijo rompe el estiramiento</button>
+          <button class="opt" data-ok="1">No: dan (4, 10) y (4, 5) — el 5 fijo rompe la condición de escalares</button>
           <button class="opt" data-ok="0">Sí: ambas dan (4, 10)</button>
           <button class="opt" data-ok="0">Sí: toda regla escrita con x e y es lineal</button>
         </div>
@@ -1081,7 +1089,7 @@
   var KEY='valentina-algebra-u3-guia-micro';
   var goals=[
     'Transformación: leer qué entra y qué sale de la transformación.',
-    'Transformación lineal: verificar que respeta las dos jugadas.',
+    'Transformación lineal: verificar que respeta las dos operaciones.',
     'El cero al cero: descartar impostoras con una sola prueba.',
     'Matriz canónica: armar la ficha técnica con dos preguntas.',
     'Núcleo: encontrar lo que la transformación aplasta al cero.',
