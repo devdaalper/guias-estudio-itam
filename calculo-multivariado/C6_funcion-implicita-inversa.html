@@ -189,6 +189,35 @@
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   sub,sup{font-size:13px}
+  /* sin-saltos-profesor */
+  .walkthrough{display:grid;gap:0;margin:8px 0 4px;min-width:0;max-width:100%}
+  .walk-title{margin:0 0 7px;padding:0;color:var(--ink);font-size:clamp(21px,3vw,25px);font-weight:800;letter-spacing:-.02em;line-height:1.25;max-width:34ch}
+  .walk-sub{margin:0 0 13px;padding:0;color:var(--slate);font-size:17px;line-height:1.68;max-width:62ch}
+  .walk-row{display:block;position:relative;padding:20px 0 18px;border-top:1.5px solid var(--line);min-width:0}
+  .walk-math{min-width:0;padding:0;color:var(--ink);font-size:clamp(19px,2.5vw,23px);font-weight:700;line-height:1.55;font-variant-numeric:tabular-nums;overflow-wrap:normal;word-break:normal}
+  .walk-math .line{display:block;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin}
+  .walk-math .line+.line{margin-top:7px;padding-left:35px}
+  .walk-why{max-width:62ch;min-width:0;margin:8px 0 0;padding:0 0 0 35px;border:0;background:transparent;color:var(--slate);font-size:17px;line-height:1.7}
+  .walk-why > strong{display:inline;color:var(--ink);margin-right:.22em}
+  .walk-row.is-result{margin-top:2px;padding:18px 14px;border-top:2px solid var(--green-deep);border-bottom:2px solid var(--green-deep);background:var(--green-tint)}
+  .walk-n{display:inline-grid;place-items:center;width:27px;height:27px;margin-right:8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--cream);font-size:13px;font-weight:900;vertical-align:.14em}
+  .case-path{display:grid;gap:0;margin:8px 0 4px;padding:0;min-width:0;background:transparent}
+  .case-path h3{font-size:clamp(21px,3vw,25px);line-height:1.25;letter-spacing:-.02em;margin:0 0 10px;max-width:34ch}
+  .case-grid{display:block;min-width:0}
+  .case-card{min-width:0;padding:17px 0 16px;border:0;border-top:1.5px solid var(--line);border-radius:0;background:transparent}
+  .case-card:last-child{border-bottom:1.5px solid var(--line)}
+  .case-card b{display:block;margin-bottom:4px;font-size:18px;line-height:1.4;color:var(--ink)}
+  .case-card p{max-width:62ch;margin:0;color:var(--slate);font-size:17px;line-height:1.7}
+  .case-take{max-width:62ch;margin:18px 0 0;padding:14px 0;border:0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);border-radius:0;background:transparent;color:var(--ink);font-size:17px;line-height:1.7}
+  .case-take > strong{display:inline;margin-right:.22em}
+  @media(max-width:500px){
+    .walk-row{padding:17px 0 15px}
+    .walk-row.is-result{padding:16px 10px}
+    .walk-why{padding-left:0}
+    .walk-math .line+.line{padding-left:0}
+  }
+  /* sin-saltos-profesor:END */
+
 </style>
 </head>
 <body>
@@ -258,6 +287,9 @@
         <p class="idea">Fíjate cerca de <strong>(3, 4)</strong> —solo el arco de arriba—. Ahí, a cada x le toca un único y: en ese trozo sí hay función.</p>
         <p class="idea">Y con esto ya llegaste. Una ecuación que, cerca de un punto, deja a una variable como función de la otra: eso es una <strong>función implícita</strong>.</p>
         <p class="idea">Tu curso lo plantea así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Una ecuación puede definir una rama local</h3><p class="walk-sub">Usamos F(x,y)=x²+y²−25=0 cerca de (3,4).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>F(3,4) = 9+16−25</span><span class="line">= 0</span></div><p class="walk-why"><strong>Comprobamos el punto.</strong>El teorema solo se aplica en un punto que satisface la ecuación.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>F<sub>y</sub>(x,y)=2y</span></div><p class="walk-why"><strong>Derivamos respecto a la variable que queremos despejar.</strong>Para expresar y como función de x se revisa F<sub>y</sub>.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>F<sub>y</sub>(3,4)=8 ≠ 0</span></div><p class="walk-why"><strong>Evaluamos la condición.</strong>La curva no tiene tangente vertical en ese punto.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>Cerca de (3,4), y=√(25−x²)</span></div><p class="walk-why"><strong>Identificamos la rama.</strong>La elección positiva corresponde al punto con y=4; la rama negativa está lejos localmente.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>y es función de x en un entorno del punto</span></div><p class="walk-why"><strong>Concluimos localmente.</strong>La ecuación completa es un círculo y no define una sola y global para cada x.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.1</span>Una ecuación F(x, y) = 0 define a y como <strong>función implícita</strong> de x cerca de un punto cuando, en un entorno de ese punto, a cada x le corresponde un único y que cumple la ecuación.</p>
         <p class="idea">Léela con lo que ya tienes: «F(x, y) = 0» es la ecuación amarrada, y «cerca de un punto» es la letra pequeña — la función vive en un trozo, no en la curva entera.</p>
       </div>
@@ -349,6 +381,9 @@
         </div>
         <p class="idea">¿Viste el borde derecho (5, 0)? Ahí F<sub>y</sub> = 2y = 0, la tangente es vertical y la función escondida desaparece. Donde la fórmula falla, la función también.</p>
         <p class="idea">Todo junto tiene nombre. Tu curso lo enuncia así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Derivar implícitamente sin despejar y</h3><p class="walk-sub">Seguimos con x²+y²=25.</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>d(x²)/dx + d(y²)/dx = d(25)/dx</span></div><p class="walk-why"><strong>Derivamos ambos lados.</strong>y depende de x, por eso su término requiere regla de la cadena.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>2x + 2y·dy/dx = 0</span></div><p class="walk-why"><strong>Aplicamos las derivadas.</strong>d(y²)/dx = 2y·dy/dx; la constante deriva a cero.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>2y·dy/dx = −2x</span></div><p class="walk-why"><strong>Aislamos el término con la pendiente.</strong>Restamos 2x en ambos lados.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>dy/dx = −x/y</span></div><p class="walk-why"><strong>Dividimos entre 2y.</strong>Este paso requiere y ≠ 0, equivalente a F<sub>y</sub> ≠ 0.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>En (3,4): dy/dx = −3/4</span></div><p class="walk-why"><strong>Evaluamos.</strong>La pendiente negativa coincide con la rama superior del círculo.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.1</span>Si F(x, y) = 0 y en un punto <strong>F<sub>y</sub> ≠ 0</strong>, entonces cerca de ahí y es función de x y su pendiente es dy/dx = −F<sub>x</sub>/F<sub>y</sub>.</p>
         <p class="idea">Léelo por partes: «F<sub>y</sub> ≠ 0» es el permiso (la función existe) y «dy/dx = −F<sub>x</sub>/F<sub>y</sub>» es la pendiente que te llevas.</p>
         <p class="idea paso">Y en cuanto la asegures, subimos un piso: la misma idea cuando la ecuación amarra <strong>tres</strong> variables.</p>
@@ -446,7 +481,10 @@
 <p class="idea">Para la esfera F = x<sup>2</sup> + y<sup>2</sup> + z<sup>2</sup> − 9 en (1, 2, 2):</p>
 <div class="fx"><div class="sys"><span class="eq">z<sub>x</sub> = −2x/2z = −1/2</span><span class="eq">z<sub>y</sub> = −2y/2z = −1</span></div></div>
 <p class="idea key">Las fórmulas no se memorizan como una receta aislada: salen de derivar la identidad F(x, y, z(x, y)) = 0.</p>
-<p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.1 (tres variables)</span>Si F(x, y, z) = 0 y <strong>F<sub>z</sub> ≠ 0</strong> en un punto, entonces cerca de ahí z es función de (x, y), con ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub> y ∂z/∂y = −F<sub>y</sub>/F<sub>z</sub>.</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Obtener dos parciales de una función implícita z(x,y)</h3><p class="walk-sub">Usamos F=x²+y²+z²−9=0 cerca de (1,2,2).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>F<sub>x</sub>=2x</span><span class="line">F<sub>y</sub>=2y</span><span class="line">F<sub>z</sub>=2z</span></div><p class="walk-why"><strong>Calculamos las parciales de F.</strong>Para cada una, las otras variables se tratan como independientes en F.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>F<sub>z</sub>(1,2,2)=4 ≠ 0</span></div><p class="walk-why"><strong>Revisamos la hipótesis.</strong>Así z puede describirse localmente como función de x e y.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>F<sub>x</sub> + F<sub>z</sub> z<sub>x</sub> = 0</span></div><p class="walk-why"><strong>Derivamos respecto a x.</strong>y se mantiene fija y z aporta la regla de la cadena.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>z<sub>x</sub> = −F<sub>x</sub>/F<sub>z</sub></span><span class="line">= −x/z</span></div><p class="walk-why"><strong>Despejamos.</strong>Dividimos por F<sub>z</sub>, que no es cero.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>z<sub>y</sub> = −F<sub>y</sub>/F<sub>z</sub></span><span class="line">= −y/z</span></div><p class="walk-why"><strong>Repetimos respecto a y.</strong>Ahora x se mantiene fija.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>En (1,2,2): z<sub>x</sub>=−1/2</span><span class="line">z<sub>y</sub>=−1</span></div><p class="walk-why"><strong>Evaluamos.</strong>Cada número mide una dirección de cambio distinta.</p></div></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.1 (tres variables)</span>Si F(x, y, z) = 0 y <strong>F<sub>z</sub> ≠ 0</strong> en un punto, entonces cerca de ahí z es función de (x, y), con ∂z/∂x = −F<sub>x</sub>/F<sub>z</sub> y ∂z/∂y = −F<sub>y</sub>/F<sub>z</sub>.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="derivacion_implicita_3var" data-level="guiado" data-module="3">
         <div class="qtag">Compruébalo · guiado</div>
@@ -577,7 +615,10 @@
 <p class="idea">En y = f(a), se cumple g(y) = a. Por eso:</p>
 <div class="fx"><div class="sys"><span class="eq">(f<sup>−1</sup>)′(f(a)) = 1/f′(a)</span></div></div>
 <p class="idea key">La condición f′(a) ≠ 0 permite dividir y garantiza una inversa local cerca de a.</p>
-<p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.2 (caso de una variable)</span>Si f′(a) ≠ 0 con b = f(a), entonces la inversa es derivable en b y <strong>(f⁻¹)′(b) = 1/f′(a)</strong>.</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Derivar una inversa desde una identidad</h3><p class="walk-sub">Sea f(x)=x³+x, a=1 y b=f(1)=2.</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>f(f<sup>−1</sup>(y)) = y</span></div><p class="walk-why"><strong>Escribimos la identidad.</strong>Aplicar f después de su inversa recupera la entrada y.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>f′(f<sup>−1</sup>(y))·(f<sup>−1</sup>)′(y)=1</span></div><p class="walk-why"><strong>Derivamos con regla de la cadena.</strong>La derivada del lado derecho y es 1.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>(f<sup>−1</sup>)′(y)=1/f′(f<sup>−1</sup>(y))</span></div><p class="walk-why"><strong>Despejamos.</strong>Dividir requiere que f′ no sea cero.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>f′(x)=3x²+1</span><span class="line">⇒  f′(1)=4</span></div><p class="walk-why"><strong>Calculamos la derivada original.</strong>Sabemos que f<sup>−1</sup>(2)=1 porque f(1)=2.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>(f<sup>−1</sup>)′(2)=1/4</span></div><p class="walk-why"><strong>Evaluamos.</strong>No fue necesario encontrar una fórmula explícita para la inversa.</p></div></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.2 (caso de una variable)</span>Si f′(a) ≠ 0 con b = f(a), entonces la inversa es derivable en b y <strong>(f⁻¹)′(b) = 1/f′(a)</strong>.</p>
 <p class="idea">Cuida dónde se evalúa: la derivada de la inversa se pide en la salida f(a), pero el denominador f′ se evalúa en la entrada a.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="funcion_inversa" data-level="guiado" data-module="4">
@@ -655,6 +696,9 @@
         <p class="idea">La función T(x, y) = (u(x, y), v(x, y)) cambia un pequeño desplazamiento (Δx, Δy) aproximadamente así:</p>
 <div class="fx"><div class="sys"><span class="eq">ΔT ≈ J<sub>T</sub>(x, y) · (Δx, Δy)</span></div></div>
 <p class="idea key">Cada fila pertenece a una salida; cada columna, a una entrada. J es la mejor transformación lineal que aproxima a T cerca del punto.</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Armar la jacobiana por filas de salida</h3><p class="walk-sub">Usamos T(x,y)=(u,v)=(x²y, x+y²).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>u(x,y)=x²y</span></div><p class="walk-why"><strong>Tomamos la primera salida.</strong>Sus parciales ocuparán la primera fila.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>u<sub>x</sub>=2xy</span><span class="line">u<sub>y</sub>=x²</span></div><p class="walk-why"><strong>Derivamos u.</strong>Cada parcial mide cómo cambia la primera salida.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>v(x,y)=x+y²</span></div><p class="walk-why"><strong>Tomamos la segunda salida.</strong>Sus parciales ocuparán la segunda fila.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>v<sub>x</sub>=1</span><span class="line">v<sub>y</sub>=2y</span></div><p class="walk-why"><strong>Derivamos v.</strong>Se mantiene el mismo orden de columnas: x, después y.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>J<sub>T</sub>(x,y)=[[2xy, x²], [1, 2y]]</span></div><p class="walk-why"><strong>Armamos la tabla.</strong>Filas = salidas; columnas = variables de entrada.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>J<sub>T</sub>(1,2)=[[4,1],[1,4]]</span></div><p class="walk-why"><strong>Evaluamos.</strong>Cada entrada se calcula en la misma pareja (1,2).</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 6.2</span>La <strong>matriz jacobiana</strong> de una transformación (x, y) → (u, v) tiene por primera fila (∂u/∂x, ∂u/∂y) y por segunda fila (∂v/∂x, ∂v/∂y): sus filas son las parciales de cada salida.</p>
         <p class="idea">Léela: cada fila es una salida (u, luego v) y cada columna una entrada (x, luego y). La casilla de la fila u y la columna x es ∂u/∂x.</p>
         <p class="idea paso">Y en la última lección, un solo número resumirá a J y dirá si la función se puede <strong>deshacer</strong>.</p>
@@ -755,7 +799,10 @@
         </figure>
 <p class="idea">Para una transformación no lineal, J es su aproximación lineal cerca del punto. Si det(J) ≠ 0, esa aproximación es invertible y el teorema transfiere la propiedad localmente a la función.</p>
 <p class="idea key">“Local” significa en una vecindad del punto; no afirma que exista una inversa en todo el dominio.</p>
-<p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.2</span>Si <strong>det(J) ≠ 0</strong> en un punto, entonces la transformación es <strong>localmente invertible</strong> ahí, y la derivada de la inversa es la matriz inversa J⁻¹.</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Del determinante jacobiano a la inversa local</h3><p class="walk-sub">Usamos J<sub>T</sub>(1,2)=[[4,1],[1,4]] para T(x,y)=(x²y,x+y²).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>det J = 4(4)−1(1)</span></div><p class="walk-why"><strong>Calculamos el determinante.</strong>La condición del teorema se revisa en el punto indicado.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>det J = 15 ≠ 0</span></div><p class="walk-why"><strong>Simplificamos.</strong>La aproximación lineal no aplasta ninguna dirección cerca del punto.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>T es localmente invertible cerca de (1,2)</span></div><p class="walk-why"><strong>Aplicamos el teorema.</strong>La conclusión es local; no afirma que T sea uno a uno en todo el dominio.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>J<sup>−1</sup>=(1/15)[[4,−1],[−1,4]]</span></div><p class="walk-why"><strong>Invertimos la jacobiana.</strong>Usamos la fórmula de la inversa 2×2.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>T(1,2) = (2,5)</span></div><p class="walk-why"><strong>Calculamos el punto de salida.</strong>La derivada de la inversa vive en este punto del codominio.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>D(T<sup>−1</sup>)(2,5) = J<sup>−1</sup></span></div><p class="walk-why"><strong>Leemos la derivada de la inversa.</strong>La matriz se calculó en la entrada (1,2), pero se asigna a la inversa en la salida (2,5).</p></div></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Teorema · Así se enuncia en tu curso · temario, tema 6.2</span>Si <strong>det(J) ≠ 0</strong> en un punto, entonces la transformación es <strong>localmente invertible</strong> ahí, y la derivada de la inversa es la matriz inversa J⁻¹.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M6G" data-tema="jacobiano" data-level="guiado" data-module="6">
         <div class="qtag">Compruébalo · guiado</div>

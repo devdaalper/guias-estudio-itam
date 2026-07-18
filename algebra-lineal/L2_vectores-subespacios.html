@@ -194,6 +194,35 @@
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   sub,sup{font-size:13px}
+  /* sin-saltos-profesor */
+  .walkthrough{display:grid;gap:0;margin:8px 0 4px;min-width:0;max-width:100%}
+  .walk-title{margin:0 0 7px;padding:0;color:var(--ink);font-size:clamp(21px,3vw,25px);font-weight:800;letter-spacing:-.02em;line-height:1.25;max-width:34ch}
+  .walk-sub{margin:0 0 13px;padding:0;color:var(--slate);font-size:17px;line-height:1.68;max-width:62ch}
+  .walk-row{display:block;position:relative;padding:20px 0 18px;border-top:1.5px solid var(--line);min-width:0}
+  .walk-math{min-width:0;padding:0;color:var(--ink);font-size:clamp(19px,2.5vw,23px);font-weight:700;line-height:1.55;font-variant-numeric:tabular-nums;overflow-wrap:normal;word-break:normal}
+  .walk-math .line{display:block;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin}
+  .walk-math .line+.line{margin-top:7px;padding-left:35px}
+  .walk-why{max-width:62ch;min-width:0;margin:8px 0 0;padding:0 0 0 35px;border:0;background:transparent;color:var(--slate);font-size:17px;line-height:1.7}
+  .walk-why > strong{display:inline;color:var(--ink);margin-right:.22em}
+  .walk-row.is-result{margin-top:2px;padding:18px 14px;border-top:2px solid var(--green-deep);border-bottom:2px solid var(--green-deep);background:var(--green-tint)}
+  .walk-n{display:inline-grid;place-items:center;width:27px;height:27px;margin-right:8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--cream);font-size:13px;font-weight:900;vertical-align:.14em}
+  .case-path{display:grid;gap:0;margin:8px 0 4px;padding:0;min-width:0;background:transparent}
+  .case-path h3{font-size:clamp(21px,3vw,25px);line-height:1.25;letter-spacing:-.02em;margin:0 0 10px;max-width:34ch}
+  .case-grid{display:block;min-width:0}
+  .case-card{min-width:0;padding:17px 0 16px;border:0;border-top:1.5px solid var(--line);border-radius:0;background:transparent}
+  .case-card:last-child{border-bottom:1.5px solid var(--line)}
+  .case-card b{display:block;margin-bottom:4px;font-size:18px;line-height:1.4;color:var(--ink)}
+  .case-card p{max-width:62ch;margin:0;color:var(--slate);font-size:17px;line-height:1.7}
+  .case-take{max-width:62ch;margin:18px 0 0;padding:14px 0;border:0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);border-radius:0;background:transparent;color:var(--ink);font-size:17px;line-height:1.7}
+  .case-take > strong{display:inline;margin-right:.22em}
+  @media(max-width:500px){
+    .walk-row{padding:17px 0 15px}
+    .walk-row.is-result{padding:16px 10px}
+    .walk-why{padding-left:0}
+    .walk-math .line+.line{padding-left:0}
+  }
+  /* sin-saltos-profesor:END */
+
 </style>
 </head>
 <body>
@@ -241,7 +270,10 @@
 <div class="fx"><div class="sys"><span class="eq">w = (2, −1, 4)</span></div></div>
 <p class="idea">Aquí hay tres entradas. Podemos nombrarlas sin inventar historias: w<sub>1</sub> = 2, w<sub>2</sub> = −1 y w<sub>3</sub> = 4.</p>
 <p class="idea key">El patrón es una <strong>lista ordenada de números</strong>. La cantidad de posiciones puede cambiar; el orden siempre conserva significado.</p>
-<p class="fdef"><span class="flbl">Definición · así la dice tu curso</span>Un <strong>vector</strong> en R<sup>n</sup> es una lista ordenada de n números reales, v = (v<sub>1</sub>, v<sub>2</sub>, …, v<sub>n</sub>). Se escribe <strong>v ∈ R<sup>n</sup></strong>, «v está en R<sup>n</sup>».</p>
+        <!-- sin-saltos:START -->
+        <div class="case-path" data-sin-saltos="casos"><h3>El orden y la cantidad de entradas cambian el vector</h3><div class="case-grid"><div class="case-card"><b>u = (2, 3)</b><p>La primera entrada es u₁ = 2 y la segunda es u₂ = 3. Por eso u pertenece a R².</p></div><div class="case-card"><b>v = (3, 2)</b><p>Contiene los mismos números, pero en posiciones distintas. Entonces v no es igual a u.</p></div><div class="case-card"><b>w = (2, 3, 0)</b><p>Agregar una tercera entrada cambia el espacio: w pertenece a R³, no a R².</p></div><div class="case-card"><b>Igualdad de vectores</b><p>Dos vectores son iguales solo si tienen el mismo número de entradas y cada posición correspondiente coincide.</p></div></div><p class="case-take"><strong>Conclusión.</strong> Un vector se lee como una lista ordenada. Ni el orden ni la cantidad de posiciones pueden ignorarse.</p></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Definición · así la dice tu curso</span>Un <strong>vector</strong> en R<sup>n</sup> es una lista ordenada de n números reales, v = (v<sub>1</sub>, v<sub>2</sub>, …, v<sub>n</sub>). Se escribe <strong>v ∈ R<sup>n</sup></strong>, «v está en R<sup>n</sup>».</p>
 <p class="idea">En w = (2, −1, 4), la letra n vale 3 y cada v<sub>i</sub> de la definición corresponde a una posición. Escribir w ∈ R<sup>3</sup> dice exactamente que w tiene tres entradas reales.</p>
 <p class="idea">Una flecha o una lista de cantidades pueden representar un vector, pero son representaciones. El objeto matemático que usarás es la lista ordenada y sus operaciones.</p>
       </div>
@@ -321,7 +353,10 @@
   </div>
   <div class="mix-result"><p>La combinación produce</p><strong id="mixWords">Resultado: (2, 1)</strong><p id="mixFormula">1·(2,1) + 0·(1,3) = (2,1)</p></div>
 </div>
-<p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.9</span>v es <strong>combinación lineal</strong> de v<sub>1</sub>, …, v<sub>k</sub> si v = c<sub>1</sub>v<sub>1</sub> + c<sub>2</sub>v<sub>2</sub> + … + c<sub>k</sub>v<sub>k</sub> para ciertos escalares c<sub>1</sub>, …, c<sub>k</sub> ∈ R.</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Calcular una combinación lineal por etapas</h3><p class="walk-sub">Usamos u = (2, 1), v = (1, 3), α = 2 y β = −1.</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>αu + βv = 2u − v</span></div><p class="walk-why"><strong>Sustituimos los escalares.</strong>β = −1 convierte βv en −v.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>2u = 2(2, 1)</span><span class="line">= (4, 2)</span></div><p class="walk-why"><strong>Multiplicamos cada entrada.</strong>El escalar 2 afecta las dos coordenadas de u.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>−v = −(1, 3)</span><span class="line">= (−1, −3)</span></div><p class="walk-why"><strong>Aplicamos el segundo escalar.</strong>Multiplicar por −1 cambia el signo de cada coordenada.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>2u − v = (4, 2) + (−1, −3)</span></div><p class="walk-why"><strong>Reunimos los vectores escalados.</strong>Ahora solo falta sumar posiciones correspondientes.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>2u − v = (3, −1)</span></div><p class="walk-why"><strong>Sumamos por coordenadas.</strong>4 + (−1) = 3 y 2 + (−3) = −1.</p></div></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.9</span>v es <strong>combinación lineal</strong> de v<sub>1</sub>, …, v<sub>k</sub> si v = c<sub>1</sub>v<sub>1</sub> + c<sub>2</sub>v<sub>2</sub> + … + c<sub>k</sub>v<sub>k</sub> para ciertos escalares c<sub>1</sub>, …, c<sub>k</sub> ∈ R.</p>
 <p class="idea">En el ejemplo, c<sub>1</sub> y c<sub>2</sub> son α y β; v<sub>1</sub> y v<sub>2</sub> son u y v. La definición resume exactamente la cuenta que acabas de hacer.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M2G" data-tema="combinacion_lineal" data-level="guiado" data-module="2">
@@ -410,7 +445,10 @@
           <figcaption>Una dirección estira sobre una línea. Dos direcciones distintas permiten combinar movimientos.</figcaption>
         </figure>
 <p class="idea key">El patrón no depende de cuántos vectores escribes, sino de cuántas <strong>direcciones independientes</strong> aportan.</p>
-<p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.10</span>gen(S) = { v ∈ R<sup>n</sup> | v = c<sub>1</sub>v<sub>1</sub> + … + c<sub>k</sub>v<sub>k</sub>, con c<sub>i</sub> ∈ R }.</p>
+        <!-- sin-saltos:START -->
+        <div class="case-path" data-sin-saltos="casos"><h3>El generado pregunta por todos los resultados posibles</h3><div class="case-grid"><div class="case-card"><b>Un vector · u = (1, 0)</b><p>αu = (α, 0). Al variar α se recorre el eje horizontal, no todo el plano.</p></div><div class="case-card"><b>Dos vectores paralelos</b><p>u = (1, 0) y v = (2, 0) siguen produciendo (α + 2β, 0). La segunda dirección no aparece.</p></div><div class="case-card"><b>Dos direcciones independientes</b><p>e₁ = (1, 0) y e₂ = (0, 1) producen αe₁ + βe₂ = (α, β). Se alcanza cualquier punto de R².</p></div><div class="case-card"><b>Prueba de pertenencia</b><p>Para saber si w está en el generado, se buscan escalares que resuelvan αu + βv = w.</p></div></div><p class="case-take"><strong>Conclusión.</strong> El generado no es un solo resultado: es el conjunto de todos los vectores que aparecen al variar los escalares.</p></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.10</span>gen(S) = { v ∈ R<sup>n</sup> | v = c<sub>1</sub>v<sub>1</sub> + … + c<sub>k</sub>v<sub>k</sub>, con c<sub>i</sub> ∈ R }.</p>
 <p class="idea">La barra vertical se lee “tal que”. La definición reúne todos los vectores v que pueden escribirse como una combinación de los vectores de S.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M3G" data-tema="generado" data-level="guiado" data-module="3">
@@ -520,7 +558,10 @@
 <div class="fx"><div class="sys"><span class="eq">αe<sub>1</sub> + βe<sub>2</sub> = (0, 0)</span><span class="eq">(α, β) = (0, 0)</span></div></div>
 <p class="idea">Aquí la única posibilidad es α = 0 y β = 0. Ninguna dirección puede reemplazarse con la otra.</p>
 <p class="idea key">Dependencia significa que existe una combinación no trivial que produce cero. Independencia significa que solo la combinación trivial produce cero.</p>
-<p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 2.11 y 2.12</span>{v<sub>1</sub>, …, v<sub>k</sub>} es <strong>linealmente independiente</strong> si la <strong>única</strong> forma de lograr c<sub>1</sub>v<sub>1</sub> + … + c<sub>k</sub>v<sub>k</sub> = 0 es con todos los c<sub>i</sub> = 0; si existe otra forma, es <strong>linealmente dependiente</strong>.</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Probar independencia resolviendo la combinación cero</h3><p class="walk-sub">Usamos u = (1, 2) y v = (2, 4).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>αu + βv = (0, 0)</span></div><p class="walk-why"><strong>Planteamos la prueba.</strong>La independencia pregunta qué coeficientes producen el vector cero.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>α(1, 2) + β(2, 4) = (0, 0)</span></div><p class="walk-why"><strong>Sustituimos los vectores.</strong>Todavía no suponemos que α y β sean cero.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>α + 2β = 0</span><span class="line">2α + 4β = 0</span></div><p class="walk-why"><strong>Igualamos coordenadas.</strong>La segunda ecuación es el doble de la primera.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>Elige β = 1</span><span class="line">⇒  α = −2</span></div><p class="walk-why"><strong>Buscamos una solución no trivial.</strong>−2 + 2(1) = 0, y la segunda ecuación también se cumple.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>−2u + v = 0</span></div><p class="walk-why"><strong>Exhibimos la dependencia.</strong>Como los coeficientes no son ambos cero, el conjunto es linealmente dependiente.</p></div></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 2.11 y 2.12</span>{v<sub>1</sub>, …, v<sub>k</sub>} es <strong>linealmente independiente</strong> si la <strong>única</strong> forma de lograr c<sub>1</sub>v<sub>1</sub> + … + c<sub>k</sub>v<sub>k</sub> = 0 es con todos los c<sub>i</sub> = 0; si existe otra forma, es <strong>linealmente dependiente</strong>.</p>
 <p class="idea">“Trivial” no añade una idea nueva: solo nombra el caso en que todos los coeficientes valen cero.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M4G" data-tema="independencia" data-level="guiado" data-module="4">
@@ -607,7 +648,10 @@
         </figure>
 <p class="idea">¿Qué permanece al cambiar de base? El espacio. ¿Qué cuenta la dimensión? El número de vectores de cualquier base.</p>
 <p class="idea key">Base = genera todo + es linealmente independiente. Dimensión = cantidad de vectores de una base.</p>
-<p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 2.13 y 2.14</span>{v<sub>1</sub>, …, v<sub>k</sub>} es una <strong>base</strong> de S si (i) gen({v<sub>1</sub>, …, v<sub>k</sub>}) = S y (ii) el conjunto es linealmente independiente. La <strong>dimensión</strong> es el número de vectores de cualquier base: dim(S) = k.</p>
+        <!-- sin-saltos:START -->
+        <div class="case-path" data-sin-saltos="casos"><h3>Una base debe pasar dos pruebas, no una</h3><div class="case-grid"><div class="case-card"><b>Genera, pero sobra un vector</b><p>{e₁, e₂, e₁ + e₂} alcanza todo R², pero el tercero es combinación de los dos primeros. No es base.</p></div><div class="case-card"><b>Independiente, pero no genera</b><p>{e₁} es independiente, pero solo alcanza el eje horizontal. No es base de R².</p></div><div class="case-card"><b>Pasa ambas pruebas</b><p>{e₁, e₂} alcanza cualquier (a, b) = ae₁ + be₂ y ninguno depende del otro. Sí es base.</p></div><div class="case-card"><b>Dimensión</b><p>Toda base de R² tiene dos vectores. La cantidad de vectores de una base es la dimensión.</p></div></div><p class="case-take"><strong>Conclusión.</strong> “Base” significa generar todo el espacio sin redundancia. Comprobar solo una condición deja el argumento incompleto.</p></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Defs. 2.13 y 2.14</span>{v<sub>1</sub>, …, v<sub>k</sub>} es una <strong>base</strong> de S si (i) gen({v<sub>1</sub>, …, v<sub>k</sub>}) = S y (ii) el conjunto es linealmente independiente. La <strong>dimensión</strong> es el número de vectores de cualquier base: dim(S) = k.</p>
 <p class="idea">En este caso, {e<sub>1</sub>, e<sub>2</sub>} es una base de R<sup>2</sup> y dim(R<sup>2</sup>) = 2.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M5G" data-tema="base" data-level="guiado" data-module="5">
@@ -683,7 +727,10 @@
         </figure>
 <p class="idea">Ahora contrasta con y = 2x + 1. El origen no cumple la ecuación, así que esa recta no puede ser subespacio.</p>
 <p class="idea key">Las tres comprobaciones son: contiene al cero, cierra bajo suma y cierra bajo multiplicación por escalares.</p>
-<p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.6</span>S es un <strong>subespacio de R<sup>n</sup></strong> si: (i) 0 ∈ S; (ii) si u, v ∈ S entonces u + v ∈ S; (iii) si u ∈ S y c ∈ R entonces c·u ∈ S.</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Verificar un subespacio con vectores arbitrarios</h3><p class="walk-sub">Probamos S = {(x, y): y = 2x}. Los ejemplos ayudan, pero la verificación general usa letras.</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>(0, 0) ∈ S porque 0 = 2(0)</span></div><p class="walk-why"><strong>Comprobamos el vector cero.</strong>Esta es la primera condición; sin ella el conjunto no puede ser subespacio.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>u = (a, 2a)</span><span class="line">v = (b, 2b)</span></div><p class="walk-why"><strong>Tomamos dos vectores cualesquiera de S.</strong>Escribir la segunda coordenada como el doble de la primera incorpora la condición del conjunto.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>u + v = (a + b, 2a + 2b)</span></div><p class="walk-why"><strong>Sumamos por coordenadas.</strong>Todavía debemos comprobar que el resultado conserva la forma.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>u + v = (a + b, 2(a + b))</span></div><p class="walk-why"><strong>Factorizamos 2.</strong>La segunda coordenada vuelve a ser el doble de la primera; la suma permanece en S.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>cu = (ca, 2ca)</span><span class="line">= (ca, 2(ca))</span></div><p class="walk-why"><strong>Multiplicamos por un escalar cualquiera.</strong>El resultado también conserva la forma, así que cu pertenece a S.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>S es subespacio de R²</span></div><p class="walk-why"><strong>Concluimos después de las tres pruebas.</strong>Contiene al cero y es cerrado bajo suma y producto por escalar.</p></div></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.6</span>S es un <strong>subespacio de R<sup>n</sup></strong> si: (i) 0 ∈ S; (ii) si u, v ∈ S entonces u + v ∈ S; (iii) si u ∈ S y c ∈ R entonces c·u ∈ S.</p>
 <p class="idea">La palabra “cerrado” aquí significa que la operación termina dentro del conjunto; no es la noción topológica de conjunto cerrado que aparecerá en Cálculo.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M6G" data-tema="subespacio" data-level="guiado" data-module="6">
@@ -802,7 +849,10 @@
 <p class="idea">Segunda pregunta: ¿qué salidas pueden escribirse como combinación de las columnas? Ese conjunto es el <strong>espacio columna</strong>.</p>
 <div class="fx"><div class="sys"><span class="eq">Nul(A) = {x : Ax = 0}</span><span class="eq">Col(A) = Gen(c<sub>1</sub>, c<sub>2</sub>, …)</span></div></div>
 <p class="idea key">El espacio nulo vive en el conjunto de entradas. El espacio columna vive en el conjunto de salidas.</p>
-<p class="fdef"><span class="flbl">Definición · así los escribe tu curso</span><strong>Nul(A)</strong> = { x ∈ R<sup>n</sup> | A·x = 0 }  ·  <strong>Col(A)</strong> = gen(columnas de A).</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Separar espacio nulo y espacio columna</h3><p class="walk-sub">Trabajamos con A = [[1, 2], [2, 4]].</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>Ax = 0</span></div><p class="walk-why"><strong>Planteamos el espacio nulo.</strong>Aquí x es una entrada; buscamos qué entradas producen la salida cero.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>x₁ + 2x₂ = 0</span><span class="line">2x₁ + 4x₂ = 0</span></div><p class="walk-why"><strong>Escribimos el sistema.</strong>La segunda ecuación repite la primera.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>x = t(−2, 1)</span></div><p class="walk-why"><strong>Resolvemos.</strong>Estas entradas forman Nul(A), una recta dentro del dominio R².</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>c₁ = (1, 2)</span><span class="line">c₂ = (2, 4)</span></div><p class="walk-why"><strong>Miramos las columnas.</strong>Ahora estudiamos salidas posibles, no soluciones de Ax = 0.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>c₂ = 2c₁</span></div><p class="walk-why"><strong>Quitamos la dirección repetida.</strong>Las columnas generan la recta Col(A) = gen{(1, 2)} en el codominio.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>Nul(A) y Col(A) responden preguntas distintas</span></div><p class="walk-why"><strong>Cerramos la comparación.</strong>Uno vive en las entradas; el otro describe las salidas.</p></div></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Definición · así los escribe tu curso</span><strong>Nul(A)</strong> = { x ∈ R<sup>n</sup> | A·x = 0 }  ·  <strong>Col(A)</strong> = gen(columnas de A).</p>
 <p class="idea">No son dos nombres para lo mismo: responden preguntas distintas y pueden tener dimensiones distintas.</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M7G" data-tema="espacio_nulo" data-level="guiado" data-module="7">
@@ -885,7 +935,10 @@
 <div class="fx"><div class="sys"><span class="eq">rango + nulidad = 3 + 1</span><span class="eq">= 4 = número de columnas</span></div></div>
 <p class="idea">Cambia la matriz: los dos números pueden cambiar, pero su suma permanece igual al número de entradas del dominio.</p>
 <p class="idea key">Cada dirección del dominio termina en uno de dos papeles: aporta una dirección de salida o una libertad que cae en el núcleo.</p>
-<p class="fdef"><span class="flbl">Definición y teorema · así los dice tu curso</span><strong>rango(A)</strong> = dim(Col(A))  ·  <strong>nulidad(A)</strong> = dim(Nul(A)). <strong>Teorema de la dimensión</strong>: rango(A) + nulidad(A) = n, el número de columnas.</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Leer rango y nulidad desde una reducción</h3><p class="walk-sub">Usamos una matriz con cuatro columnas, tres pivotes y una variable libre.</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>n = 4 columnas</span></div><p class="walk-why"><strong>Contamos variables de entrada.</strong>El teorema compara rango y nulidad con este número.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>3 columnas pivote</span></div><p class="walk-why"><strong>Contamos direcciones independientes de salida.</strong>Por definición, rango(A) = dim Col(A) = 3.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>1 variable libre</span></div><p class="walk-why"><strong>Contamos parámetros del sistema Ax = 0.</strong>Esa libertad produce una dirección del núcleo; nulidad(A) = 1.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>rango(A) + nulidad(A) = 3 + 1</span></div><p class="walk-why"><strong>Reunimos los conteos.</strong>Pivotes y variables libres reparten las cuatro columnas.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>3 + 1 = 4</span><span class="line">= n</span></div><p class="walk-why"><strong>Comprobamos el teorema.</strong>La igualdad no es una coincidencia del ejemplo: expresa cómo se reparte el dominio.</p></div></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Definición y teorema · así los dice tu curso</span><strong>rango(A)</strong> = dim(Col(A))  ·  <strong>nulidad(A)</strong> = dim(Nul(A)). <strong>Teorema de la dimensión</strong>: rango(A) + nulidad(A) = n, el número de columnas.</p>
 <p class="idea">En la notación del teorema, n es el número de columnas de A. rango(A) mide Col(A) y nulidad(A) mide Nul(A).</p>
       </div>
       <div class="check challenge" data-kind="item" data-id="M8G" data-tema="rango_nulidad" data-level="guiado" data-module="8">

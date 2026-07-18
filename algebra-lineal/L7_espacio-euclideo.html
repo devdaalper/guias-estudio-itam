@@ -189,6 +189,35 @@
   @media(max-width:400px){.sys,.matrix-form{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   sub,sup{font-size:13px}
+  /* sin-saltos-profesor */
+  .walkthrough{display:grid;gap:0;margin:8px 0 4px;min-width:0;max-width:100%}
+  .walk-title{margin:0 0 7px;padding:0;color:var(--ink);font-size:clamp(21px,3vw,25px);font-weight:800;letter-spacing:-.02em;line-height:1.25;max-width:34ch}
+  .walk-sub{margin:0 0 13px;padding:0;color:var(--slate);font-size:17px;line-height:1.68;max-width:62ch}
+  .walk-row{display:block;position:relative;padding:20px 0 18px;border-top:1.5px solid var(--line);min-width:0}
+  .walk-math{min-width:0;padding:0;color:var(--ink);font-size:clamp(19px,2.5vw,23px);font-weight:700;line-height:1.55;font-variant-numeric:tabular-nums;overflow-wrap:normal;word-break:normal}
+  .walk-math .line{display:block;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin}
+  .walk-math .line+.line{margin-top:7px;padding-left:35px}
+  .walk-why{max-width:62ch;min-width:0;margin:8px 0 0;padding:0 0 0 35px;border:0;background:transparent;color:var(--slate);font-size:17px;line-height:1.7}
+  .walk-why > strong{display:inline;color:var(--ink);margin-right:.22em}
+  .walk-row.is-result{margin-top:2px;padding:18px 14px;border-top:2px solid var(--green-deep);border-bottom:2px solid var(--green-deep);background:var(--green-tint)}
+  .walk-n{display:inline-grid;place-items:center;width:27px;height:27px;margin-right:8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--cream);font-size:13px;font-weight:900;vertical-align:.14em}
+  .case-path{display:grid;gap:0;margin:8px 0 4px;padding:0;min-width:0;background:transparent}
+  .case-path h3{font-size:clamp(21px,3vw,25px);line-height:1.25;letter-spacing:-.02em;margin:0 0 10px;max-width:34ch}
+  .case-grid{display:block;min-width:0}
+  .case-card{min-width:0;padding:17px 0 16px;border:0;border-top:1.5px solid var(--line);border-radius:0;background:transparent}
+  .case-card:last-child{border-bottom:1.5px solid var(--line)}
+  .case-card b{display:block;margin-bottom:4px;font-size:18px;line-height:1.4;color:var(--ink)}
+  .case-card p{max-width:62ch;margin:0;color:var(--slate);font-size:17px;line-height:1.7}
+  .case-take{max-width:62ch;margin:18px 0 0;padding:14px 0;border:0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);border-radius:0;background:transparent;color:var(--ink);font-size:17px;line-height:1.7}
+  .case-take > strong{display:inline;margin-right:.22em}
+  @media(max-width:500px){
+    .walk-row{padding:17px 0 15px}
+    .walk-row.is-result{padding:16px 10px}
+    .walk-why{padding-left:0}
+    .walk-math .line+.line{padding-left:0}
+  }
+  /* sin-saltos-profesor:END */
+
 </style>
 </head>
 <body>
@@ -251,6 +280,9 @@
         <div class="fx"><div class="sys"><span class="eq">‖(3, 4)‖ = √(9 + 16)</span><span class="eq">= √25</span><span class="eq">= 5</span></div></div>
         <p class="idea">Ese largo se llama la <strong>norma</strong>, y se escribe con doble barra: ‖v‖. Y con esto ya llegaste.</p>
         <p class="idea">Tu curso lo enuncia así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Calcular una norma con Pitágoras extendido</h3><p class="walk-sub">Usamos v = (3, −4, 12).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>‖v‖ = √(3² + (−4)² + 12²)</span></div><p class="walk-why"><strong>Sustituimos cada coordenada.</strong>El signo negativo queda dentro del cuadrado; no se elimina antes de elevar.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>‖v‖ = √(9 + 16 + 144)</span></div><p class="walk-why"><strong>Calculamos los cuadrados.</strong>(−4)² = 16 porque (−4)(−4) es positivo.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>‖v‖ = √169</span></div><p class="walk-why"><strong>Sumamos.</strong>La norma reúne en un solo número los aportes de las tres direcciones.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">4</span>‖v‖ = 13</span></div><p class="walk-why"><strong>Tomamos la raíz no negativa.</strong>Una longitud nunca se reporta con signo negativo.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>La <strong>norma</strong> de v = (v<sub>1</sub>, …, v<sub>n</sub>) en R<sup>n</sup> es ‖v‖ = √(v<sub>1</sub><sup>2</sup> + v<sub>2</sub><sup>2</sup> + … + v<sub>n</sub><sup>2</sup>), un número nunca negativo.</p>
         <p class="idea">Léela con el mapa: cada v<sub>i</sub> es un tramo; los elevas al cuadrado, sumas y sacas raíz. La flecha (3, 4) mide 5.</p>
         <p class="idea">Un regalo: una flecha de norma 1 es <strong>unitaria</strong>. Cualquier flecha se vuelve unitaria dividiéndola entre su norma.</p>
@@ -344,6 +376,9 @@
         <div class="fx"><div class="sys"><span class="eq">‖(3, 4)‖ = √(9 + 16) = √25 = 5</span></div></div>
         <p class="idea key">Distancia = <strong>resta y mide</strong>: resta los puntos y saca la norma.</p>
         <p class="idea">Con esto ya llegaste. Tu curso lo escribe así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">La distancia empieza con un vector diferencia</h3><p class="walk-sub">Medimos la separación entre p = (1, −2) y q = (4, 2).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>p − q = (1 − 4, −2 − 2)</span></div><p class="walk-why"><strong>Restamos por coordenadas.</strong>El vector diferencia indica cómo ir de q a p.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>p − q = (−3, −4)</span></div><p class="walk-why"><strong>Simplificamos.</strong>Cambiar el orden produciría (3,4), pero su norma sería la misma.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>d(p, q) = ‖p − q‖</span></div><p class="walk-why"><strong>Aplicamos la definición.</strong>La distancia es la longitud del vector que separa los puntos.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>d(p, q) = √((−3)² + (−4)²)</span></div><p class="walk-why"><strong>Sustituimos.</strong>Se elevan al cuadrado las dos coordenadas.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>d(p, q) = √25</span><span class="line">= 5</span></div><p class="walk-why"><strong>Calculamos.</strong>La distancia es un número no negativo y es simétrica.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>La <strong>distancia</strong> entre dos puntos p y q en R<sup>n</sup> es d(p, q) = ‖p − q‖.</p>
         <p class="idea">Léela de vuelta: p − q es la flecha que los une (la resta), y la doble barra es medir esa flecha. Aquí d = 5.</p>
       </div>
@@ -433,6 +468,9 @@
         </div>
         <p class="idea">¿Notaste que a veces da <strong>cero</strong>? Ese cero es especial, y vive en la próxima lección.</p>
         <p class="idea">En símbolos se pone un punto entre las flechas, y de ahí el nombre. Con esto ya llegaste; tu curso lo numera:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Producto punto: emparejar antes de sumar</h3><p class="walk-sub">Usamos u = (2, −1, 3) y v = (4, 5, −2).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>u · v = 2(4) + (−1)(5) + 3(−2)</span></div><p class="walk-why"><strong>Emparejamos posiciones.</strong>Primera con primera, segunda con segunda y tercera con tercera.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>u · v = 8 − 5 − 6</span></div><p class="walk-why"><strong>Calculamos los productos.</strong>El resultado de cada pareja es un escalar.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>u · v = −3</span></div><p class="walk-why"><strong>Sumamos.</strong>El producto punto produce un solo número, no otro vector.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">4</span>u · v < 0</span></div><p class="walk-why"><strong>Leemos el signo.</strong>El signo negativo indica que el ángulo entre los vectores es obtuso.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Resumen del curso, Def. 2.7</span>El <strong>producto punto</strong> de v, w ∈ R<sup>n</sup> es el escalar v · w = v<sub>1</sub>w<sub>1</sub> + v<sub>2</sub>w<sub>2</sub> + … + v<sub>n</sub>w<sub>n</sub>.</p>
         <p class="idea">Léela de vuelta: cada v<sub>i</sub>w<sub>i</sub> es «coordenada por coordenada», y la suma junta todo en un escalar (un número). Por eso (2, 3) · (4, 1) = 11.</p>
         <p class="idea key">Un regalo: una flecha por sí misma da su norma al cuadrado, v · v = ‖v‖<sup>2</sup>.</p>
@@ -557,6 +595,9 @@
         <div class="fx"><div class="sys"><span class="eq">(2, 3) · (3, −2)</span><span class="eq">= 6 − 6 = 0</span><span class="eq">→ (2, 3) ⊥ (3, −2)</span></div></div>
         <p class="idea key">Ya no dibujas ni mides ángulos: multiplicas, sumas, y si da <strong>cero</strong>, son ortogonales.</p>
         <p class="idea">En R<sup>5</sup> o R<sup>20</sup>, donde no hay dibujo, es la única manera. Tu curso lo enuncia así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Comprobar ortogonalidad con una igualdad</h3><p class="walk-sub">Usamos u = (2, 1) y v = (1, −2).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>u · v = 2(1) + 1(−2)</span></div><p class="walk-why"><strong>Aplicamos el producto punto.</strong>La comprobación usa todas las coordenadas.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>u · v = 2 − 2</span></div><p class="walk-why"><strong>Calculamos los productos.</strong>Los aportes tienen igual magnitud y signos opuestos.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>u · v = 0</span></div><p class="walk-why"><strong>Sumamos.</strong>El resultado cero es la condición algebraica de ortogonalidad.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">4</span>u ⟂ v</span></div><p class="walk-why"><strong>Concluimos.</strong>No basta con que los vectores “se vean” perpendiculares; la igualdad lo demuestra.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>Dos vectores u, v ∈ R<sup>n</sup> son <strong>ortogonales</strong> si u · v = 0. Se escribe u ⊥ v.</p>
         <p class="idea">Léela de vuelta: «ortogonal» es el nombre elegante de «perpendicular», y la prueba es una sola cuenta: que el producto punto sea 0.</p>
       </div>
@@ -646,6 +687,9 @@
         </figure>
         <p class="idea">¿Y cómo sale el coseno directo de las coordenadas? Con el producto punto, dividido entre los dos tamaños. Al ángulo se le llama θ.</p>
         <p class="idea">Con esto ya llegaste; tu curso lo enuncia así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Hallar un ángulo separando numerador y denominador</h3><p class="walk-sub">Usamos u = (1, 0) y v = (1, 1).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>u · v = 1(1) + 0(1)</span><span class="line">= 1</span></div><p class="walk-why"><strong>Calculamos el numerador.</strong>El producto punto mide el acuerdo entre direcciones.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>‖u‖ = 1</span></div><p class="walk-why"><strong>Calculamos la primera norma.</strong>√(1² + 0²) = 1.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>‖v‖ = √2</span></div><p class="walk-why"><strong>Calculamos la segunda norma.</strong>√(1² + 1²) = √2.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>cos θ = 1/(1·√2)</span><span class="line">= 1/√2</span></div><p class="walk-why"><strong>Sustituimos en la fórmula.</strong>Las normas normalizan el producto punto para que el resultado quede entre −1 y 1.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>θ = 45°</span></div><p class="walk-why"><strong>Aplicamos el coseno inverso.</strong>cos 45° = 1/√2, así que ese es el ángulo entre los vectores.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>El <strong>ángulo</strong> θ entre u, v ∈ R<sup>n</sup> (ambos no nulos) cumple cos θ = (u · v) / (‖u‖ ‖v‖).</p>
         <p class="idea">Léela de vuelta: arriba el acuerdo (u · v), abajo los dos tamaños. Si u · v = 0, cos θ = 0 y θ = 90°.</p>
         <p class="idea">Un ejemplo con u = (1, 1) y v = (1, 0):</p>
@@ -729,7 +773,10 @@
 <p class="idea">Todo vector sobre la dirección de v tiene la forma cv. Para elegir el más cercano, exige que el error u − cv sea perpendicular a v:</p>
 <div class="fx"><div class="sys"><span class="eq">(u − cv) · v = 0</span><span class="eq">u · v − c(v · v) = 0</span><span class="eq">c = (u · v)/(v · v)</span></div></div>
 <p class="idea key">La fórmula nace de una condición geométrica precisa: el residuo debe ser ortogonal a la dirección sobre la que proyectas.</p>
-<p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>La <strong>proyección</strong> de u sobre v (no nulo) es proy<sub>v</sub>(u) = ( (u · v) / (v · v) ) · v.</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Proyectar en tres cálculos visibles</h3><p class="walk-sub">Proyectamos u = (3, 4) sobre v = (1, 2).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>u · v = 3(1) + 4(2)</span><span class="line">= 11</span></div><p class="walk-why"><strong>Calculamos cuánto apunta u hacia v.</strong>Este número formará el numerador del coeficiente.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>v · v = 1² + 2²</span><span class="line">= 5</span></div><p class="walk-why"><strong>Calculamos el tamaño cuadrado de v.</strong>Dividir por v · v corrige que v no sea unitario.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>c = (u · v)/(v · v)</span><span class="line">= 11/5</span></div><p class="walk-why"><strong>Hallamos el coeficiente.</strong>c indica cuántas copias de v forman la proyección.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>proy<sub>v</sub>(u) = (11/5)v</span></div><p class="walk-why"><strong>Aplicamos el coeficiente al vector base.</strong>La proyección debe quedar sobre la dirección de v.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>proy<sub>v</sub>(u) = (11/5, 22/5)</span></div><p class="walk-why"><strong>Multiplicamos por coordenadas.</strong>El resultado es el múltiplo de v más cercano a u.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>(u − proy<sub>v</sub>(u)) · v = 0</span></div><p class="walk-why"><strong>Comprobamos.</strong>El error restante es ortogonal a v; esa igualdad certifica la proyección.</p></div></div>
+        <!-- sin-saltos:END -->
+        <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span>La <strong>proyección</strong> de u sobre v (no nulo) es proy<sub>v</sub>(u) = ( (u · v) / (v · v) ) · v.</p>
 <p class="idea">Calcula u = (2, 4) sobre v = (1, 1):</p>
 <div class="fx"><div class="sys"><span class="eq">u · v = 6</span><span class="eq">v · v = 2</span><span class="eq">proy<sub>v</sub>(u) = (6/2)(1, 1)</span><span class="eq">= (3, 3)</span></div></div>
 <figure class="visual">
@@ -897,6 +944,9 @@
         <p class="idea">Compruebo que ya son perpendiculares:</p>
         <div class="fx"><div class="sys"><span class="eq">u<sub>1</sub> · u<sub>2</sub> = (3)(0) + (0)(2) = 0</span></div></div>
         <p class="idea">Con esto ya llegaste. Tu curso lo enuncia así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Gram–Schmidt: restar exactamente la parte paralela</h3><p class="walk-sub">Partimos de v₁ = (1, 1) y v₂ = (1, 0).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>u₁ = v₁</span><span class="line">= (1, 1)</span></div><p class="walk-why"><strong>Conservamos el primer vector.</strong>Todavía no hay una dirección anterior que debamos quitarle.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>proy<sub>u₁</sub>(v₂) = ((v₂·u₁)/(u₁·u₁))u₁</span></div><p class="walk-why"><strong>Planteamos la parte paralela.</strong>Esta es la porción de v₂ que apunta en la dirección de u₁.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>v₂·u₁ = 1 y u₁·u₁</span><span class="line">= 2</span></div><p class="walk-why"><strong>Calculamos los productos punto.</strong>El coeficiente de proyección es 1/2.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>proy<sub>u₁</sub>(v₂) = (1/2, 1/2)</span></div><p class="walk-why"><strong>Multiplicamos u₁ por 1/2.</strong>Ya identificamos la parte que debe retirarse.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>u₂ = v₂ − proy<sub>u₁</sub>(v₂)</span><span class="line">= (1/2, −1/2)</span></div><p class="walk-why"><strong>Restamos.</strong>u₂ conserva la parte de v₂ perpendicular a u₁.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>u₁ · u₂ = 1/2 − 1/2</span><span class="line">= 0</span></div><p class="walk-why"><strong>Comprobamos ortogonalidad.</strong>La pareja {u₁,u₂} genera el mismo plano y ahora es ortogonal.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso</span><strong>Gram-Schmidt</strong>: dada una base {v<sub>1</sub>, …, v<sub>k</sub>}, se toma u<sub>1</sub> = v<sub>1</sub> y, a cada v<sub>j</sub>, se le restan sus proyecciones sobre los u anteriores; el resultado u<sub>j</sub> queda ortogonal a todos ellos.</p>
         <p class="idea">Léela de vuelta: no hay fórmula nueva. Es la proyección de la lección pasada, restada una y otra vez, hasta que la base quede como hoja cuadriculada.</p>
         <p class="idea">Si además divides cada flecha entre su norma, cada una queda unitaria y la base se llama <strong>ortonormal</strong> (orto por las esquinas, normal por la norma 1).</p>

@@ -183,6 +183,35 @@
   @media(max-width:400px){.sys{font-size:18px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   sub,sup{font-size:13px}
+  /* sin-saltos-profesor */
+  .walkthrough{display:grid;gap:0;margin:8px 0 4px;min-width:0;max-width:100%}
+  .walk-title{margin:0 0 7px;padding:0;color:var(--ink);font-size:clamp(21px,3vw,25px);font-weight:800;letter-spacing:-.02em;line-height:1.25;max-width:34ch}
+  .walk-sub{margin:0 0 13px;padding:0;color:var(--slate);font-size:17px;line-height:1.68;max-width:62ch}
+  .walk-row{display:block;position:relative;padding:20px 0 18px;border-top:1.5px solid var(--line);min-width:0}
+  .walk-math{min-width:0;padding:0;color:var(--ink);font-size:clamp(19px,2.5vw,23px);font-weight:700;line-height:1.55;font-variant-numeric:tabular-nums;overflow-wrap:normal;word-break:normal}
+  .walk-math .line{display:block;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin}
+  .walk-math .line+.line{margin-top:7px;padding-left:35px}
+  .walk-why{max-width:62ch;min-width:0;margin:8px 0 0;padding:0 0 0 35px;border:0;background:transparent;color:var(--slate);font-size:17px;line-height:1.7}
+  .walk-why > strong{display:inline;color:var(--ink);margin-right:.22em}
+  .walk-row.is-result{margin-top:2px;padding:18px 14px;border-top:2px solid var(--green-deep);border-bottom:2px solid var(--green-deep);background:var(--green-tint)}
+  .walk-n{display:inline-grid;place-items:center;width:27px;height:27px;margin-right:8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--cream);font-size:13px;font-weight:900;vertical-align:.14em}
+  .case-path{display:grid;gap:0;margin:8px 0 4px;padding:0;min-width:0;background:transparent}
+  .case-path h3{font-size:clamp(21px,3vw,25px);line-height:1.25;letter-spacing:-.02em;margin:0 0 10px;max-width:34ch}
+  .case-grid{display:block;min-width:0}
+  .case-card{min-width:0;padding:17px 0 16px;border:0;border-top:1.5px solid var(--line);border-radius:0;background:transparent}
+  .case-card:last-child{border-bottom:1.5px solid var(--line)}
+  .case-card b{display:block;margin-bottom:4px;font-size:18px;line-height:1.4;color:var(--ink)}
+  .case-card p{max-width:62ch;margin:0;color:var(--slate);font-size:17px;line-height:1.7}
+  .case-take{max-width:62ch;margin:18px 0 0;padding:14px 0;border:0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);border-radius:0;background:transparent;color:var(--ink);font-size:17px;line-height:1.7}
+  .case-take > strong{display:inline;margin-right:.22em}
+  @media(max-width:500px){
+    .walk-row{padding:17px 0 15px}
+    .walk-row.is-result{padding:16px 10px}
+    .walk-why{padding-left:0}
+    .walk-math .line+.line{padding-left:0}
+  }
+  /* sin-saltos-profesor:END */
+
 </style>
 </head>
 <body>
@@ -253,6 +282,9 @@
           <figcaption>Dos entradas entran, un solo número sale. La pareja (3, 2) produce 7.</figcaption>
         </figure>
         <p class="idea">Eso que acabas de usar —dos entradas, una salida— es la <strong>función de dos variables</strong>. Tu curso la enuncia así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Evaluar una función sin intercambiar entradas</h3><p class="walk-sub">Usamos f(x, y) = x² + 2y y el punto (3, −1).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>f(3, −1)</span></div><p class="walk-why"><strong>Leemos la entrada.</strong>El primer número sustituye a x y el segundo sustituye a y.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>f(3, −1) = 3² + 2(−1)</span></div><p class="walk-why"><strong>Sustituimos.</strong>Se conservan los paréntesis alrededor del valor negativo para no perder su signo.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>f(3, −1) = 9 − 2</span></div><p class="walk-why"><strong>Calculamos cada operación.</strong>Primero la potencia y el producto; después la suma.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>f(3, −1) = 7</span></div><p class="walk-why"><strong>Concluimos.</strong>La pareja de entrada produce un solo número de salida.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>f(−1, 3) = 7 también, pero es otra entrada</span></div><p class="walk-why"><strong>Contrastamos.</strong>Que dos parejas den la misma salida no permite intercambiar sus posiciones en general.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3</span>Una <strong>función de dos variables</strong> f asigna a cada pareja (x, y) de un conjunto D del plano un <strong>único</strong> número real, que se escribe f(x, y).</p>
         <p class="idea">Léela de vuelta: la pareja (x, y) son tus dos mandos y f(x, y) es el número que sale. «Único» dice que a cada pareja le toca una sola salida.</p>
         <p class="idea paso">Y en cuanto la tengas, seguimos con lo natural: si la máquina da una altura sobre cada punto, ¿qué <strong>dibujo</strong> forma?</p>
@@ -347,6 +379,9 @@
           <figcaption>Cada punto del mapa recibe su altura; el conjunto de alturas es la superficie.</figcaption>
         </figure>
         <p class="idea">Ese terreno es, palabra por palabra, lo que tu curso llama <strong>gráfica</strong>:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">De una entrada del dominio a un punto de la gráfica</h3><p class="walk-sub">Usamos f(x, y) = x² + y² y la entrada (1, 2).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>z = f(x, y)</span></div><p class="walk-why"><strong>Recordamos la tercera coordenada.</strong>La gráfica vive en R³: x e y ubican la entrada; z guarda la salida.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>z = f(1, 2)</span><span class="line">= 1² + 2²</span></div><p class="walk-why"><strong>Sustituimos.</strong>El punto (1,2) del dominio determina una altura.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>z = 5</span></div><p class="walk-why"><strong>Calculamos.</strong>Esa altura no reemplaza a x ni a y; se agrega como tercera coordenada.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>(x, y, z) = (1, 2, 5)</span></div><p class="walk-why"><strong>Construimos el punto de la gráfica.</strong>Este punto satisface z = f(x,y).</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>(1, 2) pertenece al dominio</span><span class="line">(1, 2, 5) pertenece a la gráfica</span></div><p class="walk-why"><strong>Separamos los objetos.</strong>La entrada está en el plano y la gráfica reúne puntos del espacio.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.2</span>La <strong>gráfica</strong> de f es el conjunto de puntos (x, y, z) del espacio con z = f(x, y): una <strong>superficie</strong> levantada sobre el plano.</p>
         <p class="idea">Léela así: el par (x, y) es el punto del mapa y z = f(x, y) es la altura sobre él. Juntar todas esas alturas arma la superficie.</p>
         <p class="idea paso">Y ojo con lo que viene: ningún terreno acepta cualquier pareja —hay puntos que <strong>rompen</strong> la fórmula. Esa es la siguiente idea.</p>
@@ -433,6 +468,9 @@
           <figcaption>Dentro del disco la fórmula funciona; fuera, la pareja está prohibida.</figcaption>
         </figure>
         <p class="idea">Reunido todo, el dominio es lo que tu curso define así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Hallar un dominio reuniendo todas las restricciones</h3><p class="walk-sub">Usamos f(x, y) = √(9 − x² − y²)/(x − y).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>9 − x² − y² ≥ 0</span></div><p class="walk-why"><strong>Protegemos la raíz.</strong>Una raíz cuadrada real exige radicando no negativo.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>x² + y² ≤ 9</span></div><p class="walk-why"><strong>Reordenamos.</strong>Esta condición describe el disco cerrado de radio 3.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>x − y ≠ 0</span></div><p class="walk-why"><strong>Protegemos el denominador.</strong>Dividir entre cero no está definido.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>x ≠ y</span></div><p class="walk-why"><strong>Simplificamos la segunda condición.</strong>Se excluye la recta diagonal, incluso dentro del disco.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">5</span>Dom(f) = {(x,y): x²+y² ≤ 9 y x ≠ y}</span></div><p class="walk-why"><strong>Intersectamos restricciones.</strong>Una pareja pertenece al dominio solo si cumple las dos condiciones al mismo tiempo.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.1</span>El <strong>dominio</strong> de f es el conjunto de todas las parejas (x, y) para las que f(x, y) da un número real: las que no rompen ninguna operación.</p>
         <p class="idea">Léelo de vuelta: recorres las tres operaciones peligrosas, impones su condición y te quedas con las parejas que la cumplen.</p>
         <p class="idea paso">El dominio vigila las <strong>entradas</strong>. La siguiente lección vigila su gemela: las <strong>salidas</strong>.</p>
@@ -563,6 +601,9 @@
           <figcaption>La imagen es una franja de números sueltos, no de parejas.</figcaption>
         </figure>
         <p class="idea">Con esto ya llegaste al concepto. Tu curso lo enuncia así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Determinar la imagen probando cotas y alcanzabilidad</h3><p class="walk-sub">Usamos f(x, y) = x² + y² sobre todo R².</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>x² ≥ 0 y y² ≥ 0</span></div><p class="walk-why"><strong>Buscamos una cota.</strong>Todo cuadrado real es no negativo.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>f(x, y) = x² + y² ≥ 0</span></div><p class="walk-why"><strong>Sumamos las cotas.</strong>La función nunca puede producir un número negativo.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>f(0, 0) = 0</span></div><p class="walk-why"><strong>Comprobamos el extremo inferior.</strong>El valor 0 sí se alcanza.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>Para k ≥ 0, toma (√k, 0)</span></div><p class="walk-why"><strong>Probamos alcanzabilidad.</strong>Esta pareja existe para todo k no negativo.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>f(√k, 0) = k</span></div><p class="walk-why"><strong>Sustituimos.</strong>Todo número no negativo aparece como salida.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>Im(f) = [0, ∞)</span></div><p class="walk-why"><strong>Concluimos.</strong>La cota descarta negativos y la construcción alcanza todos los demás.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.1</span>La <strong>imagen</strong> de f es el conjunto de todos los valores f(x, y) que la función llega a producir cuando (x, y) recorre el dominio.</p>
         <p class="idea">Y cuida la diferencia, porque en examen la preguntan:</p>
         <ul class="idea" style="margin:0;padding-left:20px"><li>El <strong>dominio</strong> está hecho de <strong>parejas</strong> (x, y): vive en el mapa.</li><li>La <strong>imagen</strong> está hecha de <strong>números sueltos</strong>: las alturas de salida.</li></ul>
@@ -653,6 +694,9 @@
         <p class="idea">En general, eliges una altura k y juntas los puntos donde la función vale exactamente k. En símbolos:</p>
         <div class="fx"><div class="sys"><span class="eq">f(x, y) = k</span></div></div>
         <p class="idea">Esa idea es lo que tu curso enuncia así:</p>
+        <!-- sin-saltos:START -->
+        <div class="case-path" data-sin-saltos="casos"><h3>Una altura fija produce una curva de nivel</h3><div class="case-grid"><div class="case-card"><b>f(x,y)=x²+y², k=1</b><p>Resolver f(x,y)=1 produce x²+y²=1: el círculo de radio 1.</p></div><div class="case-card"><b>La misma función, k=4</b><p>x²+y²=4 produce el círculo de radio 2. Cambia la altura y cambia el tamaño.</p></div><div class="case-card"><b>k=0</b><p>x²+y²=0 obliga x=0 y y=0. El conjunto de nivel se reduce a un punto.</p></div><div class="case-card"><b>k<0</b><p>No hay soluciones reales porque x²+y² nunca es negativo. El conjunto de nivel es vacío.</p></div></div><p class="case-take"><strong>Conclusión.</strong> Una curva de nivel no es la gráfica completa: reúne solo las entradas que comparten una salida k.</p></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.2</span>La <strong>curva de nivel</strong> de altura k de f es el conjunto de puntos (x, y) del dominio donde f(x, y) = k. Con tres variables el análogo es una <strong>superficie de nivel</strong>; el nombre común a ambos es <strong>conjunto de nivel</strong>.</p>
         <p class="idea">Léela de vuelta: fijas una altura k, igualas la fórmula a k y dibujas los puntos que lo cumplen.</p>
         <p class="idea paso">Hasta aquí miramos el terreno quieto. La siguiente lección lo mira en <strong>movimiento</strong>: qué pasa al acercarte a un punto.</p>
@@ -743,6 +787,9 @@
         <p class="idea">Un camino da 0 y el otro da ½. Como discrepan, no puede haber un solo límite:</p>
         <div class="fx"><div class="sys"><span class="eq">0 ≠ ½  ⇒  el límite no existe</span></div></div>
         <p class="idea">La definición del curso dice justo eso:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Descartar un límite con dos caminos</h3><p class="walk-sub">Estudiamos f(x,y)=xy/(x²+y²) cuando (x,y)→(0,0).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>Camino 1: y = x</span></div><p class="walk-why"><strong>Elegimos una forma de acercarnos.</strong>Si el límite existe, debe dar el mismo valor en este camino y en cualquier otro.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>f(x,x) = x²/(x²+x²)</span><span class="line">= 1/2</span></div><p class="walk-why"><strong>Sustituimos y simplificamos.</strong>Para x ≠ 0, los x² se cancelan.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>Camino 2: y = −x</span></div><p class="walk-why"><strong>Elegimos otro acercamiento.</strong>Ambos caminos llegan al mismo punto (0,0).</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>f(x,−x) = −x²/(x²+x²)</span><span class="line">= −1/2</span></div><p class="walk-why"><strong>Sustituimos.</strong>El signo cambia por el producto x(−x).</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>1/2 ≠ −1/2</span></div><p class="walk-why"><strong>Comparamos los límites de camino.</strong>Dos resultados distintos contradicen la existencia de un único límite.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>El límite no existe</span></div><p class="walk-why"><strong>Concluimos.</strong>Dos caminos bastan para descartar; nunca bastan por sí solos para confirmar.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.3</span>lím<sub>(x,y)→(a,b)</sub> f(x, y) = L significa que f(x, y) se acerca a L cuando (x, y) se acerca a (a, b) <strong>por cualquier camino</strong> dentro del dominio.</p>
         <p class="idea">Léela de vuelta: si dos caminos dan valores distintos, ningún número puede ser ese L único, y el límite no existe.</p>
         <p class="idea paso">Descartar es barato. Pero para <strong>confirmar</strong> que un límite sí existe, probar caminos nunca alcanza — la siguiente lección trae el truco que los cubre todos.</p>
@@ -889,6 +936,9 @@
         <p class="idea">El factor de ángulo nunca se pasa de 1, así que todo queda atrapado entre −r y r. Cuando r → 0, el sándwich lo aplasta a 0:</p>
         <div class="fx"><div class="sys"><span class="eq">límite = 0</span></div></div>
         <p class="idea">Esta forma de nombrar el punto es lo que tu curso llama:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Usar polares para controlar todos los ángulos</h3><p class="walk-sub">Estudiamos f(x,y)=x²y/(x²+y²) en el origen.</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>x = r cosθ</span><span class="line">y = r senθ</span></div><p class="walk-why"><strong>Cambiamos coordenadas.</strong>Acercarse al origen equivale a hacer r→0 mientras θ puede variar.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>x² + y² = r²</span></div><p class="walk-why"><strong>Simplificamos el denominador.</strong>La identidad polar reúne todos los caminos radiales.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>x²y = r³cos²θ senθ</span></div><p class="walk-why"><strong>Transformamos el numerador.</strong>Cada x aporta r cosθ y y aporta r senθ.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>f = r cos²θ senθ</span></div><p class="walk-why"><strong>Cancelamos r².</strong>Queda un factor r multiplicado por una parte angular.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>|cos²θ senθ| ≤ 1</span></div><p class="walk-why"><strong>Acotamos el ángulo.</strong>La parte angular nunca crece sin límite.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>|f| ≤ r  →  0</span></div><p class="walk-why"><strong>Aplicamos el acotamiento.</strong>Como r→0 sin importar θ, el teorema del sándwich da límite 0.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 2.4</span>En <strong>coordenadas polares</strong>, cada punto (x, y) se nombra con su distancia al origen r ≥ 0 y su ángulo θ desde el eje x: x = r·cos θ, y = r·sen θ.</p>
         <p class="idea paso">Con el límite dominado por los dos lados, cierra la unidad la pregunta que los junta: ¿la función es <strong>continua</strong> en el punto?</p>
       </div>
@@ -987,6 +1037,9 @@
         <p class="idea key">Como el límite y el valor coinciden, la función <strong>es continua en el origen</strong>.</p>
         <p class="idea">Si el valor asignado hubiera sido otro —digamos 5— el límite (0) no coincidiría, y habría un salto: discontinua.</p>
         <p class="idea">Tu curso lo enuncia así:</p>
+        <!-- sin-saltos:START -->
+        <div class="walkthrough" data-sin-saltos="pizarra"><h3 class="walk-title">Comprobar continuidad en tres preguntas</h3><p class="walk-sub">Usamos f(x,y)=(x²+y²)/(1+x²+y²) en (0,0).</p><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">1</span>f(0,0) = 0/(1+0)</span><span class="line">= 0</span></div><p class="walk-why"><strong>Comprobamos el valor.</strong>El denominador no se anula, así que la función está definida en el punto.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">2</span>x²+y² → 0</span></div><p class="walk-why"><strong>Estudiamos el numerador.</strong>Cuando (x,y) se acerca al origen, ambas coordenadas y sus cuadrados se acercan a cero.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">3</span>1+x²+y² → 1</span></div><p class="walk-why"><strong>Estudiamos el denominador.</strong>El límite del denominador es distinto de cero.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">4</span>lím f(x,y) = 0/1</span><span class="line">= 0</span></div><p class="walk-why"><strong>Usamos leyes de límites.</strong>El cociente es válido porque el denominador límite no es cero.</p></div><div class="walk-row"><div class="walk-math"><span class="line"><span class="walk-n">5</span>lím f = f(0,0)</span></div><p class="walk-why"><strong>Comparamos.</strong>El límite existe y coincide con el valor de la función.</p></div><div class="walk-row is-result"><div class="walk-math"><span class="line"><span class="walk-n">6</span>f es continua en (0,0)</span></div><p class="walk-why"><strong>Concluimos.</strong>Las tres condiciones se verificaron; no basta con observar que la fórmula “se ve suave”.</p></div></div>
+        <!-- sin-saltos:END -->
         <p class="fdef"><span class="flbl">Definición · Así se enuncia en tu curso · temario, tema 3.3</span>f es <strong>continua</strong> en (a, b) si se cumplen tres cosas: (i) existe f(a, b); (ii) existe lím<sub>(x,y)→(a,b)</sub> f(x, y); y (iii) los dos coinciden.</p>
         <p class="idea">Léela de vuelta: calculas el valor, calculas el límite y los comparas. Iguales → continua; distintos → salto.</p>
       </div>
